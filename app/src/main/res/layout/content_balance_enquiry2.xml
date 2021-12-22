@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".jctPayment.Cash_Deposit_Activity"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/margin_30dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/atv_bank_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:textColorHint="@color/colorHint"
+            >
+            <AutoCompleteTextView
+                android:id="@+id/atv_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorText"
+                android:inputType="text"
+                android:text=""
+                android:textSize="@dimen/aeps_input_text_size"
+                android:hint="@string/bank_name"
+                android:textColor="@color/colorText"
+                android:digits="@string/bank_name_digit"
+                android:textCursorDrawable="@color/colorText"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:completionThreshold="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/txt_mobileno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:hint="@string/enterMobile"
+                android:digits="@string/mobile_digit"
+                android:maxLines="1"
+                android:maxLength="10"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/aeps_input_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radio_group_adhar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_adhar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Aadhar No"
+                android:checked="true"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"/>
+
+            <RadioButton
+                android:id="@+id/rb_virtual_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Virtual Id"
+                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="visible"/>
+
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/aadhar_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:hint="@string/aadharNoHint"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/txt_aadharno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:digits="@string/mobile_digit"
+                android:maxLines="1"
+                android:maxLength="16"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/aeps_input_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_30dp"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_mantra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Mantra"
+                android:checked="true"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"/>
+
+            <RadioButton
+                android:id="@+id/rb_startek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Startek"
+                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="gone"/>
+
+            <RadioButton
+                android:id="@+id/rb_morpho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Morpho"
+                android:buttonTint="@color/darkBlueColor"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="visible"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_40dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btn_capture"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Capture"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@drawable/button_shep"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:background="@drawable/button_shep"
+                android:layout_marginLeft="5dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

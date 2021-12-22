@@ -1,0 +1,59 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rel_mobile"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Utility Bills"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/size_1dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/app_blue_color_light"
+            android:scrollbars="horizontal"
+            app:tabMode="scrollable"
+            app:tabIndicatorHeight="@dimen/margin_2dp"
+            app:tabIndicatorColor="@color/app_red_color"
+            app:tabSelectedTextColor="@color/color_white"
+            app:tabTextColor="@color/color_white_light" />
+
+    </androidx.viewpager.widget.ViewPager>
+
+
+</LinearLayout>

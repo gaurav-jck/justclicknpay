@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">cnbms.justclicknpay.com</domain>
+        <domain includeSubdomains="true">cnbmb.justclicknpay.com</domain>
+        <domain includeSubdomains="true">uatms.justclickkaro.com</domain>
+        <domain includeSubdomains="true">uat-aeps-api-yes.justclicknpay.com</domain>
+        <domain includeSubdomains="true">uatmb.justclicktravels.com</domain>
+
+            <domain includeSubdomains="true">uat.rapipay.com</domain>
+            <domain includeSubdomains="true">api.rapipay.com</domain>
+
+            <trust-anchors>
+
+                <certificates src="@raw/star_rapipay_com"/>
+            </trust-anchors>
+
+    </domain-config>
+
+</network-security-config>
+
+<!--com.android.volley.NoConnectionError: javax.net.ssl.SSLHandshakeException: java.security.cert.CertPathValidatorException: Trust anchor for certification path not found.-->

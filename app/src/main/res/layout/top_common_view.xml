@@ -1,0 +1,39 @@
+<RelativeLayout android:id="@+id/relTop"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/home_round_icon"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/backArrowImg"
+        android:layout_width="@dimen/back_arrow_size"
+        android:layout_height="@dimen/back_arrow_size"
+        app:srcCompat="@drawable/arrow_back"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:padding="@dimen/small_margin"/>
+
+    <ImageView
+        android:id="@+id/doodleTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topLogoHeight"
+        android:background="@drawable/trav_doodle_image"
+        android:alpha="0.2"
+        />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@drawable/curve_art"
+        android:layout_alignBottom="@+id/doodleTop"/>
+
+    <include layout="@layout/white_jck_logo"
+        android:layout_height="@dimen/logoSizeHeightHome"
+        android:layout_width="@dimen/logoSizeWidthHome"
+        android:layout_marginLeft="@dimen/splashSidePadding"
+        android:layout_marginRight="@dimen/splashSidePadding"
+        android:layout_marginTop="@dimen/splashSidePadding"
+        android:layout_centerHorizontal="true"/>
+
+</RelativeLayout>

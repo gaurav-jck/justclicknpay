@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/back_arrow_size"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                android:layout_marginTop="@dimen/large_margin">
+
+                <EditText
+                    android:id="@+id/destinationCityEdt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/back_arrow_size"
+                    android:layout_marginRight="@dimen/back_arrow_size"
+                    android:layout_marginTop="@dimen/back_arrow_size"
+                    android:gravity="center"
+                    android:hint="@string/where"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/app_blue_color"
+                    android:textSize="@dimen/title_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginTop="@dimen/very_large_margin"
+                        android:orientation="horizontal"
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/checkInInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            >
+
+                            <EditText
+                                android:id="@+id/checkInDateEdt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/checkIn"
+                                android:text=""
+                                android:clickable="true"
+                                android:editable="false"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:layout_marginRight="@dimen/large_margin"
+                                android:textSize="@dimen/title_text_size"
+                                android:textColor="@color/app_blue_color" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/checkOutInput"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/checkOutDateEdt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/checkOut"
+                                android:text=""
+                                android:editable="false"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:layout_marginLeft="@dimen/large_margin"
+                                android:textSize="@dimen/title_text_size"
+                                android:textColor="@color/app_blue_color" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/roomInfo"
+                        android:textColor="@color/registration_text_color"
+                        android:layout_marginTop="@dimen/medium_margin"/>
+
+                    <LinearLayout
+                        android:id="@+id/roomInfoRel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/color_white_hint">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/totalRooms"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:padding="@dimen/medium_margin"/>
+
+                            <TextView
+                                android:id="@+id/totalRoomsTv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:text="1 Room"
+                                android:gravity="right"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:padding="@dimen/medium_margin"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/paxInfo"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:paddingLeft="@dimen/medium_margin"
+                                android:paddingBottom="@dimen/medium_margin"
+                                />
+                            <TextView
+                                android:id="@+id/paxInfoTv"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:text="1 Adult, 0 Child"
+                                android:gravity="right"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:padding="@dimen/medium_margin"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:background="@color/app_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/search_Tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/large_margin"
+                        android:gravity="center"
+                        android:padding="@dimen/small_margin"
+                        android:background="@drawable/blue_round_button_background"
+                        android:text="@string/searchHotels"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/title_text_size" />
+
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/cityListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/blue_border_white_background"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

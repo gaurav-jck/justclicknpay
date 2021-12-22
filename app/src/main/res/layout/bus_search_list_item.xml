@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/listItemBackground">
+
+
+    <LinearLayout
+        android:id="@+id/itemLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/medium_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/BusNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_18sp"
+            android:maxLines="2"
+            android:text="Uttar Pradesh Road Transport Corporation(UPSRTC)"/>
+        <TextView
+            android:id="@+id/BusTypeTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volvo A/C Seater(2+2)"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/fromTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_black"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/simple_content_text_size"
+                android:text="07:30 "/>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="22dp"
+                android:layout_weight="1.5">
+
+                <View
+                    android:id="@+id/viewLeft"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/red_circle_border_background"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/doted_line"
+                    android:layout_toRightOf="@+id/viewLeft"
+                    android:layout_toLeftOf="@+id/viewRight"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="4dp"
+                    android:layerType="software"
+                    />
+
+                <View
+                    android:id="@+id/viewRight"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:background="@drawable/green_circle_border"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:srcCompat="@drawable/ic_icon_bus"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/toTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/simple_content_text_size"
+                android:text="11:30 "/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/seatTv"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/text_size_13sp"
+                android:text="(41 Seat left)"/>
+
+
+            <TextView
+                android:id="@+id/totalTime"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="right"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/small_text_size"
+                android:text="07hr 30 min"/>
+
+
+            <TextView
+                android:id="@+id/priceTv"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_gravity="center"
+                android:gravity="right|center_vertical"
+                android:layout_height="match_parent"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="@dimen/text_size_16sp"
+                android:text="INR 003434343.12"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cancellationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancellation policy"
+            android:textColor="@color/app_blue_color"
+            android:padding="2dp"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/color_black_hint"/>
+
+</LinearLayout>

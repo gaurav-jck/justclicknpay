@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sender Details"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rel_top"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/very_small_margin"
+        android:padding="@dimen/small_margin">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_small_padding">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name"
+                android:textColor="@color/listItemLightBlack"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                android:id="@+id/senderNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Gaurav"
+                android:textStyle="bold"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_2dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mobile"
+                android:textColor="@color/listItemLightBlack"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                android:id="@+id/senderMobileTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="9012888222"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding_2dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KYC Status"
+                android:textColor="@color/listItemLightBlack"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <TextView
+                android:id="@+id/senderKycTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="KYC"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/limitLin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:orientation="horizontal"
+            android:gravity="right|center_vertical"
+            android:layout_gravity="right"
+            android:paddingRight="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:background="@drawable/red_rectangle_button_background"
+            >
+
+            <TextView
+                android:id="@+id/limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="You can send upto  "
+                android:gravity="right"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp" />
+            <TextView
+                android:id="@+id/limitTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs. 25000"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/addRecTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:padding="@dimen/small_margin"
+            android:textStyle="bold"
+            android:text=" + Add Beneficiary"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_16sp" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recipientRecycleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+

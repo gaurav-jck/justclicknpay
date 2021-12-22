@@ -1,0 +1,717 @@
+<resources>
+    <string name="app_name">ClicknBook</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+    <string name="update_description">A new version of JustClicknPay is available, Install it now from Google Play Store.</string>
+    <string name="not_now">LATER</string>
+    <string name="update_settings">UPDATE</string>
+    <string name="inr_symbol">\u20B9</string>
+
+    <!--Toast messages-->
+    <string name="response_failure_message">No response found</string>
+    <string name="exception_message">Oops! something went wrong.</string>
+    <string name="no_internet_message">No internet connection</string>
+    <string name="email_send_message">Email send successfully</string>
+    <string name="un_authorise_message">You are not authorize to use this module.</string>
+    <string name="agent_inactive_message">Current agent is InActive.</string>
+    <string name="no_data_found">No response found</string>
+    <string name="no_transaction_found">Transaction not found. Please try again.</string>
+    <string name="error_in_fetching">Error in fetching results.</string>
+    <string name="error_in_response">Error in response.</string>
+    <string name="promoApplyError">Promo code not applied.</string>
+    <!--check message before use-->
+    <string name="email_resend_message">Please check your emailId and send again</string>
+
+    <string name="empty_user_name">Enter your name</string>
+    <string name="empty_email_address">Enter your emailId</string>
+    <string name="empty_mobile_no">Enter your mobile number</string>
+    <string name="empty_address">Please enter your address</string>
+    <string name="empty_post">Please select your postal address</string>
+    <string name="select_operator">Please select operator</string>
+    <string name="empty_and_invalid_email">Invalid EmailId</string>
+    <string name="empty_and_invalid_userId">User ID is empty or invalid</string>
+    <string name="empty_and_invalid_otp">OTP is empty or invalid</string>
+    <string name="empty_and_invalid_company">Company name is empty or invalid</string>
+    <string name="empty_and_invalid_name">Name is empty or invalid</string>
+    <string name="empty_and_invalid_agent_name">Agent name is empty or invalid</string>
+    <string name="empty_and_invalid_first_name">First Name is empty or invalid</string>
+    <string name="empty_and_invalid_last_name">Last Name is empty or invalid</string>
+    <string name="first_name_and_last_name_equal">First and last name should not be match</string>
+    <string name="empty_and_invalid_date_name">Date Of Birth is empty or invalid</string>
+    <string name="empty_and_invalid_passport_number">Passport Number is empty or invalid</string>
+    <string name="empty_and_invalid_passport_expiry_date">Passport Date is empty or invalid</string>
+    <string name="empty_and_invalid_mobile">Mobile number is empty or invalid</string>
+    <string name="empty_and_invalid_landLine_number">LandLine number is empty or invalid</string>
+    <string name="empty_and_invalid_pancard">Pancard number is empty or invalid</string>
+    <string name="empty_and_invalid_pancardName">Pancard name is empty or invalid</string>
+    <string name="empty_and_invalid_account_id">Account-Id is empty or invalid</string>
+    <string name="empty_and_invalid_account_confirmation">Account number not match</string>
+    <string name="empty_and_invalid_customer_id">Customer-Id is empty or invalid</string>
+    <string name="empty_and_invalid_amount">Amount is empty or invalid</string>
+    <string name="empty_and_invalid_reduce_amount">Reduce amount is empty or invalid</string>
+    <string name="empty_and_invalid_regex">is empty or invalid</string>
+    <string name="invalid_reduce_amount">Reduce amount should be less than available credit</string>
+    <string name="invalid_amount">Please enter amount below 1000000</string>
+    <string name="empty_remark">Remark is empty</string>
+    <string name="appSession">Session expired! Please login again</string>
+    <string name="empty_and_invalid_processing_cycle">Processing cycle is empty or invalid</string>
+    <string name="empty_and_invalid_billing">Billing Unit is empty or invalid</string>
+    <string name="empty_and_invalid_cycle">Cycle no is empty or invalid</string>
+    <string name="empty_and_invalid_billing_group">Billing Group is empty or invalid</string>
+    <string name="empty_and_invalid_city">Please select city</string>
+    <string name="empty_and_invalid_subscriberId">SubscriberId is empty or invalid</string>
+    <string name="empty_and_invalid_state">Please select state</string>
+    <string name="empty_and_invalid_address">Address is empty or invalid</string>
+    <string name="empty_and_invalid_pincode">Pincode is empty or invalid</string>
+    <string name="empty_and_invalid_user_type">Select user type</string>
+    <string name="empty_and_invalid_address_proof">Select address proof</string>
+    <string name="empty_and_invalid_pin">Pin is empty or invalid</string>
+    <string name="check_box">please check terms and condition</string>
+    <string name="empty_and_invalid_credit">Credit value is empty or invalid</string>
+    <string name="empty_and_invalid_receipt">Receipt number is empty or invalid</string>
+    <string name="select_bank">Select Bank Name</string>
+    <string name="bank_name">Bank Name</string>
+    <string name="select_submit_type">Please select deposit type</string>
+    <string name="empty_and_invalid_narration">Bank narration is empty or invalid</string>
+    <string name="empty_and_invalid_ledger">Bank Ledger Reference is empty or invalid</string>
+    <string name="empty_and_invalid_agent_id">Agent Id is empty or invalid</string>
+    <string name="empty_and_invalid_pnr">PNR is empty or invalid</string>
+    <string name="empty_and_invalid_referenceId">ReferenceId is empty or invalid</string>
+    <string name="empty_and_invalid_ifsc_code">IFSC code is empty or invalid</string>
+    <string name="empty_and_invalid_relation">Please select relation</string>
+    <string name="empty_and_invalid_transaction_type">Please select transaction type</string>
+    <string name="empty_and_invalid_bank">Bank name is empty or invalid</string>
+    <string name="empty_and_invalid_account_number">Account number is empty or invalid</string>
+    <string name="amount_less_than100">Amount should be greater or equal to 100</string>
+    <string name="max_rbl_amount">Maximum amount should be </string>
+    <string name="amount_multiple100">Last amount slot should be greater or equal to 100</string>
+    <string name="hotel_max_child">Max children can be two</string>
+    <string name="hotel_max_adults">Max adults can be four</string>
+    <string name="hotel_max_room">Max rooms can be four</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_balance">Check Balance</string>
+    <string name="nav_home">Home</string>
+    <string name="train_route_map">Train Route Map</string>
+    <string name="nav_agent">Agent</string>
+    <string name="nav_recharge">Recharge</string>
+    <string name="nav_recharge_list">Recharge List</string>
+    <string name="nav_air_cancellation_list">Air Cancellation List</string>
+    <string name="nav_refund_report_list">Air Refund Report</string>
+    <string name="navSalesReportList">Air Sales Report</string>
+    <string name="nav_bus_search">Bus Search</string>
+    <string name="nav_bus_transaction_list">Bus Booking List</string>
+    <string name="jctMoney">JCT Money</string>
+    <string name="jctMoneyList">JCT Money Transactions</string>
+    <string name="jctPayment">JCT Payment</string>
+    <string name="nav_flight_search">Flight Search</string>
+    <string name="nav_mobile">Mobile</string>
+    <string name="nav_dth">DTH</string>
+    <string name="nav_datacard">DataCard</string>
+    <string name="nav_electricity">Electricity</string>
+    <string name="nav_landline">Landline</string>
+    <string name="nav_gas">Gas</string>
+    <string name="nav_dashboard">Dashboard</string>
+    <string name="nav_agent_detail">Agent Detail</string>
+    <string name="nav_agent_credit_request">Credit Request</string>
+    <string name="nav_agent_deposit_request">Deposit Request</string>
+    <string name="nav_hotel_search">Hotel Search</string>
+    <string name="nav_credit_list">Credit List</string>
+    <string name="nav_deposit_list">Deposit List</string>
+    <string name="nav_credit_report">Agent Credit Report</string>
+    <string name="nav_deposit_report">Agent Deposit Report</string>
+    <string name="nav_insurance">Insurance</string>
+    <string name="nav_insurance_list">Insurance List</string>
+    <string name="nav_rapipay">MATM</string>
+
+    <string name="nav_chatting">Chatting</string>
+    <string name="nav_logout">Logout</string>
+    <string name="About_us">About Us</string>
+    <string name="terms_and_condition">Terms and Conditions</string>
+    <string name="accept_terms_and_condition">I accept</string>
+    <string name="nav_product_balance_check">Product Balance Check</string>
+
+    <!--Xml Rendering -->
+    <item name="visible" type="id" />
+    <item name="masked" type="id" />
+
+    <!--Train Fragment-->
+    <string name="pnr">PNR Number</string>
+    <string name="referenceId">Reference Id</string>
+    <string name="getResponse">Get Response</string>
+    <string name="trainBookCheckFragmentTitle">Train Booking Check</string>
+    <string name="nav_train_booking_check">Train Booking Check</string>
+    <string name="nav_train_search">Train Search</string>
+    <string name="bookTrain">Search Train</string>
+
+    <!--Sales Fragment-->
+    <string name="sales_report">Sales Report</string>
+    <string name="net_sales_report">Net Sales Report</string>
+    <string name="agent_verification_fragment">Agent Verification</string>
+    <string name="sales_accountList_fragment">SalesAccountListFragment</string>
+    <string name="sales_account_statement">Sales Account Statement</string>
+
+
+    <!--date filter dialog-->
+    <string name="filter_dialog_title">Date Filter</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
+    <string name="expire_date">Expire Date</string>
+    <string name="amount_credit">Amount Credit</string>
+    <string name="remark">Remark</string>
+
+    <!--home screen texts-->
+    <string name="flight_home_text">Flight</string>
+    <string name="flight_search_text">City or Airport</string>
+    <string name="recharge_home_text">Recharge</string>
+    <string name="bill_pay_home_text">Bill Payment</string>
+    <string name="rail_home_text">Rail</string>
+    <string name="dmt_home_text">DMT</string>
+    <string name="hotels_home_text">Hotels</string>
+    <string name="gift_home_text">Gift Voucher</string>
+
+    <!--text-->
+    <string name="login_txt">SIGN IN</string>
+    <string name="create_account">REGISTER</string>
+    <string name="forget_password">Forget Password</string>
+    <string name="reset_pin">Reset Pin</string>
+    <string name="login_pin">Login Pin</string>
+    <string name="new_pin">New Pin</string>
+    <string name="confirm_pin">Confirm Pin</string>
+    <string name="remember_me">Remember me</string>
+    <string name="email_hint">Email</string>
+    <string name="email_mobile_hint">Email or Phone</string>
+    <string name="otp_hint">Enter OTP</string>
+    <string name="password_hint">Password</string>
+    <string name="forget_detail">Please enter your information below. If everything is correct, we will email you a copy of your password!</string>
+    <string name="reset_pin_detail">Please enter your new login pin below. If everything is correct, we will email you a copy of your login pin!</string>
+    <string name="forget_passForgot">Your Password?</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="login_wait">Logging In...</string>
+    <string name="rbl_ben_non_verify_text">Verify @ 5 RS.</string>
+    <string name="rbl_ben_verify_text">Verified</string>
+
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_download_aeps_txn_excel">Download Txn Register</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <!--agentName dashboard screen-->
+    <string name="agent_dashboard_title">Welcome To JustClicknPay</string>
+    <string name="welcome_admin">Welcome admin</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search Agent</string>
+
+    <!--Create account fragment-->
+    <string name="registration_title">Registration</string>
+    <string name="registration_text">Please fill the following details. We will get back to you soon.</string>
+    <string name="company_name">Company Name</string>
+    <string name="user_name">Name</string>
+    <string name="user_first_name">First Name</string>
+    <string name="user_first_name_last_name">First and Last Name </string>
+    <string name="user_last_name">Last Name</string>
+    <string name="date_of_birth">Date Of Birth</string>
+    <string name="user_email">Email</string>
+    <string name="user_mobile">Mobile</string>
+    <string name="user_pancard">Pan Card Number</string>
+    <string name="user_pancardName">Pan Card Name</string>
+    <string name="country">Country</string>
+    <string name="state">State</string>
+    <string name="city">City</string>
+    <string name="user_address">Address</string>
+    <string name="pinCode">Pin code</string>
+    <string name="user_address_no">Address Proof No.</string>
+    <string-array name="select">
+        <item>-select-</item>
+    </string-array>
+    <string-array name="country_array">
+        <item>INDIA</item>
+    </string-array>
+    <string-array name="state_array">
+        <item>select-state</item>
+    </string-array>
+    <string-array name="city_array">
+        <item>select-city</item>
+    </string-array>
+
+    <string-array name="user_type_array">
+        <item> --user type-- </item>
+        <item>Agent</item>
+        <item>Distributor</item>
+    </string-array>
+    <string-array name="address_array">
+        <item> --address Proof-- </item>
+        <item>Voter ID</item>
+        <item>Aadhaar Card</item>
+        <item>Driving Licence</item>
+        <item>Electricity Bill</item>
+        <item>Rent Aggrement</item>
+        <item>Telephone Bill</item>
+    </string-array>
+    <string-array name="salutation_array">
+        <item>Mr</item>
+        <item>Mrs</item>
+        <item>Ms</item>
+    </string-array>
+    <string-array name="ladies_salutation_array">
+
+        <item>Mrs</item>
+        <item>Ms</item>
+    </string-array>
+    <string-array name="jct_list_array">
+        <item>( Select Status )</item>
+        <item>Initiated</item>
+        <item>Failed</item>
+        <item>Refund Pending</item>
+        <item>Refunded</item>
+        <item>Success</item>
+        <item>Under Process</item>
+        <item>Rejected</item>
+    </string-array>
+    <string-array name="rechargeProductArray">
+        <item>( Select Product )</item>
+        <item>M-Prepaid</item>
+        <item>M-Postpaid</item>
+        <item>DTH</item>
+        <item>DATACARD</item>
+        <item>LANDLINE</item>
+        <item>ELECTRICITY</item>
+        <item>GAS</item>
+    </string-array>
+    <string-array name="rechargeStatusArray">
+        <item>( Select Status )</item>
+        <item>Success</item>
+        <item>Pending</item>
+        <item>Cancelled</item>
+    </string-array>
+    <string-array name="hotel_room_amenities_array">
+        <item>Wifi</item>
+        <item>Breakfast</item>
+        <item>Led TV</item>
+        <item>Fridge</item>
+        <item>Laundry</item>
+    </string-array>
+
+    <string-array name="flight_array">
+        <item>Indigo</item>
+        <item>AirIndia</item>
+        <item>Vistara</item>
+        <item>SpiceJet</item>
+    </string-array>
+
+    <string-array name="flight_child_salutation_array">
+        <item>Mstr</item>
+        <item>Miss</item>
+    </string-array>
+
+
+    <!--agentName sales screen-->
+    <string name="agent_sales_title">Welcome To JustClicknPay</string>
+    <string name="welcome_agent">Welcome Agent</string>
+    <string name="available_credit">Available credit : </string>
+    <string name="account_balance">Account balance : </string>
+    <string name="book_balance">Booking balance : </string>
+    <string name="add_credit">Add Amount</string>
+    <string name="amount_requested">Amount requested</string>
+    <string name="reduce_credit">Reduce Amount</string>
+    <string name="comment">Comment....</string>
+    <string name="submit">Submit</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">OK</string>
+
+    <!--drawer content view-->
+    <string name="drawer_title_name">JustClicknPay</string>
+    <string name="drawer_title_email">tech@justclicknpay.com</string>
+
+    <!--confirm fragment-->
+    <string name="confirm_fragment_title">Kindly Verify The Below Details</string>
+    <string name="jct_title">JustClicknPay</string>
+    <string name="recharge_for">Recharge for</string>
+    <string name="mobile_type">Mobile</string>
+    <string name="dth_type">DTH</string>
+    <string name="datacard_type">DATACARD</string>
+    <string name="electricity_type">ELECTRICITY</string>
+    <string name="landline_type">LANDLINE</string>
+    <string name="gas_type">GAS</string>
+    <string name="mobile">Mobile(optional)</string>
+    <string name="agent_id">Agent Id</string>
+    <string name="type">Type</string>
+    <string name="operator">Operator</string>
+    <string name="id_no">Id number</string>
+    <string name="amount">Amount</string>
+    <string name="commission">Commission</string>
+    <string name="markup">Markup</string>
+    <string name="value4">Value4</string>
+    <string name="value5">Value4</string>
+    <string name="proceed">Proceed</string>
+    <string name="back">Back</string>
+
+    <!--Fragments title-->
+    <string name="mobileFragmentTitle">Mobile Recharge</string>
+    <string name="rechargeFragmentTitle">Recharge &amp; Bills</string>
+    <string name="dthFragmentTitle">DTH Recharge</string>
+    <string name="datacardFragmentTitle">DataCard Recharge</string>
+    <string name="electricityFragmentTitle">Electricity Recharge</string>
+    <string name="landlineFragmentTitle">Landline Recharge</string>
+    <string name="gasFragmentTitle">Gas Recharge</string>
+    <string name="mobileConfirmFragmentTitle">Confirm Recharge</string>
+    <string name="agentSearchFragmentTitle">Search Agents</string>
+    <string name="agentSalesDetailFragmentTitle">Update Credit</string>
+    <string name="agentBalanceCheckFragmentTitle">Account Balance</string>
+    <string name="agentCreditReportFragmentTitle">Credit Update Request</string>
+    <string name="agentRechargeListFragmentTitle">Recharge List</string>
+    <string name="airSalesReportFragmentTitle">Air Sales Report</string>
+    <string name="airRefundReportFragmentTitle">Air Refund Report</string>
+    <string name="airCancelListFragmentTitle">Air Cancellation List</string>
+    <string name="agentCreditListFragmentTitle">Credit List</string>
+    <string name="agentDepositListFragmentTitle">Deposit List</string>
+    <string name="agentDepositReportFragmentTitle">Deposit Update Request</string>
+    <string name="agentCreditRequestFragmentTitle">Agent Credit Request</string>
+    <string name="agentDepositRequestFragmentTitle">Agent Deposit Request</string>
+    <string name="moneyTransferFragmentTitle">Money Transfer</string>
+    <string name="hotelSearchFragmentTitle">Hotel Search</string>
+    <string name="flightSearchFragmentTitle">Flight Search</string>
+    <string name="hotelSearchListFragmentTitle">Hotel List</string>
+    <string name="hotelMoreInfoFragmentTitle">Hotel Details</string>
+    <string name="hotelRoomInfoFragmentTitle">Hotel Room Details</string>
+    <string name="hotelBookingInfoFragmentTitle">Hotel Booking Information</string>
+    <string name="busSearchFragmentTitle">Bus Search</string>
+    <string name="busDetailFragmentTitle">Bus Detail</string>
+    <string name="busConfirmationTitle">Please Confirm Your Booking</string>
+    <string name="busCancellationTitle">Cancellation Policy</string>
+    <string name="booking_search">Booking Search</string>
+
+
+    <!--Mobile fragment-->
+    <string name="prepaid">Prepaid</string>
+    <string name="postpaid">Postpaid</string>
+    <string name="enter_amount">Amount</string>
+    <string name="enter_subscriber_id">Subscriber Id</string>
+    <string name="enter_account_id">Account Id</string>
+    <string name="enter_billing_unit">Billing Unit</string>
+    <string name="enter_processing_cycle">Processing Cycle</string>
+    <string name="enter_cycle_no">Cycle No</string>
+    <string name="enter_mobile">Mobile Number</string>
+    <string name="enter_dataCard">DataCard Number</string>
+    <string name="enter_landline_number">LandLine Number</string>
+    <string name="enter_customer_id">Customer Id</string>
+    <string name="enter_bill_group">Bill Group no.</string>
+
+    <!--<string name="action_settings">Settings</string>-->
+
+    <!--Train Fragment-->
+    <string name="tabStation">By Station</string>
+    <string name="tabTrain">By Train Name</string>
+    <string name="from_Station">From Station</string>
+    <string name="type_departure_city">Type departure city</string>
+    <string name="train_name">Train Number</string>
+    <string name="type_train_name">Type train Number</string>
+    <string name="depart_on">Departs On</string>
+    <string name="date">Date</string>
+    <string name="search_station">Search Station</string>
+    <string name="trainRouteMapFragmentTitle">Train Route Map</string>
+    <string name="empty_and_invalid_departure_city">empty and invalid departure city</string>
+    <string name="empty_and_invalid_train_Number">empty and invalid train Number</string>
+    <string name="traveller_name_as_id">Name should be same as on Government ID proof</string>
+    <string name="contact_detail">Your ticket will be sent to below mobile number and emailId</string>
+    <string name="travel_insurance">Do you want to take travel insurance?</string>
+    <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>
+    <string name="travel_insurance_no">No, I don not want travel insurance</string>
+
+    <!--Deposit Report Fragment-->
+    <string name="bank_ledger_reference">Bank Ledger Reference</string>
+    <string name="bank_narration">Bank Narration</string>
+
+    <!--chatting-->
+    <string name="sign_in">Sign In</string>
+    <!--<string Name="default_web_client_id">Id</string>-->
+
+    <!--Air Fragment-->
+    <!--Flight -->
+    <string name="flightSearchTitle">Search Your Flight Here</string>
+    <string name="flightSubTitle">Book Over 500 Airlines and More...</string>
+    <string name="searchFlight">Search Flights</string>
+    <string name="noFlightsFound">No flight found for this date.</string>
+    <string name="hotel_search_title">Thank you for choosing us!</string>
+    <string name="Flight_search_title">We are searching for the best Flight deals</string>
+    <string name="flight_refund_title">Refunds: We can only process refund for product sold by us as and when they are received from the airline.</string>
+    <string name="flight_traveller_detail_title">Traveller Details</string>
+    <string name="leavingFrom">Leaving From</string>
+    <string name="goingTo">Going To</string>
+    <string name="flightFrom">From</string>
+    <string name="flightTo">To</string>
+    <string name="deptDate">Depart Date</string>
+    <string name="multiDate">Date</string>
+    <string name="returnDate">Return Date</string>
+    <string name="passengersDefault">01 Passenger(s)</string>
+    <string name="cabinClass">Cabin Class</string>
+    <string name="rupeeSymbolRs">\u20B9</string>
+    <string name="passengers">Passengers</string>
+    <string name="flightAdultLabel">&gt; 12 Year</string>
+    <string name="flightInfantLabel">&lt; 2 Year</string>
+    <string name="departHint">Depart Date</string>
+    <string name="returnHint">Return Date</string>
+    <string name="airClass">Class</string>
+    <string name="refundable">Refundable</string>
+    <string name="select_city">Select City</string>
+    <string name="select_source_dest">Please select both source and destination</string>
+    <string name="paxInfoTittle">Traveller Information</string>
+    <string name="flightConfirmation">Flight Confirmation</string>
+    <string name="flightDetail">Flight Detail</string>
+    <string name="roundFareNotAvail">Flight combined fare not available</string>
+    <string name="fareQuoteSuccess">Fare updated.</string>
+    <string name="fareQuoteError">Fare update fail. Please retry..</string>
+    <string name="fareQuoteException">Fare update error. Please try again..</string>
+    <string name="fareRuleException">Fare rules not found. Please try again..</string>
+    <string name="tax">Tax &amp; Charges:</string>
+    <string name="enterMobile">Enter your mobile no.</string>
+    <string name="enterEmail">Enter your email id</string>
+    <string name="logInOrGuest">Login to access your saved details &amp; more </string>
+    <string name="guestLogin">or Continue as Guest</string>
+    <string name="youAreNotLogin">You are not login! Please Login.</string>
+
+    <!--flight traveller detail-->
+    <string name="invalidGstNo">GST number is empty or invalid.</string>
+    <string name="invalidGstCompanyName">Company Name is empty or invalid.</string>
+    <string name="invalidGstEmail">GST email is empty or invalid.</string>
+    <string name="invalidGstMobile">GST mobile is empty or invalid.</string>
+    <string name="invalidFirstName">First name is empty or invalid</string>
+    <string name="invalidLastName">Last name is empty or invalid</string>
+    <string name="passportNumber">Passport Number</string>
+    <string name="passportExpiry">Passport Expiry Date</string>
+    <string name="passportExpire">Passport Expire</string>
+    <string name="selectDob">Select DOB</string>
+    <string name="firstNameMiddleNameHint">First Name (and Middle Name, if you have any.)</string>
+
+
+    <!--my flight bookings page-->
+    <string name="myBookingsTitle">My Bookings</string>
+    <string name="flightDetails">FLIGHT DETAILS</string>
+    <string name="fareDetails">FARE DETAILS</string>
+    <string name="fareInfo">Fare Info</string>
+
+    <!--flight detail-->
+    <string name="fareRule">Fare Rules</string>
+    <string name="fareBreakUp">Fare BreakUp</string>
+    <string name="fareConfirmingText">Please wait...\nWe are reconfirming the price.</string>
+
+    <string-array name="airClass">
+        <item>Economy</item>
+        <item>Business</item>
+        <item>First Class</item>
+    </string-array>
+
+    <!--Bus Fragment-->
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="from_city">Select City</string>
+    <string name="to_city">Select City</string>
+    <string name="search_buses">Search Buses</string>
+    <string name="boarding_dropping_point_buses">Bus Boarding and Dropping Point</string>
+    <string name="boarding_point">Boarding Point</string>
+    <string name="dropping_point">Dropping Point</string>
+    <string name="thankYou">THANK YOU!</string>
+    <string name="bookingDone">Your booking is done</string>
+    <string name="bookingConfirmationTitle">Booking Confirmation</string>
+    <string name="cancellationPolicyBus">Cancellation &amp; Refund Policy</string>
+    <string name="busFlight">Find My Bus</string>
+
+    <!--Hotel Fragment-->
+    <string name="where">Where?</string>
+    <string name="checkIn">Check In</string>
+    <string name="checkOut">Check Out</string>
+    <string name="destination">Select City</string>
+    <string name="totalRooms">Total Rooms</string>
+    <string name="paxInfo">Pax Info</string>
+    <string name="roomInfo">No of Rooms</string>
+    <string name="searchHotels">Search Hotels</string>
+    <string-array name="children_age_array">
+        <item>1 Year</item>
+        <item>2 Year</item>
+        <item>3 Year</item>
+        <item>4 Year</item>
+        <item>5 Year</item>
+        <item>6 Year</item>
+        <item>7 Year</item>
+        <item>8 Year</item>
+        <item>9 Year</item>
+        <item>10 Year</item>
+        <item>11 Year</item>
+        <item>12 Year</item>
+    </string-array>
+
+    <!--Money Transfer Activity-->
+    <string name="home">Home</string>
+    <string name="registration">Registration</string>
+    <string name="exit">Exit</string>
+    <string name="refund">Refund</string>
+    <string name="transactionInquiry">Transaction Inq.</string>
+    <string name="transactionDetail">Transaction Details</string>
+    <string name="logout">Logout</string>
+    <string name="kyc_active">EKYC verified</string>
+    <string name="kyc_inactive">Non-KYC</string>
+
+    <!--    insurance-->
+    <string name="user_full_name">Please enter full name (as per Government ID)</string>
+    <string name="noOfDays">Select no of days</string>
+    <string name="policyStartDate">Policy start date</string>
+    <string name="finalAmount">Final amount</string>
+    <string name="buyPolicy">Buy Policy</string>
+    <string name="buyPolicyNote">If policy already exists then your next policy will be start after one day of previous policy expiry date otherwise policy will be issued on selection date.</string>
+
+    <!--    dmt rapipay-->
+    <string name="full_name">Please enter full name (as per Government ID)</string>
+
+    <!--String arrays-->
+    <string-array name="opereator_array">
+        <item>(Select-operator)</item>
+    </string-array>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!--digits allowed in edit texts-->
+    <string name="alphaNumeric_editText_digits">0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
+    <string name="alphaNumericSpace_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
+    <string name="remarks_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM-/.&amp;@ </string>
+    <string name="filter_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM-/.&amp;@ </string>
+    <string name="personName_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="flightPersonName_editText_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="address_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321/-+=_|\,.[]{}!@#$%^:;?~&amp;&lt;&gt;*()</string>
+    <string name="commonAllInputs_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321/-+=_|\,.[]{}!@#$%^:;?~&amp;&lt;&gt;*()</string>
+    <string name="title_activity_maps32">Map</string>
+
+
+    <!--JCT Payment-->
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <string name="login_agent">AGENT LOGIN</string>
+    <string name="login_password">PASSWORD</string>
+    <string name="login_btn">LOG IN</string>
+    <string name="login_forgatpassword">Forget Password ?</string>
+
+
+    <!--Dashboard related Strings-->
+    <string name="title_activity_dash_board">Dashboard</string>
+    <string name="dash_board_aeps">FINO AEPS</string>
+    <string name="dash_board_bbps">BBPS</string>
+    <string name="dash_board_dmt">DMT</string>
+    <string name="dash_board_complaints">Complaints</string>
+    <string name="dash_board_vollet">Wallet</string>
+    <string name="dash_board_transaction">Transaction</string>
+    <string name="dash_board_services">Services</string>
+    <string name="cashPayoutRequestCaps">CASH PAYOUT</string>
+    <string name="cashPayoutRequest">Cash Payout</string>
+    <string name="transactionList">Transaction History</string>
+    <string name="bankDetails">BANK DETAILS</string>
+
+    <string name="aepsKycUpdate">KYC</string>
+
+
+    <!--Cash Widhdrawl-->
+    <string name="cash_widhhrawl_selectbank">Select Bank</string>
+    <string name="cash_widhhrawl_amount">Amount</string>
+    <string name="cash_widhhrawl_mobileno">Mobile Number</string>
+    <string name="cash_widhhrawl_aadharno">Aadhar Number</string>
+    <string name="cash_widhhrawl_virtual_id">Virtual Id</string>
+    <string name="aadharNoHint">Enter 12 digits Aadhar Number</string>
+    <string name="virtualIdHint">Enter 16 digits Virtual Id </string>
+    <string name="aadharNoError">Please enter 12 digits Aadhar Number</string>
+    <string name="virtualIdError">Please enter 16 digits Virtual Id </string>
+
+    <!--Cash Transfer -->
+    <string name="cash_transfer_enter_ifsc_code">ENTER IFSC CODE</string>
+    <string name="select_type">SELECT TYPE NEFT/RTGS</string>
+    <string name="neft">NEFT</string>
+    <string name="imps">IMPS</string>
+
+    <string name="bank_name_digit">qwertyuioplkjhgfdsazxcvbnm QWERTYUIOPLKJHGFDSAZXCVBNM</string>
+    <string name="mobile_digit">0123456789</string>
+
+    <!--cash payout-->
+    <string name="aepsAmount">AEPS Amount (in Rs) 5000</string>
+    <string name="amountRequested">Amount Requested (in Rs) </string>
+    <string name="charges">Charge -> Rs 5+GST per transaction</string>
+    <string name="minAmount">Minimum: Rs.500</string>
+    <string name="scheduleTiming">Below are the scheduler timing for your reference</string>
+
+    <!--Bank details-->
+    <string name="bene_name">Enter beneficiary name</string>
+    <string name="account_number">Enter account number</string>
+    <string name="account_number_confirm">Confirm account number</string>
+    <string name="enter_ifsc">Enter IFSC code</string>
+    <string name="cancel_check">Cancel check</string>
+    <string name="invalid_bene_name">Beneficiary name is empty or invalid</string>
+    <string name="beneName">Beneficiary Name</string>
+    <string name="accountNo">Account Number</string>
+    <string name="ifsc">IFSC code</string>
+
+    <!--Top Up related strings-->
+    <string name="topup_amount_fragment">Amount - </string>
+    <string name="topup_btn_save">Save</string>
+    <string name="topup_btn_reset">Reset</string>
+    <string name="title_activity_dashboard__new_">Dashboard_New_Activity</string>
+    <string name="action_settings">Change Password</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <string name="title_activity_cash_deposit">Cash Deposit</string>
+    <string name="title_activity_cash_withdraw">Cash Withdrawal</string>
+    <string name="title_activity_balance_enquiry">Balance Enquiry</string>
+    <string name="title_activity_mini_stmt">Mini Statement</string>
+    <string name="title_activity_aadhar_pay">Aadhar Pay</string>
+    <string name="title_activity_topup_request">Top Up Request</string>
+    <string name="title_activity_receipt">Receipt</string>
+    <string name="title_activity_bank_details">Bank Details</string>
+    <string name="title_activity_dmt_cash_transfer">DMT_Cash_Transfer_Activity</string>
+    <string name="title_activity_payment_status">Payment_Status_Activity</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_changePassword">Change Password</string>
+    <string name="title_activity_addremitter">Add Remitter</string>
+    <string name="title_activity_beneficiary">Add Beneficiary</string>
+    <string name="title_activity_viewAll">All Transactions</string>
+    <string name="title_activity_cashPayout">Cash Payout</string>
+    <string name="title_activity_cashPayoutHistory">Cash Payout History</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="server_error">Some error occurred, Please try after some time.</string>
+    <string name="aeps_response_failure">No response found. Please try again.</string>
+    <string name="captureError">Error in capturing, please reconnect the device and try again.</string>
+    <string name="bankListError">Error in fetching bank list. Please reload page and retry.</string>
+    <string name="transactionListError">Error in fetching transaction list. Please reload page and retry.</string>
+    <string name="transactionError">There was a technical error from host, please try again.</string>
+    <string name="transactionException">There was a error response from host, please try again.</string>
+    <string name="channelLoginFail">Channel login failed, Please refresh and retry.</string>
+    <string name="freshnessFactorError">There was error in host, please try again.</string>
+
+    <string name="server_errorBal">Some error occurred, Please try after some time..</string>
+    <string name="aeps_response_failureBal">No response found. Please try again..</string>
+    <string name="captureErrorBal">Error in capturing, please reconnect the device and try again..</string>
+    <string name="bankListErrorBal">Error in fetching bank list. Please reload page and retry..</string>
+    <string name="transactionListErrorBal">Error in fetching transaction list. Please reload page and retry..</string>
+    <string name="transactionErrorBal">There was a technical error from host, please try again..</string>
+    <string name="transactionExceptionBal">There was a error response from host, please try again..</string>
+    <string name="freshnessFactorErrorBal">There was error in host, please try again..</string>
+</resources>

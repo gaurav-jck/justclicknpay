@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    android:clickable="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:orientation="horizontal"
+        android:background="@drawable/icon6"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#502c67b5"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        >
+<!--#302c67b5-->
+<!--#902c67b5-->
+        <ImageView
+        android:id="@+id/messengerImageView"
+        android:layout_marginLeft="@dimen/drawer_content_left_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+            android:layout_width="@dimen/drawer_logo_height"
+        android:layout_height="@dimen/drawer_logo_height"
+        android:src="@drawable/app_icon"
+            android:alpha="1"/>
+
+        <!--<ImageView-->
+            <!--android:Id="@+Id/iv_agent_icon"-->
+            <!--android:layout_width="@dimen/drawer_logo_width"-->
+            <!--android:layout_height="@dimen/drawer_logo_height"-->
+            <!--android:layout_marginLeft="@dimen/drawer_content_left_margin"-->
+            <!--android:layout_marginTop="@dimen/very_small_margin"-->
+            <!--android:src="@drawable/jct_white_icon_new" />-->
+
+        <TextView
+            android:id="@+id/tv_agency_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_agent_icon"
+            android:text="@string/drawer_title_name"
+            android:layout_marginLeft="@dimen/drawer_content_left_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/drawer_content_text_size"/>
+
+        <TextView
+            android:id="@+id/tv_email_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_title_email"
+            android:textColor="@color/color_white"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:textSize="@dimen/drawer_content_text_size"
+            android:layout_marginLeft="@dimen/drawer_content_left_margin"
+            />
+    </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/medium_margin">
+
+            <LinearLayout
+                android:id="@+id/home_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="visible"
+                >
+
+                <ImageView
+                    android:id="@+id/home_img"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_home_black" />
+
+                <TextView
+                    android:id="@+id/home_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_home"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/balance_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="visible"
+                >
+
+                <ImageView
+                    android:id="@+id/account_img"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_rupee" />
+
+                <TextView
+                    android:id="@+id/account_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_balance"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/credit_request_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/credit_request_img"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    android:src="@drawable/credit_icon" />
+
+                <TextView
+                    android:id="@+id/credit_request_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_agent_credit_request"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/deposit_request_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:id="@+id/deposit_request_img"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_cash_black" />
+
+                <TextView
+                    android:id="@+id/deposit_request_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_agent_deposit_request"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sales_report_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_cash_black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recharge History"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_black_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:alpha="0.4">
+
+            </View>
+
+            <!--Menu item container-->
+            <LinearLayout
+                android:id="@+id/menu_items_lin_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/insurance_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:id="@+id/iv_insurance"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_rupee" />
+                <TextView
+                    android:id="@+id/tv_insurance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_insurance"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/insurance_list_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:id="@+id/iv_insurance_list"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_rupee" />
+                <TextView
+                    android:id="@+id/tv_insurance_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_insurance"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/train_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:id="@+id/iv_train"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/train_booking_check_icon" />
+                <TextView
+                    android:id="@+id/tv_rapipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_train_search"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chatting_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:id="@+id/iv_chatting"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    android:src="@drawable/chat_icon" />
+                <TextView
+                    android:id="@+id/tv_chatting"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_chatting"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/logout_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                >
+                <ImageView
+                    android:id="@+id/iv_logout"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/ic_icon_logout" />
+                <TextView
+                    android:id="@+id/tv_logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nav_logout"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>

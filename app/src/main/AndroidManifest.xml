@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.justclick.clicknbook">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@drawable/app_icon"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Aeps"
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup,android:icon, android:roundIcon, android:theme">
+        <activity
+            android:name=".Activity.TestActivity"
+            android:exported="true">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".credopay.CredoPayActivityJava"
+            android:exported="true" />
+        <activity android:name=".jctPayment.newaeps.AepsWebviewActivity" />
+        <activity android:name=".rapipayMatm.TxnListActivity" />
+        <activity android:name=".rapipayMatm.MainRapipayActivity" />
+        <activity android:name=".rapipayMatm.MainTestActivity" />
+        <activity
+            android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity"
+            android:theme="@style/Theme.AepsApp" />
+        <activity
+            android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.MatmArrSyncActivity"
+            android:theme="@style/Theme.AepsApp" />
+        <activity
+            android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.BluetoothList_Activty"
+            android:theme="@style/Theme.AepsApp" />
+        <activity android:name=".jctPayment.fino.finomvvm.view.FinoCashWithdrawActivity" /> <!-- Activity.SplashScreen -->
+        <activity
+            android:name=".Activity.SplashScreen"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.NavigationDrawerActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".Activity.MyLoginActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".Activity.MyLoginActivityAeps"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".Activity.RegistrationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chatting.ChattingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chatting.SignInActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MoneyTransferActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.MoneyTransferNextActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name="calendar.CalendarDayDecoratorActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
+
+        <service
+            android:name=".chatting.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".chatting.MyFirebaseInstanceIdService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".Activity.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".Activity.TicTacActivity" />
+        <!--
+<meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="296a6844522f2e32ee5fb52fb221998dfcd1b2b4" /> &lt;!&ndash; JCT Payment &ndash;&gt;
+        -->
+        <activity
+            android:name=".jctPayment.Dashboard_New_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_dashboard__new_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.Dashboard_Old_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_dashboard__new_"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.Cash_Deposit_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cash_deposit"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.Cash_Withdrawl_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cash_withdraw"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.Cash_Withdrawl_Activity_old"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cash_withdraw"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.Balance_Enquiry_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_balance_enquiry"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.Balance_Enquiry_Activity_old"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_balance_enquiry"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.newaeps.Balance_Enquiry_Activity_N"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_balance_enquiry"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.newaeps.Cash_Withdrawl_Activity_N"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cash_withdraw"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.newaeps.KycActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cash_withdraw"
+            android:supportsRtl="true"
+            android:theme="@style/Theme.Aeps"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".jctPayment.BankDetailsActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_bank_details"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.Activities.Receipt_Activity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_receipt"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.Activities.ViewAllTransaction"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_viewAll"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.CashPayoutRequestActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cashPayout"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".jctPayment.CashPayoutHistoryActivity"
+            android:configChanges="orientation"
+            android:label="@string/title_activity_cashPayoutHistory"
+            android:theme="@style/AppTheme.NoActionBar" />
+    </application>
+
+</manifest>

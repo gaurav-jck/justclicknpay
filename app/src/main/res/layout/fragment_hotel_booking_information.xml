@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardMobileBackground"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_blue_color"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/backArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    app:srcCompat="@drawable/back_arrow" />
+
+                    <TextView
+                        android:id="@+id/detailTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:textColor="@color/color_white"
+                        android:text="Booking Information"
+                        android:textSize="@dimen/title_text_size" />
+
+            </LinearLayout>
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/hotelImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hotelImageSize"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/hotel_demo_image"
+                android:layout_weight="0.70" />
+
+            <TextView
+                android:id="@+id/hotelDetailsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                android:text="Africa Diplomatic Enclave, New Delhi,Delhi 110023"
+                android:textColor="@color/color_white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/small_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:background="@color/hotelBackgroundColor"
+                >
+
+                <TextView
+                    android:id="@+id/roomTypeTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Standard Room"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textSize="@dimen/list_view_name_field_text_size"
+                    android:textColor="@color/color_black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/small_margin">
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/medium_margin">
+                        <TextView
+                            android:id="@+id/checkInLabelTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:textSize="@dimen/small_text_size10sp"
+                            android:text="CHECK IN" />
+
+                        <TextView
+                            android:id="@+id/checkInDateTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/flightBlackColor"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:text="MON,13 OCT"/>
+
+                        <TextView
+                            android:id="@+id/checkInTimeeTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:textColor="@color/flightBlackColor"
+                            android:layout_height="wrap_content"
+                            android:text="4:00 PM"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical">
+                        <TextView
+                            android:id="@+id/roomDayInfoTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="-5dp"
+                            android:textSize="@dimen/small_text_size10sp"
+                            android:text="(2Rooms X 3Nights)"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="100dp"
+                                android:layout_gravity="center"
+                                android:rotation="180"
+                                android:layout_marginLeft="@dimen/small_margin"
+                                android:layout_marginTop="0.07dp"
+                                android:layout_height="1dp"
+                                android:background="@color/color_black"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=">"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                android:textColor="@color/color_black"/>
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/paxInfoTv"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="-5dp"
+                            android:textSize="@dimen/small_text_size10sp"
+                            android:layout_height="wrap_content"
+                            android:text="(3 Adults,2Kids)"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:orientation="vertical"
+                        android:paddingRight="@dimen/medium_margin">
+
+                        <TextView
+                            android:id="@+id/checkOutLabelTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/small_text_size10sp"
+                            android:text="CHECK OUT"/>
+
+                        <TextView
+                            android:id="@+id/checkOutDateTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textColor="@color/flightBlackColor"
+                            android:text="MON,16 OCT"/>
+
+                        <TextView
+                            android:id="@+id/checkOutTimeTv"
+                            android:layout_width="wrap_content"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/flightBlackColor"
+                            android:text="10:00AM"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_large_margin"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/priceTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textSize="@dimen/title_text_size"
+                        android:textColor="@color/flightDarkBlackColor"
+                        android:text="INR 10000"/>
+                    <TextView
+                        android:id="@+id/refundTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Refundable"
+                        android:textSize="@dimen/small_text_size10sp"
+                        android:textColor="@color/app_red_color"/>
+                    <TextView
+                        android:id="@+id/totalFareGst"
+                        android:layout_width="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginTop="@dimen/very_small_margin"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:text="Total fare with GST(INR 1000)"/>
+
+                </LinearLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    >
+
+                    <EditText
+                        android:id="@+id/promoCodeEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/personName_editText_digits"
+                        android:hint="Promo Code"
+                        android:maxLength="49"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roomDetailArrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/hotelBackgroundColor"
+                android:padding="@dimen/small_margin"
+                >
+                <ImageView
+                    android:layout_width="@dimen/airVectorIconSize"
+                    android:layout_height="@dimen/airVectorIconSize"
+                    android:layout_margin="@dimen/very_small_margin"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/passanger_info_adult"/>
+                <TextView
+                    android:id="@+id/roomDetailsTitle"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/color_black"
+                    android:layout_height="match_parent"
+                    android:text="ROOM DETAILS"/>
+                <ImageView
+                    android:id="@+id/roomDetailArrowImg"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.09"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/down_arrow"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/submitBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@color/app_red_color"
+                android:textColor="@color/color_white"
+                android:padding="@dimen/small_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:textSize="@dimen/title_text_size"
+                android:text="SUBMIT"/>
+
+        </LinearLayout>
+    </ScrollView>
+    <!--</android.support.v4.widget.NestedScrollView>-->
+</LinearLayout>
+
+
+
+

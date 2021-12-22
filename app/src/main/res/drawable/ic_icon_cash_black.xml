@@ -1,0 +1,54 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+  <path
+      android:pathData="M0,0L0,64L64,64L64,0L0,0z"
+      android:fillColor="@color/transparent"
+      android:strokeColor="#00000000"/>
+
+  <path
+      android:pathData="M41,5C38.2992,9.5634 35.8668,16.0377 31.7762,19.4869
+      C28.9592,21.8622 25.0204,22.0035 22.2099,24.4298C18.6743,27.4819
+      17.5318,32.5814 13.7901,35.4005C10.6226,37.7869 5.6384,38.3085 2,40L3,44
+      C4.6664,42.863 6.7106,41.062 8.8827,41.2515C12.6738,41.5824 14.671,49.7183 14.091,52.7909
+      C13.6732,55.0047 11.704,56.8195 11,59C15.5126,58.1735 17.271,55.3542 21.1289,53.4144
+      C28.6895,49.6127 35.1386,48.7639 43,51C46.7445,42.3101 52.26,34.3178 56.7693,26
+      C58.1596,23.4354 61.3267,19.5076 60.2886,16.3897C59.5676,14.2242 56.8015,13.061 54.9954,12
+      C50.4906,9.3537 46.0282,6.4791 41,5z"
+      android:fillColor="@color/app_icon_color_black"
+      android:strokeColor="#00000000"/>
+
+  <path
+      android:pathData="M42,9C37.776,17.0196 32.5876,24.6742 29,33C34.722,30.7507
+      34.8897,24.2448 40.0231,22.1366C43.5213,20.7 48.3139,24.1815 47.9637,28.0039
+      C47.4392,33.7291 39.3198,39.5124 37,45L41,47C47.2177,37.5736 53.2242,27.229 58,17
+      C52.5897,14.474 47.7124,10.8077 42,9z"
+      android:fillColor="@color/app_icon_inner_background_color_light"
+      android:strokeColor="#00000000"/>
+
+  <path
+      android:pathData="M35,28C40.9097,27.635 42.6171,29.1956 44,34
+      C45.1793,33.0177 45.3816,32.3467 47.0162,29.8619
+      C50.1255,23.2466 38.8174,18.0809 35,28z"
+      android:fillColor="@color/app_icon_color2"
+      android:strokeColor="#00000000"/>
+
+  <path
+      android:pathData="M17,50C28.608,49.7591 36.8132,42.8255 41,32C36.6367,31.3807
+      23.7531,40.3794 27.5957,29.044L29,25C22.7509,26.2911 15.9906,35.581 15.4622,42
+      C15.2453,44.6341 16.4196,47.4596 17,50z"
+      android:fillColor="@color/app_icon_inner_background_color_light"
+      android:strokeColor="#00000000"/>
+
+  <path
+      android:pathData="M10,40C1.0795,43.7524 6.1065,49.5322 10,56L15,55C13.9908,49.8137
+       12.8478,44.5043 10,40z"
+      android:fillColor="@color/app_icon_color2"
+      android:strokeColor="#00000000"/>
+
+
+
+
+</vector>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingTop="@dimen/very_large_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        app:srcCompat="@drawable/error_notificaion_icon"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Oops! your connection seems off..."
+        android:textColor="@color/black_text_color"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="pull to refresh to try again"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/rechargeSuccessGrayTextColor"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/large_margin"
+        android:gravity="center"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:background="@color/grayViewColorFlight"/>
+
+    <TextView
+        android:id="@+id/okayTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ok"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="@dimen/large_margin"
+        android:paddingBottom="@dimen/large_margin"
+        android:textSize="@dimen/title_text_size"
+        android:textStyle="bold"
+        android:textColor="@color/app_blue_color"
+        />
+
+</LinearLayout>

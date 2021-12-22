@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:background="@color/colorWhite"
+    android:theme="@style/LoginTheme"
+    android:paddingTop="@dimen/pageTopPadding"
+    tools:context=".Fragment.flights.fragments.TravellersDetails">
+    <LinearLayout
+        android:id="@+id/relTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorWhite"
+        android:padding="@dimen/very_small_margin"
+        android:orientation="horizontal">
+
+        <include layout="@layout/back_image_blue"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/flight_traveller_detail_title"
+            android:textColor="@color/black_text_color"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textSize="@dimen/title_text_size"
+            />
+    </LinearLayout>
+    <View
+        android:id="@+id/topView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_below="@+id/relTop"
+        android:background="@color/topTitleLineViewColor"/>
+    <ScrollView
+        android:layout_below="@id/relTop"
+        android:layout_above="@+id/relBottom"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/size_1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin"
+                android:layout_alignBottom="@+id/viewCircle"
+                app:cardCornerRadius="@dimen/small_margin"
+                app:cardBackgroundColor="@color/transparent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/medium_margin"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_2dp"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/large_margin"
+                    android:paddingRight="@dimen/large_margin"
+                    android:paddingTop="@dimen/small_margin"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/departCityTv"
+                            android:layout_width="@dimen/size_0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="New Delhi"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="5dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/arrow_pointing_to_right" />
+
+                        <TextView
+                            android:id="@+id/arriveCityTv"
+                            android:layout_width="@dimen/size_0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="New Delhi"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/medium_margin">
+
+                        <TextView
+                            android:id="@+id/departTimeTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="17:20"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/text_size_14sp" />
+
+                        <TextView
+                            android:id="@+id/departCityCodeTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingLeft="@dimen/small_margin"
+                            android:text="DEL"
+                            android:textColor="@color/grayTextLightColorFlight"
+                            android:textSize="@dimen/text_size_14sp" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/route_point" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="---"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/text_size_14sp" />
+
+                        <TextView
+                            android:id="@+id/durationTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/size_1dp"
+                            android:layout_marginRight="@dimen/size_1dp"
+                            android:background="@drawable/circular_round_gray_icon"
+                            android:paddingLeft="@dimen/small_margin"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="+1 Day  |  10h 20m"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/small_text_size11sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="---"
+                            android:textColor="@color/gray_color"
+                            android:textSize="@dimen/text_size_14sp" />
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/route_point" />
+
+                        <TextView
+                            android:id="@+id/arriveTimeTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="17:20"
+                            android:textColor="@color/black_text_color"
+                            android:textSize="@dimen/text_size_14sp" />
+
+                        <TextView
+                            android:id="@+id/arriveCityCodeTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="DEL"
+                            android:textColor="@color/grayTextLightColorFlight"
+                            android:textSize="@dimen/text_size_14sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/dateDetailTv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:text="Sat, 28 Jan'19 | 1 Adult(s) | Economy"
+                        android:textColor="@color/grayTextLightColorFlight"
+                        android:textSize="@dimen/small_text_size" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_0_5dp"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:layout_marginBottom="@dimen/medium_margin"
+                        android:background="@color/grayViewColorFlight" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/medium_margin"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin">
+
+                        <TextView
+                            android:id="@+id/cancellationTv"
+                            android:layout_width="@dimen/size_0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Fare Rules"
+                            android:textColor="@color/travelerLightBlueColorFlight"
+                            android:textSize="@dimen/text_size_13sp"
+                            android:background="@drawable/circular_round_sky_blue_icon"
+                            android:gravity="center"
+                            android:padding="@dimen/small_margin"/>
+
+                        <TextView
+                            android:id="@+id/baggageTv"
+                            android:layout_width="@dimen/size_0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Baggage Info"
+                            android:textColor="@color/travelerLightBlueColorFlight"
+                            android:textSize="@dimen/text_size_13sp"
+                            android:background="@drawable/circular_round_sky_blue_icon"
+                            android:gravity="center"
+                            android:padding="@dimen/small_margin"
+                            android:singleLine="true"
+                            android:layout_marginLeft="@dimen/medium_margin"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_color"
+                android:paddingLeft="@dimen/large_margin"
+                android:layout_marginTop="@dimen/large_margin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Traveller Names"
+                    android:textColor="@color/black_text_color"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_16sp"/>
+                <ImageView
+                    android:id="@+id/getCoPassengersImg"
+                    android:layout_width="40dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/add_pax_icon"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/loginLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_color"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/small_text_size10sp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@color/hotelLightBlackTextColor"
+                    android:text="@string/logInOrGuest"/>
+                <TextView
+                    android:id="@+id/loginTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:textColor="@color/app_red_color"
+                    android:textStyle="bold"
+                    android:text="LOGIN"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/guestTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/guestLogin"
+                android:gravity="right"
+                android:textSize="@dimen/small_text_size"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/traveller_gray_color"
+                />
+
+            <LinearLayout
+                android:id="@+id/passengerContainerLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_light_color"
+                android:paddingBottom="@dimen/small_margin"
+                android:orientation="vertical"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_travellers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_light_color"
+                android:paddingBottom="@dimen/small_margin"
+                android:visibility="gone"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Note: Please make sure the details below as per traveller's ID"
+                android:textColor="@color/grayTextLightColorFlight"
+                android:textSize="@dimen/small_text_size11sp"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingRight="@dimen/large_margin"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_color"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/very_small_margin"
+                android:paddingBottom="@dimen/very_small_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact Information"
+                    android:textColor="@color/black_text_color"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" * your booking status will be send here."
+                    android:textColor="@color/grayTextLightColorFlight"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/small_text_size10sp"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/large_margin"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:orientation="horizontal">
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="@dimen/small_margin">
+                    <ImageView
+                        android:id="@+id/emailImage"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:srcCompat="@drawable/email_icn"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailEdtSignUpInput"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:layout_toRightOf="@+id/emailImage"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        >
+
+                        <EditText
+                            android:id="@+id/et_email"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enterEmail"
+                            android:textColor="@color/black_text_color"
+                            android:background="@color/transparent"
+                            android:textColorHint="@color/grayTextHintColorFlight"
+                            android:textSize="@dimen/text_size_14sp"
+                            android:visibility="visible"
+                            android:inputType="textEmailAddress"
+                            android:paddingTop="@dimen/small_margin"
+                            android:paddingBottom="@dimen/small_margin"
+                            android:maxLength="@integer/nameMaxLength"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text=""
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_1dp"
+                        android:layout_weight="1"
+                        android:layout_below="@+id/emailEdtSignUpInput"
+                        android:background="@color/loginTextColor"
+                        android:layout_marginTop="@dimen/small_margin"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/small_margin">
+
+                    <ImageView
+                        android:id="@+id/mobileImage"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        app:srcCompat="@drawable/phone_book_icn"
+                        android:layout_gravity="bottom"
+                        android:layout_centerVertical="true"
+                        android:visibility="gone"
+                        android:layout_marginBottom="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/very_small_margin"
+                        />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/numberInput"
+                        android:layout_width="match_parent"
+                        android:layout_weight="2"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/mobileImage"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        >
+
+                        <EditText
+                            android:id="@+id/et_mobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/enterMobile"
+                            android:textColor="@color/black_text_color"
+                            android:background="@color/transparent"
+                            android:textColorHint="@color/grayTextHintColorFlight"
+                            android:textSize="@dimen/text_size_14sp"
+                            android:visibility="visible"
+                            android:inputType="number"
+                            android:paddingTop="@dimen/small_margin"
+                            android:paddingBottom="@dimen/small_margin"
+                            android:maxLength="@integer/mobileMaxLength"
+                            android:maxLines="1"
+                            android:singleLine="true"
+                            android:text=""
+                            />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/size_1dp"
+                        android:layout_weight="1"
+                        android:layout_below="@+id/numberInput"
+                        android:background="@color/loginTextColor"
+                        android:layout_marginTop="@dimen/small_margin"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/gstCheckBoxRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/traveller_gray_color"
+                android:paddingLeft="@dimen/large_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/small_margin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Use GST for this booking"
+                    android:textColor="@color/black_text_color"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_16sp"/>
+                <CheckBox
+                    android:id="@+id/gstCheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:checked="false"/>
+            </RelativeLayout>
+            <LinearLayout
+                android:id="@+id/gstLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="@dimen/small_margin">
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/email_icn"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginBottom="@dimen/small_margin"
+                            />
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/gstNoInput"
+                            android:layout_width="match_parent"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/medium_margin"
+                            >
+
+                            <EditText
+                                android:id="@+id/gstNoEdt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="GST Number"
+                                android:textColor="@color/black_text_color"
+                                android:background="@color/transparent"
+                                android:textColorHint="@color/grayTextHintColorFlight"
+                                android:textSize="@dimen/text_size_14sp"
+                                android:visibility="visible"
+                                android:inputType="text"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:maxLength="@integer/nameMaxLength"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text=""
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_1dp"
+                            android:layout_weight="1"
+                            android:layout_below="@+id/gstNoInput"
+                            android:background="@color/loginTextColor"
+                            android:layout_marginTop="@dimen/small_margin"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/small_margin">
+
+                        <ImageView
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            app:srcCompat="@drawable/phone_book_icn"
+                            android:layout_gravity="bottom"
+                            android:layout_centerVertical="true"
+                            android:visibility="gone"
+                            android:layout_marginBottom="@dimen/small_margin"
+                            android:layout_marginLeft="@dimen/very_small_margin"
+                            />
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/companynameInput"
+                            android:layout_width="match_parent"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/medium_margin"
+                            >
+
+                            <EditText
+                                android:id="@+id/gstCompanyNameEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Company Name"
+                                android:textColor="@color/black_text_color"
+                                android:background="@color/transparent"
+                                android:textColorHint="@color/grayTextHintColorFlight"
+                                android:textSize="@dimen/text_size_14sp"
+                                android:visibility="visible"
+                                android:inputType="textPersonName"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:maxLength="@integer/nameLargeMaxLength"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text=""
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_1dp"
+                            android:layout_weight="1"
+                            android:layout_below="@+id/companynameInput"
+                            android:background="@color/loginTextColor"
+                            android:layout_marginTop="@dimen/small_margin"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+
+                    android:orientation="horizontal">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="@dimen/small_margin">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/gstEmailInput"
+                            android:layout_width="match_parent"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:layout_marginRight="@dimen/medium_margin"
+                            android:layout_marginTop="@dimen/small_margin">
+                            <EditText
+                                android:id="@+id/gstEmailEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Company Email ID"
+                                android:textColor="@color/black_text_color"
+                                android:background="@color/transparent"
+                                android:textColorHint="@color/grayTextHintColorFlight"
+                                android:textSize="@dimen/text_size_14sp"
+                                android:visibility="visible"
+                                android:inputType="textEmailAddress"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:maxLength="@integer/emailMaxLength"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text=""
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_1dp"
+                            android:layout_weight="1"
+                            android:layout_below="@+id/gstEmailInput"
+                            android:background="@color/loginTextColor"
+                            />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="@dimen/small_margin">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/gstMobileInput"
+                            android:layout_width="match_parent"
+                            android:layout_weight="2"
+                            android:layout_height="wrap_content"
+                            android:visibility="visible"
+                            android:layout_marginRight="@dimen/medium_margin"
+                            android:layout_marginTop="@dimen/small_margin">
+                            <EditText
+                                android:id="@+id/gstMobileEdit"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Company Mobile No."
+                                android:textColor="@color/black_text_color"
+                                android:background="@color/transparent"
+                                android:textColorHint="@color/grayTextHintColorFlight"
+                                android:textSize="@dimen/text_size_14sp"
+                                android:visibility="visible"
+                                android:inputType="number"
+                                android:digits="@string/mobile_digit"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:maxLength="@integer/mobileMaxLength"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text=""
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/size_1dp"
+                            android:layout_weight="1"
+                            android:layout_below="@+id/gstMobileInput"
+                            android:background="@color/loginTextColor"
+                            />
+                    </RelativeLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/relBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_transparent"
+        android:padding="@dimen/small_margin"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_s"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:text="TOTAL\nAMOUNT"
+            android:textColor="@color/colorWhite"
+            android:layout_alignBottom="@+id/proceedTv"
+            android:textSize="@dimen/small_text_size" />
+
+        <TextView
+            android:id="@+id/totalPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_toRightOf="@id/tv_s"
+            android:text="@string/rupeeSymbolRs"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/title_text_size"
+            android:layout_alignBottom="@+id/proceedTv"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/proceedTv"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:textSize="@dimen/text_size_14sp"
+            android:background="@drawable/solid_round_blue_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Proceed"
+            android:textColor="@color/colorWhite" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup"
+    android:background="@drawable/blue_border_white_background"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:gravity="center"
+                android:textStyle="bold|italic"
+                android:textSize="@dimen/title_text_size"
+                android:text="Agency Detail"/>
+
+            <ImageButton
+                android:id="@+id/close_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"
+                android:background="@color/transparent"
+                app:srcCompat="@drawable/cross_white"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AgencyName/code"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/validityTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="11-04-2018 00:00:00"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/contact_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Abc bac"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                >
+                <TextView
+                    android:id="@+id/addressTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="dcsdcsdcsdc"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:textColor="@color/listItemTextColorBlue"
+                    android:textSize="@dimen/small_text_size10sp" />
+            </ScrollView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/city_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delhi"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/stateTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="delhi"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/pincode_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="12321"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/mobileTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="9876534565"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="abc@email.com"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+            <TextView
+                android:id="@+id/panNoTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="DJISDJ2332H"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+</LinearLayout>

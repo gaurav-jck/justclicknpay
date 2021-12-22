@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/update_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_white"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/medium_margin"
+        android:gravity="center"
+        android:textSize="@dimen/title_text_size"
+        android:text="Guest Info."/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@color/cardMobileBackground"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:text="No of rooms"
+                    android:textColor="@color/app_blue_color"
+                    android:textSize="@dimen/list_view_name_field_text_size" />
+
+                <ImageView
+                    android:id="@+id/roomMinusTv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/blue_rect_button_background"
+                    android:src="@drawable/minus" />
+
+                <TextView
+                    android:id="@+id/roomCountTv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textSize="@dimen/title_text_size" />
+
+                <ImageView
+                    android:id="@+id/roomPlusTv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.4"
+                    android:background="@drawable/blue_rect_button_background"
+                    android:src="@drawable/plus" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/cardview_shadow_start_color" />
+
+
+            <LinearLayout
+                android:id="@+id/roomOneLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Room 1"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <ImageView
+                        android:id="@+id/adultMinusImg1"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/adultImg11"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men" />
+
+                    <ImageView
+                        android:id="@+id/adultImg12"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg13"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg14"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultPlusImg1"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                    <ImageView
+                        android:id="@+id/childMinusImg1"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/childImg11"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:alpha=".4"
+                        android:background="@drawable/men_cut"
+                        android:src="@drawable/men"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/childImg12"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childImg13"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childPlusImg1"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/childAgeLin1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:text="Children's Age"
+                        android:textColor="@color/color_black_hint" />
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner11"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:visibility="visible">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/color_black_hint" />
+
+            <LinearLayout
+                android:id="@+id/roomTwoLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Room 2"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <ImageView
+                        android:id="@+id/adultMinusImg2"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/adultImg21"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men" />
+
+                    <ImageView
+                        android:id="@+id/adultImg22"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg23"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg24"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultPlusImg2"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                    <ImageView
+                        android:id="@+id/childMinusImg2"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/childImg21"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:alpha=".4"
+                        android:background="@drawable/men_cut"
+                        android:src="@drawable/men"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/childImg22"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childImg23"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childPlusImg2"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/childAgeLin2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:text="Children's Age"
+                        android:textColor="@color/color_black_hint" />
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:visibility="invisible">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:visibility="gone"
+                android:background="@color/color_black_hint" />
+
+            <LinearLayout
+                android:id="@+id/roomThreeLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Room 3"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <ImageView
+                        android:id="@+id/adultMinusImg3"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/adultImg31"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men" />
+
+                    <ImageView
+                        android:id="@+id/adultImg32"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg33"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg34"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultPlusImg3"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                    <ImageView
+                        android:id="@+id/childMinusImg3"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/childImg31"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:alpha=".4"
+                        android:background="@drawable/men_cut"
+                        android:src="@drawable/men"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/childImg32"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childImg33"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childPlusImg3"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/childAgeLin3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:text="Children's Age"
+                        android:textColor="@color/color_black_hint" />
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:visibility="invisible">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner32"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:visibility="gone"
+                android:background="@color/color_black_hint" />
+
+            <LinearLayout
+                android:id="@+id/roomFourLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Room 4"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <ImageView
+                        android:id="@+id/adultMinusImg4"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/adultImg41"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men" />
+
+                    <ImageView
+                        android:id="@+id/adultImg42"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg43"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultImg44"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/adultPlusImg4"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                    <ImageView
+                        android:id="@+id/childMinusImg4"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/minus" />
+
+                    <ImageView
+                        android:id="@+id/childImg41"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:alpha=".4"
+                        android:background="@drawable/men_cut"
+                        android:src="@drawable/men"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/childImg42"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childImg43"
+                        android:layout_width="@dimen/adult_image_width"
+                        android:layout_height="@dimen/child_image_size"
+                        android:layout_gravity="bottom"
+                        android:src="@drawable/men"
+                        android:visibility="gone" />
+
+                    <ImageView
+                        android:id="@+id/childPlusImg4"
+                        android:layout_width="@dimen/plus_image_size"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:src="@drawable/plus" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/childAgeLin4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:text="Children's Age"
+                        android:textColor="@color/color_black_hint" />
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner41"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/childAgeLin42"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:visibility="invisible">
+
+                        <Spinner
+                            android:id="@+id/childAgeSpinner42"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:drawSelectorOnTop="true"
+                            android:entries="@array/children_age_array"
+                            android:textColor="@color/app_blue_color"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:visibility="gone"
+                android:background="@color/color_black_hint" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:layout_marginTop="@dimen/large_margin">
+
+                <TextView
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/large_margin"
+                    android:paddingRight="@dimen/large_margin"
+                    android:visibility="gone"
+                    android:background="@drawable/blue_round_button_background"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <TextView
+                    android:id="@+id/submit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ok"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/large_margin"
+                    android:paddingRight="@dimen/large_margin"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:background="@drawable/blue_round_button_background"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
+
+
+
+

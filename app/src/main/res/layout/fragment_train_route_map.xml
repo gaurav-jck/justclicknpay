@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_home_screen"
+    android:weightSum="1">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/large_margin"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/color_white"
+                android:padding="@dimen/small_margin"
+                android:background="@color/app_blue_color"
+                android:text="Search Your Train"/>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from_Station"
+                android:textColor="@color/registration_text_color"
+                android:layout_marginTop="@dimen/medium_margin"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/registration_edittext_back"
+                >
+
+                <EditText
+                    android:id="@+id/from_station_edt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/type_departure_city"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/train_name"
+                android:textColor="@color/registration_text_color"
+                android:layout_marginTop="@dimen/medium_margin"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/registration_edittext_back"
+                >
+
+                <EditText
+                    android:id="@+id/train_name_edt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/type_train_name"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:inputType="number"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/depart_on"
+                android:textColor="@color/registration_text_color"
+                android:layout_marginTop="@dimen/medium_margin"/>
+            <RelativeLayout
+                android:id="@+id/date_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/registration_edittext_back"
+                >
+                <TextView
+                    android:id="@+id/address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_blue_color"
+                    android:text=""
+                    android:padding="@dimen/padding_3dp"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:hint="@string/date"
+                    android:background="@color/transparent"
+                    android:layout_centerVertical="true"
+                    android:textColorHint="@color/login_hint_color_new"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_5dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/calendar_icon_small" />
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+            >
+
+            <Button
+                android:id="@+id/bt_submit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:background="@drawable/blue_round_button_background"
+                android:text="@string/submit"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/title_text_size" />
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="@dimen/medium_margin"
+                >
+                <TextView
+                    android:id="@+id/response_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_blue_color"
+                    android:background="@color/filterBackground"
+                    android:padding="@dimen/medium_margin"
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:text=""
+                    />
+            </ScrollView>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>
+

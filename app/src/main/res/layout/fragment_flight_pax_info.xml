@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground"
+    android:id="@+id/mainLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"
+            android:src="@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/tittleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"
+            android:text="@string/paxInfoTittle"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/flightListMoreInfoColor"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    android:src="@drawable/passanger_info_adult" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <TextView
+                        android:id="@+id/travellerTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1 ADULT"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/list_view_name_field_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name should be same as on Govt. ID proof"
+                        android:textColor="@color/color_black_hint"
+                        android:textSize="@dimen/small_text_size11sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/adult_pax_info"/>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearChild"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/adult_pax_info"/>-->
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearInfant"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/adult_pax_info"/>-->
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/flightListMoreInfoColor"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin">
+
+                <ImageView
+                    android:id="@+id/contact_img"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:src="@drawable/contact_details" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CONTACT DETAILS"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/list_view_name_field_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your Ticket will be sent to this email address"
+                        android:textColor="@color/color_black_hint"
+                        android:textSize="@dimen/small_text_size11sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/contactDetailImg"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.3"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/emailEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/small_margin"
+                    android:hint="E-mail"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/login_text_color"
+                    android:textColorHint="@color/registration_hint_color"
+                    android:textSize="@dimen/text_size_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/mobileEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/small_margin"
+                    android:hint="Mobile"
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/login_text_color"
+                    android:textColorHint="@color/registration_hint_color"
+                    android:textSize="@dimen/text_size_14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6">
+
+                    <EditText
+                        android:id="@+id/promoCodeEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/small_margin"
+                        android:layout_weight="6"
+                        android:hint="Promo Code"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/login_text_color"
+                        android:textColorHint="@color/color_black"
+                        android:textSize="@dimen/text_size_14sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/promoApplyTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:gravity="center"
+                    android:text="Apply"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/list_view_name_field_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6">
+
+                    <EditText
+                        android:id="@+id/tourCodeEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/small_margin"
+                        android:layout_weight="6"
+                        android:hint="Tour Code"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/login_text_color"
+                        android:textColorHint="@color/color_black"
+                        android:textSize="@dimen/text_size_14sp" />
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tourApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:gravity="center"
+                    android:text="Apply"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/list_view_name_field_text_size" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/term_linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/descriptionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="I have read and agree to the Term and Conditions" />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/continueTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/app_red_color"
+                android:gravity="center"
+                android:padding="@dimen/small_margin"
+                android:text="CONTINUE"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/title_text_size" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout"
+    android:background="@color/colorWhite"
+    android:paddingBottom="@dimen/very_large_margin"
+    android:weightSum="1">
+    <ImageView
+        android:id="@+id/hotel_art_img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flight_img"/>
+
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@+id/hotel_art_img"
+        android:max="100"
+        android:progress="20"/>
+
+    <TextView
+        android:id="@+id/tittleTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/searchFlight"
+        android:textSize="@dimen/title_text_size"
+        android:visibility="gone"
+        android:textColor="@color/black_text_color"
+        android:gravity="center"
+        android:layout_below="@+id/hotel_art_img"/>
+    <TextView
+        android:id="@+id/tittleTv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Flight_search_title"
+        android:textSize="@dimen/text_size_16sp"
+        android:textColor="@color/textBlackColorFlight"
+        android:gravity="center"
+        android:layout_below="@+id/tittleTv"/>
+
+    <LinearLayout
+        android:id="@+id/cityLinear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_below="@+id/tittleTv1"
+        >
+        <ImageView
+            android:layout_width="@dimen/editTextIconSize"
+            android:layout_height="@dimen/editTextIconSize"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/calender_grey"/>
+
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_gravity="center"
+            android:textSize="@dimen/text_size_14sp"
+            android:text="Mon,21- Wed,24 Jan 2019"/>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_below="@+id/cityLinear"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:background="@color/textBlackColorFlight"/>
+    <RelativeLayout
+        android:id="@+id/detail_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:gravity="center"
+        android:layout_below="@+id/view">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/viewCity"
+            >
+            <ImageView
+                android:layout_width="@dimen/editTextIconSize"
+                android:layout_height="@dimen/editTextIconSize"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/grey_location_icon"/>
+
+            <TextView
+                android:id="@+id/cityNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:gravity="center"
+                android:textSize="@dimen/text_size_14sp"
+                android:text="Delhi" />
+        </LinearLayout>
+        <View
+            android:id="@+id/viewCity"
+            android:layout_width="@dimen/size_1dp"
+            android:layout_height="@dimen/editTextIconSize"
+            android:layout_centerHorizontal="true"
+            android:background="@color/rechargeSuccessGrayTextColor"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:gravity="left"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_toRightOf="@+id/viewCity"
+            >
+            <ImageView
+                android:layout_width="@dimen/editTextIconSize"
+                android:layout_height="@dimen/editTextIconSize"
+                android:layout_gravity="center"
+                android:src="@drawable/grey_pax_icon"/>
+            <TextView
+                android:id="@+id/noOfTravellerTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_gravity="center"
+                android:textSize="@dimen/text_size_14sp"
+                android:text="2 Traveller(s)"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/bottomTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_gravity="center"
+        android:layout_below="@+id/detail_tv"
+        android:textSize="@dimen/small_text_size10sp"
+        android:text="@string/flight_refund_title"/>
+
+</RelativeLayout>
+
+
+
+

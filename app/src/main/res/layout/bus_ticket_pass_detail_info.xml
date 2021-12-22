@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment">
+
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/small_margin"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:text="NAME"
+                android:textColor="@color/transactionListLabelColor"
+                android:textSize="@dimen/simple_content_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Age"
+                android:visibility="gone"
+                android:textColor="@color/transactionListLabelColor"
+                android:textSize="@dimen/simple_content_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Transaction ID"
+                android:gravity="left"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold"
+                android:textColor="@color/app_blue_color"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="1.2"/>
+
+            <TextView
+                android:id="@+id/cancelTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="CANCEL"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:textColor="@color/app_red_color"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="0.6"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/nameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.8"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/text_size_14sp"
+                android:text="Priyanshi kumari sinha kumari "/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:visibility="gone"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/text_size_14sp"
+                android:text="ABC"/>
+
+            <TextView
+                android:id="@+id/pnrTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Dummuy122635625356256"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_black"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="1.2"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_weight="0.6">
+                <androidx.appcompat.widget.AppCompatCheckBox
+                    android:id="@+id/checkImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.3"
+                android:text="AGE"
+                android:textColor="@color/transactionListLabelColor"
+                android:textSize="@dimen/simple_content_text_size" />
+
+            <TextView
+                android:id="@+id/ageTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:gravity="left"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="0.3"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Seat"
+                android:gravity="left"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:textColor="@color/app_blue_color"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="0.5"/>
+
+            <TextView
+                android:id="@+id/seatTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="A1"
+                android:gravity="left"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:paddingRight="@dimen/medium_margin"
+                android:layout_weight="0.9"/>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="@color/color_black_hint"/>
+
+    </LinearLayout>
+
+</LinearLayout>

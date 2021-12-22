@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/very_small_margin"
+    android:layout_marginRight="@dimen/very_small_margin"
+    android:layout_marginTop="@dimen/very_small_margin"
+    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardCornerRadius="1dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/flightListSubMainColor"
+        android:layout_marginTop="@dimen/small_margin"
+        android:padding="@dimen/small_margin"
+        android:orientation="vertical">
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:id="@+id/linear_main_menu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:paddingTop="@dimen/medium_margin"
+            android:paddingBottom="@dimen/medium_margin"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="@dimen/small_margin"
+                android:orientation="horizontal">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/flightImage"
+                    android:layout_width="@dimen/flightListAirlineImageSize"
+                    android:layout_height="@dimen/flightListAirlineImageSize"
+                    android:layout_gravity="center_vertical"
+                    fresco:placeholderImage="@drawable/air_icon"
+                    />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/flight_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="INDIGO"
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/flightSearchCityColor"/>
+
+                    <TextView
+                        android:id="@+id/flight_Sr_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="6E-171"
+
+                        android:textSize="@dimen/small_text_size11sp"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/priceTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rs. 4000"
+                    android:textColor="@color/dark_blue_color"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <TextView
+                    android:id="@+id/policyTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Non Refundable"
+                    android:textColor="@color/flightSearchHintColor"
+                    android:textSize="@dimen/flightListDurationSize" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:src="@drawable/flight_from"/>
+
+            <TextView
+                android:id="@+id/fromTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="05:05 DEL"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+
+
+            <TextView
+                android:id="@+id/fromDurationTv"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="2h 10m(Non-Stop)"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListDurationSize" />
+
+            <TextView
+                android:id="@+id/fromArrivalTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="07:15 DEL"
+                android:gravity="center"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="wrap_content"
+                android:rotation="45"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/flight_from"/>
+
+            <TextView
+                android:id="@+id/toTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="05:05 DEL"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+
+
+            <TextView
+                android:id="@+id/toDurationTv"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="2h 10m(Non-Stop)"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListDurationSize" />
+
+            <TextView
+                android:id="@+id/toArrivalTimeTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="07:15 DEL"
+                android:gravity="center"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

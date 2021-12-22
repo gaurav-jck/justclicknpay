@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_account_balance_black_24dp"-->
+        <!--android:padding="10dp"-->
+        <!--android:Id="@+Id/imageView" />-->
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="@dimen/simple_content_text_size"
+        android:textColor="@color/app_blue_color"
+        android:id="@+id/countryName"
+        android:layout_alignParentTop="true"
+        android:background="@color/cardBackground"
+        android:paddingLeft="@dimen/small_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/medium_margin"
+        android:paddingBottom="@dimen/medium_margin"/>
+</RelativeLayout>

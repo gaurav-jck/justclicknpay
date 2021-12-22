@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:theme="@style/AppTheme">
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:theme="@style/AppTheme">
+            <RadioGroup
+                android:layout_margin="10dp"
+                android:id="@+id/myRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:checkedButton="@+id/cashid"
+                android:weightSum="800">
+
+                <RadioButton
+                    android:id="@+id/cashid"
+                    android:layout_weight="400"
+                    android:textSize="14dp"
+                    android:textStyle="bold|italic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aeps1cashwithdraw" />
+
+                <RadioButton
+                    android:layout_weight="400"
+                    android:id="@+id/balanceid"
+                    android:textSize="14dp"
+                    android:textStyle="bold|italic"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/aeps1balenq" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+
+
+
+
+        <EditText
+            android:id="@+id/input_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount"
+            android:inputType="number"
+            android:maxLength="10"
+            android:textSize="16dp" />
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/input_texts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
+            android:textColor="@color/red"
+            android:visibility="gone"/>
+        <Spinner
+            android:id="@+id/select_deviceid"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:spinnerMode="dropdown"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:weightSum="700">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_submit_aeps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="300"
+                android:background="@drawable/newbtn_shape"
+                android:onClick="onClick"
+                android:text="@string/btnsubmit"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:weightSum="700">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="300"
+                android:background="@drawable/newbtn_shape"
+                android:onClick="onClick"
+                android:text="Get Status"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/syc_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_weight="300"
+                android:background="@drawable/newbtn_shape"
+                android:onClick="onClick"
+                android:text="Sync device"
+                android:textColor="@color/white"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

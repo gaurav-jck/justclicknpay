@@ -1,0 +1,1518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/hotelCitySearchRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:orientation="horizontal"
+                    >
+
+                    <ImageView
+                        android:id="@+id/flightImgDepart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/hotel_building"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/medium_margin"/>
+
+                    <LinearLayout
+                        android:id="@+id/fromLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:layout_gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/fromTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="WHERE"
+                            android:visibility="visible"
+                            android:textColor="@color/flightSearchCityTitleColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/fromNameTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text=""
+                            android:hint="@string/select_city"
+                            android:textColor="@color/color_black_hint"
+                            android:textSize="@dimen/airCityTextSize" />
+
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/down_arrow"
+                        android:layout_gravity="center_vertical"
+                        android:padding="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/large_margin"
+                        android:alpha="0.5"
+                        android:rotation="270"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:alpha="0.5"
+                    android:layout_marginLeft="@dimen/very_large_margin"
+                    android:layout_marginRight="@dimen/very_large_margin"
+                    android:background="@color/app_blue_color"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="@dimen/very_large_margin"
+                            android:paddingTop="@dimen/medium_margin"
+                            android:paddingBottom="@dimen/medium_margin"
+                            android:background="@color/flightSearchDateBackground"
+                            >
+
+                            <RelativeLayout
+                                android:id="@+id/departDateLin"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:layout_gravity="left"
+                                android:paddingTop="@dimen/very_small_margin"
+                                android:paddingRight="@dimen/small_margin"
+                                android:paddingLeft="@dimen/small_margin"
+                                android:paddingBottom="@dimen/very_small_margin">
+
+                                <TextView
+                                    android:id="@+id/departLabel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="DEPART"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="@dimen/small_text_size"
+                                    android:gravity="center"
+                                    android:layout_toRightOf="@+id/departIcon"
+                                    android:layout_alignBottom="@+id/departIcon"
+                                    android:layout_alignTop="@+id/departIcon"
+                                    android:layout_marginLeft="@dimen/small_margin"
+                                    android:textColor="@color/flightSearchCityTitleColor" />
+
+
+                                <ImageView
+                                    android:id="@+id/departIcon"
+                                    android:layout_width="@dimen/airSearchCalenderSize"
+                                    android:layout_height="@dimen/airSearchCalenderSize"
+                                    android:src="@drawable/flight_calender"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/departIcon"
+                                    android:paddingTop="@dimen/very_small_margin">
+
+                                    <TextView
+                                        android:id="@+id/departDateTv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="26 OCT"
+                                        android:gravity="center"
+                                        android:layout_gravity="center_vertical"
+                                        android:textColor="@color/flightSearchDateColor"
+                                        android:textSize="@dimen/airDateTextSize"
+                                        android:textStyle="bold"
+                                        />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:layout_below="@+id/departIcon"
+                                        android:padding="@dimen/small_margin">
+
+                                        <TextView
+                                            android:id="@+id/departDayTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="WEDNESDAY"
+                                            android:gravity="center"
+                                            android:textColor="@color/color_black_hint"
+                                            android:textSize="@dimen/small_text_size10sp"
+                                            android:singleLine="true"
+                                            />
+                                        <TextView
+                                            android:id="@+id/departYearTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="2017"
+                                            android:textSize="@dimen/text_size_14sp"
+                                            android:textColor="@color/flightSearchCityColor" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/nightTv"
+                                android:layout_width="55dp"
+                                android:layout_height="55dp"
+                                android:padding="2dp"
+                                android:text="1\nNight"
+                                android:gravity="center"
+                                android:layout_gravity="center_vertical|left"
+                                android:background="@drawable/blue_circle_border_background"
+                                android:textColor="@color/color_white"
+                                android:layout_margin="@dimen/small_margin"
+                                android:textSize="@dimen/small_text_size"
+                                />
+
+                            <RelativeLayout
+                                android:id="@+id/returnDateLin"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:layout_gravity="right"
+                                android:paddingTop="@dimen/very_small_margin"
+                                android:paddingRight="@dimen/small_margin"
+                                android:paddingLeft="@dimen/small_margin"
+                                android:paddingBottom="@dimen/very_small_margin">
+
+                                <TextView
+                                    android:id="@+id/returnLabel"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="RETURN"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textSize="@dimen/small_text_size"
+                                    android:gravity="center"
+                                    android:layout_toRightOf="@+id/returnIcon"
+                                    android:layout_alignBottom="@+id/returnIcon"
+                                    android:layout_alignTop="@+id/returnIcon"
+                                    android:layout_marginLeft="@dimen/small_margin"
+                                    android:textColor="@color/flightSearchCityTitleColor" />
+
+
+                                <ImageView
+                                    android:id="@+id/returnIcon"
+                                    android:layout_width="@dimen/airSearchCalenderSize"
+                                    android:layout_height="@dimen/airSearchCalenderSize"
+                                    android:src="@drawable/flight_calender"
+                                    />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/returnIcon"
+                                    android:paddingTop="@dimen/very_small_margin">
+
+                                    <TextView
+                                        android:id="@+id/returnDateTv"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="27 OCT"
+                                        android:gravity="center"
+                                        android:layout_gravity="center_vertical"
+                                        android:textColor="@color/flightSearchDateColor"
+                                        android:textSize="@dimen/airDateTextSize"
+                                        android:textStyle="bold"
+                                        />
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:layout_below="@+id/departIcon"
+                                        android:padding="@dimen/small_margin">
+
+                                        <TextView
+                                            android:id="@+id/returnDayTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="THURSDAY"
+                                            android:gravity="center"
+                                            android:textColor="@color/color_black_hint"
+                                            android:textSize="@dimen/small_text_size10sp"
+                                            android:singleLine="true"
+                                            />
+                                        <TextView
+                                            android:id="@+id/returnYearTv"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="2017"
+                                            android:textSize="@dimen/text_size_14sp"
+                                            android:textColor="@color/flightSearchCityColor" />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.1dp"
+                            android:alpha="0.5"
+                            android:background="@color/app_blue_color"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@color/hotelBackgroundTitleColor"
+                            android:layout_marginTop="@dimen/large_margin">
+
+                            <TextView
+                                android:id="@+id/roomInfoLabel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/roomInfo"
+                                android:textColor="@color/dark_blue_color"
+                                android:padding="@dimen/small_margin"
+                                android:layout_centerVertical="true"/>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/very_small_margin"
+                                android:orientation="horizontal"
+                                android:layout_centerVertical="true"
+                                android:layout_alignParentRight="true">
+
+
+                                <ImageView
+                                    android:id="@+id/roomMinusTv"
+                                    android:layout_width="@dimen/plus_image_size"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    app:srcCompat="@drawable/minus_flight" />
+
+                                <TextView
+                                    android:id="@+id/roomCountTv"
+                                    android:layout_width="@dimen/adult_image_width"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="@dimen/small_margin"
+                                    android:text="1"
+                                    android:gravity="center"
+                                    android:textColor="@color/color_black"
+                                    android:textSize="@dimen/title_text_size"/>
+
+                                <ImageView
+                                    android:id="@+id/roomPlusTv"
+                                    android:layout_width="@dimen/plus_image_size"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    app:srcCompat="@drawable/plus_flight" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:background="@color/cardMobileBackground"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:id="@+id/roomOneLin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="@dimen/medium_margin"
+                                android:paddingRight="@dimen/medium_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:background="@color/flightListSubMainColor1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/medium_margin"
+                                    android:layout_marginTop="@dimen/very_large_margin"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/roomLabel1"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Room 1"
+                                        android:textColor="@color/app_blue_color"
+                                        android:textSize="@dimen/simple_content_text_size" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/adultImg11"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg12"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="visible" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg13"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="visible" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg14"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="visible" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="horizontal">
+
+
+                                            <ImageView
+                                                android:id="@+id/adultMinusImg1"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginLeft="@dimen/small_margin"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomAdultCount1"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="1"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/adultPlusImg1"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="@dimen/small_margin"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/large_margin"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/childImg11"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:alpha=".4"
+
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="visible" />
+<!--android:background="@drawable/men_cut"-->
+                                            <ImageView
+                                                android:id="@+id/childImg12"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg13"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg14"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg15"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_gravity="center">
+
+
+                                            <ImageView
+                                                android:id="@+id/childMinusImg1"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomChildCount1"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="0"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/childPlusImg1"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/childAgeLin1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin11"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner11"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin12"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="visible">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner12"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin13"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner13"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin14"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner14"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/roomTwoLin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/medium_margin"
+                                android:paddingLeft="@dimen/medium_margin"
+                                android:paddingRight="@dimen/medium_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:background="@color/flightListSubMainColor1"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/medium_margin"
+                                    android:layout_marginTop="@dimen/very_large_margin"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/roomLabel2"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Room 2"
+                                        android:textColor="@color/app_blue_color"
+                                        android:textSize="@dimen/simple_content_text_size" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/adultImg21"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg22"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg23"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg24"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="horizontal">
+
+
+                                            <ImageView
+                                                android:id="@+id/adultMinusImg2"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginLeft="@dimen/small_margin"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomAdultCount2"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="1"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/adultPlusImg2"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="@dimen/small_margin"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/large_margin"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/childImg21"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:alpha=".4"
+
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="visible" />
+<!--android:background="@drawable/men_cut"-->
+                                            <ImageView
+                                                android:id="@+id/childImg22"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg23"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg24"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg25"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_centerVertical="true"
+                                            android:layout_alignParentRight="true">
+
+
+                                            <ImageView
+                                                android:id="@+id/childMinusImg2"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomChildCount2"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="0"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/childPlusImg2"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/childAgeLin2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin21"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner21"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin22"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner22"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin23"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner23"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin24"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner24"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/roomThreeLin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/medium_margin"
+                                android:paddingLeft="@dimen/medium_margin"
+                                android:paddingRight="@dimen/medium_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:background="@color/flightListSubMainColor1"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/medium_margin"
+                                    android:layout_marginTop="@dimen/very_large_margin"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/roomLabel3"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Room 3"
+                                        android:textColor="@color/app_blue_color"
+                                        android:textSize="@dimen/simple_content_text_size" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/adultImg31"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg32"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg33"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg34"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="horizontal">
+
+
+                                            <ImageView
+                                                android:id="@+id/adultMinusImg3"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginLeft="@dimen/small_margin"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomAdultCount3"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="1"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/adultPlusImg3"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="@dimen/small_margin"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/large_margin"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/childImg31"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:alpha=".4"
+
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="visible" />
+<!--android:background="@drawable/men_cut"-->
+                                            <ImageView
+                                                android:id="@+id/childImg32"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg33"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg34"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+                                            <ImageView
+                                                android:id="@+id/childImg35"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_centerVertical="true"
+                                            android:layout_alignParentRight="true">
+
+
+                                            <ImageView
+                                                android:id="@+id/childMinusImg3"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomChildCount3"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="0"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/childPlusImg3"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/childAgeLin3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin31"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner31"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin32"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner32"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin33"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner33"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin34"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner34"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/roomFourLin"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/medium_margin"
+                                android:paddingLeft="@dimen/medium_margin"
+                                android:paddingRight="@dimen/medium_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:background="@color/flightListSubMainColor1"
+                                android:orientation="vertical"
+                                android:visibility="gone">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="@dimen/medium_margin"
+                                    android:layout_marginTop="@dimen/very_large_margin"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/roomLabel4"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:text="Room 4"
+                                        android:textColor="@color/app_blue_color"
+                                        android:textSize="@dimen/simple_content_text_size" />
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/adultImg41"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg42"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg43"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/adultImg44"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:src="@drawable/adult"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:orientation="horizontal">
+
+
+                                            <ImageView
+                                                android:id="@+id/adultMinusImg4"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginLeft="@dimen/small_margin"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomAdultCount4"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="1"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/adultPlusImg4"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_marginRight="@dimen/small_margin"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/large_margin"
+                                        android:orientation="vertical">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal">
+                                            <ImageView
+                                                android:id="@+id/childImg41"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                android:alpha=".4"
+
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="visible" />
+<!--android:background="@drawable/men_cut"-->
+                                            <ImageView
+                                                android:id="@+id/childImg42"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg43"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg44"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+
+                                            <ImageView
+                                                android:id="@+id/childImg45"
+                                                android:layout_width="@dimen/child_image_size"
+                                                android:layout_height="@dimen/adult_image_width"
+                                                android:layout_gravity="bottom"
+                                                app:srcCompat="@drawable/infant_new_vector"
+                                                android:visibility="gone" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_centerVertical="true"
+                                            android:layout_alignParentRight="true">
+
+
+                                            <ImageView
+                                                android:id="@+id/childMinusImg4"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/minus_flight" />
+
+                                            <TextView
+                                                android:id="@+id/roomChildCount4"
+                                                android:layout_width="@dimen/adult_image_width"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:layout_margin="@dimen/small_margin"
+                                                android:text="0"
+                                                android:gravity="center"
+                                                android:textColor="@color/color_black"
+                                                android:textSize="@dimen/title_text_size"/>
+
+                                            <ImageView
+                                                android:id="@+id/childPlusImg4"
+                                                android:layout_width="@dimen/plus_image_size"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                app:srcCompat="@drawable/plus_flight" />
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/childAgeLin4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="right"
+                                    android:orientation="horizontal"
+                                    android:visibility="gone">
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin41"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/money_receiver_border_rect_corner">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner41"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin42"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner42"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin43"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner43"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+                                    <LinearLayout
+                                        android:id="@+id/childAgeLin44"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginLeft="@dimen/small_margin"
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="gone">
+
+                                        <Spinner
+                                            android:id="@+id/childAgeSpinner44"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:drawSelectorOnTop="true"
+                                            android:entries="@array/children_age_array"
+                                            android:textColor="@color/app_blue_color"
+                                            android:textSize="@dimen/simple_content_text_size" />
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <View
+                                android:id="@+id/view4"
+                                android:layout_width="match_parent"
+                                android:layout_height="0.2dp"
+                                android:visibility="gone"
+                                android:background="@color/color_black_hint" />
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/cityListView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_border_white_background"
+                        android:visibility="gone"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/searchRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/airSearchIconSize"
+                    android:background="@color/app_red_color"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    >
+                    <TextView
+                        android:id="@+id/search_Tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/small_margin"
+                        android:text="@string/searchHotels"
+                        android:textColor="@color/color_white"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/title_text_size" />
+                    <ImageView
+                        android:id="@+id/flight_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/hotel_search_image"
+                        android:paddingLeft="@dimen/large_margin"
+                        android:paddingRight="@dimen/large_margin"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

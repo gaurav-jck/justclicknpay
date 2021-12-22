@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Travellers"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:padding="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adults"/>
+
+        <TextView
+            android:layout_below="@id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Above 12 yrs"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/tvAdultMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/tvAdultCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/very_large_margin"
+                android:layout_marginRight="@dimen/very_large_margin"
+                />
+
+            <TextView
+                android:id="@+id/tvAdultPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:padding="@dimen/very_small_margin"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Children"/>
+
+        <TextView
+            android:layout_below="@id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Above 2-12 yrs"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/tvChildMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                />
+
+            <TextView
+                android:id="@+id/tvChildCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/very_large_margin"
+                android:layout_marginRight="@dimen/very_large_margin"
+                />
+
+            <TextView
+                android:id="@+id/tvChildPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Infant"/>
+
+        <TextView
+            android:layout_below="@id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Below 2 yrs"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/tvInfantMinus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                />
+
+            <TextView
+                android:id="@+id/tvInfantCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/very_large_margin"
+                android:layout_marginRight="@dimen/very_large_margin"
+                android:text="0"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvInfantPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/very_small_margin"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="20dp">
+
+        <TextView
+            android:id="@+id/tvCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/green"
+            android:paddingRight="@dimen/medium_margin"
+            android:paddingLeft="@dimen/medium_margin"
+            />
+
+        <TextView
+            android:id="@+id/tvDone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DONE"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/colorComplete"
+            android:paddingLeft="@dimen/medium_margin"
+            android:paddingRight="@dimen/medium_margin"/>
+    </LinearLayout>
+
+</LinearLayout>

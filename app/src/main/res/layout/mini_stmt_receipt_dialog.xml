@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mini Statement"
+        android:gravity="center"
+        android:background="@color/app_blue_color"
+        android:textColor="@color/color_white"
+        android:textStyle="bold"
+        android:textSize="@dimen/simple_content_text_size"
+        android:padding="@dimen/small_margin"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title"
+        android:layout_above="@+id/back_tv"
+        />
+
+
+    <TextView
+        android:id="@+id/back_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/blue_round_button_background"
+        android:gravity="center"
+        android:paddingBottom="@dimen/small_margin"
+        android:paddingLeft="@dimen/large_margin"
+        android:paddingRight="@dimen/large_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:text="Back"
+        android:visibility="visible"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/simple_content_text_size"
+        android:textStyle="bold" />
+
+</RelativeLayout>

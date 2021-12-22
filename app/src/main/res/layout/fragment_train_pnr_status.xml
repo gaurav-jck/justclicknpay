@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"
+            app:srcCompat="@drawable/arrow_left_back"
+            />
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:padding="@dimen/medium_margin"
+            android:text="Current PNR Status"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+    </RelativeLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_centerInParent="true">
+
+        <EditText
+            android:id="@+id/number_edt"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter PNR number"
+            android:text=""
+            android:maxLength="10"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/app_blue_color" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/get_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mobile"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_weight="0.4"
+        android:background="@color/app_blue_color"
+        android:gravity="center"
+        android:padding="@dimen/margin_7dp"
+        android:text="Check Current Status"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/title_text_size" />
+
+    <TextView
+        android:id="@+id/status_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/get_tv"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_weight="0.4"
+        android:background="@color/app_blue_color"
+        android:gravity="center"
+        android:padding="@dimen/margin_7dp"
+        android:text="Get PNR Status"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/title_text_size"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:weightSum="2"
+    tools:context="com.justclick.clicknbook.Activity.TicTacActivity">
+    <ImageView
+        android:id="@+id/cancel"
+        android:layout_width="40dp"
+        android:layout_height="0dp"
+        android:layout_weight="0.12"
+        app:srcCompat="@drawable/arrow_left_back_red"
+        android:layout_gravity="left"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:src="@drawable/app_icon"/>
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textStyle="bold|italic"
+            android:layout_margin="@dimen/small_margin"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/app_blue_color"
+            android:text="ENTER PIN"/>
+        <TextView
+            android:id="@+id/jctIdTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/small_padding"
+            android:textColor="@color/app_red_color"
+            android:text="JCT000001"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/very_large_margin">
+
+            <ImageView
+                android:id="@+id/radioButton1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                app:srcCompat="@drawable/radio_uncheck_blue"/>
+            <ImageView
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                app:srcCompat="@drawable/radio_uncheck_blue"/>
+            <ImageView
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                app:srcCompat="@drawable/radio_uncheck_blue"/>
+            <ImageView
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                app:srcCompat="@drawable/radio_uncheck_blue"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/toeLinear"
+        android:layout_width="match_parent"
+        android:layout_weight="0.7"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:text="1"
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                android:text="2"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tv3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="3"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="4"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tv5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="5"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+
+            <TextView
+                android:id="@+id/tv6"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="6"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv7"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="7"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tv8"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="8"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:id="@+id/tv9"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="9"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/clearTv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/title_text_size"
+                app:srcCompat="@drawable/cross_white"
+                android:textColor="@color/app_red_color"
+                android:padding="@dimen/large_padding"
+                android:gravity="center"
+                />
+
+
+            <TextView
+                android:id="@+id/tv0"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="0"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/app_red_color"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/titleLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"
+            app:srcCompat="@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/tittleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"
+            android:text="@string/bookingConfirmationTitle"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:layout_below="@+id/titleLin"
+        android:paddingBottom="@dimen/very_small_margin"
+        android:layout_above="@+id/book_tv">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/thankYou"
+                android:layout_gravity="center_horizontal"
+                android:textSize="@dimen/large_text_size"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:textColor="@color/darkBlueColor"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/hotelBackgroundColor"
+                >
+                <TextView
+                    android:id="@+id/bookRefLabelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your reference ID is: "
+                    android:textSize="@dimen/text_size_14sp"
+                    android:textColor="@color/color_black_hint"/>
+
+                <TextView
+                    android:id="@+id/bookingRefTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A22097782132B3322"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:layout_below="@+id/fromImg"
+                    android:textStyle="bold"
+                    android:textColor="@color/app_red_color"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_red_color"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hotel The Leela Palace"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/color_white"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Africa Avenue, Chanakyapuri, Diplomatic enclave, New Delhi,\nPh. 011-12343433, +91 9394444555"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/color_white"/>
+
+            </LinearLayout>
+
+           <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/small_margin"
+               android:paddingTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="CONFIRMATION ID: "
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="23238298323232"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/text_size_18sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="STANDARD ROOM"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_14sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="(2 Room x 3 Night)"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/text_size_14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="NUMBER OF GUEST"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_14sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="3 Adult, 2 Kids"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/text_size_14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+            android:paddingLeft="@dimen/medium_margin">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/checkIn"
+                android:textStyle="bold"
+                android:textColor="@color/color_black"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_14sp"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:text="Monday 04 Dec'17, 07:30 PM"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:textColor="@color/color_black_hint"
+                android:textSize="@dimen/text_size_14sp"/>
+        </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/checkOut"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_14sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="Monday 04 Dec'17, 10:30 PM"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/text_size_14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Contact No."
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black"
+                    android:textAllCaps="true"
+                    android:textSize="@dimen/text_size_14sp"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="011-1282822, +91-882828222"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/text_size_14sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ROOM(s)"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="INR 00000"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/title_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GST(0%)"
+                    android:textStyle="bold"
+                    android:textColor="@color/color_black_hint"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="INR 00000"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/title_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="GRAND TOTAL"
+                    android:textStyle="bold"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.5"
+                    android:text="INR 00000"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/title_text_size"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_blue_color"
+                    android:text="@string/cancellationPolicyBus"
+                    android:textSize="@dimen/small_text_size"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/app_blue_color"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/book_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/app_red_color"
+        android:gravity="center"
+        android:padding="@dimen/small_margin"
+        android:text="Book Hotel"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/title_text_size" />
+</RelativeLayout>

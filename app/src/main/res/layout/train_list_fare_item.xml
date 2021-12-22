@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/small_margin"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/dateTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Fri, 22 Oct"
+        android:textColor="@color/color_light_black"
+        android:textSize="@dimen/text_size_14sp"
+        android:padding="@dimen/small_margin"/>
+
+    <TextView
+        android:id="@+id/availableTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.4"
+        android:text="Not available"
+        android:textColor="@color/text_dark_gray"
+        android:textSize="@dimen/text_size_14sp"
+        android:padding="@dimen/small_margin"/>
+
+    <TextView
+        android:id="@+id/bookTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.6"
+        android:text="Book"
+        android:textColor="@color/app_blue_color"
+        android:textSize="@dimen/text_size_16sp"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        android:gravity="center"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/blue_border_white_background"/>
+
+</LinearLayout>

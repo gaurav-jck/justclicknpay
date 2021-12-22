@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="?android:windowBackground"
+    android:id="@+id/mainLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"
+            app:srcCompat="@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/tittleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"
+            android:text="@string/paxInfoTittle"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardMobileBackground"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:background="@color/hotelBackgroundColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/sourceFlightImg"
+                    android:layout_width="@dimen/busIconSizeDetail"
+                    android:layout_height="@dimen/busIconSizeDetail"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/ic_icon_bus" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/sourceArrowImg"
+                    android:layout_toRightOf="@+id/sourceFlightImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/sourceCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/flightListAirlineImageSize"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/back_blue_arrow"
+                            android:rotation="180"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"/>
+
+                        <TextView
+                            android:id="@+id/destCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Agra"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/busSupplierNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Uttar Pradesh Road Transport Corporation(UPSRTC)"
+                        android:textSize="@dimen/small_text_size" />
+                    <TextView
+                        android:id="@+id/busTypeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Volvo A/C Seater(2+2)"
+                        android:textSize="@dimen/small_text_size" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sourceArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/down_arrow" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/small_margin">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/large_margin"
+                    android:layout_marginRight="@dimen/large_margin"
+                    android:layout_weight="6"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/boardingLabelTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Boarding point"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/sourceNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Raja Ki Mandi"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/boardingTimeDateTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/droppingLin"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/droppingLabelTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Dropping point"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/destNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="ISBT Kashmiri gate"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/deBoardingTimeDateTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="20:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/durationFirstTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="4h 00m"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/small_text_size" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="-10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/margin_30dp"
+                    android:paddingRight="@dimen/margin_30dp">
+
+                    <ImageView
+                        android:id="@+id/sourceStart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:srcCompat="@drawable/radio_check_red" />
+
+                    <View
+                        android:id="@+id/sourceLine"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/sourceEnd"
+                        android:layout_toRightOf="@id/sourceStart"
+                        android:background="@color/app_red_color" />
+
+                    <ImageView
+                        android:id="@+id/sourceEnd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        app:srcCompat="@drawable/map_pin" />
+
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/totalFareRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/hotelBackgroundColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/fareTempImg"
+                    android:layout_width="@dimen/busIconSizeDetail"
+                    android:layout_height="@dimen/busIconSizeDetail"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:paddingRight="@dimen/small_margin"
+                    app:srcCompat="@drawable/ic_bus_icon_blue"
+                    android:visibility="visible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/totalFareTv"
+                    android:layout_toRightOf="@+id/fareTempImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <TextView
+                        android:id="@+id/fareTitleTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="TOTAL FARE"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/farTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Including taxes and fare"
+                        android:textSize="@dimen/small_text_size" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/totalFareTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_toLeftOf="@+id/fareArrowImg"
+                    android:padding="@dimen/very_small_margin"
+                    android:text="INR 1000000"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <ImageView
+                    android:id="@+id/fareArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="visible"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/totalFareDetailRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/totalFareFlightImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/bus_icon"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/totalFareFlightImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Base fare"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/baseFare"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Agent markup"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/agentMarkupTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Conveyance Fee"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/conveyanceTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Discount"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/discount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="TDS"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/tds"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Gross fare"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/grossFareTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Net payable"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/payable"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/app_red_color"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/hotelBackgroundColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/passengerImg"
+                    android:layout_width="@dimen/airVectorIconSize"
+                    android:layout_height="@dimen/airVectorIconSize"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/traveller_icon" />
+
+                <TextView
+                    android:id="@+id/passenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/classType"
+                    android:layout_toRightOf="@+id/passengerImg"
+                    android:padding="@dimen/small_margin"
+                    android:text="4 PASSENGER"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/linearAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/adult_pax_info"/>-->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/continueTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:background="@color/app_red_color"
+        android:gravity="center"
+        android:padding="@dimen/small_margin"
+        android:textStyle="bold|italic"
+        android:text="BOOK NOW"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/title_text_size" />
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+</LinearLayout>

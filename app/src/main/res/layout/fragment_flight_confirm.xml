@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/medium_margin"
+            android:orientation="vertical"
+            android:background="@color/color_white_hint"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/thankYou"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/large_text_size"
+                    android:textStyle="bold"
+                    android:textColor="@color/darkBlueColor"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:background="@color/hotelBackgroundColor"
+                    >
+                    <TextView
+                        android:id="@+id/bookRefLabelTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Your reference ID is: "
+                        android:textSize="@dimen/simple_content_text_size"
+                        android:textColor="@color/color_black_hint"/>
+
+                    <TextView
+                        android:id="@+id/bookingRefTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="A22097782132B3322"
+                        android:textSize="@dimen/text_size_18sp"
+                        android:layout_below="@+id/fromImg"
+                        android:textStyle="bold"
+                        android:textColor="@color/app_red_color"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:padding="@dimen/small_margin"
+                    android:background="@color/app_red_color">
+                    <TextView
+                        android:id="@+id/fromTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DELHI"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="@dimen/title_text_size"
+                        android:textColor="@color/color_white"
+                        android:textStyle="bold"/>
+
+                    <ImageView
+                        android:id="@+id/fromImg"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:src="@drawable/both_side_arrow"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:layout_gravity="center_vertical"
+                        />
+
+                    <TextView
+                        android:id="@+id/toTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="MUMBAI"
+                        android:textSize="@dimen/title_text_size"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/color_white"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/large_margin"
+                        android:layout_marginTop="@dimen/medium_margin">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="DEL"
+                                android:textColor="@color/flightBlackColor"
+                                android:textSize="@dimen/simple_content_text_size" />
+
+                            <ImageView
+                                android:layout_width="@dimen/flightListAirlineImageSize"
+                                android:layout_height="@dimen/flightListAirlineImageSize"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/back_blue_arrow"
+                                android:rotation="180"
+                                android:layout_marginTop="1dp"
+                                android:layout_marginLeft="@dimen/small_margin"
+                                android:layout_marginRight="@dimen/small_margin"/>
+
+                            <TextView
+                                android:id="@+id/destCityTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="BOM"
+                                android:textColor="@color/flightBlackColor"
+                                android:textSize="@dimen/simple_content_text_size" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/text_size_18sp"
+                                android:textColor="@color/black"
+                                android:paddingLeft="@dimen/large_margin"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:paddingRight="@dimen/large_margin"
+                                android:gravity="center"
+                                android:layout_marginRight="@dimen/small_margin"
+                                android:background="@color/hotelBackgroundColor"
+                                android:text="PNR-6E-v21t5"/>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/large_margin">
+
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:layout_width="@dimen/flightListAirlineImageSize"
+                            android:layout_height="@dimen/flightListAirlineImageSize"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/small_margin"
+                            app:placeholderImage="@color/app_blue_color"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="INDIGO"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="6E - 755"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size11sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:layout_marginLeft="@dimen/large_margin"
+                        android:layout_marginRight="@dimen/large_margin"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/fromTimeTv"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_black"
+                                android:gravity="center_vertical"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:text="DEL 05:05"/>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="22dp"
+                                android:gravity="center"
+                                android:layout_weight="1.5">
+
+                                <View
+                                    android:id="@+id/viewLeft1"
+                                    android:layout_width="10dp"
+                                    android:layout_height="10dp"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@drawable/red_circle_border_background"/>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:background="@drawable/doted_line"
+                                    android:layout_toRightOf="@+id/viewLeft1"
+                                    android:layout_toLeftOf="@+id/viewRight"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:layerType="software"
+                                    />
+
+                                <View
+                                    android:id="@+id/viewRight"
+                                    android:layout_width="10dp"
+                                    android:layout_height="10dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@drawable/green_circle_border"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="2h 10m"
+                                    android:paddingBottom="@dimen/small_margin"
+                                    android:layout_centerInParent="true"
+                                    />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:id="@+id/toTimeTv"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:gravity="right"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/simple_content_text_size"
+                                android:text="BOM 07:15"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:textSize="@dimen/text_size_13sp"
+                                android:text="(41 Seat left)"/>
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1.5"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:textColor="@color/color_black"
+                                android:textSize="@dimen/text_size_14sp"
+                                android:text="07hr 30 min"/>
+
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_gravity="center"
+                                android:gravity="right|center_vertical"
+                                android:layout_height="match_parent"
+                                android:textColor="@color/dark_blue_color"
+                                android:textSize="@dimen/title_text_size"
+                                android:text="INR 000"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/large_margin"
+                        android:layout_marginRight="@dimen/large_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:text="Wed, 01 Oct"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_centerInParent="true"
+                            android:textSize="@dimen/text_size_13sp"
+                            android:text="Non-Stop"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_gravity="center"
+                            android:gravity="right|center_vertical"
+                            android:layout_height="match_parent"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:text="Wed, 01 Oct"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/sourceCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <ImageView
+                            android:layout_width="@dimen/flightListAirlineImageSize"
+                            android:layout_height="@dimen/flightListAirlineImageSize"
+                            android:layout_gravity="center_vertical"
+                            android:src="@drawable/back_blue_arrow"
+                            android:rotation="180"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="BOM"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/text_size_18sp"
+                            android:textColor="@color/black"
+                            android:paddingLeft="@dimen/large_margin"
+                            android:paddingTop="@dimen/small_margin"
+                            android:paddingBottom="@dimen/small_margin"
+                            android:paddingRight="@dimen/large_margin"
+                            android:gravity="center"
+                            android:layout_marginRight="@dimen/small_margin"
+                            android:background="@color/hotelBackgroundColor"
+                            android:text="PNR-6E-v21t5"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sourceImg"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/small_margin"
+                        app:placeholderImage="@color/app_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/flightNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="INDIGO"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+                    <TextView
+                        android:id="@+id/flightCodeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/large_margin"
+                    android:layout_marginRight="@dimen/large_margin"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_black"
+                            android:gravity="center_vertical"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:text="DEL 05:05"/>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="22dp"
+                            android:gravity="center"
+                            android:layout_weight="1.5">
+
+                            <View
+                                android:id="@+id/viewLeft"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/red_circle_border_background"/>
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="2dp"
+                                android:background="@drawable/doted_line"
+                                android:layout_toRightOf="@+id/viewLeft"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginBottom="4dp"
+                                android:layerType="software"
+                                />
+
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                android:background="@drawable/green_circle_border"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2h 10m"
+                                android:layout_centerInParent="true"
+                                />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/color_black"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:text="BOM 07:15"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin"
+                    android:layout_marginRight="@dimen/large_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textSize="@dimen/simple_content_text_size"
+                        android:text="Wed, 01 Oct"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/text_size_13sp"
+                        android:text="Non-Stop"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:gravity="right|center_vertical"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/simple_content_text_size"
+                        android:text="Wed, 01 Oct"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/app_red_color"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:text="Connect Hyderabad"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_white"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:paddingTop="@dimen/medium_margin"
+                    android:paddingLeft="@dimen/medium_margin">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ADULT FARE"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_black_hint"
+                        android:textSize="@dimen/simple_content_text_size"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="INR 00000"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/medium_margin"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/title_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="CHILD FARE"
+                        android:textStyle="bold"
+                        android:textColor="@color/color_black_hint"
+                        android:textSize="@dimen/simple_content_text_size"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="INR 00000"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/medium_margin"
+                        android:textColor="@color/color_black"
+                        android:textSize="@dimen/title_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="GRAND TOTAL"
+                        android:textStyle="bold"
+                        android:textColor="@color/app_red_color"
+                        android:textSize="@dimen/simple_content_text_size"/>
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5"
+                        android:text="INR 00000"
+                        android:textStyle="bold"
+                        android:gravity="right"
+                        android:paddingRight="@dimen/medium_margin"
+                        android:textColor="@color/app_red_color"
+                        android:textSize="@dimen/title_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/very_large_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:paddingLeft="@dimen/medium_margin">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/app_blue_color"
+                        android:text="@string/cancellationPolicyBus"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/app_blue_color"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <TextView
+        android:id="@+id/book_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/app_red_color"
+        android:gravity="center"
+        android:padding="@dimen/small_margin"
+        android:text="Book Now"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/title_text_size" />
+</RelativeLayout>

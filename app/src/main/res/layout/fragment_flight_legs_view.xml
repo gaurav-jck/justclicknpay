@@ -1,0 +1,103 @@
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/small_margin"
+    app:cardBackgroundColor="@color/grayLightColorFlight"
+    app:cardElevation="@dimen/margin_2dp">
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/margin_2dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <RelativeLayout
+            android:id="@+id/segmentRel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:background="@color/grayTextColorFlight"
+            android:visibility="visible">
+
+            <ImageView
+                android:id="@+id/sourceFlightImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/flight_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/legShowHideArrowImg"
+                android:layout_toRightOf="@+id/sourceFlightImg"
+                android:orientation="vertical"
+                android:padding="@dimen/small_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/sourceCityTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="DEL"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="15dp"
+                        android:rotation="180"
+                        android:layout_gravity="center_vertical"
+                        app:srcCompat="@drawable/arrow_back"/>
+                    <TextView
+                        android:id="@+id/destCityTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="BOM"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/simple_content_text_size" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/airlineDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="06h 55m | 2stop | Refundable | Economy"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/small_text_size" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/legShowHideArrowImg"
+                android:layout_width="@dimen/size_25dp"
+                android:layout_height="@dimen/size_25dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:visibility="visible"
+                android:rotation="-90"
+                android:padding="@dimen/small_margin"
+                app:srcCompat="@drawable/arrow_left_back" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/segmentsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

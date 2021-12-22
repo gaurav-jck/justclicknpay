@@ -1,0 +1,1667 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"
+            app:srcCompat="@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/tittleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"
+            android:text="@string/flightDetail"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/cardMobileBackground"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:background="@color/flightListMoreInfoColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/sourceFlightImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:rotation="55"
+                    app:srcCompat="@drawable/flight_vector_blue" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/sourceArrowImg"
+                    android:layout_toRightOf="@+id/sourceFlightImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/sourceCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <ImageView
+                            android:layout_width="@dimen/flightListAirlineImageSize"
+                            android:layout_height="@dimen/flightListAirlineImageSize"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/back_blue_arrow"
+                            android:rotation="180"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"/>
+
+                        <TextView
+                            android:id="@+id/destCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="BOM"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/airlineFirstDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="06h 55m | 2stop | Refundable | Economy"
+                        android:textSize="@dimen/small_text_size" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/sourceArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/down_arrow" />
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sourceImg"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/flightNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="INDIGO"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+                    <TextView
+                        android:id="@+id/flightCodeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/sourceStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/sourceLine"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/sourceEnd"
+                            android:layout_below="@id/sourceStart"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/sourceEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sourceNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/sourceAirportFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/durationFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/destNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/destAirportFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/detail2Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sourceImg2"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/flightNameTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="BOM"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/flightCodeTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:visibility="visible"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/sourceStart2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/sourceLine2"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/sourceEnd2"
+                            android:layout_below="@id/sourceStart2"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/sourceEnd2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sourceNameFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/sourceAirportFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/durationFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/destNameFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/destAirportFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/detail3Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sourceImg3"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/flightNameTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="BOM"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/flightCodeTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/sourceStart3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/sourceLine3"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/sourceEnd3"
+                            android:layout_below="@id/sourceStart3"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/sourceEnd3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/sourceNameFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/sourceAirportFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/durationFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/destNameFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/destAirportFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="0dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_weight="3"-->
+                        <!--android:gravity="center"-->
+                        <!--android:visibility="gone"-->
+                        <!--android:orientation="vertical">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/sourceDateFirstTv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:text="Wed 01'Oct"-->
+                            <!--android:textColor="@color/flightBlackColor"-->
+                            <!--android:textSize="@dimen/simple_content_text_size" />-->
+
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/sourceTimeFirstTv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/small_margin"-->
+                            <!--android:text="05:30"-->
+                            <!--android:textColor="@color/flightDarkBlackColor"-->
+                            <!--android:textSize="@dimen/title_text_size"-->
+                            <!--android:textStyle="bold" />-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/sourcePriceTv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/small_margin"-->
+                            <!--android:text="INR 1000000"-->
+                            <!--android:textColor="@color/flightBlackColor"-->
+                            <!--android:textSize="@dimen/simple_content_text_size" />-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/refFirstTv"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginTop="@dimen/very_small_margin"-->
+                            <!--android:text="Refundable"-->
+                            <!--android:textColor="@color/app_blue_color"-->
+                            <!--android:textSize="@dimen/small_text_size" />-->
+                    <!--</LinearLayout>-->
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/roundMainTitleRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/flightListMainColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/roundSourceFlightImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:rotation="55"
+                    app:srcCompat="@drawable/flight_vector_blue" />
+
+                <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/roundSourceArrowImg"
+                    android:layout_toRightOf="@+id/roundSourceFlightImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/roundSourceCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <ImageView
+                            android:layout_width="@dimen/flightListAirlineImageSize"
+                            android:layout_height="@dimen/flightListAirlineImageSize"
+                            android:layout_gravity="center_vertical"
+                            app:srcCompat="@drawable/back_blue_arrow"
+                            android:rotation="180"
+                            android:layout_marginTop="1dp"
+                            android:layout_marginLeft="@dimen/small_margin"
+                            android:layout_marginRight="@dimen/small_margin"/>
+
+                        <TextView
+                            android:id="@+id/roundDestCityTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="BOM"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/roundAirlineFirstDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="06h 55m | 2stop | Refundable | Economy"
+                        android:textSize="@dimen/small_text_size" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/roundSourceArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/down_arrow" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/roundDetail1Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/roundSourceImg"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/roundFlightNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="INDIGO"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+                    <TextView
+                        android:id="@+id/roundFlightCodeTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/roundSourceStart"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/roundSourceLine"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/roundSourceStart"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/roundSourceEnd"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/roundSourceNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundSourceAirportFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDurationFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestNameFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestAirportFirstTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roundDetail2Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/roundSourceImg2"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/roundFlightNameTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="BOM"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/roundFlightCodeTv2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/roundSourceStart2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/roundSourceLine2"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/roundSourceEnd2"
+                            android:layout_below="@id/roundSourceStart2"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/roundSourceEnd2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/roundSourceNameFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundSourceAirportFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDurationFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestNameFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestAirportFirstTv2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/roundDetail3Linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/large_margin">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/roundSourceImg3"
+                        android:layout_width="@dimen/flightListAirlineImageSize"
+                        android:layout_height="@dimen/flightListAirlineImageSize"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"/>
+
+                    <TextView
+                        android:id="@+id/roundFlightNameTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="BOM"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/roundFlightCodeTv3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="6E - 755"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/small_text_size11sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_white_hint"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingTop="@dimen/small_margin">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_weight="1.2"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/medium_margin"
+                        android:paddingRight="@dimen/medium_margin"
+                        >
+
+                        <ImageView
+                            android:id="@+id/roundSsourceStart3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/radio_check_red" />
+
+                        <View
+                            android:id="@+id/roundSourceLine3"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_above="@+id/roundSourceEnd3"
+                            android:layout_centerHorizontal="true"
+                            android:background="@color/app_red_color" />
+
+                        <ImageView
+                            android:id="@+id/roundSourceEnd3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            app:srcCompat="@drawable/map_pin" />
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="5"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/roundSourceNameFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="DEL | 16:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundSourceAirportFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Indira Gandhi intl,New Delhi"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDurationFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text=" 2h 10m"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/small_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestNameFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/medium_margin"
+                            android:text="BOM | 18:00 | 23 Nov 2017"
+                            android:textColor="@color/flightDarkBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/roundDestAirportFirstTv3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="Chhatrapati Shivaji International,Mumbai"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size" />
+                    </LinearLayout>
+
+
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_weight="3"-->
+                    <!--android:gravity="center"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/sourceDateFirstTv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Wed 01'Oct"-->
+                    <!--android:textColor="@color/flightBlackColor"-->
+                    <!--android:textSize="@dimen/simple_content_text_size" />-->
+
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/sourceTimeFirstTv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/small_margin"-->
+                    <!--android:text="05:30"-->
+                    <!--android:textColor="@color/flightDarkBlackColor"-->
+                    <!--android:textSize="@dimen/title_text_size"-->
+                    <!--android:textStyle="bold" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/sourcePriceTv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/small_margin"-->
+                    <!--android:text="INR 1000000"-->
+                    <!--android:textColor="@color/flightBlackColor"-->
+                    <!--android:textSize="@dimen/simple_content_text_size" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/refFirstTv"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginTop="@dimen/very_small_margin"-->
+                    <!--android:text="Refundable"-->
+                    <!--android:textColor="@color/app_blue_color"-->
+                    <!--android:textSize="@dimen/small_text_size" />-->
+                    <!--</LinearLayout>-->
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/totalFareRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/flightListMoreInfoColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/fareTempImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/air_icon"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/totalFareTv"
+                    android:layout_toRightOf="@+id/fareTempImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="TOTAL FARE"
+                        android:textColor="@color/flightBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Including taxes and fare"
+                        android:textSize="@dimen/small_text_size" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/totalFareTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_toLeftOf="@+id/fareArrowImg"
+                    android:padding="@dimen/very_small_margin"
+                    android:text="INR 1000000"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <ImageView
+                    android:id="@+id/fareArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/down_arrow" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/totalFareDetailRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/totalFareFlightImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/air_icon"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/totalFareFlightImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Base fare"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/adultFare"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="YQ"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/yq"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Tax &amp; charges"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/tax"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Agent markup"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/markUp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Gross fare"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/grossFare"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Discount"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/discount"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="TDS"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+
+                        <TextView
+                            android:id="@+id/tds"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/small_margin">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:text="Net payable"
+                            android:textColor="@color/flightBlackColor"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/payable"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:paddingRight="@dimen/small_margin"
+                            android:text="INR 100000"
+                            android:textColor="@color/app_red_color"
+                            android:textSize="@dimen/simple_content_text_size"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/flightListMoreInfoColor"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/passengerImg"
+                    android:layout_width="@dimen/airVectorIconSize"
+                    android:layout_height="@dimen/airVectorIconSize"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/traveller_icon" />
+
+                <TextView
+                    android:id="@+id/passenger"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_toLeftOf="@+id/classType"
+                    android:layout_toRightOf="@+id/passengerImg"
+                    android:padding="@dimen/small_margin"
+                    android:text="3 PASSENGER"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <TextView
+                    android:id="@+id/classType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:paddingRight="@dimen/small_margin"
+                    android:text="ECONOMY"
+                    android:textColor="@color/flightBlackColor"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/small_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/passTempImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/air_icon"
+                    android:visibility="invisible" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/passArrowImg"
+                    android:layout_toRightOf="@+id/passTempImg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="Free cancellation within 24 hours"
+                        android:textColor="@color/flightDarkBlackColor"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="After 24 hours, standard flight rules apply."
+                        android:textSize="@dimen/small_text_size" />
+
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/passArrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"
+                    app:srcCompat="@drawable/down_arrow" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/continueTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:background="@color/app_red_color"
+                android:gravity="center"
+                android:padding="@dimen/small_margin"
+                android:text="CONTINUE"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/title_text_size" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!--</android.support.v4.widget.NestedScrollView>-->
+</LinearLayout>

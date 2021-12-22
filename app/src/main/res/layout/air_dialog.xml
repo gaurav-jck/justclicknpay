@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:background="@color/color_white"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/icon1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:alpha="0.03"/>
+
+    <ImageView
+        android:id="@+id/icon5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:alpha="0.04" />
+
+    <ImageView
+        android:id="@+id/icon2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:layout_below="@+id/icon1"
+        android:layout_alignParentRight="true"
+        android:alpha="0.04"/>
+
+    <ImageView
+        android:id="@+id/icon3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:layout_below="@+id/icon2"
+        android:layout_alignParentLeft="true"
+        android:alpha="0.04"/>
+
+    <ImageView
+        android:id="@+id/icon4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/app_icon"
+        android:layout_below="@+id/icon2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:alpha="0.04"/>
+
+    <ImageView
+        android:id="@+id/plane"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/plane"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:padding="@dimen/large_margin"/>
+
+
+    <LinearLayout
+        android:id="@+id/cloudOneLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/cloudTwoLin"
+        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/app_icon"
+            android:layout_below="@+id/icon2"
+            android:layout_alignParentLeft="true"
+            android:alpha="0.04"/>
+
+
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            />
+
+        <ImageView
+            android:id="@+id/cloud5"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:alpha="0.3"
+            app:srcCompat="@drawable/flight_cloud_queue"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cloudTwoLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
+
+        <ImageView
+            android:id="@+id/cloud1"
+            android:layout_width="0dp"
+            android:layout_weight="0.5"
+            android:visibility="gone"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/flight_cloud_queue"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            />
+
+
+        <ImageView
+            android:id="@+id/cloud2"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/flight_cloud_queue"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cloudThreeLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_below="@+id/cloudTwoLin">
+
+
+        <ImageView
+            android:id="@+id/cloud3"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:layout_weight="2"
+            android:alpha="0.3"
+            app:srcCompat="@drawable/flight_cloud_queue" />
+
+        <ImageView
+            android:id="@+id/cloud4"
+            android:layout_width="200dp"
+            android:layout_weight="1.9"
+            android:layout_gravity="bottom"
+            android:layout_height="100dp"
+            android:alpha="0.3"
+            app:srcCompat="@drawable/flight_cloud_queue"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lin_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_below="@+id/cloudThreeLin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/app_blue_color"
+            android:text="We are searching the best flight for you,"
+            app:srcCompat="@drawable/flight_cloud_queue" />
+
+
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/app_blue_color"
+            android:text="You just RELAX !"
+            app:srcCompat="@drawable/flight_cloud_queue"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon"
+                android:alpha="0.04"/>
+
+            <ImageView
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon"
+                android:layout_marginLeft="@dimen/very_large_margin"
+                android:alpha="0.04"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon"
+                android:alpha="0.04"/>
+
+            <ImageView
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/app_icon"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/very_large_margin"
+                android:alpha="0.04"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <!--<ImageView-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/app_icon"-->
+    <!--android:layout_below="@+id/lin_lay"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:alpha="0.09"/>-->
+
+</RelativeLayout>
+
+
+
+

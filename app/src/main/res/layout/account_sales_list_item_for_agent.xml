@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginTop="1dp"
+    android:padding="@dimen/very_small_margin"
+    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardCornerRadius="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/listItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AgencyName/code"
+                android:textStyle="bold|italic"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/list_view_name_field_text_size" />
+            <TextView
+                android:id="@+id/infoTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:text="Agent info"
+                android:gravity="right"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/list_view_name_field_text_size" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.3"
+        android:text="Available Bal"
+        android:gravity="left"
+        android:textColor="@color/listItemDateColorLight"
+        android:textSize="@dimen/small_text_size" />
+    <TextView
+        android:id="@+id/bookBalTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.3"
+        android:text="000000000000"
+        android:textStyle="bold"
+        android:gravity="left"
+        android:textColor="@color/listItemDateColorLight"
+        android:textSize="@dimen/text_size_14sp" />
+
+</LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.3"
+                    android:text="Actual Bal"
+                    android:gravity="center"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/small_text_size" />
+                <TextView
+                    android:id="@+id/actualBalTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.3"
+                    android:text="000000000000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.3"
+                    android:text="Available Credit"
+                    android:gravity="right"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/small_text_size" />
+                <TextView
+                    android:id="@+id/availableBalTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="0.3"
+                    android:text="000000000000"
+                    android:textStyle="bold"
+                    android:gravity="right"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/date_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="11\12\2018:12:12:12"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/active_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.6"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Active"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:textSize="@dimen/simple_content_text_size"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

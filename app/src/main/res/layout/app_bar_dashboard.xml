@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".jctPayment.Dashboard_New_Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible"
+        android:background="@color/app_blue_color">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/img_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bar_48"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/color_white"
+                android:layout_centerInParent="true"/>
+
+            <ImageView
+                android:id="@+id/img_profile"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/member_48"
+                android:layout_alignParentRight="true"
+                android:layout_margin="10dp"/>
+        </RelativeLayout>
+
+        <ToggleButton
+            android:id="@+id/toggleButton1"
+            android:layout_width="300dp"
+            android:layout_height="60dp"
+            android:background="@drawable/bgtoggle"
+            android:button="@null"
+            android:textOff=""
+            android:textOn=""
+            android:checked="false"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+    </FrameLayout>
+
+
+</LinearLayout>

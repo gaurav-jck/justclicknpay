@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Train Route\ntrftyrtff"
+            android:textSize="@dimen/simple_content_text_size"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textColor="@color/color_white"
+            android:layout_toRightOf="@id/back_arrow"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/labelLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/rel_top"
+        android:padding="@dimen/small_margin"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Station"
+            android:textColor="@color/app_blue_color"
+            android:padding="@dimen/very_small_margin"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:text="Arrival - Departure"
+            android:gravity="center"
+            android:textColor="@color/app_blue_color"
+            android:padding="@dimen/very_small_margin"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/routeRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@id/labelLin"
+        tools:listitem="@layout/train_route_list_item"
+        />
+
+</RelativeLayout>

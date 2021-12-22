@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/flightImg"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/flight_vector_blue"
+        android:rotation="90"
+        android:layout_margin="@dimen/medium_margin"/>
+
+    <!--<ViewFlipper
+        android:id="@+id/view_flipper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">-->
+
+        <LinearLayout
+            android:id="@+id/cloudLin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_margin="@dimen/medium_margin"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="100dp"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="80dp"
+                android:alpha="0.5"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/cloudLin3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_margin="@dimen/medium_margin"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="100dp"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="20dp"
+                android:alpha="0.5"/>
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/chat_icon"
+                android:layout_marginTop="80dp"
+                android:alpha="0.5"/>
+
+
+        </LinearLayout>
+    <!--</ViewFlipper>-->
+
+
+    <LinearLayout
+        android:id="@+id/cloudLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/chat_icon"
+            android:layout_margin="@dimen/medium_margin"
+            android:alpha="0.5"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/chat_icon"
+            android:layout_marginTop="100dp"
+            android:alpha="0.5"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/chat_icon"
+            android:layout_marginTop="20dp"
+            android:alpha="0.5"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/chat_icon"
+            android:layout_marginTop="80dp"
+            android:alpha="0.5"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

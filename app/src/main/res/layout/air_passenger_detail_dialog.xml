@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_black"
+        android:textSize="@dimen/title_text_size"
+        android:gravity="left"
+        android:text="Passengers"
+        android:padding="@dimen/large_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large_margin"
+        android:layout_marginRight="@dimen/large_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/adultValueTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="1 Adult"
+                android:textColor="@color/flightBlackColor"
+                android:textSize="@dimen/simple_content_text_size" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="12 years old &amp; above"
+                android:textColor="@color/flightSearchHintColor"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/adultMinusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/minus" />
+
+        <TextView
+            android:id="@+id/adultCountTv"
+            android:layout_width="@dimen/adult_image_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/small_margin"
+            android:text="1"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_18sp"/>
+
+        <ImageView
+            android:id="@+id/adultPlusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/plus" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large_margin"
+        android:layout_marginRight="@dimen/large_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/childValueTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="0 Child"
+                android:textColor="@color/flightBlackColor"
+                android:textSize="@dimen/simple_content_text_size" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="2 to 12 years"
+                android:textColor="@color/flightSearchHintColor"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/childMinusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/minus" />
+
+        <TextView
+            android:id="@+id/childCountTv"
+            android:layout_width="@dimen/adult_image_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/small_margin"
+            android:text="0"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_18sp"/>
+
+        <ImageView
+            android:id="@+id/childPlusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/plus" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/large_margin"
+        android:layout_marginRight="@dimen/large_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/infantValueTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="0 Infant"
+                android:textColor="@color/flightBlackColor"
+                android:textSize="@dimen/simple_content_text_size" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="0 to 2 years"
+                android:textColor="@color/flightSearchHintColor"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/infantMinusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/minus" />
+
+        <TextView
+            android:id="@+id/infantCountTv"
+            android:layout_width="@dimen/adult_image_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/small_margin"
+            android:text="0"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_18sp"/>
+
+        <ImageView
+            android:id="@+id/infantPlusImg"
+            android:layout_width="@dimen/plus_image_size"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_rect_button_background"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/plus" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:padding="@dimen/small_margin"
+        android:layout_marginTop="@dimen/large_margin">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:paddingLeft="@dimen/large_margin"
+            android:paddingRight="@dimen/large_margin"
+            android:visibility="visible"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/simple_content_text_size"/>
+
+        <TextView
+            android:id="@+id/ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OK"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:paddingLeft="@dimen/large_margin"
+            android:paddingRight="@dimen/large_margin"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/simple_content_text_size"/>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+

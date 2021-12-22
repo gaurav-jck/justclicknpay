@@ -1,0 +1,135 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.justclick.clicknbook.Fragment.jctmoney.OtpFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/jctMoney"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/small_margin"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        card_view:cardCornerRadius="4dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/very_small_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="OTP Authentication"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/main_text_color"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/large_margin"
+                android:src="@drawable/watch_otp_icon"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin">
+                <EditText
+                    android:id="@+id/otpEdt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:hint="Enter OTP"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="3"
+                    android:text=""
+                    android:textColor="@color/app_blue_color"
+                    android:textColorHint="@color/login_hint_color_new"
+                    android:background="@color/filterBackground"
+                    android:padding="@dimen/small_margin"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/sendOtpTv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:text="Submit OTP"
+                    android:gravity="center"
+                    android:textColor="@color/color_white"
+                    android:background="@color/orange_color"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/otpDetailTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_gravity="center_horizontal"
+                android:text="One Time Password ( OTP ) has been send\nto your registered mobile ****** .\nPlease enter the same here."
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/resendOtpTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resend OTP"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/color_white"
+                android:background="@color/orange_color"/>
+
+            </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

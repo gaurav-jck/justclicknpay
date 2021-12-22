@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Money"
+        android:background="@color/colorPrimary"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:textSize="@dimen/text_size_16sp"
+        android:padding="@dimen/small_margin"/>
+
+    <TextView
+        android:id="@+id/limitTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="limit is Rs 0000"
+        android:textColor="@color/app_blue_color"
+        android:textSize="@dimen/text_size_14sp"
+        android:padding="@dimen/small_margin"
+        android:layout_gravity="right"/>
+
+    <LinearLayout
+        android:id="@+id/limitDetailLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/edittext_border_hotel">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_margin">
+            <TextView
+                android:id="@+id/type1"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="NEFT"/>
+            <TextView
+                android:id="@+id/bank1"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="000"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:background="@color/gray_color"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_margin">
+            <TextView
+                android:id="@+id/type2"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="NEFT"/>
+            <TextView
+                android:id="@+id/bank2"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="000"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:background="@color/gray_color"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_margin">
+            <TextView
+                android:id="@+id/type3"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="NEFT"/>
+            <TextView
+                android:id="@+id/bank3"
+                android:layout_width="@dimen/size_0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/small_text_size"
+                android:text="000"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/transactionTypeIMPSTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/blue_rect_button_background"
+            android:paddingBottom="@dimen/small_margin"
+            android:paddingLeft="@dimen/very_large_margin"
+            android:paddingRight="@dimen/very_large_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:text=" IMPS "
+            android:textSize="@dimen/money_transfer_button_text_size"
+            android:textColor="@color/color_white" />
+
+        <TextView
+            android:id="@+id/transactionTypeNEFTTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            android:paddingBottom="@dimen/small_margin"
+            android:paddingLeft="@dimen/very_large_margin"
+            android:paddingRight="@dimen/very_large_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:text=" NEFT "
+            android:textSize="@dimen/money_transfer_button_text_size"
+            android:textColor="@color/dark_blue_color" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        >
+        <EditText
+            android:id="@+id/amountEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter amount"
+            android:text=""
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        >
+        <EditText
+            android:id="@+id/otpEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter OTP"
+            android:text=""
+            android:maxLength="4"
+            android:visibility="gone"
+            android:inputType="numberDecimal"
+            android:textColor="@color/black"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/cancelTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:background="@color/orange_color"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_16sp"
+            android:padding="@dimen/small_margin"/>
+        <TextView
+            android:id="@+id/payNowTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pay Now"
+            android:background="@color/orange_color"
+            android:textColor="@color/white"
+            android:layout_marginLeft="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_16sp"
+            android:padding="@dimen/small_margin"/>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,94 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/recharge_layout_water"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment"
+    tools:showIn="@layout/fragment_mobile"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin">
+        <Spinner
+            android:id="@+id/spinner_dth_operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            >
+        </Spinner>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/color_light_black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin">
+     <EditText
+         android:id="@+id/dth_amount_edt"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="@string/enter_amount"
+         android:textColorHint="@color/flightSearchHintColor"
+         android:textColor="@color/black_text_color"
+         android:inputType="number"
+         android:maxLength="10"
+         android:maxLines="1"
+         android:text=""
+         android:textSize="@dimen/simple_content_text_size"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:visibility="gone"
+        android:background="@color/color_light_black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/very_small_margin">
+    <EditText
+        android:id="@+id/dth_subscriberId_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_subscriber_id"
+        android:textColorHint="@color/flightSearchHintColor"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/simple_content_text_size"
+        android:maxLength="25"
+        android:inputType="text"
+android:digits="@string/alphaNumericSpace_editText_digits"
+        android:maxLines="1"
+        android:singleLine="true"
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:visibility="gone"
+        android:background="@color/color_light_black"/>
+
+</LinearLayout>

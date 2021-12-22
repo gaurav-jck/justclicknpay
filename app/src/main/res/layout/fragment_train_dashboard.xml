@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.train.TrainDashboardFragment"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"
+            app:srcCompat="@drawable/arrow_left_back" />
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:padding="@dimen/medium_margin"
+            android:text="IRCTC Dashboard"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_50dp">
+                <LinearLayout
+                    android:id="@+id/searchTrain"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/margin_50dp"
+                        android:layout_height="@dimen/margin_50dp"
+                        android:src="@drawable/train_home_vector"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Plan Your Journey"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/black_text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/searchPNR"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/margin_50dp"
+                        android:layout_height="@dimen/margin_50dp"
+                        android:src="@drawable/train_home_vector"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Search PNR"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/black_text_color"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_30dp">
+
+                <LinearLayout
+                    android:id="@+id/pnrStatus"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:visibility="visible">
+                    <ImageView
+                        android:layout_width="@dimen/margin_50dp"
+                        android:layout_height="@dimen/margin_50dp"
+                        android:src="@drawable/train_home_vector"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check Current\nPNR Status"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/black_text_color"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bookingList"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="@dimen/margin_50dp"
+                        android:layout_height="@dimen/margin_50dp"
+                        android:src="@drawable/ic_clipboards"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking List"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/black_text_color"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

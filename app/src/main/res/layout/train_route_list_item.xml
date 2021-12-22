@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:id="@+id/view"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/small_margin">
+
+    <TextView
+        android:id="@+id/stnNameTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.5"
+        android:text="Delhi-DLI"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/black_text_color"
+        android:padding="@dimen/very_small_margin"/>
+
+    <TextView
+        android:id="@+id/dayTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day 1"
+        android:gravity="center"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/color_light_black"
+        android:padding="@dimen/very_small_margin"
+        android:layout_marginRight="@dimen/small_margin"/>
+
+    <TextView
+        android:id="@+id/arrivalTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="01:20"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/black_text_color"
+        android:padding="@dimen/very_small_margin"/>
+
+    <TextView
+        android:id="@+id/stopTimeTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="05 mins"
+        android:gravity="center"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/color_light_black"
+        android:padding="@dimen/very_small_margin"/>
+
+    <TextView
+        android:id="@+id/departureTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="1:30"
+        android:gravity="right"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/black_text_color"
+        android:padding="@dimen/very_small_margin"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

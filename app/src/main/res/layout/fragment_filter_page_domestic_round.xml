@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:clickable="false"
+    tools:context=".Fragment.flights.fragments.FilterPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_blue_color"
+            android:paddingTop="@dimen/pageTopPadding"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <include layout="@layout/back_image_white"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/img_back"
+                android:padding="10dp"
+                android:text="FILTERS"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/simple_content_text_size" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+
+                <TextView
+                    android:id="@+id/tv_reset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="RESET"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <TextView
+                    android:id="@+id/tv_apply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="APPLY"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/simple_content_text_size" />
+            </LinearLayout>
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible">
+            <TextView
+                android:id="@+id/bothTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:gravity="center"
+                android:text="Both List"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/textBlackColorFlight"
+                android:padding="@dimen/small_margin"
+                android:background="@drawable/circular_round_gray_icon"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/outboundTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:gravity="center"
+                android:text="Outbound List"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/textBlackColorFlight"
+                android:padding="@dimen/small_margin"
+                android:textStyle="bold"
+                android:background="@drawable/circular_round_gray_icon"
+                />
+
+            <TextView
+                android:id="@+id/inboundTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="120dp"
+                android:gravity="center"
+                android:text="Inbound List"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/grayTextColorFlight"
+                android:padding="@dimen/small_margin"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:background="@drawable/circular_round_gray_icon"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:background="#dbdbdb"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_price_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="PRICE &amp; STOPS"
+                    android:textColor="@color/app_red_color" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="TIME"
+                    android:textColor="@color/black_text_color" />
+
+                <TextView
+                    android:id="@+id/tv_airline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="AIRLINES"
+                    android:textColor="@color/black_text_color" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".7"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_price_stop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                        android:id="@+id/rangeSeekbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:bar_highlight_color="@color/app_blue_color"
+                        app:bar_color="@color/gray_color_hotel_review"
+                        app:left_thumb_color="@color/app_blue_color"
+                        app:right_thumb_color="@color/app_blue_color"
+                        app:left_thumb_color_pressed="@color/app_red_color_light"
+                        app:right_thumb_color_pressed="@color/app_red_color_light"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="10dp"
+                        />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginLeft="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_p_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rs 100"
+                            android:textColor="@color/black_text_color"/>
+
+                        <TextView
+                            android:id="@+id/tv_p_max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:text="Rs 30000"
+                            android:textColor="@color/black_text_color"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:text="STOPS"
+                        android:textColor="@color/black_text_color"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_nonStop"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="0"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_oneStop"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="1"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_moreStop"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="2+"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:text="DEPARTURE TIME"
+                        android:textColor="@color/black_text_color"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp">
+
+                        <TextView
+                            android:id="@+id/tv_morning"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/moon_icon"
+                            android:drawablePadding="5dp"
+                            android:padding="10dp"
+                            android:text="00-06"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_afternoon"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/sun_icon"
+                            android:drawablePadding="5dp"
+                            android:padding="10dp"
+                            android:text="06-12"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_evening"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/sun_icon"
+                            android:drawablePadding="5dp"
+                            android:padding="10dp"
+                            android:text="12-18"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/tv_night"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:drawableTop="@drawable/moon_icon"
+                            android:drawablePadding="5dp"
+                            android:padding="10dp"
+                            android:text="18-00"
+                            android:textColor="@color/black_text_color"
+                            android:gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_airline"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recycler_airline"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/tripTypeLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/large_margin"
+                >
+
+                <LinearLayout
+                    android:id="@+id/oneWayLin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/oneWayRadioImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/radio_button_checked"/>
+
+                    <TextView
+                        android:id="@+id/tv_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="One Way"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/flightSearchCityColor"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:textSize="@dimen/simple_content_text_size"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/roundTripLin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:id="@+id/roundTripRadioImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/radio_button_unchecked"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_reduce"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Round Trip"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/flightSearchCityColor"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:textSize="@dimen/simple_content_text_size"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_large_margin"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/from"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:text="@string/to"
+                            android:textSize="@dimen/small_text_size"
+                            android:textColor="@color/flightSearchHintColor"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_small_margin"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/fromLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/fromNameTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="DEL"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/airCityTextSize" />
+
+                            <TextView
+                                android:id="@+id/fromCitytv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Delhi"
+                                android:textColor="@color/flightSearchCityColor" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.1dp"
+                                android:alpha="0.5"
+                                android:background="@color/app_blue_color" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/flightImgDepart"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/air_icon"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/toLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:gravity="right">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="BOM"
+                                android:gravity="center"
+                                android:textSize="@dimen/airCityTextSize"
+                                android:textColor="@color/color_black_hint"
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Mumbai"
+                                android:textColor="@color/flightSearchCityColor"/>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.1dp"
+                                android:alpha="0.5"
+                                android:background="@color/app_blue_color"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_large_margin"
+                        android:orientation="horizontal"
+                        >
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:textSize="@dimen/small_text_size"
+                            android:text="@string/departHint"/>
+                        <TextView
+                            android:id="@+id/returnDateLabelTv"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="right"
+                            android:textSize="@dimen/small_text_size"
+                            android:textColor="@color/flightSearchHintColor"
+                            android:text="@string/returnHint"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        >
+
+                        <LinearLayout
+                            android:id="@+id/departDateLin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingTop="@dimen/very_small_margin"
+                            android:paddingRight="@dimen/small_margin"
+                            android:paddingBottom="@dimen/very_small_margin"
+                            android:gravity="left">
+
+                            <ImageView
+                                android:layout_width="@dimen/airSearchCalenderSize"
+                                android:layout_height="@dimen/airSearchCalenderSize"
+                                android:src="@drawable/calendar_icon_small"
+                                android:layout_gravity="center_vertical"/>
+
+                            <TextView
+                                android:id="@+id/departDateTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="26 Oct 2017"
+                                android:gravity="center"
+                                android:padding="@dimen/small_margin"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/airDateTextSize"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/returnDateLin"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:paddingTop="@dimen/very_small_margin"
+                            android:paddingLeft="@dimen/small_margin"
+                            android:paddingBottom="@dimen/small_margin"
+                            android:gravity="right">
+
+                            <ImageView
+                                android:layout_width="@dimen/airSearchCalenderSize"
+                                android:layout_height="@dimen/airSearchCalenderSize"
+                                android:src="@drawable/calendar_icon_small"
+                                android:layout_gravity="center_vertical"/>
+
+                            <TextView
+                                android:id="@+id/returnDateTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="26 Oct 2017"
+                                android:gravity="center"
+                                android:paddingTop="@dimen/small_margin"
+                                android:paddingLeft="@dimen/small_margin"
+                                android:paddingBottom="@dimen/small_margin"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/airDateTextSize"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:alpha="0.5"
+                        android:background="@color/app_blue_color"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/passengers"
+                        android:textColor="@color/flightSearchHintColor"
+                        android:textSize="@dimen/small_text_size"
+                        android:layout_marginTop="@dimen/very_large_margin"/>
+
+                    <LinearLayout
+                        android:id="@+id/passengerLin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/passengerBackColor"
+                        android:orientation="horizontal"
+                        android:padding="@dimen/medium_margin">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="@dimen/airAdultImageSize"
+                                android:layout_height="@dimen/airAdultImageSize"
+                                android:src="@drawable/men_flight_border" />
+
+                            <TextView
+                                android:id="@+id/adultTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:text="1 Adult"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="@dimen/airChildImageSize"
+                                android:layout_height="@dimen/airChildImageSize"
+                                android:src="@drawable/men_flight_border" />
+
+                            <TextView
+                                android:id="@+id/childTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:text="0 Child"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom"
+                            android:layout_weight="1">
+
+                            <ImageView
+                                android:layout_width="@dimen/airInfantImageSize"
+                                android:layout_height="@dimen/airInfantImageSize"
+                                android:src="@drawable/men_flight_border" />
+
+                            <TextView
+                                android:id="@+id/infantTv"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:text="0 Infant"
+                                android:textColor="@color/color_black_hint"
+                                android:textSize="@dimen/simple_content_text_size" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:alpha="0.5"
+                        android:background="@color/app_blue_color"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/airClass"
+                        android:textColor="@color/flightSearchHintColor"
+                        android:textSize="@dimen/small_text_size"
+                        android:layout_marginTop="@dimen/very_large_margin"/>
+
+                    <Spinner
+                        android:id="@+id/classSpinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </Spinner>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.1dp"
+                        android:background="@color/app_blue_color"/>
+
+
+                    <TextView
+                        android:id="@+id/search_Tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/very_large_margin"
+                        android:gravity="center"
+                        android:padding="@dimen/small_margin"
+                        android:background="@drawable/blue_round_button_background"
+                        android:text="@string/searchFlight"
+                        android:textColor="@color/color_white"
+                        android:textSize="@dimen/title_text_size" />
+
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/cityListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/blue_border_white_background"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</RelativeLayout>

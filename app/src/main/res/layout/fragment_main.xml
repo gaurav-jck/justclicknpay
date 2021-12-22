@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <com.justclick.clicknbook.utils.SlidingUpPanelLayout
+        android:id="@+id/slidingLayout"
+        android:gravity="bottom"
+        app:shadowHeight="0dp"
+        app:paralaxOffset="@dimen/paralax_offset"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <FrameLayout
+            android:gravity="top"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:id="@+id/mapContainer"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" />
+        </FrameLayout>
+      <!--  <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:map="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.justclick.clicknbook.Fragment.hotel.HotelListWithMapFragment" >
+
+        </fragment>
+-->
+
+        <RelativeLayout
+            android:id="@+id/slidingContainer"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <View
+                android:id="@+id/transparentView"
+                android:visibility="gone"
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/map_height"
+                android:layout_alignParentTop="true"/>
+
+            <View
+                android:id="@+id/whiteSpaceView"
+                android:visibility="gone"
+                android:background="@android:color/white"
+                android:layout_marginTop="@dimen/map_height"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <com.justclick.clicknbook.utils.LockableRecyclerView
+                android:id="@android:id/list"
+                android:cacheColorHint="@android:color/white"
+                android:drawSelectorOnTop="true"
+                android:dividerHeight="@dimen/divider_height"
+                android:divider="@android:color/darker_gray"
+                android:background="@android:color/transparent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@id/transparentView"
+                android:smoothScrollbar="false"/>
+        </RelativeLayout>
+    </com.justclick.clicknbook.utils.SlidingUpPanelLayout>
+
+    <!-- more code here -->
+</RelativeLayout>

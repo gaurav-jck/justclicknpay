@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="#44eeeeee"
+    android:layout_marginTop="@dimen/small_margin"
+    android:padding="@dimen/medium_margin">
+
+    <TextView
+        android:id="@+id/passengerCountTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Passenger"
+        android:background="@color/gray_color_very_light"
+        android:padding="@dimen/small_margin"/>
+
+    <RadioGroup
+        android:id="@+id/genderRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/medium_margin">
+        <RadioButton
+            android:id="@+id/maleRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:textColor="@color/listItemLightBlack"
+            android:checked="true"
+            android:paddingLeft="@dimen/small_margin"/>
+        <RadioButton
+            android:id="@+id/femaleRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:textColor="@color/listItemLightBlack"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginLeft="@dimen/medium_margin"/>
+        <RadioButton
+            android:id="@+id/transRb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transgender"
+            android:textColor="@color/listItemLightBlack"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_marginLeft="@dimen/medium_margin"/>
+    </RadioGroup>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@null">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full name"
+            android:inputType="textPersonName"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_16sp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginTop="@dimen/medium_margin">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/ageEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Age"
+            android:inputType="number"
+            android:digits="@string/mobile_digit"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_marginTop="@dimen/medium_margin"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nationality"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/margin_2dp"/>
+
+    <Spinner
+        android:id="@+id/nationality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        android:layout_marginTop="@dimen/small_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birth Preference"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/margin_2dp"/>
+
+    <Spinner
+        android:id="@+id/birthPref"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        android:layout_marginTop="@dimen/small_margin"/>
+
+<LinearLayout
+    android:id="@+id/foodLin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Food Choice"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/margin_2dp"/>
+
+    <Spinner
+        android:id="@+id/foodChoice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grey"
+        android:layout_marginTop="@dimen/small_margin"/>
+</LinearLayout>
+
+    <TextView
+        android:id="@+id/addPassTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Passenger"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/blue_round_button_background"
+        android:backgroundTint="@color/app_blue_color"
+        android:textColor="@color/white"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        />
+
+</LinearLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/popup"
+    android:padding="@dimen/large_margin"
+    android:background="@color/edittext_light_background_color"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/margin_5dp">
+
+        <ImageButton
+            android:id="@+id/close_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            app:srcCompat="@drawable/close"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:layout_marginLeft="@dimen/very_large_margin"
+        android:layout_marginRight="@dimen/very_large_margin"
+        android:orientation="vertical"
+        >
+
+        <!--<TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/color_white"
+            android:text="OTP"/>-->
+        <EditText
+            android:id="@+id/otp_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_blue_color"
+            android:hint="@string/otp_hint"
+            android:maxLines="1"
+            android:text=""
+            android:maxLength="@integer/otp_maxLength"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:inputType="number"
+            android:layout_marginLeft="@dimen/very_large_margin"
+            android:layout_marginRight="@dimen/very_large_margin"
+            android:paddingLeft="@dimen/margin_40dp"
+            android:paddingRight="@dimen/margin_40dp"
+            android:paddingTop="@dimen/large_margin"
+            android:paddingBottom="@dimen/large_margin"
+            android:gravity="center"
+            android:textColorHint="@color/login_hint_color_new"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin">
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:background="@drawable/blue_round_button_background"
+            android:text="Submit"
+            android:textColor="@color/color_white" />
+
+        <TextView
+            android:id="@+id/resendOtpTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/submit_btn"
+            android:layout_toRightOf="@+id/submit_btn"
+            android:padding="@dimen/very_small_margin"
+            android:text="Resend"
+            android:textColor="@color/app_blue_color"
+            android:visibility="gone" />
+    </RelativeLayout>
+</LinearLayout>

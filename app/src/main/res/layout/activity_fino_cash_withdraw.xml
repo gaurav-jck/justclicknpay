@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    >
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/amount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/colorHint">
+
+        <EditText
+            android:id="@+id/txt_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:hint="@string/amount"
+            android:digits="@string/mobile_digit"
+            android:maxLines="1"
+            android:maxLength="@integer/amountMaxLength"
+            android:gravity="center"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/amount"
+        android:text="Submit"
+        android:textSize="@dimen/simple_content_text_size"
+        android:textColor="@color/white"
+        android:background="@drawable/button_shep"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="5dp"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

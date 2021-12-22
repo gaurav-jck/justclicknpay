@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@color/color_white"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/back_arrow"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:id="@+id/fromToTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Your Seat"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/color_white"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/roundLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:background="@drawable/money_receiver_border_rect_corner"
+        >
+
+        <TextView
+            android:id="@+id/oneWayTv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/app_blue_color_light"
+            android:text="GOING"
+            android:textColor="@color/color_white"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size"
+            />
+
+
+        <TextView
+            android:id="@+id/roundWayTv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            android:text="RETURN"
+            android:textColor="@color/darkBlueColor"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/small_margin"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:background="@color/hotelBackgroundColor">
+
+        <TextView
+            android:id="@+id/busNameTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_14sp"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:text="Uttar Pradesh State Road Transport Corp."/>
+        <TextView
+            android:id="@+id/busDetailTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/text_size_14sp"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:text="Volvo A/C Seater"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/SeatLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginLeft="@dimen/very_small_margin"
+        android:layout_marginRight="@dimen/very_small_margin"
+        android:visibility="visible"
+        android:background="@drawable/money_receiver_border_rect_corner"
+        >
+
+        <TextView
+            android:id="@+id/lowerSeatLin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/app_blue_color_light"
+            android:text="Lower"
+            android:textColor="@color/color_white"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/upperSeatLin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            android:text="Upper"
+            android:textColor="@color/darkBlueColor"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/adult_image_width"
+                android:layout_height="@dimen/adult_image_width"
+                android:src="@drawable/blank_seat"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/availabilityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:textColor="@color/color_black"
+                android:text="Available"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/adult_image_width"
+                android:layout_height="@dimen/adult_image_width"
+                android:src="@drawable/blue_seat"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/selectedTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:textColor="@color/color_black"
+                android:text="Selected"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="@dimen/adult_image_width"
+                android:layout_height="@dimen/adult_image_width"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/gray_seat" />
+
+            <TextView
+                android:id="@+id/occupiedTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_black"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:text="Occupied"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/adult_image_width"
+                android:layout_height="@dimen/adult_image_width"
+                android:src="@drawable/red_seat"
+                android:layout_gravity="center_vertical"
+                />
+            <TextView
+                android:id="@+id/ladiesTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/color_black"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:text="Ladies"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="10"
+        android:paddingBottom="@dimen/very_small_margin"
+        android:background="@color/hotelBackgroundColor"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/very_small_margin"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/driverImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginRight="25dp"
+                android:layout_marginBottom="15dp"
+                android:rotation="90"
+                android:visibility="visible"
+                android:layout_gravity="right"
+                android:src="@drawable/bus_driver_icon"/>
+
+            <LinearLayout
+                android:id="@+id/busSeatLinTwoLower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverImg"
+                android:layout_margin="@dimen/medium_margin"
+                android:paddingBottom="@dimen/very_small_margin"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"/>
+
+            <RelativeLayout
+                android:id="@+id/busSeatLinOneLower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverImg"
+                android:layout_margin="@dimen/medium_margin"
+                android:paddingBottom="@dimen/very_small_margin"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"/>
+
+            <LinearLayout
+                android:id="@+id/busSeatLinTwoUpper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverImg"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/medium_margin"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/very_small_margin"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/busSeatLinOneUpper"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/driverImg"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/medium_margin"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/very_small_margin"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hotelBackgroundColor">
+        <TextView
+            android:id="@+id/seatNumberTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:padding="@dimen/small_margin"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/color_black_hint"
+            android:text="Seat no: "/>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_black_hint"
+            android:layout_marginLeft="@dimen/very_small_margin"
+            android:layout_marginRight="@dimen/very_small_margin"
+            />
+
+        <TextView
+            android:id="@+id/totalPriceTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/small_margin"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/title_text_size"
+            android:text="INR 00"/>
+
+        <TextView
+            android:id="@+id/continueTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/app_red_color"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"
+            android:text="Continue"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

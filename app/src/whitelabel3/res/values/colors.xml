@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#285AB4</color>
+    <color name="colorPrimaryDark">#074699</color>
+    <color name="colorAccent">#285AB4</color>
+    <color name="dark_blue_color">#093998</color>
+    <color name="app_blue_color">#285AB4</color>
+    <color name="app_red_color">#D40A0A</color>
+    <color name="app_new_red_color">#B40505</color>
+    <color name="app_red_color_light">#aaD40A0A</color>
+    <color name="app_blue_color_light">@color/app_blue_color</color>
+    <color name="orange_color">@color/app_new_red_color</color>
+    <color name="app_green_color">#78AD17</color>
+
+
+    <color name="app_icon_color">@color/app_new_red_color</color>
+    <color name="app_icon_color2">@color/app_blue_color_light</color>
+    <color name="app_icon_color_black">@color/black_text_color</color>
+    <color name="app_icon_inner_background_color">#ccffffff</color>
+    <color name="app_icon_inner_background_color_light">#ddffffff</color>
+    <color name="app_icon_background_color">#ffffff</color>
+
+
+</resources>

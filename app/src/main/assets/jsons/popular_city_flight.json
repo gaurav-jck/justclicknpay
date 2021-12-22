@@ -1,0 +1,80 @@
+{
+  "status": 200,
+  "error": null,
+  "response": [
+    {
+      "id": 5676,
+      "airportCode": "BLR",
+      "airportName": "Bengaluru Intl",
+      "cityCode": "BLR",
+      "cityName": "Bangalore",
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "id": 5482,
+      "airportCode": "BOM",
+      "airportName": "Chhatrapati Shivaji Intl",
+      "cityCode": "BOM",
+      "cityName": "Mumbai",
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "id": 5710,
+      "airportCode": "BKK",
+      "airportName": "Suvarnabhumi",
+      "cityCode": "BKK",
+      "cityName": "Bangkok",
+      "countryCode": "TH",
+      "countryName": "Thailand"
+    },
+    {
+      "id": 5601,
+      "airportCode": "DEL",
+      "airportName": "Indira Gandhi Intl",
+      "cityCode": "DEL",
+      "cityName": "Delhi",
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "id": 3871,
+      "airportCode": "DXB",
+      "airportName": "Dubai Intl",
+      "cityCode": "DXB",
+      "cityName": "Dubai",
+      "countryCode": "AE",
+      "countryName": "United Arab Emirates"
+    },
+
+
+    {
+      "id": 5503,
+      "airportCode": "PNQ",
+      "airportName": "Pune",
+      "cityCode": "PNQ",
+      "cityName": "Pune",
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "id": 5491,
+      "airportCode": "GOI",
+      "airportName": "Dabolim",
+      "cityCode": "GOI",
+      "cityName": "Goa",
+      "countryCode": "IN",
+      "countryName": "India"
+    },
+    {
+      "id": 5545,
+      "airportCode": "CCU",
+      "airportName": "Netaji Subhash Chandra Bose Intl",
+      "cityCode": "CCU",
+      "cityName": "Kolkata",
+      "countryCode": "IN",
+      "countryName": "India"
+    }
+  ]
+}

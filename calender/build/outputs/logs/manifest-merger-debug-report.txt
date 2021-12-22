@@ -1,0 +1,9 @@
+-- Merging decision tree log ---
+manifest
+ADDED from F:\JustClicknBookWL\calender\AndroidManifest.xml:1:1-3:12
+INJECTED from F:\JustClicknBookWL\calender\AndroidManifest.xml:1:1-3:12
+INJECTED from F:\JustClicknBookWL\calender\AndroidManifest.xml:1:1-3:12
+	package
+		ADDED from F:\JustClicknBookWL\calender\AndroidManifest.xml:1:11-46
+		INJECTED from F:\JustClicknBookWL\calender\AndroidManifest.xml
+		INJECTED from F:\JustClicknBookWL\calender\AndroidManifest.xml

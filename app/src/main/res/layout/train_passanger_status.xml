@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/small_margin"
+    android:paddingBottom="@dimen/small_margin"
+    android:paddingLeft="@dimen/medium_margin"
+    android:paddingRight="@dimen/medium_margin"
+    >
+
+    <TextView
+        android:id="@+id/snoTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:text="Sno."
+        android:textSize="@dimen/text_size_14sp"/>
+
+    <TextView
+        android:id="@+id/ageTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Age"
+        android:textSize="@dimen/text_size_14sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/bookingStatusTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="Booking Status"
+        android:textSize="@dimen/text_size_14sp"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/currentStatusTv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="Current Status"
+        android:textSize="@dimen/text_size_14sp"
+        android:gravity="right"/>
+
+</LinearLayout>

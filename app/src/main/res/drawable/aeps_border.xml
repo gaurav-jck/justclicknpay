@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <solid
+        android:color="@color/colorAEPSDashboardBlue"/>
+    <corners android:radius="10dp"/>
+    <stroke android:color="@color/app_blue_color_light"
+        android:width="@dimen/margin_2dp"/>
+    <size
+        android:width="50dp"
+        android:height="50dp"/>
+</shape>

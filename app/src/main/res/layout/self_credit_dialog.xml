@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mainLayout"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/cardMobileBackground">
+
+
+    <TextView
+        android:id="@+id/update_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_white"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/medium_margin"
+        android:gravity="center"
+        android:textSize="@dimen/title_text_size"
+        android:singleLine="true"
+        android:text="Self Credit"/>
+
+    <!--<TextView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/agent_id"
+        android:textColor="@color/app_blue_color"
+        android:paddingLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/medium_margin"/>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/medium_margin">
+    <EditText
+        android:id="@+id/agent_id_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_blue_color"
+        android:text=""
+        android:textSize="@dimen/simple_content_text_size"
+        android:hint="@string/agent_id"
+        android:maxLines="3"
+        android:digits="@string/alphaNumericSpace_editText_digits"
+        android:singleLine="true"
+        android:maxLength="75"
+        android:textColorHint="@color/login_hint_color_new"
+        />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/lin_other_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+                <EditText
+                    android:id="@+id/amount_credit_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_blue_color"
+                    android:text=""
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:hint="@string/amount_credit"
+                    android:inputType="numberDecimal"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:textColorHint="@color/login_hint_color_new"
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+                <EditText
+                    android:id="@+id/mobile_no_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_blue_color"
+                    android:text=""
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:inputType="number"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:hint="@string/mobile"
+                    android:textColorHint="@color/login_hint_color_new"
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+                <EditText
+                    android:id="@+id/remark_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/app_blue_color"
+                    android:text=""
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:hint="@string/remark"
+                    android:digits="@string/remarks_editText_digits"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:textColorHint="@color/login_hint_color_new"
+                    />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/very_small_margin"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/cancel_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_round_button_background"
+                        android:text="Cancel"
+                        android:textSize="@dimen/title_text_size"
+                        android:gravity="center"
+                        android:padding="@dimen/medium_margin"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:textColor="@color/color_white" />
+                    <TextView
+                        android:id="@+id/submit_tv"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:padding="@dimen/medium_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:text="Submit"
+                        android:textSize="@dimen/title_text_size"
+                        android:textColor="@color/color_white" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/agencyList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:background="@color/color_white"
+                />
+
+            </RelativeLayout>
+
+</LinearLayout>
+
+</LinearLayout>
+

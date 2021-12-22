@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="remarks_maxLength">150</integer>
+    <integer name="pincode_maxLength">10</integer>
+    <integer name="otp_maxLength">10</integer>
+    <integer name="flight_name_max_length">35</integer>
+    <integer name="flight_passport_max_length">30</integer>
+    <integer name="flight_frequent_flyer_max_length">13</integer>
+    <integer name="nameMaxLength">100</integer>
+    <integer name="mobileMaxLength">10</integer>
+    <integer name="amountMaxLength">12</integer>
+    <integer name="nameLargeMaxLength">150</integer>
+    <integer name="emailMaxLength">100</integer>
+    <integer name="passwordMaxLength">20</integer>
+    <integer name="ifscMaxLength">11</integer>
+    <integer name="addressMaxLength">150</integer>
+    <integer name="maxLength30">30</integer>
+
+    <!--icons widh-->
+    <integer name="width1dp">1</integer>
+    <integer name="width2dp">2</integer>
+    <integer name="width3dp">3</integer>
+    <integer name="width4dp">4</integer>
+    <integer name="width6dp">6</integer>
+</resources>

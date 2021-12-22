@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/dialogLin"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/very_small_margin"
+    android:background="@color/listItemBackground">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/listItemTextColorBlue"
+            android:textSize="@dimen/text_size_14sp"
+            android:textStyle="bold"
+            android:padding="@dimen/small_margin"
+            android:text="Enter OTP"/>
+        <EditText
+            android:id="@+id/otp_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_margin="@dimen/small_margin"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_14sp"
+            android:padding="@dimen/small_margin"
+            android:textStyle="bold"
+            android:singleLine="true"
+            android:maxLength="@integer/otp_maxLength"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            android:textColor="@color/dark_blue_color"
+            android:inputType="number"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/large_margin"
+        android:paddingRight="@dimen/medium_padding"
+        android:paddingBottom="@dimen/small_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/large_margin"
+            android:paddingRight="@dimen/large_margin"
+            android:textSize="@dimen/simple_content_text_size"
+            android:text="Cancel"/>
+
+        <TextView
+            android:id="@+id/resend_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/large_margin"
+            android:paddingRight="@dimen/large_margin"
+            android:textSize="@dimen/simple_content_text_size"
+            android:text="Resend OTP"/>
+
+        <TextView
+            android:id="@+id/continue_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:textStyle="bold"
+            android:paddingLeft="@dimen/large_margin"
+            android:paddingRight="@dimen/large_margin"
+            android:textSize="@dimen/simple_content_text_size"
+            android:text="  Submit  "/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

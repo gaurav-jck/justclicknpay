@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginTop="1dp"
+    android:padding="@dimen/very_small_margin"
+    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardCornerRadius="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/listItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AgencyName/code"
+                android:textStyle="bold"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/list_view_name_field_text_size" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/doneCardUser_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.3"
+                android:text="JCT00000000001"
+                android:textStyle="bold"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+
+            <TextView
+                android:id="@+id/dateTime_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.56"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="15/09/2017 12:19:29 AM"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/email_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="abc@email.com"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/number_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.6"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="3454383274"
+                android:textSize="@dimen/simple_content_text_size"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/approved_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Approved"
+                android:textColor="@color/green"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/disapproved_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Disapproved"
+                android:textStyle="bold"
+                android:textColor="@color/red"
+                android:textSize="@dimen/text_size_14sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

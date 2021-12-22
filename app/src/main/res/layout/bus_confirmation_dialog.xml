@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup"
+    android:background="@color/color_white"
+    android:padding="@dimen/large_margin"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+       >
+
+        <TextView
+            android:id="@+id/for_text_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/busConfirmationTitle"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/dark_blue_color"
+            android:textSize="@dimen/title_text_size"
+
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Travelling From "
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+                android:id="@+id/travel_deatail_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold">
+            </TextView>
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:text="Total Price"
+        android:textColor="@color/app_blue_color"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold">
+    </TextView>
+    <TextView
+        android:id="@+id/price_tv"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:textColor="@color/app_blue_color"
+        android:textSize="@dimen/text_size_16sp"
+        android:textStyle="bold">
+
+    </TextView>
+</LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="Total Pax"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold">
+            </TextView>
+            <TextView
+
+                android:id="@+id/pax_tv"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/text_size_16sp"
+                android:textStyle="bold">
+
+            </TextView>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:orientation="horizontal"
+       >
+
+        <Button
+            android:id="@+id/close_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_round_button_background"
+            android:text="Cancel"
+            android:layout_marginRight="@dimen/small_margin"
+            android:textColor="@color/color_white" />
+
+        <Button
+            android:id="@+id/submit_btn"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_round_button_background"
+            android:text="Confirm"
+            android:textColor="@color/color_white" />
+
+    </LinearLayout>
+</LinearLayout>

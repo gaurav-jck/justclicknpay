@@ -1,0 +1,126 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.train.TrainListsFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"/>
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:ellipsize="end"
+            android:maxWidth="@dimen/_120sdp"
+            android:maxLines="1"
+            android:text="Saharanpur"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+
+        <ImageView
+            android:id="@+id/arrowImg"
+            android:layout_width="@dimen/margin_30dp"
+            android:layout_height="15dp"
+            android:src="@drawable/arrow_back"
+            android:foregroundGravity="center"
+            android:layout_gravity="center"
+            android:layout_alignBottom="@+id/fromStationTv"
+            android:rotation="180"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/margin_2dp"
+            android:layout_toRightOf="@id/fromStationTv"/>
+
+        <TextView
+            android:id="@+id/toStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/arrowImg"
+            android:maxWidth="@dimen/_120sdp"
+            android:maxLines="1"
+            android:text="Delhi"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+
+        <TextView
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday, 05 Apr 21"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/color_white_light2"
+            android:layout_below="@+id/fromStationTv"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/filterView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top"
+        android:visibility="visible"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quota"
+            android:textColor="@color/gray"
+            android:padding="@dimen/small_margin"
+            android:layout_toLeftOf="@+id/quotaSpinner"
+            android:textSize="@dimen/small_text_size"
+            android:layout_centerVertical="true"
+            />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/quotaSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/large_margin"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:background="@color/gray_color_light"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:name="com.justclick.clicknbook.Fragment.train.TrainListsFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@id/filterView"
+        tools:listitem="@layout/train_lists_item" />
+
+</LinearLayout>

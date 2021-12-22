@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+  <TextView
+      android:id="@+id/close_btn"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:text="@string/filter_dialog_title"
+      android:textColor="@color/color_white"
+      android:gravity="center"
+      android:textSize="@dimen/title_text_size"
+      android:padding="@dimen/small_margin"
+      android:background="@color/colorPrimary"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/start_date"
+            android:gravity="center"
+            android:textColor="@color/dark_blue_color"
+            android:textSize="@dimen/text_size_16sp"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/end_date"
+            android:gravity="center"
+            android:textColor="@color/dark_blue_color"
+            android:textSize="@dimen/text_size_16sp"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:padding="@dimen/small_margin"
+        android:gravity="center"
+        android:background="@color/filterBackground">
+
+            <LinearLayout
+                android:id="@+id/startDateLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="visible"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingBottom="@dimen/medium_margin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_margin"
+                    android:src="@drawable/calendar_icon_small" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/start_date_value_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22 Jun 17"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/start_day_value_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wednesday"
+                        android:textColor="@color/lightBlueColor"
+                        android:textSize="@dimen/text_size_14sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/date_line"
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:visibility="visible"
+                android:layout_toRightOf="@+id/startDateLinear"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:background="@color/app_blue_color" />
+
+            <LinearLayout
+                android:id="@+id/endDateLinear"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/date_line"
+                android:gravity="center"
+                android:visibility="visible"
+                android:paddingTop="@dimen/medium_margin"
+                android:paddingBottom="@dimen/medium_margin">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/small_margin"
+                    android:src="@drawable/calendar_icon_small" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/end_date_value_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="22 May 17"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <TextView
+                        android:id="@+id/end_day_value_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Wednesday"
+                        android:textColor="@color/lightBlueColor"
+                        android:textSize="@dimen/text_size_14sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        >
+
+        <TextView
+            android:id="@+id/cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/orange_color"
+            android:gravity="center"
+            android:padding="@dimen/small_margin"
+            android:text="@string/cancel"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/color_white_hint"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            />
+
+        <TextView
+            android:id="@+id/submit_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/submit"
+            android:textColor="@color/color_white"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:padding="@dimen/small_margin"
+            android:background="@color/orange_color"/>
+
+    </LinearLayout>
+
+</LinearLayout>

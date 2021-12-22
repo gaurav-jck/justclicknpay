@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:background="@color/color_white">
+
+    <LinearLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        >
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/back_arrow"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:id="@+id/fromToTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/boarding_dropping_point_buses"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tripTypeLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginLeft="@dimen/very_small_margin"
+        android:layout_marginRight="@dimen/very_small_margin"
+        android:visibility="visible"
+        android:background="@drawable/money_receiver_border_rect_corner"
+        >
+
+        <TextView
+            android:id="@+id/goingTv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/flightSearchDeSelectColor"
+            android:text="Delhi-Agra"
+            android:textColor="@color/color_white"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size">
+
+        </TextView>
+
+        <TextView
+            android:id="@+id/returnTv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            android:text="Agra-Delhi"
+            android:visibility="visible"
+            android:textColor="@color/app_blue_color"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/simple_content_text_size">
+
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/boardingTitleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@color/hotelBackgroundColor"
+            android:padding="@dimen/small_margin"
+            android:text="Choose your Boarding point"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/simple_content_text_size" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/boardingList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/small_margin" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/boardingListReturn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:paddingTop="@dimen/small_margin" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/deBoardingTitleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:background="@color/hotelBackgroundColor"
+            android:padding="@dimen/small_margin"
+            android:text="Choose your Dropping point"
+            android:textColor="@color/color_black"
+            android:textSize="@dimen/simple_content_text_size" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/droppingList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/small_margin"
+                />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/deBoardingListReturn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"
+                android:paddingTop="@dimen/small_margin" />
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/continueTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:background="@color/app_red_color"
+            android:gravity="center"
+            android:padding="@dimen/small_margin"
+            android:text="CONTINUE"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+
+
+

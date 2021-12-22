@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".jctPayment.BankDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/atv_bank_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintTop_toBottomOf="@id/appBar"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/atv_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorText"
+            android:inputType="text"
+            android:text=""
+            android:textSize="@dimen/aeps_input_text_size"
+            android:hint="@string/bank_name"
+            android:textColor="@color/colorText"
+            android:digits="@string/bank_name_digit"
+            android:textCursorDrawable="@color/colorText"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:completionThreshold="1"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/bene_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:hint="@string/bene_name"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintTop_toBottomOf="@+id/atv_bank_input">
+
+        <EditText
+            android:id="@+id/txt_bene_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:digits="@string/personName_editText_digits"
+            android:maxLines="1"
+            android:maxLength="@integer/nameMaxLength"
+            android:inputType="textPersonName"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/account_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:hint="@string/account_number"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintTop_toBottomOf="@+id/bene_name">
+
+        <EditText
+            android:id="@+id/txt_account_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:digits="@string/mobile_digit"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/confirm_account_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:hint="@string/account_number_confirm"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintTop_toBottomOf="@+id/account_no">
+
+        <EditText
+            android:id="@+id/txt_confirm_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:digits="@string/mobile_digit"
+            android:maxLines="1"
+            android:maxLength="20"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ifsc_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:hint="@string/enter_ifsc"
+        android:textColorHint="@color/colorHint"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_account_no">
+
+        <EditText
+            android:id="@+id/txt_ifsc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:maxLines="1"
+            android:maxLength="@integer/ifscMaxLength"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:id="@+id/chooseFileLin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@drawable/registration_edittext_back"
+        app:layout_constraintTop_toBottomOf="@+id/ifsc_code"
+        app:layout_constraintRight_toRightOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/panCardCopy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:padding="@dimen/medium_margin"
+            android:hint="Choose file"
+            />
+
+        <ImageView
+            android:id="@+id/imageFile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/choose_file"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cancelCheckLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_check"
+        app:layout_constraintEnd_toStartOf="@+id/chooseFileLin"
+        app:layout_constraintTop_toTopOf="@+id/chooseFileLin"
+        app:layout_constraintBottom_toBottomOf="@+id/chooseFileLin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:textColor="@color/colorText"
+        />
+
+    <TextView
+        android:id="@+id/cancelCheckImageLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_check"
+        app:layout_constraintTop_toBottomOf="@+id/ifsc_code"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:paddingLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:textColor="@color/colorText"
+        />
+
+
+    <ImageView
+        android:id="@+id/check_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="600dp"
+        app:layout_constraintTop_toBottomOf="@id/cancelCheckImageLabel"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        />
+
+    <Button
+        android:id="@+id/bt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@drawable/button_shep"
+        android:text="@string/submit"
+        android:textColor="@color/color_white"
+        android:textSize="@dimen/text_size_18sp"
+        app:layout_constraintTop_toBottomOf="@+id/chooseFileLin"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

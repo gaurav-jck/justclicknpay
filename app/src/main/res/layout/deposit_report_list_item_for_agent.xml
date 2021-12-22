@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginTop="1dp"
+    android:padding="@dimen/very_small_margin"
+    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardCornerRadius="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/listItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/name_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AgencyName/code"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/list_view_name_field_text_size" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/requested_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.45"
+                android:text="Requested"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/request_date_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="15/09/2017 12:19:29 AM"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/request_amount_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.56"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="00"
+                android:textColor="@color/app_red_color"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/credit_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.45"
+                android:text="Credited"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/credit_date_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="15/09/2017 12:19:29 AM"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <TextView
+                android:id="@+id/credit_amount_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="0.56"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="1000000.00"
+                android:textColor="@color/app_red_color"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/bankLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="2dp"
+            android:visibility="gone"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Bank Name"
+                android:visibility="gone"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/bankTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Axis"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Bank Narration"
+                android:gravity="left"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/bankNarrationTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight=".50"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="good"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="2dp"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Bank Charge:"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size11sp" />
+
+            <TextView
+                android:id="@+id/bankChargesTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".55"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="22"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="GST :  "
+                android:gravity="left"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/gstTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight=".50"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="22"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="2dp"
+            android:gravity="right">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Status :"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/statusTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".55"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Deposit Update"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Remarks :  "
+                android:gravity="left"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/remarksTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:layout_weight=".50"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Remark"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/update_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.45"
+                android:text="Updated By"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/small_text_size" />
+
+            <TextView
+                android:id="@+id/updated_by_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="Admin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

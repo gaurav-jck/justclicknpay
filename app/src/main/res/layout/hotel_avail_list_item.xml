@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="1dp"
+    android:background="@color/listItemBackground">
+
+    <LinearLayout
+        android:id="@+id/itemLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/hotelImage"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@drawable/hotel_demo_image"
+            />
+        <!-- <ImageView
+             android:id="@+id/hotelImage"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1"
+             android:layout_gravity="center"
+             android:padding="@dimen/small_margin"/>-->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/name_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:textColor="@color/flightDarkBlackColor"
+                    android:textSize="@dimen/list_view_name_field_text_size"
+                    android:textStyle="bold"
+                    android:text="The Leela Palace"/>
+
+
+            </LinearLayout>
+            <TextView
+                android:id="@+id/address_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:textSize="@dimen/text_size_14sp"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/listItemDateColorLight"
+                android:text="Mayur Vihar Delhi"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_small_margin"
+                android:paddingLeft="@dimen/small_margin"
+                android:orientation="horizontal">
+
+                <RatingBar
+                    android:id="@+id/ratingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:rating="0"
+                    android:numStars="5"
+                    android:stepSize="1"
+                    android:isIndicator="true"
+                    />
+
+                <TextView
+                    android:id="@+id/amount_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="INR 0000.00"
+                    android:gravity="right"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/listItemAmountColor"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:layout_weight="0.4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/Night"
+                    android:gravity="right"
+                    android:textSize="@dimen/small_text_size10sp"
+                    android:textColor="@color/listItemAmountColor"
+                    android:paddingRight="@dimen/medium_margin"
+                    />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/very_small_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4.5"
+                        android:textColor="@color/color_white"
+                        android:background="@color/color_black"
+                        android:textSize="@dimen/small_text_size"
+                        android:padding="@dimen/very_small_padding"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" of 5 Excellent"
+                        android:textColor="@color/flightDarkBlackColor"
+                        android:textSize="@dimen/small_text_size"
+                        android:padding="@dimen/very_small_padding"/>
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/bookHotelTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GST Extra"
+                    android:layout_alignParentRight="true"
+                    android:textColor="@color/flightDarkBlackColor"
+                    android:textSize="@dimen/small_text_size11sp"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/color_light_black"/>
+
+</LinearLayout>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#470480</color>
+    <color name="colorPrimaryDark">#29014B</color>
+    <color name="colorAccent">#470480</color>
+    <color name="dark_blue_color">#470480</color>
+    <color name="app_blue_color">#470480</color>
+    <color name="app_red_color">#B8A702</color>
+    <color name="app_new_red_color">#B8A702</color>
+    <color name="app_red_color_light">#aac1af03</color>
+    <color name="app_blue_color_light">@color/app_blue_color</color>
+    <color name="orange_color">@color/app_new_red_color</color>
+    <color name="app_green_color">#78AD17</color>
+
+
+    <color name="app_icon_color">@color/app_new_red_color</color>
+    <color name="app_icon_color2">@color/app_blue_color_light</color>
+    <color name="app_icon_color_black">@color/black_text_color</color>
+    <color name="app_icon_inner_background_color">#ccffffff</color>
+    <color name="app_icon_inner_background_color_light">#ddffffff</color>
+    <color name="app_icon_background_color">#ffffff</color>
+
+    <!--Login colors-->
+    <color name="login_cardview_background">#ddFFFFFF</color>
+    <color name="login_text_color">#bb000000</color>
+    <color name="login_hint_color">#88090808</color>
+    <color name="login_hint_color_new">#88090808</color>
+    <color name="login_background_image_color">#bb000000</color>
+
+</resources>

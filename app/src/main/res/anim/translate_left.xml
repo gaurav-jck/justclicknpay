@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!--http://blog.quent.in/index.php/2013/06/activity-transition-animations-like-the-vine-android-application/-->
+<!--https://guides.codepath.com/android/Animations-->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <translate android:fromXDelta="100%"
+        android:toXDelta="0%"
+        android:duration="@android:integer/config_mediumAnimTime" />
+
+</set>

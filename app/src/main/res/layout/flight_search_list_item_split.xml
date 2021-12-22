@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/linear_main_menu"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/listItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="@dimen/small_margin"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/flightImage"
+                android:layout_width="@dimen/flightListAirlineImageSize"
+                android:layout_height="@dimen/flightListAirlineImageSize"
+                fresco:placeholderImage="@drawable/air_icon"
+                />
+
+            <TextView
+                android:id="@+id/airlineNoTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6E-171"
+                android:textSize="@dimen/flightListAirlineNameSize"
+                android:textColor="@color/app_blue_color"/>
+
+            <TextView
+                android:id="@+id/airlineNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GoAir"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:layout_gravity="center"
+            android:paddingRight="@dimen/small_margin"
+            android:gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/timingTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22:00 - 23:00"
+                android:textColor="@color/flightSearchCityColor"
+                android:textSize="@dimen/flightListTimingSize" />
+            <TextView
+                android:id="@+id/durationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2h 10m"
+                android:textColor="@color/flightSearchHintColor"
+                android:textSize="@dimen/flightListDurationSize" />
+
+            <TextView
+                android:id="@+id/refundTypeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Non Refundable"
+                android:textColor="@color/flightSearchHintColor"
+                android:textSize="@dimen/flightListDurationSize" />
+
+            <TextView
+                android:id="@+id/priceTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs. 4000"
+                android:paddingBottom="@dimen/small_margin"
+                android:textColor="@color/app_red_color"
+                android:textSize="@dimen/flightListTimingSize" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="(save - 450)"
+            android:layout_marginRight="@dimen/small_margin"
+            android:textSize="@dimen/small_text_size"
+            android:visibility="gone"
+            android:textColor="@color/app_blue_color"/>
+
+        <!--<TextView
+            android:id="@+id/priceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rs. 4000"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/app_red_color"
+            android:textSize="@dimen/flightListTimingSize" />-->
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_blue_color"/>
+
+</LinearLayout>

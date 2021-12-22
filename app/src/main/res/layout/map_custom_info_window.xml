@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/small_margin"
+    android:maxWidth="200dp">
+
+    <TextView
+        android:id="@+id/hotelNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/flightDarkBlackColor"
+        android:textSize="@dimen/list_view_name_field_text_size"
+        android:textStyle="bold"
+        android:text="The Leela Palace"/>
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rating="0"
+        android:numStars="5"
+        android:stepSize="1"
+        android:isIndicator="true"
+        style="@style/hotelRatingBar"
+        />
+
+    <TextView
+        android:id="@+id/hotelAddressTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:textColor="@color/listItemDateColorLight"
+        android:text="Mayur Vihar Delhi"/>
+
+</LinearLayout>

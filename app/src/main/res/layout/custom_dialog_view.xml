@@ -1,0 +1,52 @@
+<LinearLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/progressDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/colorPrimary"
+        android:paddingLeft="@dimen/very_large_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:text="We are reconfirming the price."
+        android:textSize="@dimen/text_size_16sp" />
+    <RelativeLayout android:id="@+id/mainLayout"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="2dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:padding="8dp">
+        <ProgressBar android:id="@+id/imgVw_progress"
+            android:indeterminateDrawable="@drawable/my_progress_one"
+            android:layout_centerVertical="true"
+            android:layout_height="40dp"
+            android:layout_width="40dp"
+            android:layout_marginLeft="10dp"
+            />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tv_progressmsg"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imgVw_progress"
+            android:layout_width="wrap_content"
+            android:text="Please wait......"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textStyle="">
+
+        </TextView>
+    </RelativeLayout>
+
+</LinearLayout>

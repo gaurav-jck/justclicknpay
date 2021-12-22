@@ -1,0 +1,250 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.rblDmt.MoneyTransferRemittanceFragment"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mobile Balance Check"
+                android:textSize="@dimen/title_text_size"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:gravity="center"
+                android:textColor="@color/app_blue_color"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/medium_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="Available Mobile Balance" />
+
+                <TextView
+                    android:id="@+id/mobile_balance_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:padding="@dimen/medium_margin" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/mobile_balance_btn"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="Mobile Balance"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_gravity="center"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/color_white"
+                android:background="@color/app_blue_color"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_blue_color"
+                android:layout_marginTop="@dimen/medium_margin"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Rail Balance Check"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/title_text_size"
+                android:gravity="center"
+                android:textColor="@color/app_blue_color"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/medium_margin">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="Available Rail Balance" />
+
+                <TextView
+                    android:id="@+id/rail_balance_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="2"
+                    android:padding="@dimen/medium_margin"
+                    android:background="@drawable/money_receiver_border_rect_corner" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/rail_balance_btn"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="Rail Balance"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/color_white"
+                android:background="@color/app_blue_color"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/app_blue_color"
+                android:layout_marginTop="@dimen/medium_margin"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Air Balance Check"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/title_text_size"
+                android:gravity="center"
+                android:textColor="@color/app_blue_color"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Airline Code"
+                    android:layout_gravity="center_vertical"
+                    />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/airline_code_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Agency ID"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <Spinner
+                        android:id="@+id/agent_id_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
+
+                    </Spinner>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:background="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Available Airline Balance"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="2"/>
+
+                <TextView
+                    android:id="@+id/air_balance_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:padding="@dimen/medium_margin"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:layout_weight="2"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/air_balance_btn"
+                android:layout_width="140dp"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:text="Airline Balance"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/large_margin"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/color_white"
+                android:background="@color/app_blue_color"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_agent"
+            android:icon="@drawable/user_icon_black"
+            android:title="Agent" />
+
+    </group>
+
+    <item android:title="Recharge">
+        <menu>
+            <item
+                android:id="@+id/nav_mobile"
+                android:icon="@drawable/mobile_icon"
+                android:title="Mobile" />
+            <item
+                android:id="@+id/nav_dth"
+                android:icon="@drawable/mobile_icon"
+                android:title="DTH" />
+            <item
+                android:id="@+id/nav_datacard"
+                android:icon="@drawable/mobile_icon"
+                android:title="DataCard" />
+            <item
+                android:id="@+id/nav_electricity"
+                android:icon="@drawable/mobile_icon"
+                android:title="Electricity" />
+            <item
+                android:id="@+id/nav_landline"
+                android:icon="@drawable/mobile_icon"
+                android:title="Landline" />
+            <item
+                android:id="@+id/nav_gas"
+                android:icon="@drawable/mobile_icon"
+                android:title="Gas" />
+        </menu>
+    </item>
+
+</menu>

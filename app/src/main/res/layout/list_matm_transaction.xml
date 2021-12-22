@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/very_small_margin"
+    android:padding="@dimen/small_margin"
+    android:layout_marginLeft="@dimen/small_margin"
+    android:layout_marginRight="@dimen/small_margin"
+    android:background="@color/listItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txnId"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="D6562632134512435726"
+            android:textSize="@dimen/text_size_14sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue_color"
+            android:layout_weight="1.2"/>
+
+        <TextView
+            android:id="@+id/txnAmountTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:gravity="right"
+            android:textSize="@dimen/text_size_14sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue_color"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/bankNameTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Bank"
+            android:gravity="left"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/text_dark_gray"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/senderMobileTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="2126516356"
+            android:gravity="right"
+            android:visibility="gone"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/text_dark_gray"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/accountNoTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="0723765265352"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/text_dark_gray"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/ifscTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:gravity="right"
+            android:textSize="@dimen/text_size_14sp"
+            android:textColor="@color/dark_blue_color"
+            android:paddingRight="@dimen/medium_margin"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txnDateTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.3"
+            android:text="11/12/2018"
+            android:textColor="@color/transactionListLabelColor"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <TextView
+            android:id="@+id/statusTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="status"
+            android:gravity="right"
+            android:textSize="@dimen/text_size_14sp"
+            android:paddingRight="@dimen/medium_margin"
+            android:textColor="@color/text_dark_gray"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/very_small_margin">
+    <TextView
+        android:id="@+id/txnType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="left"
+        android:text="TC "
+        android:textColor="@color/transactionListLabelColor"
+        android:textSize="@dimen/text_size_14sp" />
+
+    <TextView
+        android:id="@+id/print_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:layout_gravity="right"
+        android:textColor="@color/app_red_color"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:textStyle="bold|italic"
+        android:textSize="@dimen/text_size_16sp"
+        android:text=" Print"/>
+</LinearLayout>
+
+
+</LinearLayout>

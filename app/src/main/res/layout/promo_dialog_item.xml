@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:paddingTop="@dimen/small_margin"
+    android:id="@+id/promoItemRel"
+    android:orientation="vertical">
+    <RadioButton
+        android:id="@+id/radioButtonPromo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/small_margin"
+        android:checked="false"/>
+    <TextView
+        android:id="@+id/promoNameTv"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text="JCTPROMO"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/app_red_color"
+        android:layout_toRightOf="@+id/radioButtonPromo"
+        android:layout_alignTop="@+id/radioButtonPromo"
+        android:layout_alignBottom="@+id/radioButtonPromo"
+        android:gravity="center_vertical"
+        />
+
+    <TextView
+        android:id="@+id/promoDetailTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get upto 5%"
+        android:layout_below="@+id/radioButtonPromo"
+        android:layout_toRightOf="@+id/radioButtonPromo"
+        android:textSize="@dimen/small_text_size"
+        android:textColor="@color/grayTextColorFlight"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_below="@+id/promoDetailTv"
+        android:background="@color/grayViewColorFlight"
+        android:layout_marginTop="@dimen/small_margin" />
+
+</RelativeLayout>

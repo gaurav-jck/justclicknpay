@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/small_margin"
+    android:background="@drawable/blue_border_white_background">
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="Child Layout"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:layout_margin="@dimen/small_margin"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <TextView
+                        android:id="@+id/agency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Jct tour and travels"
+                        android:textStyle="bold"
+                        android:padding="2dp"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:visibility="gone"
+                        android:textColor="@color/dark_blue_color"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TXN ID :- "
+                        />
+
+                    <TextView
+                        android:id="@+id/txnId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DCHFYFFDTDRDDRDR"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="REF. ID :- "
+                        />
+
+                    <TextView
+                        android:id="@+id/refId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="DCHFYFFDTDRDDRDR"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TXN Charge :- "
+                        />
+
+                    <TextView
+                        android:id="@+id/txnChr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="62"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TID :- "
+                        />
+
+                    <TextView
+                        android:id="@+id/tid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="123455454"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Bank REF. NO :- "
+                        />
+
+                    <TextView
+                        android:id="@+id/bankRef"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="231243212223"
+                        android:textStyle="bold"
+                        android:gravity="left"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/very_small_margin">
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="11/12/2018"
+                        />
+
+                </LinearLayout>
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/small_margin"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="jc4342342"
+                    android:layout_marginRight="@dimen/large_margin"
+                    android:padding="@dimen/small_padding"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="invisible"
+                    android:textSize="@dimen/small_text_size"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AMOUNT"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textSize="@dimen/small_text_size"
+                    />
+                <TextView
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="20000"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/small_text_size"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="SUCCESS"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/large_margin"
+                        android:textColor="@color/dark_blue_color"
+                        android:padding="@dimen/small_margin"
+                        android:textSize="@dimen/small_text_size"
+                        />
+
+                    <TextView
+                        android:id="@+id/refund_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Refund"
+                        android:textStyle="bold|italic"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/very_small_margin"
+                        android:textColor="@color/red"
+                        android:padding="@dimen/small_margin"
+                        android:textSize="@dimen/text_size_16sp"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+</LinearLayout>

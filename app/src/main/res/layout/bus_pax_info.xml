@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/hotelBackgroundColor"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mr. Veer Pratap Singh"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/app_red_color" />
+
+        <TextView
+            android:id="@+id/detailTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Seat no 5, Ticket no. 2929292"
+            android:textSize="@dimen/small_text_size"
+            android:textColor="@color/color_black_hint"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

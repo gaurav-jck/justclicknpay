@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/sub_menu_title"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/medium_margin"
+    android:paddingLeft="@dimen/large_margin">
+
+    <ImageView
+        android:id="@+id/iv_sub_menu"
+        android:layout_width="@dimen/drawer_image_size"
+        android:layout_height="@dimen/drawer_image_size"
+        android:src="@drawable/chat_icon" />
+    <TextView
+        android:id="@+id/tv_sub_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/nav_chatting"
+        android:textSize="@dimen/drawer_content_text_size"
+        android:textColor="@color/main_text_color"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+</LinearLayout>

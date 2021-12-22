@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/color_white_light"
+    android:orientation="vertical"
+    tools:context="jctPayment.Fragments.Transactions_Fragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/app_blue_color_light">
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:id="@+id/hs_view"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scrollbars="none"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ll_shape"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:text="Today Transactions"
+                        android:textColor="@color/text_dark_gray"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="-20dp"
+                        android:background="@drawable/design_trans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="-30dp"
+                        android:text="INR"
+                        android:textColor="@color/text_inr"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_today"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/app_blue_color_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ll_shape"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:text="Total Month"
+                        android:textColor="@color/text_dark_gray"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="-20dp"
+                        android:background="@drawable/design_trans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="-30dp"
+                        android:text="INR"
+                        android:textColor="@color/text_inr"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/app_blue_color_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="250dp"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/ll_shape"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:padding="10dp"
+                        android:text="Today Commission"
+                        android:textColor="@color/text_dark_gray"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="right"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginTop="-20dp"
+                        android:background="@drawable/design_trans" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="-30dp"
+                        android:text="INR"
+                        android:textColor="@color/text_inr"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_commission"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="2dp"
+                        android:text=""
+                        android:textColor="@color/app_blue_color_light"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0.5dp"
+        android:background="@color/app_blue_color_light"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:padding="10dp"
+            android:text="Recent Transaction"
+            android:gravity="center"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/tv_all_transaction"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:gravity="right"
+            android:padding="10dp"
+            android:visibility="gone"
+            android:textStyle="bold|italic"
+            android:text="Show All"
+            android:textColor="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_all_transaction_details"
+            android:layout_width="0dp"
+            android:layout_marginLeft="45dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".7"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:text="Transaction Details"
+            android:textColor="@color/app_blue_color" />
+
+        <TextView
+            android:id="@+id/tv_all_transaction_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".3"
+            android:gravity="left"
+            android:text="Amount"
+            android:textColor="@color/app_blue_color" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_2dp"
+        android:paddingTop="@dimen/very_small_margin"
+        android:layout_below="@+id/rel_top"
+        android:background="@color/color_white_light2"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/linFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/filter_image"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/very_small_margin"
+                android:text="List Filter"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/startDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StartDate"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/small_text_size"
+            android:gravity="center"/>
+
+        <LinearLayout
+            android:id="@+id/lin_dateFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:id="@+id/filter_image_rel"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:id="@+id/filter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/very_small_margin"
+                android:text="Date filter"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        android:layout_below="@id/date_lin"
+        />
+    <TextView
+        android:id="@+id/noRecordTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Record Found"
+        android:textColor="@color/dark_blue_color"
+        android:textSize="@dimen/text_size_16sp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/medium_margin"/>
+
+</LinearLayout>

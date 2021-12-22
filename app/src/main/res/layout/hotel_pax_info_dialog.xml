@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/popup"
+    android:background="@color/cardMobileBackground"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/color_white"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/small_margin"
+        android:gravity="center"
+        android:text="Pick Traveller"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Adult"
+            android:textColor="@color/app_blue_color"
+            android:gravity="center"
+            android:textSize="@dimen/list_view_name_field_text_size"/>
+
+        <ImageView
+            android:id="@+id/adult_minus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@drawable/minus"
+            />
+        <TextView
+            android:id="@+id/adult_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:text="0"
+            />
+
+        <ImageView
+            android:id="@+id/adult_plus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@drawable/plus"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:text="Child"
+            android:textColor="@color/app_blue_color"
+            android:gravity="center"
+            android:textSize="@dimen/list_view_name_field_text_size"/>
+
+        <ImageView
+            android:id="@+id/child_minus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@drawable/minus"
+            />
+        <TextView
+            android:id="@+id/child_count"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:text="0"
+            />
+
+        <ImageView
+            android:id="@+id/child_plus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/cardview_shadow_end_color"
+            android:src="@drawable/plus"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/jct_title_size"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/cancel_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_round_button_background"
+            android:gravity="center"
+            android:layout_margin="@dimen/very_small_margin"
+            android:padding="@dimen/small_margin"
+            android:text="Cancel"
+            android:textColor="@color/color_white" />
+
+        <TextView
+            android:id="@+id/submit_tv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/blue_round_button_background"
+            android:gravity="center"
+            android:layout_margin="@dimen/very_small_margin"
+            android:padding="@dimen/small_margin"
+            android:text="Ok"
+            android:textColor="@color/color_white" />
+
+    </LinearLayout>
+</LinearLayout>

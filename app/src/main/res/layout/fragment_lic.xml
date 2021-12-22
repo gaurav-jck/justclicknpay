@@ -1,0 +1,166 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.justclick.clicknbook.Fragment.lic.LicFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIC Payment"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/rel_top"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/policy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/email">
+
+            <EditText
+                android:id="@+id/policyEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Policy number"
+                android:textColorHint="@color/black_text_color"
+                android:text=""
+                android:maxLength="15"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/emailEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email Id"
+                android:text=""
+                android:maxLength="@integer/emailMaxLength"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/nameEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Customer name"
+                android:text=""
+                android:maxLength="@integer/emailMaxLength"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:enabled="false"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/amountEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ämount"
+                android:text=""
+                android:maxLength="@integer/emailMaxLength"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:enabled="false"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="gone">
+
+            <EditText
+                android:id="@+id/dateEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Due date"
+                android:text=""
+                android:maxLength="@integer/emailMaxLength"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:enabled="false"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:layout_marginTop="@dimen/size_30dp"
+            android:text="Get LIC Bill"
+            android:background="@color/app_blue_color"
+            android:textColor="@color/white"
+            android:textSize="@dimen/simple_content_text_size"
+            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+            />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

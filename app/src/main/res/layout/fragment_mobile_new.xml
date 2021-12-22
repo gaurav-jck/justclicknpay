@@ -1,0 +1,33 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rel_mobile"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment">
+
+
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/app_blue_color_light"
+            android:scrollbars="horizontal"
+            app:tabMode="scrollable"
+            app:tabIndicatorColor="@color/app_red_color"
+            app:tabSelectedTextColor="@color/color_white"
+            app:tabTextColor="@color/color_white_light" />
+
+        </androidx.viewpager.widget.ViewPager>
+
+
+</LinearLayout>

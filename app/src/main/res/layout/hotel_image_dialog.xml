@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/listItemBackground">
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/hotelImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/small_margin"
+            android:padding="1dp"
+            android:background="@drawable/money_receiver_border_rect_corner"
+            fresco:placeholderImage="@drawable/no_hotel_image"
+            />
+
+
+</LinearLayout>

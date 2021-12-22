@@ -1,0 +1,164 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:id="@+id/recharge_layout_electricity"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment"
+    tools:showIn="@layout/fragment_mobile"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin">
+        <Spinner
+            android:id="@+id/spinner_electricity_operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            >
+        </Spinner>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/color_light_black"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/medium_margin">
+     <EditText
+         android:id="@+id/electricity_amount_edt"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="@string/enter_amount"
+         android:textColorHint="@color/flightSearchHintColor"
+         android:textColor="@color/black_text_color"
+         android:inputType="numberDecimal"
+         android:maxLength="10"
+         android:textSize="@dimen/simple_content_text_size"/>
+</com.google.android.material.textfield.TextInputLayout>
+   <!-- <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/app_blue_color"/>
+-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/very_small_margin">
+    <EditText
+        android:id="@+id/electricity_account_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_account_id"
+        android:textColorHint="@color/flightSearchHintColor"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/simple_content_text_size"
+        android:inputType="text"
+        android:singleLine="true"
+        android:digits="@string/alphaNumericSpace_editText_digits"
+        android:maxLength="30"
+        />
+</com.google.android.material.textfield.TextInputLayout>
+    <!--<View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/app_blue_color"/>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/view_electricity_billing_unit_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enter_billing_unit"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/very_small_margin">
+    <EditText
+        android:id="@+id/electricity_billing_unit_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/flightSearchHintColor"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/simple_content_text_size"
+        android:inputType="number"
+        android:singleLine="true"
+        android:maxLength="4"
+        />
+</com.google.android.material.textfield.TextInputLayout>
+    <!--<View
+        android:id="@+id/view_electricity_billing_unit_edt"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/app_blue_color"/>-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/view_electricity_processing_cycle_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/very_small_margin">
+
+        <EditText
+            android:id="@+id/electricity_processing_cycle_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="2"
+            android:textColorHint="@color/flightSearchHintColor"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/simple_content_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+    <!--<View
+        android:id="@+id/view_electricity_processing_cycle_edt"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/app_blue_color"/>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin">
+        <Spinner
+            android:id="@+id/spinner_electricity_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            >
+        </Spinner>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_spinner_electricity_city"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:background="@color/color_light_black"/>
+
+</LinearLayout>

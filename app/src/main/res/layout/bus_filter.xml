@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:background="@color/color_white"
+    android:weightSum="1">
+    <LinearLayout
+        android:id="@+id/titleLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_margin"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="Filter"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/cancelTv"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/cross_white"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleLin"
+        android:layout_above="@+id/applyTv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/color_white_hint">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SORT BY"
+                    android:padding="@dimen/small_margin"
+                    android:textColor="@color/app_blue_color"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textSize="@dimen/simple_content_text_size"/>
+
+                <CheckBox
+                    android:id="@+id/netFareCheckbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_alignParentRight="true"
+                    android:padding="@dimen/small_margin"
+                    android:visibility="gone"
+                    android:text="Net Fare"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/fareLin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/fareImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/radio_button_unchecked"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="FARE"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/departureLin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/departureImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/radio_button_unchecked"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="DEPARTURE"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/noneLin"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:layout_height="wrap_content"
+                    >
+                    <ImageView
+                        android:id="@+id/noneImg"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/radio_button_unchecked"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="NONE"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BUS TYPE"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/busTypeLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/busTypeLin"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:text="Select all"
+                    android:paddingLeft="@dimen/small_margin"
+                    app:srcCompat="@drawable/checkbox_custom"
+                    />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OPERATOR"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/operatorLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/operatorLin"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:text="Select all"
+                    android:paddingLeft="@dimen/small_margin"
+                    app:srcCompat="@drawable/checkbox_custom"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DEPARTURE TIME"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/departureTime6Lin"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.02"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="00:00 TO 05:59"
+                        android:paddingLeft="@dimen/small_margin"
+                        app:srcCompat="@drawable/checkbox_custom"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/departureTime11Lin"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.02"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="06:00 TO 11:59"
+                        android:paddingLeft="@dimen/small_margin"
+                        app:srcCompat="@drawable/checkbox_custom"
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/departureTime17Lin"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.02"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="12:00 TO 17:59"
+                        android:paddingLeft="@dimen/small_margin"
+                        app:srcCompat="@drawable/checkbox_custom"
+                        />
+
+                    <CheckBox
+                        android:id="@+id/departureTime23Lin"
+                        android:layout_width="0dp"
+                        android:layout_weight="1.02"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:text="18:00 TO 23:59"
+                        android:paddingLeft="@dimen/small_margin"
+                        app:srcCompat="@drawable/checkbox_custom"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="BOARDING POINT"
+                android:padding="@dimen/small_margin"
+                android:visibility="gone"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/boardingPointLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/boardingPointLin"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:layout_height="wrap_content"
+                    android:text="Select all"
+                    android:paddingLeft="@dimen/small_margin"
+                    app:srcCompat="@drawable/checkbox_custom"
+                    />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DROPPING POINT"
+                android:padding="@dimen/small_margin"
+                android:visibility="gone"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/DroppingLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="gone"
+                android:orientation="vertical">
+                <CheckBox
+                    android:id="@+id/DroppingLin"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    android:layout_height="wrap_content"
+                    android:text="Select all"
+                    android:paddingLeft="@dimen/small_margin"
+                    app:srcCompat="@drawable/checkbox_custom"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/applyTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Apply"
+        android:gravity="center"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/color_white"
+        android:padding="@dimen/small_margin"
+        android:layout_alignParentBottom="true"
+        android:background="@color/orange_color"/>
+
+</RelativeLayout>
+
+
+
+

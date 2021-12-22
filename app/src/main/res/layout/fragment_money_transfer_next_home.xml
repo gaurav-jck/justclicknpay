@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/sender_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/app_blue_color"
+            android:paddingLeft="@dimen/medium_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:text="Sender"
+            android:textSize="@dimen/money_transfer_button_text_size"
+            android:textColor="@color/color_white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@drawable/money_reciever_border_round_corner"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/sender_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/form_padding"
+                    android:text="Sender Name"
+                    android:textColor="@color/dark_blue_color"
+                    android:textSize="@dimen/form_text_size" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_blue_color"/>
+
+                <TextView
+                    android:id="@+id/senderNameTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:padding="@dimen/form_padding"
+                    android:textSize="@dimen/form_text_size"
+                    android:textColor="@color/app_blue_color"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_blue_color"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/mobile_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Mobile Number"
+                    android:padding="@dimen/form_padding"
+                    android:textSize="@dimen/form_text_size"
+                    android:textColor="@color/dark_blue_color"/>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/dark_blue_color"/>
+
+                <TextView
+                    android:id="@+id/senderMobileTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text=""
+                    android:padding="@dimen/form_padding"
+                    android:textSize="@dimen/form_text_size"
+                    android:textColor="@color/app_blue_color"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_blue_color"/>
+
+            <LinearLayout
+                android:id="@+id/linSenderMoreDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/pin_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/form_padding"
+                        android:text="Pincode"
+                        android:textColor="@color/dark_blue_color"
+                        android:textSize="@dimen/form_text_size" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/pinCodeTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dark_blue_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/city_name_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/form_padding"
+                        android:text="City Name"
+                        android:textColor="@color/dark_blue_color"
+                        android:textSize="@dimen/form_text_size" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/cityNameTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dark_blue_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/state_name_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="State Name"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/dark_blue_color"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/stateNameTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text=""
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dark_blue_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/month_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Month Limit"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/dark_blue_color"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/monthLimitTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="25000"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dark_blue_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/beneficiary_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Beneficiary Limit At Time"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/dark_blue_color"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/beneficiaryLimitTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="5"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/dark_blue_color"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/kyc_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="KYC Status"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/dark_blue_color"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color"/>
+
+                    <TextView
+                        android:id="@+id/KYCStatusTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Active"
+                        android:padding="@dimen/form_padding"
+                        android:textSize="@dimen/form_text_size"
+                        android:textColor="@color/app_blue_color"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:padding="1dp"
+            android:layout_marginRight="@dimen/small_margin"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/showHideTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show Details"
+                android:textSize="@dimen/form_text_size"
+                android:textColor="@color/app_blue_color"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_small_margin">
+
+            <TextView
+                android:id="@+id/remittance_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/app_blue_color"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingRight="@dimen/small_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:textSize="@dimen/money_transfer_button_text_size"
+                android:text="Remittance"
+                android:textColor="@color/color_white" />
+
+            <TextView
+                android:id="@+id/benVerifyTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/medium_margin"
+                android:drawableRight="@drawable/check_box_checked"
+                android:layout_alignParentRight="true"
+                android:drawablePadding="@dimen/small_margin"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:textColor="@color/color_white"
+                android:text="OTP Verified"/>
+
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/very_small_margin"
+            card_view:cardBackgroundColor="@color/cardMobileBackground"
+            card_view:cardCornerRadius="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:layout_marginRight="@dimen/very_small_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    >
+
+                    <TextView
+                        android:id="@+id/registeredBeneficiaryTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/small_margin"
+                        android:paddingTop="@dimen/small_margin"
+                        android:text="Registered Benificiary"
+                        android:textSize="@dimen/money_transfer_button_text_size"
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:id="@+id/newBeneficiaryTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/small_margin"
+                        android:paddingTop="@dimen/small_margin"
+                        android:text="New Benificiary"
+                        android:textSize="@dimen/money_transfer_button_text_size"
+                        android:textColor="@color/dark_blue_color" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/registeredBenfListRel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <TextView
+                        android:id="@+id/beneficiary_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/small_margin"
+                        android:text="Beneficiary"
+                        android:textSize="@dimen/money_transfer_button_text_size"
+                        android:textColor="@color/color_white" />
+
+                    <RelativeLayout
+                        android:id="@+id/rel_beneficiary_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/money_reciever_border_round_corner"
+                        android:layout_toRightOf="@+id/beneficiary_label"
+                        android:layout_toLeftOf="@+id/deleteBenImg"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/beneficiarySpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/margin_30dp"
+                            android:background="@color/transparent"
+                            android:text="1"
+                            android:textColor="@color/color_white" />
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center"
+                            android:background="@drawable/blue_round_button_background"
+                            android:padding="@dimen/small_margin"
+                            android:src="@drawable/dropdown"
+                            android:textColor="@color/color_white" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/deleteBenImg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/blue_round_button_background"
+                        android:padding="@dimen/small_margin"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/delete"
+                        android:textColor="@color/color_white" />
+
+                </RelativeLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+
+                    <EditText
+                        android:id="@+id/NameAsPerBankEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name As Per Bank"
+                        android:text=""
+                        android:digits="@string/personName_editText_digits"
+                        android:inputType="text"
+                        android:singleLine="true"
+
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:maxLength="49"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/beneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+
+                    <EditText
+                        android:id="@+id/beneficiaryNameEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Beneficiary name"
+                        android:text=""
+                        android:digits="@string/personName_editText_digits"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:maxLength="49"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/account"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <EditText
+                        android:id="@+id/accountEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Account no"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/bankNameInput"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <EditText
+                        android:id="@+id/bankNameEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Bank Name"
+                        android:text=""
+                        android:digits="@string/personName_editText_digits"
+                        android:maxLength="49"
+                        android:singleLine="true"
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/bank_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_weight="6"
+                    android:textColor="@color/login_text_color" />
+
+                <View
+                    android:id="@+id/bankView"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@color/color_black" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirmAccount"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <EditText
+                        android:id="@+id/confirmAccountEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Confirm account no"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ifsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <EditText
+                        android:id="@+id/IFSCCodeEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="IFSC code"
+                        android:maxLength="11"
+                        android:digits="@string/alphaNumeric_editText_digits"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin">
+                    <TextView
+                        android:id="@+id/searchIFSCTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:padding="@dimen/small_margin"
+                        android:text="Search IFSC Code"
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:id="@+id/verifyAccountTv"
+                        android:layout_gravity="right"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:padding="@dimen/small_margin"
+                        android:text="@string/rbl_ben_non_verify_text"
+                        android:textColor="@color/color_white" />
+                </LinearLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+
+                    <EditText
+                        android:id="@+id/beneficiaryNumberEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Beneficiary Mobile"
+                        android:text=""
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:maxLength="10"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Spinner
+                    android:id="@+id/relation_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_weight="6"
+                    android:textColor="@color/login_text_color" />
+
+                <View
+                    android:id="@+id/relationView"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.2dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:background="@color/color_black" />
+
+                <LinearLayout
+                    android:id="@+id/transactionLin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginTop="@dimen/large_margin"
+                        android:text="Transaction Type"
+                        android:textColor="@color/dark_blue_color"
+                        android:textSize="@dimen/simple_content_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginTop="@dimen/very_small_margin"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/transactionTypeIMPSTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/blue_rect_button_background"
+                            android:paddingBottom="@dimen/medium_margin"
+                            android:paddingLeft="@dimen/very_large_margin"
+                            android:paddingRight="@dimen/very_large_margin"
+                            android:paddingTop="@dimen/medium_margin"
+                            android:text=" IMPS "
+                            android:textSize="@dimen/money_transfer_button_text_size"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/transactionTypeNEFTTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/money_receiver_border_rect_corner"
+                            android:paddingBottom="@dimen/medium_margin"
+                            android:paddingLeft="@dimen/very_large_margin"
+                            android:paddingRight="@dimen/very_large_margin"
+                            android:paddingTop="@dimen/medium_margin"
+                            android:text=" NEFT "
+                            android:textSize="@dimen/money_transfer_button_text_size"
+                            android:textColor="@color/dark_blue_color" />
+
+                    </LinearLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/amount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginTop="@dimen/medium_margin">
+
+                        <EditText
+                            android:id="@+id/transferAmountEdt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Amount ( Min 100 )"
+                            android:text=""
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:textSize="@dimen/money_transfer_input_text_size"
+                            android:maxLength="10"
+                            android:textColor="@color/app_blue_color" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/calculateCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:background="@drawable/blue_round_button_background"
+                        android:padding="@dimen/medium_margin"
+                        android:visibility="gone"
+                        android:text="Calculate Charges"
+                        android:textColor="@color/color_white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginTop="@dimen/large_margin"
+                            android:text="Total debit amount "
+                            android:textSize="@dimen/small_text_size"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginTop="@dimen/large_margin"
+                            android:text="0"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/small_margin"
+                        >
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:layout_weight="2"
+                            android:text="Cash contribution "
+                            android:textSize="@dimen/small_text_size"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:text="0" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/small_margin"
+                        >
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:text="Customer collection amount "
+                            android:textSize="@dimen/small_text_size"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                            android:text="0" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/remarkEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Remark"
+                        android:digits="@string/remarks_editText_digits"
+                        android:inputType="text"
+                        android:maxLines="2"
+                        android:singleLine="true"
+                        android:text=""
+                        android:maxLength="50"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/payNowTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@drawable/blue_round_button_background"
+                    android:padding="@dimen/medium_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="PAY NOW"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:visibility="visible"
+                    android:textColor="@color/color_white" />
+
+                <TextView
+                    android:id="@+id/registerNewBeneficiaryTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@drawable/blue_round_button_background"
+                    android:padding="@dimen/medium_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="Register Beneficiary"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:visibility="gone"
+                    android:textColor="@color/color_white" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

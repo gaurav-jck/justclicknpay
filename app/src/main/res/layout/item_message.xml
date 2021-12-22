@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:Id="@+Id/messengerImageView"-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="36dp"-->
+            <!--android:src="@drawable/ic_account_circle_black_36dp"/>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:background="@drawable/receive_left_back"
+                android:id="@+id/messageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="0"
+                android:text=""
+                android:textColor="@color/color_white"
+                android:padding="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+            <!--<ImageView-->
+                <!--android:Id="@+Id/messageImageView"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:adjustViewBounds="true"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:scaleType="fitCenter"/>-->
+
+            <!--<TextView-->
+                <!--android:Id="@+Id/messengerTextView"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="0"-->
+                <!--android:textAppearance="?android:attr/textAppearanceSmall"/>-->
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="jctPayment.Activities.Receipt_Activity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_barr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="Note: Pls do not pay any charges/fee"
+        android:textColor="#fff"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_barr"
+        android:layout_marginBottom="40dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/app_logo"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/color_grey_receipt" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:src="@drawable/yesbanklogo"
+                    android:layout_margin="5dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey_receipt" />
+
+            <TextView
+                android:id="@+id/tv_type"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Customer Copy - AEPS"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_grey_receipt" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="Date &amp; Time:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="Terminal ID:"
+                        android:textColor="@color/white"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_terminal"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:padding="10dp"/>
+                </TableRow>
+
+                <TableRow android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Agent ID:"
+                        android:textColor="@color/color_black" />
+
+                    <TextView
+                        android:id="@+id/tv_agent_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Test"
+                        android:textColor="@color/color_black" />
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="BC Name:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text=""
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="BC Location:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:text="Delhi"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Aadhar No:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_aadhar"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/white" />
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="RRN:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_rrn"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="STAN:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_stan"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/white" />
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="mATM Req ID:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:text="1234"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="UIDAI Auth Code:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_uidai"
+                        android:layout_height="60dp"
+                        android:padding="10dp"
+                        android:textColor="@color/white" />
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="Txn Status:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_txn_status"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Txn Amt:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_txn_amount"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/white" />
+                </TableRow>
+                <TableRow
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="A/c bal:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ac_balance"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+                </TableRow>
+                <TableRow android:background="@color/color_grey_receipt">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Response Code:"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tv_resp_code"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:textColor="@color/white" />
+                </TableRow>
+                <TableRow
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_white">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:text="Response Message:"
+                        android:textColor="@color/color_black"
+                        android:padding="10dp"/>
+
+                    <TextView
+                        android:id="@+id/tv_resp_message"
+                        android:layout_height="90dp"
+                        android:textColor="@color/color_black"
+                        android:minLines="2"
+                        android:padding="10dp"/>
+                </TableRow>
+            </TableLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

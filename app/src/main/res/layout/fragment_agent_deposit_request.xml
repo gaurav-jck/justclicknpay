@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_margin_2dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/medium_margin"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/agency_name_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:textSize="@dimen/title_text_size"
+                    android:textColor="@color/dark_blue_color"
+                    android:text="(just click demo)"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <Spinner
+                        android:id="@+id/spinner_submit_type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"></Spinner>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:background="@color/color_light_black"/>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+                    <EditText
+                        android:id="@+id/amount_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/app_blue_color"
+                        android:layout_marginTop="@dimen/very_small_margin"
+                        android:hint="Amount"
+                        android:text=""
+                        android:inputType="numberDecimal"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:textColorHint="@color/login_hint_color_new"
+                        android:textSize="@dimen/simple_content_text_size"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/date_lin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@color/transparent"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    >
+                    <TextView
+                        android:id="@+id/address_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:textColor="@color/app_blue_color"
+                        android:text=""
+                        android:layout_margin="@dimen/margin_5dp"
+                        android:textSize="@dimen/simple_content_text_size"
+                        android:hint="Date"
+                        android:layout_centerVertical="true"
+                        android:textColorHint="@color/login_hint_color_new"
+                        />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_5dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/calendar_icon_small" />
+
+
+                </RelativeLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:background="@color/app_blue_color"/>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+                    <EditText
+                        android:id="@+id/mobile_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mobile number"
+                        android:singleLine="true"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/login_hint_color_new"
+                        android:textSize="@dimen/simple_content_text_size"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+                    <Spinner
+                        android:id="@+id/spinner_bank_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        >
+                    </Spinner>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:background="@color/color_light_black"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin">
+                    <EditText
+                        android:id="@+id/receipt_no_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLength="24"
+                        android:digits="1234567890qwertyuioplkjhgfdsazxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM"
+                        android:layout_marginTop="@dimen/medium_margin"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/login_hint_color_new"
+                        android:hint="Receipt No."
+                        android:textSize="@dimen/simple_content_text_size"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/chooseFileLin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@drawable/registration_edittext_back"
+                    >
+
+                    <TextView
+                        android:id="@+id/panCardCopy"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="right"
+                        android:padding="@dimen/medium_margin"
+                        android:hint="Choose file"
+                        />
+
+                    <ImageView
+                        android:id="@+id/imageFile"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:src="@drawable/choose_file"/>
+
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+                    <EditText
+                        android:id="@+id/remark_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:maxLength="150"
+                        android:digits="@string/remarks_editText_digits"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/login_hint_color_new"
+                        android:hint="@string/remark"
+                        android:textSize="@dimen/simple_content_text_size"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/view_agent_name_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/very_small_margin">
+                    <EditText
+                        android:id="@+id/agent_name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Agent Name"
+                        android:text=""
+                        android:singleLine="true"
+                        android:visibility="visible"
+                        android:digits="@string/commonAllInputs_editText_digits"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/login_hint_color_new"
+                        android:textSize="@dimen/simple_content_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/bt_submit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:background="@drawable/blue_round_button_background"
+                    android:text="@string/submit"
+                    android:textColor="@color/color_white"
+                    android:textSize="@dimen/title_text_size" />
+
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

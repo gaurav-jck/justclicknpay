@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<RelativeLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/selectRoomTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select Room Type"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="@dimen/small_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:textColor="@color/dark_blue_color"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/roomRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bookHotelTv"
+        android:layout_below="@+id/selectRoomTv"
+        android:layout_marginTop="@dimen/small_margin">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/bookHotelTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Book Hotel"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textSize="@dimen/title_text_size"
+        android:padding="@dimen/small_margin"
+        android:background="@drawable/blue_round_button_background"
+        android:textColor="@color/color_white"
+        android:layout_alignParentBottom="true"
+        android:textStyle="bold"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,308 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.rblDmt.MoneyTransferRemittanceFragment"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/small_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        android:text="Remittance"
+        android:textColor="@color/color_white" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/very_small_margin"
+        card_view:cardBackgroundColor="@color/cardMobileBackground"
+        card_view:cardCornerRadius="4dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/very_small_margin"
+                android:layout_marginRight="@dimen/very_small_margin"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    >
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/small_margin"
+                        android:paddingTop="@dimen/small_margin"
+                        android:text="Registered Benificiary"
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:gravity="center"
+                        android:paddingBottom="@dimen/small_margin"
+                        android:paddingTop="@dimen/small_margin"
+                        android:text="New Benificiary"
+                        android:textColor="@color/dark_blue_color" />
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <TextView
+                        android:id="@+id/beneficiary_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:layout_centerVertical="true"
+                        android:padding="@dimen/small_margin"
+                        android:text="Beneficiary"
+                        android:textColor="@color/color_white" />
+
+                    <RelativeLayout
+                        android:id="@+id/rel_beneficiary_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/small_margin"
+                        android:layout_marginRight="@dimen/small_margin"
+                        android:background="@drawable/money_reciever_border_round_corner"
+                        android:layout_toRightOf="@+id/beneficiary_label"
+                        android:layout_toLeftOf="@+id/deleteBenImg"
+                        android:orientation="vertical">
+
+                        <Spinner
+                            android:id="@+id/beneficiarySpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/margin_30dp"
+                            android:background="@color/transparent"
+                            android:text="1"
+                            android:textColor="@color/color_white" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_gravity="center"
+                            android:background="@drawable/blue_round_button_background"
+                            android:padding="@dimen/small_margin"
+                            android:src="@drawable/dropdown"
+                            android:textColor="@color/color_white" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:id="@+id/deleteBenImg"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center"
+                        android:background="@drawable/blue_round_button_background"
+                        android:padding="@dimen/small_margin"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/delete"
+                        android:textColor="@color/color_white" />
+
+                </RelativeLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/account"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <EditText
+                        android:id="@+id/account_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Account no"
+                        android:text=""
+                        android:singleLine="true"
+                        android:maxLength="20"
+                        android:inputType="number"
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/beneficiary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/beneficiary_edt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Beneficiary name"
+                        android:digits="@string/personName_editText_digits"
+                        android:singleLine="true"
+                        android:maxLength="49"
+                        android:text=""
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ifsc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/ifsc_code_edt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="IFSC code"
+                        android:singleLine="true"
+                        android:maxLength="11"
+                        android:text=""
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:text="Transaction Type"
+                    android:textColor="@color/dark_blue_color"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/blue_rect_button_background"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/very_large_margin"
+                        android:paddingRight="@dimen/very_large_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:text=" IMPS "
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/money_receiver_border_rect_corner"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:paddingLeft="@dimen/very_large_margin"
+                        android:paddingRight="@dimen/very_large_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:text=" NEFT "
+                        android:textColor="@color/dark_blue_color" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <EditText
+                        android:id="@+id/transfer_amount_edt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Amount ( Min 100 )"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:inputType="numberDecimal"
+                        android:text=""
+                        android:textSize="@dimen/money_transfer_input_text_size"
+                        android:textColor="@color/app_blue_color" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:background="@drawable/blue_round_button_background"
+                    android:padding="@dimen/medium_margin"
+                    android:text="Calculate Charges"
+                    android:textColor="@color/color_white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/large_margin"
+                    android:text="Total amount :   0" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/remark_edt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Remark"
+                        android:text=""
+                        android:digits="@string/remarks_editText_digits"
+                        android:maxLength="50"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

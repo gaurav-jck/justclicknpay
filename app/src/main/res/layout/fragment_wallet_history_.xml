@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:id="@+id/rl"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="10dp"
+tools:context=".jctPayment.Activities.ViewAllTransaction"
+android:background="#498a48"
+    >
+<TextView
+    android:id="@+id/tv_message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#d8ecd8"
+    android:layout_marginBottom="15dp"
+    android:padding="10dp"
+    />
+<GridView
+    android:id="@+id/grid_whistory"
+    android:layout_width="650dp"
+    android:layout_height="wrap_content"
+    android:padding="2dp"
+    android:numColumns="3"
+    android:background="#63b162"
+    android:verticalSpacing="2dp"
+    android:horizontalSpacing="2dp"
+    android:stretchMode="columnWidth"
+    android:gravity="left"
+    android:layout_below="@id/tv_message"
+    >
+</GridView>
+
+
+
+</RelativeLayout>

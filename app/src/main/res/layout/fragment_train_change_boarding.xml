@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"
+            app:srcCompat="@drawable/arrow_left_back"
+            />
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:padding="@dimen/medium_margin"
+            android:text="Change Boarding Station"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"
+        app:cardBackgroundColor="@color/cardBackground"
+        app:cardCornerRadius="@dimen/small_margin">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/medium_margin">
+
+            <TextView
+                android:id="@+id/pnrTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="PNR"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/app_blue_color"
+                />
+
+            <TextView
+                android:id="@+id/trainNameTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:text="Golden temple mail"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintTop_toBottomOf="@+id/pnrTv"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="@dimen/medium_margin"
+                />
+
+            <TextView
+                android:id="@+id/durationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:padding="@dimen/small_margin"
+                android:text="2 h 30 m"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trainNameTv" />
+
+            <View
+                android:id="@+id/viewLeft"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color_light"
+                app:layout_constraintBottom_toBottomOf="@+id/durationTv"
+                app:layout_constraintRight_toLeftOf="@+id/durationTv"
+                app:layout_constraintTop_toTopOf="@+id/durationTv" />
+
+            <View
+                android:id="@+id/viewRight"
+                android:layout_width="@dimen/size_20dp"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color_light"
+                app:layout_constraintBottom_toBottomOf="@+id/durationTv"
+                app:layout_constraintLeft_toRightOf="@+id/durationTv"
+                app:layout_constraintTop_toTopOf="@+id/durationTv" />
+
+
+            <TextView
+                android:id="@+id/fromStnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:text="20:00"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="@dimen/text_size_14sp"
+                app:layout_constraintRight_toLeftOf="@+id/viewLeft"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/trainNameTv" />
+
+            <TextView
+                android:id="@+id/toStnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22:00"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="@dimen/text_size_14sp"
+                android:gravity="right"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/viewRight"
+                app:layout_constraintTop_toBottomOf="@+id/trainNameTv"
+                android:layout_marginTop="@dimen/medium_margin"
+                />
+
+            <TextView
+                android:id="@+id/boardingStn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Boarding point - Delhi(DLI)"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="@dimen/text_size_13sp"
+                android:gravity="right"
+                app:layout_constraintTop_toBottomOf="@+id/toStnTv"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Passenger PNR Status Details"
+        android:textColor="@color/text_dark_gray"
+        android:textSize="@dimen/text_size_14sp"
+        android:paddingTop="@dimen/margin_2dp"
+        android:paddingBottom="@dimen/margin_2dp"
+        android:paddingLeft="@dimen/small_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_color_very_light"
+        android:layout_marginTop="@dimen/small_margin" >
+        <include layout="@layout/train_passanger_status"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/passengerContainerLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/small_margin"/>
+
+</LinearLayout>

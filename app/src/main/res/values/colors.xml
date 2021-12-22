@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/app_green_color</color>
+    <color name="colorPrimaryDark">#59810A</color>
+    <color name="colorAccent">#285AB4</color>
+    <color name="dark_blue_color">@color/app_blue_color</color>
+    <color name="app_blue_color">#09528f</color>
+    <color name="app_blue_color_light">#2ba9ca</color>
+    <color name="app_red_color">@color/orange_color</color>
+    <color name="app_new_red_color">#D16411</color>
+    <color name="app_red_color_light">@color/orange_color</color>
+    <color name="orange_color">#ea7419</color>
+    <color name="app_green_color">#78AD17</color>
+
+
+    <color name="app_icon_color">@color/orange_color</color>
+    <color name="app_icon_color2">@color/app_blue_color_light</color>
+    <color name="app_icon_color_black">@color/black_text_color</color>
+    <color name="app_icon_inner_background_color">#ccffffff</color>
+    <color name="app_icon_inner_background_color_light">#ddffffff</color>
+    <color name="app_icon_background_color">#ffffff</color>
+
+    <!--no color change in white label-->
+    <color name="first_row_color">#39ae85</color>
+    <color name="second_row_color">#71c3ca</color>
+    <color name="third_row_color">#7199ca</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_white_light">#64FFFFFF</color>
+    <color name="color_white_light2">#ddeeeeee</color>
+    <color name="main_menu_background">#64eeeeee</color>
+    <color name="main_text_color">#444444</color>
+    <color name="colorComplete">#48b14c</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <!--Home Screen colors-->
+    <!--Not used yet-->
+    <color name="flight_color_background">#517e1f</color>
+    <color name="startColor">#075ba1</color>
+    <color name="centerColor">#cc075ba1</color>
+    <color name="endColor">#119bc9</color>
+    <color name="buttonStartColor">#0f93cd</color>
+    <color name="buttonCenterColor">#1082c2</color>
+    <color name="buttonEndColor">#075ba1</color>
+    <color name="tabBackgroundColor">#e7e7e7</color>
+
+    <!--Login colors-->
+    <color name="login_cardview_background">#ddFFFFFF</color>
+    <color name="login_text_color">#2c67b5</color>
+    <color name="login_hint_color">#88FFFFFF</color>
+    <color name="login_hint_color_new">#aa2c67b5</color>
+    <color name="login_background_image_color">#bb000000</color>
+    <color name="transparent">#00ffffff</color>
+
+    <!--Login colors-->
+    <color name="registration_text_color">#2c67b5</color>
+    <color name="signUpSalutationColor">#119bc9</color>
+
+    <!--Mobile Fragment-->
+    <color name="mobile_cardview_background">#90000000</color>
+    <color name="mobile_background_image_color">#aa000000</color>
+    <color name="edittext_light_background_color">#20000000</color>
+
+    <color name="edittext_background_color">#77000000</color>
+    <color name="registration_hint_color">#902c67b5</color>
+    <color name="splash_white_light">#bbFFFFFF</color>
+    <color name="color_black">#000000</color>
+    <color name="bg_color">#e3ebee</color>
+    <color name="color_light_black">#888888</color>
+    <color name="color_light_black2">#555555</color>
+    <color name="color_white_hint">#88dddddd</color>
+    <color name="color_black_hint">#222222</color>
+
+    <color name="cardBackground">#eeFFFFFF</color>
+    <color name="cardMobileBackground">#bbFFFFFF</color>
+    <color name="filterBackground">#152c67b5</color>
+    <color name="filterBackgroundLight">#102c67b5</color>
+    <color name="drawerBackground">#902c67b5</color>
+    <color name="listItemBackground">#FFFFFF</color>
+    <color name="listItemLightBlack">#bb000000</color>
+    <color name="darkBlueColor">#093978</color>
+    <color name="lightBlueColor">#902c67b5</color>
+    <color name="listItemTextColorBlue">@color/app_blue_color</color>
+    <color name="listItemDateColorLight">#90000000</color>
+    <color name="listItemAmountColor">#ddD40A0A</color>
+
+    <!--Rbl colors-->
+    <color name="printDialogLableColor">#aa000000</color>
+    <color name="transactionListLabelColor">@color/app_blue_color</color>
+
+    <!--date filter colors-->
+    <color name="black_background_date">#cc000000</color>
+
+    <!--Air colors-->
+    <color name="flightSearchHintColor">#60000000</color>
+    <color name="flightSearchCityColor">#dd333333</color>
+    <color name="flightSearchDateColor">#696868</color>
+    <color name="flightSearchCityTitleColor">#285AB4</color>
+    <color name="flightSearchMenColor">@color/app_blue_color</color>
+    <color name="flightSearchDateBackground">#aae6e6e6</color>
+    <color name="flightSearchSelectColor">@color/app_blue_color</color>
+    <color name="flightSearchDeSelectColor">@color/app_blue_color_light</color>
+    <color name="passengerBackColor">#00dddddd</color>
+    <color name="flightBlackColor">#dd333333</color>
+    <color name="flightDarkBlackColor">#dd000000</color>
+    <color name="flightListMainColor">#99bbd7ed</color>
+    <color name="flightListSubMainColor">#F4FAFF</color>
+    <color name="flightListSubMainColor1">#F1F6FF</color>
+    <color name="cloud_background">#902c67b5</color>
+    <color name="flightListMoreInfoColor">#99bbd7ed</color>
+    <color name="flightRefundableColor">#009300</color>
+    <color name="black_text_color">#404040</color>
+    <color name="gray_color">#abadae</color>
+    <color name="textBlackColorFlight">#424242</color>
+    <color name="grayLightColorFlight">#99dadcdc</color>
+    <color name="grayColorFlight">#abadae</color>
+    <color name="grayViewColorFlight">#bdbcc4</color>
+    <color name="tabTextColor">#97969b</color>
+    <color name="grayTextColorFlight">#404040</color>
+    <color name="grayTextLightColorFlight">#777777</color>
+    <color name="rechargeSuccessGrayTextColor">#888888</color>
+    <color name="grayTextHintColorFlight">#bdbcc4</color>
+    <color name="darkGrayColorFlight">#9d9ca1</color>
+    <color name="domesticRoundItemClickColor">#dde7eded</color>
+    <color name="sortingBackgroundColorFlight">#e7eded</color>
+    <color name="travelerSkyBlueColorFlight">#e5f8ff</color>
+    <color name="travelerLightBlueColorFlight">#119bc9</color>
+    <color name="topTitleLineViewColor">#9d9ca1</color>
+    <color name="traveller_gray_color">#99dadcdc</color>
+    <color name="traveller_gray_light_color">#88f4f4f4</color>
+    <color name="gray_color_very_light">#f4f4f4</color>
+    <color name="detailColor">#fd4754</color>
+    <color name="black_transparent">#99050505</color>
+    <color name="hotelLightBlackTextColor">#777777</color>
+    <color name="loginTextColor">#404040</color>
+    <color name="gray_color_light">#dadcdc</color>
+
+    <!--hotels colors-->
+    <color name="star_rating_color">#f5f500</color>
+    <color name="hotelBackgroundColor">#e0ebfd</color>
+    <color name="hotelBackgroundTitleColor">#99bbd7ed</color>
+    <color name="hotelTitleColor">#ebf2ff</color>
+    <color name="gray_color_hotel_review">#99dadcdc</color>
+
+    <!--calendar-->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#222222</color>
+    <color name="day_disabled_background_color">#F1F5F8</color>
+    <color name="day_disabled_text_color">#DEDEDE</color>
+    <color name="selected_day_background">#03A7E9</color>
+    <color name="current_day_of_month">#03A7E9</color>
+    <!--Other general colors-->
+    <color name="red">#f00</color>
+    <color name="blue">#009de0</color>
+    <color name="off_white">#f1f5f7</color>
+    <color name="blue_selector">#00aeea</color>
+    <color name="red_negative_progress">#ff3333</color>
+
+    <color name="color_grey">#2a2d30</color>
+    <color name="color_grey_receipt">#882a2d30</color>
+
+    <color name="background">#E0E0E0</color>
+    <color name="grey">#757575</color>
+    <color name="green">#04730e</color>
+
+
+    <!--JCT Payment-->
+
+    <color name="colorText">@color/black_text_color</color>
+    <color name="colorHint">#777777</color>
+
+    <color name="colorAEPSDashboardBlue">#88EAF1FD</color>
+
+    <color name="text_dark_gray">#262626</color>
+    <color name="text_light_gray">#9f9f9f</color>
+    <color name="text_inr">#666666</color>
+</resources>
+
+<!--<color name="colorPrimary">@color/app_blue_color_light</color>-->
+    <!--<color name="colorPrimaryDark">@color/app_blue_color</color>-->
+    <!--<color name="colorAccent">@color/app_blue_color</color>-->
+    <!--<color name="dark_blue_color">@color/app_blue_color</color>-->
+    <!--<color name="app_blue_color">#09528f</color>-->
+    <!--<color name="app_blue_color_light">#1B60A5</color>-->
+    <!--<color name="light_blue_color">#2ba9ca</color>-->
+    <!--<color name="orange_color">#ea7419</color>-->
+    <!--<color name="orange_color_old">#f0881f</color>-->
+    <!--<color name="app_green_color">#80b61d</color>-->
+    <!--<color name="colorWhite">#FFFFFF</color>-->

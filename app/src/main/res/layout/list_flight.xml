@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_main"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:id="@+id/passengerMainLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/very_small_margin"
+        android:paddingRight="@dimen/very_small_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_ficon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitXY"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            >
+
+            <TextView
+                android:id="@+id/tv_airline_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flight name"
+                android:textSize="@dimen/text_size_14sp"
+                android:visibility="gone"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_fCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="code"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/small_margin"
+                android:singleLine="true"
+                android:textSize="@dimen/small_text_size"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_arr_dep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00-00"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_gravity="center"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_cabin_class"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Economy"
+                android:textSize="@dimen/text_size_13sp"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Non Stop"
+                android:textSize="@dimen/small_text_size"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_fare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="fare"
+                android:textStyle="bold"
+                android:layout_gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/app_blue_color"/>
+            <TextView
+                android:id="@+id/refundTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Refundable"
+                android:layout_gravity="right"
+                android:paddingTop="@dimen/margin_2dp"
+                android:textSize="@dimen/small_text_size11sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_below="@id/passengerMainLin"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/grayViewColorFlight"
+        android:layout_marginTop="15dp"/>
+
+</RelativeLayout>

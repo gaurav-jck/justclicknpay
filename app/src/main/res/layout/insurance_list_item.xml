@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/simple_content_text_size"
+        android:textColor="@color/text_dark_gray"
+        android:text="name"
+        android:gravity="center"
+        android:padding="@dimen/small_margin"
+        />
+
+</LinearLayout>

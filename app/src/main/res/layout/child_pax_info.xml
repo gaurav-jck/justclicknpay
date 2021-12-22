@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@color/flightListMainColor"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_gravity="center_vertical"
+            android:layout_height="match_parent"
+            android:src="@drawable/child"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/list_view_name_field_text_size"
+            android:textColor="@color/color_black"
+            android:text="1 CHILD"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:src="@drawable/down_arrow"
+            android:rotation="180"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        >
+        <Spinner
+            android:id="@+id/childSalutation_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:textColor="@color/login_text_color"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:layout_alignBottom="@+id/first_name_input1"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/first_name_input1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/childSalutation_spinner"
+            android:layout_weight="6"
+            >
+
+            <EditText
+                android:id="@+id/child_first_name_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/login_text_color"
+                android:hint="@string/user_first_name"
+                android:maxLines="1"
+                android:maxLength="50"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_14sp"
+                android:inputType="textPersonName"
+                android:digits="@string/personName_editText_digits"
+                android:textColorHint="@color/registration_hint_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/last_name_input1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/childSalutation_spinner"
+            android:layout_below="@+id/first_name_input1"
+            android:layout_weight="6"
+            >
+
+            <EditText
+                android:id="@+id/child_last_name_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:textSize="@dimen/text_size_14sp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/login_text_color"
+                android:hint="@string/user_last_name"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:digits="@string/personName_editText_digits"
+                android:textColorHint="@color/registration_hint_color"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/last_name_input1"
+            android:layout_toRightOf="@+id/childSalutation_spinner"
+            android:orientation="horizontal">
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:weightSum="1"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/salutation_spinner"
+                android:layout_below="@+id/first_name_input"
+                android:layout_weight="6"
+                >
+                <EditText
+                    android:id="@+id/child_date_of_birth_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/date_of_birth"
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/childCalender"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:src="@drawable/calendar_icon_small"
+                />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@color/flightListMainColor"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:src="@drawable/more_info"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/list_view_name_field_text_size"
+            android:textColor="@color/color_black"
+            android:text="MORE INFO"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent"
+            android:src="@drawable/down_arrow"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:left="@dimen/very_small_margin"
+        android:orientation="vertical">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            >
+            <EditText
+                android:id="@+id/childFrequentFlyerNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/login_text_color"
+                android:hint="Frequent Flyer No"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_14sp"
+                android:singleLine="true"
+                android:textColorHint="@color/registration_hint_color"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/salutation_spinner"
+            android:layout_below="@+id/first_name_input"
+            >
+            <EditText
+                android:id="@+id/childAirline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/login_text_color"
+                android:hint="Select an airline"
+                android:maxLines="1"
+                android:textSize="@dimen/text_size_14sp"
+                android:singleLine="true"
+                android:textColorHint="@color/registration_hint_color"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/salutation_spinner"
+            android:layout_below="@+id/first_name_input"
+            >
+            <EditText
+                android:id="@+id/childPassportNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/login_text_color"
+                android:hint="Passport Number"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColorHint="@color/registration_hint_color"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="4"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/salutation_spinner"
+                android:layout_below="@+id/first_name_input"
+                >
+                <EditText
+                    android:id="@+id/childPassportExpiryDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    android:hint="Passport Expiry Date"
+                    android:maxLines="1"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/childPassportCalender"
+                android:layout_width="0dp"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:src="@drawable/calendar_icon_small"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

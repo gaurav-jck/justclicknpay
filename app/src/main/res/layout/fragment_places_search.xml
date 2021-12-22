@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/tabBackgroundColor"
+    android:orientation="vertical"
+    android:theme="@style/LoginTheme"
+    android:paddingTop="@dimen/pageTopPadding"
+    tools:context=".Fragment.flights.fragments.PlacesSearch">
+
+    <LinearLayout
+        android:id="@+id/registration_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal">
+
+        <include layout="@layout/back_image_blue"/>
+
+        <TextView
+            android:id="@+id/searchTitleTv"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="SEARCH CITY"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/medium_margin"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/simple_content_text_size"
+            />
+        <ImageView
+            android:id="@+id/cancelImg"
+            android:layout_width="0dp"
+            android:layout_weight="0.1"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/close_icon"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+    <View
+        android:id="@+id/viewHotel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/size_1dp"
+        android:layout_below="@+id/registration_title_tv"
+        android:background="@color/grayTextLightColorFlight"/>
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/medium_margin"
+        android:background="@drawable/solid_round_white_background"
+        android:layout_below="@+id/locationLinear"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/search_icon"/>
+
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="1dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:textColorHint="@color/gray_color"
+            android:background="@color/transparent"
+            android:padding="@dimen/small_margin"
+            android:singleLine="true"
+            android:text=""
+            android:maxLength="150"
+            android:textSize="@dimen/text_size_18sp"
+            android:textColor="@color/black_text_color"/>
+
+        <ImageView
+            android:id="@+id/cross"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            app:srcCompat="@drawable/close_icon"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_place"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/colorWhite">
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>

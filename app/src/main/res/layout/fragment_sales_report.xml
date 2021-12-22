@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_home_screen"
+        android:alpha=".4"/>
+
+
+    <RelativeLayout
+        android:id="@+id/title_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/searchAgent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/color_white"
+        android:visibility="gone">
+    <LinearLayout
+        android:id="@+id/searchAgentLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:visibility="visible"
+        android:background="@color/color_white_hint"
+        >
+
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search_icon"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/small_margin"/>
+
+        <EditText
+            android:id="@+id/agent_search_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/search_hint"
+            android:textColor="@color/app_blue_color"
+            android:layout_gravity="center_vertical"
+            android:background="@android:color/transparent"
+            android:paddingLeft="@dimen/small_margin"
+            android:maxLines="1"
+            android:digits="@string/commonAllInputs_editText_digits"
+            android:singleLine="true"
+            android:text=""
+            android:inputType="text"
+            android:textColorHint="@color/login_hint_color_new"
+            />
+
+    </LinearLayout>
+        </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:background="@color/color_white"
+        android:layout_below="@+id/searchAgent"
+        android:paddingTop="@dimen/very_small_margin"
+        >
+
+        <LinearLayout
+            android:id="@+id/lin_sales_type_Filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <ImageView
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/very_small_margin"
+                android:text="Sales Report Type"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/startDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StartDate"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/small_text_size"
+            android:gravity="center"/>
+
+
+        <LinearLayout
+            android:id="@+id/lin_dateFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:id="@+id/filter_image_rel"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:id="@+id/filter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/very_small_margin"
+                android:text="Date filter"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+    <TextView
+        android:id="@+id/self_deposit2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Self Deposit"
+        android:padding="@dimen/very_small_margin"
+        android:visibility="gone"
+        android:layout_below="@+id/date_lin"
+        android:layout_alignParentRight="true"/>
+
+    <RelativeLayout
+        android:id="@+id/filter_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/date_lin"
+        android:background="@color/edittext_light_background_color"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:id="@+id/self_deposit3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/very_small_margin"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/self_request_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Self Deposit"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filter_image_rel3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/very_small_margin"
+            android:gravity="right">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date Filter"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/filter_icon"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/filter_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/edittext_light_background_color"
+        android:visibility="gone"
+        android:layout_below="@+id/self_deposit2"
+        >
+
+        <RelativeLayout
+            android:id="@+id/filter_image_rel2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_margin"
+            android:visibility="visible"
+            android:layout_alignParentRight="true"
+            >
+            <ImageView
+                android:id="@+id/filter_img"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:padding="@dimen/small_margin"
+                android:layout_centerVertical="true"
+                android:background="@color/edittext_light_background_color"
+                android:src="@drawable/filter_icon"/>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignTop="@+id/filter_image_rel2"
+            android:layout_alignBottom="@+id/filter_image_rel2"
+            android:layout_toLeftOf="@+id/filter_image_rel2"
+            android:layout_margin="@dimen/small_margin"
+            android:visibility="visible"
+            android:background="@color/edittext_light_background_color"
+            >
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/search_icon"
+                android:layout_gravity="center_vertical"
+                android:padding="@dimen/small_margin"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/search"
+                android:textColor="@color/color_white"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:paddingLeft="@dimen/small_margin"
+                android:maxLines="1"
+                android:inputType="text"
+                android:textColorHint="@color/color_white_hint"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/date_lin"/>
+
+    <ListView
+        android:id="@+id/agencyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_below="@+id/searchAgent"
+        android:background="@color/color_white"/>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_home_screen"
+        android:alpha=".4"/>
+
+    <LinearLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingLeft="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/back_arrow"
+            android:layout_gravity="center_vertical"
+            android:padding="@dimen/very_small_margin"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/fromCityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEL"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/color_white"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 DEC 2017"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/small_text_size11sp"
+                android:visibility="gone"
+                android:textColor="@color/color_white"/>
+
+        </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/back_arrow_bus"
+        android:rotation="180"/>
+
+    <TextView
+        android:id="@+id/fromDateTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:layout_marginTop="-5dp"
+        android:textSize="@dimen/small_text_size10sp"
+        android:text="12/22/17"/>
+
+</LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ToCityTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEL"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/color_white"/>
+            <TextView
+                android:id="@+id/toDateTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 DEC 2017"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textSize="@dimen/small_text_size11sp"
+                android:textColor="@color/color_white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lin_dateFilter"
+            android:layout_width="0dp"
+            android:layout_weight="0.4"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+
+            <ImageView
+                android:id="@+id/filter_image_rel"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:visibility="visible"
+                android:src="@drawable/filter_white_icon"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/date_lin"/>
+
+
+</RelativeLayout>
+
+

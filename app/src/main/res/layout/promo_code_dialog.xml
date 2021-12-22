@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:id="@+id/promoLin"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/very_small_margin"
+        android:layout_marginRight="@dimen/very_small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_alignBottom="@+id/viewCircle"
+        app:cardCornerRadius="@dimen/small_margin"
+        app:cardBackgroundColor="@color/transparent"
+        android:layout_centerHorizontal="true"
+        >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/RechargeTheme"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Have a promo code ?"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textColor="@color/grayTextColorFlight"
+                android:textSize="@dimen/text_size_14sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_below="@+id/promoRemoveTv"
+                android:background="@color/grayViewColorFlight"
+                android:layout_marginTop="@dimen/small_margin"/>
+            <RelativeLayout
+                android:id="@+id/promoListSelectionRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:visibility="visible">
+                <TextView
+                    android:id="@+id/promoAppliedNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="JCTPROMO"
+                    android:textColor="@color/app_red_color"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:textSize="@dimen/simple_content_text_size"/>
+                <TextView
+                    android:id="@+id/promoRemoveFromListTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="REMOVE"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/colorWhite"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:background="@drawable/solid_round_red_background"/>
+                <TextView
+                    android:id="@+id/promoAppliedDescriptionTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Congratulation! Promo code has been applied successfully."
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/small_text_size"
+                    android:layout_below="@+id/promoRemoveFromListTv"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_below="@+id/promoAppliedDescriptionTv"
+                    android:background="@color/grayViewColorFlight"
+                    android:layout_marginTop="@dimen/small_margin" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/promoContainerLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin">
+                <!--<include layout="@layout/promo_dialog_item"/>-->
+                <!--<include layout="@layout/promo_dialog_item"/>-->
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/very_small_margin"
+        android:layout_marginRight="@dimen/very_small_margin"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
+        android:layout_alignBottom="@+id/viewCircle"
+        app:cardCornerRadius="@dimen/small_margin"
+        app:cardBackgroundColor="@color/transparent"
+        android:layout_centerHorizontal="true"
+        >
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/popup"
+            android:theme="@style/RechargeTheme"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apply your promo/discount coupon"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textColor="@color/grayTextColorFlight"
+                android:textSize="@dimen/text_size_14sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_below="@+id/promoRemoveTv"
+                android:background="@color/grayViewColorFlight"
+                android:layout_marginTop="@dimen/small_margin"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin">
+                <EditText
+                    android:id="@+id/promoCodeEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:hint="Enter promo/coupon code"
+                    android:textColor="@color/app_red_color"
+                    android:maxWidth="150dp"
+                    android:singleLine="true"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/promoApplyEdtTv"
+                    android:textSize="@dimen/simple_content_text_size"/>
+                <TextView
+                    android:id="@+id/promoApplyEdtTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="APPLY"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:textColor="@color/colorWhite"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:background="@drawable/solid_round_red_background"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/titleLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_margin"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="Filter"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_gravity="center"/>
+        <ImageView
+            android:id="@+id/cancelTv"
+            android:layout_width="wrap_content"
+            android:layout_gravity="right"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/cross_white"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/agentLabelTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="@dimen/small_margin"
+        android:textColor="@color/text_dark_gray"
+        android:text="Agent Id"/>
+
+    <EditText
+        android:id="@+id/agent_search_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_border_white_background"
+        android:hint="Agent Id"
+        android:text=""
+        android:maxLines="2"
+        android:digits="@string/filter_editText_digits"
+        android:layout_margin="@dimen/small_margin"
+        android:padding="@dimen/small_margin"
+        android:textColor="@color/black"/>
+
+    <RelativeLayout
+        android:id="@+id/agent_search_rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="@dimen/small_margin"
+        android:textColor="@color/text_dark_gray"
+        android:text="Txn Id"/>
+
+    <EditText
+        android:id="@+id/txnEdt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_border_white_background"
+        android:hint="Txn Id"
+        android:text=""
+        android:maxLines="1"
+        android:singleLine="true"
+        android:maxLength="25"
+        android:digits="@string/filter_editText_digits"
+        android:layout_margin="@dimen/small_margin"
+        android:padding="@dimen/small_margin"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:padding="@dimen/small_margin"
+        android:textColor="@color/text_dark_gray"
+        android:text="Txn Status"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_margin"
+        android:background="@drawable/blue_border_white_background"
+        >
+
+        <Spinner
+            android:id="@+id/statusSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+        </Spinner>
+    </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/text_dark_gray"
+                android:text="Mobile no"
+                android:visibility="visible"/>
+
+            <EditText
+                android:id="@+id/mobileEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_border_white_background"
+                android:hint="Mobile no"
+                android:text=""
+                android:maxLines="1"
+                android:singleLine="true"
+                android:maxLength="10"
+                android:inputType="number"
+                android:digits="@string/filter_editText_digits"
+                android:layout_margin="@dimen/small_margin"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/black"
+                android:visibility="visible"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:visibility="gone"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/very_small_margin"></View>
+
+    <TextView
+        android:id="@+id/applyTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Apply"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:gravity="center"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/color_white"
+        android:padding="@dimen/small_margin"
+        android:layout_alignParentBottom="true"
+        android:background="@color/orange_color"/>
+    </LinearLayout>
+        <ListView
+            android:id="@+id/list_agent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="gone"
+            />
+    </RelativeLayout>
+</LinearLayout>
