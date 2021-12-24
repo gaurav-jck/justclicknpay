@@ -15,6 +15,7 @@ import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.adapter.TrainBookingListAdapter
 import com.justclick.clicknbook.Fragment.train.model.PnrResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
+import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
@@ -91,45 +92,57 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
     private fun changeBoardingStn(list: TrainBookingListResponseModel.reservationlist) {
         showCustomDialog()
         val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getBoardingStn("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
+        val call = apiService.getBoardingStnForChange("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
                 +list!!.trainNumber+"&Date="+journeyDate(list.departDate)+"&fromStation="+
-                list!!.source+ "&toStation="+list.destination+"&className="+list.journeyClass,
+                getStnCode(list!!.source)+ "&toStation="+getStnCode(list.destination)+"&className="+list.journeyClass,
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
-        call.enqueue(object : Callback<TrainBookFragment.BoardingStnResponse?> {
-            override fun onResponse(call: Call<TrainBookFragment.BoardingStnResponse?>, response: Response<TrainBookFragment.BoardingStnResponse?>) {
+        call.enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 try {
                     hideCustomDialog()
-                    if (response != null && response.body() != null && response.body()!!.boardingStationList!=null) {
-                        if(response.body()!!.boardingStationList!!.size>0){
-                            boardingStnLabelRel.visibility = AdapterView.VISIBLE
+                    if (response != null && response.body() != null ) {
+                        var responseString=response!!.body()!!.string()
+                        responseString=responseString.replace("boardingStationList\":{", "boardingStationList\":[{")
+                        responseString=responseString.replace("},\"mealChoiceenable", "}],\"mealChoiceenable")
+                        val boardingStnResponse = Gson().fromJson(responseString, TrainBookFragment.BoardingStnResponse::class.java)
+                        if(boardingStnResponse.boardingStationList!=null && boardingStnResponse.boardingStationList!!.size>0){
 
-                            var arr: Array<String?> =arrayOfNulls<String>(response.body()!!.boardingStationList!!.size)
-                            for(pos in response.body()!!.boardingStationList!!.indices){
-                                arr[pos]=response.body()!!.boardingStationList!!.get(pos).stnNameCode
+                            var arr: Array<String?> =arrayOfNulls<String>(boardingStnResponse.boardingStationList!!.size)
+                            for(pos in boardingStnResponse.boardingStationList!!.indices){
+                                arr[pos]=boardingStnResponse.boardingStationList!!.get(pos).stnNameCode
                             }
 
-//                            spinnerBoardingStn.adapter=getSpinnerAdapter(arr)
+                            val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
+                            (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
 
                         }
                     } else {
                         hideCustomDialog()
-//                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     hideCustomDialog()
-//                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onFailure(call: Call<TrainBookFragment.BoardingStnResponse?>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 hideCustomDialog()
-//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
     }
 
+    private fun getStnCode(station: String?): String? {
+        return station!!.substring(station.indexOf("(")+1, station.indexOf(")"))
+    }
+
     private fun journeyDate(departDate: String?): String? {
-        return Common.getServerDateFormat().format(SimpleDateFormat("dd-MM-yyyy", Locale.US).parse(departDate))
+        if(departDate!!.contains("/")){
+            return Common.getServerDateFormat().format(SimpleDateFormat("dd/MM/yyyy", Locale.US).parse(departDate))
+        }else{
+            return Common.getServerDateFormat().format(SimpleDateFormat("dd-MM-yyyy", Locale.US).parse(departDate))
+        }
     }
 
     private fun callBookingList() {

@@ -150,41 +150,59 @@
                 app:layout_constraintTop_toBottomOf="@+id/toStnTv"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="@dimen/small_margin"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:lineSpacingExtra="@dimen/small_margin"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Passenger PNR Status Details"
-        android:textColor="@color/text_dark_gray"
-        android:textSize="@dimen/text_size_14sp"
-        android:paddingTop="@dimen/margin_2dp"
-        android:paddingBottom="@dimen/margin_2dp"
-        android:paddingLeft="@dimen/small_margin"
-        android:layout_marginTop="@dimen/very_large_margin"
-        />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/gray_color_very_light"
-        android:layout_marginTop="@dimen/small_margin" >
-        <include layout="@layout/train_passanger_status"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            />
-    </FrameLayout>
-
-
     <LinearLayout
-        android:id="@+id/passengerContainerLin"
+        android:id="@+id/boardingStnLabelRel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_large_margin"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/small_margin"/>
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_color_very_light"
+            android:padding="@dimen/medium_margin"
+            android:text="Select Boarding Station"
+            android:textColor="@color/text_dark_gray"
+            android:textSize="@dimen/simple_content_text_size" />
+
+        <Spinner
+            android:id="@+id/spinnerBoardingStn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@color/gray_color"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/submitTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:gravity="center"
+        android:padding="@dimen/margin_7dp"
+        android:background="@drawable/red_rectangle_button_background"
+        android:backgroundTint="@color/app_blue_color"
+        android:textColor="@color/white"
+        android:textSize="@dimen/simple_content_text_size"
+        android:layout_marginTop="@dimen/margin_30dp"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_marginRight="@dimen/small_margin"/>
 
 </LinearLayout>

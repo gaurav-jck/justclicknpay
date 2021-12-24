@@ -424,6 +424,7 @@
     <string name="travel_insurance">Do you want to take travel insurance?</string>
     <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>
     <string name="travel_insurance_no">No, I don not want travel insurance</string>
+    <string name="change"><u>Change</u></string>
 
     <!--Deposit Report Fragment-->
     <string name="bank_ledger_reference">Bank Ledger Reference</string>

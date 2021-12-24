@@ -48,16 +48,21 @@
             android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_50dp">
+                android:layout_marginTop="@dimen/margin_50dp"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:gravity="center_vertical">
                 <LinearLayout
                     android:id="@+id/searchTrain"
                     android:layout_width="@dimen/size_0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:background="@drawable/edittext_border_hotel">
                     <ImageView
                         android:layout_width="@dimen/margin_50dp"
                         android:layout_height="@dimen/margin_50dp"
@@ -68,19 +73,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Plan Your Journey"
-                        android:gravity="center"
+                        android:gravity="center_horizontal"
                         android:layout_marginTop="@dimen/small_margin"
                         android:textColor="@color/black_text_color"
+                        android:minLines="2"
                         />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/searchPNR"
                     android:layout_width="@dimen/size_0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:background="@drawable/edittext_border_hotel"
+                    android:layout_marginLeft="@dimen/small_margin">
                     <ImageView
                         android:layout_width="@dimen/margin_50dp"
                         android:layout_height="@dimen/margin_50dp"
@@ -91,27 +99,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Search PNR"
-                        android:gravity="center"
+                        android:gravity="center_horizontal"
                         android:layout_marginTop="@dimen/small_margin"
                         android:textColor="@color/black_text_color"
+                        android:minLines="2"
                         />
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="120dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="@dimen/margin_30dp">
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin">
 
                 <LinearLayout
                     android:id="@+id/pnrStatus"
                     android:layout_width="@dimen/size_0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:visibility="visible">
+                    android:visibility="visible"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:background="@drawable/edittext_border_hotel">
                     <ImageView
                         android:layout_width="@dimen/margin_50dp"
                         android:layout_height="@dimen/margin_50dp"
@@ -131,10 +144,12 @@
                 <LinearLayout
                     android:id="@+id/bookingList"
                     android:layout_width="@dimen/size_0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="vertical"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:background="@drawable/edittext_border_hotel">
                     <ImageView
                         android:layout_width="@dimen/margin_50dp"
                         android:layout_height="@dimen/margin_50dp"
@@ -145,9 +160,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Booking List"
-                        android:gravity="center"
+                        android:gravity="center_horizontal"
                         android:layout_marginTop="@dimen/small_margin"
                         android:textColor="@color/black_text_color"
+                        android:minLines="2"
                         />
                 </LinearLayout>
 

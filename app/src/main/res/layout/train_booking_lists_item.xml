@@ -196,7 +196,7 @@
                     android:id="@+id/changeBoarding"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Change"
+                    android:text="@string/change"
                     android:textColor="@color/blue"
                     android:layout_marginLeft="@dimen/medium_margin"
                     android:padding="@dimen/margin_2dp"/>

@@ -392,6 +392,16 @@ public interface ApiInterface {
                                                                @Header("Identifier") String doneCard,
                                                                @Header("LoggedInUserType") String type,
                                                                @Header("Merchant") String merchant, @Header("Mode") String mode);
+    @GET()
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> changeBoardingStn(@Url String url);
+
+    @GET()
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getBoardingStnForChange(@Url String url,
+                                                               @Header("Identifier") String doneCard,
+                                                               @Header("LoggedInUserType") String type,
+                                                               @Header("Merchant") String merchant, @Header("Mode") String mode);
 
     @GET()
     @Headers({"Content-Type: application/json"})
