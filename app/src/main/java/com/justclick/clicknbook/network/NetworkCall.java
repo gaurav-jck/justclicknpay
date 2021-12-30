@@ -1264,7 +1264,6 @@ public class NetworkCall {
         retrofitResponseListener= listener;
         if(isDialog){
             showCustomDialog();}
-        ApiInterface service = APIClient.getClient("https://api.railyatri.in/").create(ApiInterface.class);
         responseBodyCall.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1365,6 +1364,39 @@ public class NetworkCall {
         });
     }
 
+    public void callLicServicePaytm(Object model, String methodName, final Context context,String userData, String token,
+                               boolean isDialog, RetrofitResponseListener listener) {
+        this.context=context;
+        retrofitResponseListener= listener;
+        String json = new Gson().toJson(model);
+        String toString=model.toString(); //className@110010
+        if(isDialog){
+            showCustomDialog();}
+        ApiInterface service = APIClient.getClient(ApiConstants.BASE_URL_PAYTM).create(ApiInterface.class);
+        Call<ResponseBody> call = service.getLicCommonPost(methodName,model,userData,token);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    responseBody=response.body();
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+                }catch (Exception e){
+                    responseBody=null;
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                responseBody=null;
+                retrofitResponseListener.onRetrofitResponse(null,0);
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
     public void callBillPayService(Object model, String methodName, final Context context,String userData, String token,
                                boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
@@ -1412,7 +1444,8 @@ public void callPaytmService(Object model, String methodName, final Context cont
         String toString=model.toString(); //className@110010
         if(isDialog){
             showCustomDialog();}
-        ApiInterface service= APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+//        ApiInterface service= APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+        ApiInterface service= APIClient.getClient(ApiConstants.BASE_URL_PAYTM).create(ApiInterface.class);
 
         Call<ResponseBody> call = service.getPaytmCommonPostNew(methodName,model,userData,"Bearer "+token);
         call.enqueue(new Callback<ResponseBody>() {
@@ -1572,7 +1605,7 @@ public void callPaytmService(Object model, String methodName, final Context cont
         return result.toString();
     }
 
-    public static ApiInterface getApiInterface(){
+    public static ApiInterface getTrainApiInterface(){
         return APIClient.getClientTrain().create(ApiInterface.class);
     }
 

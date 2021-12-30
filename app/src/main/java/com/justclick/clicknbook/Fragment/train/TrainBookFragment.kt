@@ -32,7 +32,6 @@ import com.justclick.clicknbook.Fragment.train.model.*
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.train_passanger_show.*
 import kotlinx.android.synthetic.main.train_passanger_show.view.*
 import okhttp3.ResponseBody
 import java.text.SimpleDateFormat
@@ -543,7 +542,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var userTypr = loginModel!!.Data.UserType
 
         val json = Gson().toJson(trainBookingRequest)
-        NetworkCall().callRailService(NetworkCall.getApiInterface().bookTrain(trainBookingRequest,ApiConstants.PreBook,
+        NetworkCall().callRailService(NetworkCall.getTrainApiInterface().bookTrain(trainBookingRequest,ApiConstants.PreBook,
                 agentCode, userTypr, ApiConstants.MerchantId, "App", token, userData), context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
@@ -740,7 +739,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private fun checkCredential() {
         var agentCode = loginModel!!.Data.DoneCardUser
         var userTypr = loginModel!!.Data.UserType
-        NetworkCall().callRailService(NetworkCall.getApiInterface().getTrainCredentials(ApiConstants.CheckCredential,
+        NetworkCall().callRailService(NetworkCall.getTrainApiInterface().getTrainCredentials(ApiConstants.CheckCredential,
                 agentCode, userTypr, ApiConstants.MerchantId, "App"), context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {

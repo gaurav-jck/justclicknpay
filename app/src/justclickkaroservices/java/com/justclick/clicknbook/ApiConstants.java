@@ -30,6 +30,8 @@ public class ApiConstants
         public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N
         public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
         public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
+        public static final String BASE_URL_PAYTM_UAT="https://Uatremittance.justclicknpay.com/";
+        public static final String BASE_URL_PAYTM=BASE_URL_LIC;
 //    public static final String BASE_URL_AEPS=BASE_URL_JCT_MONEY;   // AEPS URL new
  //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
     public static final String AEPS_EXCEL_DOWNLOAD_URL="https://tinyurl.com/t4qe23w";   // AEPS Excel downloadURL
@@ -194,6 +196,7 @@ public class ApiConstants
     public static final String PreBook="PreBook";
     public static final String Book="Book";
     public static final String GetPnrDetails="GetPnrDetails";
+    public static final String CancelTicket="CancelTicket";
 
 //    Payout
     public static final String ValidateCredential="ValidateCredential";

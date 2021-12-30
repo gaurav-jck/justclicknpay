@@ -11,7 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.utils.MyPreferences
-import com.paysprint.onboardinglib.activities.HostActivity
+//import com.paysprint.onboardinglib.activities.HostActivity
 
 class KycActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -41,8 +41,8 @@ class KycActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
 
         val loginModel = MyPreferences.getLoginData(LoginModel(), applicationContext)
-        val intent = Intent(applicationContext, HostActivity::class.java)
-//        val intent = Intent(applicationContext, KycActivity::class.java)
+//        val intent = Intent(applicationContext, HostActivity::class.java)
+        val intent = Intent(applicationContext, KycActivity::class.java)
         intent.putExtra("pId", partnerId)
         intent.putExtra("pApiKey", partnerKey)
 //        intent.putExtra("mCode",loginModel.Data.DoneCardUser);

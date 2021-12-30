@@ -15,6 +15,7 @@ import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.adapter.TrainBookingListAdapter
 import com.justclick.clicknbook.Fragment.train.model.PnrResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
+import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
@@ -72,6 +73,8 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                 override fun onListFragmentInteraction(item: ArrayList<TrainBookingListResponseModel.reservationlist>?, id: Int, listPosition: Int) {
                     if(id==R.id.changeBoarding){
                         changeBoardingStn(item!!.get(listPosition))
+                    }else if(id==R.id.cancelTicket){
+                        cancelTicket(item!!.get(listPosition))
                     }else{
                         getBookingData(item!!.get(listPosition).reservationID)
                     }
@@ -115,6 +118,46 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                             val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
                             (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
 
+                        }
+                    } else {
+                        hideCustomDialog()
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                    }
+                } catch (e: Exception) {
+                    hideCustomDialog()
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                hideCustomDialog()
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    private fun cancelTicket(list: TrainBookingListResponseModel.reservationlist) {
+        showCustomDialog()
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getCancelTicketDetail(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/GetCancelDetail?TransactionId="
+                +list!!.reservationID,
+                loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
+        call.enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                try {
+                    hideCustomDialog()
+                    if (response != null && response.body() != null ) {
+                        var responseString=response!!.body()!!.string()
+                        val response = Gson().fromJson(responseString, TrainCancelTicketDetailResponse::class.java)
+                        if(response.statusCode.equals("00")){
+                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
+                            val bundle = Bundle()
+                            bundle.putSerializable("cancelResponse", response)
+                            val fragment = TrainCancelDetailsFragment()
+                            fragment.arguments = bundle
+                            (context as NavigationDrawerActivity).replaceFragmentWithBackStack(fragment)
+                        }else{
+                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
                         }
                     } else {
                         hideCustomDialog()

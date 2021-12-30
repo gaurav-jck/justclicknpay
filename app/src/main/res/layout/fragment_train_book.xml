@@ -323,7 +323,8 @@
                     android:textSize="@dimen/text_size_16sp"
                     android:maxLength="@integer/addressMaxLength"
                     android:singleLine="true"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:text=""/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -340,7 +341,8 @@
                     android:maxLength="@integer/pincode_maxLength"
                     android:textColor="@color/black_text_color"
                     android:singleLine="true"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:text=""/>
             </com.google.android.material.textfield.TextInputLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"

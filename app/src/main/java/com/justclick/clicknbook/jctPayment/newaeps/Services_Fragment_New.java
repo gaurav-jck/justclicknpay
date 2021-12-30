@@ -36,6 +36,7 @@ import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 import com.paysprint.onboardinglib.activities.HostActivity;
+//import com.paysprint.onboardinglib.activities.HostActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

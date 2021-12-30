@@ -161,7 +161,7 @@ class TrainBookingConfirmationFragment : Fragment() {
 
     private fun makeBooking() {
         val json = Gson().toJson(trainBookingRequest)
-        NetworkCall().callRailService(NetworkCall.getApiInterface().finalBookTrain(trainBookingRequest, ApiConstants.Book,
+        NetworkCall().callRailService(NetworkCall.getTrainApiInterface().finalBookTrain(trainBookingRequest, ApiConstants.Book,
                 trainBookingRequest!!.agentCode, trainBookingRequest!!.userType, ApiConstants.MerchantId, "App",
                 trainBookingRequest!!.token, trainBookingRequest!!.userDate), context, true
         ) { response: ResponseBody?, responseCode: Int ->

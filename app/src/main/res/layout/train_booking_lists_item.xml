@@ -178,6 +178,7 @@
                 />
 
             <LinearLayout
+                android:id="@+id/boardingLin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/toStnTv"
@@ -200,6 +201,26 @@
                     android:textColor="@color/blue"
                     android:layout_marginLeft="@dimen/medium_margin"
                     android:padding="@dimen/margin_2dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/operationLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/boardingLin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:gravity="right">
+
+                <TextView
+                    android:id="@+id/cancelTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel Ticket"
+                    android:textSize="@dimen/small_text_size"
+                    android:padding="@dimen/small_margin"
+                    android:background="@drawable/edittext_border_hotel"
+                    android:textColor="@color/blue"/>
+
             </LinearLayout>
 
 

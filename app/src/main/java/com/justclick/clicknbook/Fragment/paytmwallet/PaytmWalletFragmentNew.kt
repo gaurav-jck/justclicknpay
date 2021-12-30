@@ -1,5 +1,6 @@
 package com.justclick.clicknbook.Fragment.paytmwallet
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
@@ -87,7 +88,7 @@ class PaytmWalletFragmentNew : Fragment() {
     private fun getCredentials() {
         paytmRequest!!.AgentCode=MyPreferences.getLoginData(LoginModel(),context).Data.DoneCardUser
         showCustomDialog("Getting credentials...")
-        NetworkCall().callLicService(paytmRequest, ApiConstants.GenerateToken, context, "","",false
+        NetworkCall().callLicServicePaytm(paytmRequest, ApiConstants.GenerateToken, context, "","",false
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 responseHandler(response, GenerateToken, paytmRequest!!) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
@@ -104,7 +105,7 @@ class PaytmWalletFragmentNew : Fragment() {
         }else{
             showCustomDialog("Paytm TopUp requested, please wait...")
         }
-        NetworkCall().callPaytmService(paytmRequest, ApiConstants.WalletTransfer, context, userData,token,false
+        NetworkCall().callPaytmService(paytmRequest,/*"WalletBulkTransfer"*/ ApiConstants.WalletTransfer, context, userData,token,false
         ) { response: ResponseBody?, responseCode: Int ->
 
             if (response != null) {
@@ -145,7 +146,9 @@ class PaytmWalletFragmentNew : Fragment() {
             Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
             return false
         }else if(amount.toInt()<100 || amount.toInt()>5000){
+//        }else if(amount.toInt()<1 || amount.toInt()>100000){
             Toast.makeText(context, "Amount should be in between 100 to 5000", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(context, "Amount should be in between 100 to 100000", Toast.LENGTH_SHORT).show()
             return false
         }
         paytmRequest!!.Mobile=mobile
@@ -207,6 +210,7 @@ class PaytmWalletFragmentNew : Fragment() {
                 Toast.makeText(context, "Response",Toast.LENGTH_SHORT).show()
                 val commonResponse = Gson().fromJson(response.string()/*bill*/, PaytmTopUpResponse::class.java)
                 if (commonResponse != null) {
+//                    openResponseDialog("Transaction Response", commonResponse.statusMessage!!, "", "OK", "", "")
                     if (commonResponse.statusCode.equals("00", ignoreCase = true) ||
                             commonResponse.statusCode.equals("01", ignoreCase = true)||
                             commonResponse.statusCode.equals("02", ignoreCase = true)) {
@@ -223,6 +227,26 @@ class PaytmWalletFragmentNew : Fragment() {
         }catch (e: Exception){
 
         }
+    }
+
+    private fun openResponseDialog(title: String, message: String,
+                                          cancel: String, submit: String, token: String, userData: String) {
+        val builder = AlertDialog.Builder(context)
+        //set title for alert dialog
+        builder.setTitle(title)
+        //set message for alert dialog
+        builder.setMessage(message)
+//        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        // Create the AlertDialog
+        var alertDialog: AlertDialog?=null
+        //performing positive action
+        builder.setPositiveButton("OK"){dialogInterface, which ->
+            alertDialog!!.dismiss()
+        }
+        alertDialog= builder.create()
+        // Set other dialog properties
+        alertDialog.setCancelable(false)
+        alertDialog.show()
     }
 
     private fun showBillReceipt(commonResponse: PaytmTopUpResponse) {

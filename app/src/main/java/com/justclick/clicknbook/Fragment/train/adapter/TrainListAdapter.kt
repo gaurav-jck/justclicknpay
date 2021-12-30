@@ -202,7 +202,7 @@ class TrainListAdapter(
         }else{
             fareRuleRequest.JourneyQuota="GN"
         }
-        NetworkCall().callService(NetworkCall.getApiInterface().trainFareRule(ApiConstants.FareAvailability, fareRuleRequest,
+        NetworkCall().callService(NetworkCall.getTrainApiInterface().trainFareRule(ApiConstants.FareAvailability, fareRuleRequest,
         loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App"),
                 context,true
         ) { response: ResponseBody?, responseCode: Int ->

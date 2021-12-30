@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment
 
@@ -44,12 +45,17 @@ class TrainBookingListAdapter(
 
         if(item.pnRno!=null && !item.pnRno.isEmpty()){
             holder.changeBoarding.visibility=View.VISIBLE
+            holder.operationLin.visibility=View.VISIBLE
         }else{
             holder.changeBoarding.visibility=View.GONE
+            holder.operationLin.visibility=View.GONE
         }
 
         holder.view.setOnClickListener{
             mListener?.onListFragmentInteraction(mValues,holder.pnrTv.id,position)
+        }
+        holder.cancelTicket.setOnClickListener{
+            mListener?.onListFragmentInteraction(mValues,holder.cancelTicket.id,position)
         }
         holder.changeBoarding.setOnClickListener{
             mListener?.onListFragmentInteraction(mValues,holder.changeBoarding.id,position)
@@ -69,6 +75,8 @@ class TrainBookingListAdapter(
         val durationTv: TextView = mView.durationTv
         val boardingStn: TextView = mView.boardingStn
         val changeBoarding: TextView = mView.changeBoarding
+        val cancelTicket: TextView = mView.cancelTicket
+        val operationLin: LinearLayout = mView.operationLin
 
         override fun toString(): String {
             return super.toString() + " '" + pnrTv.text + "'"

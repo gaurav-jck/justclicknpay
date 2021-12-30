@@ -386,6 +386,13 @@ public interface ApiInterface {
                                      @Header("LoggedInUserType") String type,
                                      @Header("Merchant") String merchant, @Header("Mode") String mode);
 
+    @Headers({"Content-Type: application/json"})
+    @POST("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> trainCancelTicket(@Path("methodName") String method, @Body Object data,
+                                     @Header("Identifier") String doneCard,
+                                     @Header("LoggedInUserType") String type,
+                                     @Header("Merchant") String merchant, @Header("Mode") String mode);
+
     @GET()
     @Headers({"Content-Type: application/json"})
     Call<TrainBookFragment.BoardingStnResponse> getBoardingStn(@Url String url,
@@ -402,6 +409,20 @@ public interface ApiInterface {
                                                                @Header("Identifier") String doneCard,
                                                                @Header("LoggedInUserType") String type,
                                                                @Header("Merchant") String merchant, @Header("Mode") String mode);
+
+    @GET()
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getCancelTicketDetail(@Url String url,
+                                               @Header("Identifier") String doneCard,
+                                               @Header("LoggedInUserType") String type,
+                                               @Header("Merchant") String merchant, @Header("Mode") String mode);
+
+    @GET()
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getCancelIdRefund(@Url String url,
+                                               @Header("Identifier") String doneCard,
+                                               @Header("LoggedInUserType") String type,
+                                               @Header("Merchant") String merchant, @Header("Mode") String mode);
 
     @GET()
     @Headers({"Content-Type: application/json"})
@@ -482,10 +503,6 @@ public interface ApiInterface {
     Call<ResponseBody> getBillPayCommonPost(@Path("methodName") String method, @Body Object data,
                                         @Header("userData") String userData, @Header("Authorization") String token);
 
-    @POST("Utility/Wallet/{methodName}")
-    @Headers({"Content-Type: application/json"})
-    Call<ResponseBody> getPaytmCommonPost(@Path("methodName") String method, @Body Object data,
-                                        @Header("userData") String userData, @Header("Authorization") String token);
     @POST("api/Paytem/{methodName}")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getPaytmCommonPostNew(@Path("methodName") String method, @Body Object data,
