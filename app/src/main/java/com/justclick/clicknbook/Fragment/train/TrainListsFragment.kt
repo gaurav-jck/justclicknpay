@@ -37,7 +37,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener {
     val Ladies="Ladies Quota"
     public val SrCitizen="Sr. Citizen"
     public val Tatkal="Tatkal Quota"
-    public val Handicapped="Handicapped"
+//    public val Handicapped="Handicapped"
     private var listener: OnListFragmentInteractionListener? = null
     var viewModel:TrainSearchViewModel?=null
     var adapter: TrainListAdapter?=null
@@ -167,9 +167,9 @@ class TrainListsFragment : Fragment(), View.OnClickListener {
             return Ladies
         }else if(value.equals("TQ")){
             return Tatkal
-        }else if(value.equals("HP")){
+        }/*else if(value.equals("HP")){
             return Handicapped
-        }else if(value.equals("SS")){
+        }*/else if(value.equals("SS")){
             return SrCitizen
         }else{
             return ""

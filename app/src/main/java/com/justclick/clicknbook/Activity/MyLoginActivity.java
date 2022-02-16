@@ -389,7 +389,8 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                         }else if(loginModel.StatusCode.equalsIgnoreCase("2")){
                             otpDialog(LOGIN_SERVICE);
                         } else {
-                            Toast.makeText(context,loginModel.Status,Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(context,loginModel.Status,Toast.LENGTH_SHORT).show();
+                            errorPopup(loginModel.Status);
                         }
                     }else {
                         Toast.makeText(context,R.string.response_failure_message,Toast.LENGTH_SHORT).show();
@@ -416,6 +417,30 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
             hideCustomDialog();
             Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void errorPopup(String status) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        //set title for alert dialog
+        builder.setTitle("Response message");
+        //set message for alert dialog
+        builder.setMessage(status);
+//        builder.setIcon(android.R.drawable.ic_dialog_alert)
+        // Create the AlertDialog
+        AlertDialog alertDialog=null;
+
+        builder.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        email_edt.setText("");
+                        password_edt.setText("");
+                        dialog.cancel();
+                    }
+                });
+        alertDialog=builder.create();
+        alertDialog.setCancelable(false);
+        alertDialog.show();
     }
 
     private void showCustomDialog(){

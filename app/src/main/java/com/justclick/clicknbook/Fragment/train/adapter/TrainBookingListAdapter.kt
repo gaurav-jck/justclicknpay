@@ -38,8 +38,10 @@ class TrainBookingListAdapter(
         holder.pnrTv.text = "PNR : "+item.pnRno
         holder.resIdTv.text = "ResId : "+item.reservationID
         holder.trainNameTv.text = item.trainName+" ("+item.trainNumber+")"
-        holder.fromStnTv.text = item.source.replace("(","\n(")
-        holder.toStnTv.text = item.destination.replace("(","\n(")
+        holder.fromStnTv.text = item.source+"\n("+item.sourceCode+")"
+        holder.toStnTv.text = item.destination+"\n("+item.destinationCode+")"
+        holder.deptDataTv.text = item.departDate
+        holder.arrivalDataTv.text = item.arriveDate
         holder.durationTv.text = item.journeyClass+" | "+item.journeyQuota
         holder.boardingStn.text = "Boarding Stn : "+item.boardingStn
 
@@ -49,6 +51,13 @@ class TrainBookingListAdapter(
         }else{
             holder.changeBoarding.visibility=View.GONE
             holder.operationLin.visibility=View.GONE
+        }
+
+        holder.statusTv.setText(item.status)
+        if(item.status.equals("CNF")){
+            holder.statusTv.setTextColor(context!!.resources.getColor(R.color.green))
+        }else{
+            holder.statusTv.setTextColor(context!!.resources.getColor(R.color.black_text_color))
         }
 
         holder.view.setOnClickListener{
@@ -73,9 +82,12 @@ class TrainBookingListAdapter(
         val fromStnTv: TextView = mView.fromStnTv
         val toStnTv: TextView = mView.toStnTv
         val durationTv: TextView = mView.durationTv
+        val deptDataTv: TextView = mView.deptDataTv
+        val arrivalDataTv: TextView = mView.arrivalDataTv
         val boardingStn: TextView = mView.boardingStn
         val changeBoarding: TextView = mView.changeBoarding
         val cancelTicket: TextView = mView.cancelTicket
+        val statusTv: TextView = mView.statusTv
         val operationLin: LinearLayout = mView.operationLin
 
         override fun toString(): String {

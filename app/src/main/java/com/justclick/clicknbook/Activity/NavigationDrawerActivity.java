@@ -839,10 +839,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
             subLic.SubMenuCode=MenuCodes.LIC;
             subMenuArrayList.add(subLic);
 
-//            LoginModel.DataList.subMenu subBill=dataList.new subMenu();
-//            subBill.SubMenu=MenuCodes.BILL_PAY;
-//            subBill.SubMenuCode=MenuCodes.BILL_PAY;
-//            subMenuArrayList.add(subBill);
+            LoginModel.DataList.subMenu subBill=dataList.new subMenu();
+            subBill.SubMenu=MenuCodes.BILL_PAY;
+            subBill.SubMenuCode=MenuCodes.BILL_PAY;
+            subMenuArrayList.add(subBill);
 
             LoginModel.DataList.subMenu subMenuCashOut=dataList.new subMenu();
             subMenuCashOut.SubMenu=MenuCodes.CASH_OUT;

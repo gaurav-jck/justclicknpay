@@ -9,13 +9,19 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/edittext_border_hotel.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_clipboards.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_clipboards2.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_icon_password.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_userid.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/my_progress_one.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/refresh_captcha.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/splash_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_bus_from_city.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_dashboard__new_.xml" value="0.2617753623188406" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_navigation.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_test.xml" value="0.25" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/bus_autocomplete_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/confirmation_dialog_layout.xml" value="0.27291666666666664" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/custom_dialog_view.xml" value="0.264945652173913" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/drawer_content.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/drawer_mainitem_layout.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_home.xml" value="0.2708333333333333" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_jct_money_create_sender_rapipay.xml" value="0.27291666666666664" />
@@ -40,6 +46,7 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_money_receipt_dialog.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_money_receipt_dialog_rapipay.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_paynow_dialog.xml" value="0.27291666666666664" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/lic_receipt_dialog.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/pin_otp.xml" value="0.26721014492753625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/rapipay_matm_receipt_dialog.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/rapipay_txndetail_item.xml" value="0.27291666666666664" />

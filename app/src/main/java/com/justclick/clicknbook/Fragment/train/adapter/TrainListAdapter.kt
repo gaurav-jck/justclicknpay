@@ -208,9 +208,10 @@ class TrainListAdapter(
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-                responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
-                responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
-
+                if(responseString.contains("applicableBerthTypes")){
+                    responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
+                    responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
+                }
                 responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
                 responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
 

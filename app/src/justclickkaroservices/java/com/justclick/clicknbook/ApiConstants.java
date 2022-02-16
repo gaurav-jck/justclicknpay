@@ -47,7 +47,8 @@ public class ApiConstants
     public static final String MobilePage="MobileServices.svc/";
     public static final String MerchantId="JUSTCLICKTRAVELS";
     public static final String AGENTLOGIN="AGENTLOGIN";
-    public static final String LOGIN="LOGIN";
+//    public static final String LOGIN="LOGIN";
+    public static final String LOGIN="INDIALOGIN";
     public static final String REGISTRATION="REGISTRATION";
     public static final String UploadFile="UploadFile";
     public static final String FORGETPASSWORD="FORGETPASS";
@@ -197,6 +198,7 @@ public class ApiConstants
     public static final String Book="Book";
     public static final String GetPnrDetails="GetPnrDetails";
     public static final String CancelTicket="CancelTicket";
+    public static final String VerifyOtpRefund="VerifyOtpRefund";
 
 //    Payout
     public static final String ValidateCredential="ValidateCredential";

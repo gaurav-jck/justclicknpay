@@ -144,10 +144,26 @@ class TrainPnrStatusFragment : Fragment(), View.OnClickListener {
                     hideCustomDialog()
                     if (response != null && response.body() != null) {
                         var responseString=response.body()!!.string()
-                        responseString=responseString.replace("passengerList\":{", "passengerList\":[{")
-                        responseString=responseString.replace("},\"pnrNumber", "}],\"pnrNumber")
-                        val response=Gson().fromJson(responseString, PnrStatusResponse::class.java)
-                        pnrStatusData(response)
+//                        responseString=responseString.replace("passengerList\":{", "passengerList\":[{")
+//                        responseString=responseString.replace("},\"pnrNumber", "}],\"pnrNumber")
+                        val responseData=Gson().fromJson(responseString, PnrStatusResponse::class.java)
+                        if(responseData!=null){
+                            if(responseData.statusCode.equals("00")){
+                                pnrStatusData(responseData)
+                            }else{
+                                if(responseData.pnrEnqueryresponse!=null){
+                                    if(responseData.pnrEnqueryresponse.errorMessage!=null && !responseData.pnrEnqueryresponse.errorMessage.isEmpty()){
+                                        Toast.makeText(context, responseData.pnrEnqueryresponse.errorMessage, Toast.LENGTH_LONG).show()
+                                    }else{
+                                        Toast.makeText(context, responseData.statusMessage, Toast.LENGTH_LONG).show()
+                                    }
+                                }else{
+                                    Toast.makeText(context, responseData.statusMessage, Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        }else{
+                            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                        }
                     } else {
                         hideCustomDialog()
                         Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()

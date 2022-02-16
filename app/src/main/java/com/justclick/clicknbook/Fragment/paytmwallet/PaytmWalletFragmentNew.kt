@@ -146,7 +146,7 @@ class PaytmWalletFragmentNew : Fragment() {
             Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
             return false
         }else if(amount.toInt()<100 || amount.toInt()>5000){
-//        }else if(amount.toInt()<1 || amount.toInt()>100000){
+//        }else if(amount.toInt()<100 || amount.toInt()>100000){
             Toast.makeText(context, "Amount should be in between 100 to 5000", Toast.LENGTH_SHORT).show()
 //            Toast.makeText(context, "Amount should be in between 100 to 100000", Toast.LENGTH_SHORT).show()
             return false

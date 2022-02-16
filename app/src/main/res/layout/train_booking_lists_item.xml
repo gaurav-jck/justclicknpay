@@ -35,6 +35,16 @@
                 />
 
             <TextView
+                android:id="@+id/statusTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textSize="@dimen/small_text_size"
+                android:textAllCaps="true"/>
+
+            <TextView
                 android:id="@+id/resIdTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -162,6 +172,16 @@
                 app:layout_constraintRight_toLeftOf="@+id/viewLeft"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/trainNameTv" />
+            <TextView
+                android:id="@+id/deptDataTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fromStnTv"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="28/01/2022 01:23:00 AM"
+                android:textSize="@dimen/small_text_size"
+                android:textColor="@color/gray"/>
 
             <TextView
                 android:id="@+id/toStnTv"
@@ -177,11 +197,23 @@
                 android:layout_marginTop="@dimen/medium_margin"
                 />
 
+            <TextView
+                android:id="@+id/arrivalDataTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toStnTv"
+                android:layout_marginTop="@dimen/small_margin"
+                android:text="date time"
+                android:textSize="@dimen/small_text_size"
+                android:textColor="@color/gray"
+                />
+
             <LinearLayout
                 android:id="@+id/boardingLin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/toStnTv"
+                app:layout_constraintTop_toBottomOf="@+id/arrivalDataTv"
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginTop="@dimen/small_margin">
                 <TextView

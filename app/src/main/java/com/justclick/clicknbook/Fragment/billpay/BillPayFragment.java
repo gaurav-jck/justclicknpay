@@ -49,7 +49,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     public static final int POSTPAID_TYPE =1, WATER_TYPE =2,
             DATACARD_TYPE=3, ELECTRICITY_TYPE=4, LANDLINE_TYPE=5, GAS_TYPE=6, INSURANCE_TYPE=7, EMI_TYPE=8;
     public static final String categoryElectricity="Electricity",categoryGas="Gas",categoryPostpaid="Postpaid",
-            categoryWater="Water",categoryInsurance="Insurance",categoryDatacardPrepaid="Datacard Prepaid",
+            categoryWater="Water",categoryInsurance="Insurance",categoryDatacardPrepaid="DatacardPrepaid",
             categoryLandline="Landline",categoryEMI="EMI";
     private boolean isElectricityOperator, isGasOperator, isPostpaidOperator, isWaterOperator, isDatacardOperator,
             isLandlineOperator;
@@ -561,9 +561,10 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         try{
             FetchBillResponseModel responseModel=new Gson().fromJson(response.string(),FetchBillResponseModel.class);
             if(responseModel!=null && responseModel.statusCode.equals("00")){
-                Toast.makeText(context, responseModel.statusMessage+"\namount="+responseModel.billAmount, Toast.LENGTH_SHORT).show();
                 if(responseModel.payfetchbilllist!=null){
                     showBillDetail(responseModel,rechargeType, operator);
+                }else {
+                    Toast.makeText(context, responseModel.statusMessage/*+"\namount="+responseModel.billAmount*/, Toast.LENGTH_SHORT).show();
                 }
             }else {
                 Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();

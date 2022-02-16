@@ -67,7 +67,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nameTv">
+        app:layout_constraintTop_toTopOf="@+id/nameTv"
+        android:gravity="right">
         <TextView
             android:id="@+id/seatNoTv"
             android:layout_width="wrap_content"

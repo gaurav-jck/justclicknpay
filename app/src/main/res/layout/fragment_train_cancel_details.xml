@@ -35,7 +35,7 @@
             android:layout_marginLeft="@dimen/large_margin"
             android:layout_toRightOf="@+id/back_arrow"
             android:padding="@dimen/medium_margin"
-            android:text="Change Boarding Station"
+            android:text="Cancel Ticket"
             android:textColor="@color/color_white"
             android:textSize="@dimen/simple_content_text_size" />
     </RelativeLayout>
@@ -43,45 +43,46 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/rel_top"
-        android:layout_above="@+id/okTv"
-        >
+        android:layout_above="@+id/bottomLin"
+        android:layout_below="@+id/rel_top">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
                 android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginRight="@dimen/small_margin"
-                >
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/small_margin">
 
                 <TextView
                     android:id="@+id/pnrTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
                     android:padding="@dimen/small_margin"
                     android:text="Pnr : 121345"
                     android:textAllCaps="true"
                     android:textColor="@color/dark_blue_color"
                     android:textSize="@dimen/simple_content_text_size"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:id="@+id/statusTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:padding="@dimen/small_margin"
                     android:text="Success"
                     android:textAllCaps="true"
                     android:textColor="@color/dark_blue_color"
-                    android:textSize="@dimen/small_text_size"
-                    android:gravity="right"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="@dimen/small_text_size" />
 
             </LinearLayout>
 
@@ -89,11 +90,11 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
                 android:background="@color/gray_color_very_light"
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:layout_marginTop="@dimen/medium_margin"
                 android:text="Train Details"
                 android:textColor="@color/text_dark_gray"
                 android:textSize="@dimen/text_size_14sp" />
@@ -112,10 +113,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:paddingTop="@dimen/small_margin"
-                    android:paddingBottom="@dimen/small_margin"
                     android:paddingLeft="@dimen/medium_margin"
-                    android:paddingRight="@dimen/medium_margin">
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:paddingBottom="@dimen/small_margin">
 
                     <TextView
                         android:id="@+id/trainNameTv"
@@ -125,8 +126,8 @@
                         android:text="Golden temple mail"
                         android:textColor="@color/text_dark_gray"
                         android:textSize="@dimen/text_size_14sp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/durationTv"
@@ -262,8 +263,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/very_small_margin"
-                        android:text="Delhi"
                         android:gravity="right"
+                        android:text="Delhi"
                         android:textColor="@color/text_dark_gray"
                         android:textSize="@dimen/small_text_size"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -275,29 +276,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_3dp"
+                        android:gravity="right"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/viewRight"
-                        app:layout_constraintTop_toBottomOf="@+id/toStnTv"
-                        android:gravity="right">
+                        app:layout_constraintTop_toBottomOf="@+id/toStnTv">
 
                         <TextView
                             android:id="@+id/seatsTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/medium_margin"
                             android:text="Available Seats"
                             android:textColor="@color/text_dark_gray"
                             android:textSize="@dimen/text_size_13sp"
-                            android:layout_marginLeft="@dimen/medium_margin"
-                            android:visibility="gone"
-                            />
+                            android:visibility="gone" />
 
                         <TextView
                             android:id="@+id/classTv"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text=""
                             android:layout_marginTop="@dimen/margin_2dp"
+                            android:text=""
                             android:textColor="@color/text_dark_gray"
                             android:textSize="@dimen/small_text_size"
                             android:visibility="visible" />
@@ -309,13 +309,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginTop="@dimen/margin_2dp"
                         android:text="Boarding point - Delhi(DLI)"
                         android:textColor="@color/text_dark_gray"
                         android:textSize="@dimen/small_text_size"
-                        app:layout_constraintTop_toBottomOf="@+id/classTop"
+                        android:visibility="visible"
                         app:layout_constraintRight_toRightOf="parent"
-                        android:layout_marginTop="@dimen/margin_2dp"
-                        android:visibility="visible" />
+                        app:layout_constraintTop_toBottomOf="@+id/classTop" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -337,8 +337,8 @@
                 android:id="@+id/passengerContainerLin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/margin_2dp"/>
+                android:layout_marginTop="@dimen/margin_2dp"
+                android:orientation="vertical" />
 
 
         </LinearLayout>
@@ -346,41 +346,47 @@
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/okTv"
+    <LinearLayout
+        android:id="@+id/bottomLin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:background="@drawable/blue_round_button_background"
-        android:backgroundTint="@color/app_blue_color"
-        android:gravity="center"
-        android:padding="@dimen/margin_7dp"
-        android:text="Cancel Ticket"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_16sp"
-        android:layout_above="@+id/refundTv"/>
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+        <TextView
+            android:id="@+id/okTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:backgroundTint="@color/app_blue_color"
+            android:gravity="center"
+            android:padding="@dimen/margin_7dp"
+            android:text="Cancel Ticket"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_above="@+id/refundTv"/>
 
-    <TextView
-        android:id="@+id/refundTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="@dimen/small_margin"
-        android:layout_marginTop="@dimen/small_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:background="@drawable/blue_round_button_background"
-        android:backgroundTint="@color/app_blue_color"
-        android:gravity="center"
-        android:padding="@dimen/margin_7dp"
-        android:text="Refund Ticket"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_16sp" />
-
-
+        <TextView
+            android:id="@+id/refundTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/small_margin"
+            android:layout_marginBottom="@dimen/small_margin"
+            android:background="@drawable/blue_round_button_background"
+            android:backgroundTint="@color/app_blue_color"
+            android:gravity="center"
+            android:padding="@dimen/margin_7dp"
+            android:text="Refund Ticket"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_16sp"
+            android:visibility="visible"/>
+    </LinearLayout>
 </RelativeLayout>

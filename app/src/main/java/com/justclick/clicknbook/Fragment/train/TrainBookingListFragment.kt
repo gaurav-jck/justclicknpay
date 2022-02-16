@@ -97,7 +97,7 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
         val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
         val call = apiService.getBoardingStnForChange("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
                 +list!!.trainNumber+"&Date="+journeyDate(list.departDate)+"&fromStation="+
-                getStnCode(list!!.source)+ "&toStation="+getStnCode(list.destination)+"&className="+list.journeyClass,
+                list.sourceCode+ "&toStation="+list.destinationCode+"&className="+list.journeyClass,
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
         call.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
@@ -108,16 +108,20 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                         responseString=responseString.replace("boardingStationList\":{", "boardingStationList\":[{")
                         responseString=responseString.replace("},\"mealChoiceenable", "}],\"mealChoiceenable")
                         val boardingStnResponse = Gson().fromJson(responseString, TrainBookFragment.BoardingStnResponse::class.java)
-                        if(boardingStnResponse.boardingStationList!=null && boardingStnResponse.boardingStationList!!.size>0){
+                        if(boardingStnResponse!=null){
+                            if(boardingStnResponse.boardingStationList!=null && boardingStnResponse.boardingStationList!!.size>0){
 
-                            var arr: Array<String?> =arrayOfNulls<String>(boardingStnResponse.boardingStationList!!.size)
-                            for(pos in boardingStnResponse.boardingStationList!!.indices){
-                                arr[pos]=boardingStnResponse.boardingStationList!!.get(pos).stnNameCode
+                                var arr: Array<String?> =arrayOfNulls<String>(boardingStnResponse.boardingStationList!!.size)
+                                for(pos in boardingStnResponse.boardingStationList!!.indices){
+                                    arr[pos]=boardingStnResponse.boardingStationList!!.get(pos).stnNameCode
+                                }
+
+                                val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
+                                (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
+
+                            }else{
+                                Toast.makeText(context, boardingStnResponse.errorMessage, Toast.LENGTH_LONG).show()
                             }
-
-                            val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
-                            (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
-
                         }
                     } else {
                         hideCustomDialog()
@@ -150,7 +154,7 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                         var responseString=response!!.body()!!.string()
                         val response = Gson().fromJson(responseString, TrainCancelTicketDetailResponse::class.java)
                         if(response.statusCode.equals("00")){
-                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
+//                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
                             val bundle = Bundle()
                             bundle.putSerializable("cancelResponse", response)
                             val fragment = TrainCancelDetailsFragment()
@@ -177,7 +181,10 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getStnCode(station: String?): String? {
-        return station!!.substring(station.indexOf("(")+1, station.indexOf(")"))
+        try {
+            return station!!.substring(station.indexOf("(")+1, station.indexOf(")"))
+        }catch (e: Exception){}
+        return ""
     }
 
     private fun journeyDate(departDate: String?): String? {

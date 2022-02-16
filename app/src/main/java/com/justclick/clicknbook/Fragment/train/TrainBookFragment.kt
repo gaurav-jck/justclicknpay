@@ -263,11 +263,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     }
 
     class BoardingStnResponse{
+        var errorMessage:String?=null
         var boardingStationList :ArrayList<BoardingStationList>? =null
         class BoardingStationList{
             var stnNameCode:String?=null
         }
         /*{"boardingStationList":[{"stnNameCode":"ANAND VIHAR TRM - ANVT"},{"stnNameCode":"KANPUR CENTRAL - CNB"}]}*/
+        /*{"errorMessage":"This action not allowed as the Date given is Outside Advance Reservation Period- (80012)","mealChoiceenable":"false","serverId":"DM04AP19MS3","timeStamp":"2022-01-28T11:22:43.981"}*/
     }
 
     private fun callBoardingStation() {
@@ -809,9 +811,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             foodChoice!!.adapter=aa
         }else{
             foodLin!!.visibility=View.GONE
-        }
-        for(i in fareRuleResponse!!.bkgCfg!!.applicableBerthTypes.indices){
-            list.add(getBerthName(fareRuleResponse!!.bkgCfg!!.applicableBerthTypes[i]))
         }
 
         var isAdd:Boolean

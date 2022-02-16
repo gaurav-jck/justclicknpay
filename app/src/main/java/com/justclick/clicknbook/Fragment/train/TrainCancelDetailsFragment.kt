@@ -12,15 +12,18 @@ import android.widget.*
 import androidx.core.view.children
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.train.model.TrainCancelResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
+import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import kotlinx.android.synthetic.main.fragment_train_cancel_details.*
+import kotlinx.android.synthetic.main.fragment_train_cancel_details.passengerContainerLin
 import kotlinx.android.synthetic.main.fragment_train_cancel_details.view.*
 import kotlinx.android.synthetic.main.train_passanger_seats_show.view.*
 import kotlinx.android.synthetic.main.train_passanger_seats_show.view.statusTv
@@ -66,6 +69,82 @@ class TrainCancelDetailsFragment : Fragment() {
         return view
     }
 
+    private fun setData(view: View) {
+
+        view.statusTv.text="ResId : "+trainResponse!!.trainCancelDetail.get(0).transactionId
+        view.pnrTv.text="Pnr : "+trainResponse!!.trainCancelDetail.get(0).pnr
+
+        var journeyDetail=trainResponse!!.trainCancelDetail.get(0);
+        view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
+        try{
+            view.startTimeTv.text = journeyDetail.fromStation
+            view.endTimeTv.text = journeyDetail.toStation
+        }catch (e:Exception){
+
+        }
+        view.fromStnTv.text = journeyDetail.fromStationCode
+        view.toStnTv.text = journeyDetail.toStationCode
+        view.durationTv.text = ""
+        view.classTv.text = "Passenger = "+trainResponse!!.paxCancelDetail.size+" | "+ "Quota = "+journeyDetail.quota
+        view.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ("+journeyDetail.boardingStationCode+")"
+
+        var seats=""
+        view.seatsTv.text = seats
+
+        if(seats.contains("AVAIL")||
+                seats.contains("AVBL")){
+            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
+        }else{
+            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
+        }
+
+        view.passengerContainerLin!!.removeAllViews()
+        var isRefund=false
+        var isCancel=false
+        for(list in trainResponse!!.paxCancelDetail.iterator()){
+            val child: View = layoutInflater.inflate(R.layout.train_passanger_cancel_view, null)
+            var count:TextView=child.findViewById(R.id.passengerCountTv)
+            var nameTv:TextView=child.findViewById(R.id.nameTv)
+            nameTv.text= list.name
+            var ageTv:TextView=child.findViewById(R.id.ageTv)
+            var seatNoTv:TextView=child.findViewById(R.id.seatNoTv)
+            var statusTv:TextView=child.findViewById(R.id.statusTv)
+            var remarkLin:LinearLayout=child.findViewById(R.id.remarkLin)
+            ageTv.text= list.age.toString()
+            child.genderTv.text= list.gender
+            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+
+            seatNoTv.text="Booking Status:"+list.bookingStatus
+            statusTv.text="Current Status:"+list.currentStatus
+
+            if(list.currentStatus.equals("CAN")){
+                remarkLin.visibility=View.GONE
+            }
+
+            if(!isRefund && list.currentStatus.equals("CAN")){
+                isRefund=true
+            }
+            if(!isCancel && (list.currentStatus.equals("CNF") || list.currentStatus.equals("RAC") || list.currentStatus.equals("WL")
+                        || list.currentStatus.equals("TQWL"))){
+                isCancel=true
+            }
+
+            view.passengerContainerLin!!.addView(child)
+        }
+
+        if(isRefund){
+            view.refundTv.visibility=View.VISIBLE
+        }else{
+            view.refundTv.visibility=View.GONE
+        }
+        if(isCancel){
+            view.okTv.visibility=View.VISIBLE
+        }else{
+            view.okTv.visibility=View.GONE
+        }
+
+    }
+
     private fun getCancelIdForRefund() {
         showCustomDialog()
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
@@ -78,16 +157,58 @@ class TrainCancelDetailsFragment : Fragment() {
                     hideCustomDialog()
                     if (response != null && response.body() != null ) {
                         var responseString=response!!.body()!!.string()
-                        val response = Gson().fromJson(responseString, TrainCancelTicketDetailResponse::class.java)
+                        val response = Gson().fromJson(responseString, TrainCancelResponse::class.java)
                         if(response.statusCode.equals("00")){
-                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
-                            otpDialog("cancelId")
+//                            Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
+                            otpDialog(response.cancelIdDetail.get(0).cancellationId)
+//                            otpAuthentication(response.cancelIdDetail.get(0).cancellationId)
                         }else{
                             Toast.makeText(context,response.statusMessage, Toast.LENGTH_LONG).show()
-                            otpDialog("cancelId")
+//                            otpDialog("cancelId")
                         }
                     } else {
                         hideCustomDialog()
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                    }
+                } catch (e: java.lang.Exception) {
+                    hideCustomDialog()
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
+                hideCustomDialog()
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        })
+    }
+
+    class OtpResponse{
+        var response:String?=null
+        var resend_OTP_Left:String?=null
+        var statusCode:String?=null
+        var statusMessage:String?=null
+    }
+
+    private fun otpAuthentication(cancelId: String) {
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getRefundOtp(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/OtpAuthentication?Pnr="
+                +trainResponse!!.trainCancelDetail.get(0).pnr+"&CancellationId="+cancelId,
+                loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
+        showCustomDialog()
+        call.enqueue(object : Callback<ResponseBody?> {
+            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
+                try {
+                    hideCustomDialog()
+                    if (response?.body() != null) {
+                        val responseData = Gson().fromJson(response.body()!!.string(), OtpResponse::class.java)
+                        if(responseData.statusCode.equals("00")){
+                            Toast.makeText(context, responseData.response, Toast.LENGTH_LONG).show()
+                            otpDialog(cancelId)
+                        }else{
+                            Toast.makeText(context, responseData.response, Toast.LENGTH_LONG).show()
+                        }
+                    } else {
                         Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
                     }
                 } catch (e: java.lang.Exception) {
@@ -116,10 +237,25 @@ class TrainCancelDetailsFragment : Fragment() {
         otpDialog.setCancelable(false)
         val otp_edt = otpDialog.findViewById<EditText>(R.id.otp_edt)
         val submit = otpDialog.findViewById<TextView>(R.id.submit_btn)
+        val resend_btn = otpDialog.findViewById<TextView>(R.id.resend_btn)
+        val radioGroup = otpDialog.findViewById<RadioGroup>(R.id.radioGroup)
         val dialogCloseButton = otpDialog.findViewById<ImageButton>(R.id.close_btn)
+
+        val radioButton=RadioButton(requireContext())
+        radioButton.text=cancelId
+        radioButton.isChecked=true
+        radioGroup.addView(radioButton)
         submit.setOnClickListener {
-            refundRequest(cancelId, otp_edt.text.toString())
-            otpDialog.dismiss()
+            if(otp_edt.text.toString().length<4){
+                Toast.makeText(requireContext(), "Please enter valid otp", Toast.LENGTH_SHORT).show()
+            }else{
+                refundRequest(cancelId, otp_edt.text.toString())
+                Common.hideSoftInputFromDialog(otpDialog,requireContext())
+                otpDialog.dismiss()
+            }
+        }
+        resend_btn.setOnClickListener {
+            otpAuthentication(cancelId)
         }
         dialogCloseButton.setOnClickListener {
             otpDialog.dismiss()
@@ -128,7 +264,43 @@ class TrainCancelDetailsFragment : Fragment() {
     }
 
     private fun refundRequest(cancelId: String, otp: String) {
-        Toast.makeText(requireContext(), cancelId+"\n"+otp, Toast.LENGTH_SHORT).show()
+        var request= RefundRequest()
+        request.cancellationId=cancelId
+        request.pnr=trainResponse!!.trainCancelDetail.get(0).pnr
+        request.otp=otp
+        NetworkCall().callService(NetworkCall.getTrainApiInterface().trainRefundVerifyOtp(ApiConstants.VerifyOtpRefund, request,
+                loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App"),
+                context,true)
+        { response: ResponseBody?, responseCode: Int ->
+
+            if (response != null) {
+                responseHandlerRefund(response, request) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    class TrainRefundResponse {
+        var statusCode: String? = null
+        var statusMessage: String? = null
+    }
+
+    private fun responseHandlerRefund(response: ResponseBody, request: RefundRequest) {
+        try{
+            val refundResponse = Gson().fromJson(response.string(), TrainRefundResponse::class.java)
+            if(refundResponse!=null){
+                if(refundResponse.statusCode.equals("00")){
+                    Toast.makeText(context, refundResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context, refundResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }
+            }else{
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }catch (e:Exception){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     class CancelRequest{
@@ -196,8 +368,6 @@ class TrainCancelDetailsFragment : Fragment() {
     }
 
     private fun cancelSelected(cancelRequest: CancelRequest) {
-        Toast.makeText(requireContext(), "Cancel\n"+cancelRequest.paxData!!.get(0).paxCancelRemarks, Toast.LENGTH_SHORT).show()
-
         NetworkCall().callService(NetworkCall.getTrainApiInterface().trainCancelTicket(ApiConstants.CancelTicket, cancelRequest,
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App"),
                 context,true)
@@ -213,61 +383,20 @@ class TrainCancelDetailsFragment : Fragment() {
 
     private fun responseHandler(response: ResponseBody, cancelRequest: CancelRequest) {
         try{
-            val boardingStnResponse = Gson().fromJson(response.string(), TrainBookFragment.BoardingStnResponse::class.java)
-
+            val cancelResponse = Gson().fromJson(response.string(), TrainCancelResponse::class.java)
+            if(cancelResponse!=null){
+                if(cancelResponse.statusCode.equals("00")){
+                    Toast.makeText(context, cancelResponse.statusMessage, Toast.LENGTH_SHORT).show()
+                    otpDialog(cancelResponse.paxCancel.get(0).cancellationId)
+                }else{
+                    Toast.makeText(context, cancelResponse.statusMessage, Toast.LENGTH_SHORT).show()
+                }
+            }else{
+                Toast.makeText(context, R.string.error_in_response, Toast.LENGTH_SHORT).show()
+            }
         }catch (e:Exception){
             Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun setData(view: View) {
-
-        view.statusTv.text="ResId : "+trainResponse!!.trainCancelDetail.get(0).transactionId
-        view.pnrTv.text="Pnr : "+trainResponse!!.trainCancelDetail.get(0).pnr
-
-        var journeyDetail=trainResponse!!.trainCancelDetail.get(0);
-        view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
-        try{
-            view.startTimeTv.text = journeyDetail.fromStation
-            view.endTimeTv.text = journeyDetail.toStation
-        }catch (e:Exception){
-
-        }
-        view.fromStnTv.text = journeyDetail.fromStationCode
-        view.toStnTv.text = journeyDetail.toStationCode
-        view.durationTv.text = ""
-        view.classTv.text = "Passenger = "+trainResponse!!.paxCancelDetail.size+" | "+ "Quota = "+journeyDetail.quota
-        view.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ("+journeyDetail.boardingStationCode+")"
-
-        var seats=""
-        view.seatsTv.text = seats
-
-        if(seats.contains("AVAIL")||
-                seats.contains("AVBL")){
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
-        }else{
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
-        }
-
-        view.passengerContainerLin!!.removeAllViews()
-        for(list in trainResponse!!.paxCancelDetail.iterator()){
-            val child: View = layoutInflater.inflate(R.layout.train_passanger_cancel_view, null)
-            var count:TextView=child.findViewById(R.id.passengerCountTv)
-            var nameTv:TextView=child.findViewById(R.id.nameTv)
-            nameTv.text= list.name
-            var ageTv:TextView=child.findViewById(R.id.ageTv)
-            var seatNoTv:TextView=child.findViewById(R.id.seatNoTv)
-            var statusTv:TextView=child.findViewById(R.id.statusTv)
-            ageTv.text= list.age.toString()
-            child.genderTv.text= list.gender
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
-
-            seatNoTv.text="Seat no."/*+list.sNo*/
-            statusTv.text=list.bookingStatus
-
-            view.passengerContainerLin!!.addView(child)
-        }
-
     }
 
     private fun showCustomDialog() {

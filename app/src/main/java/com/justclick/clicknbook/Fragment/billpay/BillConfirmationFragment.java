@@ -182,7 +182,7 @@ public class BillConfirmationFragment extends Fragment {
     class PayBillRequest{
         public String Operatorid,Canumber,billdate,dueDate,cellNumber,userName,AgentCode,Email,Suppliercode,Category,fetchbillstring;
         public String Lattitude="27.2233",Longitude="78.26535",Mode="offline",acceptPayment="",acceptPartPay="",
-                Merchant=ApiConstants.MerchantId,Type="App";
+                Merchant=ApiConstants.MerchantId,Type="App", PayBillType="";
         public float BillAmount,Billnetamount;
         /*{"Operatorid": "12",
     "BillAmount": 12.0,
@@ -233,7 +233,7 @@ public class BillConfirmationFragment extends Fragment {
             if(type==GenerateToken){
                 CheckResponseClass responseModel=new Gson().fromJson(response.string(),CheckResponseClass.class);
                 if(responseModel!=null && responseModel.statusCode.equals("00")){
-                    Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
                     payBill(responseModel.credentialData.get(0).userData, responseModel.credentialData.get(0).token);
                 }else {
                     Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();

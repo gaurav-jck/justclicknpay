@@ -11,7 +11,8 @@ public class TrainBookingListResponseModel {
     public class reservationlist implements Serializable {
         public String reservationID, trainName, trainNumber, source, destination, boardingDate,
                 totalFare, totalPassenger, reservationDate, status, journeyClass, journeyQuota,
-                departDate, arriveDate, distance, pnRno, boardingStn, mobile, agentMobile;
+                departDate, arriveDate, distance, pnRno, boardingStn, mobile, agentMobile,
+                sourceCode, destinationCode;
     }
 
 }
