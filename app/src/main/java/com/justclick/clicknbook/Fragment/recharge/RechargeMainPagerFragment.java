@@ -23,7 +23,8 @@ import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
  */
 public class RechargeMainPagerFragment extends Fragment implements TabLayout.OnTabSelectedListener{
 
-    private static final int NUM_PAGES = 6;
+//    private static final int NUM_PAGES = 6;
+    private static final int NUM_PAGES = 2;
     private Context context;
     private ToolBarTitleChangeListener titleChangeListener;
     private ViewPager viewPager;
@@ -31,8 +32,7 @@ public class RechargeMainPagerFragment extends Fragment implements TabLayout.OnT
     private TabLayout tabLayout;
     private PagerAdapter mPagerAdapter;
     private Fragment mobileFragment;
-    private String[] tabTitle = new  String[]{"Mobile","DTH","DataCard",
-            "Electricity","Landline","gas"};
+    private String[] tabTitle = new  String[]{"Prepaid Mobile","Prepaid DTH"/*,"FastTag"*/};
 
     public RechargeMainPagerFragment()
     {
@@ -65,12 +65,6 @@ public class RechargeMainPagerFragment extends Fragment implements TabLayout.OnT
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
@@ -85,12 +79,12 @@ public class RechargeMainPagerFragment extends Fragment implements TabLayout.OnT
         tabLayout =  view.findViewById(R.id.tabLayout);
 //
         //Adding the tabs using addTab() method
-        tabLayout.addTab(tabLayout.newTab().setText("Mobile"));
-        tabLayout.addTab(tabLayout.newTab().setText("DTH"));
-        tabLayout.addTab(tabLayout.newTab().setText("DataCard"));
-        tabLayout.addTab(tabLayout.newTab().setText("Electricity"));
-        tabLayout.addTab(tabLayout.newTab().setText("Landline"));
-        tabLayout.addTab(tabLayout.newTab().setText("gas"));
+        tabLayout.addTab(tabLayout.newTab().setText("Prepaid Mobile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Prepaid DTH"));
+//        tabLayout.addTab(tabLayout.newTab().setText("FastTag"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Electricity"));
+//        tabLayout.addTab(tabLayout.newTab().setText("Landline"));
+//        tabLayout.addTab(tabLayout.newTab().setText("gas"));
 //        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 //
 //        //Adding onTabSelectedListener to swipe views

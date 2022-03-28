@@ -29,6 +29,7 @@ import com.justclick.clicknbook.model.JctIfscByCodeResponse;
 import com.justclick.clicknbook.model.JioAmountData;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.model.OptModel;
+import com.justclick.clicknbook.model.OptModelRecharge;
 import com.justclick.clicknbook.model.RblAddressIFSCResponse;
 import com.justclick.clicknbook.model.RblBankDetailByIFSCResponse;
 import com.justclick.clicknbook.model.RblCommonResponse;
@@ -499,6 +500,24 @@ public interface ApiInterface {
     Call<ResponseBody> getPayoutTxnWithHeader(@Path("methodName") String method, @Body Object data,
                                            @Header("userData") String userData, @Header("Authorization") String token);
 
+//    qr
+
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> getQRAuth(@Path("methodName") String method, @Body Object data);
+
+    @GET("V2/Cashfree/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getVPACheck(@Path("methodName") String method,
+                                   @Header("userData") String userData, @Header("Authorization") String token/*,
+                                   @Header("Identifier") String doneCard, @Header("LoggedInUserType") String type,
+                                   @Header("Merchant") String merchant, @Header("Mode") String mode*/);
+
+    @GET("V2/Cashfree/VPAActive?Active=1")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> activeVPA(@Header("userData") String userData, @Header("Authorization") String token,
+                                   @Header("Identifier") String doneCard, @Header("LoggedInUserType") String type,
+                                   @Header("Merchant") String merchant, @Header("Mode") String mode);
+
 //MATM
     @POST("api_V1/PaymentEngine/{methodName}")
     Call<ResponseBody> getRapipayMatmCommonPost(@Path("methodName") String method, @Body Object data);
@@ -521,6 +540,15 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getPaytmCommonPostNew(@Path("methodName") String method, @Body Object data,
                                           @Header("userData") String userData, @Header("Authorization") String token);
+
+    @GET("api/Utilityrecharge/GetOperator")
+    Call<OptModelRecharge> getRechargeOperator(@Query("Category") String method);
+
+    @POST("api/Utilityrecharge/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> recharge(@Path("methodName") String method, @Body Object data,
+                                @Header("userData") String userData, @Header("Authorization") String token);
+
 
     // insurance Service
     @POST("API/Insurence/{methodName}")

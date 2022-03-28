@@ -205,6 +205,9 @@ public class ApiConstants
     public static final String CashfreeTrans="Transaction";
     public static final String PayoutTransactionList="TransactionList";
     public static final String CheckStatus="CheckStatus";
+//    qr
+    public static final String Authentication="Authentication";
+    public static final String VPACheck="VPACheck";
 
     //    LIC
     public static final String GenerateToken   ="GenerateToken";

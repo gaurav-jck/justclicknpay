@@ -29,6 +29,7 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragm
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
 import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
+import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
@@ -36,6 +37,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
@@ -250,6 +252,10 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new CashoutTransactionListFragment());
                 break;
+            case MenuCodes.UtilityList://20
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new UtilityTransactionListFragment());
+                break;
             case MenuCodes.TopUpDetails://21
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new RechargeListFragment());
@@ -284,6 +290,9 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.PAYTM://29
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
+                break;
+            case MenuCodes.CASHFREE_QR://29
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 break;
             case MenuCodes.TrainBookingList://30
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListFragment());

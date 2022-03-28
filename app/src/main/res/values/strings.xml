@@ -147,6 +147,9 @@
     <string name="nav_train_search">Train Search</string>
     <string name="bookTrain">Search Train</string>
 
+<!--    QR code-->
+    <string name="qrCode">QR Code</string>
+
     <!--Sales Fragment-->
     <string name="sales_report">Sales Report</string>
     <string name="net_sales_report">Net Sales Report</string>
@@ -337,6 +340,7 @@
     <string name="mobile_type">Mobile</string>
     <string name="dth_type">DTH</string>
     <string name="datacard_type">DATACARD</string>
+    <string name="fasttag_type">FASTTAG</string>
     <string name="electricity_type">ELECTRICITY</string>
     <string name="landline_type">LANDLINE</string>
     <string name="gas_type">GAS</string>

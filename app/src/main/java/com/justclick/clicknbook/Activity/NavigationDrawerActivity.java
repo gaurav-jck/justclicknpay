@@ -65,6 +65,7 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestF
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirSalesReportFragment;
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
 import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
+import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.cashout.SenderDetailFragment;
 import com.justclick.clicknbook.Fragment.flight.FlightSearchFragment;
@@ -82,6 +83,7 @@ import com.justclick.clicknbook.Fragment.HomeFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
@@ -481,6 +483,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashoutTransactionListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.UtilityList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new UtilityTransactionListFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.LIC:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new LicFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -491,6 +497,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case MenuCodes.PAYTM:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case MenuCodes.CASHFREE_QR:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.NetSalesReport:
@@ -557,6 +567,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 return R.drawable.lic_vector;
             case MenuCodes.PAYTM:
                 return R.drawable.account_balance_wallet;
+            case MenuCodes.CASHFREE_QR:
+                return R.drawable.ic_qr_code;
             case MenuCodes.BILL_PAY:
                 return R.drawable.ic_icon_mobile_payment_black;
             case MenuCodes.AirSalesReport:
@@ -570,6 +582,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.JCTMoneyList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.PayoutList:
+                return R.drawable.ic_icon_list_view;
+            case MenuCodes.UtilityList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.TrainBookingList:
                 return R.drawable.ic_icon_list_view;
@@ -789,9 +803,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.BusSearch) ||
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.AEPS) ))){*/
                 for(int i=0; i<modules.length;i++){
-                    if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].toUpperCase().contains(MenuCodes.AEPS.toUpperCase())||
-                            modules[i].contains(MenuCodes.BusSearch+"-1")  /* ||
-                            modules[i].contains(MenuCodes.MobileFragment+"-1")*/){
+                    if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].contains(MenuCodes.AEPS+"-1")||
+                            modules[i].contains(MenuCodes.BusSearch+"-1")   ||
+                            modules[i].contains(MenuCodes.MobileFragment+"-1")){
                         LoginModel.DataList.subMenu subMenu=dataList.new subMenu();
 //                        subMenu.SubMenu=loginModel.ProductList.get(i).Product;      //previous
 //                        subMenu.SubMenuCode=loginModel.ProductList.get(i).ProductCode;
@@ -800,6 +814,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.DMT)){
                             subMenu.SubMenu="DMT";
                             findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
+                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
+                            subMenu.SubMenu="Recharge";
                         }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
@@ -854,6 +870,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
             subPaytm.SubMenuCode=MenuCodes.PAYTM;
             subMenuArrayList.add(subPaytm);
 
+            LoginModel.DataList.subMenu subQR=dataList.new subMenu();
+            subQR.SubMenu=MenuCodes.CASHFREE_QR;
+            subQR.SubMenuCode=MenuCodes.CASHFREE_QR;
+            subMenuArrayList.add(subQR);
+
             /*if(subMenuArrayList.size()>3){
                 Collections.swap(subMenuArrayList, 1,3);
             }*/
@@ -876,6 +897,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         payoutList.SubMenu=MenuCodes.PayoutList;
                         payoutList.SubMenuCode=MenuCodes.PayoutList;
                         subMenuArrayList.add(payoutList);
+
+                        LoginModel.DataList.subMenu utilityList=loginModel.new DataList().new subMenu();
+                        utilityList.SubMenu=MenuCodes.UtilityList;
+                        utilityList.SubMenuCode=MenuCodes.UtilityList;
+                        subMenuArrayList.add(utilityList);
                     }
                     subMenuArrayList.add(loginModel.DataList.get(i).subMenu.get(j));
                 }

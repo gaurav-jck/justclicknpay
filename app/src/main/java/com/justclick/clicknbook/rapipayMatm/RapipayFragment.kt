@@ -209,6 +209,7 @@ public class RapipayFragment : Fragment() {
         loginModel = MyPreferences.getLoginData(loginModel, context)
         val request = InitiateMatmTxnRequest()
         request.agentCode = loginModel.Data.DoneCardUser
+//        request.agentCode = "JC0A39550"
         if(transactionType==SYN){
             request.amount=0f
             request.txnType = "SYNC"
@@ -235,8 +236,10 @@ public class RapipayFragment : Fragment() {
                 if (senderResponse.statusCode == "00") {
                     clientRefId = senderResponse.transactionId
                     smId = senderResponse.smId
+//                    smId = "246341"
                     jckTransactionId = senderResponse.jckTransactionId
                     mobile = senderResponse.mobile
+//                    mobile = "9389173616";
                     if(TYPE==SYN){
                         syncData()
                     }else{
@@ -260,10 +263,10 @@ public class RapipayFragment : Fragment() {
                 val date = Calendar.getInstance().time
                 val timestamp = SimpleDateFormat("yyyymmddHH").format(date)
 //                val timestamps = SimpleDateFormat("yyyymmddHHmm").format(date)
-                @SuppressLint("SimpleDateFormat") val timestamps = SimpleDateFormat("yyyymmddHHmm").format(Date())
+//                @SuppressLint("SimpleDateFormat") val timestamps = SimpleDateFormat("yyyymmddHHmm").format(Date())
                 val intent = Intent(getActivity(), NewMatmArrActivity::class.java)
                 val strhasdata = Utils.sha512(MerchantId, smId, clientRefId, SaltData)  //rapi
-//                val strhasdata = Utils.sha512(MerchantId, SubMerchantId, timestamps, SaltData)
+//                val strhasdata = Utils.sha512(MerchantId, smId, timestamps, SaltData)
                 Log.d("strdata", strhasdata)
                 val b = Bundle()
                 b.putString("Merchantid", MerchantId)
@@ -329,7 +332,7 @@ public class RapipayFragment : Fragment() {
         val keys = bundle.keySet()
         for (key in keys) {
             try {
-                // json.put(key, bundle.get(key)); see edit below
+                 json.put(key, bundle.get(key)); //see edit below
 //                json.put(key, JSONObject.wrap(bundle[key]))
             } catch (e: JSONException) {
                 //Handle exception here

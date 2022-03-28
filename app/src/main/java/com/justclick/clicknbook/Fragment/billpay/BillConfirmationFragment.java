@@ -163,8 +163,8 @@ public class BillConfirmationFragment extends Fragment {
         });
     }
 
-    class GenerateToken{
-        String AgentCode, Merchant=ApiConstants.MerchantId, Mode="App";
+    public class GenerateToken{
+        public String AgentCode, Merchant=ApiConstants.MerchantId, Mode="App";
         /*{
             "AgentCode": "JC0A13387",
                 "Merchant": "JUSTCLICKTRAVELS",

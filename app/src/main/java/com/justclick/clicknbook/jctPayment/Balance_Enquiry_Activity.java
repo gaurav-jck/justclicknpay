@@ -109,7 +109,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import io.jsonwebtoken.impl.AndroidBase64Codec;
 import okhttp3.ResponseBody;
 
 public class Balance_Enquiry_Activity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
@@ -433,14 +432,14 @@ public class Balance_Enquiry_Activity extends AppCompatActivity implements Googl
 
     }
 
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         int permissionLocation = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
             displayLocationSettingsRequest();
         }
-    }
+    }*/
 
     private void  displayLocationSettingsRequest() {
         mGoogleApiClient = new GoogleApiClient.Builder(context)

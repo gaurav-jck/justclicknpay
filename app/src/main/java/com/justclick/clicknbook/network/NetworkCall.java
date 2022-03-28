@@ -1609,6 +1609,10 @@ public void callPaytmService(Object model, String methodName, final Context cont
         return APIClient.getClientTrain().create(ApiInterface.class);
     }
 
+    public static ApiInterface getCashFreeQRApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);
+    }
+
 
     private void showCustomDialog() {
         MyCustomDialog.showCustomDialog(context,"Please wait...");

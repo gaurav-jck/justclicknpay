@@ -1,4 +1,5 @@
 package com.justclick.clicknbook.Fragment.recharge;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
@@ -7,18 +8,21 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.billpay.BillConfirmationFragment;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.AgentDetails;
 import com.justclick.clicknbook.model.LoginModel;
-import com.justclick.clicknbook.model.RechargeModel;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
+import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
-import com.justclick.clicknbook.requestmodels.RechargeRequestModel;
+import com.justclick.clicknbook.requestmodels.CommonRequestModel;
 import com.justclick.clicknbook.retrofit.APIClient;
 import com.justclick.clicknbook.retrofit.ApiInterface;
 import com.justclick.clicknbook.utils.Common;
@@ -26,6 +30,9 @@ import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
+import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -93,13 +100,13 @@ public class RechargeConfirmationFragment extends Fragment {
 
     private void setValues(int rechargeType, Bundle bundle) {
         rechargeRequestModel=new RechargeRequestModel();
-        rechargeRequestModel.DeviceId=Common.getDeviceId(context);
-        rechargeRequestModel.LoginSessionId= EncryptionDecryptionClass.EncryptSessionId(EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
-        rechargeRequestModel.DoneCardUser =loginModel.Data.DoneCardUser;
-        rechargeRequestModel.Password = MyPreferences.getLoginPassword(context);
-        rechargeRequestModel.MobileNumber =bundle.getString("IdNumber");
-        rechargeRequestModel.OptName=bundle.getString("Operator");
-        rechargeRequestModel.Amount=bundle.getString("RechargeAmount");
+        rechargeRequestModel.AgentCode =loginModel.Data.DoneCardUser;
+        rechargeRequestModel.Number =bundle.getString("IdNumber");
+        rechargeRequestModel.OperateName=bundle.getString("Operator");
+        rechargeRequestModel.OperateCode=bundle.getString("OperatorCode");
+        rechargeRequestModel.RechargeAmount= Float.valueOf(bundle.getString("RechargeAmount")).intValue();
+        rechargeRequestModel.token="";
+        rechargeRequestModel.userData="";
         tv_amount.setText(bundle.getString("RechargeAmount"));
         tv_id_number.setText(bundle.getString("IdNumber"));
         tv_operator.setText(bundle.getString("Operator"));
@@ -108,16 +115,14 @@ public class RechargeConfirmationFragment extends Fragment {
         switch (rechargeType){
             case RechargeFragment.MOBILE_TYPE:
 
-                rechargeRequestModel.RechargeType=getString(R.string.mobile_type);
-                rechargeRequestModel.ConnectionType =bundle.getString("MobileType");
-                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
-                rechargeRequestModel.OptionalPara2="test";
-                rechargeRequestModel.OptionalPara3 ="test";
+                rechargeRequestModel.Type="Mobile";
 
                 tv_recharge_type.setText(context.getString(R.string.mobile_type));
-                tv_type.setText(bundle.getString("MobileType"));
+                tv_type.setText(bundle.getString("Mobile"));
 //                commissionTv.setText(bundle.getString("Commision"));
 //                markUpTv.setText(bundle.getString("MarkUp"));
+                tv_type.setVisibility(View.GONE);
+                view_tv_type.setVisibility(View.GONE);
                 tv_value4.setVisibility(View.GONE);
                 tv_value5.setVisibility(View.GONE);
                 view_tv_value4.setVisibility(View.GONE);
@@ -126,12 +131,7 @@ public class RechargeConfirmationFragment extends Fragment {
                 break;
             case RechargeFragment.DTH_TYPE:
 
-                rechargeRequestModel.RechargeType=getString(R.string.dth_type);
-                rechargeRequestModel.ConnectionType ="";
-                rechargeRequestModel.OptionalPara1="test";
-                rechargeRequestModel.OptionalPara2="test";
-                rechargeRequestModel.OptionalPara3 ="test";
-
+                rechargeRequestModel.Type="DTH";
 
                 tv_recharge_type.setText(context.getString(R.string.dth_type));
 //                commissionTv.setText(bundle.getString("Commision"));
@@ -143,7 +143,7 @@ public class RechargeConfirmationFragment extends Fragment {
                 view_tv_value4.setVisibility(View.GONE);
                 view_tv_value5.setVisibility(View.GONE);
                 break;
-            case RechargeFragment.DATACARD_TYPE:
+            /*case RechargeFragment.DATACARD_TYPE:
 
                 rechargeRequestModel.RechargeType=getString(R.string.datacard_type);
                 rechargeRequestModel.ConnectionType =bundle.getString("DatacardType");
@@ -159,14 +159,31 @@ public class RechargeConfirmationFragment extends Fragment {
                 tv_value5.setVisibility(View.GONE);
                 view_tv_value4.setVisibility(View.GONE);
                 view_tv_value5.setVisibility(View.GONE);
+                break;*/
+            case RechargeFragment.FAST_TAG_TYPE:
+
+//                rechargeRequestModel.RechargeType=getString(R.string.fasttag_type);
+//                rechargeRequestModel.ConnectionType =bundle.getString("DatacardType");
+//                rechargeRequestModel.OptionalPara1="test";
+//                rechargeRequestModel.OptionalPara2="test";
+//                rechargeRequestModel.OptionalPara3 ="test";
+
+                tv_recharge_type.setText(context.getString(R.string.datacard_type));
+//                commissionTv.setText(bundle.getString("Commision"));
+//                markUpTv.setText(bundle.getString("MarkUp"));
+                tv_type.setText(bundle.getString("DatacardType"));
+                tv_value4.setVisibility(View.GONE);
+                tv_value5.setVisibility(View.GONE);
+                view_tv_value4.setVisibility(View.GONE);
+                view_tv_value5.setVisibility(View.GONE);
                 break;
             case RechargeFragment.ELECTRICITY_TYPE:
 
-                rechargeRequestModel.RechargeType=getString(R.string.electricity_type);
-                rechargeRequestModel.ConnectionType ="";
-                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
-                rechargeRequestModel.OptionalPara2=bundle.getString("Value5");
-                rechargeRequestModel.OptionalPara3 ="test";
+//                rechargeRequestModel.RechargeType=getString(R.string.electricity_type);
+//                rechargeRequestModel.ConnectionType ="";
+//                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
+//                rechargeRequestModel.OptionalPara2=bundle.getString("Value5");
+//                rechargeRequestModel.OptionalPara3 ="test";
 
                 tv_recharge_type.setText(context.getString(R.string.electricity_type));
 //                commissionTv.setText(bundle.getString("Commision"));
@@ -194,11 +211,11 @@ public class RechargeConfirmationFragment extends Fragment {
                 break;
             case RechargeFragment.LANDLINE_TYPE:
 
-                rechargeRequestModel.RechargeType=getString(R.string.landline_type);
-                rechargeRequestModel.ConnectionType ="";
-                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
-                rechargeRequestModel.OptionalPara2=bundle.getString("Value5");
-                rechargeRequestModel.OptionalPara3 ="test";
+//                rechargeRequestModel.RechargeType=getString(R.string.landline_type);
+//                rechargeRequestModel.ConnectionType ="";
+//                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
+//                rechargeRequestModel.OptionalPara2=bundle.getString("Value5");
+//                rechargeRequestModel.OptionalPara3 ="test";
 
                 tv_recharge_type.setText(context.getString(R.string.landline_type));
 //                commissionTv.setText(bundle.getString("Commision"));
@@ -226,11 +243,11 @@ public class RechargeConfirmationFragment extends Fragment {
                 break;
             case RechargeFragment.GAS_TYPE:
 
-                rechargeRequestModel.RechargeType=getString(R.string.gas_type);
-                rechargeRequestModel.ConnectionType ="";
-                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
-                rechargeRequestModel.OptionalPara2="test";
-                rechargeRequestModel.OptionalPara3 ="test";
+//                rechargeRequestModel.RechargeType=getString(R.string.gas_type);
+//                rechargeRequestModel.ConnectionType ="";
+//                rechargeRequestModel.OptionalPara1=bundle.getString("Value4");
+//                rechargeRequestModel.OptionalPara2="test";
+//                rechargeRequestModel.OptionalPara3 ="test";
 
 
                 tv_recharge_type.setText(context.getString(R.string.gas_type));
@@ -316,9 +333,10 @@ public class RechargeConfirmationFragment extends Fragment {
                 try {
                     if(response.body().StatusCode.equalsIgnoreCase("0")){
                         if(isSufficientBalance(response.body())){
-                            MyCustomDialog.setDialogMessage("Recharging...");
-//                            hideCustomDialog();
-                        callRecharge(rechargeRequestModel);
+                           MyCustomDialog.setDialogMessage("Recharging...");
+//                           hideCustomDialog();
+//                           callRecharge(rechargeRequestModel);
+                            getCredential();
                         }else {
                             hideCustomDialog();
                             Toast.makeText(context,"Your balance is low",Toast.LENGTH_LONG).show();
@@ -342,22 +360,87 @@ public class RechargeConfirmationFragment extends Fragment {
         });
     }
 
-    private void callRecharge(RechargeRequestModel rechargeRequestModel) {
+    private void getCredential() {
+        BillConfirmationFragment.GenerateToken request=new BillConfirmationFragment().new GenerateToken();
+        request.AgentCode=loginModel.Data.DoneCardUser;
+        new NetworkCall().callLicService(request, ApiConstants.GenerateToken, context, "", "", false, (response, responseCode) -> {
+            MyCustomDialog.hideCustomDialog();
+            if(response!=null){
+                responseHandlerCredential(response, 0);
+            }else {
+                hideCustomDialog();
+                Toast.makeText(context, R.string.no_data_found, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-        ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
-        Call<RechargeModel> call = apiService.mobileRechargePost(ApiConstants.RECHARGE, rechargeRequestModel);
-        call.enqueue(new Callback<RechargeModel>() {
+    private void responseHandlerCredential(ResponseBody response, int i) {
+        try {
+            BillConfirmationFragment.CheckResponseClass responseModel=new Gson().fromJson(response.string(), BillConfirmationFragment.CheckResponseClass.class);
+            if(responseModel!=null && responseModel.statusCode.equals("00")){
+//                    Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
+//                payBill(responseModel.credentialData.get(0).userData, responseModel.credentialData.get(0).token);
+                callRecharge(rechargeRequestModel, responseModel.credentialData.get(0).userData, responseModel.credentialData.get(0).token);
+            }else {
+                hideCustomDialog();
+                Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            hideCustomDialog();
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    class RechargeResponse{
+        public String statusCode, statusMessage;
+        public ArrayList<rechargeDetail> rechargeDetail;
+
+        class rechargeDetail{
+            public String transactionId, acknowledgementNo, operator, operatorRefId, status,
+                    apiMessage, number, agentCode;
+            public String amount;
+        }
+
+        /*{"rechargeDetail":[{"transactionId":"M28022DHNNJC0A41848","acknowledgementNo":"251095560",
+        "operator":"Airtel","operatorRefId":"1556879568","amount":719,"status":"Success",
+        "apiMessage":"Recharge Success.","number":"9820461056","agentCode":"JC0A41848"}],
+        "statusCode":"00","statusMessage":"SUCCESS"}*/
+    }
+
+    class RechargeRequestModel{
+        public String Merchant=ApiConstants.MerchantId, Mode="App";
+        public String AgentCode, Number, Type, OperateCode, OperateName, token, userData;
+        public int RechargeAmount;
+
+        /*{"Merchant":"JUSTCLICKTRAVELS","AgentCode":"JC0A41848","Mode":"Web",
+        "Number":"9820461056","Type":"Mobile","OperateCode":"MAT","OperateName":"Airtel",
+        "RechargeAmount":719,"token":"","userData":""}*/
+    }
+
+
+    private void callRecharge(RechargeRequestModel rechargeRequestModel, String userData, String token) {
+//        rechargeRequestModel.OperateCode="ABC";
+//        rechargeRequestModel.OperateName="";
+        String json = new Gson().toJson(rechargeRequestModel);
+        ApiInterface apiService = APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+        Call<ResponseBody> call = apiService.recharge(ApiConstants.RECHARGE, rechargeRequestModel, userData, token);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onResponse(Call<RechargeModel> call, Response<RechargeModel> response) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     hideCustomDialog();
                     if(response!=null){
-                       if(response.body().StatusCode.equalsIgnoreCase("0")){
-                           Common.showResponsePopUp(context,response.body().Data.ResponseMessage);
-                       }else {
-//                           Toast.makeText(context,response.body().Status,Toast.LENGTH_LONG).show();
-                           Common.showResponsePopUp(context,response.body().Data.ResponseMessage);
-                       }
+                        RechargeResponse rechargeResponse=new Gson().fromJson(response.body().string(), RechargeResponse.class);
+                        if(rechargeResponse!=null){
+                            if(rechargeResponse.statusCode.equals("00") || rechargeResponse.statusCode.equals("01")){
+                                Toast.makeText(context,rechargeResponse.statusMessage,Toast.LENGTH_LONG).show();
+                                openReceipt(rechargeResponse);
+                            }else {
+                                Toast.makeText(context,rechargeResponse.statusMessage,Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            Toast.makeText(context,R.string.response_failure_message,Toast.LENGTH_LONG).show();
+                        }
                     }else {
                         Toast.makeText(context,R.string.response_failure_message,Toast.LENGTH_LONG).show();
                     }
@@ -373,13 +456,48 @@ public class RechargeConfirmationFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<RechargeModel> call, Throwable t) {
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
                 hideCustomDialog();
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
             }
 
 
         });
+    }
+
+    private void openReceipt(RechargeResponse responseModel) {
+        final Dialog dialog = new Dialog(context, R.style.Theme_Design_Light);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.lic_receipt_dialog);
+        Window window = dialog.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        TextView agentCodeTv=dialog.findViewById(R.id.agentCodeTv);
+        TextView txnIdTv=dialog.findViewById(R.id.txnIdTv);
+        TextView title=dialog.findViewById(R.id.title);
+        TextView policyTv=dialog.findViewById(R.id.policyTv);
+        TextView policyNoTv=dialog.findViewById(R.id.policyNoTv);
+        TextView nameTv=dialog.findViewById(R.id.nameTv);
+        TextView amountTv=dialog.findViewById(R.id.amountTv);
+        TextView operatorIdTv=dialog.findViewById(R.id.operatorIdTv);
+        TextView statusTv=dialog.findViewById(R.id.statusTv);
+        title.setText(rechargeRequestModel.Type+" Receipt");
+        policyTv.setText("Acknowledge no");
+        policyNoTv.setText(responseModel.rechargeDetail.get(0).acknowledgementNo);
+        txnIdTv.setText(responseModel.rechargeDetail.get(0).transactionId);
+        operatorIdTv.setText(responseModel.rechargeDetail.get(0).operator);
+        statusTv.setText(responseModel.rechargeDetail.get(0).status);
+        amountTv.setText(responseModel.rechargeDetail.get(0).amount+"");
+        agentCodeTv.setText(loginModel.Data.DoneCardUser);
+        nameTv.setText(responseModel.rechargeDetail.get(0).operator);
+
+
+        dialog.findViewById(R.id.back_tv).setOnClickListener(view -> {
+            dialog.dismiss();
+            getParentFragmentManager().popBackStack();
+        });
+
+        dialog.show();
     }
 
     private boolean isSufficientBalance(AgentDetails agent) {
@@ -401,5 +519,10 @@ public class RechargeConfirmationFragment extends Fragment {
     private void hideCustomDialog() {
         MyCustomDialog.hideCustomDialog();
     }
+
+    private String dummyResponse="{\"rechargeDetail\":[{\"transactionId\":\"M28022DHNNJC0A41848\",\"acknowledgementNo\":\"251095560\",\n" +
+            "        \"operator\":\"Airtel\",\"operatorRefId\":\"1556879568\",\"amount\":719,\"status\":\"Success\",\n" +
+            "        \"apiMessage\":\"Recharge Success.\",\"number\":\"9820461056\",\"agentCode\":\"JC0A41848\"}],\n" +
+            "        \"statusCode\":\"00\",\"statusMessage\":\"SUCCESS\"}";
 
 }

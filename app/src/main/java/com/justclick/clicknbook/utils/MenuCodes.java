@@ -33,6 +33,7 @@ public class MenuCodes {
     public static final String  BusBookingList="BusBookingList";
     public static final String  JCTMoneyList="JCTMoneyList";
     public static final String  PayoutList="PayoutList";
+    public static final String  UtilityList="UtilityList";
     //AirBookingList,Top-UpDetails,TrainBookingList,TrainFailedList,TrainBookingcheck,DMTTransactionList,GiftBookingList
 
     //Accounts
@@ -118,6 +119,7 @@ public class MenuCodes {
     public static final String  CASH_OUT="PayOut";
     public static final String  LIC="LIC";
     public static final String  PAYTM="Paytm Wallet";
+    public static final String  CASHFREE_QR="QR CODE";
     public static final String  AgentChattingFragment="S0";
     public static final String  AgentDepositRequestFragment="DepositRequest";
     public static final String  AgentCreditRequestFragment="CreditRequest";

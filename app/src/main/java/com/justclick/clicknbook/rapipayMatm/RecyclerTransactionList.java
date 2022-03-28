@@ -102,7 +102,7 @@ public class RecyclerTransactionList extends RecyclerView.Adapter<RecyclerView.V
                 myViewHolder.status.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        listener.onRecyclerItemClick(myViewHolder.status, (ArrayList<TxnListResponseModel.transactionListDetail>) infoList,info,position);
+                        listener.onRecyclerItemClick(myViewHolder.status, (ArrayList<TxnListResponseModel.transactionListDetail>) infoList,info,position);
                     }
                 });
 

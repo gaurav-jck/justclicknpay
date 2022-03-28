@@ -24,6 +24,7 @@ import com.justclick.clicknbook.database.DataBaseHelper;
 import com.justclick.clicknbook.model.JioAmountData;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.model.OptModel;
+import com.justclick.clicknbook.model.OptModelRecharge;
 import com.justclick.clicknbook.model.RechargeDetailResponseModel;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.requestmodels.GetMobileOperatorModel;
@@ -47,7 +48,7 @@ import retrofit2.Response;
 public class RechargeFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     public static final int MOBILE_TYPE=1,DTH_TYPE=2,
-            DATACARD_TYPE=3, ELECTRICITY_TYPE=4, LANDLINE_TYPE=5, GAS_TYPE=6;
+            FAST_TAG_TYPE=3/*DATACARD_TYPE=3*/, ELECTRICITY_TYPE=4, LANDLINE_TYPE=5, GAS_TYPE=6;
     private Context context;
     private LoginModel loginModel;
     private View view;
@@ -100,7 +101,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             gas_billGroup_edt;
     private String gasOperator="";
 
-    private ArrayList<OptModel.OptData> mobileOperatorArrayList, dthOperatorArrayList,
+    private ArrayList<OptModelRecharge.operatorDetail> mobileOperatorArrayList, dthOperatorArrayList,
             datacardOperatorArrayList, elecricityOperatorArrayList,
             landlineOperatorArrayList, gasOperatorArrayList;
     private ArrayList<JioAmountData.JioData> jioAmountList;
@@ -169,12 +170,12 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
 
         fragmentToShow(rechargeType);
 
-        if(dataBaseHelper.getAllOperatorNames(MOBILE_TYPE).size()>0) {
+        /*if(dataBaseHelper.getAllOperatorNames(MOBILE_TYPE).size()>0) {
             mobileOperatorArrayList.clear();
             mobileOperatorArrayList.addAll(dataBaseHelper.getAllOperatorNames(MOBILE_TYPE));
-        }
+        }*/
         if(mobileOperatorArrayList.size()==0) {
-            callOperator("Mobile", MOBILE_TYPE, false);
+            callOperator("prepaid", MOBILE_TYPE, false);
         }else {
             spinner_mobile_operator.setAdapter(setSpinnerAdapter(mobileOperatorArrayList));
             spinner_dth_operator.setAdapter(setSpinnerAdapter(dthOperatorArrayList));
@@ -202,9 +203,12 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             case DTH_TYPE:
                 titleChangeListener.onToolBarTitleChange(getString(R.string.dthFragmentTitle));
                 break;
-            case DATACARD_TYPE:
+            case FAST_TAG_TYPE:
                 titleChangeListener.onToolBarTitleChange(getString(R.string.datacardFragmentTitle));
                 break;
+            /*case DATACARD_TYPE:
+                titleChangeListener.onToolBarTitleChange(getString(R.string.datacardFragmentTitle));
+                break;*/
             case ELECTRICITY_TYPE:
                 titleChangeListener.onToolBarTitleChange(getString(R.string.electricityFragmentTitle));
                 break;
@@ -335,25 +339,20 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
     }
 
     private void callOperator(String type, final int rechargeType, final boolean once) {
-        GetMobileOperatorModel operatorModel=new GetMobileOperatorModel();
-        if(loginModel!=null && loginModel.Data!=null){
-            operatorModel.MerchantId=loginModel.Data.MerchantID;
-            operatorModel.RechargeType=type;
-        }
         ApiInterface apiService =
-                APIClient.getClient().create(ApiInterface.class);
+                APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
 
-        Call<OptModel> call = apiService.getOptPost(ApiConstants.GetOptName,operatorModel);
+        Call<OptModelRecharge> call = apiService.getRechargeOperator(type);
         call.request().headers("");
-        call.enqueue(new Callback<OptModel>() {
+        call.enqueue(new Callback<OptModelRecharge>() {
             @Override
-            public void onResponse(Call<OptModel>call, Response<OptModel> response) {
+            public void onResponse(Call<OptModelRecharge>call, Response<OptModelRecharge> response) {
 //                Toast.makeText(context, "response ", Toast.LENGTH_LONG).show();
                 try{
                     switch (rechargeType){
                         case MOBILE_TYPE:
                             mobileOperatorArrayList.clear();
-                            mobileOperatorArrayList.addAll(response.body().Data);
+                            mobileOperatorArrayList.addAll(response.body().operatorDetail);
 //                          dataBaseHelper.insertOperatorNames(MOBILE_TYPE, response.body().Data);
                             spinner_mobile_operator.setAdapter(setSpinnerAdapter(mobileOperatorArrayList));
 
@@ -367,32 +366,46 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                             break;
                         case DTH_TYPE:
                             dthOperatorArrayList.clear();
-                            dthOperatorArrayList.addAll(response.body().Data);
+                            dthOperatorArrayList.addAll(response.body().operatorDetail);
 //                            dataBaseHelper.insertOperatorNames(DTH_TYPE, response.body().Data);
                             spinner_dth_operator.setAdapter(setSpinnerAdapter(dthOperatorArrayList));
                             /* if(!once) {
                                 getOperatorIfNotInDatabase(DATACARD_TYPE, false);
                             }*/
                             if(!once) {
-                                callOperator("Datacard", DATACARD_TYPE, false);
+//                                callOperator("Datacard", DATACARD_TYPE, false);
+                                callOperator("FastTag", FAST_TAG_TYPE, false);
                             }
                             break;
-                        case DATACARD_TYPE:
+                        /*case DATACARD_TYPE:
                             datacardOperatorArrayList.clear();
                             datacardOperatorArrayList.addAll(response.body().Data);
+//                            dataBaseHelper.insertOperatorNames(DATACARD_TYPE, response.body().Data);
+                            spinner_datacard_operator.setAdapter(setSpinnerAdapter(datacardOperatorArrayList));
+
+                            *//*if(!once) {
+                                getOperatorIfNotInDatabase(ELECTRICITY_TYPE, false);
+                            }*//*
+                            if(!once) {
+                                callOperator("Electricity", ELECTRICITY_TYPE, false);
+                            }
+                            break;*/
+                        case FAST_TAG_TYPE:
+                            datacardOperatorArrayList.clear();
+                            datacardOperatorArrayList.addAll(response.body().operatorDetail);
 //                            dataBaseHelper.insertOperatorNames(DATACARD_TYPE, response.body().Data);
                             spinner_datacard_operator.setAdapter(setSpinnerAdapter(datacardOperatorArrayList));
 
                             /*if(!once) {
                                 getOperatorIfNotInDatabase(ELECTRICITY_TYPE, false);
                             }*/
-                            if(!once) {
+                            /*if(!once) {
                                 callOperator("Electricity", ELECTRICITY_TYPE, false);
-                            }
+                            }*/
                             break;
                         case ELECTRICITY_TYPE:
                             elecricityOperatorArrayList.clear();
-                            elecricityOperatorArrayList.addAll(response.body().Data);
+                            elecricityOperatorArrayList.addAll(response.body().operatorDetail);
 //                            dataBaseHelper.insertOperatorNames(ELECTRICITY_TYPE, response.body().Data);
                             spinner_electricity_operator.setAdapter(setSpinnerAdapter(elecricityOperatorArrayList));
 
@@ -405,7 +418,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                             break;
                         case LANDLINE_TYPE:
                             landlineOperatorArrayList.clear();
-                            landlineOperatorArrayList.addAll(response.body().Data);
+                            landlineOperatorArrayList.addAll(response.body().operatorDetail);
 //                            dataBaseHelper.insertOperatorNames(LANDLINE_TYPE, response.body().Data);
                             spinner_landline_operator.setAdapter(setSpinnerAdapter(landlineOperatorArrayList));
 
@@ -418,7 +431,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                             break;
                         case GAS_TYPE:
                             gasOperatorArrayList.clear();
-                            gasOperatorArrayList.addAll(response.body().Data);
+                            gasOperatorArrayList.addAll(response.body().operatorDetail);
 //                            dataBaseHelper.insertOperatorNames(GAS_TYPE, response.body().Data);
                             spinner_gas_operator.setAdapter(setSpinnerAdapter(gasOperatorArrayList));
                             break;
@@ -434,7 +447,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             }
 
             @Override
-            public void onFailure(Call<OptModel>call, Throwable t) {
+            public void onFailure(Call<OptModelRecharge>call, Throwable t) {
                 int a=0;
 //                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
             }
@@ -444,8 +457,10 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
     private void getOperatorIfNotInDatabase(int optType, boolean once) {
         if(optType==DTH_TYPE && dataBaseHelper.getAllOperatorNames(DTH_TYPE).size()==0){
             callOperator("DTH", DTH_TYPE, false);
-        }else if(optType==DATACARD_TYPE && dataBaseHelper.getAllOperatorNames(DATACARD_TYPE).size()==0){
+        }/*else if(optType==DATACARD_TYPE && dataBaseHelper.getAllOperatorNames(DATACARD_TYPE).size()==0){
             callOperator("Datacard", DATACARD_TYPE, false);
+        }*/else if(optType==FAST_TAG_TYPE && dataBaseHelper.getAllOperatorNames(FAST_TAG_TYPE).size()==0){
+            callOperator("Datacard", FAST_TAG_TYPE, false);
         }else if(optType==ELECTRICITY_TYPE && dataBaseHelper.getAllOperatorNames(ELECTRICITY_TYPE).size()==0){
             callOperator("Electricity", ELECTRICITY_TYPE, false);
         }else if(optType==LANDLINE_TYPE && dataBaseHelper.getAllOperatorNames(LANDLINE_TYPE).size()==0){
@@ -487,10 +502,10 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
         });
     }
 
-    private ArrayAdapter<String> setSpinnerAdapter(ArrayList<OptModel.OptData> data) {
+    private ArrayAdapter<String> setSpinnerAdapter(ArrayList<OptModelRecharge.operatorDetail> data) {
         String[] arr=new String[data.size()];
         for(int i=0;i<data.size();i++){
-            arr[i]=data.get(i).OptName;
+            arr[i]=data.get(i).operatorName;
         }
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
@@ -613,8 +628,10 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                 return isMobileValid();
             case DTH_TYPE:
                 return isDthValid();
-            case DATACARD_TYPE:
-                return isDatacardValid();
+//            case DATACARD_TYPE:
+//                return isDatacardValid();
+            case FAST_TAG_TYPE:
+                return isFastTagValid();
             case ELECTRICITY_TYPE:
                 return isElectricityValid();
             case LANDLINE_TYPE:
@@ -632,24 +649,27 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
 
-        }else if(!mobileOperator.equalsIgnoreCase("JIO") &&
+        }else if(/*!mobileOperator.equalsIgnoreCase("JIO") &&*/
                 (!Common.isdecimalvalid(mobile_amount_edt.getText().toString()))){
             Toast.makeText(context,R.string.empty_and_invalid_amount,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!mobileOperator.equalsIgnoreCase("JIO") &&
+        }else if(/*!mobileOperator.equalsIgnoreCase("JIO") &&*/
                 mobile_amount_edt.getText().toString().trim().length()>0 &&
                 Float.parseFloat(mobile_amount_edt.getText().toString().trim())==0){
             Toast.makeText(context,R.string.empty_and_invalid_amount,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(mobileOperator.equalsIgnoreCase("JIO") &&
+        }else if(Float.parseFloat(mobile_amount_edt.getText().toString().trim())<10){
+            Toast.makeText(context,"Please enter minimum amount of rupees 10",Toast.LENGTH_SHORT).show();
+            return false;
+        }/*else if(mobileOperator.equalsIgnoreCase("JIO") &&
                 spinner_jio_amount.getSelectedItemPosition()==0 &&
                 spinner_jio_amount.getSelectedItem().toString().trim().toLowerCase().contains("select")){
             Toast.makeText(context,R.string.empty_and_invalid_amount,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(user_mobile_edt.getText().toString().trim().length()<10){
+        }*/else if(user_mobile_edt.getText().toString().trim().length()<10){
             Toast.makeText(context,R.string.empty_and_invalid_mobile,Toast.LENGTH_SHORT).show();
             return false;
-        }else  if (mobileOperator.trim().equalsIgnoreCase("IDEA") && mobileType == POSTPAID) {
+        }/*else  if (mobileOperator.trim().equalsIgnoreCase("IDEA") && mobileType == POSTPAID) {
             if (Float.parseFloat(mobile_amount_edt.getText().toString()) < 10 ||
                     Float.parseFloat(mobile_amount_edt.getText().toString()) > 10800)
 
@@ -673,7 +693,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                 Toast.makeText(context, "Please enter amount between 50 to 10000", Toast.LENGTH_SHORT).show();
                 return false;
             }
-        }
+        }*/
         return true;
     }
     private boolean isDthValid() {
@@ -691,6 +711,21 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
         return true;
     }
     private boolean isDatacardValid() {
+        if(datacardOperator.length()==0){
+            Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
+            return false;
+        }else if((!Common.isdecimalvalid(amount_edt_datacard.getText().toString())) ||
+                Float.parseFloat(amount_edt_datacard.getText().toString().trim())==0){
+            Toast.makeText(context,R.string.empty_and_invalid_amount,Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(user_mobile_edt_datacard.getText().toString().trim().length()==0 ||
+                user_mobile_edt_datacard.getText().toString().trim().length()<10){
+            Toast.makeText(context,R.string.empty_and_invalid_mobile,Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+    private boolean isFastTagValid() {
         if(datacardOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
@@ -818,24 +853,35 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                 bundle.putString("MobileType",mobileType==PREPAID?"Prepaid":"Postpaid");
                 bundle.putString("IdNumber",user_mobile_edt.getText().toString());
                 bundle.putString("Operator", spinner_mobile_operator.getSelectedItem().toString());
-                bundle.putString("RechargeAmount",mobileOperator.equalsIgnoreCase("JIO") ?
+                bundle.putString("OperatorCode", mobileOperatorArrayList.get(spinner_mobile_operator.getSelectedItemPosition()).operatorCode);
+                bundle.putString("RechargeAmount", mobile_amount_edt.getText().toString().trim());
+                /*bundle.putString("RechargeAmount",mobileOperator.equalsIgnoreCase("JIO") ?
                         spinner_jio_amount.getSelectedItem().toString():
                         mobile_amount_edt.getText().toString().trim());
                 if(mobileOperator.equalsIgnoreCase("JIO") && jioAmountList.size()>0) {
                     bundle.putString("Value4", jioAmountList.get(spinner_jio_amount.getSelectedItemPosition()).Id);
                 }else {
                     bundle.putString("Value4","");
-                }
+                }*/
 
                 break;
             case DTH_TYPE:
                 bundle.putString("Type","DTH");
                 bundle.putString("IdNumber",dth_subscriberId_edt.getText().toString());
                 bundle.putString("Operator", spinner_dth_operator.getSelectedItem().toString());
+                bundle.putString("OperatorCode", spinner_dth_operator.getSelectedItem().toString());
+                bundle.putString("OperatorCode", dthOperatorArrayList.get(spinner_dth_operator.getSelectedItemPosition()).operatorCode);
                 bundle.putString("RechargeAmount", dth_amount_edt.getText().toString().trim());
                 break;
-            case DATACARD_TYPE:
+            /*case DATACARD_TYPE:
                 bundle.putString("Type","DATACARD");
+                bundle.putString("DatacardType",datacardType==PREPAID?"Prepaid":"Postpaid");
+                bundle.putString("IdNumber",user_mobile_edt_datacard.getText().toString());
+                bundle.putString("Operator", spinner_datacard_operator.getSelectedItem().toString());
+                bundle.putString("RechargeAmount", amount_edt_datacard.getText().toString().trim());
+                break;*/
+            case FAST_TAG_TYPE:
+                bundle.putString("Type","FASTTAG");
                 bundle.putString("DatacardType",datacardType==PREPAID?"Prepaid":"Postpaid");
                 bundle.putString("IdNumber",user_mobile_edt_datacard.getText().toString());
                 bundle.putString("Operator", spinner_datacard_operator.getSelectedItem().toString());
@@ -909,7 +955,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                 recharge_layout_mobile.setVisibility(View.VISIBLE);
 //                mobileOperatorArrayList=dataBaseHelper.getAllOperatorNames(MOBILE_TYPE);
                 if(mobileOperatorArrayList.size()==0){
-                    callOperator("Mobile", MOBILE_TYPE, true);
+                    callOperator("prepaid", MOBILE_TYPE, true);
                 }
                 break;
             case DTH_TYPE:
@@ -921,13 +967,22 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
                     callOperator("DTH", DTH_TYPE, true);
                 }
                 break;
-            case DATACARD_TYPE:
+           /* case DATACARD_TYPE:
                 rechargeType = DATACARD_TYPE;
                 setOtherVisibilityGone();
                 recharge_layout_datacard.setVisibility(View.VISIBLE);
 //                datacardOperatorArrayList=dataBaseHelper.getAllOperatorNames(DATACARD_TYPE);
                 if(datacardOperatorArrayList.size()==0){
                     callOperator("Datacard", DATACARD_TYPE, true);
+                }
+                break;*/
+            case FAST_TAG_TYPE:
+                rechargeType = FAST_TAG_TYPE;
+                setOtherVisibilityGone();
+                recharge_layout_datacard.setVisibility(View.VISIBLE);
+//                datacardOperatorArrayList=dataBaseHelper.getAllOperatorNames(DATACARD_TYPE);
+                if(datacardOperatorArrayList.size()==0){
+                    callOperator("Fasttag", FAST_TAG_TYPE, true);
                 }
                 break;
             case ELECTRICITY_TYPE:
@@ -977,8 +1032,11 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             case DTH_TYPE:
                 rechargeType =DTH_TYPE;
                 break;
-            case DATACARD_TYPE:
+            /*case DATACARD_TYPE:
                 rechargeType =DATACARD_TYPE;
+                break;*/
+            case FAST_TAG_TYPE:
+                rechargeType =FAST_TAG_TYPE;
                 break;
             case ELECTRICITY_TYPE:
                 rechargeType=ELECTRICITY_TYPE;
@@ -1022,7 +1080,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
     }
     private void mobileOperatorSelector(int position, String selectedValue) {
         mobileOperator=selectedValue;
-        if(selectedValue.equalsIgnoreCase("JIO")){
+        /*if(selectedValue.equalsIgnoreCase("JIO")){
             linear_jio_spinner.setVisibility(View.VISIBLE);
             jio_spinner_view.setVisibility(View.VISIBLE);
             mobile_amount_edt.setVisibility(View.INVISIBLE);
@@ -1039,7 +1097,7 @@ public class RechargeFragment extends Fragment implements View.OnClickListener, 
             amount_edt_parent.setVisibility(View.VISIBLE);
             postpaid_lin.setEnabled(true);
             postpaid_lin.setAlpha(1f);
-        }
+        }*/
     }
 
     private void dthOperatorSelector(int position, String selectedValue) {

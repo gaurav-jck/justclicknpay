@@ -59,6 +59,13 @@ public class TxnListResponseModel implements Serializable {
         private String rrn;
         private String cardHolderName;
 
+//        utility
+        private String rechargeNumber;
+
+        public String getRechargeNumber() {
+            return rechargeNumber;
+        }
+
         public String getServiceType() {
             return serviceType;
         }

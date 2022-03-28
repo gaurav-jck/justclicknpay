@@ -269,7 +269,8 @@
                 android:id="@+id/commissionLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/commissionTv"
                     android:layout_width="0dp"
@@ -300,12 +301,14 @@
                 android:id="@+id/viewCommissionTv"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="gone"
                 android:background="@color/grayTextHintColorFlight"/>
             <LinearLayout
                 android:id="@+id/markUpLinear"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
                 <TextView
                     android:id="@+id/markUpTv"
                     android:layout_width="0dp"
@@ -336,6 +339,7 @@
                 android:id="@+id/viewmarkUpTv"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:visibility="gone"
                 android:background="@color/grayTextHintColorFlight"/>
             <LinearLayout
                 android:layout_width="match_parent"

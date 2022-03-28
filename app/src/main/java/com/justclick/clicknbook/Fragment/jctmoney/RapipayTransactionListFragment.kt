@@ -24,6 +24,7 @@ import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.jctmoney.request.DmtListRequestModel
+import com.justclick.clicknbook.Fragment.jctmoney.response.BankResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
 import com.justclick.clicknbook.model.AgentNameModel
@@ -178,11 +179,13 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
                 R.id.statusTv->{
-                   /* statusPosition=position
+                    statusPosition=position
                     val statusCheck=StatusCheck()
                     statusCheck.setTransactionId(data.jckTransactionId)
-                    statusCheck.setLoggedinAgentCode(loginModel!!.Data.DoneCardUser)
-                    getStatus(statusCheck)*/
+                    statusCheck.setLoggedInAgentCode(loginModel!!.Data.DoneCardUser)
+//                    statusCheck.setLoggedInAgentCode("JC0A39395")  //hard code
+//                    statusCheck.setLoggedInAgentCode("jc0o188")  //hard code
+                    getStatus(statusCheck)
                 }
 
             }
@@ -210,15 +213,18 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getStatus(statusCheck: StatusCheck) {
-        NetworkCall().callRapipayMatmService(statusCheck, ApiConstants.StatusCheck, context,
-         { response, responseCode ->
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface::class.java)
+        val call = apiService.getRapipayCommonPost(ApiConstants.StatusCheck, statusCheck)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
             if (response != null) {
                 responseHandler(response, STATUS_CHECK)
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
             }
             hideCustomDialog()
-        },true)
+        }
     }
 
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
@@ -293,7 +299,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openFilterDialog() {
-        filterDialog = Dialog(context!!)
+        filterDialog = Dialog(requireContext())
         filterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         filterDialog!!.setContentView(R.layout.filter_dialog_layout)
         start_date_value_tv = filterDialog!!.findViewById(R.id.start_date_value_tv)
@@ -369,8 +375,9 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     fun callAgent(transactionListRequestModel: DmtListRequestModel?, progress: Boolean) {
 
 //        transactionListRequestModel!!.setAgentCode("JC0A39395") // hardcode
-//        transactionListRequestModel!!.setAgentCode("JC0D3416") // hardcode
+//        transactionListRequestModel!!.setAgentCode("jc0o188") // hardcode
         transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
+//        transactionListRequestModel!!.setUserType("OOU")
         if(loginModel!!.Data.UserType.equals("A") || loginModel!!.Data.UserType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         }else{
@@ -438,7 +445,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
             }
             R.id.lin_dateFilter -> openFilterDialog()
             R.id.linFilter -> openListFilterDialog()
-            R.id.back_arrow -> fragmentManager!!.popBackStack()
+            R.id.back_arrow -> requireFragmentManager().popBackStack()
         }
     }
 
@@ -448,7 +455,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         agentDoneCard = ""
         agentName = ""
         CustMobile = ""
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.jct_txn_list_filter)
         val statusSpinner = dialog.findViewById<Spinner>(R.id.statusSpinner)
@@ -462,7 +469,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
             agent_search_edt.visibility = View.GONE
             dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
         adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
         statusSpinner.adapter = adapter
@@ -563,14 +570,14 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setSpinnerAdapter(data: Array<String>): ArrayAdapter<String> {
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter
     }
 
     private fun openStartDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     startDateCalendar!![year, monthOfYear] = dayOfMonth
@@ -596,7 +603,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openEndDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     endDateCalendar = Calendar.getInstance()
@@ -620,7 +627,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openReceipt(senderResponse: TxnListResponseModel.transactionListDetail) {
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)
         val window = dialog.window
@@ -669,7 +676,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
 
     private fun hideSoftInputFromDialog(dialog: Dialog) {
         try {
-            val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(dialog.window!!.currentFocus!!.windowToken, 0)
         } catch (e: NullPointerException) {
         }
@@ -677,7 +684,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
 
 
     private fun showCustomDialog() {
-        MyCustomDialog.showCustomDialog(context, context!!.resources.getString(R.string.please_wait))
+        MyCustomDialog.showCustomDialog(context, requireContext().resources.getString(R.string.please_wait))
     }
 
     private fun hideCustomDialog() {
@@ -686,15 +693,16 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
 
     public class StatusCheck {
         private var TransactionId: String? = null
-        private var Merchant: String? = ApiConstants.MerchantId
-        private var LoggedinAgentCode: String? = null
+        private var MerchantId: String? = ApiConstants.MerchantId
+        private var Mode: String? = "App"
+        private var LoggedInAgentCode: String? = null
 
 
         fun setTransactionId(transactionId: String?) {
             TransactionId = transactionId
         }
-        fun setLoggedinAgentCode(agentCode: String?) {
-            LoggedinAgentCode = agentCode
+        fun setLoggedInAgentCode(agentCode: String?) {
+            LoggedInAgentCode = agentCode
         }
     }
 
