@@ -110,10 +110,12 @@ public class MenuCodes {
     public static final String  FlightSearch="Flight";
     public static final String  HotelSearch="Hotel";
     public static final String  BusSearch="Bus";
-    public static final String  AEPS="Aeps";
+//    public static final String  AEPS="Aeps";
+    public static final String  AEPS="AAEPS";
     public static final String  AEPS_OLD ="AepsYes";
     public static final String  MATM="MATM";
     public static final String  CREDOPAY="CREDOPAY";
+    public static final String  FAST_TAG="FastTag";
     public static final String  TRAIN="IRCTC";
     public static final String  BILL_PAY="BILL PAY";
     public static final String  CASH_OUT="PayOut";

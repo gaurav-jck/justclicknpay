@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.justclick.clicknbook.R;
 
 /**
- * Created by pc1 on 4/24/2017.
+ * Created by Gaurav on 4/24/2017.
  */
 //uses link
 //https://pankajchunchun.wordpress.com/2011/09/10/customization-of-spinner-progress/

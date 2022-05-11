@@ -211,6 +211,8 @@ class PaytmWalletFragmentNew : Fragment() {
                 val commonResponse = Gson().fromJson(response.string()/*bill*/, PaytmTopUpResponse::class.java)
                 if (commonResponse != null) {
 //                    openResponseDialog("Transaction Response", commonResponse.statusMessage!!, "", "OK", "", "")
+//                    mobileEdt!!.setText("")
+//                    amountEdt!!.setText("")
                     if (commonResponse.statusCode.equals("00", ignoreCase = true) ||
                             commonResponse.statusCode.equals("01", ignoreCase = true)||
                             commonResponse.statusCode.equals("02", ignoreCase = true)) {

@@ -536,6 +536,9 @@ public interface ApiInterface {
     Call<ResponseBody> getBillPayCommonPost(@Path("methodName") String method, @Body Object data,
                                         @Header("userData") String userData, @Header("Authorization") String token);
 
+    @POST("List/UtilityReport/{methodName}")
+    Call<ResponseBody> getUtilityList(@Path("methodName") String method, @Body Object data);
+
     @POST("api/Paytem/{methodName}")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getPaytmCommonPostNew(@Path("methodName") String method, @Body Object data,
@@ -553,4 +556,8 @@ public interface ApiInterface {
     // insurance Service
     @POST("API/Insurence/{methodName}")
     Call<ResponseBody> getInsuranceCommonPost(@Path("methodName") String method, @Body Object data);
+
+//    fasttag  api
+    @GET("Api_v1/Fastag/Fastaglist")
+    Call<ResponseBody> getFastTagOperator();
 }

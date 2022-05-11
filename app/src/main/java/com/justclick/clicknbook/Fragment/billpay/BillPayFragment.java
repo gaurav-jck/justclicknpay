@@ -50,7 +50,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             DATACARD_TYPE=3, ELECTRICITY_TYPE=4, LANDLINE_TYPE=5, GAS_TYPE=6, INSURANCE_TYPE=7, EMI_TYPE=8;
     public static final String categoryElectricity="Electricity",categoryGas="Gas",categoryPostpaid="Postpaid",
             categoryWater="Water",categoryInsurance="Insurance",categoryDatacardPrepaid="DatacardPrepaid",
-            categoryLandline="Landline",categoryEMI="EMI";
+            categoryLandline="Landline",categoryEMI="EMI", categoryFastTag="FastTag";
     private boolean isElectricityOperator, isGasOperator, isPostpaidOperator, isWaterOperator, isDatacardOperator,
             isLandlineOperator;
     private Context context;
@@ -314,15 +314,15 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         }*/
     }
 
-    class OperatorResponseModel implements Serializable{
-        String StatusCode, StatusMessage;
+    public class OperatorResponseModel implements Serializable{
+        public String StatusCode, StatusMessage;
         int OperaterCount;
-        ArrayList<operatorlistDetails> operatorlistDetails;
+        public ArrayList<operatorlistDetails> operatorlistDetails;
 
-        class operatorlistDetails implements Serializable {
-            String operaterid, name,category,regex, displayname, Suppliercode, ad1_name, ad1_regex;
-            int viewbill;
-            boolean ad1code, ad2code,ad3code;
+        public class operatorlistDetails implements Serializable {
+            public String operaterid, name,category,regex, displayname, Suppliercode, ad1_name, ad1_regex;
+            public int viewbill;
+            public boolean ad1code, ad2code,ad3code;
         }
     }
 
@@ -448,8 +448,8 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         }
     }
 
-    class FetchBillRequest{
-        String Category,AgentCode, Merchant=ApiConstants.MerchantId, Type="App", operatorId, canumber, ad1;
+    public class FetchBillRequest{
+        public String Category,AgentCode, Merchant=ApiConstants.MerchantId, Type="App", operatorId, canumber, ad1;
  /* {
     "operatorId": "20",
     "canumber": "60024474722",
@@ -460,12 +460,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
 }*/
     }
 
-    class FetchBillResponseModel implements Serializable {
-        String statusCode, statusMessage;
+    public class FetchBillResponseModel implements Serializable {
+        public String statusCode, statusMessage;
         float billAmount;
-        ArrayList<payfetchbilllist> payfetchbilllist;
+        public ArrayList<payfetchbilllist> payfetchbilllist;
 
-        class payfetchbilllist implements Serializable{
+        public class payfetchbilllist implements Serializable{
             float billAmount;
             String dueDate, customerName,billNumber,fetchbillstring, category,operatorid,canumber;
             /*"": 40,

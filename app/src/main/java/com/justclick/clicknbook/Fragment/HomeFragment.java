@@ -31,6 +31,7 @@ import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
+import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment;
@@ -275,6 +276,9 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.CREDOPAY://24
                 startActivity(new Intent(context, CredoPayActivityJava.class));
+                break;
+            case MenuCodes.FAST_TAG://24
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new FasttagFragment());
                 break;
             case MenuCodes.TRAIN://25
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());

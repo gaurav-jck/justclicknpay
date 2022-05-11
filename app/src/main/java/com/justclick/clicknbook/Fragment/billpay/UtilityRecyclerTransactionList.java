@@ -68,7 +68,7 @@ public class UtilityRecyclerTransactionList extends RecyclerView.Adapter<Recycle
                 myViewHolder.txnAmount.setText("Rs "+info.getTxnAmount());
                 myViewHolder.operatorIdTv.setText(info.getRechargeNumber());
                 myViewHolder.date.setText( info.getCreatedDate());
-                myViewHolder.txnType.setText(info.getTxnType());
+                myViewHolder.txnType.setText(info.getRechargeType());
                 myViewHolder.status.setText( info.getTxnStatusDesc());
 
                 myViewHolder.print_tv.setOnClickListener(new View.OnClickListener() {

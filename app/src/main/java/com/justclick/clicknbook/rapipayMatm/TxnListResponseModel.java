@@ -51,6 +51,12 @@ public class TxnListResponseModel implements Serializable {
         private String distCode;
         private String distName;
         private String txnType;
+        private String rechargeType;
+
+        public String getRechargeType() {
+            return rechargeType;
+        }
+
         private String bankName;
         private String mobile;
         private String apiStatusMessage;

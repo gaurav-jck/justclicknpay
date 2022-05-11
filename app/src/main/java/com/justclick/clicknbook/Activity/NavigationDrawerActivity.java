@@ -68,6 +68,7 @@ import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.cashout.SenderDetailFragment;
+import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.flight.FlightSearchFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.flights.fragments.PlacesSearch;
@@ -471,6 +472,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 startActivity(new Intent(context, CredoPayActivityJava.class));
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.FAST_TAG:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new FasttagFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.TRAIN:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -548,6 +553,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.MATM:
                 return R.drawable.ic_icon_mobile_payment_black;
             case MenuCodes.CREDOPAY:
+                return R.drawable.ic_icon_mobile_payment_black;
+            case MenuCodes.FAST_TAG:
                 return R.drawable.ic_icon_mobile_payment_black;
             case MenuCodes.TRAIN:
                 return R.drawable.train_booking_check_icon;
@@ -816,6 +823,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
                         }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
                             subMenu.SubMenu="Recharge";
+                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
+                            subMenu.SubMenu="AEPS";
                         }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
@@ -834,16 +843,17 @@ public class NavigationDrawerActivity extends AppCompatActivity
             }
 
 
+
 //            hardcoded
             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
             subMenuHotel.SubMenu=MenuCodes.MATM;
             subMenuHotel.SubMenuCode=MenuCodes.MATM;
             subMenuArrayList.add(subMenuHotel);
 
-//            LoginModel.DataList.subMenu credopay=dataList.new subMenu();
-//            credopay.SubMenu=MenuCodes.CREDOPAY;
-//            credopay.SubMenuCode=MenuCodes.CREDOPAY;
-//            subMenuArrayList.add(credopay);
+            LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
+            fasttag.SubMenu=MenuCodes.FAST_TAG;
+            fasttag.SubMenuCode=MenuCodes.FAST_TAG;
+            subMenuArrayList.add(fasttag);
 
             LoginModel.DataList.subMenu subMenuTrain=dataList.new subMenu();
             subMenuTrain.SubMenu=MenuCodes.TRAIN;

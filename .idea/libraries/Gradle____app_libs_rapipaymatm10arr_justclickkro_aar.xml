@@ -12,6 +12,17 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c056e4fe200ccbf258489c2d7b6e9b5/jetified-rapipaymatm10arr-justclickkro/jars/libs/morefun_mpos_sdk_v2.0.20040916.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c056e4fe200ccbf258489c2d7b6e9b5/jetified-rapipaymatm10arr-justclickkro/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/1c056e4fe200ccbf258489c2d7b6e9b5/jetified-rapipaymatm10arr-justclickkro/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/commons-lang3-3.1.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/morefun_mpos_sdk_v2.0.20040916.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/jackson-databind-2.9.8.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/com.android.volley-2015.05.28.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/jjwt-0.9.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/commons-ssl.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/jackson-annotations-2.9.0.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/655369903160387282419393574ccaa6/jetified-rapipaymatm10arr-justclickkro/jars/libs/jackson-core-2.9.8.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

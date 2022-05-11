@@ -10,6 +10,9 @@ public class PayoutListRequestModel {
     public void setUserType(String userType) {
         UserType = userType;
     }
+    public String getUserType() {
+        return UserType;
+    }
 
     public void setAgentCode(String agentCode) {
         AgentCode = agentCode;

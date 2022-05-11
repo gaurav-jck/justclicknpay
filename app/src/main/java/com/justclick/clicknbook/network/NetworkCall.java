@@ -1613,6 +1613,10 @@ public void callPaytmService(Object model, String methodName, final Context cont
         return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);
     }
 
+    public static ApiInterface getFastTagApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+    }
+
 
     private void showCustomDialog() {
         MyCustomDialog.showCustomDialog(context,"Please wait...");

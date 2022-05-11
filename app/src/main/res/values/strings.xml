@@ -719,4 +719,8 @@
     <string name="transactionErrorBal">There was a technical error from host, please try again..</string>
     <string name="transactionExceptionBal">There was a error response from host, please try again..</string>
     <string name="freshnessFactorErrorBal">There was error in host, please try again..</string>
+
+<!--    fasttag-->
+    <string name="fasttag">FastTag</string>
+
 </resources>

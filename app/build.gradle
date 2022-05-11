@@ -30,8 +30,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 29
-            versionName "1.4.2"
+            versionCode 32
+            versionName "1.4.5"
 //            applicationIdSuffix ".qa"
 
         }
@@ -139,6 +139,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

@@ -17,6 +17,7 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import android.widget.AdapterView.*
+//import android.app.Fragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -397,24 +398,36 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
     fun callAgent(transactionListRequestModel: PayoutListRequestModel?, progress: Boolean) {
 
 //        transactionListRequestModel!!.setAgentCode("JC0O188") // hardcode
-//        transactionListRequestModel!!.setUserType("OOU") // hardcode
-//        transactionListRequestModel!!.setAgentCode("JC0D3416") // hardcode
+        transactionListRequestModel!!.setUserType("OOU") // hardcode
 //        transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
 //        transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
-        /*if(loginModel!!.Data.UserType.equals("A") || loginModel!!.Data.UserType.equals("D")){
+        if(transactionListRequestModel!!.userType.equals("A") || transactionListRequestModel!!.userType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         }else{
             transactionListRequestModel!!.setAgentCode("")
-        }*/
+        }
         if (progress && !MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }
-        NetworkCall().callLicService(transactionListRequestModel, ApiConstants.PayoutTransactionList, context, "", "", false
+        /*NetworkCall().callLicService(transactionListRequestModel, ApiConstants.PayoutTransactionList, context, "", "", false
         ) { response, responseCode ->
             if (response != null) {
                 responseHandler(response, CALL_AGENT)
             } else {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+            hideCustomDialog()
+        }*/
+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_LIC).create(ApiInterface::class.java)
+        val call = apiService.getUtilityList(ApiConstants.PayoutTransactionList, transactionListRequestModel)
+        NetworkCall().callService(call,context,false
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandler(response, CALL_AGENT)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
             }
             hideCustomDialog()
         }
@@ -666,7 +679,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         val amountTv = dialog.findViewById<TextView>(R.id.amountTv)
         val operatorIdTv = dialog.findViewById<TextView>(R.id.operatorIdTv)
         val statusTv = dialog.findViewById<TextView>(R.id.statusTv)
-        title.setText(senderResponse.txnType + " Bill Receipt")
+        title.setText(senderResponse.rechargeType + " Bill Receipt")
         policyTv.text = "Operator Id"
         nameLabel.text = "Txn Type"
         agentCodeTv.text = senderResponse.agentCode
@@ -674,7 +687,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         policyNoTv.text = senderResponse.rechargeNumber
         statusTv.text = senderResponse.txnStatusDesc
         amountTv.text = senderResponse.txnAmount.toString()
-        nameTv.text=senderResponse.txnType
+        nameTv.text=senderResponse.rechargeType
         dialog.findViewById<View>(R.id.back_tv).setOnClickListener { dialog.dismiss() }
         dialog.show()
     }

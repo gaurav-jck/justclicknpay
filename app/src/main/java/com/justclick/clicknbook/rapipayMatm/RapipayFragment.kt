@@ -1,5 +1,6 @@
 package com.justclick.clicknbook.rapipayMatm
 
+import android.Manifest
 import android.app.Dialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -35,8 +36,11 @@ import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import android.annotation.SuppressLint
-
-
+import android.app.Activity
+import android.bluetooth.BluetoothManager
+import android.content.pm.PackageManager
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 
 
 public class RapipayFragment : Fragment() {
@@ -129,6 +133,15 @@ public class RapipayFragment : Fragment() {
         }
     }
 
+    val registerForResult = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val intent = result.data
+            // Handle the Intent
+        }
+    }
+
     fun bluetooth(){
         btAdapter= BluetoothAdapter.getDefaultAdapter()
         if(btAdapter==null){
@@ -143,13 +156,48 @@ public class RapipayFragment : Fragment() {
             if (!btAdapter!!.isEnabled) {
                 Log.d("GoPosActivity", "bluetooth is not enable")
                 val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                startActivityForResult(enableBT, REQUEST_BLUETOOTH)
+//                startActivityForResult(enableBT, REQUESTLUE_BTOOTH)
+                registerForResult.launch(enableBT)
             } else {
                 Log.d("GoPosActivity", "bluetooth is enable")
                 accessBluetoothDetails()
             }
         }
     }
+
+    val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+            }
+        }
+
+    fun bluetooth2(){
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.BLUETOOTH
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                // You can use the API that requires the permission.
+            }
+        }
+       /* else -> {
+            // You can directly ask for the permission.
+            // The registered ActivityResultCallback gets the result of this request.
+            requestPermissionLauncher.launch(
+                Manifest.permission.BLUETOOTH)
+        }*/
+    }
+
 
     var bluetoothDevice: BluetoothDevice? = null
     var bluetoothName: String? = null
