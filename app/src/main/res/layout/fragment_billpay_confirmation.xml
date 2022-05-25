@@ -102,7 +102,10 @@
                 android:textColorHint="@color/grayTextHintColorFlight"
                 android:textSize="@dimen/simple_content_text_size"
                 android:textStyle="bold"
-                android:enabled="false"/>
+                android:enabled="false"
+                android:maxLength="10"
+                android:singleLine="true"
+                android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 

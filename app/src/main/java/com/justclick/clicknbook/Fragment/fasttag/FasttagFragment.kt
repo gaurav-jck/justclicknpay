@@ -151,7 +151,7 @@ class FasttagFragment : Fragment(), AdapterView.OnItemSelectedListener {
         bundle.putInt("RechargeType", 1)
         bundle.putSerializable("BillDetailResponse", responseModel.payfetchbilllist[0])
         bundle.putSerializable("OperatorData", operatorData)
-        val fragment = BillConfirmationFragment()
+        val fragment = FastTagConfirmationFragment()
         fragment.arguments = bundle
         (context as NavigationDrawerActivity).replaceFragmentWithBackStack(fragment)
     }

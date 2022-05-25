@@ -560,4 +560,11 @@ public interface ApiInterface {
 //    fasttag  api
     @GET("Api_v1/Fastag/Fastaglist")
     Call<ResponseBody> getFastTagOperator();
+
+    @POST("Api_v1/Fastag/Fetchbilldetails")
+    Call<ResponseBody> getFastTagBill(@Body Object data);
+
+    @POST("Api_v1/Fastag/PayBillpayments")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> payFastTagBill(@Body Object data, @Header("userData") String userData, @Header("Authorization") String token);
 }

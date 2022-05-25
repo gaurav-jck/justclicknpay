@@ -43,18 +43,18 @@ import kotlin.collections.ArrayList
  * A simple [Fragment] subclass.
  */
 class TrainBookFragment : Fragment(), View.OnClickListener {
-    private final val ADULT:Int=1
-    private final val INFANT:Int=2
-    private final val NoPreference="No Preference"
-    private final val LowerBerth="Lower Berth"
-    private final val UpperBerth="Upper Berth"
-    private final val MiddleBerth="Middle Berth"
-    private final val SideUpper="Side Upper"
-    private final val SideLower="Side Lower"
-    private final val WindowSeat="Window Seat"
-    private final val Veg="Veg"
-    private final val NonVeg="Non Veg"
-    private final val DoNotSelect="No Food"
+    private val ADULT:Int=1
+    private val INFANT:Int=2
+    private val NoPreference="No Preference"
+    private val LowerBerth="Lower Berth"
+    private val UpperBerth="Upper Berth"
+    private val MiddleBerth="Middle Berth"
+    private val SideUpper="Side Upper"
+    private val SideLower="Side Lower"
+    private val WindowSeat="Window Seat"
+    private val Veg="Veg"
+    private val NonVeg="Non Veg"
+    private val DoNotSelect="No Food"
     var loginModel:LoginModel?=null
     var passengerContainerLin:LinearLayout?=null
     var infantContainerLin:LinearLayout?=null
@@ -127,7 +127,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             view.pgChargeEdt.setText("0")
             view.serviceChargeEdt.setText("0")
 
-            view.pin_edt.addTextChangedListener(object : TextWatcher {
+            /*view.pin_edt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 //                Toast.makeText(context, "count="+count+"  text="+s.toString(),Toast.LENGTH_SHORT).show();
@@ -139,7 +139,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 }
 
                 override fun afterTextChanged(s: Editable) {}
-            })
+            })*/
 
             view.pin_edt2.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -156,7 +156,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 override fun afterTextChanged(s: Editable) {}
             })
 
-            view.cityAtv.onItemClickListener = OnItemClickListener { parent, view, position, id ->
+            /*view.cityAtv.onItemClickListener = OnItemClickListener { parent, view, position, id ->
 //                post = view.cityAtv.text.toString()
 //                city = pinCityResponseArrayList!![position].district
 //                state = pinCityResponseArrayList!![position].state
@@ -164,7 +164,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 //                state_edt.setText(state)
 //                cityEdt.setText(city)
             }
-            view.cityAtv.setOnClickListener(this)
+            view.cityAtv.setOnClickListener(this)*/
 
             setFonts()
 
@@ -225,7 +225,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 showHideFare()
             R.id.cityAtv-> {
                 Common.hideSoftKeyboard(context as Activity?)
-                cityAtv.showDropDown()
+//                cityAtv.showDropDown()
             }
         }
     }
@@ -338,22 +338,22 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                             getCityPin(pin,pinCity!!.cityList!!.get(0))
                         }else{
                             hideCustomDialog()
-                            Toast.makeText(context, "No data found for this pin code", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
                         }
 
                     } else {
                         hideCustomDialog()
-                        Toast.makeText(context, "No data found for this pin code", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     hideCustomDialog()
-                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 hideCustomDialog()
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -376,29 +376,29 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 
                         val pinCity = Gson().fromJson(responseString, CityPinResponse::class.java)
                         if(pinCity!=null && pinCity!!.postofficeList!=null && pinCity!!.postofficeList!!.size>0){
-                            cityAtv.setAdapter(getSpinnerAdapter(pinCity!!.postofficeList!!))
+                            /*cityAtv.setAdapter(getSpinnerAdapter(pinCity!!.postofficeList!!))
                             Common.hideSoftKeyboard(context as Activity?)
                             cityAtv.showDropDown()
                             city=pinCity!!.city
                             state=pinCity!!.state
                             state_edt.setText(state)
-                            cityEdt.setText(city)
+                            cityEdt.setText(city)*/
                         }else{
-                            Toast.makeText(context, "No data found for this pin code", Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
                         }
 
                     } else {
-                        Toast.makeText(context, "No data found for this pin code", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     hideCustomDialog()
-                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 hideCustomDialog()
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -407,10 +407,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         city = ""
         state = ""
         pinCityResponseArrayList!!.clear()
-        cityAtv.setAdapter(getSpinnerAdapter(arrayOfNulls<String>(0)))
+        /*cityAtv.setAdapter(getSpinnerAdapter(arrayOfNulls<String>(0)))
         cityAtv.clearListSelection()
         cityAtv.setText("")
-        state_edt.setText("")
+        state_edt.setText("")*/
     }
 
     private fun getGstCity(pin: String) {
@@ -435,7 +435,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     } else {
                         hideCustomDialog()
                         clearCityState2()
-                        Toast.makeText(context, "No data found for this pin code", Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
                     }
                   /*  if (response != null && response.body() != null && response.body()!!.cityList!=null) {
                         hideCustomDialog()
@@ -449,13 +449,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     }*/
                 } catch (e: Exception) {
                     hideCustomDialog()
-                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
                 hideCustomDialog()
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -476,22 +476,22 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                             cityEdt2.setText(response.body()!![0].postOffice.get(0).district)
                             state_edt2.setText(response.body()!![0].postOffice.get(0).state)
                         } else {
-                            Toast.makeText(context, response.body()!![0].message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(requireContext(), response.body()!![0].message, Toast.LENGTH_LONG).show()
                             clearCityState2()
                         }
                     } else {
                         hideCustomDialog()
-                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                        Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
                     }
                 } catch (e: Exception) {
                     hideCustomDialog()
-                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
                 }
             }
 
             override fun onFailure(call: Call<ArrayList<PinCityResponse>?>, t: Throwable) {
                 hideCustomDialog()
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -514,20 +514,20 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var mobile=mobileEdt.text.toString()
         var email=emailEdt.text.toString()
         if(!isPass){
-            Toast.makeText(context, "Please add passenger", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please add passenger", Toast.LENGTH_SHORT).show()
         }else if(!isGstValid()){
-            Toast.makeText(context, "Please add all GST details", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Please add all GST details", Toast.LENGTH_SHORT).show()
         }else if(!Common.isMobileValid(mobile)){
-            Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show()
         } else if(!Common.isEmailValid(email)){
-            Toast.makeText(context, R.string.empty_and_invalid_email, Toast.LENGTH_SHORT).show()
-        }else if(addressEdt.text.toString().isEmpty()){
-            Toast.makeText(context, R.string.empty_address, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.empty_and_invalid_email, Toast.LENGTH_SHORT).show()
+        }/*else if(addressEdt.text.toString().isEmpty()){
+            Toast.makeText(requireContext(), R.string.empty_address, Toast.LENGTH_SHORT).show()
         }else if(pin_edt.text.toString().length<6){
-            Toast.makeText(context, R.string.empty_and_invalid_pincode, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.empty_and_invalid_pincode, Toast.LENGTH_SHORT).show()
         }else if(cityAtv.text.toString().isEmpty()){
-            Toast.makeText(context, R.string.empty_post, Toast.LENGTH_SHORT).show()
-        }else{
+            Toast.makeText(requireContext(), R.string.empty_post, Toast.LENGTH_SHORT).show()
+        }*/else{
             checkCredential()
         }
     }
@@ -550,13 +550,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             if (response != null) {
                 responseHandler(response, 1, token, userData) //https://rail.justclicknpay.com/apiV1/RailEngine/CheckCredential
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun makeBookingRequest(): TrainBookingRequest {
-//        var trainBookingRequest:TrainBookingRequest= TrainBookingRequest();
+//        var trainBookingRequest= TrainBookingRequest();
         var journeyList:ArrayList<TrainBookingRequest.journeyDetails> = ArrayList()
         var destinationList:ArrayList<TrainBookingRequest.destinationDetail> = ArrayList()
         var passengerAddDetailList:ArrayList<TrainBookingRequest.passengerAdditionalDetail> = ArrayList()
@@ -620,11 +620,16 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         journeyList.add(journey)
 
         var destination:TrainBookingRequest.destinationDetail=trainBookingRequest!!.destinationDetail()
-        destination.address=addressEdt.text.toString()
+        /*destination.address=addressEdt.text.toString()
         destination.pinCode=pin_edt.text.toString()
         destination.stateName=state_edt.text.toString().uppercase()
         destination.city=cityEdt.text.toString()
-        destination.postOffice=cityAtv.text.toString()
+        destination.postOffice=cityAtv.text.toString()*/
+        destination.address="Saharanpur"
+        destination.pinCode="247001"
+        destination.stateName="UTTAR PRADESH"
+        destination.city="Saharanpur"
+        destination.postOffice="Hakikat Nagar S.O"
 
         destinationList.add(destination)
 
@@ -680,14 +685,14 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 if(senderResponse.statusCode!=null && senderResponse.statusCode.equals("00")){
                     makeTrainBookingRequest(senderResponse, token, userData)
                 }else{
-                    Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), senderResponse.statusMessage, Toast.LENGTH_LONG).show()
                 }
 
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
-            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -742,12 +747,12 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var agentCode = loginModel!!.Data.DoneCardUser
         var userTypr = loginModel!!.Data.UserType
         NetworkCall().callRailService(NetworkCall.getTrainApiInterface().getTrainCredentials(ApiConstants.CheckCredential,
-                agentCode, userTypr, ApiConstants.MerchantId, "App"), context, true
+                agentCode, userTypr, ApiConstants.MerchantId, "App"), requireContext(), true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 responseHandlerCredential(response, 1) //https://rail.justclicknpay.com/apiV1/RailEngine/CheckCredential
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -760,13 +765,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(requireContext(),senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
                     bookTrain(senderResponse.credentialData[0].token, senderResponse.credentialData[0].userData)
                 } else {
-                    Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), senderResponse.statusMessage, Toast.LENGTH_LONG).show()
                 }
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         } catch (e: Exception) {
-            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -1065,7 +1070,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showCustomDialog() {
-        MyCustomDialog.showCustomDialog(context, resources.getString(R.string.please_wait))
+        MyCustomDialog.showCustomDialog(requireContext(), resources.getString(R.string.please_wait))
     }
 
     private fun hideCustomDialog() {

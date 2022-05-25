@@ -43,7 +43,19 @@ class FasttagRepository {
     }
 
     fun getBillDetails(context: Context?, billRequest: FasttagFragment.FetchBillRequest) {
-        NetworkCall().callBillPayService( billRequest, ApiConstants.Fetchbilldetails, context, "", "", true
+        /*NetworkCall().callBillPayService( billRequest, ApiConstants.Fetchbilldetails, context, "", "", true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                MyCustomDialog.hideCustomDialog();
+                var responseString=response.string()
+                val responseData = Gson().fromJson(responseString, BillPayFragment.FetchBillResponseModel::class.java)
+                billLiveData!!.postValue(responseData)
+            } else {
+                MyCustomDialog.hideCustomDialog();
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }*/
+        NetworkCall().callService( NetworkCall.getFastTagApiInterface().getFastTagBill(billRequest), context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 MyCustomDialog.hideCustomDialog();

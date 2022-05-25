@@ -154,7 +154,7 @@ public class BillConfirmationFragment extends Fragment {
                 if(Common.checkInternetConnection(context)) {
                     Common.preventFrequentClick(payBtn);
                     getCredential();
-                    Toast.makeText(context,"Bill",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(context,"Bill",Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
                 }

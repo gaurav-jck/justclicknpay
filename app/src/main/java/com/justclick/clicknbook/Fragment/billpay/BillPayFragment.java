@@ -466,8 +466,8 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         public ArrayList<payfetchbilllist> payfetchbilllist;
 
         public class payfetchbilllist implements Serializable{
-            float billAmount;
-            String dueDate, customerName,billNumber,fetchbillstring, category,operatorid,canumber;
+            public float billAmount;
+            public String dueDate, customerName,billNumber,fetchbillstring, category,operatorid,canumber,cellNumber;
             /*"": 40,
             "billdate": null,
             "": "2021-08-01",

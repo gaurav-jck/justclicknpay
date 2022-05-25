@@ -298,7 +298,8 @@
                 android:paddingLeft="@dimen/small_margin"
                 android:textColor="@color/color_light_black2"/>
 
-    <TextView
+<!--    Destination address-->
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/very_large_margin"
@@ -403,7 +404,7 @@
                     android:textColorHint="@color/grayTextHintColorFlight"
                     android:textSize="@dimen/simple_content_text_size"
                     />
-            </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>-->
 
             <RelativeLayout
                 android:id="@+id/gstLabelRel"

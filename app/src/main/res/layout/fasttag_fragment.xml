@@ -65,9 +65,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint=""
+                android:text=""
                 android:textColor="@color/black_text_color"
                 android:textColorHint="@color/grayTextHintColorFlight"
                 android:singleLine="true"
+                android:inputType="textCapCharacters"
+                android:maxLength="12"
                 android:textSize="@dimen/simple_content_text_size"/>
         </com.google.android.material.textfield.TextInputLayout>
 

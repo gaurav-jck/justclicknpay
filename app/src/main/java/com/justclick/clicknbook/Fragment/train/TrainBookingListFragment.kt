@@ -200,6 +200,7 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
         val call = apiService.getTrainBookingList(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/GetTopDetails",
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
+//                "JC0O188", "OOU", ApiConstants.MerchantId, "App")
         call.enqueue(object : Callback<TrainBookingListResponseModel?> {
             override fun onResponse(call: Call<TrainBookingListResponseModel?>, response: Response<TrainBookingListResponseModel?>) {
                 try {

@@ -37,8 +37,10 @@ import java.text.SimpleDateFormat
 import java.util.*
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.bluetooth.BluetoothManager
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 
@@ -71,6 +73,7 @@ public class RapipayFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_main_rapipay,container,false)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
+
         bluetooth()
 
         view.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
@@ -133,17 +136,14 @@ public class RapipayFragment : Fragment() {
         }
     }
 
-    val registerForResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val intent = result.data
-            // Handle the Intent
-        }
-    }
-
     fun bluetooth(){
-        btAdapter= BluetoothAdapter.getDefaultAdapter()
+        val bluetoothManager: BluetoothManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            bluetoothManager=requireContext().getSystemService(BluetoothManager::class.java)
+            btAdapter=bluetoothManager.adapter
+        }else{
+            btAdapter= BluetoothAdapter.getDefaultAdapter()
+        }
         if(btAdapter==null){
             AlertDialog.Builder(requireContext())
                     .setTitle("Not compatible")
@@ -152,12 +152,32 @@ public class RapipayFragment : Fragment() {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show()
         } else {
+            var requestBluetooth = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == RESULT_OK) {
+                    //granted
+                    accessBluetoothDetails()
+                }else{
+                    //deny
+                    parentFragmentManager.popBackStack()
+                }
+            }
+            val requestMultiplePermissions =
+                registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                    permissions.entries.forEach {
+                        Log.d("test006", "${it.key} = ${it.value}")
+                    }
+                }
             Log.d("GoPosActivity", "bluetooth adapter is not null")
             if (!btAdapter!!.isEnabled) {
-                Log.d("GoPosActivity", "bluetooth is not enable")
-                val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-//                startActivityForResult(enableBT, REQUESTLUE_BTOOTH)
-                registerForResult.launch(enableBT)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    requestMultiplePermissions.launch(arrayOf(
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.BLUETOOTH_CONNECT))
+                }
+                else{
+                    val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+                    requestBluetooth.launch(enableBtIntent)
+                }
             } else {
                 Log.d("GoPosActivity", "bluetooth is enable")
                 accessBluetoothDetails()
@@ -165,44 +185,10 @@ public class RapipayFragment : Fragment() {
         }
     }
 
-    val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                // Permission is granted. Continue the action or workflow in your
-                // app.
-            } else {
-                // Explain to the user that the feature is unavailable because the
-                // features requires a permission that the user has denied. At the
-                // same time, respect the user's decision. Don't link to system
-                // settings in an effort to convince the user to change their
-                // decision.
-            }
-        }
-
-    fun bluetooth2(){
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.BLUETOOTH
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                // You can use the API that requires the permission.
-            }
-        }
-       /* else -> {
-            // You can directly ask for the permission.
-            // The registered ActivityResultCallback gets the result of this request.
-            requestPermissionLauncher.launch(
-                Manifest.permission.BLUETOOTH)
-        }*/
-    }
-
 
     var bluetoothDevice: BluetoothDevice? = null
     var bluetoothName: String? = null
 
-    @SuppressLint("MissingPermission")
     private fun accessBluetoothDetails(): String? {
         if (btAdapter!!.bondedDevices != null) if (btAdapter!!.bondedDevices.size > 0) {
             val pairedDevices = btAdapter!!.bondedDevices
@@ -228,19 +214,22 @@ public class RapipayFragment : Fragment() {
             }
             if (!isPosPaired) {
                 AlertDialog.Builder(requireContext())
-                        .setTitle("Bluetooth Enable")
-                        .setMessage("Please Enable your Bluetooth by pressing OK")
-                        .setPositiveButton("OK") { dialog, which ->
-                            val enableBT = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-                            startActivityForResult(enableBT, REQUEST_BLUETOOTH)
-                        }
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show()
+                    .setTitle("BlueTooth Pairing")
+                    .setMessage("Your bluetooth is not paired with MATM device, please pair")
+//                    .setCancelable(false)
+                    .setPositiveButton("Ok") { dialog, which ->
+                        val intentOpenBluetoothSettings = Intent()
+                        intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
+                        startActivity(intentOpenBluetoothSettings)
+                    }
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .show()
             }
         } else {
             AlertDialog.Builder(requireContext())
                     .setTitle("BlueTooth Pairing")
-                    .setMessage("Your bluetooth is not paired with MATM device please pair")
+                    .setMessage("Your bluetooth is not paired with MATM device, please pair")
+//                    .setCancelable(false)
                     .setPositiveButton("Ok") { dialog, which ->
                         val intentOpenBluetoothSettings = Intent()
                         intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
