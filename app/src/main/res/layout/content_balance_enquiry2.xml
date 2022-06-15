@@ -137,22 +137,22 @@
                 android:textColor="@color/darkBlueColor"/>
 
             <RadioButton
-                android:id="@+id/rb_startek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Startek"
-                android:layout_marginLeft="20dp"
-                android:buttonTint="@color/darkBlueColor"
-                android:textColor="@color/darkBlueColor"
-                android:visibility="gone"/>
-
-            <RadioButton
                 android:id="@+id/rb_morpho"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Morpho"
                 android:buttonTint="@color/darkBlueColor"
                 android:layout_marginLeft="20dp"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="visible"/>
+
+            <RadioButton
+                android:id="@+id/rb_startek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Startek"
+                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/darkBlueColor"
                 android:textColor="@color/darkBlueColor"
                 android:visibility="visible"/>
 

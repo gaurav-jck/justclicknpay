@@ -578,6 +578,7 @@ public class Balance_Enquiry_Activity extends AppCompatActivity implements Googl
             request.PId=Base64.encodeToString(("<?xml version=\"1.0\"?>"+pidDataXML).
                     getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
         }
+        Toast.makeText(context, pidDataXML, Toast.LENGTH_LONG).show();
         isGetAgain=false;
        new NetworkCall().callAepsServiceHeaderNew(request,method, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -633,7 +634,7 @@ public class Balance_Enquiry_Activity extends AppCompatActivity implements Googl
         agentCodeTv.setText(detail.agentCode);
         bankNameTv.setText( detail.bankName);
         if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("##########"+detail.accountNumber.substring(detail.accountNumber.length()-4));
+            accountNoTv.setText("xxxxxxxx"+detail.accountNumber.substring(detail.accountNumber.length()-4));
         }else{
             accountNoTv.setText(detail.accountNumber);
         }

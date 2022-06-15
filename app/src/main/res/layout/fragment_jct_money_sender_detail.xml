@@ -35,8 +35,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/rel_top"
+        android:layout_marginStart="@dimen/very_small_margin"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:layout_marginEnd="@dimen/very_small_margin"
+        android:layout_marginBottom="@dimen/very_small_margin"
         android:orientation="vertical"
-        android:layout_margin="@dimen/very_small_margin"
         android:padding="@dimen/small_margin">
 
         <LinearLayout
@@ -50,7 +53,7 @@
                 android:layout_weight="1"
                 android:text="Name"
                 android:textColor="@color/listItemLightBlack"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
             <TextView
                 android:id="@+id/senderNameTv"
@@ -58,9 +61,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Gaurav"
-                android:textStyle="bold"
                 android:textColor="@color/color_black"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -75,7 +78,7 @@
                 android:layout_weight="1"
                 android:text="Mobile"
                 android:textColor="@color/listItemLightBlack"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
             <TextView
                 android:id="@+id/senderMobileTv"
@@ -83,9 +86,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="9012888222"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -100,7 +103,7 @@
                 android:layout_weight="1"
                 android:text="KYC Status"
                 android:textColor="@color/listItemLightBlack"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp" />
 
             <TextView
                 android:id="@+id/senderKycTv"
@@ -108,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="KYC"
-                android:textStyle="bold"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -118,37 +121,121 @@
             android:id="@+id/limitLin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
-            android:orientation="horizontal"
-            android:gravity="right|center_vertical"
             android:layout_gravity="right"
-            android:paddingRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/red_rectangle_button_background"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal"
             android:paddingLeft="@dimen/small_margin"
             android:paddingTop="@dimen/small_margin"
-            android:paddingBottom="@dimen/small_margin"
-            android:background="@drawable/red_rectangle_button_background"
-            >
+            android:paddingRight="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin">
 
             <TextView
                 android:id="@+id/limit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="You can send upto  "
-                android:gravity="right"
                 android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:text="You can send upto  "
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp" />
+
             <TextView
                 android:id="@+id/limitTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rs. 25000"
                 android:layout_gravity="center_vertical"
-                android:textStyle="bold"
                 android:gravity="right"
+                android:text="Rs. 25000"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_16sp" />
+                android:textSize="@dimen/text_size_14sp"
+                android:textStyle="bold" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/limitDetailLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@drawable/edittext_border_hotel">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_3dp">
+                <TextView
+                    android:id="@+id/type1"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="NEFT"/>
+                <TextView
+                    android:id="@+id/bank1"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_3dp">
+                <TextView
+                    android:id="@+id/type2"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="NEFT"/>
+                <TextView
+                    android:id="@+id/bank2"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_3dp">
+                <TextView
+                    android:id="@+id/type3"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="NEFT"/>
+                <TextView
+                    android:id="@+id/bank3"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/listItemLightBlack"
+                    android:text="000"/>
+            </LinearLayout>
         </LinearLayout>
 
         <TextView
@@ -159,10 +246,10 @@
             android:layout_marginTop="@dimen/small_margin"
             android:background="@drawable/blue_round_button_background"
             android:padding="@dimen/small_margin"
-            android:textStyle="bold"
             android:text=" + Add Beneficiary"
             android:textColor="@color/color_white"
-            android:textSize="@dimen/text_size_16sp" />
+            android:textSize="@dimen/text_size_15sp"
+            android:textStyle="bold" />
 
 
         <androidx.recyclerview.widget.RecyclerView

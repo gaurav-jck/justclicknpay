@@ -178,6 +178,8 @@ public class ApiConstants
     public static final String VerifySender   ="VerifySender";
     public static final String GetBankName   ="GetBankName";
     public static final String DmtTransactionList   ="DmtTransactionList";
+    public static final String Reject   ="Reject";
+    public static final String PendingRefund   ="PendingRefund";
 
 //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";

@@ -731,7 +731,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         agentCodeTv.setText(detail.agentCode);
         bankNameTv.setText( detail.bankName);
         if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("##########"+detail.accountNumber.substring(detail.accountNumber.length()-4));
+            accountNoTv.setText("xxxxxxx"+detail.accountNumber.substring(detail.accountNumber.length()-4));
         }else{
             accountNoTv.setText(detail.accountNumber);
         }
@@ -776,12 +776,12 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         TextView txnStatusTv = dialog.findViewById(R.id.txnStatusTv);
         TextView txnDateTv = dialog.findViewById(R.id.txnDateTv);
 
-        cardHolderTv.setText("");
+        cardHolderTv.setText("xxxxxxxx"+str_aadhar.substring(str_aadhar.length()-4));
         AepsResponse.cashWithdrawal detail=responseModel.cashWithdrawal.get(0);
         agentCodeTv.setText(detail.agentCode);
         bankNameTv.setText( detail.bankName);
         if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("##########"+detail.accountNumber.substring(detail.accountNumber.length()-4));
+            accountNoTv.setText("XXXXXXXX"+detail.accountNumber.substring(detail.accountNumber.length()-4));
         }else{
             accountNoTv.setText(detail.accountNumber);
         }

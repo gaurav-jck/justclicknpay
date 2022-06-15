@@ -302,7 +302,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openFilterDialog() {
-        filterDialog = Dialog(context!!)
+        filterDialog = Dialog(requireContext())
         filterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         filterDialog!!.setContentView(R.layout.filter_dialog_layout)
         start_date_value_tv = filterDialog!!.findViewById(R.id.start_date_value_tv)
@@ -376,6 +376,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
 
     fun callAgent(transactionListRequestModel: TxnListRequestModel?, progress: Boolean) {
         transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
+//        transactionListRequestModel!!.setUserType("OOU")
         if(loginModel!!.Data.UserType.equals("A") || loginModel!!.Data.UserType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         }else{
@@ -452,7 +453,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
         agentDoneCard = ""
         agentName = ""
         CustMobile = ""
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.jct_txn_list_filter)
         val statusSpinner = dialog.findViewById<Spinner>(R.id.statusSpinner)
@@ -466,7 +467,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
             agent_search_edt.visibility = View.GONE
             dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
         adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
         statusSpinner.adapter = adapter
@@ -566,14 +567,14 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setSpinnerAdapter(data: Array<String>): ArrayAdapter<String> {
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter
     }
 
     private fun openStartDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     startDateCalendar!![year, monthOfYear] = dayOfMonth
@@ -599,7 +600,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openEndDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     endDateCalendar = Calendar.getInstance()
@@ -623,7 +624,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openReceipt(senderResponse: TxnListResponseModel.transactionListDetail) {
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)
         val window = dialog.window
@@ -644,12 +645,24 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
         val txnTypeTv = dialog.findViewById<TextView>(R.id.txnTypeTv)
         val txnStatusTv = dialog.findViewById<TextView>(R.id.txnStatusTv)
         val txnDateTv = dialog.findViewById<TextView>(R.id.txnDateTv)
+        val aadharTv = dialog.findViewById<TextView>(R.id.aadharTv)
+        val cardNameLin = dialog.findViewById<LinearLayout>(R.id.cardNameLin)
 
+        if(senderResponse.cardHolderName==null || senderResponse.cardHolderName.isEmpty()){
+            cardNameLin.visibility=View.GONE
+        }else{
+            cardNameLin.visibility=View.VISIBLE
+        }
+        if(senderResponse.txnType.equals("Cash Withdrawal")){
+            aadharTv.text="Aadhar No"
+        }else{
+            aadharTv.text="Card Holder"
+        }
         cardHolderTv.text = senderResponse.cardHolderName
         agentCodeTv.text = senderResponse.agentCode
         bankNameTv.text = senderResponse.bankName
         if(senderResponse.accountNo!=null && senderResponse.accountNo.length>6){
-            accountNoTv.text="##########"+senderResponse.accountNo.substring(senderResponse.accountNo.length-4)
+            accountNoTv.text="xxxxxxxx"+senderResponse.accountNo.substring(senderResponse.accountNo.length-4)
         }else{
             accountNoTv.text=senderResponse.accountNo
         }
@@ -669,7 +682,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
 
     private fun hideSoftInputFromDialog(dialog: Dialog) {
         try {
-            val inputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(dialog.window!!.currentFocus!!.windowToken, 0)
         } catch (e: NullPointerException) {
         }
@@ -677,7 +690,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
 
 
     private fun showCustomDialog() {
-        MyCustomDialog.showCustomDialog(context, context!!.resources.getString(R.string.please_wait))
+        MyCustomDialog.showCustomDialog(context, requireContext().resources.getString(R.string.please_wait))
     }
 
     private fun hideCustomDialog() {

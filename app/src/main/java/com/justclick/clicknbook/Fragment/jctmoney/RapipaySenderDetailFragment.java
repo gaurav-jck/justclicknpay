@@ -132,6 +132,20 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
 
         addRecTv.setOnClickListener(this);
 
+        final TextView type1= view.findViewById(R.id.type1);
+        final TextView bank1= view.findViewById(R.id.bank1);
+        final TextView type2= view.findViewById(R.id.type2);
+        final TextView bank2= view.findViewById(R.id.bank2);
+        final TextView type3= view.findViewById(R.id.type3);
+        final TextView bank3= view.findViewById(R.id.bank3);
+
+        type1.setText(senderDetailResponse.getType1());
+        type2.setText(senderDetailResponse.getType2());
+        type3.setText(senderDetailResponse.getType3());
+        bank1.setText(senderDetailResponse.getBank1());
+        bank2.setText(senderDetailResponse.getBank2());
+        bank3.setText(senderDetailResponse.getBank3());
+
     }
 
     private RapipayRecipientListAdapter getAdapter(ArrayList<SenderDetailResponse.benificiaryDetailData> benificiaryDetailData) {

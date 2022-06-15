@@ -368,6 +368,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
         try {
             if (d_type.equals(STARTEK) && validation()) {
                 if (searchPackageName(STARTEK_PACKAGE)) {
+//                    String pidOptXML = createPidOptXMLStartek();
                     String pidOptXML = createPidOptXML();
                     capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
@@ -579,7 +580,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
         request.Mobile=str_mobile;
         request.BankName=str_b_name;
         request.BankIIN=bank_iin.get(str_b_name);
-        if(d_type.equals(MORPHO)){
+        if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
             request.PId=Base64.encodeToString(pidDataXML.
                     getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
         }else {
@@ -687,7 +688,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                 params.put("Mode","APP");
                 params.put("Latitude", mCurrentLocation.getLatitude() + "");
                 params.put("Longitude", mCurrentLocation.getLongitude() + "");
-                if(d_type.equals(MORPHO)){
+                if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
                     params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")
                 }else {
                     params.put("PId", ("<?xml version=\"1.0\"?>"+pidDataXML).replace("\n",""));
@@ -760,13 +761,14 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
         TextView txnTypeTv = dialog.findViewById(R.id.txnTypeTv);
         TextView txnStatusTv = dialog.findViewById(R.id.txnStatusTv);
         TextView txnDateTv = dialog.findViewById(R.id.txnDateTv);
-
-        cardHolderTv.setText("");
+        LinearLayout cardNameLin = dialog.findViewById(R.id.cardNameLin);
+        cardNameLin.setVisibility(View.GONE);
+//        cardHolderTv.setText("xxxxxxxx"+str_aadhar.substring(str_aadhar.length()-4));
         AepsResponse.balEnQDetails detail=responseModel.balEnqDetails.get(0);
         agentCodeTv.setText(detail.agentCode);
         bankNameTv.setText( detail.bankName);
         if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("##########"+detail.accountNumber.substring(detail.accountNumber.length()-4));
+            accountNoTv.setText("XXXXXXXX"+detail.accountNumber.substring(detail.accountNumber.length()-4));
         }else{
             accountNoTv.setText(detail.accountNumber);
         }
@@ -936,6 +938,125 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
             return tmpOptXml;
         } catch (Exception ex) {
             showMessageDialogue("EXCEPTION- " + ex.getMessage(), "EXCEPTION");
+            return "";
+        }
+    }
+
+    // pid data xml
+    private String createPidOptXMLStartek() {
+        String tmpOptXml = "";
+        try{
+            String fTypeStr = "0";
+            String timeOutStr = "20000";
+            //            uat
+            String formatStr = "1";
+//            String envStr = "PP";
+//            live
+            String envStr = "P";
+
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            docFactory.setNamespaceAware(true);
+            DocumentBuilder docBuilder = null;
+
+            docBuilder = docFactory.newDocumentBuilder();
+            Document doc = docBuilder.newDocument();
+            doc.setXmlStandalone(true);
+
+            Element rootElement = doc.createElement("PidOptions");
+            doc.appendChild(rootElement);
+
+            Element opts = doc.createElement("Opts");
+            rootElement.appendChild(opts);
+
+            Attr attr = doc.createAttribute("fCount");
+            //attr.setValue(String.valueOf(fCountSel.getSelectedItem().toString()));
+            attr.setValue("1");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("fType");
+            attr.setValue(fTypeStr);
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("iCount");
+            attr.setValue("0");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("iType");
+//            attr.setValue("");    // before
+            attr.setValue("0");     // after
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("pCount");
+            attr.setValue("0");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("pType");
+//            attr.setValue("");    // before
+            attr.setValue("0");    // after
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("format");
+            attr.setValue(formatStr);
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("pidVer");
+            attr.setValue("2.0");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("timeout");
+            attr.setValue(timeOutStr);
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("otp");
+            attr.setValue("");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("env");
+            attr.setValue(envStr);
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("wadh");
+            attr.setValue("");
+            opts.setAttributeNode(attr);
+
+            attr = doc.createAttribute("posh");
+            attr.setValue("UNKNOWN");
+            opts.setAttributeNode(attr);
+
+            Element demo = doc.createElement("Demo");
+            demo.setTextContent("");
+            rootElement.appendChild(demo);
+
+            Element custotp = doc.createElement("CustOpts");
+            rootElement.appendChild(custotp);
+
+            Element param = doc.createElement("Param");
+            custotp.appendChild(param);
+
+
+            attr = doc.createAttribute("name");
+            attr.setValue("ValidationKey");
+            param.setAttributeNode(attr);
+
+            attr = doc.createAttribute("value");
+            attr.setValue("ONLY USE FOR LOCKED DEVICES.");
+            param.setAttributeNode(attr);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+            DOMSource source = new DOMSource(doc);
+            StringWriter writer = new StringWriter();
+            StreamResult result = new StreamResult(writer);
+            transformer.transform(source, result);
+
+            tmpOptXml = writer.getBuffer().toString().replaceAll("\n|\r", "");
+            tmpOptXml = tmpOptXml.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
+
+            return tmpOptXml;
+        }catch(Exception ex){
+            showMessageDialogue("EXCEPTION- " + ex.getMessage(),"EXCEPTION");
             return "";
         }
     }

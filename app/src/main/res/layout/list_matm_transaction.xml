@@ -21,7 +21,7 @@
             android:id="@+id/txnId"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="D6562632134512435726"
+            android:text="D12345"
             android:textSize="@dimen/text_size_14sp"
             android:textStyle="bold"
             android:textColor="@color/dark_blue_color"
@@ -161,6 +161,30 @@
         android:textSize="@dimen/text_size_16sp"
         android:text=" Print"/>
 </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/refundLin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/refund_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:paddingLeft="@dimen/margin_2dp"
+            android:paddingRight="@dimen/margin_2dp"
+            android:textStyle="bold|italic"
+            android:textSize="@dimen/text_size_16sp"
+            android:text="Refund"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:background="@color/blue"/>
+    </LinearLayout>
+
 
 
 </LinearLayout>

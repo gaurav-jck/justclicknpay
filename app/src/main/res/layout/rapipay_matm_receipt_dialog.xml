@@ -151,15 +151,17 @@
                     android:layout_marginTop="@dimen/very_small_margin"
                     android:layout_marginLeft="@dimen/small_margin"
                     android:layout_marginRight="@dimen/small_margin"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <TextView
+                        android:id="@+id/aadharTv"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:textColor="@color/printDialogLableColor"
                         android:textSize="@dimen/text_size_14sp"
-                        android:text="Card holder name"/>
+                        android:text="Aadhar no"/>
                     <TextView
                         android:id="@+id/cardHolderTv"
                         android:layout_width="0dp"
