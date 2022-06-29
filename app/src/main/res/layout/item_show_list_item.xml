@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="1dp"
     android:layout_marginRight="1dp"
-    android:layout_marginTop="1dp"
+    android:layout_marginTop="@dimen/small_margin"
     android:padding="@dimen/very_small_margin"
     card_view:cardBackgroundColor="@color/splash_white_light"
     card_view:cardCornerRadius="1dp">
@@ -17,7 +17,7 @@
     android:id="@+id/linear_main_menu"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/listItemBackground"
+    android:background="@drawable/app_blue_round_button_background"
    >
     <TextView
         android:id="@+id/title"
@@ -25,14 +25,18 @@
         android:layout_height="wrap_content"
         android:text="Recharge"
         android:padding="@dimen/very_small_margin"
-        android:textColor="@color/color_black"
+        android:layout_marginLeft="@dimen/margin_3dp"
+        android:textColor="@color/white"
         android:textSize="@dimen/text_size_16sp"/>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_menu_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        android:scrollIndicators="end">
+        android:layout_margin="@dimen/small_margin"
+        android:scrollIndicators="end"
+        android:paddingTop="@dimen/small_margin"
+        android:background="@drawable/white_round_button_background">
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
     </androidx.cardview.widget.CardView>

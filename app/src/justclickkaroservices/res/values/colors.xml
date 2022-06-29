@@ -10,6 +10,7 @@
     <color name="app_new_red_color">#B40505</color>
     <color name="app_red_color_light">#aaD40A0A</color>
     <color name="app_blue_color_light">@color/app_blue_color</color>
+    <color name="app_blue_color_light2">#ee285AB4</color>
     <color name="orange_color">@color/app_new_red_color</color>
     <color name="app_green_color">#78AD17</color>
 

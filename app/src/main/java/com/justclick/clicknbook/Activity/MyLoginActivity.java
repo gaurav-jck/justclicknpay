@@ -807,8 +807,8 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(context, location.getLatitude() + "," + location.getLongitude(),
-                Toast.LENGTH_SHORT).show();
+//        Toast.makeText(context, location.getLatitude() + "," + location.getLongitude(),
+//                Toast.LENGTH_SHORT).show();
     }
 
     @Override

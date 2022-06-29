@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/app_blue_round_button_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/arrow_left_back.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/blue_circle_border_background.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/blue_round_button_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/close.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/edittext_border_hotel.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_clipboards.xml" value="0.2890625" />
@@ -18,7 +20,9 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/my_progress_one.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/red_rectangle_button_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/refresh_captcha.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/solid_circle_white_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/splash_background.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/white_round_button_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_bus_from_city.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_dashboard__new_.xml" value="0.2617753623188406" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/activity_navigation.xml" value="0.27291666666666664" />
@@ -60,6 +64,7 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_train_response.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_train_search2.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_train_webview.xml" value="0.27291666666666664" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/item_show_list_item.xml" value="0.33" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_money_receipt_dialog.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_money_receipt_dialog_rapipay.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/jct_money_refund_dialog.xml" value="0.2554347826086957" />
@@ -88,6 +93,7 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/train_passanger_show.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/train_passanger_status.xml" value="0.2617753623188406" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/train_passanger_view.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/admin/.gradle/caches/transforms-2/files-2.1/94cbf4a03bd8422beb6f5d67563e33e9/jetified-finalonboardinglib-release_v1_0_7/res/drawable/white_bg.xml" value="0.2890625" />
       </map>
     </option>
   </component>
