@@ -116,12 +116,12 @@ public class MenuCodes {
     public static final String  MATM="MATM";
     public static final String  CREDOPAY="CREDOPAY";
     public static final String  FAST_TAG="FastTag";
-    public static final String  TRAIN="IRCTC";
+    public static final String  TRAIN="Rail";
     public static final String  BILL_PAY="BILL PAY";
     public static final String  CASH_OUT="PayOut";
     public static final String  LIC="LIC";
-    public static final String  PAYTM="Paytm Wallet";
-    public static final String  CASHFREE_QR="QR CODE";
+    public static final String  PAYTM="Wallet";
+    public static final String  CASHFREE_QR="QRCODE";
     public static final String  AgentChattingFragment="S0";
     public static final String  AgentDepositRequestFragment="DepositRequest";
     public static final String  AgentCreditRequestFragment="CreditRequest";

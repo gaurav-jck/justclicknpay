@@ -83,14 +83,17 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
             case R.id.img_cash_withdrawl:
                 checkKYC(WITHDRAW, URLs.CheckKyc);
 //                startActivity(new Intent(getContext(), Cash_Withdrawl_Activity.class));
+//                Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
+//                intent.putExtra("TYPE","CW");
+//                startActivity(intent);
                 break;
             case R.id.img_balance_enquiry:
                 checkKYC(BAL_ENQ, URLs.CheckKyc);
 //                onboardSdk();
 //                openWebView("");
-                /*Intent be=new Intent(getContext(),Balance_Enquiry_Activity.class);
-                be.putExtra("TYPE","BE");
-                startActivity(be);*/
+//                Intent intent2=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
+//                intent2.putExtra("TYPE","BE");
+//                startActivity(intent2);
                 break;
             case R.id.img_mini_stmt:
                 checkKYC(MINISTMT, URLs.CheckKyc);

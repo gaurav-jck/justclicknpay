@@ -2,10 +2,6 @@ package com.justclick.clicknbook.model;
 
 import java.util.ArrayList;
 
-/**
- * Created by Lenovo on 04/13/2017.
- */
-
 public class LoginModel
 {
     public String StatusCode, Status;

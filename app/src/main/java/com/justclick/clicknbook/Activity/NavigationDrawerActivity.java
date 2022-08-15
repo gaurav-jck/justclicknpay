@@ -812,7 +812,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 for(int i=0; i<modules.length;i++){
                     if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].contains(MenuCodes.AEPS+"-1")||
                             modules[i].contains(MenuCodes.BusSearch+"-1")   ||
-                            modules[i].contains(MenuCodes.MobileFragment+"-1")){
+                            modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
+                            modules[i].contains(MenuCodes.MATM+"-1") ||
+                            modules[i].contains(MenuCodes.PAYTM+"-1") ||
+                            modules[i].contains(MenuCodes.TRAIN+"-1") ||
+                            modules[i].contains(MenuCodes.CASHFREE_QR+"-1") ){
                         LoginModel.DataList.subMenu subMenu=dataList.new subMenu();
 //                        subMenu.SubMenu=loginModel.ProductList.get(i).Product;      //previous
 //                        subMenu.SubMenuCode=loginModel.ProductList.get(i).ProductCode;
@@ -825,6 +829,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             subMenu.SubMenu="Recharge";
                         }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
                             subMenu.SubMenu="AEPS";
+                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.PAYTM)){
+                            subMenu.SubMenu="Paytm Wallet";
+                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
+                            subMenu.SubMenu="IRCTC";
+                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.CASHFREE_QR)){
+                            subMenu.SubMenu="QR Code";
                         }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
@@ -845,20 +855,20 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 
 //            hardcoded
-            LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
-            subMenuHotel.SubMenu=MenuCodes.MATM;
-            subMenuHotel.SubMenuCode=MenuCodes.MATM;
-            subMenuArrayList.add(subMenuHotel);
+//            LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
+//            subMenuHotel.SubMenu=MenuCodes.MATM;
+//            subMenuHotel.SubMenuCode=MenuCodes.MATM;
+//            subMenuArrayList.add(subMenuHotel);
 
             LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
             fasttag.SubMenu=MenuCodes.FAST_TAG;
             fasttag.SubMenuCode=MenuCodes.FAST_TAG;
             subMenuArrayList.add(fasttag);
 
-            LoginModel.DataList.subMenu subMenuTrain=dataList.new subMenu();
-            subMenuTrain.SubMenu=MenuCodes.TRAIN;
-            subMenuTrain.SubMenuCode=MenuCodes.TRAIN;
-            subMenuArrayList.add(subMenuTrain);
+//            LoginModel.DataList.subMenu subMenuTrain=dataList.new subMenu();
+//            subMenuTrain.SubMenu=MenuCodes.TRAIN;
+//            subMenuTrain.SubMenuCode=MenuCodes.TRAIN;
+//            subMenuArrayList.add(subMenuTrain);
 
             LoginModel.DataList.subMenu subLic=dataList.new subMenu();
             subLic.SubMenu=MenuCodes.LIC;
@@ -875,15 +885,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
             subMenuCashOut.SubMenuCode=MenuCodes.CASH_OUT;
             subMenuArrayList.add(subMenuCashOut);
 
-            LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
-            subPaytm.SubMenu=MenuCodes.PAYTM;
-            subPaytm.SubMenuCode=MenuCodes.PAYTM;
-            subMenuArrayList.add(subPaytm);
+//            LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
+//            subPaytm.SubMenu=MenuCodes.PAYTM;
+//            subPaytm.SubMenuCode=MenuCodes.PAYTM;
+//            subMenuArrayList.add(subPaytm);
 
-            LoginModel.DataList.subMenu subQR=dataList.new subMenu();
-            subQR.SubMenu=MenuCodes.CASHFREE_QR;
-            subQR.SubMenuCode=MenuCodes.CASHFREE_QR;
-            subMenuArrayList.add(subQR);
+//            LoginModel.DataList.subMenu subQR=dataList.new subMenu();
+//            subQR.SubMenu=MenuCodes.CASHFREE_QR;
+//            subQR.SubMenuCode=MenuCodes.CASHFREE_QR;
+//            subMenuArrayList.add(subQR);
 
             /*if(subMenuArrayList.size()>3){
                 Collections.swap(subMenuArrayList, 1,3);

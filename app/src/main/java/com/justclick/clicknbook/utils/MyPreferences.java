@@ -11,11 +11,6 @@ import com.google.gson.Gson;
 
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Created by pc1 on 4/14/2017.
- */
-
 public class MyPreferences {
 
     private static final String MyPrefName="MyPref";

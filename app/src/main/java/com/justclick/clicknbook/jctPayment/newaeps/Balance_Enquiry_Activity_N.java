@@ -1313,7 +1313,9 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                             //converting response to json object
                             JSONObject obj = new JSONObject(response);
                             //if no error in response
-                            JSONArray jsonArray = obj.getJSONArray("RecordData");
+//                            JSONArray jsonArray = bankList.getJSONArray("RecordData");  //old
+                            JSONObject bankList = obj.getJSONObject("banklist");
+                            JSONArray jsonArray = bankList.getJSONArray("data");
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 //getting the json object of the particular index inside the array

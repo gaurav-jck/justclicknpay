@@ -14,7 +14,8 @@ public class URLs {
         public static final String AEPS_EXCEL_DOWNLOAD_URL = ApiConstants.AEPS_EXCEL_DOWNLOAD_URL;
     public static final String LIVE_BASE_URL = BASE_URL+"api/";
     public static final String BANK_LIST = LIVE_BASE_URL + "aeps/bankList";
-    public static final String BANK_LIST_NEW = "https://aeps.rapipay.com/iinList";
+//    public static final String BANK_LIST_NEW = "https://aeps.rapipay.com/iinList";
+    public static final String BANK_LIST_NEW = "https://jckaeps.justclicknpay.com/B2B/AdharPayment/GetBankList";
     public static final String AepsInitTransaction = "AepsInitTransaction";
     public static final String UpdateTransaction =  "UpdateTransaction";
     public static final String TransactionList =  "TransactionList";
