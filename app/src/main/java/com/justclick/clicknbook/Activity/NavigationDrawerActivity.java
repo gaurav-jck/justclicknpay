@@ -396,7 +396,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.FlightSearch:
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(FlightSearchFragment.newInstance());
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(FlightSearchFragment.newInstance());
+                AirWebviewActivity.airSession(context);
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.BusSearch:
@@ -548,7 +549,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 return R.drawable.ic_bus_icon_black;
             case MenuCodes.AEPS:
                 return R.drawable.ic_icon_rupee;
-             case MenuCodes.AEPS_OLD:
+            case MenuCodes.AEPS_OLD:
                 return R.drawable.ic_icon_rupee;
             case MenuCodes.MATM:
                 return R.drawable.ic_icon_mobile_payment_black;
@@ -803,53 +804,54 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
             ArrayList<LoginModel.DataList.subMenu> subMenuArrayList=new ArrayList<>();
             String modules[]=loginModel.Data.ModuleAccess.split(",");
-          //  loginModel.Data.ModuleAccess.contains(MenuCodes.DMT+"-1"
+            //  loginModel.Data.ModuleAccess.contains(MenuCodes.DMT+"-1"
                 /*for(int i=0; i<loginModel.ProductList.size(); i++){
                     if(loginModel.ProductList.get(i).Active!=null && ((loginModel.ProductList.get(i).Active.equals("1") &&
                                     loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.DMT)||
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.BusSearch) ||
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.AEPS) ))){*/
-                for(int i=0; i<modules.length;i++){
-                    if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].contains(MenuCodes.AEPS+"-1")||
-                            modules[i].contains(MenuCodes.BusSearch+"-1")   ||
-                            modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
-                            modules[i].contains(MenuCodes.MATM+"-1") ||
-                            modules[i].contains(MenuCodes.PAYTM+"-1") ||
-                            modules[i].contains(MenuCodes.TRAIN+"-1") ||
-                            modules[i].contains(MenuCodes.CASHFREE_QR+"-1") ){
-                        LoginModel.DataList.subMenu subMenu=dataList.new subMenu();
+            for(int i=0; i<modules.length;i++){
+                if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].contains(MenuCodes.AEPS+"-1")||
+                        modules[i].contains(MenuCodes.BusSearch+"-1")   ||
+                        modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
+                        modules[i].contains(MenuCodes.MATM+"-1") ||
+                        modules[i].contains(MenuCodes.PAYTM+"-1") ||
+                        modules[i].contains(MenuCodes.TRAIN+"-1") ||
+                        modules[i].contains(MenuCodes.CASHFREE_QR+"-1")||
+                        modules[i].contains(MenuCodes.FlightSearch+"-1") ){
+                    LoginModel.DataList.subMenu subMenu=dataList.new subMenu();
 //                        subMenu.SubMenu=loginModel.ProductList.get(i).Product;      //previous
 //                        subMenu.SubMenuCode=loginModel.ProductList.get(i).ProductCode;
-                        subMenu.SubMenu=modules[i].substring(0,modules[i].indexOf("-"));
-                        subMenu.SubMenuCode=modules[i].substring(0,modules[i].indexOf("-"));
-                        if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.DMT)){
-                            subMenu.SubMenu="DMT";
-                            findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
-                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
-                            subMenu.SubMenu="Recharge";
-                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
-                            subMenu.SubMenu="AEPS";
-                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.PAYTM)){
-                            subMenu.SubMenu="Paytm Wallet";
-                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
-                            subMenu.SubMenu="IRCTC";
-                        }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.CASHFREE_QR)){
-                            subMenu.SubMenu="QR Code";
-                        }
+                    subMenu.SubMenu=modules[i].substring(0,modules[i].indexOf("-"));
+                    subMenu.SubMenuCode=modules[i].substring(0,modules[i].indexOf("-"));
+                    if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.DMT)){
+                        subMenu.SubMenu="DMT";
+                        findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
+                        subMenu.SubMenu="Recharge";
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
+                        subMenu.SubMenu="AEPS";
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.PAYTM)){
+                        subMenu.SubMenu="Paytm Wallet";
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
+                        subMenu.SubMenu="IRCTC";
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.CASHFREE_QR)){
+                        subMenu.SubMenu="QR Code";
+                    }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
                             subMenuHotel.SubMenu=MenuCodes.AEPS_OLD;
                             subMenuHotel.SubMenuCode=MenuCodes.AEPS_OLD;
                             subMenuArrayList.add(subMenuHotel);
                         }*/
-                        if(!((loginModel.Data.UserType.equalsIgnoreCase("D"))||
-                                (loginModel.Data.UserType.equalsIgnoreCase("S")))) {
+                    if(!((loginModel.Data.UserType.equalsIgnoreCase("D"))||
+                            (loginModel.Data.UserType.equalsIgnoreCase("S")))) {
                            /* if(!subMenu.SubMenuCode.equals(MenuCodes.AEPS)){
                                 subMenuArrayList.add(subMenu);
                             }*/
-                            subMenuArrayList.add(subMenu);
-                        }
+                        subMenuArrayList.add(subMenu);
                     }
+                }
             }
 
 
@@ -1083,7 +1085,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //        final String password = "123456";
 
         if(isDialog){
-        showCustomDialog();}
+            showCustomDialog();}
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URLs.AGENT_LOGIN,
                 new Response.Listener<String>() {
                     @Override
@@ -1093,7 +1095,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             JSONObject obj = new JSONObject(response);
                             String status = obj.getString("status");
                             if (status.equals("true")) {
-                               loginAeps(obj);
+                                loginAeps(obj);
 //                                alertBox(obj);
                             }else if(status.equals("3")){
                                 alertBox(obj);

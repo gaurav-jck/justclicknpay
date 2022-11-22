@@ -29,7 +29,7 @@ public class RapipayRecipientListAdapter extends RecyclerView.Adapter<RecyclerVi
     private String mobile;
 
     public interface OnRecyclerItemClickListener{
-       public void onRecyclerItemClick(View view, ArrayList<SenderDetailResponse.benificiaryDetailData> list, int position);
+        public void onRecyclerItemClick(View view, ArrayList<SenderDetailResponse.benificiaryDetailData> list, int position);
     }
 
     public RapipayRecipientListAdapter(Context context, OnRecyclerItemClickListener fragment,

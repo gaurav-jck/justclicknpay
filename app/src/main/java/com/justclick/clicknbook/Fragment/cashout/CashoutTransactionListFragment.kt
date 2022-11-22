@@ -189,8 +189,8 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                         statusPosition=position
                         val statusCheck=StatusCheck()
                         statusCheck.setTransactionId(data.jckTransactionId)
-                    statusCheck.setAgentCode(loginModel!!.Data.DoneCardUser)
-                    statusCheck.setLoggedInUserType(loginModel!!.Data.UserType)
+                        statusCheck.setAgentCode(loginModel!!.Data.DoneCardUser)
+                        statusCheck.setLoggedInUserType(loginModel!!.Data.UserType)
 //                        statusCheck.setAgentCode("JC0O188")
 //                        statusCheck.setLoggedInUserType("OOU")
                         if(data.serviceType.equals("PayoutPaytm")){
@@ -233,14 +233,14 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
 
     private fun getStatus(statusCheck: StatusCheck) {
         NetworkCall().callPayoutTxnServiceHeader(statusCheck, ApiConstants.CheckStatus, context,
-         { response, responseCode ->
-            if (response != null) {
-                responseHandler(response, STATUS_CHECK)
-            } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-            }
-            hideCustomDialog()
-        },"","", true)
+            { response, responseCode ->
+                if (response != null) {
+                    responseHandler(response, STATUS_CHECK)
+                } else {
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                }
+                hideCustomDialog()
+            },"","", true)
     }
 
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
@@ -255,7 +255,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                         listAdapter!!.setCount(totalPageCount)
                         listAdapter!!.notifyDataSetChanged()
                         if (commonResponse.transactionListDetail != null &&
-                                commonResponse.transactionListDetail.size == 0) {
+                            commonResponse.transactionListDetail.size == 0) {
                             noRecordTv!!.visibility = View.VISIBLE
                         }
                     } else if (commonResponse.statusCode.equals("2", ignoreCase = true)) {
@@ -491,7 +491,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
             dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
         val adapter = ArrayAdapter(requireContext(),
-                R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
+            R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
         adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
         statusSpinner.adapter = adapter
         statusSpinner.setSelection(txnStatusPosition)
@@ -520,17 +520,17 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
             list_agent!!.setAdapter(autocompleteAdapter)
         }
         list_agent!!.setOnItemClickListener(
-                OnItemClickListener { parent, view, position, id ->
-                    agentName = autocompleteAdapter!!.getItem(position).AgencyName
-                    agentDoneCard = agentName.substring(agentName.indexOf("(") + 1, agentName.indexOf(")"))
-                    //                        Active = autocompleteAdapter.getItem(position).Active;
-                    list_agent!!.setVisibility(View.GONE)
-                    //                        agent_name_tv.setText(agentName);
+            OnItemClickListener { parent, view, position, id ->
+                agentName = autocompleteAdapter!!.getItem(position).AgencyName
+                agentDoneCard = agentName.substring(agentName.indexOf("(") + 1, agentName.indexOf(")"))
+                //                        Active = autocompleteAdapter.getItem(position).Active;
+                list_agent!!.setVisibility(View.GONE)
+                //                        agent_name_tv.setText(agentName);
 //                        agent_search_rel.setVisibility(View.VISIBLE);
-                    agent_search_edt.setText(agentName)
-                    agent_search_edt.setSelection(agent_search_edt.text.length)
-                    Common.hideSoftKeyboard(context as NavigationDrawerActivity?)
-                })
+                agent_search_edt.setText(agentName)
+                agent_search_edt.setSelection(agent_search_edt.text.length)
+                Common.hideSoftKeyboard(context as NavigationDrawerActivity?)
+            })
         agent_search_edt.setOnClickListener {
             agent_search_edt.setText("")
             agentName = ""
@@ -549,7 +549,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                         model.DeviceId = Common.getDeviceId(context)
                         model.DoneCardUser = loginModel!!.Data.DoneCardUser
                         model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
-                                EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context)
+                            EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context)
                         model.Type = loginModel!!.Data.UserType
                         model.RequiredType = loginModel!!.Data.UserType
                         call_agent(model)
@@ -564,7 +564,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
         })
         val window = dialog.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT)
+            LinearLayout.LayoutParams.MATCH_PARENT)
         dialog.show()
     }
 
@@ -592,27 +592,27 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
 
     private fun setSpinnerAdapter(data: Array<String>): ArrayAdapter<String> {
         val adapter = ArrayAdapter(requireContext(),
-                R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
+            R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter
     }
 
     private fun openStartDatePicker() {
         val datePickerDialog = DatePickerDialog(requireContext(),
-                R.style.DatePickerTheme,
-                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    startDateCalendar!![year, monthOfYear] = dayOfMonth
-                    if (startDateCalendar!!.after(Calendar.getInstance())) {
-                        Toast.makeText(context, "Can't select date after current date", Toast.LENGTH_SHORT).show()
-                    } else {
-                        startDateDay = dayOfMonth
-                        startDateMonth = monthOfYear
-                        startDateYear = year
-                        start_date_value_tv!!.text = dateFormat!!.format(startDateCalendar!!.time)
-                        start_day_value_tv!!.text = dayFormat!!.format(startDateCalendar!!.time)
-                        startDateToSend = dateToServerFormat!!.format(startDateCalendar!!.time)
-                    }
-                }, startDateYear, startDateMonth, startDateDay)
+            R.style.DatePickerTheme,
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                startDateCalendar!![year, monthOfYear] = dayOfMonth
+                if (startDateCalendar!!.after(Calendar.getInstance())) {
+                    Toast.makeText(context, "Can't select date after current date", Toast.LENGTH_SHORT).show()
+                } else {
+                    startDateDay = dayOfMonth
+                    startDateMonth = monthOfYear
+                    startDateYear = year
+                    start_date_value_tv!!.text = dateFormat!!.format(startDateCalendar!!.time)
+                    start_day_value_tv!!.text = dayFormat!!.format(startDateCalendar!!.time)
+                    startDateToSend = dateToServerFormat!!.format(startDateCalendar!!.time)
+                }
+            }, startDateYear, startDateMonth, startDateDay)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             datePickerDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
@@ -625,21 +625,21 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
 
     private fun openEndDatePicker() {
         val datePickerDialog = DatePickerDialog(requireContext(),
-                R.style.DatePickerTheme,
-                OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                    endDateCalendar = Calendar.getInstance()
-                    endDateCalendar!!.set(year, monthOfYear, dayOfMonth)
-                    if (endDateCalendar!!.after(Calendar.getInstance())) {
-                        Toast.makeText(context, "Can't select date after current date", Toast.LENGTH_SHORT).show()
-                    } else {
-                        endDateDay = dayOfMonth
-                        endDateMonth = monthOfYear
-                        endDateYear = year
-                        end_date_value_tv!!.text = dateFormat!!.format(endDateCalendar!!.getTime())
-                        end_day_value_tv!!.text = dayFormat!!.format(endDateCalendar!!.getTime())
-                        endDateToSend = dateToServerFormat!!.format(endDateCalendar!!.getTime())
-                    }
-                }, endDateYear, endDateMonth, endDateDay)
+            R.style.DatePickerTheme,
+            OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                endDateCalendar = Calendar.getInstance()
+                endDateCalendar!!.set(year, monthOfYear, dayOfMonth)
+                if (endDateCalendar!!.after(Calendar.getInstance())) {
+                    Toast.makeText(context, "Can't select date after current date", Toast.LENGTH_SHORT).show()
+                } else {
+                    endDateDay = dayOfMonth
+                    endDateMonth = monthOfYear
+                    endDateYear = year
+                    end_date_value_tv!!.text = dateFormat!!.format(endDateCalendar!!.getTime())
+                    end_day_value_tv!!.text = dayFormat!!.format(endDateCalendar!!.getTime())
+                    endDateToSend = dateToServerFormat!!.format(endDateCalendar!!.getTime())
+                }
+            }, endDateYear, endDateMonth, endDateDay)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
             datePickerDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
@@ -653,7 +653,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)
         val window = dialog.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT)
+            LinearLayout.LayoutParams.MATCH_PARENT)
         dialog.findViewById<TextView>(R.id.title).text="DMT Receipt"
         val cardHolderTv = dialog.findViewById<TextView>(R.id.cardHolderTv)
         val agentCodeTv = dialog.findViewById<TextView>(R.id.agentCodeTv)
@@ -743,4 +743,4 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    }
+}

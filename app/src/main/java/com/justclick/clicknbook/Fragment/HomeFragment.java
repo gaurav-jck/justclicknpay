@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminDepositReportFragment;
@@ -209,7 +210,9 @@ public class HomeFragment extends Fragment {
                         replaceFragmentWithBackStack(new TrainFailedListFragment());
                 break;
             case MenuCodes.FlightSearch://12
-                ((NavigationDrawerActivity) context).replaceFragmentWithTag(FlightSearch.newInstance(), FlightSearch.FlightSearchTag);
+//                ((NavigationDrawerActivity) context).replaceFragmentWithTag(FlightSearch.newInstance(), FlightSearch.FlightSearchTag);
+                AirWebviewActivity.airSession(context);
+//                startActivity(new Intent(context, AirWebviewActivity.class));
                 break;
             case MenuCodes.BusSearch://13
                 ((NavigationDrawerActivity)context).

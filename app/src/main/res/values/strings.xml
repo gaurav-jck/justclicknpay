@@ -147,7 +147,7 @@
     <string name="nav_train_search">Train Search</string>
     <string name="bookTrain">Search Train</string>
 
-<!--    QR code-->
+    <!--    QR code-->
     <string name="qrCode">QR Code</string>
 
     <!--Sales Fragment-->
@@ -720,7 +720,7 @@
     <string name="transactionExceptionBal">There was a error response from host, please try again..</string>
     <string name="freshnessFactorErrorBal">There was error in host, please try again..</string>
 
-<!--    fasttag-->
+    <!--    fasttag-->
     <string name="fasttag">FastTag</string>
 
 </resources>

@@ -1,25 +1,25 @@
 package com.justclick.clicknbook.utils.enums;
 
 public enum TrainQuotaEnum {
-    GN("General"),
-    LD("Ladies"),
-    TQ("Tatkal"),
-    SS("Sr. Citizen"),
-    HP("Physically Handicapped");
+  GN("General"),
+  LD("Ladies"),
+  TQ("Tatkal"),
+  SS("Sr. Citizen"),
+  HP("Physically Handicapped");
 
-    private String quotaName;
+  private String quotaName;
 
-    TrainQuotaEnum(String name) {
-        quotaName=name;
-    }
+  TrainQuotaEnum(String name) {
+    quotaName=name;
+  }
 
-    public String value(){
-        return quotaName;
-    }
+  public String value(){
+    return quotaName;
+  }
 
-    @Override public String toString(){
-        return quotaName;
-    }
+  @Override public String toString(){
+    return quotaName;
+  }
 
     /*'GN~General Quota~LD~Ladies Quota~HO~Head quarters/high official Quota
     ~DF~Defence Quota~PH~Parliament house Quota~FT~Foreign Tourist Quota~

@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_qr_code" />
-                            <entry key="sourceFile" value="C:\JustClicknBookWL" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_flight_icon" />
+                            <entry key="sourceFile" value="C:\Users\admin\Downloads\flight_icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

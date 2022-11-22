@@ -132,7 +132,7 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.flight_blue );
 //                    homeIcon.setColorFilter(appColor);
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
-                    vh.imageView_sub_item.setImageResource(R.drawable.flight_blue);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_flight_icon);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.BusSearch)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.flight_blue );
 //                    homeIcon.setColorFilter(appColor);

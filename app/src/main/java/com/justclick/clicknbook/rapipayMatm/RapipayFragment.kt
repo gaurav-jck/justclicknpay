@@ -120,7 +120,7 @@ public class RapipayFragment : Fragment() {
         }
 
         return view;
-        }
+    }
 
     open fun assignBundleValue(position: Int) {
         if (position == 0) {
@@ -146,11 +146,11 @@ public class RapipayFragment : Fragment() {
         }
         if(btAdapter==null){
             AlertDialog.Builder(requireContext())
-                    .setTitle("Not compatible")
-                    .setMessage("Your phone does not support Bluetooth")
-                    .setPositiveButton("Exit") { dialog, which -> System.exit(0) }
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show()
+                .setTitle("Not compatible")
+                .setMessage("Your phone does not support Bluetooth")
+                .setPositiveButton("Exit") { dialog, which -> System.exit(0) }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
         } else {
             var requestBluetooth = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
@@ -201,10 +201,10 @@ public class RapipayFragment : Fragment() {
                     if (device.name.startsWith("MP-")) bluetoothName = device.name.substring(3) else if (device.name.startsWith("D180")) bluetoothName = device.name
                     val bluetoothAddress = device.address
                     Log.d("GoPosActivity",
-                            "bluetoothName: "
-                                    + bluetoothName
-                                    + " ,bluetoothAddress:"
-                                    + bluetoothAddress)
+                        "bluetoothName: "
+                                + bluetoothName
+                                + " ,bluetoothAddress:"
+                                + bluetoothAddress)
                     if (!TextUtils.isEmpty(bluetoothAddress)) {
                         return bluetoothAddress
                     }
@@ -227,16 +227,16 @@ public class RapipayFragment : Fragment() {
             }
         } else {
             AlertDialog.Builder(requireContext())
-                    .setTitle("BlueTooth Pairing")
-                    .setMessage("Your bluetooth is not paired with MATM device, please pair")
+                .setTitle("BlueTooth Pairing")
+                .setMessage("Your bluetooth is not paired with MATM device, please pair")
 //                    .setCancelable(false)
-                    .setPositiveButton("Ok") { dialog, which ->
-                        val intentOpenBluetoothSettings = Intent()
-                        intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
-                        startActivity(intentOpenBluetoothSettings)
-                    }
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show()
+                .setPositiveButton("Ok") { dialog, which ->
+                    val intentOpenBluetoothSettings = Intent()
+                    intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
+                    startActivity(intentOpenBluetoothSettings)
+                }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
         }
         return null
     }
@@ -256,14 +256,14 @@ public class RapipayFragment : Fragment() {
         }
 
         NetworkCall().callRapipayMatmService(request, ApiConstants.InitiateMatmTxn, context,
-         { response, responseCode ->
-            if (response != null) {
-                responseHandlerCredential(response, transactionType) //https://remittance.justclicknpay.com/api/payments/CheckCredential
-            } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
-                isInitiateTxn = true
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-            }
-        },true)
+            { response, responseCode ->
+                if (response != null) {
+                    responseHandlerCredential(response, transactionType) //https://remittance.justclicknpay.com/api/payments/CheckCredential
+                } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
+                    isInitiateTxn = true
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                }
+            },true)
     }
 
     private fun responseHandlerCredential(response: ResponseBody, TYPE: Int) {
@@ -369,7 +369,7 @@ public class RapipayFragment : Fragment() {
         val keys = bundle.keySet()
         for (key in keys) {
             try {
-                 json.put(key, bundle.get(key)); //see edit below
+                json.put(key, bundle.get(key)); //see edit below
 //                json.put(key, JSONObject.wrap(bundle[key]))
             } catch (e: JSONException) {
                 //Handle exception here
@@ -384,13 +384,13 @@ public class RapipayFragment : Fragment() {
         val matmRequest = MatmRequestLog()
         matmRequest.Json = request
         NetworkCall().callRapipayMatmService(matmRequest, ApiConstants.MatmAppLog, context
-        ,{ response, responseCode ->
-            if (response != null) {
+            ,{ response, responseCode ->
+                if (response != null) {
 //                Toast.makeText(context, "Success "+response.string(), Toast.LENGTH_SHORT).show()
-            } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
-                Toast.makeText(context, "Request log", Toast.LENGTH_SHORT).show()
-            }
-        },false)
+                } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
+                    Toast.makeText(context, "Request log", Toast.LENGTH_SHORT).show()
+                }
+            },false)
     }
 
     private val NEW_MATM_AEPS_Resposne = 150
@@ -460,7 +460,7 @@ public class RapipayFragment : Fragment() {
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)
         val window = dialog.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT)
+            LinearLayout.LayoutParams.MATCH_PARENT)
         val cardHolderTv = dialog.findViewById<TextView>(R.id.cardHolderTv)
         val agentCodeTv = dialog.findViewById<TextView>(R.id.agentCodeTv)
         val bankNameTv = dialog.findViewById<TextView>(R.id.bankNameTv)
@@ -509,14 +509,14 @@ public class RapipayFragment : Fragment() {
         request.setRowStart("1")
         request.setRowEnd("10")
         NetworkCall().callRapipayMatmService(request, ApiConstants.TransactionListMatm, context
-        ,{ response, responseCode ->
-            if (response != null) {
-                responseHandlerList(response, 1) //https://remittance.justclicknpay.com/api/payments/CheckCredential
-            } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
-                isInitiateTxn = true
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-            }
-        },true)
+            ,{ response, responseCode ->
+                if (response != null) {
+                    responseHandlerList(response, 1) //https://remittance.justclicknpay.com/api/payments/CheckCredential
+                } else {      //{"AgentCode":"JC0A13387","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
+                    isInitiateTxn = true
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                }
+            },true)
     }
 
     private fun responseHandlerList(response: ResponseBody, i: Int) {

@@ -345,8 +345,8 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
                         amountEdt.setEnabled(true);
 //                        paymentDialog.dismiss();
                         openTxnConfirmationDialog("Confirm this transaction","Please confirm," +
-                                " you want to make this transaction.\n"+"Amount="+amount+
-                                "\nAccount no="+beneData.getAccountNumber()+"\nName="+beneData.getAccountHolderName(),
+                                        " you want to make this transaction.\n"+"Amount="+amount+
+                                        "\nAccount no="+beneData.getAccountNumber()+"\nName="+beneData.getAccountHolderName(),
                                 "Cancel","Submit");
                     }
                 }else {
@@ -361,7 +361,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
     }
 
     private void openTxnConfirmationDialog(String title, String message,
-                                              String cancel, String submit) {
+                                           String cancel, String submit) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.confirmation_dialog_layout);

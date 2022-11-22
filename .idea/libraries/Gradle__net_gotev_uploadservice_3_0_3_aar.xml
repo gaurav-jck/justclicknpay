@@ -10,6 +10,9 @@
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30614d5f2a3e5dd1fc24e6a2d708d764/jetified-uploadservice-3.0.3/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30614d5f2a3e5dd1fc24e6a2d708d764/jetified-uploadservice-3.0.3/AndroidManifest.xml" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/30614d5f2a3e5dd1fc24e6a2d708d764/jetified-uploadservice-3.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0675a8d71a9a1d0f1475587ef0a664c/jetified-uploadservice-3.0.3/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0675a8d71a9a1d0f1475587ef0a664c/jetified-uploadservice-3.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e0675a8d71a9a1d0f1475587ef0a664c/jetified-uploadservice-3.0.3/res" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.gotev/uploadservice/3.0.3/969429d0026076f5c5f8f369d501db7dd23af663/uploadservice-3.0.3-javadoc.jar!/" />

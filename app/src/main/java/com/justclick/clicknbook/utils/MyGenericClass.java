@@ -5,7 +5,7 @@ package com.justclick.clicknbook.utils;
  */
 
 public class MyGenericClass<T> {
-    T obj;
-    public void add(T obj){this.obj=obj;}
-    T get(){return obj;}
+  T obj;
+  public void add(T obj){this.obj=obj;}
+  T get(){return obj;}
 }

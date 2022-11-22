@@ -20,49 +20,49 @@ import java.util.Date;
 
 public class ImagePicker {
 
-    public static final int CAMERA=1, GALLERY=2;
+  public static final int CAMERA=1, GALLERY=2;
 
-    public static String getImagePath(Intent data){
-        if(data!=null && data.getData()!=null){
-            return data.getData().getPath();
-        }else {
-            return null;
-        }
-
+  public static String getImagePath(Intent data){
+    if(data!=null && data.getData()!=null){
+      return data.getData().getPath();
+    }else {
+      return null;
     }
 
-    public static Bitmap getImageBitmap(Intent data, Context context){
-        // Let's read picked image data - its URI
-        Uri pickedImage = data.getData();
-        // Let's read picked image path using content resolver
-        String[] filePath = { MediaStore.Images.Media.DATA };
-        Cursor cursor = context.getContentResolver().query(pickedImage, filePath, null, null, null);
-        cursor.moveToFirst();
-        String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+  }
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
+  public static Bitmap getImageBitmap(Intent data, Context context){
+    // Let's read picked image data - its URI
+    Uri pickedImage = data.getData();
+    // Let's read picked image path using content resolver
+    String[] filePath = { MediaStore.Images.Media.DATA };
+    Cursor cursor = context.getContentResolver().query(pickedImage, filePath, null, null, null);
+    cursor.moveToFirst();
+    String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
-        // Do something with the bitmap
+    BitmapFactory.Options options = new BitmapFactory.Options();
+    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+    Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 
-        // At the end remember to close the cursor or you will end with the RuntimeException!
-        cursor.close();
-        return bitmap;
-    }
+    // Do something with the bitmap
 
-    private static File createImageFile(Context context) throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "Bank_" + timeStamp + "_";
-        File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
+    // At the end remember to close the cursor or you will end with the RuntimeException!
+    cursor.close();
+    return bitmap;
+  }
 
-        return image;
-    }
+  private static File createImageFile(Context context) throws IOException {
+    // Create an image file name
+    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+    String imageFileName = "Bank_" + timeStamp + "_";
+    File storageDir = context.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+    File image = File.createTempFile(
+            imageFileName,  /* prefix */
+            ".jpg",         /* suffix */
+            storageDir      /* directory */
+    );
+
+    return image;
+  }
 
 }

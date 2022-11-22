@@ -47,7 +47,8 @@ import retrofit2.Response;
 public class BillPayFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     public static final int POSTPAID_TYPE =1, WATER_TYPE =2,
-            DATACARD_TYPE=3, ELECTRICITY_TYPE=4, LANDLINE_TYPE=5, GAS_TYPE=6, INSURANCE_TYPE=7, EMI_TYPE=8;
+            DATACARD_TYPE=3, ELECTRICITY_TYPE=4,
+            LANDLINE_TYPE=5, GAS_TYPE=6, INSURANCE_TYPE=7, EMI_TYPE=8;
     public static final String categoryElectricity="Electricity",categoryGas="Gas",categoryPostpaid="Postpaid",
             categoryWater="Water",categoryInsurance="Insurance",categoryDatacardPrepaid="DatacardPrepaid",
             categoryLandline="Landline",categoryEMI="EMI", categoryFastTag="FastTag";
@@ -371,6 +372,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                         isDatacardOperator=true;
                         if(!isElectricityOperator) {
                             callOperator(categoryElectricity, ELECTRICITY_TYPE, false);
+//                            callOperator(categoryLandline, LANDLINE_TYPE, false);
                         }
                         break;
                     case ELECTRICITY_TYPE:

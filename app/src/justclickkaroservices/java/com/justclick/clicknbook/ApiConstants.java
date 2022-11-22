@@ -80,6 +80,7 @@ public class ApiConstants
     public static final String AirCancellationReport ="AirCancellationReport";
     public static final String AirRefundReport ="AirRefundReport";
     public static final String AirSalesReport ="AirSalesReport";
+    public static final String TRAVELSESSION ="TRAVELSESSION";
 
     //Sales Report
     public static final String SalesAgentDetail ="SalesAgentDetails";

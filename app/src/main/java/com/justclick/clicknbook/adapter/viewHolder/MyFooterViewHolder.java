@@ -8,11 +8,11 @@ import android.widget.TextView;
 import com.justclick.clicknbook.R;
 
 public class MyFooterViewHolder extends RecyclerView.ViewHolder {
-        public TextView name;
-        public LinearLayout footer_lin;
-        public MyFooterViewHolder(View view) {
-            super(view);
-            name = view.findViewById(R.id.name_tv);
-            footer_lin = view.findViewById(R.id.footer_lin);
-        }
-    }
+  public TextView name;
+  public LinearLayout footer_lin;
+  public MyFooterViewHolder(View view) {
+    super(view);
+    name = view.findViewById(R.id.name_tv);
+    footer_lin = view.findViewById(R.id.footer_lin);
+  }
+}

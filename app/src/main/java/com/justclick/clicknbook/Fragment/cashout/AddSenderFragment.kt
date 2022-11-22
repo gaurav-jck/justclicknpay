@@ -107,11 +107,11 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
     }
 
     private fun initializeViews(view: View) {
-        if (arguments!!.getSerializable("senderResponse") != null) {
-            senderDetailResponse = arguments!!.getSerializable("senderResponse") as SenderDetailResponse?
-            commonParams = arguments!!.getSerializable("commonParams") as CommonParams?
+        if (requireArguments().getSerializable("senderResponse") != null) {
+            senderDetailResponse = requireArguments().getSerializable("senderResponse") as SenderDetailResponse?
+            commonParams = requireArguments().getSerializable("commonParams") as CommonParams?
         }
-        val senderNumber = arguments!!.getString("SenderNumber", "")
+        val senderNumber = requireArguments().getString("SenderNumber", "")
         val face = Common.TextViewTypeFace(context)
         titleTv = view.findViewById(R.id.titleTv)
         get_tv = view.findViewById(R.id.get_tv)
@@ -135,7 +135,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
         get_tv!!.setTypeface(face)
         val genderArray = arrayOf<String?>("MALE", "FEMALE")
         genderAtv!!.setOnClickListener(this)
-        genderAtv!!.setAdapter<ArrayAdapter<*>>(ArrayAdapter<Any?>(context!!, android.R.layout.simple_spinner_dropdown_item, genderArray))
+        genderAtv!!.setAdapter<ArrayAdapter<*>>(ArrayAdapter<Any?>(requireContext(), android.R.layout.simple_spinner_dropdown_item, genderArray))
         genderAtv!!.setSelection(0)
         genderAtv!!.setOnItemClickListener(OnItemClickListener { parent, view, position, id -> gender = genderArray[position] })
         cityAtv!!.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
@@ -482,7 +482,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
 
     private fun openDatePicker() {
         //Date formats
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     dobDateCalendar!![year, monthOfYear] = dayOfMonth
@@ -496,7 +496,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getSpinnerAdapter(data: Array<String?>): ArrayAdapter<String?> {
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter

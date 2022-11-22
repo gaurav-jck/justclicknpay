@@ -12,42 +12,42 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class IncomingSms extends BroadcastReceiver {
 
-    // Get the object of SmsManager
-    final SmsManager sms = SmsManager.getDefault();
+  // Get the object of SmsManager
+  final SmsManager sms = SmsManager.getDefault();
 
-    public void onReceive(Context context, Intent intent) {
+  public void onReceive(Context context, Intent intent) {
 
-        // Retrieves a map of extended data from the intent.
-        final Bundle bundle = intent.getExtras();
+    // Retrieves a map of extended data from the intent.
+    final Bundle bundle = intent.getExtras();
 
-        try {
+    try {
 
-            if (bundle != null) {
+      if (bundle != null) {
 
-                final Object[] pdusObj = (Object[]) bundle.get("pdus");
+        final Object[] pdusObj = (Object[]) bundle.get("pdus");
 
-                for (int i = 0; i < pdusObj.length; i++) {
+        for (int i = 0; i < pdusObj.length; i++) {
 
-                    SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
-                    String phoneNumber = currentMessage.getDisplayOriginatingAddress();
+          SmsMessage currentMessage = SmsMessage.createFromPdu((byte[]) pdusObj[i]);
+          String phoneNumber = currentMessage.getDisplayOriginatingAddress();
 
-                    String senderNum = phoneNumber;
-                    String message = currentMessage.getDisplayMessageBody().split("Verification Code")[1].trim().split("\\s")[0];
+          String senderNum = phoneNumber;
+          String message = currentMessage.getDisplayMessageBody().split("Verification Code")[1].trim().split("\\s")[0];
 
 //                    message = message.substring(0, 7);
-                    Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
+          Log.i("SmsReceiver", "senderNum: " + senderNum + "; message: " + message);
 
-                    Intent myIntent = new Intent("otp");
-                    myIntent.putExtra("message",message);
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(myIntent);
-                    // Show Alert
+          Intent myIntent = new Intent("otp");
+          myIntent.putExtra("message",message);
+          LocalBroadcastManager.getInstance(context).sendBroadcast(myIntent);
+          // Show Alert
 
-                } // end for loop
-            } // bundle is null
+        } // end for loop
+      } // bundle is null
 
-        } catch (Exception e) {
-            Log.e("SmsReceiver", "Exception smsReceiver" +e);
+    } catch (Exception e) {
+      Log.e("SmsReceiver", "Exception smsReceiver" +e);
 
-        }
     }
+  }
 }

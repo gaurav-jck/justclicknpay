@@ -99,6 +99,7 @@ public class NetworkCall {
                     retrofitResponseListener.onRetrofitResponse(responseBody,0);
                 }catch (Exception e){
                     responseBody=null;
+                    hideCustomDialog();
                     Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
                 }
             }
@@ -349,7 +350,7 @@ public class NetworkCall {
 //            showCustomDialog();}
         ApiInterface service = APIClient.getClientAir().create(ApiInterface.class);
         Call<ResponseBody> call = service.getFlightCityPost(methodName,model);
-         call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try{
@@ -755,7 +756,7 @@ public class NetworkCall {
     }
 
     public void callAepsServiceHeaderNew(Object model, String methodName, final Context context,
-                                      RetrofitResponseListener listener, String userData,String token) {
+                                         RetrofitResponseListener listener, String userData,String token) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
@@ -799,7 +800,7 @@ public class NetworkCall {
         String json = new Gson().toJson(model);
         String toString=model.toString(); //className@110010
         if(isDialog){
-        showCustomDialog();}
+            showCustomDialog();}
         ApiInterface service = APIClient.getClientRapipay().create(ApiInterface.class);
         Call<ResponseBody> call = service.getRapipayCommonPost(methodName,model);
         call.enqueue(new Callback<ResponseBody>() {
@@ -872,7 +873,7 @@ public class NetworkCall {
     }
 
     public void testHeader(Object model, String methodName, final Context context,
-                                         RetrofitResponseListener listener, String userData,String token) {
+                           RetrofitResponseListener listener, String userData,String token) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
@@ -910,37 +911,37 @@ public class NetworkCall {
         });
     }
 
-//    Aeps New
+    //    Aeps New
     public void callAepsServiceN(Object model, String methodName, final Context context, RetrofitResponseListener listener) {
-    this.context=context;
-    retrofitResponseListener= listener;
-    String json = new Gson().toJson(model).toString();
-    ApiInterface service = APIClient.getClient(URLs.BASE_URL_N).create(ApiInterface.class);
-    Call<ResponseBody> call = service.aepsPostServiceN(methodName,model);
-    call.enqueue(new Callback<ResponseBody>() {
-        @Override
-        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-            try{
-                hideCustomDialog();
-                responseBody=response.body();
-                retrofitResponseListener.onRetrofitResponse(responseBody,0);
-            }catch (Exception e){
-                responseBody=null;
+        this.context=context;
+        retrofitResponseListener= listener;
+        String json = new Gson().toJson(model).toString();
+        ApiInterface service = APIClient.getClient(URLs.BASE_URL_N).create(ApiInterface.class);
+        Call<ResponseBody> call = service.aepsPostServiceN(methodName,model);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    hideCustomDialog();
+                    responseBody=response.body();
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+                }catch (Exception e){
+                    responseBody=null;
 //                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
-                Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                }
             }
-        }
 
-        @Override
-        public void onFailure(Call<ResponseBody> call, Throwable t) {
-            responseBody=null;
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                responseBody=null;
 //                retrofitResponseListener.onRetrofitResponse(responseBody,0);
-            hideCustomDialog();
-            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
-        }
+                hideCustomDialog();
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
 
-    });
-}
+        });
+    }
 
     public void callPayoutService(Object model, String methodName, final Context context,boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
@@ -982,13 +983,13 @@ public class NetworkCall {
     }
 
     public void callPayoutServiceHeader(Object model, String methodName, final Context context,
-                                         RetrofitResponseListener listener, String userData,String token, boolean isDialog) {
+                                        RetrofitResponseListener listener, String userData,String token, boolean isDialog) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
         String toString=model.toString(); //className@110010
         if(isDialog){
-        showCustomDialog();}
+            showCustomDialog();}
         ApiInterface service = APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);
         Call<ResponseBody> call = service.getPayoutWithHeader(methodName,model,userData,"Bearer "+token);
         call.enqueue(new Callback<ResponseBody>() {
@@ -1022,7 +1023,7 @@ public class NetworkCall {
     }
 
     public void callPayoutTxnServiceHeader(Object model, String methodName, final Context context,
-                                        RetrofitResponseListener listener, String userData,String token, boolean isDialog) {
+                                           RetrofitResponseListener listener, String userData,String token, boolean isDialog) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
@@ -1180,7 +1181,7 @@ public class NetworkCall {
     }
 
     public void callTrainServiceFinalGet(String methodName, String jckId, String pnr, String uid,
-                                    final Context context, String doneCard, String userType,boolean isDialog,
+                                         final Context context, String doneCard, String userType,boolean isDialog,
                                          RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
@@ -1221,7 +1222,7 @@ public class NetworkCall {
     }
 
     public void callTrainStationServiceGet(String methodName, String param1,
-                                    final Context context, boolean isDialog, RetrofitResponseListener listener) {
+                                           final Context context, boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         if(isDialog){
@@ -1259,7 +1260,7 @@ public class NetworkCall {
     }
 
     public void callService(Call<ResponseBody> responseBodyCall,
-                                           final Context context, boolean isDialog, RetrofitResponseListener listener) {
+                            final Context context, boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         if(isDialog){
@@ -1295,7 +1296,7 @@ public class NetworkCall {
     }
 
     public void callRailService(Call<ResponseBody> responseBodyCall,
-                            final Context context, boolean isDialog, RetrofitResponseListener listener) {
+                                final Context context, boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         if(isDialog){
@@ -1365,7 +1366,7 @@ public class NetworkCall {
     }
 
     public void callLicServicePaytm(Object model, String methodName, final Context context,String userData, String token,
-                               boolean isDialog, RetrofitResponseListener listener) {
+                                    boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
@@ -1398,7 +1399,7 @@ public class NetworkCall {
     }
 
     public void callBillPayService(Object model, String methodName, final Context context,String userData, String token,
-                               boolean isDialog, RetrofitResponseListener listener) {
+                                   boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);
@@ -1407,7 +1408,7 @@ public class NetworkCall {
             showCustomDialog();}
         ApiInterface service;
 //        if(userData.length()==0){
-            service = APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+        service = APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
 //        }else {
 //            service = APIClient.getClient("https://uatrechargepay.justclicknpay.com/").create(ApiInterface.class);
 //        }
@@ -1436,8 +1437,8 @@ public class NetworkCall {
         });
     }
 
-public void callPaytmService(Object model, String methodName, final Context context,String userData, String token,
-                               boolean isDialog, RetrofitResponseListener listener) {
+    public void callPaytmService(Object model, String methodName, final Context context,String userData, String token,
+                                 boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
         retrofitResponseListener= listener;
         String json = new Gson().toJson(model);

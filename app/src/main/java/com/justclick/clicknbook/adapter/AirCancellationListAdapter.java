@@ -34,7 +34,7 @@ public class AirCancellationListAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     public interface OnRecyclerItemClickListener{
-       public void onRecyclerItemClick(View view, ArrayList<AirCancellationListModel.AirCancelListData> list, int position);
+        public void onRecyclerItemClick(View view, ArrayList<AirCancellationListModel.AirCancelListData> list, int position);
     }
 
     public AirCancellationListAdapter(Context context, OnRecyclerItemClickListener fragment, ArrayList<AirCancellationListModel.AirCancelListData> arrayList, int totalPageCount) {

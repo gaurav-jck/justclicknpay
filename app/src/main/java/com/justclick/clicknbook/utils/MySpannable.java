@@ -12,24 +12,24 @@ import android.view.View;
 
 public class MySpannable extends ClickableSpan {
 
-    private boolean isUnderline = true;
+  private boolean isUnderline = true;
 
-    /**
-     * Constructor
-     */
-    public MySpannable(boolean isUnderline) {
-        this.isUnderline = isUnderline;
-    }
+  /**
+   * Constructor
+   */
+  public MySpannable(boolean isUnderline) {
+    this.isUnderline = isUnderline;
+  }
 
-    @Override
-    public void updateDrawState(TextPaint ds) {
-        ds.setUnderlineText(isUnderline);
-        ds.setColor(Color.parseColor("#D40A0A"));
-    }
+  @Override
+  public void updateDrawState(TextPaint ds) {
+    ds.setUnderlineText(isUnderline);
+    ds.setColor(Color.parseColor("#D40A0A"));
+  }
 
-    @Override
-    public void onClick(View widget) {
+  @Override
+  public void onClick(View widget) {
 
 
-    }
+  }
 }
