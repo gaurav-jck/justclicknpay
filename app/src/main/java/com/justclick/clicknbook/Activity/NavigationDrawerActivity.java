@@ -118,6 +118,7 @@ import com.justclick.clicknbook.myinterface.FragmentBackPressListener;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
+import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.RapipayFragment;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
 import com.justclick.clicknbook.requestmodels.CommonRequestModel;
@@ -401,7 +402,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.BusSearch:
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(busSearchFragment);
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(busSearchFragment);
+                AirWebviewActivity.airSession(context);
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.HotelSearch:
@@ -465,7 +467,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.MATM:
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new RapipayFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MainMatmFragment());
 //                startActivity(new Intent(context, CredoPayActivityJava.class));
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;

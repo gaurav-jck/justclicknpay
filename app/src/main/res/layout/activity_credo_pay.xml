@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:background="@color/gray"
+        android:background="@color/grey_dark"
         android:padding="@dimen/medium_margin"
         android:text="Open CredoPay"
         android:textColor="@color/white" />

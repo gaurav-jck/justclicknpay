@@ -44,12 +44,12 @@
 
         <RadioButton
             android:id="@+id/cashid"
-            android:layout_weight="4"
-            android:textSize="@dimen/simple_content_text_size"
-            android:textStyle="bold|italic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/aeps1cashwithdraw" />
+            android:layout_weight="4"
+            android:text="Cash Withdraw"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textStyle="bold|italic" />
 
         <RadioButton
             android:layout_weight="4"
@@ -59,7 +59,7 @@
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/aeps1balenq" />
+            android:text="Balance Enquiry" />
 
     </RadioGroup>
 
@@ -131,6 +131,7 @@
             android:background="@drawable/rapipay_background"
             android:text="Sync device"
             android:textColor="@color/white"
+            android:visibility="gone"
             android:textSize="@dimen/text_size_14sp" />
 
 

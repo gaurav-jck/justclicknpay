@@ -6,10 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.justclick.clicknbook.Activity.TestActivity;
 import com.justclick.clicknbook.R;
 
-import in.credopay.payment.sdk.CredopayPaymentConstants;
-import in.credopay.payment.sdk.PaymentActivity;
+//import in.credopay.payment.sdk.CredopayPaymentConstants;
+//import in.credopay.payment.sdk.PaymentActivity;
 
 public class CredoPayActivityJava extends AppCompatActivity {
 
@@ -24,8 +25,10 @@ public class CredoPayActivityJava extends AppCompatActivity {
     }
 
     private void openCredoPayActivity() {
-        Intent intent = new Intent(this, PaymentActivity.class);
-        intent.putExtra("TRANSACTION_TYPE", CredopayPaymentConstants.MICROATM);
+//        Intent intent = new Intent(this, PaymentActivity.class);
+        Intent intent = new Intent(this, TestActivity.class);
+//        intent.putExtra("TRANSACTION_TYPE", CredopayPaymentConstants.MICROATM);
+        intent.putExtra("TRANSACTION_TYPE", 1);
 //        Purchase Transaction
         intent.putExtra("DEBUG_MODE",true);
         intent.putExtra("PRODUCTION",false);

@@ -4,8 +4,20 @@ import com.justclick.clicknbook.ApiConstants;
 
 public class AddBeneRequest{
     private String Mode="WEB", MerchantId= ApiConstants.MerchantId;
-    private String AccountHolderName,AccountNumber, ConfirmAccountNumber,BankName,
+    private String AccountHolderName,AccountNumber, ConfirmAccountNumber,BankName, BankId,
             IfscCode,Mobile,SessionRefId,SessionKey,AgentCode;
+
+    public void setBankId(String bankId) {
+        BankId = bankId;
+    }
+
+    public String getApiService() {
+        return ApiService;
+    }
+    public void setApiService(String apiService) {
+        ApiService = apiService;
+    }
+    private String ApiService;   // new change
 
     public void setMode(String mode){
         Mode=mode;

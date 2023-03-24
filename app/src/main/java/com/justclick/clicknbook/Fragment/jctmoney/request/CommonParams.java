@@ -6,6 +6,16 @@ public class CommonParams implements Serializable {
     private String sessionKey,sessionRefNo,token, userData;
     private String kycStatus;
 
+    public String getApiService() {
+        return ApiService;
+    }
+
+    public void setApiService(String apiService) {
+        ApiService = apiService;
+    }
+
+    private String ApiService;   // new change
+
     public String getKycStatus() {
         return kycStatus;
     }

@@ -303,14 +303,14 @@ public class NetworkCall {
                     hideCustomDialog();
                     retrofitResponseListener.onRetrofitResponse(response.body(),0);
                 }catch (Exception e){
-                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+//                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 hideCustomDialog();
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -1616,6 +1616,10 @@ public class NetworkCall {
 
     public static ApiInterface getFastTagApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+    }
+
+    public static ApiInterface getMATMApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY_MATM).create(ApiInterface.class);
     }
 
 

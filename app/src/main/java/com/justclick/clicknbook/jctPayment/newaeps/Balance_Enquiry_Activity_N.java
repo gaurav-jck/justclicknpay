@@ -375,7 +375,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
             } else if (d_type.equals(MANTRA) && validation()) {
                 if (searchPackageName(MANTRA_PACKAGE)) {
 //                    String pidOptXML = getPIDOptions();
-                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                     capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
             } else if (d_type.equals(MORPHO) && validation()) {
@@ -434,6 +435,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int permissionLocation = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
@@ -496,6 +498,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                                 sendMobileTransaction();
                             }else {
                                 Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
+//                                sendMobileTransaction();
                             }
                         }
                         break;
@@ -688,6 +691,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                 params.put("Mode","APP");
                 params.put("Latitude", mCurrentLocation.getLatitude() + "");
                 params.put("Longitude", mCurrentLocation.getLongitude() + "");
+//                params.put("Latitude", 28.70 + "");
+//                params.put("Longitude", 77.1 + "");
                 if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
                     params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")
                 }else {
@@ -840,7 +845,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
         String tmpOptXml = "";
         try {
             String fCount = "1";
-            String fType = "0";
+//            String fType = "0";  //old
+            String fType = "2";
             String iCount = "0";
             String iType = "0";
             String pCount = "0";

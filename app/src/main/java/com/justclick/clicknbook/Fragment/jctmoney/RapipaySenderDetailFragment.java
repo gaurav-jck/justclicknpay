@@ -188,6 +188,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         requestModel.setAccountNumber(beneData.getAccountNumber());
         requestModel.setIfscCode(beneData.getIfsc());
         requestModel.setMobile(senderInfo.getMobile());
+        requestModel.setApiService(commonParams.getApiService());  // new change
         //  https://remittance.justclicknpay.com/api/payments/ValidateAccuont
 //{"AccountHolderName":"atuulll","AccountNumber":"135301507733","AgentCode":"JC0A13387","BankName":"ICICI BANK LIMITED",
 // "IfscCode":"ICIC0000001","MerchantId":"JUSTCLICKTRAVELS","Mobile":"8468862808","Mode":"App","SessionKey":"DBS210106145635S096280609627","SessionRefId":"V016532537"}
@@ -242,6 +243,9 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         request.setAgentCode(loginModel.Data.DoneCardUser);
         request.setSessionKey(commonParams.getSessionKey());
         request.setSessionRefId(commonParams.getSessionRefNo());
+        request.setApiService(commonParams.getApiService());
+        request.setBankId(listItem.getBankid());
+        request.setMobile(senderInfo.getMobile());
 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
         new NetworkCall().callRapipayServiceHeader(request, ApiConstants.DeleteBenificiary, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -450,6 +454,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
         jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
         jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -735,10 +740,12 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         requestModel.setAmount(amount);
         requestModel.setAccountNumber(beneData.getAccountNumber());
         requestModel.setName(beneData.getAccountHolderName());
+        requestModel.setBankId(beneData.getBankid());
         requestModel.setBankName(beneData.getBankName());
         requestModel.setIFSC(beneData.getIfsc());
         requestModel.setBeniId(beneData.getBeneid());
         requestModel.setTransferType(TType);
+        requestModel.setApiService(commonParams.getApiService());  // new change
 
 //        responseHandler(null, Transaction);
         new NetworkCall().callRapipayServiceHeader(requestModel, ApiConstants.TransactionRapi, context,

@@ -24,11 +24,11 @@ class TrainSearchRepository {
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-                responseString=responseString.replace("avlClasses\":\"", "avlClasses\":[\"")
-                responseString=responseString.replace("\",\"departureTime", "\"],\"departureTime")
+//                responseString=responseString.replace("avlClasses\":\"", "avlClasses\":[\"")
+//                responseString=responseString.replace("\",\"departureTime", "\"],\"departureTime")
 
-                responseString=responseString.replace("trainBtwnStnsList\":{", "trainBtwnStnsList\":[{")
-                responseString=responseString.replace("},\"vikalpInSpecialTrainsAccomFlag", "}],\"vikalpInSpecialTrainsAccomFlag")
+//                responseString=responseString.replace("trainBtwnStnsList\":{", "trainBtwnStnsList\":[{")
+//                responseString=responseString.replace("},\"vikalpInSpecialTrainsAccomFlag", "}],\"vikalpInSpecialTrainsAccomFlag")
 
                 val trainSearchDataModel = Gson().fromJson(responseString, TrainSearchDataModel::class.java)
                 trainSearchResponseLiveData!!.postValue(trainSearchDataModel)

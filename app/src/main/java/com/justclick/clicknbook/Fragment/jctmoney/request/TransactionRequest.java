@@ -2,7 +2,12 @@ package com.justclick.clicknbook.Fragment.jctmoney.request;
 
 public class TransactionRequest extends CommonRapiRequest{
     private String Name,BeniId,SessionRefId,SessionKey,TransferType,MobileNumber,
-            AgentCode, IFSC, BankName,AccountNumber;
+            AgentCode, IFSC, BankName,AccountNumber, BankId;
+
+    public void setBankId(String bankId) {
+        BankId = bankId;
+    }
+
     private int Amount;
 
     public String getName() {

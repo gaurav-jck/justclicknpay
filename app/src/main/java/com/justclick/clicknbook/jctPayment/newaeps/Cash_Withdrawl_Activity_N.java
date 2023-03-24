@@ -108,10 +108,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         LocationListener,
         ResultCallback<LocationSettingsResult> {
     private FusedLocationProviderClient fusedLocationClient;
-    private final String MANTRA="MANTRA", STARTEK="STARTEK", MORPHO="MORPHO", ADHAR_UID = "uid", VIRTUAL_ID = "vid";
-    private final String MANTRA_PACKAGE="com.mantra.rdservice", STARTEK_PACKAGE="com.acpl.registersdk",
-            MORPHO_PACKAGE="com.scl.rdservice";
-    private final int CASH_WITH =1, ADHAR_PAY =2;
+    private final String MANTRA = "MANTRA", STARTEK = "STARTEK", MORPHO = "MORPHO", ADHAR_UID = "uid", VIRTUAL_ID = "vid";
+    private final String MANTRA_PACKAGE = "com.mantra.rdservice", STARTEK_PACKAGE = "com.acpl.registersdk",
+            MORPHO_PACKAGE = "com.scl.rdservice";
+    private final int CASH_WITH = 1, ADHAR_PAY = 2;
     private final int CAPTURE_REQUEST_CODE = 123;
     Context context;
     private Button btn_capture, btn_submit;
@@ -126,7 +126,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     ProgressDialog progressDialog;
     String d_type = MANTRA, adharType = ADHAR_UID;
     private ArrayList<String> positions;
-    int TYPE= CASH_WITH;
+    int TYPE = CASH_WITH;
     String URL;
     private boolean isGetAgain;
 
@@ -135,7 +135,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cash__withdrawl_);
-        context=this;
+        context = this;
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -147,14 +147,14 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             }
         });
 
-        if(getIntent().getStringExtra("TYPE").equals("CW")){
-            TYPE= CASH_WITH;
+        if (getIntent().getStringExtra("TYPE").equals("CW")) {
+            TYPE = CASH_WITH;
             getSupportActionBar().setTitle(R.string.title_activity_cash_withdraw);
-            URL =URLs.WithdrawCash;
-        }else {
-            TYPE= ADHAR_PAY;
+            URL = URLs.WithdrawCash;
+        } else {
+            TYPE = ADHAR_PAY;
             getSupportActionBar().setTitle(R.string.title_activity_aadhar_pay);
-            URL =URLs.AadharPay;
+            URL = URLs.AadharPay;
         }
 
         positions = new ArrayList<>();
@@ -163,7 +163,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
         // init views
         atv_bank = findViewById(R.id.atv_bank);
-        btn_capture=findViewById(R.id.btn_capture);
+        btn_capture = findViewById(R.id.btn_capture);
         btn_submit = findViewById(R.id.btn_submit);
         et_amount = findViewById(R.id.txt_amount);
         et_mobile = findViewById(R.id.txt_mobileno);
@@ -183,7 +183,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         hideCapture();
         et_aadhar.setFilters(filter12);
 
-        ((RadioGroup)findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -200,7 +200,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             }
         });
 
-        ((RadioGroup)findViewById(R.id.radio_group_adhar)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ((RadioGroup) findViewById(R.id.radio_group_adhar)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -208,9 +208,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                         adharType = ADHAR_UID;
                         aadhar_no.setHint(getResources().getString(R.string.aadharNoHint));
                         et_aadhar.setFilters(filter12);
-                        if(validation()){
+                        if (validation()) {
                             showCapture();
-                        }else {
+                        } else {
                             hideCapture();
                         }
                         break;
@@ -218,9 +218,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                         adharType = VIRTUAL_ID;
                         aadhar_no.setHint(getResources().getString(R.string.virtualIdHint));
                         et_aadhar.setFilters(filter16);
-                        if(validation()){
+                        if (validation()) {
                             showCapture();
-                        }else {
+                        } else {
                             hideCapture();
                         }
                         break;
@@ -232,9 +232,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             @Override
             public void onClick(View v) {
                 Common.preventFrequentClick(btn_capture);
-                if(!isGetAgain) {
+                if (!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
-                }else {
+                } else {
                     captureData();
                 }
             }
@@ -273,7 +273,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Common.hideSoftKeyboard((Cash_Withdrawl_Activity_N)context);
+                Common.hideSoftKeyboard((Cash_Withdrawl_Activity_N) context);
             }
         });
 
@@ -285,12 +285,12 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if(TextUtils.isEmpty(charSequence) || !Common.isdecimalvalid(charSequence.toString()) || Float.parseFloat(charSequence.toString())==0){
+                if (TextUtils.isEmpty(charSequence) || !Common.isdecimalvalid(charSequence.toString()) || Float.parseFloat(charSequence.toString()) == 0) {
                     hideCapture();
-                }else {
-                    if(validation()){
+                } else {
+                    if (validation()) {
                         showCapture();
-                    }else {
+                    } else {
                         hideCapture();
                     }
                 }
@@ -305,28 +305,32 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         //validation for length , text and focus
         et_mobile.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(s.length() < 10){
+                if (s.length() < 10) {
                     hideCapture();
-                } else{
+                } else {
                     et_aadhar.requestFocus();
-                    if(validation()){
+                    if (validation()) {
                         showCapture();
-                    }else {
+                    } else {
                         hideCapture();
                     }
                 }
             }
+
             @Override
-            public void afterTextChanged(Editable s) { }
+            public void afterTextChanged(Editable s) {
+            }
         });
         et_mobile.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    if(et_mobile.getText().toString().length()<10){
+                if (!hasFocus) {
+                    if (et_mobile.getText().toString().length() < 10) {
                         et_mobile.setError("Please enter 10 digit Mobile Number");
                     }
                 }
@@ -359,10 +363,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                     hideCapture();
                 } else if (adharType.equals(VIRTUAL_ID) && et_aadhar.getText().toString().length() < 16) {
                     hideCapture();
-                }else{
-                    if(validation()){
+                } else {
+                    if (validation()) {
                         showCapture();
-                    }else {
+                    } else {
                         hideCapture();
                     }
                 }
@@ -376,25 +380,25 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     }
 
     public void captureData() {
-        isGetAgain=true;
+        isGetAgain = true;
         try {
             if (d_type.equals(STARTEK) && validation()) {
-                if(searchPackageName(STARTEK_PACKAGE)){
+                if (searchPackageName(STARTEK_PACKAGE)) {
                     String pidOptXML = createPidOptXML();
                     capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            }
-            else if (d_type.equals(MANTRA) && validation()) {
-                if(searchPackageName(MANTRA_PACKAGE)){
+            } else if (d_type.equals(MANTRA) && validation()) {
+                if (searchPackageName(MANTRA_PACKAGE)) {
 //                    String pidOptXML = getPIDOptions();
-                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                     capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            }
-            else if (d_type.equals(MORPHO) && validation()) {
-                if(searchPackageName(MORPHO_PACKAGE)){
+            } else if (d_type.equals(MORPHO) && validation()) {
+                if (searchPackageName(MORPHO_PACKAGE)) {
 //                    String pidOptXML = createPidOptXML();
-                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"morphokey\" value=\"\" /></CustOpts> </PidOptions>";
+//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"morphokey\" value=\"\" /></CustOpts> </PidOptions>";
+                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"morphokey\" value=\"\" /></CustOpts> </PidOptions>";
                     capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
             }
@@ -409,6 +413,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         btn_capture.setBackgroundResource(R.color.gray_color);
         btn_capture.setAlpha(0.4f);
     }
+
     private void showCapture() {
         btn_capture.setEnabled(true);
         btn_capture.setTextColor(getResources().getColor(R.color.color_white));
@@ -420,7 +425,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         et_aadhar.setError(null);
     }
 
-    protected static final int REQUEST_CHECK_SETTINGS = 0x1, REQUEST_ID_MULTIPLE_PERMISSIONS=0x2;
+    protected static final int REQUEST_CHECK_SETTINGS = 0x1, REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
@@ -429,7 +434,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
-    private void checkPermissions(){
+    private void checkPermissions() {
         int permissionLocation = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -439,7 +444,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 ActivityCompat.requestPermissions(this,
                         listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
             }
-        }else{
+        } else {
             displayLocationSettingsRequest();
         }
 
@@ -447,6 +452,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         int permissionLocation = ContextCompat.checkSelfPermission(context,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
@@ -454,7 +460,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         }
     }
 
-    private void  displayLocationSettingsRequest() {
+    private void displayLocationSettingsRequest() {
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -503,11 +509,12 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 //                            Toast.makeText(context, mCurrentLocation.getLatitude()+"",
 //                                    Toast.LENGTH_SHORT).show();
 //                            sessionCheckMethod(true);
-                            if(mCurrentLocation!=null){
+                            if (mCurrentLocation != null) {
 //                                mobileTxn();
                                 sendMobileTransaction();
-                            }else {
-                                Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Please fetch your current location from google map.", Toast.LENGTH_LONG).show();
+//                                sendMobileTransaction();
                             }
                         }
                         break;
@@ -546,77 +553,79 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         startActivityForResult(intent1, requestCode);
     }
 
-    public class AepsTxnRequest{
-        public String AgentCode,Mode="APP", Merchant= ApiConstants.MerchantId,SessionKey,SessionRefNo,
-                Lattitude,Longitude,DeviceId,TxnType="AADHAAR",AadharNumber,PId,
-                BankIIN, BankName, Mobile,CustomerName="";
+    public class AepsTxnRequest {
+        public String AgentCode, Mode = "APP", Merchant = ApiConstants.MerchantId, SessionKey, SessionRefNo,
+                Lattitude, Longitude, DeviceId, TxnType = "AADHAAR", AadharNumber, PId,
+                BankIIN, BankName, Mobile, CustomerName = "";
         public int Amount;
     }
 
-    public class AepsResponse{
-        public String statusCode,statusMessage;
+    public class AepsResponse {
+        public String statusCode, statusMessage;
         public ArrayList<cashWithdrawal> cashWithdrawal;
-        public class cashWithdrawal{
-            public String bankName, availableBalance, rrn, accountNumber,status,transactionId,
-                    txnAmount,agentCode,timeStamp, jckTransactionId, apiTxnId,txnType;
+
+        public class cashWithdrawal {
+            public String bankName, availableBalance, rrn, accountNumber, status, transactionId,
+                    txnAmount, agentCode, timeStamp, jckTransactionId, apiTxnId, txnType;
         } //        {"statusCode":"01","statusMessage":"Issuer bank is inoperative","cashWithdrawal":[{"bankName":"Punjab National Bank","availableBalance":"","rrn":"112518295010","accountNumber":"XXXXXXXX2683","status":"Failed","transactionId":"MA05051WS4SJC0A13387"}]}
     }
 
-    public class AdharPayResponse{
-        public String statusCode,statusMessage;
+    public class AdharPayResponse {
+        public String statusCode, statusMessage;
         public ArrayList<aadaharPayDetail> aadaharPayDetail;
-        public class aadaharPayDetail{
-            public String bankName, availableBalance, rrn, accountNumber,status,transactionId,
-                    txnAmount,agentCode,timeStamp, jckTransactionId, apiTxnId,txnType;
+
+        public class aadaharPayDetail {
+            public String bankName, availableBalance, rrn, accountNumber, status, transactionId,
+                    txnAmount, agentCode, timeStamp, jckTransactionId, apiTxnId, txnType;
         } //        {"statusCode":"01","statusMessage":"Issuer bank is inoperative","cashWithdrawal":[{"bankName":"Punjab National Bank","availableBalance":"","rrn":"112518295010","accountNumber":"XXXXXXXX2683","status":"Failed","transactionId":"MA05051WS4SJC0A13387"}]}
     }
 
-    public void mobileTxn(){
-        AepsTxnRequest request=new AepsTxnRequest();
-        LoginModel loginModel=new LoginModel();
-        request.AgentCode=MyPreferences.getLoginData(loginModel,context).Data.DoneCardUser;
-        request.SessionKey=MyPreferences.getSessionKey(context);
-        request.SessionRefNo=MyPreferences.getSessionRefNo(context);
-        request.Lattitude=mCurrentLocation.getLatitude() + "";
-        request.Longitude=mCurrentLocation.getLongitude() + "";
-        request.DeviceId=Common.getDeviceId(context);
-        request.AadharNumber=str_aadhar;
-        request.Mobile=str_mobile;
-        request.Amount= Integer.parseInt(str_amount);
-        request.BankName=str_b_name;
-        request.BankIIN=bank_iin.get(str_b_name);
-        if(d_type.equals(MORPHO)){
-            request.PId=Base64.encodeToString(pidDataXML.
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
-        }else {
-            request.PId=Base64.encodeToString(("<?xml version=\"1.0\"?>"+pidDataXML).
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
+    public void mobileTxn() {
+        AepsTxnRequest request = new AepsTxnRequest();
+        LoginModel loginModel = new LoginModel();
+        request.AgentCode = MyPreferences.getLoginData(loginModel, context).Data.DoneCardUser;
+        request.SessionKey = MyPreferences.getSessionKey(context);
+        request.SessionRefNo = MyPreferences.getSessionRefNo(context);
+        request.Lattitude = mCurrentLocation.getLatitude() + "";
+        request.Longitude = mCurrentLocation.getLongitude() + "";
+        request.DeviceId = Common.getDeviceId(context);
+        request.AadharNumber = str_aadhar;
+        request.Mobile = str_mobile;
+        request.Amount = Integer.parseInt(str_amount);
+        request.BankName = str_b_name;
+        request.BankIIN = bank_iin.get(str_b_name);
+        if (d_type.equals(MORPHO)) {
+            request.PId = Base64.encodeToString(pidDataXML.
+                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
+        } else {
+            request.PId = Base64.encodeToString(("<?xml version=\"1.0\"?>" + pidDataXML).
+                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
         }
-        isGetAgain=false;
-        new NetworkCall().callAepsServiceHeaderNew(request,URLs.CashWithdrawal, context,
+        isGetAgain = false;
+        new NetworkCall().callAepsServiceHeaderNew(request, URLs.CashWithdrawal, context,
                 new NetworkCall.RetrofitResponseListener() {
                     @Override
                     public void onRetrofitResponse(ResponseBody response, int responseCode) {
                         MyCustomDialog.hideCustomDialog();
-                        if(response!=null){
+                        if (response != null) {
                             try {
 //                                Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
                                 AepsResponse commonResponseModel = new Gson().fromJson(response.string(), AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                     openReceipt(commonResponseModel);
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 Toast.makeText(context, "exception", Toast.LENGTH_SHORT).show();
                             }
-                        }else {
+                        } else {
                             Toast.makeText(context, "no response", Toast.LENGTH_SHORT).show();
                         }
                     }
-                },MyPreferences.getUserData(context),MyPreferences.getAepsToken(context));
+                }, MyPreferences.getUserData(context), MyPreferences.getAepsToken(context));
     }
 
     private void sendMobileTransaction() {
@@ -633,22 +642,22 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         try {
-                            if(TYPE==CASH_WITH){
+                            if (TYPE == CASH_WITH) {
                                 AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                     openReceipt(commonResponseModel);
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
-                            }else {
+                            } else {
                                 AdharPayResponse commonResponseModel = new Gson().fromJson(response, AdharPayResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                     openReceiptAadharPay(commonResponseModel);
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -685,11 +694,13 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 params.put("Mobile", str_mobile);
                 params.put("Amount", str_amount);
                 params.put("AadharNumber", str_aadhar);
-                params.put("AgentCode",MyPreferences.getLoginData(new LoginModel(),context).Data.DoneCardUser );
-                params.put("Merchant",ApiConstants.MerchantId);
-                params.put("Mode","APP");
+                params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
+                params.put("Merchant", ApiConstants.MerchantId);
+                params.put("Mode", "APP");
                 params.put("Latitude", mCurrentLocation.getLatitude() + "");
                 params.put("Longitude", mCurrentLocation.getLongitude() + "");
+//                params.put("Latitude", 28.70 + "");
+//                params.put("Longitude", 77.1 + "");
                 params.put("PId", pidDataXML);
                 return params;
             }
@@ -710,8 +721,8 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        TextView cardHolderTv,agentCodeTv;
-        ((TextView)dialog.findViewById(R.id.title)).setText("AEPS Receipt");
+        TextView cardHolderTv, agentCodeTv;
+        ((TextView) dialog.findViewById(R.id.title)).setText("AEPS Receipt");
         cardHolderTv = dialog.findViewById(R.id.cardHolderTv);
         agentCodeTv = dialog.findViewById(R.id.agentCodeTv);
         TextView bankNameTv = dialog.findViewById(R.id.bankNameTv);
@@ -727,21 +738,21 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         TextView txnDateTv = dialog.findViewById(R.id.txnDateTv);
 
         cardHolderTv.setText("");
-        AdharPayResponse.aadaharPayDetail detail=responseModel.aadaharPayDetail.get(0);
+        AdharPayResponse.aadaharPayDetail detail = responseModel.aadaharPayDetail.get(0);
         agentCodeTv.setText(detail.agentCode);
-        bankNameTv.setText( detail.bankName);
-        if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("xxxxxxx"+detail.accountNumber.substring(detail.accountNumber.length()-4));
-        }else{
+        bankNameTv.setText(detail.bankName);
+        if (detail.accountNumber != null && detail.accountNumber.length() > 6) {
+            accountNoTv.setText("xxxxxxx" + detail.accountNumber.substring(detail.accountNumber.length() - 4));
+        } else {
             accountNoTv.setText(detail.accountNumber);
         }
-        benIdTv.setText( "");
-        apiTxnIdTv.setText( detail.apiTxnId);
-        jckTxnIdTv.setText( detail.transactionId);
-        bankRefNoTv.setText( detail.rrn);
+        benIdTv.setText("");
+        apiTxnIdTv.setText(detail.apiTxnId);
+        jckTxnIdTv.setText(detail.transactionId);
+        bankRefNoTv.setText(detail.rrn);
         txnTypeTv.setText(detail.txnType);
-        txnStatusTv.setText( detail.status);
-        remitAmountTv.setText( detail.txnAmount+"");
+        txnStatusTv.setText(detail.status);
+        remitAmountTv.setText(detail.txnAmount + "");
         availBalTv.setText(detail.availableBalance);
         txnDateTv.setText(detail.timeStamp);
         dialog.findViewById(R.id.back_tv).setOnClickListener(new View.OnClickListener() {
@@ -760,8 +771,8 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        TextView cardHolderTv,agentCodeTv;
-        ((TextView)dialog.findViewById(R.id.title)).setText("AEPS Receipt");
+        TextView cardHolderTv, agentCodeTv;
+        ((TextView) dialog.findViewById(R.id.title)).setText("AEPS Receipt");
         cardHolderTv = dialog.findViewById(R.id.cardHolderTv);
         agentCodeTv = dialog.findViewById(R.id.agentCodeTv);
         TextView bankNameTv = dialog.findViewById(R.id.bankNameTv);
@@ -776,22 +787,22 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         TextView txnStatusTv = dialog.findViewById(R.id.txnStatusTv);
         TextView txnDateTv = dialog.findViewById(R.id.txnDateTv);
 
-        cardHolderTv.setText("xxxxxxxx"+str_aadhar.substring(str_aadhar.length()-4));
-        AepsResponse.cashWithdrawal detail=responseModel.cashWithdrawal.get(0);
+        cardHolderTv.setText("xxxxxxxx" + str_aadhar.substring(str_aadhar.length() - 4));
+        AepsResponse.cashWithdrawal detail = responseModel.cashWithdrawal.get(0);
         agentCodeTv.setText(detail.agentCode);
-        bankNameTv.setText( detail.bankName);
-        if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("XXXXXXXX"+detail.accountNumber.substring(detail.accountNumber.length()-4));
-        }else{
+        bankNameTv.setText(detail.bankName);
+        if (detail.accountNumber != null && detail.accountNumber.length() > 6) {
+            accountNoTv.setText("XXXXXXXX" + detail.accountNumber.substring(detail.accountNumber.length() - 4));
+        } else {
             accountNoTv.setText(detail.accountNumber);
         }
-        benIdTv.setText( "");
-        apiTxnIdTv.setText( detail.apiTxnId);
-        jckTxnIdTv.setText( detail.jckTransactionId);
-        bankRefNoTv.setText( detail.rrn);
+        benIdTv.setText("");
+        apiTxnIdTv.setText(detail.apiTxnId);
+        jckTxnIdTv.setText(detail.jckTransactionId);
+        bankRefNoTv.setText(detail.rrn);
         txnTypeTv.setText(detail.txnType);
-        txnStatusTv.setText( detail.status);
-        remitAmountTv.setText( detail.txnAmount+"");
+        txnStatusTv.setText(detail.status);
+        remitAmountTv.setText(detail.txnAmount + "");
         availBalTv.setText(detail.availableBalance);
         txnDateTv.setText(detail.timeStamp);
         dialog.findViewById(R.id.back_tv).setOnClickListener(new View.OnClickListener() {
@@ -816,21 +827,20 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 //            atv_bank.requestFocus();
             return false;
         }
-        if(TextUtils.isEmpty(str_amount)){
+        if (TextUtils.isEmpty(str_amount)) {
             et_amount.setError("Please enter Amount");
 //            et_amount.requestFocus();
             return false;
-        }else if(!Common.isdecimalvalid(str_amount) || Float.parseFloat(str_amount)==0){
+        } else if (!Common.isdecimalvalid(str_amount) || Float.parseFloat(str_amount) == 0) {
             et_amount.setError("Please enter valid amount");
 //            et_amount.requestFocus();
             return false;
         }
-        if(TextUtils.isEmpty(str_mobile)){
+        if (TextUtils.isEmpty(str_mobile)) {
             et_mobile.setError("Please enter Mobile Number");
 //            et_mobile.requestFocus();
             return false;
-        }
-        else if (str_mobile.length() != 10){
+        } else if (str_mobile.length() != 10) {
             et_mobile.setError("Please enter 10 digit Mobile Number");
 //            et_mobile.requestFocus();
             return false;
@@ -863,8 +873,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     // pid data xml
     private String createPidOptXML() {
         String tmpOptXml = "";
-        try{
-            String fTypeStr = "0";
+        try {
+//            String fTypeStr = "0";
+            String fTypeStr = "2";
             String timeOutStr = "20000";
             //            uat
             String formatStr = "1";
@@ -973,8 +984,8 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             tmpOptXml = tmpOptXml.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
             return tmpOptXml;
-        }catch(Exception ex){
-            showMessageDialogue("EXCEPTION- " + ex.getMessage(),"EXCEPTION");
+        } catch (Exception ex) {
+            showMessageDialogue("EXCEPTION- " + ex.getMessage(), "EXCEPTION");
             return "";
         }
     }
@@ -1129,7 +1140,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
                 String s_status = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errCode").getNodeValue();
 
-                if(s_status.equals("0")){
+                if (s_status.equals("0")) {
 //                    isDataCaptured=true;
                     showTransactionAlert();
 //                    showMessageDialogue("Data captured", "Fingerprint data status");
@@ -1191,10 +1202,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         PackageManager packageManager = getPackageManager();
         List<PackageInfo> packageList = packageManager
                 .getInstalledPackages(PackageManager.GET_PERMISSIONS);
-        boolean isPackage=false;
-        for(PackageInfo pl: packageList){
-            if(pl.applicationInfo.packageName.equals(mPackageName)){
-                isPackage=true;
+        boolean isPackage = false;
+        for (PackageInfo pl : packageList) {
+            if (pl.applicationInfo.packageName.equals(mPackageName)) {
+                isPackage = true;
             }
         }
 
@@ -1210,7 +1221,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             toast.show();
             Intent intentPlay = new Intent(Intent.ACTION_VIEW);
             //intentPlay.setData(Uri.parse("market://details?id=com.acpl.registersdk"));
-            intentPlay.setData(Uri.parse("market://details?id="+mPackageName));
+            intentPlay.setData(Uri.parse("market://details?id=" + mPackageName));
             startActivity(intentPlay);
             return false;
         }
@@ -1241,7 +1252,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
                                 //adding the bank to herolist
                                 bankArray.add(myObject.getString("bankName"));
-                                bank_iin.put(myObject.getString("bankName"),myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
+                                bank_iin.put(myObject.getString("bankName"), myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
                             }
                             //spinner
                             aa = new ArrayAdapter(context, R.layout.item_bank_list, bankArray);
@@ -1250,7 +1261,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                         } catch (JSONException e) {
                             e.printStackTrace();
                             Toast.makeText(context, getResources().getString(R.string.bankListError), Toast.LENGTH_LONG).show();
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                             Toast.makeText(context, getResources().getString(R.string.bankListError), Toast.LENGTH_LONG).show();
                         }
@@ -1262,8 +1273,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                         progressDialog.dismiss();
                         Toast.makeText(context, getResources().getString(R.string.bankListError), Toast.LENGTH_LONG).show();
                     }
-                })
-        {
+                }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> pars = new HashMap<String, String>();
@@ -1295,10 +1305,11 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 //                                          int[] grantResults)
                 // to handle the case where the user grants the permission. See the documentation
                 // for ActivityCompat#requestPermissions for more details.
+//                checkPermissions();
                 return;
             }
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if(mCurrentLocation!=null){
+            if (mCurrentLocation != null) {
 //                Toast.makeText(context, mCurrentLocation.getLatitude()+"",
 //                        Toast.LENGTH_SHORT).show();
             }
@@ -1329,11 +1340,25 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     protected void onResume() {
         super.onResume();
 
-        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location->{
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+//            Toast.makeText(context, mCurrentLocation.getLatitude()+"",
+//                        Toast.LENGTH_SHORT).show();
+//            checkPermissions();
+            return;
+        }
+        fusedLocationClient.getLastLocation().addOnSuccessListener(this, location -> {
             // Got last known location. In some rare situations this can be null.
             if (location != null) {
                 // Logic to handle location object
-                mCurrentLocation=location;
+                mCurrentLocation = location;
             }
         });
     }

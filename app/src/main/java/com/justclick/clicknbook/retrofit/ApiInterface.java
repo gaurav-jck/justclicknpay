@@ -522,6 +522,9 @@ public interface ApiInterface {
     @POST("api_V1/PaymentEngine/{methodName}")
     Call<ResponseBody> getRapipayMatmCommonPost(@Path("methodName") String method, @Body Object data);
 
+    @POST("api_V1/PaymentEngine/{methodName}")
+    Call<ResponseBody> getRapipayMatmCommonPost2(@Path("methodName") String method,@Query("transactionid") String id, @Body Object data);
+
     //    LIC
     @POST("Utility/BillPayment/{methodName}")
     Call<ResponseBody> getLicCommonPost(@Path("methodName") String method, @Body Object data);

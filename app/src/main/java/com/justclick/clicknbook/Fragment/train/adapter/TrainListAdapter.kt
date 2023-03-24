@@ -105,49 +105,49 @@ class TrainListAdapter(
             holder.sunday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.sunday.alpha=1f
         }else{
-            holder.sunday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.sunday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.sunday.alpha=0.5f
         }
         if(item.runningMon.equals("Y")){
             holder.monday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.monday.alpha=1f
         }else{
-            holder.monday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.monday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.monday.alpha=0.5f
         }
         if(item.runningTue.equals("Y")){
             holder.tuesday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.tuesday.alpha=1f
         }else{
-            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.tuesday.alpha=0.5f
         }
         if(item.runningWed.equals("Y")){
             holder.wednesday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.wednesday.alpha=1f
         }else{
-            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.wednesday.alpha=0.5f
         }
         if(item.runningThu.equals("Y")){
             holder.thursday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.thursday.alpha=1f
         }else{
-            holder.thursday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.thursday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.thursday.alpha=0.5f
         }
         if(item.runningFri.equals("Y")){
             holder.friday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.friday.alpha=1f
         }else{
-            holder.friday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.friday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.friday.alpha=0.5f
         }
         if(item.runningSat.equals("Y")){
             holder.saturday.setTextColor(context!!.resources.getColor(R.color.green))
             holder.saturday.alpha=1f
         }else{
-            holder.saturday.setTextColor(context!!.resources.getColor(R.color.gray))
+            holder.saturday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
             holder.saturday.alpha=0.5f
         }
 
@@ -208,12 +208,12 @@ class TrainListAdapter(
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-                if(responseString.contains("applicableBerthTypes")){
-                    responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
-                    responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
-                }
-                responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
-                responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
+//                if(responseString.contains("applicableBerthTypes")){
+//                    responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
+//                    responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
+//                }
+//                responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
+//                responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
 
                 val fareRuleResponse = Gson().fromJson(responseString, FareRuleResponse::class.java)
                 mValues!!.get(position).fareRuleResponse=fareRuleResponse

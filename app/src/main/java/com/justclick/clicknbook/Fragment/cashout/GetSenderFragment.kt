@@ -94,6 +94,7 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
                     commonParams!!.token = senderResponse.credentialData[0].token
                     commonParams!!.userData = senderResponse.credentialData[0].userData
                     commonParams!!.kycStatus = senderResponse.credentialData[0].kycStatus
+                    commonParams!!.apiService = senderResponse.apiServices
                     if (isCheckCredential) {
                         isCheckCredential = false
                         senderDetail
@@ -132,6 +133,7 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
                 jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
                 jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
                 jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+                jctMoneySenderRequestModel.setApiService(commonParams!!.apiService)
                 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
                 NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                         { response, responseCode ->

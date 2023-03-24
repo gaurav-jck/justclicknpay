@@ -34,6 +34,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.response.AddSenderResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.response.CommonRapiResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.response.SenderDetailResponse;
+import com.justclick.clicknbook.Fragment.jctmoney.response.StateList;
 import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.JctCreateSenderResponse;
@@ -63,16 +64,16 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
     private Context context;
     private ToolBarTitleChangeListener titleChangeListener;
     private TextView get_tv, resendTv, titleTv, otpDetailTv;
-    private EditText number_edt,name_edt, otpEdt,dob_edt,pin_edt, state_edt;
+    private EditText number_edt,name_edt, last_name_edt, otpEdt,dob_edt,pin_edt, state_edt;
     private AutoCompleteTextView genderAtv,cityAtv;
     private LinearLayout otpLin;
     private LoginModel loginModel;
-    private boolean isVerify=false;
+    private boolean isVerify=false, isNewApi=false;
     private SenderDetailResponse senderDetailResponse;
     private AddSenderResponse addSenderResponse;
     private ArrayList<PinCityResponse.PostOffice> pinCityResponseArrayList;
     private CommonParams commonParams;
-    private String gender="", city="",  state="", address="";
+    private String gender="", city="",  state="", address="", gstState="";
     private SimpleDateFormat dateServerFormat;
     private int checkInDateDay, checkInDateMonth, checkInDateYear;
     private Calendar dobDateCalendar, currentDate;
@@ -121,6 +122,7 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
         otpEdt =  view.findViewById(R.id.otpEdt);
         number_edt = view.findViewById(R.id.number_edt);
         name_edt =  view.findViewById(R.id.name_edt);
+        last_name_edt =  view.findViewById(R.id.last_name_edt);
         genderAtv =  view.findViewById(R.id.genderAtv);
         cityAtv =  view.findViewById(R.id.cityAtv);
         dob_edt =  view.findViewById(R.id.dob_edt);
@@ -157,10 +159,18 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
             }
         });
 
-        if(senderDetailResponse !=null && senderDetailResponse.getStatusCode().equals(ADD_SENDER)){
-            addSenderRequired();
+        if(commonParams.getApiService().equals("0")){
+            number_edt.setEnabled(false);
+            otpLin.setVisibility(View.VISIBLE);         // new change
+            otpDetailTv.setVisibility(View.VISIBLE);     // new change
+            titleTv.setText("Add Sender");
+            isNewApi=true;
         }else {
-            updateRequired();
+            if(senderDetailResponse !=null && senderDetailResponse.getStatusCode().equals(ADD_SENDER)){
+                addSenderRequired();
+            }else {
+                updateRequired();
+            }
         }
 
         pin_edt.addTextChangedListener(new TextWatcher() {
@@ -184,6 +194,16 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
 
             }
         });
+    }
+
+    private String getGstState(String state) {
+        StateList stateList=new Gson().fromJson(StateList.StateListJson, StateList.class);
+        for(int i=0; i<stateList.StateList.size(); i++){
+            if(stateList.StateList.get(i).Name.equalsIgnoreCase(state)){
+                return stateList.StateList.get(i).StateCode;
+            }
+        }
+        return "";
     }
 
     private void getCityState(String pin) {
@@ -271,6 +291,7 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
     private void addSender(String methodName, String otp, final int responseType) {
         AddSenderRequest jctMoneySenderRequestModel=new AddSenderRequest();
         jctMoneySenderRequestModel.setName(name_edt.getText().toString().trim());
+        jctMoneySenderRequestModel.setLastName(last_name_edt.getText().toString().trim());
         jctMoneySenderRequestModel.setMobile(number_edt.getText().toString());
         jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
         jctMoneySenderRequestModel.setPin(pin_edt.getText().toString());
@@ -281,6 +302,9 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
         jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
         jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
         jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
+        jctMoneySenderRequestModel.otp=otp;
+        jctMoneySenderRequestModel.gst_state=getGstState(state);
 
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, methodName, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -348,7 +372,15 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
                 Common.hideSoftKeyboard((NavigationDrawerActivity)context);
                 Common.preventFrequentClick(get_tv);
                 if(Common.checkInternetConnection(context)) {
-                    if(isVerify){
+                    if(isNewApi){
+                        if(validate()){
+                            if(otpEdt.getText().toString().length()>=4){
+                                addSender(ApiConstants.AddSender, otpEdt.getText().toString(),VALIDATE_OTP);
+                            }else {
+                                Toast.makeText(context, R.string.empty_and_invalid_otp, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }else if(isVerify){
                         if(otpEdt.getText().toString().length()>=4){
                             validateSender(ApiConstants.VerifySender,otpEdt.getText().toString(),VALIDATE_OTP);
                         }else {
@@ -397,10 +429,13 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
         jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
         jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
         jctMoneySenderRequestModel.setOtp(otp);
-        jctMoneySenderRequestModel.setOtpRefId(addSenderResponse.getOtpRefId());
-        jctMoneySenderRequestModel.setFundTransferId(addSenderResponse.getFundTransferId());
         jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
         jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
+        if(addSenderResponse!=null){
+            jctMoneySenderRequestModel.setOtpRefId(addSenderResponse.getOtpRefId());
+            jctMoneySenderRequestModel.setFundTransferId(addSenderResponse.getFundTransferId());
+        }
 
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, verifySender, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -419,8 +454,10 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
         if(!Common.isNameValid(name_edt.getText().toString().trim())) {
             Toast.makeText(context, R.string.empty_and_invalid_name, Toast.LENGTH_SHORT).show();
             return false;
-        }
-        else if (number_edt.getText().toString().length() < 10) {
+        }else if (!Common.isNameValid(last_name_edt.getText().toString().trim())) {
+            Toast.makeText(context, R.string.empty_and_invalid_last_name, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (number_edt.getText().toString().length() < 10) {
             Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
             return false;
         }else if (gender.length() ==0) {
@@ -448,6 +485,7 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
         jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
         jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
         jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                 new NetworkCall.RetrofitResponseListener() {

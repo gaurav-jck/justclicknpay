@@ -59,6 +59,7 @@ import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
+import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.RapipayFragment;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.squareup.picasso.Picasso;
@@ -215,8 +216,9 @@ public class HomeFragment extends Fragment {
 //                startActivity(new Intent(context, AirWebviewActivity.class));
                 break;
             case MenuCodes.BusSearch://13
-                ((NavigationDrawerActivity)context).
-                        replaceFragmentWithBackStack(new BusSearchFragment());
+//                ((NavigationDrawerActivity)context).
+//                        replaceFragmentWithBackStack(new BusSearchFragment());
+                AirWebviewActivity.airSession(context);
                 break;
             case MenuCodes.HotelSearch://14
                 ((NavigationDrawerActivity)context).
@@ -274,7 +276,7 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(AgentVerificationFragment.newInstance());
                 break;
             case MenuCodes.MATM://24
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new RapipayFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MainMatmFragment());
 //                startActivity(new Intent(context, CredoPayActivityJava.class));
                 break;
             case MenuCodes.CREDOPAY://24

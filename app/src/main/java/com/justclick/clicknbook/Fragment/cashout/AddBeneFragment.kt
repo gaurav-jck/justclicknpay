@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.jctmoney.RapipayAddBeneFragment
 import com.justclick.clicknbook.Fragment.jctmoney.request.AddBeneRequest
 import com.justclick.clicknbook.Fragment.jctmoney.request.CommonParams
 import com.justclick.clicknbook.Fragment.jctmoney.response.BankResponse
@@ -61,10 +62,10 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
         bankArray = ArrayList()
         loginModel = LoginModel()
         loginModel = MyPreferences.getLoginData(loginModel, context)
-        if (arguments != null && arguments!!.getString("Mobile") != null) {
+        if (arguments != null && requireArguments().getString("Mobile") != null) {
 //            user_mobile_edt.setText(getArguments().getString("SenderNumber"));
-            Mobile = arguments!!.getString("Mobile")
-            commonParams = arguments!!.getSerializable("commonParams") as CommonParams?
+            Mobile = requireArguments().getString("Mobile")
+            commonParams = requireArguments().getSerializable("commonParams") as CommonParams?
         }
     }
 
@@ -140,7 +141,7 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getSpinnerAdapter(data: Array<String?>): ArrayAdapter<String?> {
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter
@@ -242,7 +243,9 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
             R.id.submit_tv -> {
                 Common.preventFrequentClick(submit_tv)
                 if (Common.checkInternetConnection(context)) {
-                    addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient)
+                    if(validate()) {
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient)
+                    }
                 } else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
                 }
@@ -250,7 +253,9 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
             R.id.verifyAccountTv -> {
                 Common.preventFrequentClick(verifyAccountTv)
                 if (Common.checkInternetConnection(context)) {
-                    addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount)
+                    if(validate()) {
+                        addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount)
+                    }
                 } else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
                 }
@@ -259,29 +264,29 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addOrValidateBeneficiary(method: String, TYPE: Int) {
-        if (validate()) {
-            val requestModel = AddBeneRequest()
-            requestModel.agentCode = loginModel!!.Data.DoneCardUser
-            requestModel.sessionKey = commonParams!!.sessionKey
-            requestModel.sessionRefId = commonParams!!.sessionRefNo
-            requestModel.bankName = atv_bank!!.text.toString()
-            requestModel.accountHolderName = name_edt!!.text.toString()
-            requestModel.accountNumber = account_no_edt!!.text.toString()
-            requestModel.confirmAccountNumber = confirmAccountEdt!!.text.toString()
-            requestModel.ifscCode = ifscEdt!!.text.toString()
-            requestModel.mobile = user_mobile_edt!!.text.toString()
-            //  https://remittance.justclicknpay.com/api/payments/AddBenificiary
+        val requestModel = AddBeneRequest()
+        requestModel.agentCode = loginModel!!.Data.DoneCardUser
+        requestModel.sessionKey = commonParams!!.sessionKey
+        requestModel.sessionRefId = commonParams!!.sessionRefNo
+        requestModel.bankName = atv_bank!!.text.toString()
+        requestModel.setBankId(ifscByCodeResponse!!.getBankId());   // new change
+        requestModel.accountHolderName = name_edt!!.text.toString()
+        requestModel.accountNumber = account_no_edt!!.text.toString()
+        requestModel.confirmAccountNumber = confirmAccountEdt!!.text.toString()
+        requestModel.ifscCode = ifscEdt!!.text.toString()
+        requestModel.mobile = user_mobile_edt!!.text.toString()
+        requestModel.apiService = commonParams!!.apiService
+        //  https://remittance.justclicknpay.com/api/payments/AddBenificiary
 //{"Mobile": "8468862808","SessionRefId": "V015838345","AccountNumber": "135301507755","ConfirmAccountNumber": "135301507755","IfscCode": "ICIC0000001",
 //    "AccountHolderName": "apptest","BankName": "ICICI BANK LIMITED","Mode": "WEB","AgentCode": "JC0A13387","MerchantId": "JUSTCLICKTRAVELS","SessionKey": "DBS210103115407S725580372557"}
-            NetworkCall().callRapipayServiceHeader(requestModel, method, context,
-                    { response, responseCode ->
-                        if (response != null) {
-                            responseHandler(response, TYPE)
-                        } else {
-                            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-                        }
-                    }, commonParams!!.userData, commonParams!!.token)
-        }
+        NetworkCall().callRapipayServiceHeader(requestModel, method, context,
+            { response, responseCode ->
+                if (response != null) {
+                    responseHandler(response, TYPE)
+                } else {
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                }
+            }, commonParams!!.userData, commonParams!!.token)
     }
 
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
@@ -300,13 +305,15 @@ class AddBeneFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
                 }
             } else if (TYPE == VerifyAccount) {
-                val senderResponse = Gson().fromJson(response.string(), CommonRapiResponse::class.java)
+                val senderResponse = Gson().fromJson(response.string(), RapipayAddBeneFragment.ValidateBeneResponse::class.java)
                 if (senderResponse != null) {
                     if (senderResponse.statusCode == "00") {
                         Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
+                        name_edt!!.setText(senderResponse.beneficiaryName)
                         verifyAccountTv!!.text = "Account Verified"
                         verifyAccountTv!!.isEnabled = false
                         verifyAccountTv!!.alpha = 0.6f
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary,AddRecipient)
                     } else {
                         Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_SHORT).show()
                     }

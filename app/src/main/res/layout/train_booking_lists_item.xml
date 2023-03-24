@@ -181,7 +181,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:text="28/01/2022 01:23:00 AM"
                 android:textSize="@dimen/small_text_size"
-                android:textColor="@color/gray"/>
+                android:textColor="@color/grey_dark"/>
 
             <TextView
                 android:id="@+id/toStnTv"
@@ -206,7 +206,7 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:text="date time"
                 android:textSize="@dimen/small_text_size"
-                android:textColor="@color/gray"
+                android:textColor="@color/grey_dark"
                 />
 
             <LinearLayout

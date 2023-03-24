@@ -5,6 +5,7 @@ import java.util.List;
 public class CheckCredentialResponse {
     private String statusCode, statusMessage;
     private List<credentialData> credentialData;
+    public String apiServices;
 
     public String getStatusCode() {
         return statusCode;

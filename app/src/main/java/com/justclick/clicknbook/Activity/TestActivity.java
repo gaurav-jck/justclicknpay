@@ -11,6 +11,12 @@ import com.justclick.clicknbook.Fragment.jctmoney.request.SenderDetailRequest;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.network.NetworkCall;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Stack;
+import java.util.Vector;
+
 import okhttp3.ResponseBody;
 
 public class TestActivity extends AppCompatActivity {
@@ -23,6 +29,11 @@ public class TestActivity extends AppCompatActivity {
         findViewById(R.id.clickBtn).setOnClickListener(v -> {
             callApi();
         });
+
+        List<String> list=new ArrayList<>();
+        List<String> list2=new LinkedList<>();
+        List<String> list3=new Vector<>();
+        List<String> list4=new Stack<>();
     }
 
 

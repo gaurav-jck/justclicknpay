@@ -64,7 +64,7 @@
             android:paddingTop="@dimen/large_margin"
             android:paddingBottom="@dimen/large_margin"
             android:gravity="center"
-            android:textColorHint="@color/gray"/>
+            android:textColorHint="@color/grey_dark"/>
 
     </LinearLayout>
 

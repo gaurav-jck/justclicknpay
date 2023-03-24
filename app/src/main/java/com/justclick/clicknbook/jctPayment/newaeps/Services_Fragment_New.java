@@ -35,7 +35,6 @@ import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
-import com.paysprint.onboardinglib.activities.HostActivity;
 //import com.paysprint.onboardinglib.activities.HostActivity;
 
 import org.json.JSONException;
@@ -187,8 +186,8 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
 
     private void onboardSdk() {
         LoginModel loginModel=MyPreferences.getLoginData(new LoginModel(),context);
-        Intent intent =new Intent(context, HostActivity.class);
-//        Intent intent =new Intent(context, KycActivity.class);
+//        Intent intent =new Intent(context, HostActivity.class);
+        Intent intent =new Intent(context, KycActivity.class);
         intent.putExtra("pId", partnerId);
         intent.putExtra("pApiKey", partnerKey);
         intent.putExtra("mCode",loginModel.Data.DoneCardUser);

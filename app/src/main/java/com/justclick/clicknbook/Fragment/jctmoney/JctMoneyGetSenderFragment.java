@@ -101,6 +101,7 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                     commonParams.setToken(senderResponse.getCredentialData().get(0).getToken());
                     commonParams.setUserData(senderResponse.getCredentialData().get(0).getUserData());
                     commonParams.setKycStatus(senderResponse.getCredentialData().get(0).getKycStatus());
+                    commonParams.setApiService(senderResponse.apiServices);
                     if(isCheckCredential){
                         isCheckCredential =false;
                         getSenderDetail();
@@ -138,6 +139,7 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
             jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
             jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
             jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+            jctMoneySenderRequestModel.setApiService(commonParams.getApiService());  //new change
 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
             new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                     new NetworkCall.RetrofitResponseListener() {

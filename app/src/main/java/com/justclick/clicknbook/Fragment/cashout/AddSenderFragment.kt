@@ -254,6 +254,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
         jctMoneySenderRequestModel.requestFor = senderDetailResponse!!.requestFor
         jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
         jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
         NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, methodName, context,
                 { response, responseCode ->
                     if (response != null) {
@@ -366,6 +367,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
         jctMoneySenderRequestModel.fundTransferId = addSenderResponse!!.fundTransferId
         jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
         jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
         NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, verifySender, context,
                 { response, responseCode ->
                     if (response != null) {
@@ -410,6 +412,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
             jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
             jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
             jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+            jctMoneySenderRequestModel.setApiService(commonParams!!.apiService)
             //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
             NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                     { response, responseCode ->

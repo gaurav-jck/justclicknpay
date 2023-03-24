@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: ./app/libs/finalonboardinglib-release_v1_0_9.aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3be7f40a801b10fe9f2a34c7db098fad/jetified-finalonboardinglib-release_v1_0_9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3be7f40a801b10fe9f2a34c7db098fad/jetified-finalonboardinglib-release_v1_0_9/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/3be7f40a801b10fe9f2a34c7db098fad/jetified-finalonboardinglib-release_v1_0_9/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

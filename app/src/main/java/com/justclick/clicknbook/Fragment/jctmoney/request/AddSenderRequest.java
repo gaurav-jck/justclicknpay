@@ -4,10 +4,23 @@ import com.justclick.clicknbook.ApiConstants;
 
 public class AddSenderRequest{
     private String Mode="WEB", MerchantId= ApiConstants.MerchantId;
-    private String AgentCode, Mobile,Name, Dob, Gender, State,SessionKey,SessionRefId,
+    private String AgentCode, Mobile, Name, LastName, Dob, Gender, State,SessionKey,SessionRefId,
     RequestFor, Pin, Address;
 //    verify sender
     private String Otp,OtpRefId,FundTransferId;
+    public String otp, gst_state; // new change
+
+    public void setLastName(String lastName) {
+        LastName = lastName;
+    }
+
+    public String getApiService() {
+        return ApiService;
+    }
+    public void setApiService(String apiService) {
+        ApiService = apiService;
+    }
+    private String ApiService;   // new change
 
     public String getFundTransferId() {
         return FundTransferId;

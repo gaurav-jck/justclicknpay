@@ -53,7 +53,7 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
     private EditText user_mobile_edt, ifscEdt,
             name_edt,account_no_edt,confirmAccountEdt;
     private TextInputLayout Address;
-    private String bankName, Mobile;
+    private String bankName, Mobile, bankId;
     private DataBaseHelper dataBaseHelper;
     private LoginModel loginModel;
     private BankResponse ifscByCodeResponse;
@@ -282,7 +282,9 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
             case R.id.submit_tv:
                 Common.preventFrequentClick(submit_tv);
                 if(Common.checkInternetConnection(context)){
-                    addOrValidateBeneficiary(ApiConstants.AddBenificiary,AddRecipient);
+                    if(validate()) {
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient);
+                    }
                 }else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                 }
@@ -290,7 +292,9 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
             case R.id.verifyAccountTv:
                 Common.preventFrequentClick(verifyAccountTv);
                 if(Common.checkInternetConnection(context)){
-                    addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount);
+                    if(validate()) {
+                        addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount);
+                    }
                 }else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
                 }
@@ -299,33 +303,36 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
     }
 
     private void addOrValidateBeneficiary(String method, final int TYPE) {
-        if(validate())
-        {
-            AddBeneRequest requestModel=new AddBeneRequest();
-            requestModel.setAgentCode(loginModel.Data.DoneCardUser);
-            requestModel.setSessionKey(commonParams.getSessionKey());
-            requestModel.setSessionRefId(commonParams.getSessionRefNo());
-            requestModel.setBankName(atv_bank.getText().toString());
-            requestModel.setAccountHolderName(name_edt.getText().toString());
-            requestModel.setAccountNumber(account_no_edt.getText().toString());
-            requestModel.setConfirmAccountNumber(confirmAccountEdt.getText().toString());
-            requestModel.setIfscCode(ifscEdt.getText().toString());
-            requestModel.setMobile(user_mobile_edt.getText().toString());
-            //  https://remittance.justclicknpay.com/api/payments/AddBenificiary
+        AddBeneRequest requestModel=new AddBeneRequest();
+        requestModel.setAgentCode(loginModel.Data.DoneCardUser);
+        requestModel.setSessionKey(commonParams.getSessionKey());
+        requestModel.setSessionRefId(commonParams.getSessionRefNo());
+        requestModel.setBankName(atv_bank.getText().toString());
+        requestModel.setBankId(ifscByCodeResponse.getBankId());   // new change
+        requestModel.setAccountHolderName(name_edt.getText().toString());
+        requestModel.setAccountNumber(account_no_edt.getText().toString());
+        requestModel.setConfirmAccountNumber(confirmAccountEdt.getText().toString());
+        requestModel.setIfscCode(ifscEdt.getText().toString());
+        requestModel.setMobile(user_mobile_edt.getText().toString());
+        requestModel.setApiService(commonParams.getApiService());
+        //  https://remittance.justclicknpay.com/api/payments/AddBenificiary
 //{"Mobile": "8468862808","SessionRefId": "V015838345","AccountNumber": "135301507755","ConfirmAccountNumber": "135301507755","IfscCode": "ICIC0000001",
 //    "AccountHolderName": "apptest","BankName": "ICICI BANK LIMITED","Mode": "WEB","AgentCode": "JC0A13387","MerchantId": "JUSTCLICKTRAVELS","SessionKey": "DBS210103115407S725580372557"}
-            new NetworkCall().callRapipayServiceHeader(requestModel, method, context,
-                    new NetworkCall.RetrofitResponseListener() {
-                        @Override
-                        public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                            if(response!=null){
-                                responseHandler(response, TYPE);
-                            }else {
-                                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-                            }
+        new NetworkCall().callRapipayServiceHeader(requestModel, method, context,
+                new NetworkCall.RetrofitResponseListener() {
+                    @Override
+                    public void onRetrofitResponse(ResponseBody response, int responseCode) {
+                        if(response!=null){
+                            responseHandler(response, TYPE);
+                        }else {
+                            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                         }
-                    }, commonParams.getUserData(), commonParams.getToken());
-        }
+                    }
+                }, commonParams.getUserData(), commonParams.getToken());
+    }
+
+    public class ValidateBeneResponse extends CommonRapiResponse{
+        public String beneficiaryName;
     }
 
     private void responseHandler(ResponseBody response, int TYPE) {
@@ -344,13 +351,15 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
                     Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                 }
             }else if(TYPE==VerifyAccount){
-                CommonRapiResponse senderResponse = new Gson().fromJson(response.string(), CommonRapiResponse.class);
+                ValidateBeneResponse senderResponse = new Gson().fromJson(response.string(), ValidateBeneResponse.class);
                 if(senderResponse!=null){
                     if(senderResponse.getStatusCode().equals("00")) {
                         Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_LONG).show();
+                        name_edt.setText(senderResponse.beneficiaryName);
                         verifyAccountTv.setText("Account Verified");
                         verifyAccountTv.setEnabled(false);
                         verifyAccountTv.setAlpha(0.6f);
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary,AddRecipient);
 
                     } else {
                         Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();

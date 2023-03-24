@@ -26,8 +26,8 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
-import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.MatmArrSyncActivity
-import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity
+//import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.MatmArrSyncActivity
+//import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity
 import kotlinx.android.synthetic.main.activity_main_rapipay.*
 import kotlinx.android.synthetic.main.activity_main_rapipay.view.*
 import okhttp3.ResponseBody
@@ -43,6 +43,8 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import com.justclick.clicknbook.Activity.TestActivity
+import com.justclick.clicknbook.paysprintMatm.MainMatmFragment
 
 
 public class RapipayFragment : Fragment() {
@@ -301,7 +303,8 @@ public class RapipayFragment : Fragment() {
                 val timestamp = SimpleDateFormat("yyyymmddHH").format(date)
 //                val timestamps = SimpleDateFormat("yyyymmddHHmm").format(date)
 //                @SuppressLint("SimpleDateFormat") val timestamps = SimpleDateFormat("yyyymmddHHmm").format(Date())
-                val intent = Intent(getActivity(), NewMatmArrActivity::class.java)
+//                val intent = Intent(getActivity(), NewMatmArrActivity::class.java)
+                val intent = Intent(getActivity(), TestActivity::class.java)
                 val strhasdata = Utils.sha512(MerchantId, smId, clientRefId, SaltData)  //rapi
 //                val strhasdata = Utils.sha512(MerchantId, smId, timestamps, SaltData)
                 Log.d("strdata", strhasdata)
@@ -339,7 +342,8 @@ public class RapipayFragment : Fragment() {
             if (!accessBluetoothDetails()!!.isEmpty()) {
                 val timestamp = SimpleDateFormat("yyyymmddHH").format(Date()).toString()
                 val timestamps = SimpleDateFormat("yyyymmddHHmm").format(Date()).toString()
-                val intent = Intent(activity, MatmArrSyncActivity::class.java)
+//                val intent = Intent(activity, MatmArrSyncActivity::class.java)
+                val intent = Intent(activity, MainMatmFragment::class.java)
                 val b = Bundle()
                 b.putString("Merchantid", MerchantId)
                 b.putString("Submerchantid", smId)
@@ -447,7 +451,8 @@ public class RapipayFragment : Fragment() {
         dialog_currentdate_text.text = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date())
         //        VersionName.setText("ver " + BuildConfig.VERSION_NAME);
         val btn = dialog.findViewById<Button>(R.id.okbutton)
-        dialog_title.setText(R.string.Alert)
+//        dialog_title.setText(R.string.Alert)
+        dialog_title.setText("Alert")
         dialog_msg.text = response.replace(",", "\n")
         btn.setOnClickListener { dialog.dismiss() }
         dialog.show()

@@ -109,7 +109,7 @@
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/light_grey"
+                android:background="@color/gray_color_very_light"
                 />
 
             <TextView

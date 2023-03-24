@@ -178,6 +178,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     requestModel.accountNumber = beneData.accountNumber
     requestModel.ifscCode = beneData.ifsc
     requestModel.mobile = senderInfo!!.mobile
+    requestModel.apiService = commonParams!!.apiService
     //  https://remittance.justclicknpay.com/api/payments/ValidateAccuont
 //{"AccountHolderName":"atuulll","AccountNumber":"135301507733","AgentCode":"JC0A13387","BankName":"ICICI BANK LIMITED",
 // "IfscCode":"ICIC0000001","MerchantId":"JUSTCLICKTRAVELS","Mobile":"8468862808","Mode":"App","SessionKey":"DBS210106145635S096280609627","SessionRefId":"V016532537"}
@@ -217,6 +218,9 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     request.agentCode = loginModel!!.Data.DoneCardUser
     request.sessionKey = commonParams!!.sessionKey
     request.sessionRefId = commonParams!!.sessionRefNo
+    request.apiService = commonParams!!.apiService
+    request.setBankId(listItem.getBankid());
+    request.setMobile(senderInfo!!.getMobile());
     //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
     NetworkCall().callRapipayServiceHeader(request, ApiConstants.DeleteBenificiary, context,
       { response, responseCode ->
@@ -323,6 +327,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     loginModel = MyPreferences.getLoginData(loginModel, context)
     val request = CheckCredentialRequest()
     request.agentCode = loginModel.Data.DoneCardUser
+    request.setApiService(commonParams!!.apiService)
     NetworkCall().callPayoutService(request, ApiConstants.ValidateCredential, context, true
     ) { response: ResponseBody?, responseCode: Int ->
       if (response != null) {
@@ -406,6 +411,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
     jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
     jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+    jctMoneySenderRequestModel.setApiService(commonParams!!.apiService)
     //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
     NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
       { response, responseCode ->
@@ -667,6 +673,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     requestModel.BeniId = beneData!!.beneid
     requestModel.TransferType = TType
     requestModel.Email= loginModel!!.Data.Email
+    requestModel.ApiService= commonParams!!.apiService
 
 //        responseHandler(null, Transaction);
     NetworkCall().callPayoutTxnServiceHeader(requestModel, ApiConstants.CashfreeTrans, context,

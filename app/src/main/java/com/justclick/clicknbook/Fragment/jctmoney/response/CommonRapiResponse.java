@@ -18,4 +18,6 @@ public class CommonRapiResponse {
     public void setStatusMessage(String statusMessage) {
         this.statusMessage = statusMessage;
     }
+
+//    {"statusCode":"00","statusMessage":"Remitter Successfully Registered","otpRefId":null,"fundTransferId":null}
 }

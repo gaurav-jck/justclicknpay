@@ -104,7 +104,12 @@ public class SenderDetailResponse implements Serializable {
 
     public class benificiaryDetailData implements Serializable{
         private String isVerified,isNEFT,isIMPS,bankName,beneid,accountHolderName,
-                accountNumber,ifsc;
+                accountNumber,ifsc, bankid;
+
+        public String getBankid() {
+            return bankid;
+        }
+
         public boolean isVisible;
 
         public String getIsVerified() {

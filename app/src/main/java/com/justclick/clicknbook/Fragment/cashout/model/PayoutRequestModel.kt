@@ -15,5 +15,6 @@ class PayoutRequestModel {
     var BankName:String?=null
     var AccountNumber:String?=null
     var Email:String?=null
+    var ApiService:String?=null
 
 }

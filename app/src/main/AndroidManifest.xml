@@ -76,8 +76,6 @@
             android:exported="true" />
         <activity android:name=".jctPayment.newaeps.AepsWebviewActivity" />
         <activity android:name=".rapipayMatm.TxnListActivity" />
-        <activity android:name=".rapipayMatm.MainRapipayActivity" />
-        <activity android:name=".rapipayMatm.MainTestActivity" />
         <activity
             android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity"
             android:theme="@style/Theme.AepsApp" />
