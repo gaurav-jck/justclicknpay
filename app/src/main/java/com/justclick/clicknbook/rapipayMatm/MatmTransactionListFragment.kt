@@ -285,7 +285,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openFilterDialog() {
-        filterDialog = Dialog(context!!)
+        filterDialog = Dialog(requireContext())
         filterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         filterDialog!!.setContentView(R.layout.filter_dialog_layout)
         start_date_value_tv = filterDialog!!.findViewById(R.id.start_date_value_tv)
@@ -361,6 +361,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
         transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
         if(loginModel!!.Data.UserType.equals("A") || loginModel!!.Data.UserType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
+//            transactionListRequestModel!!.setAgentCode("JC0A36575")
         }else{
             transactionListRequestModel!!.setAgentCode("")
         }
@@ -425,7 +426,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
             }
             R.id.lin_dateFilter -> openFilterDialog()
             R.id.linFilter -> openListFilterDialog()
-            R.id.back_arrow -> fragmentManager!!.popBackStack()
+            R.id.back_arrow -> parentFragmentManager.popBackStack()
         }
     }
 
@@ -435,7 +436,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
         agentDoneCard = ""
         agentName = ""
         CustMobile = ""
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.jct_txn_list_filter)
         val statusSpinner = dialog.findViewById<Spinner>(R.id.statusSpinner)
@@ -449,7 +450,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
             agent_search_edt.visibility = View.GONE
             dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
         adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
         statusSpinner.adapter = adapter
@@ -549,14 +550,14 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setSpinnerAdapter(data: Array<String>): ArrayAdapter<String> {
-        val adapter = ArrayAdapter(context!!,
+        val adapter = ArrayAdapter(requireContext(),
                 R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
         adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
         return adapter
     }
 
     private fun openStartDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     startDateCalendar!![year, monthOfYear] = dayOfMonth
@@ -582,7 +583,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openEndDatePicker() {
-        val datePickerDialog = DatePickerDialog(context!!,
+        val datePickerDialog = DatePickerDialog(requireContext(),
                 R.style.DatePickerTheme,
                 OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                     endDateCalendar = Calendar.getInstance()
@@ -606,7 +607,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openReceipt(senderResponse: TxnListResponseModel.transactionListDetail) {
-        val dialog = Dialog(context!!, R.style.Theme_Design_Light)
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)
         val window = dialog.window
@@ -626,14 +627,13 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
         val txnStatusTv = dialog.findViewById<TextView>(R.id.txnStatusTv)
         val txnDateTv = dialog.findViewById<TextView>(R.id.txnDateTv)
 
-        cardHolderTv.text = senderResponse.cardHolderName
+        dialog.findViewById<LinearLayout>(R.id.accNoLin).visibility=View.GONE
+
+        val aadharTv = dialog.findViewById<TextView>(R.id.aadharTv)
+        aadharTv.text = "Card Number"
+        cardHolderTv.text = senderResponse.accountNo
         agentCodeTv.text = senderResponse.agentCode
         bankNameTv.text = senderResponse.bankName
-        if(senderResponse.accountNo!=null && senderResponse.accountNo.length>6){
-            accountNoTv.text="##########"+senderResponse.accountNo.substring(senderResponse.accountNo.length-4)
-        }else{
-            accountNoTv.text=senderResponse.accountNo
-        }
         benIdTv.text = ""
         apiTxnIdTv.text = senderResponse.transactionId
         jckTxnIdTv.text = senderResponse.jckTransactionId

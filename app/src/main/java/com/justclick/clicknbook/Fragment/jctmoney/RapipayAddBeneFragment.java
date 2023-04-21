@@ -283,7 +283,7 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
                 Common.preventFrequentClick(submit_tv);
                 if(Common.checkInternetConnection(context)){
                     if(validate()) {
-                        addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient);
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient, false);
                     }
                 }else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
@@ -293,7 +293,11 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
                 Common.preventFrequentClick(verifyAccountTv);
                 if(Common.checkInternetConnection(context)){
                     if(validate()) {
-                        addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount);
+                        if(commonParams.getApiService().equals("1")){
+                            addOrValidateBeneficiary(ApiConstants.AddBenificiary, AddRecipient, true);
+                        }else {
+                            addOrValidateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount, false);
+                        }
                     }
                 }else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
@@ -302,7 +306,7 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private void addOrValidateBeneficiary(String method, final int TYPE) {
+    private void addOrValidateBeneficiary(String method, final int TYPE, boolean isVerify) {
         AddBeneRequest requestModel=new AddBeneRequest();
         requestModel.setAgentCode(loginModel.Data.DoneCardUser);
         requestModel.setSessionKey(commonParams.getSessionKey());
@@ -315,6 +319,14 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
         requestModel.setIfscCode(ifscEdt.getText().toString());
         requestModel.setMobile(user_mobile_edt.getText().toString());
         requestModel.setApiService(commonParams.getApiService());
+        requestModel.setAddress(commonParams.getAddress());  // new change
+        requestModel.setPinCode(commonParams.getPinCode());  // new change
+        requestModel.setState(commonParams.getState());  // new change
+        requestModel.setCity(commonParams.getCity());  // new change
+        requestModel.setStatecode(commonParams.getStatecode());  // new change
+        requestModel.setGst_state(commonParams.getStatecode());  // new change
+        requestModel.setUserdata(commonParams.getUserData());  // new change
+        requestModel.verified="1";
         //  https://remittance.justclicknpay.com/api/payments/AddBenificiary
 //{"Mobile": "8468862808","SessionRefId": "V015838345","AccountNumber": "135301507755","ConfirmAccountNumber": "135301507755","IfscCode": "ICIC0000001",
 //    "AccountHolderName": "apptest","BankName": "ICICI BANK LIMITED","Mode": "WEB","AgentCode": "JC0A13387","MerchantId": "JUSTCLICKTRAVELS","SessionKey": "DBS210103115407S725580372557"}
@@ -359,7 +371,7 @@ public class RapipayAddBeneFragment extends Fragment implements View.OnClickList
                         verifyAccountTv.setText("Account Verified");
                         verifyAccountTv.setEnabled(false);
                         verifyAccountTv.setAlpha(0.6f);
-                        addOrValidateBeneficiary(ApiConstants.AddBenificiary,AddRecipient);
+                        addOrValidateBeneficiary(ApiConstants.AddBenificiary,AddRecipient, false);
 
                     } else {
                         Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();

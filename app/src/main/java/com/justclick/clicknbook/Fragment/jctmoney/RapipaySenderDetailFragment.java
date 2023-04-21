@@ -32,6 +32,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.request.TransactionRequest;
 import com.justclick.clicknbook.Fragment.jctmoney.response.CommonRapiResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.response.SenderDetailResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.response.TransactionResponse;
+import com.justclick.clicknbook.Fragment.jctmoney.response.ValidateAccountResponse;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
@@ -46,7 +47,7 @@ import okhttp3.ResponseBody;
 
 
 public class RapipaySenderDetailFragment extends Fragment implements View.OnClickListener {
-    private final int GetSenderDetails=0,DeleteRecipient=1,Transaction=2, VerifyAccount=4;
+    private final int GetSenderDetails=0,DeleteRecipient=1,Transaction=2, VerifyAccount=4, AddBene=5;
     private View view;
     private Context context;
     private ToolBarTitleChangeListener titleChangeListener;
@@ -166,7 +167,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
                     if(beneData.getAccountNumber()==null || beneData.getAccountNumber().length()==0){
                         Toast.makeText(context, "You can't validate this beneficiary.", Toast.LENGTH_SHORT).show();
                     }else {
-                        verifyAccount(list.get(position));
+                        verifyAccount(list.get(position), ApiConstants.ValidateAccount, VerifyAccount);
                         currentListItemPosition=position;
                     }
                 }else {
@@ -177,32 +178,82 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         },benificiaryDetailData,senderInfo.getMobile());
     }
 
-    private void verifyAccount(SenderDetailResponse.benificiaryDetailData beneData) {
+    private void verifyAccount(SenderDetailResponse.benificiaryDetailData beneData, String method, int type) {
         AddBeneRequest requestModel=new AddBeneRequest();
         requestModel.setAgentCode(loginModel.Data.DoneCardUser);
         requestModel.setSessionKey(commonParams.getSessionKey());
         requestModel.setMode("App");
         requestModel.setSessionRefId(commonParams.getSessionRefNo());
         requestModel.setBankName(beneData.getBankName());
+        requestModel.setBankId(beneData.getBankid());
         requestModel.setAccountHolderName(beneData.getAccountHolderName());
         requestModel.setAccountNumber(beneData.getAccountNumber());
         requestModel.setIfscCode(beneData.getIfsc());
         requestModel.setMobile(senderInfo.getMobile());
         requestModel.setApiService(commonParams.getApiService());  // new change
+        requestModel.setAddress(commonParams.getAddress());  // new change
+        requestModel.setPinCode(commonParams.getPinCode());  // new change
+        requestModel.setState(commonParams.getState());  // new change
+        requestModel.setCity(commonParams.getCity());  // new change
+        requestModel.setStatecode(commonParams.getStatecode());  // new change
+        requestModel.setGst_state(commonParams.getStatecode());  // new change
+        requestModel.setBene_id(beneData.getBeneid());  // new change
+        requestModel.verified="1";  // new change
+
+
         //  https://remittance.justclicknpay.com/api/payments/ValidateAccuont
 //{"AccountHolderName":"atuulll","AccountNumber":"135301507733","AgentCode":"JC0A13387","BankName":"ICICI BANK LIMITED",
 // "IfscCode":"ICIC0000001","MerchantId":"JUSTCLICKTRAVELS","Mobile":"8468862808","Mode":"App","SessionKey":"DBS210106145635S096280609627","SessionRefId":"V016532537"}
-        new NetworkCall().callRapipayServiceHeader(requestModel, ApiConstants.ValidateAccount, context,
+        new NetworkCall().callRapipayServiceHeader(requestModel, method, context,
                 new NetworkCall.RetrofitResponseListener() {
                     @Override
                     public void onRetrofitResponse(ResponseBody response, int responseCode) {
                         if(response!=null){
-                            responseHandler(response, VerifyAccount);
+                            responseHandlerVerify(response, type, beneData);
                         }else {
                             Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                         }
                     }
                 }, commonParams.getUserData(), commonParams.getToken());
+    }
+
+    private void responseHandlerVerify(ResponseBody response, int type, SenderDetailResponse.benificiaryDetailData beneData) {
+        if(type==VerifyAccount){
+            try {
+                ValidateAccountResponse senderResponse = new Gson().fromJson(response.string(), ValidateAccountResponse.class);
+                Toast.makeText(context,response.string(),Toast.LENGTH_LONG).show();
+                if(senderResponse!=null){
+                    if(senderResponse.getStatusCode().equals("00")) {
+                        Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                        beneData.setAccountHolderName(senderResponse.beneficiaryName);
+                        verifyAccount(beneData, ApiConstants.AddBenificiary, AddBene);
+                    } else {
+                        Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            try {
+                CommonRapiResponse senderResponse = new Gson().fromJson(response.string(), CommonRapiResponse.class);
+                Toast.makeText(context,response.string(),Toast.LENGTH_LONG).show();
+                if(senderResponse!=null){
+                    if(senderResponse.getStatusCode().equals("00")) {
+                        Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                        getSenderDetail(GetSenderDetails);
+                    } else {
+                        Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                }
+            }catch (Exception e){
+                Toast.makeText(context, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void openDeleteConfirmationDialog(String title, String message,
@@ -455,6 +506,8 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
         jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
         jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
+        jctMoneySenderRequestModel.setIsBank2(commonParams.isBank2);  //new change
+        jctMoneySenderRequestModel.setIsBank3(commonParams.isBank3);  //new change
 //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                 new NetworkCall.RetrofitResponseListener() {
@@ -746,6 +799,12 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         requestModel.setBeniId(beneData.getBeneid());
         requestModel.setTransferType(TType);
         requestModel.setApiService(commonParams.getApiService());  // new change
+        requestModel.setAddress(commonParams.getAddress());  // new change
+        requestModel.setPinCode(commonParams.getPinCode());  // new change
+        requestModel.setState(commonParams.getState());  // new change
+        requestModel.setCity(commonParams.getCity());  // new change
+        requestModel.setStatecode(commonParams.getStatecode());  // new change
+        requestModel.setGst_state(commonParams.getStatecode());  // new change
 
 //        responseHandler(null, Transaction);
         new NetworkCall().callRapipayServiceHeader(requestModel, ApiConstants.TransactionRapi, context,

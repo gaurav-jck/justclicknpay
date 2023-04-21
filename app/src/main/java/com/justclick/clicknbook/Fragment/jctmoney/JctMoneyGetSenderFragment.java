@@ -102,6 +102,13 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                     commonParams.setUserData(senderResponse.getCredentialData().get(0).getUserData());
                     commonParams.setKycStatus(senderResponse.getCredentialData().get(0).getKycStatus());
                     commonParams.setApiService(senderResponse.apiServices);
+                    commonParams.setAddress(senderResponse.getCredentialData().get(0).address);
+                    commonParams.setPinCode(senderResponse.getCredentialData().get(0).pinCode);
+                    commonParams.setState(senderResponse.getCredentialData().get(0).state);
+                    commonParams.setCity(senderResponse.getCredentialData().get(0).city);
+                    commonParams.setStatecode(senderResponse.getCredentialData().get(0).statecode);
+                    commonParams.isBank2= senderResponse.getCredentialData().get(0).isBank2;
+                    commonParams.isBank3= senderResponse.getCredentialData().get(0).isBank3;
                     if(isCheckCredential){
                         isCheckCredential =false;
                         getSenderDetail();
@@ -140,7 +147,8 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
             jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
             jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
             jctMoneySenderRequestModel.setApiService(commonParams.getApiService());  //new change
-//{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
+            jctMoneySenderRequestModel.setIsBank2(commonParams.isBank2);  //new change
+            jctMoneySenderRequestModel.setIsBank3(commonParams.isBank3);  //new change
             new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                     new NetworkCall.RetrofitResponseListener() {
                         @Override

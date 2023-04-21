@@ -34,6 +34,8 @@ public class CheckCredentialResponse {
     public class credentialData{
         private String kycStatus,sessionKey,sessionRefNo,token,userData,txnRefId;
         private float payoutlimit;
+        public String address, pinCode, state, city, statecode;
+        public int isBank2, isBank3;
 
         public float getPayoutlimit() {
             return payoutlimit;

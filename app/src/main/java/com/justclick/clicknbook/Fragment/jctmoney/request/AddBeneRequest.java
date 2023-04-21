@@ -3,9 +3,53 @@ package com.justclick.clicknbook.Fragment.jctmoney.request;
 import com.justclick.clicknbook.ApiConstants;
 
 public class AddBeneRequest{
-    private String Mode="WEB", MerchantId= ApiConstants.MerchantId;
+    private String Mode="APP", MerchantId= ApiConstants.MerchantId;
     private String AccountHolderName,AccountNumber, ConfirmAccountNumber,BankName, BankId,
             IfscCode,Mobile,SessionRefId,SessionKey,AgentCode;
+    private String address, pinCode, state, city, statecode, gst_state, bene_id, userdata;
+    public String verified;
+
+    public void setUserdata(String userdata) {
+        this.userdata = userdata;
+    }
+
+    private boolean isVerifyRequired;
+
+    public void setVerifyRequired(boolean verifyRequired) {
+        isVerifyRequired = verifyRequired;
+    }
+
+    public void setBene_id(String bene_id) {
+        this.bene_id = bene_id;
+    }
+
+    public void setGst_state(String gst_state) {
+        this.gst_state = gst_state;
+    }
+
+    public void setMerchantId(String merchantId) {
+        MerchantId = merchantId;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStatecode(String statecode) {
+        this.statecode = statecode;
+    }
 
     public void setBankId(String bankId) {
         BankId = bankId;

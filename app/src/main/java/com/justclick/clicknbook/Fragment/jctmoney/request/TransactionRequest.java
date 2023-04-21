@@ -3,6 +3,31 @@ package com.justclick.clicknbook.Fragment.jctmoney.request;
 public class TransactionRequest extends CommonRapiRequest{
     private String Name,BeniId,SessionRefId,SessionKey,TransferType,MobileNumber,
             AgentCode, IFSC, BankName,AccountNumber, BankId;
+    private String address, pinCode, state, city, statecode, gst_state;
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStatecode(String statecode) {
+        this.statecode = statecode;
+    }
+
+    public void setGst_state(String gst_state) {
+        this.gst_state = gst_state;
+    }
 
     public void setBankId(String bankId) {
         BankId = bankId;

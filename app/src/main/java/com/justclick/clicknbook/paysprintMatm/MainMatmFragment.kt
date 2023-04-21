@@ -37,6 +37,7 @@ import android.app.Activity.RESULT_OK
 import android.bluetooth.BluetoothManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.getSystemService
 import com.justclick.clicknbook.rapipayMatm.*
 import com.service.finopayment.Hostnew
 import java.lang.StringBuilder
@@ -52,13 +53,14 @@ public class MainMatmFragment : Fragment() {
     val MerchantId = "27266" ;val SubMerchantId = "246341" ;val SaltData = "1706A98F834A4C20B3D3DF57BE7A30FD"
     val Name = "JCKTest" ;val returnUrl = "https://matm.justclicknpay.com/api_V1/PaymentEngine/CashWithDraw"
     val ret="www.justclicknpay.in"
+    var agentCode:String?=null
     protected var btAdapter: BluetoothAdapter? = null
     protected val REQUEST_BLUETOOTH = 101
     var transactionType: String? = null
     var tType=CashWith
     private var isInitiateTxn = false
     private var clientRefId: String? = null; var smId:String? = null; var jckTransactionId:String?="1234"; var mobile:String?=null
-
+    var line=""
     var partnerId = "PS0068"
     var key = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk="
     var chars = charArrayOf(
@@ -136,8 +138,23 @@ public class MainMatmFragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_main_rapipay,container,false)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
-        bluetooth()
-
+        line="141"
+        try{
+            bluetooth()
+        }catch (e:Exception){
+            AlertDialog.Builder(requireContext())
+                .setTitle("Logs")
+                .setMessage("Line no="+line+"\n"+e.message+"\n"+e.toString())
+//                    .setCancelable(false)
+                .setPositiveButton("Ok") { dialog, which ->
+                    val intentOpenBluetoothSettings = Intent()
+                    intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
+                    startActivity(intentOpenBluetoothSettings)
+                }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
+        }
+        line="143"
         view.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
                 if (checkedId == R.id.cashid) {
@@ -192,9 +209,12 @@ public class MainMatmFragment : Fragment() {
     }
 
     fun bluetooth(){
+        line=line+"-197"
         val bluetoothManager: BluetoothManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            line=line+"-200"
             bluetoothManager=requireContext().getSystemService(BluetoothManager::class.java)
+            line=line+"-202"
             btAdapter=bluetoothManager.adapter
         }else{
             btAdapter= BluetoothAdapter.getDefaultAdapter()
@@ -207,21 +227,24 @@ public class MainMatmFragment : Fragment() {
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
         } else {
+            line=line+"-215"
             var requestBluetooth = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == RESULT_OK) {
                     //granted
-                    accessBluetoothDetails()
+//                    accessBluetoothDetails()
                 }else{
                     //deny
                     parentFragmentManager.popBackStack()
                 }
             }
+            line=line+"-226"
             val requestMultiplePermissions =
                 registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
                     permissions.entries.forEach {
                         Log.d("test006", "${it.key} = ${it.value}")
                     }
                 }
+            line=line+"-233"
             Log.d("GoPosActivity", "bluetooth adapter is not null")
             if (!btAdapter!!.isEnabled) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -235,7 +258,7 @@ public class MainMatmFragment : Fragment() {
                 }
             } else {
                 Log.d("GoPosActivity", "bluetooth is enable")
-                accessBluetoothDetails()
+//                accessBluetoothDetails()
             }
         }
     }
@@ -245,6 +268,7 @@ public class MainMatmFragment : Fragment() {
     var bluetoothName: String? = null
 
     private fun accessBluetoothDetails(): Boolean? {
+        line=line+"-254"
         if (btAdapter!!.bondedDevices != null) if (btAdapter!!.bondedDevices.size > 0) {
             val pairedDevices = btAdapter!!.bondedDevices
             val devices = ArrayList<String>()
@@ -292,8 +316,10 @@ public class MainMatmFragment : Fragment() {
         var loginModel = LoginModel()
         loginModel = MyPreferences.getLoginData(loginModel, context)
         val request = InitiateMatmTxnRequest()
-//        request.agentCode = loginModel.Data.DoneCardUser
-        request.agentCode = "JC0A36575"
+        agentCode = loginModel.Data.DoneCardUser
+        request.agentCode = agentCode    // uncomment this
+//        request.agentCode = "JC0A42217"
+//        request.agentCode = "JC0A36575"
         if(transactionType==SYN){
             request.amount=0f
             request.txnType = "SYNC"
@@ -340,20 +366,24 @@ public class MainMatmFragment : Fragment() {
 
     private fun makeTxn() {
         try {
-            if (accessBluetoothDetails()!! && transactionType != null && !input_amount!!.text.toString().isEmpty()) {
+            if (/*accessBluetoothDetails()!! &&*/ transactionType != null && !input_amount!!.text.toString().isEmpty()) {
                 val intent = Intent(requireContext(), Hostnew::class.java)
                 intent.putExtra("partnerId", partnerId)
                 intent.putExtra("apiKey", key)
                 intent.putExtra("transactionType", tType)
                 intent.putExtra("amount", input_amount!!.text.toString().trim())
-                intent.putExtra("merchantCode", "jc0a36575")
-                intent.putExtra("remarks", "JCK test Transaction")
+                intent.putExtra("merchantCode", agentCode)
+//                intent.putExtra("merchantCode", "JC0A36575")
+//                intent.putExtra("merchantCode", "JC0A42217")
+                intent.putExtra("remarks", "JCK Transaction")
                 intent.putExtra("mobileNumber", mobile)
 //                intent.putExtra("referenceNumber", getRandomString(5, chars))
                 intent.putExtra("referenceNumber", clientRefId)
                 intent.putExtra("latitude", "22.572646")
                 intent.putExtra("longitude", "88.363895")
-                intent.putExtra("subMerchantId", "jc0a36575")
+                intent.putExtra("subMerchantId", agentCode)
+//                intent.putExtra("subMerchantId", "JC0A36575")
+//                intent.putExtra("subMerchantId", "JC0A42217")
                 intent.putExtra("deviceManufacturerId", "3")
                 startActivityForResult(intent, 999)
 
@@ -421,18 +451,18 @@ public class MainMatmFragment : Fragment() {
 //                            succes.setVisibility(View.VISIBLE)
 //                            fail.setVisibility(View.GONE)
                             response.status=status
-                            response.response=response1
-                            response.response_code=response1
-                            response.transactiontype=tType
-                            response.txnstatus=1
-                            response.ackno=jsonObject.getString("txnid")
-                            response.bankrrn=jsonObject.getString("bankRrn")
-                            response.amount=jsonObject.getString("balAmount")
-                            response.txnAmount=jsonObject.getString("transAmount")
-                            response.txnrefrenceNo=jsonObject.getString("txnid")
+                            response.response=message
                             response.message=message
-                            response.cardnumber=jsonObject.getString("cardNumber")
+                            response.transType=jsonObject.getString("transType")
+                            response.type=jsonObject.getString("type")
+                            response.bankrrn=jsonObject.getString("bankRrn")
+                            response.balAmount=jsonObject.getString("balAmount")
+                            response.transAmount=jsonObject.getString("transAmount")
+                            response.txnid=jsonObject.getString("txnid")
+                            response.cardNumber=jsonObject.getString("cardNumber")
+                            response.cardType=jsonObject.getString("cardType")
                             response.bankName=jsonObject.getString("bankName")
+                            response.terminalId=jsonObject.getString("terminalId")
                             updateResponse(response)
                             openReceipt(response)
                             Toast.makeText(
@@ -448,17 +478,8 @@ public class MainMatmFragment : Fragment() {
                     }else{
                         var response=MATMResponse()
                         response.status=status
-                        response.response=response1
-                        response.response_code=response1
-                        response.transactiontype=tType
-//                        response.txnstatus=1
-//                        response.ackno="1234"
-//                        response.bankrrn="1234"
-//                        response.amount="100"
-                        response.txnrefrenceNo=clientRefId
-//                        response.message="testing"
-//                        response.cardnumber="111122223333"
-//                        response.bankName="bank"
+                        response.response=message
+                        response.txnid=clientRefId
                         updateResponse(response)
                     }
                 }
@@ -472,7 +493,7 @@ public class MainMatmFragment : Fragment() {
     private fun updateResponse(response: MATMResponse) {
         val json = Gson().toJson(response)
         NetworkCall().callService(NetworkCall.getMATMApiInterface().getRapipayMatmCommonPost2(ApiConstants.PaysprintCashWithDraw,
-            response.txnrefrenceNo, response), context, false
+            response.txnid, response), context, false
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 responseHandlerUpdate(response, 1) //https://remittance.justclicknpay.com/api/payments/CheckCredential
@@ -540,19 +561,19 @@ public class MainMatmFragment : Fragment() {
         val txnDateTv = dialog.findViewById<TextView>(R.id.txnDateTv)
         val aadharTv = dialog.findViewById<TextView>(R.id.aadharTv)
         val contentLin = dialog.findViewById<LinearLayout>(R.id.contentLin)
-        cardHolderTv.text = senderResponse.cardnumber
+        dialog.findViewById<LinearLayout>(R.id.accNoLin).visibility=View.GONE
+        cardHolderTv.text = senderResponse.cardNumber
         agentCodeTv.text = MyPreferences.getLoginData(LoginModel(), context).Data.DoneCardUser
         aadharTv.text = "Card Number"
         bankNameTv.text = senderResponse.bankName
-//        accountNoTv.text = senderResponse.accountNo
         benIdTv.text = ""
         jckTxnIdTv.text = jckTransactionId
-        apiTxnIdTv.text = senderResponse.txnrefrenceNo
+        apiTxnIdTv.text = senderResponse.txnid
         bankRefNoTv.text = senderResponse.bankrrn
-        txnTypeTv.text = senderResponse.transactiontype
+        txnTypeTv.text = senderResponse.transType
         txnStatusTv.text = senderResponse.message
-        remitAmountTv.text = senderResponse.txnAmount
-        availBalTv.text = senderResponse.amount
+        remitAmountTv.text = senderResponse.transAmount
+        availBalTv.text = senderResponse.balAmount
 //        txnDateTv.text = senderResponse.transactionDatetime
 //        if(senderResponse.accountNo!=null && senderResponse.accountNo.length>6){
 //            accountNoTv.text="##########"+senderResponse.accountNo.substring(senderResponse.accountNo.length-4)

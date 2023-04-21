@@ -17,8 +17,9 @@ public class ApiConstants
 //    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //test insurance url
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
 //    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //live insurance url
-    public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
-    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //live rapipay url
+//    public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
+    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
+    public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
     public static final String BASE_URL_PAYOUT_OLD="https://payout.justclicknpay.com/";  //live payout url
 //    public static final String BASE_URL_PAYOUT="http://wluatcashout.justclicknpay.com/";  //uat payout url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
