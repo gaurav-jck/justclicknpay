@@ -159,7 +159,7 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
             }
         });
 
-        if(commonParams.getApiService().equals("0")){
+        if(commonParams.getApiService().equals("1")){
             number_edt.setEnabled(false);
             otpLin.setVisibility(View.VISIBLE);         // new change
             otpDetailTv.setVisibility(View.VISIBLE);     // new change

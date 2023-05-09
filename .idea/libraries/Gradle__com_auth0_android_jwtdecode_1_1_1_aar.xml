@@ -1,25 +1,14 @@
 <component name="libraryTable">
   <library name="Gradle: com.auth0.android:jwtdecode:1.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8d4cc7f94e92c08bbee70f717cda3ba/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8d4cc7f94e92c08bbee70f717cda3ba/jetified-jwtdecode-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b8d4cc7f94e92c08bbee70f717cda3ba/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7c44a5d7e0f63a2f65021778c1a54507/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7c44a5d7e0f63a2f65021778c1a54507/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/7c44a5d7e0f63a2f65021778c1a54507/jetified-jwtdecode-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/148dd7fbf5248e81a333314b7c24c7b1/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/148dd7fbf5248e81a333314b7c24c7b1/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/148dd7fbf5248e81a333314b7c24c7b1/jetified-jwtdecode-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/09f54215a870252fd380c65329a370ed/jetified-jwtdecode-1.1.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad2ebd7aa1e6808e4a1dac5c973872/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad2ebd7aa1e6808e4a1dac5c973872/jetified-jwtdecode-1.1.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4cad2ebd7aa1e6808e4a1dac5c973872/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/be86eba2ef201cc46b3003455bb8b0af/transformed/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/be86eba2ef201cc46b3003455bb8b0af/transformed/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.auth0.android/jwtdecode/1.1.1/334ddca4cf7f1eb007b3590b9be748662666b290/jwtdecode-1.1.1-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.auth0.android/jwtdecode/1.1.1/334ddca4cf7f1eb007b3590b9be748662666b290/jwtdecode-1.1.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.auth0.android/jwtdecode/1.1.1/879cdee8c4b06c2ac79d823c86b59f52e3e6bf23/jwtdecode-1.1.1-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.auth0.android/jwtdecode/1.1.1/879cdee8c4b06c2ac79d823c86b59f52e3e6bf23/jwtdecode-1.1.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

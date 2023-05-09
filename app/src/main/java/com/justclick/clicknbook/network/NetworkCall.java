@@ -1622,6 +1622,10 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY_MATM).create(ApiInterface.class);
     }
 
+    public static ApiInterface getCreditCardApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_CREDIT).create(ApiInterface.class);
+    }
+
 
     private void showCustomDialog() {
         MyCustomDialog.showCustomDialog(context,"Please wait...");

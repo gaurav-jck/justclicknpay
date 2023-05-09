@@ -34,6 +34,7 @@ public class MenuCodes {
   public static final String  JCTMoneyList="JCTMoneyList";
   public static final String  PayoutList="PayoutList";
   public static final String  UtilityList="UtilityList";
+  public static final String  CreditCardList="CreditCard List";
   //AirBookingList,Top-UpDetails,TrainBookingList,TrainFailedList,TrainBookingcheck,DMTTransactionList,GiftBookingList
 
   //Accounts
@@ -117,10 +118,11 @@ public class MenuCodes {
   public static final String  CREDOPAY="CREDOPAY";
   public static final String  FAST_TAG="FastTag";
   public static final String  TRAIN="Rail";
-  public static final String  BILL_PAY="BILL PAY";
+  public static final String  BILL_PAY="UITILITY";
   public static final String  CASH_OUT="PayOut";
   public static final String  LIC="LIC";
   public static final String  PAYTM="Wallet";
+  public static final String  CREDIT="Credit Card";
   public static final String  CASHFREE_QR="QRCODE";
   public static final String  AgentChattingFragment="S0";
   public static final String  AgentDepositRequestFragment="DepositRequest";

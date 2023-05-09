@@ -31,6 +31,7 @@ public class ApiConstants
         public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
         public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N
         public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
+        public static final String BASE_URL_CREDIT="https://fantasy.justclicknpay.com/";
         public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
         public static final String BASE_URL_PAYTM_UAT="https://Uatremittance.justclicknpay.com/";
         public static final String BASE_URL_PAYTM=BASE_URL_LIC;
@@ -231,5 +232,9 @@ public class ApiConstants
     public static final String TopUp="TopUp";
 //    PaytmNew
     public static final String WalletTransfer="WalletTransfer";
+
+//    Credit card
+    public static final String generateOTP="generateOTP";
+    public static final String ccinitiatetrans="ccinitiatetrans";
 
 }

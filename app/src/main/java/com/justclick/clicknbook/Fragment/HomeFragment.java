@@ -32,6 +32,7 @@ import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
+import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
@@ -39,6 +40,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
@@ -262,6 +264,10 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new UtilityTransactionListFragment());
                 break;
+            case MenuCodes.CreditCardList://20
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new TransactionListFragment());
+                break;
             case MenuCodes.TopUpDetails://21
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new RechargeListFragment());
@@ -305,6 +311,9 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.TrainBookingList://30
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListFragment());
+                break;
+            case MenuCodes.CREDIT://31
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CreditCardFragment());
                 break;
             default:
                 Toast.makeText(context,"Not working", Toast.LENGTH_SHORT).show();

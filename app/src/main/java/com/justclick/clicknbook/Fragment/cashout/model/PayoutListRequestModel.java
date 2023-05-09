@@ -5,7 +5,7 @@ import com.justclick.clicknbook.ApiConstants;
 public class PayoutListRequestModel {
     private String AgentCode,UserType,Merchant= ApiConstants.MerchantId, Fromdate, Todate, RRn, JckTransactionId;
     private String RowStart, RowEnd;
-    public String TxnType, DistCode, TxnDescription="";
+    public String TxnType, DistCode, TxnDescription="", rechargeType="";
 
     public void setUserType(String userType) {
         UserType = userType;

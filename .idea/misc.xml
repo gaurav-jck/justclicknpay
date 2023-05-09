@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/account_balance_wallet.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/account_balance_wallet_home.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/app_blue_round_button_background.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/arrow_back.xml" value="0.2846153846153846" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/arrow_forward.xml" value="0.2846153846153846" />
@@ -17,6 +18,8 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/flight_vector_blue.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_clipboards.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_clipboards2.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_credit_card.xml" value="0.2890625" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_credit_card_home.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_flight_icon.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_icon_password.xml" value="0.2890625" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/drawable/ic_qr_code.xml" value="0.2890625" />
@@ -62,6 +65,7 @@
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_billpay_confirmation.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_cash_free_qr_code.xml" value="0.27219202898550726" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_confirmation.xml" value="0.27291666666666664" />
+        <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_credit_card.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_deposit_list_for_agent.xml" value="0.27291666666666664" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_home.xml" value="0.2708333333333333" />
         <entry key="..\:/JustClicknBookWL/app/src/main/res/layout/fragment_jct_money_add_recipient.xml" value="0.27291666666666664" />
@@ -123,7 +127,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="jbr-17" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

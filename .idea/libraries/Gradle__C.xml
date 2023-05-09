@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: C">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/0b21e355512486595769c9232855a50e/transformed/jetified-finalonboardinglib-release_v1_0_9/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/0b21e355512486595769c9232855a50e/transformed/jetified-finalonboardinglib-release_v1_0_9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/0b21e355512486595769c9232855a50e/transformed/jetified-finalonboardinglib-release_v1_0_9/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -204,6 +204,8 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_cash_payout_border);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.FAST_TAG)){
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_icon_mobile_payment);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.CREDIT)){
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_credit_card_home);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
                     vh.imageView_sub_item.setImageResource(R.drawable.train_home_vector);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TrainBookingList)){

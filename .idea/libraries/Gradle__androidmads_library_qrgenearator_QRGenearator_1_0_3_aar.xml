@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.3@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/42ff06d5f4db15477908131efc776260/jetified-QRGenearator-1.0.3/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/42ff06d5f4db15477908131efc776260/jetified-QRGenearator-1.0.3/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/42ff06d5f4db15477908131efc776260/jetified-QRGenearator-1.0.3/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/0f9bd60476112d9bee8e2bd105930d3e/transformed/jetified-QRGenearator-1.0.3/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/0f9bd60476112d9bee8e2bd105930d3e/transformed/jetified-QRGenearator-1.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/0f9bd60476112d9bee8e2bd105930d3e/transformed/jetified-QRGenearator-1.0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.3/6d5ba51325848da403567811ac218cd181ea8a84/QRGenearator-1.0.3-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.3/6d5ba51325848da403567811ac218cd181ea8a84/QRGenearator-1.0.3-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.3/cb9dc3e8695bb722219985dce3f992ed32f876aa/QRGenearator-1.0.3-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/androidmads.library.qrgenearator/QRGenearator/1.0.3/cb9dc3e8695bb722219985dce3f992ed32f876aa/QRGenearator-1.0.3-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

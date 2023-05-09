@@ -137,6 +137,15 @@ public final class Common {
     }
   }
 
+  public static boolean isCreditCardValid(String email){
+    String pattern = "[0-9]*";
+    if(email.length()>0 && email.matches(pattern)){
+      return true;
+    }else {
+      return false;
+    }
+  }
+
   public static boolean isNameValid(String name){
     String pattern = "[a-zA-Z ]*";
     if(name.length()>0 && name.matches(pattern)){

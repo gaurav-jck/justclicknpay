@@ -217,7 +217,6 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
             transactionListRequestModel!!.setTodate(endDateToSend + "")
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
             transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
-//            transactionListRequestModel!!.setUserType("OOU")
             transactionListRequestModel!!.TxnType=""
             transactionListRequestModel!!.setJckTransactionId("")
             transactionListRequestModel!!.setRRn("")
@@ -398,8 +397,9 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
     fun callAgent(transactionListRequestModel: PayoutListRequestModel?, progress: Boolean) {
 
 //        transactionListRequestModel!!.setAgentCode("JC0O188") // hardcode
-//        transactionListRequestModel!!.setUserType("OOU") // hardcode
-        transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
+        transactionListRequestModel!!.setUserType("OOU") // hardcode
+//        transactionListRequestModel!!.rechargeType="CCBILLPAY"            //remove
+//        transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
 //        transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         if(transactionListRequestModel!!.userType.equals("A") || transactionListRequestModel!!.userType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)

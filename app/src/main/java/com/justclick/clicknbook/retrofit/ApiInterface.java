@@ -570,4 +570,11 @@ public interface ApiInterface {
     @POST("Api_v1/Fastag/PayBillpayments")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> payFastTagBill(@Body Object data, @Header("userData") String userData, @Header("Authorization") String token);
+
+
+//    Credit card api
+    @POST("api/CreditCard/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> creditCard(@Path("methodName") String method, @Body Object data,
+                                  @Header("userData") String userData, @Header("Authorization") String token);
 }

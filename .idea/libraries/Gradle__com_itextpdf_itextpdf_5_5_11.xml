@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Gradle: com.itextpdf:itextpdf:5.5.11">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/4c66347f10e9dbf062a086e1223a0d0a9eeb3677/itextpdf-5.5.11.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/4c66347f10e9dbf062a086e1223a0d0a9eeb3677/itextpdf-5.5.11.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/42d5b931d65226217719b5d54dc3722f799f5525/itextpdf-5.5.11-javadoc.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/42d5b931d65226217719b5d54dc3722f799f5525/itextpdf-5.5.11-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/397ccdf033adb57273f8985d3b1cdcfee915948d/itextpdf-5.5.11-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.itextpdf/itextpdf/5.5.11/397ccdf033adb57273f8985d3b1cdcfee915948d/itextpdf-5.5.11-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

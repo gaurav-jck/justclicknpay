@@ -44,6 +44,8 @@
     <string name="empty_and_invalid_passport_number">Passport Number is empty or invalid</string>
     <string name="empty_and_invalid_passport_expiry_date">Passport Date is empty or invalid</string>
     <string name="empty_and_invalid_mobile">Mobile number is empty or invalid</string>
+    <string name="empty_and_invalid_credit_card">Credit Card number is empty or invalid</string>
+    <string name="empty_and_invalid_card_holder">Card holder name is empty or invalid</string>
     <string name="empty_and_invalid_landLine_number">LandLine number is empty or invalid</string>
     <string name="empty_and_invalid_pancard">Pancard number is empty or invalid</string>
     <string name="empty_and_invalid_pancardName">Pancard name is empty or invalid</string>
@@ -722,5 +724,8 @@
 
     <!--    fasttag-->
     <string name="fasttag">FastTag</string>
+
+<!--    credit card-->
+    <string name="card_number">Card Number</string>
 
 </resources>

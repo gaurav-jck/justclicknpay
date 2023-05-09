@@ -68,6 +68,7 @@ import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.cashout.SenderDetailFragment;
+import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.flight.FlightSearchFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
@@ -84,6 +85,7 @@ import com.justclick.clicknbook.Fragment.HomeFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
@@ -479,6 +481,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new FasttagFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.CREDIT:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CreditCardFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.TRAIN:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -493,6 +499,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case MenuCodes.UtilityList:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new UtilityTransactionListFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case MenuCodes.CreditCardList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TransactionListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.LIC:
@@ -559,6 +569,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 return R.drawable.ic_icon_mobile_payment_black;
             case MenuCodes.FAST_TAG:
                 return R.drawable.ic_icon_mobile_payment_black;
+            case MenuCodes.CREDIT:
+                return R.drawable.ic_credit_card;
             case MenuCodes.TRAIN:
                 return R.drawable.train_booking_check_icon;
             case MenuCodes.HotelSearch:
@@ -594,6 +606,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.PayoutList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.UtilityList:
+                return R.drawable.ic_icon_list_view;
+            case MenuCodes.CreditCardList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.TrainBookingList:
                 return R.drawable.ic_icon_list_view;
@@ -820,7 +834,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         modules[i].contains(MenuCodes.PAYTM+"-1") ||
                         modules[i].contains(MenuCodes.TRAIN+"-1") ||
                         modules[i].contains(MenuCodes.CASHFREE_QR+"-1")||
-                        modules[i].contains(MenuCodes.FlightSearch+"-1") ){
+                        modules[i].contains(MenuCodes.FlightSearch+"-1")||
+                        modules[i].contains(MenuCodes.BILL_PAY+"-1") ){
                     LoginModel.DataList.subMenu subMenu=dataList.new subMenu();
 //                        subMenu.SubMenu=loginModel.ProductList.get(i).Product;      //previous
 //                        subMenu.SubMenuCode=loginModel.ProductList.get(i).ProductCode;
@@ -839,6 +854,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         subMenu.SubMenu="IRCTC";
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.CASHFREE_QR)){
                         subMenu.SubMenu="QR Code";
+                    }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.BILL_PAY)){
+                        subMenu.SubMenu="Utility Bill";
                     }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
@@ -879,20 +896,20 @@ public class NavigationDrawerActivity extends AppCompatActivity
             subLic.SubMenuCode=MenuCodes.LIC;
             subMenuArrayList.add(subLic);
 
-            LoginModel.DataList.subMenu subBill=dataList.new subMenu();
+           /* LoginModel.DataList.subMenu subBill=dataList.new subMenu();
             subBill.SubMenu=MenuCodes.BILL_PAY;
             subBill.SubMenuCode=MenuCodes.BILL_PAY;
-            subMenuArrayList.add(subBill);
+            subMenuArrayList.add(subBill);*/
 
             LoginModel.DataList.subMenu subMenuCashOut=dataList.new subMenu();
             subMenuCashOut.SubMenu=MenuCodes.CASH_OUT;
             subMenuCashOut.SubMenuCode=MenuCodes.CASH_OUT;
             subMenuArrayList.add(subMenuCashOut);
 
-//            LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
-//            subPaytm.SubMenu=MenuCodes.PAYTM;
-//            subPaytm.SubMenuCode=MenuCodes.PAYTM;
-//            subMenuArrayList.add(subPaytm);
+            LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
+            subPaytm.SubMenu=MenuCodes.CREDIT;
+            subPaytm.SubMenuCode=MenuCodes.CREDIT;
+            subMenuArrayList.add(subPaytm);
 
 //            LoginModel.DataList.subMenu subQR=dataList.new subMenu();
 //            subQR.SubMenu=MenuCodes.CASHFREE_QR;
@@ -926,6 +943,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         utilityList.SubMenu=MenuCodes.UtilityList;
                         utilityList.SubMenuCode=MenuCodes.UtilityList;
                         subMenuArrayList.add(utilityList);
+
+                        LoginModel.DataList.subMenu ccList=loginModel.new DataList().new subMenu();
+                        ccList.SubMenu=MenuCodes.CreditCardList;
+                        ccList.SubMenuCode=MenuCodes.CreditCardList;
+                        subMenuArrayList.add(ccList);
                     }
                     subMenuArrayList.add(loginModel.DataList.get(i).subMenu.get(j));
                 }
