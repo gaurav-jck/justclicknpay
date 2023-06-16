@@ -114,27 +114,48 @@ class LicFragment : Fragment() {
         var Lattitude: String? = "28.351839"
         var Longitude: String? = "79.409561"
         var BillNumber: String? = null
+        var Ad1: String? = null
         var Ad2: String? = null
         var Ad3: String? = null
         var Amount: Float? = null
+        var bill_Fetch: BillResponse.Bill_Fetch?=null
 
     }
 
-    internal class BillResponse {
+    class BillResponse {
         var statusCode: String? = null
         var statusMessage: String? = null
         var licBill: List<LicBill>? = null
         var billDetail: List<BillDetail>? = null
 
+        /*{"status":true,"response_code":0,"operatorid":"0","ackno":61013641,
+        "message":"You Bill Payment for Life Insurance Corporation of Amount 100 is Processed successful.",
+        "opening":"360351.35","closing":"360251.73"}*/
+
         inner class LicBill {
-            val billNumber: String? = null
+            var billNumber: String? = null
             var billDate: String? = null
             val dueDate: String? = null
             var billAmount: Float? = null
             var acceptPartPay: String? = null
-            val customerName: String? = null
-            val ad2: String? = null
-            val ad3: String? = null
+            var customerName: String? = null
+            var ad2: String? = null
+            var ad3: String? = null
+            var bill_Fetch:Bill_Fetch?=null
+        }
+
+        inner class Bill_Fetch{
+            var billNumber:String?=null
+            var billAmount:String?=null
+            var billnetamount:String?=null
+            var billdate:String?=null
+            var acceptPayment:String?=null
+            var acceptPartPay:String?=null
+            var cellNumber:String?=null
+            var dueFrom:String?=null
+            var dueTo:String?=null
+            var validationId:String?=null
+            var billId:String?=null
         }
 
         inner class BillDetail{
@@ -144,6 +165,10 @@ class LicFragment : Fragment() {
             var amount:String?=null
             var status:String?=null
         }
+
+        /*{"statusCode":"00","statusMessage":"Bill fetch successfully.",
+        "licBill":[{"amount":"1324.10","customerName":"Isubu","dueDate":"28/03/2023",
+        "bill_Fetch":{},"ad2":"HGAYV12E000693551346B0","ad3":"HGAYV12E000693551346"}]}*/
     }
 
 
@@ -223,7 +248,7 @@ class LicFragment : Fragment() {
 //        Toast.makeText(context, commonResponse.licBill!!.get(0).customerName,Toast.LENGTH_LONG).show()
         policyEdt!!.isEnabled=false
         emailEdt!!.isEnabled=false
-        amountEdt!!.setText(commonResponse.licBill!!.get(0).billAmount.toString())
+        amountEdt!!.setText(commonResponse.licBill!!.get(0).bill_Fetch!!.billAmount)
         nameEdt!!.setText(commonResponse.licBill!!.get(0).customerName.toString())
         dateEdt!!.setText(commonResponse.licBill!!.get(0).dueDate.toString())
         submitBtn!!.setText("Pay bill")
@@ -238,13 +263,19 @@ class LicFragment : Fragment() {
         licPayBillRequest!!.AgentCode=request.AgentCode
         licPayBillRequest!!.userData=request.userData
         licPayBillRequest!!.token=request.token
-        licPayBillRequest!!.Amount=commonResponse.licBill!!.get(0).billAmount
+        licPayBillRequest!!.Amount=commonResponse.licBill!!.get(0).bill_Fetch!!.billAmount!!.toFloat()
+//        licPayBillRequest!!.Amount=1f
+        licPayBillRequest!!.Ad1=emailEdt!!.text.toString().trim()
         licPayBillRequest!!.Ad2=commonResponse.licBill!!.get(0).ad2
         licPayBillRequest!!.Ad3=commonResponse.licBill!!.get(0).ad3
+//        commonResponse.licBill!!.get(0).bill_Fetch!!.billAmount="1"
+//        commonResponse.licBill!!.get(0).bill_Fetch!!.billnetamount="1"
+        licPayBillRequest!!.bill_Fetch=commonResponse.licBill!!.get(0).bill_Fetch
 
     }
 
     private fun payBill(){
+        var req=Gson().toJson(licPayBillRequest)
         NetworkCall().callLicService(licPayBillRequest, ApiConstants.PayLicBill, context,
                 licPayBillRequest!!.userData, licPayBillRequest!!.token, true
         ) { response: ResponseBody?, responseCode: Int ->
@@ -276,13 +307,17 @@ class LicFragment : Fragment() {
         val operatorIdTv = dialog.findViewById<TextView>(R.id.operatorIdTv)
         val statusTv = dialog.findViewById<TextView>(R.id.statusTv)
 
-        agentCodeTv.text=licPayBillRequest!!.AgentCode
-        policyNoTv.text=licPayBillRequest!!.PolicyNumber
-        nameTv.text=nameEdt!!.text.toString()
-        amountTv.text=commonResponse.billDetail!!.get(0).amount
-        txnIdTv.text=commonResponse.billDetail!!.get(0).transactionId
-        operatorIdTv.text=commonResponse.billDetail!!.get(0).operatotrId
-        statusTv.text=commonResponse.billDetail!!.get(0).status
+        try{
+            agentCodeTv.text=licPayBillRequest!!.AgentCode
+            policyNoTv.text=licPayBillRequest!!.PolicyNumber
+            nameTv.text=nameEdt!!.text.toString()
+            amountTv.text=commonResponse.billDetail!!.get(0).amount
+            txnIdTv.text=commonResponse.billDetail!!.get(0).transactionId
+            operatorIdTv.text=commonResponse.billDetail!!.get(0).operatotrId
+            statusTv.text=commonResponse.billDetail!!.get(0).status
+        }catch (e:NullPointerException){
+
+        }
 
         dialog.back_tv.setOnClickListener{
             dialog.dismiss()

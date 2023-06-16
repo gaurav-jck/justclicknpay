@@ -1,13 +1,32 @@
 package com.justclick.clicknbook.Fragment.train
 
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.AdapterView
+import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.FileProvider
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
@@ -22,12 +41,16 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import kotlinx.android.synthetic.main.fragment_train_booking_details.view.*
+import kotlinx.android.synthetic.main.fragment_train_response.view.pdfTv
 import kotlinx.android.synthetic.main.train_passanger_seats_show.view.*
 import kotlinx.android.synthetic.main.train_passanger_seats_show.view.statusTv
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -36,6 +59,9 @@ class TrainBookingDetailsFragment : Fragment() {
 
     var trainResponse: PnrResponse?=null
     var loginModel: LoginModel?=null
+    private var bitmap: Bitmap? = null
+    private var scrollView:ScrollView?=null
+    private var cancelTicket:TextView?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         loginModel = LoginModel()
@@ -47,12 +73,14 @@ class TrainBookingDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=  inflater.inflate(R.layout.fragment_train_booking_details, container, false)
-
+        cancelTicket =view.findViewById(R.id.cancelTicket)
         if(arguments!=null) {
             trainResponse = requireArguments().getSerializable("trainResponse") as PnrResponse
             var fromStationTv: TextView =view.findViewById(R.id.fromStationTv)
             var toStationTv: TextView =view.findViewById(R.id.toStationTv)
             var dateTv: TextView =view.findViewById(R.id.dateTv)
+
+            scrollView =view.findViewById(R.id.scrollView)
             fromStationTv.text=trainResponse!!.transactionDetails.get(0).boarding
             toStationTv.text=trainResponse!!.transactionDetails.get(0).resvUpto
             dateTv.text=trainResponse!!.transactionDetails.get(0).dateOfJourney
@@ -70,6 +98,54 @@ class TrainBookingDetailsFragment : Fragment() {
 
         view.okTv.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+
+        val requestMultiplePermissions =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+                permissions.entries.forEach {
+                    Log.d("test006", "${it.key} = ${it.value}")
+                }
+            }
+
+        val requestPermissionLauncher =
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted: Boolean ->
+                if (isGranted) {
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                    bitmap = loadBitmapFromView(scrollView, scrollView!!.getWidth(), scrollView!!.getChildAt(0).getMeasuredHeight());
+                    createPdf();
+                    //            createandDisplayPdf("JCK pdf")
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // features requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            }
+
+
+        view.pdfTv.setOnClickListener {
+
+            when {
+                ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    READ_EXTERNAL_STORAGE
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    // You can use the API that requires the permission.
+                    bitmap = loadBitmapFromView(scrollView, scrollView!!.getWidth(), scrollView!!.getChildAt(0).getMeasuredHeight());
+                    createPdf();
+                    //            createandDisplayPdf("JCK pdf")
+                }
+                else -> {
+
+                    requestPermissionLauncher.launch(
+                        READ_EXTERNAL_STORAGE)
+
+                }
+            }
         }
 
         view.changeBoarding.setOnClickListener{
@@ -242,6 +318,89 @@ class TrainBookingDetailsFragment : Fragment() {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
         })
+    }
+
+    fun loadBitmapFromView(v: ScrollView?, width: Int, height: Int): Bitmap? {
+
+        cancelTicket!!.visibility=View.GONE
+        Handler(Looper.getMainLooper()).postDelayed({
+            cancelTicket!!.visibility=View.VISIBLE
+        }, 4000)
+
+        val b = Bitmap.createBitmap(width+20, height, Bitmap.Config.ARGB_8888)
+        val c = Canvas(b)
+        v!!.draw(c)
+        return b
+    }
+
+    private fun createPdf() {
+        val wm = requireContext().getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        //  Display display = wm.getDefaultDisplay();
+        val displaymetrics = DisplayMetrics()
+        requireActivity().windowManager.defaultDisplay.getMetrics(displaymetrics)
+        val hight = displaymetrics.heightPixels.toFloat()
+        val width = displaymetrics.widthPixels.toFloat()
+        val convertHighet = hight.toInt()
+        val convertWidth = width.toInt()+20
+
+//        Resources mResources = getResources();
+//        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.screenshot);
+        val document = PdfDocument()
+        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create()
+        val page = document.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+        canvas.drawPaint(paint)
+        bitmap = Bitmap.createScaledBitmap(bitmap!!, convertWidth, convertHighet, true)
+        paint.color = Color.WHITE
+        canvas.drawBitmap(bitmap!!, 0f, 0f, null)
+        document.finishPage(page)
+
+        // write the document content
+//        var pdfFile= File(Environment.getExternalStorageDirectory().path, "jck_irctc_pdf.pdf") //running
+//        var pdfFile= File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).path, "jck_irctc_pdf.pdf")
+        var pdfFile= File(requireContext().getExternalFilesDir(null)!!.path, "jck_irctc_pdf.pdf")
+        //        String targetPdf = "/sdcard/pdffromlayout.pdf";
+//        File filePath;
+//        filePath = new File(targetPdf);
+        try {
+            document.writeTo(FileOutputStream(pdfFile))
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Toast.makeText(requireContext(), "Something wrong in creating PDF: $e", Toast.LENGTH_LONG).show()
+        }
+
+        // close the document
+        document.close()
+        Toast.makeText(requireContext(), "PDF is created!!!", Toast.LENGTH_SHORT).show()
+        openGeneratedPDF2(pdfFile)
+    }
+
+    private fun openGeneratedPDF2(pdfFile: File) {
+
+//        File file = new File("/sdcard/pdffromlayout.pdf");
+        if (pdfFile.exists()) {
+            val intent = Intent(Intent.ACTION_VIEW)
+            val uri = Uri.fromFile(pdfFile)
+            val photoURI = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().applicationContext.packageName + ".provider", pdfFile
+            )
+            intent.setDataAndType(photoURI, "application/pdf")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            try {
+                startActivity(intent)
+            } catch (e: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "No Application available to view pdf",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }else{
+            Toast.makeText(requireContext(), "No file exist", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showCustomDialog() {

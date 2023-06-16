@@ -178,7 +178,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
             ((TextView)findViewById(R.id.appVerTv)).setText("Ver "+ pinfo.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.5.2"/*+ BuildConfig.VERSION_NAME*/);
+            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.5.7+"/*+ BuildConfig.VERSION_NAME*/);
         }
         remember_me_checkbox = findViewById(R.id.remember_me_checkbox);
         findViewById(R.id.scrollView).setOnClickListener(this);

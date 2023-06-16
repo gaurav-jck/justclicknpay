@@ -397,27 +397,20 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
     fun callAgent(transactionListRequestModel: PayoutListRequestModel?, progress: Boolean) {
 
 //        transactionListRequestModel!!.setAgentCode("JC0O188") // hardcode
-        transactionListRequestModel!!.setUserType("OOU") // hardcode
+//        transactionListRequestModel!!.setUserType("OOU") // hardcode
 //        transactionListRequestModel!!.rechargeType="CCBILLPAY"            //remove
-//        transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
-//        transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
-        if(transactionListRequestModel!!.userType.equals("A") || transactionListRequestModel!!.userType.equals("D")){
-            transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
+        transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
+        transactionListRequestModel!!.setAgentCode("")
+        if(transactionListRequestModel!!.userType.equals("O") || transactionListRequestModel!!.userType.equals("OOU")){
+            transactionListRequestModel!!.AgentID="";
         }else{
-            transactionListRequestModel!!.setAgentCode("")
+            transactionListRequestModel!!.AgentID=loginModel!!.Data.DoneCardUser;
         }
         if (progress && !MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }
-        /*NetworkCall().callLicService(transactionListRequestModel, ApiConstants.PayoutTransactionList, context, "", "", false
-        ) { response, responseCode ->
-            if (response != null) {
-                responseHandler(response, CALL_AGENT)
-            } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-            }
-            hideCustomDialog()
-        }*/
+
+        val json = Gson().toJson(transactionListRequestModel);
 
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_LIC).create(ApiInterface::class.java)
         val call = apiService.getUtilityList(ApiConstants.PayoutTransactionList, transactionListRequestModel)

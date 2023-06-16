@@ -336,6 +336,8 @@ class TrainCancelDetailsFragment : Fragment() {
         cancelRequest.transactionId=trainResponse!!.trainCancelDetail.get(0).transactionId
         cancelRequest.paxData=list
 
+        var request=Gson().toJson(cancelRequest)
+
         if(list!!.size>0){
             cancelTicketConfirmation(cancelRequest)
             return true

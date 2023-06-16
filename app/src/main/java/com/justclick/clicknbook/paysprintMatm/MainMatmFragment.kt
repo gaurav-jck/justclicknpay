@@ -54,12 +54,15 @@ public class MainMatmFragment : Fragment() {
     val Name = "JCKTest" ;val returnUrl = "https://matm.justclicknpay.com/api_V1/PaymentEngine/CashWithDraw"
     val ret="www.justclicknpay.in"
     var agentCode:String?=null
+    var mobile:String?=null
     protected var btAdapter: BluetoothAdapter? = null
     protected val REQUEST_BLUETOOTH = 101
     var transactionType: String? = null
     var tType=CashWith
     private var isInitiateTxn = false
-    private var clientRefId: String? = null; var smId:String? = null; var jckTransactionId:String?="1234"; var mobile:String?=null
+    private var clientRefId: String? = null;
+    var jckTransactionId:String?="1234";
+//    var smId:String? = null;
     var line=""
     var partnerId = "PS0068"
     var key = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk="
@@ -267,56 +270,12 @@ public class MainMatmFragment : Fragment() {
     var bluetoothDevice: BluetoothDevice? = null
     var bluetoothName: String? = null
 
-    private fun accessBluetoothDetails(): Boolean? {
-        line=line+"-254"
-        if (btAdapter!!.bondedDevices != null) if (btAdapter!!.bondedDevices.size > 0) {
-            val pairedDevices = btAdapter!!.bondedDevices
-            val devices = ArrayList<String>()
-            var isPosPaired = false
-            for (device in pairedDevices) {
-                if (device.name.startsWith("D180") || device.name.startsWith("MPOS")) {
-                    bluetoothDevice = device
-                    isPosPaired = true
-
-                } else {
-                    isPosPaired = false
-                }
-            }
-            if (!isPosPaired) {
-                AlertDialog.Builder(requireContext())
-                    .setTitle("BlueTooth Pairing")
-                    .setMessage("Your bluetooth is not paired with MATM device, please pair")
-//                    .setCancelable(false)
-                    .setPositiveButton("Ok") { dialog, which ->
-                        val intentOpenBluetoothSettings = Intent()
-                        intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
-                        startActivity(intentOpenBluetoothSettings)
-                    }
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .show()
-            }
-            return isPosPaired
-        } else {
-            AlertDialog.Builder(requireContext())
-                .setTitle("BlueTooth Pairing")
-                .setMessage("Your bluetooth is not paired with MATM device, please pair")
-//                    .setCancelable(false)
-                .setPositiveButton("Ok") { dialog, which ->
-                    val intentOpenBluetoothSettings = Intent()
-                    intentOpenBluetoothSettings.action = Settings.ACTION_BLUETOOTH_SETTINGS
-                    startActivity(intentOpenBluetoothSettings)
-                }
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .show()
-        }
-        return false
-    }
-
     private fun initiateMatmTxn(transactionType: Int) {
         var loginModel = LoginModel()
         loginModel = MyPreferences.getLoginData(loginModel, context)
         val request = InitiateMatmTxnRequest()
         agentCode = loginModel.Data.DoneCardUser
+        mobile = loginModel.Data.Mobile
         request.agentCode = agentCode    // uncomment this
 //        request.agentCode = "JC0A42217"
 //        request.agentCode = "JC0A36575"
@@ -345,10 +304,10 @@ public class MainMatmFragment : Fragment() {
             if (senderResponse != null) {
                 if (senderResponse.statusCode == "00") {
                     clientRefId = senderResponse.transactionId
-                    smId = senderResponse.smId
+//                    smId = senderResponse.smId
 //                    smId = "246341"
                     jckTransactionId = senderResponse.jckTransactionId
-                    mobile = senderResponse.mobile
+//                    mobile = senderResponse.mobile
 //                    mobile = "9389173616";
                     makeTxn()
 
@@ -374,7 +333,7 @@ public class MainMatmFragment : Fragment() {
                 intent.putExtra("amount", input_amount!!.text.toString().trim())
                 intent.putExtra("merchantCode", agentCode)
 //                intent.putExtra("merchantCode", "JC0A36575")
-//                intent.putExtra("merchantCode", "JC0A42217")
+//                intent.putExtra("merchantCode", "JC0A45929")
                 intent.putExtra("remarks", "JCK Transaction")
                 intent.putExtra("mobileNumber", mobile)
 //                intent.putExtra("referenceNumber", getRandomString(5, chars))
@@ -383,7 +342,7 @@ public class MainMatmFragment : Fragment() {
                 intent.putExtra("longitude", "88.363895")
                 intent.putExtra("subMerchantId", agentCode)
 //                intent.putExtra("subMerchantId", "JC0A36575")
-//                intent.putExtra("subMerchantId", "JC0A42217")
+//                intent.putExtra("subMerchantId", "JC0A45929")
                 intent.putExtra("deviceManufacturerId", "3")
                 startActivityForResult(intent, 999)
 

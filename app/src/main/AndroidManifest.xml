@@ -13,10 +13,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
 
     <uses-feature
         android:name="android.hardware.bluetooth"
@@ -44,17 +45,7 @@
             android:name=".Activity.AirWebviewActivity"
             android:exported="false"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <!--
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.provider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
-        -->
+
         <activity
             android:name=".Activity.TestActivity"
             android:exported="true">
@@ -72,7 +63,7 @@
             android:exported="true" />
         <activity android:name=".jctPayment.newaeps.AepsWebviewActivity" />
         <activity android:name=".rapipayMatm.TxnListActivity" />
-        <activity
+        <!--<activity
             android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity"
             android:theme="@style/Theme.AepsApp" />
         <activity
@@ -80,7 +71,7 @@
             android:theme="@style/Theme.AepsApp" />
         <activity
             android:name="com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.BluetoothList_Activty"
-            android:theme="@style/Theme.AepsApp" />
+            android:theme="@style/Theme.AepsApp" />-->
         <activity android:name=".jctPayment.fino.finomvvm.view.FinoCashWithdrawActivity" /> <!-- Activity.SplashScreen -->
         <activity
             android:name=".Activity.SplashScreen"
@@ -126,10 +117,10 @@
             android:name=".Activity.MoneyTransferNextActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" />
-        <activity
+       <!-- <activity
             android:name="calendar.CalendarDayDecoratorActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden" />-->
 
         <service
             android:name=".chatting.MyFirebaseMessagingService"
@@ -249,6 +240,28 @@
             android:configChanges="orientation"
             android:label="@string/title_activity_cashPayoutHistory"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths_jck"
+                tools:replace="android:resource"/>
+        </provider>
+        <!--<provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.captureimage.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>-->
+
     </application>
 
 </manifest>

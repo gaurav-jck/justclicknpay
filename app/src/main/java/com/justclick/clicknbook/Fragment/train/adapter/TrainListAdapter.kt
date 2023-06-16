@@ -202,6 +202,7 @@ class TrainListAdapter(
         }else{
             fareRuleRequest.JourneyQuota="GN"
         }
+        var req=Gson().toJson(fareRuleRequest)
         NetworkCall().callService(NetworkCall.getTrainApiInterface().trainFareRule(ApiConstants.FareAvailability, fareRuleRequest,
         loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App"),
                 context,true

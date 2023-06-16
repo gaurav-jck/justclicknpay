@@ -2,8 +2,8 @@
   <library name="Gradle: androidx.constraintlayout:constraintlayout:2.0.4@aar">
     <CLASSES>
       <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/1899f555bf75bf6c60d72c3c53fd0f5e/transformed/constraintlayout-2.0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/1899f555bf75bf6c60d72c3c53fd0f5e/transformed/constraintlayout-2.0.4/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/1899f555bf75bf6c60d72c3c53fd0f5e/transformed/constraintlayout-2.0.4/res" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/1899f555bf75bf6c60d72c3c53fd0f5e/transformed/constraintlayout-2.0.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

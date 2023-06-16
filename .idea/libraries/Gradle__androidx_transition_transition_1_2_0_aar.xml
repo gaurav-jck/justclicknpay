@@ -4,9 +4,9 @@
       <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/36e75875016ea54c68b5616a6ca38434/transformed/transition-1.2.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/36e75875016ea54c68b5616a6ca38434/transformed/transition-1.2.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/36e75875016ea54c68b5616a6ca38434/transformed/transition-1.2.0/res" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/36e75875016ea54c68b5616a6ca38434/transformed/transition-1.2.0/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/36e75875016ea54c68b5616a6ca38434/transformed/transition-1.2.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

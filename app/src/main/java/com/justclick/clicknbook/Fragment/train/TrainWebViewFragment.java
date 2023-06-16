@@ -109,7 +109,6 @@ public class TrainWebViewFragment extends Fragment {
             if(url.contains("CancelButton=Y")){
                 getParentFragmentManager().popBackStack();
             } else if(url.contains(responseUrl)){
-//                Toast.makeText(context, "Booking Status called \n"+url, Toast.LENGTH_LONG).show();
                 getBookingData();
             }else {
                 view.loadUrl(url);
@@ -145,6 +144,7 @@ public class TrainWebViewFragment extends Fragment {
                         TrainBookingResponseFragment fragment=new TrainBookingResponseFragment();
                         fragment.setArguments(bundle);
                         ((NavigationDrawerActivity)context).replaceFragment(fragment);
+//                        getParentFragmentManager().popBackStack();
                     }else {
                         Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_LONG).show();
                     }

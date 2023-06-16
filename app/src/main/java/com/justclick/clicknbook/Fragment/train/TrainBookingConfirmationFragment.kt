@@ -175,6 +175,7 @@ class TrainBookingConfirmationFragment : Fragment() {
 
     private fun responseHandlerFinal(response: ResponseBody, i: Int, agentCode: String, userType: String) {
         try {
+//            var resp=response.string()
             val senderResponse = Gson().fromJson(response.string(), TrainBookingResponse::class.java)
             if(senderResponse!=null){
                 if (senderResponse.statusCode.equals("00")) {

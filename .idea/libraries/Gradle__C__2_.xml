@@ -5,8 +5,8 @@
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/323dab209e4c44d38fc9d712f9f1c88e/transformed/jetified-FINO_PS_MATM/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/323dab209e4c44d38fc9d712f9f1c88e/transformed/jetified-FINO_PS_MATM/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/323dab209e4c44d38fc9d712f9f1c88e/transformed/jetified-FINO_PS_MATM/res" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/323dab209e4c44d38fc9d712f9f1c88e/transformed/jetified-FINO_PS_MATM/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -805,6 +805,16 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         requestModel.setCity(commonParams.getCity());  // new change
         requestModel.setStatecode(commonParams.getStatecode());  // new change
         requestModel.setGst_state(commonParams.getStatecode());  // new change
+        requestModel.setIsBank2(commonParams.isBank2);
+        requestModel.setIsBank3(commonParams.isBank3);
+        requestModel.setBank1Type(senderDetailResponse.getType1());
+        requestModel.setBank1Value(senderDetailResponse.getBank1());
+        requestModel.setBank2Type(senderDetailResponse.getType2());
+        requestModel.setBank2Value(senderDetailResponse.getBank2());
+        requestModel.setBank3Type(senderDetailResponse.getType3());
+        requestModel.setBank3Value(senderDetailResponse.getBank3());
+
+        String json = new Gson().toJson(requestModel);
 
 //        responseHandler(null, Transaction);
         new NetworkCall().callRapipayServiceHeader(requestModel, ApiConstants.TransactionRapi, context,
