@@ -9,6 +9,9 @@ import java.util.Locale;
 
 public class DateAndTimeUtils {
 
+  public static final String DateTrainInput="dd/MM/yyyy KK:mm:ss aaa";
+  public static final String DateTrainOutput="dd/MM/yyyy HH:mm:ss";
+
   public static SimpleDateFormat getFlightDateTimeFormat2(){
     return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);
   }
@@ -44,15 +47,6 @@ public class DateAndTimeUtils {
     return new SimpleDateFormat("HH:mm", Locale.US).format(date);
   }
 
-  public static String getDDMMMYYDate(String time){
-    Date date;
-    try {
-      date = getFlightDateTimeFormat().parse(time);
-    } catch (ParseException e) {
-      return "";
-    }
-    return new SimpleDateFormat("dd-MMM-yy", Locale.US).format(date);
-  }
 
   public static String getDayDDMMMYYDate(String time){
     Date date;
@@ -62,25 +56,6 @@ public class DateAndTimeUtils {
       return "";
     }
     return new SimpleDateFormat("EEE, dd MMM", Locale.US).format(date);
-  }
-  public static String getDayDDMMMYYDateFlightSuccess(String time){
-    Date date;
-    try {
-      date = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.US).parse(time);
-    } catch (ParseException e) {
-      return "";
-    }
-    return new SimpleDateFormat("EEE, dd MMM, HH:mm", Locale.US).format(date);
-  }
-
-  public static String getSegmentDepArrDate(String time){
-    Date date;
-    try {
-      date = getFlightDateTimeFormat().parse(time);
-    } catch (ParseException e) {
-      return "";
-    }
-    return new SimpleDateFormat("yyyy-MM-dd", Locale.US).format(date);
   }
 
   public static String getDurationBetweenTwoDates(String endDateString, String startDateString){
@@ -179,25 +154,6 @@ public class DateAndTimeUtils {
         return calendar.get(Calendar.HOUR);*/
     return date.getHours();
   }
-  public static String getDayMonth(String endDateString){
-    Date endDate;
-    try {
-      endDate = getHotelDateTimeFormat().parse(endDateString);
-    } catch (ParseException e) {
-      return "";
-    }
-    String day= (String) DateFormat.format("dd MMM",   endDate);
-    return day;
-  } public static String getDayMonthYear(String endDateString){
-    Date endDate;
-    try {
-      endDate = getHotelDateTimeFormat().parse(endDateString);
-    } catch (ParseException e) {
-      return "";
-    }
-    String day= (String) DateFormat.format("dd MMM yy",   endDate);
-    return day;
-  }
   public static String getDayOfWeek(String endDateString){
     Date endDate;
     try {
@@ -247,6 +203,23 @@ public class DateAndTimeUtils {
     }
     String day= (String) DateFormat.format("yyyy",   endDate);
     return day;
+  }
+
+  public static String formatDateFromDateString(String inputDateFormat, String outputDateFormat,
+                                                String inputDate) {
+    Date mParsedDate;
+    String mOutputDateString="";
+    try{
+      SimpleDateFormat mInputDateFormat =
+              new SimpleDateFormat(inputDateFormat, java.util.Locale.getDefault());
+      SimpleDateFormat mOutputDateFormat =
+              new SimpleDateFormat(outputDateFormat, java.util.Locale.getDefault());
+      mParsedDate = mInputDateFormat.parse(inputDate);
+      mOutputDateString = mOutputDateFormat.format(mParsedDate);
+    }catch (ParseException e){
+
+    }
+    return mOutputDateString;
   }
 
   public static SimpleDateFormat getDayFormat(){

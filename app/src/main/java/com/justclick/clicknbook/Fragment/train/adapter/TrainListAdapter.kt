@@ -209,12 +209,14 @@ class TrainListAdapter(
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-//                if(responseString.contains("applicableBerthTypes")){
-//                    responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
-//                    responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
-//                }
-//                responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
-//                responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
+                if(responseString.contains("applicableBerthTypes")){
+                    responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
+                    responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
+                }
+                if(responseString.contains("avlDayList") && responseString.contains("bkgCfg")){
+                    responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
+                    responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
+                }
 
                 val fareRuleResponse = Gson().fromJson(responseString, FareRuleResponse::class.java)
                 mValues!!.get(position).fareRuleResponse=fareRuleResponse

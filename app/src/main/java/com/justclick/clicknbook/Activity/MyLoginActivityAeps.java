@@ -427,11 +427,11 @@ public class MyLoginActivityAeps extends AppCompatActivity implements View.OnCli
                     ForgetPasswordModel forgetPasswordModel = new Gson().fromJson(response.string(), ForgetPasswordModel.class);
                     hideCustomDialog();
                     if(forgetPasswordModel!=null){
-                        if(forgetPasswordModel.StatusCode.equalsIgnoreCase("0")){
-                            Toast.makeText(context, forgetPasswordModel.Data.Message, Toast.LENGTH_SHORT).show();
+                        if(forgetPasswordModel.statusCode.equals("0")){
+                            Toast.makeText(context, forgetPasswordModel.statusMessage, Toast.LENGTH_SHORT).show();
                             forgetDialog.dismiss();
                         }else {
-                            Toast.makeText(context, forgetPasswordModel.Status, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, forgetPasswordModel.statusMessage, Toast.LENGTH_SHORT).show();
                         }
                     }else {
                         Toast.makeText(context,R.string.response_failure_message,Toast.LENGTH_SHORT).show();

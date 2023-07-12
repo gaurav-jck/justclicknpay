@@ -35,6 +35,7 @@ import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
+import com.paysprint.onboardinglib.activities.HostActivity;
 //import com.paysprint.onboardinglib.activities.HostActivity;
 
 import org.json.JSONException;
@@ -46,11 +47,13 @@ import java.util.Map;
 
 public class Services_Fragment_New extends Fragment implements View.OnClickListener {
     private final int CASH_OUT=0, BANK_DETAILS=1;
-    private final int BAL_ENQ=0, WITHDRAW=1, MINISTMT=2, AadharPay=3;
+    private final int BAL_ENQ=0, WITHDRAW=1, MINISTMT=2, AadharPay=3, REGISTER=4;
     private Context context;
     ProgressDialog progressDialog;
-    private String partnerKey = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk=";
-    private String partnerId = "PS0068";
+//    private String partnerKey = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk=";
+    private String partnerKey = "UFMwMDE2NDdiMWVhYzI1MzRiODUyNDBhYWY2NDk2Mzc4ODcxOTY0";
+//    private String partnerId = "PS0068";
+    private String partnerId = "PS00164";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,7 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
         rootView.findViewById(R.id.img_cash_payout_history).setOnClickListener(this);
         rootView.findViewById(R.id.img_bank_details).setOnClickListener(this);
         rootView.findViewById(R.id.img_onboard).setOnClickListener(this);
+        rootView.findViewById(R.id.img_register).setOnClickListener(this);
 
         return rootView;
     }
@@ -108,6 +112,10 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                 break;
             case R.id.img_bank_details:
                 getBankDetailAndAmount(BANK_DETAILS);
+                break;
+            case R.id.img_register:
+//                checkKYC(REGISTER, URLs.CheckKyc);
+                startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
                 break;
             case R.id.img_onboard:
                 onboardSdk();
@@ -154,6 +162,8 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                                         Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
                                         intent.putExtra("TYPE","AP");
                                         startActivity(intent);
+                                    }else if(TYPE==REGISTER){
+                                        startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
                                     }else {
                                         Intent intent=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
                                         intent.putExtra("TYPE","MS");
@@ -166,8 +176,8 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                                 }
                             }else {
                                 if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    if(commonResponseModel.boardDetails!=null && commonResponseModel.boardDetails.size()>0)
-                                    openWebView(commonResponseModel.boardDetails.get(0).url);
+                                    if(commonResponseModel.boardDetails!=null && commonResponseModel.boardDetails.size()>0){
+                                    openWebView(commonResponseModel.boardDetails.get(0).url);}
                                 }else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
@@ -186,8 +196,8 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
 
     private void onboardSdk() {
         LoginModel loginModel=MyPreferences.getLoginData(new LoginModel(),context);
-//        Intent intent =new Intent(context, HostActivity.class);
-        Intent intent =new Intent(context, KycActivity.class);
+        Intent intent =new Intent(context, HostActivity.class);
+//        Intent intent =new Intent(context, KycActivity.class);
         intent.putExtra("pId", partnerId);
         intent.putExtra("pApiKey", partnerKey);
         intent.putExtra("mCode",loginModel.Data.DoneCardUser);

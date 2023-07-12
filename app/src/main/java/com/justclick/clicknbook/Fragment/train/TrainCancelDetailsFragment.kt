@@ -109,6 +109,7 @@ class TrainCancelDetailsFragment : Fragment() {
             var ageTv:TextView=child.findViewById(R.id.ageTv)
             var seatNoTv:TextView=child.findViewById(R.id.seatNoTv)
             var statusTv:TextView=child.findViewById(R.id.statusTv)
+            var refundStatusTv:TextView=child.findViewById(R.id.refundStatusTv)
             var remarkLin:LinearLayout=child.findViewById(R.id.remarkLin)
             ageTv.text= list.age.toString()
             child.genderTv.text= list.gender
@@ -116,9 +117,13 @@ class TrainCancelDetailsFragment : Fragment() {
 
             seatNoTv.text="Booking Status:"+list.bookingStatus
             statusTv.text="Current Status:"+list.currentStatus
+            refundStatusTv.text="Refund Status:"+list.refundStatus
 
             if(list.currentStatus.equals("CAN")){
                 remarkLin.visibility=View.GONE
+                refundStatusTv.visibility=View.VISIBLE
+            }else{
+                refundStatusTv.visibility=View.GONE
             }
 
             if(!isRefund && list.currentStatus.equals("CAN")){

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             app:srcCompat="@drawable/close"
-            android:visibility="gone"/>
+            android:visibility="visible"/>
     </RelativeLayout>
 
     <LinearLayout

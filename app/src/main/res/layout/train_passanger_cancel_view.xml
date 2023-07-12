@@ -92,6 +92,17 @@
             android:visibility="visible"
             android:textSize="@dimen/small_text_size"
             />
+        <TextView
+            android:id="@+id/refundStatusTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seatNoTv"
+            android:text="WL"
+            android:textColor="@color/app_blue_color"
+            android:visibility="visible"
+            android:textSize="@dimen/small_text_size"
+            />
 
     </LinearLayout>
 
@@ -99,7 +110,7 @@
         android:id="@+id/remarkLin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/genderTv"
+        app:layout_constraintTop_toBottomOf="@+id/seatLin"
         android:layout_marginTop="@dimen/small_margin"
         android:gravity="center_vertical">
 

@@ -780,7 +780,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.setContentView(layoutInflater.inflate(R.layout.train_passanger_view, null))
         var radioGroup:RadioGroup?=dialog.findViewById(R.id.genderRadioGroup)
         var nameEdt: TextView? =dialog.findViewById(R.id.nameEdt)
-        var ageEdt: TextView? =dialog.findViewById(R.id.ageEdt)
+        var ageEdt: EditText? =dialog.findViewById(R.id.ageEdt)
+        var berthCheck: CheckBox? =dialog.findViewById(R.id.berthCheck)
         var textView: TextView? =dialog.findViewById(R.id.passengerCountTv)
         var nationality:Spinner?= dialog.findViewById(R.id.nationality)
         var birthPref:Spinner?= dialog.findViewById(R.id.birthPref)
@@ -821,11 +822,36 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var isAdd:Boolean
         if(position<passengerArray!!.size){
             nameEdt!!.text=passengerArray!!.get(position).passengerName
-            ageEdt!!.text=passengerArray!!.get(position).passengerAge
+            ageEdt!!.setText(passengerArray!!.get(position).passengerAge)
+            if(Integer.parseInt(passengerArray!!.get(position).passengerAge)<12){
+                berthCheck!!.isEnabled=true;
+            }
+            berthCheck!!.isChecked = passengerArray!!.get(position).childBerthFlag!=null &&
+                    passengerArray!!.get(position).childBerthFlag.equals("True")
             isAdd=false
         }else{
             isAdd=true
         }
+
+        ageEdt!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if(s!!.isNotEmpty()) {
+                    var a: Int = Integer.parseInt(s.toString())
+                    if(a in 5..11){
+                        berthCheck!!.isEnabled=true
+                        berthCheck!!.isChecked=true
+                    }else{
+                        berthCheck!!.isEnabled=false
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
 
         dialog.addPassTv.setOnClickListener {
             if(!Common.isNameValid(nameEdt!!.text.toString())){
@@ -844,6 +870,15 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
                         passenger.passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
                     }
+                    if(berthCheck!!.isEnabled){
+                        if(berthCheck.isChecked){
+                            passenger.childBerthFlag="True"
+                        }else{
+                            passenger.childBerthFlag="False"
+                        }
+                    }else{
+                        passenger.childBerthFlag=null
+                    }
                     passenger.type=type
                     passengerArray!!.add(passenger)
                     addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender)
@@ -856,6 +891,15 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     passengerArray!!.get(position).passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
                     if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
                         passengerArray!!.get(position).passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
+                    }
+                    if(berthCheck!!.isEnabled){
+                        if(berthCheck.isChecked){
+                            passengerArray!!.get(position).childBerthFlag="True"
+                        }else{
+                            passengerArray!!.get(position).childBerthFlag="False"
+                        }
+                    }else{
+                        passengerArray!!.get(position).childBerthFlag=null
                     }
                     passengerArray!!.get(position).type=type
                     refreshPassengerList()

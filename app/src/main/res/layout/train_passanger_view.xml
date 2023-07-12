@@ -65,24 +65,41 @@
             android:textSize="@dimen/text_size_16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:layout_marginTop="@dimen/medium_margin">
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/ageEdt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Age"
-            android:inputType="number"
-            android:digits="@string/mobile_digit"
-            android:maxLength="3"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:textSize="@dimen/text_size_16sp"
-            android:layout_marginTop="@dimen/medium_margin"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:background="@null"
+            android:layout_toLeftOf="@+id/berthCheck"
+            >
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ageEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Age"
+                android:inputType="number"
+                android:digits="@string/mobile_digit"
+                android:maxLength="3"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_16sp"
+                android:layout_marginTop="@dimen/medium_margin"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <CheckBox
+            android:id="@+id/berthCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@+id/age"
+            android:text="Opt Berth"
+            android:checked="true"
+            android:enabled="false"/>
+    </RelativeLayout>
+
 
     <TextView
         android:layout_width="wrap_content"

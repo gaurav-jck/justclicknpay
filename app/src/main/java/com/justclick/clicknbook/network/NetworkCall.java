@@ -1626,6 +1626,10 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_CREDIT).create(ApiInterface.class);
     }
 
+    public static ApiInterface getForgetPassApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_FORGET).create(ApiInterface.class);
+    }
+
 
     private void showCustomDialog() {
         MyCustomDialog.showCustomDialog(context,"Please wait...");

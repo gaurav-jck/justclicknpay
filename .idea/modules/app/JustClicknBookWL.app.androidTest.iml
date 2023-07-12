@@ -25,7 +25,7 @@
             <stringArg name="classpath">
               <args>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/271b4d5d0e2c7fac23de2c33717aa7e9/transformed/jetified-simple-xml-2.7.1.jar</arg>
-                <arg>$USER_HOME$/.jdks/caches/transforms-3/6060e108de93194e597e4cb25e26dcca/transformed/jetified-finalonboardinglib-release_v1_0_9-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/96633b4c258936748b904736209726a0/transformed/jetified-onboard_uat_v2.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/4d667eefe42ce4f945b19b46dcaa5835/transformed/jetified-PS_MATM_2.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/792489b1ac24afdfda6a7e947ca32383/transformed/jetified-FINO_PS_MATM-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/4803c76a7cea8a0d55cb7ee06614c786/transformed/espresso-core-3.1.0-api.jar</arg>
@@ -227,11 +227,19 @@
     <output-test url="file://$MODULE_DIR$/../../../app/build/intermediates/javac/justclickkaroservicesDebugUnitTest/classes" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/aidl_source_output_dir/justclickkaroservicesDebugAndroidTest/out" />
-    <content url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebugAndroidTest/out" />
+    <content url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebugAndroidTest/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebugAndroidTest/out" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebugAndroidTest/out" isTestSource="true" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/renderscript_source_output_dir/justclickkaroservicesDebugAndroidTest/out" />
-    <content url="file://$MODULE_DIR$/../../../app/build/generated/res/resValues/androidTest/justclickkaroservices/debug" />
+    <content url="file://$MODULE_DIR$/../../../app/build/generated/res/resValues/androidTest/justclickkaroservices/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/res/resValues/androidTest/justclickkaroservices/debug" type="java-test-resource" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/androidTest/justclickkaroservices/debug" />
-    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/justclickkaroservices/debug" />
+    <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/justclickkaroservices/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/justclickkaroservices/debug" isTestSource="true" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/androidTest/justclickkaroservices/debug" isTestSource="true" generated="true" />
+    </content>
     <content url="file://$MODULE_DIR$/../../../app/src/androidTest">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/src/androidTest/java" isTestSource="true" />
     </content>

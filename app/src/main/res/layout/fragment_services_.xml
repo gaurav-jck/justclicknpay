@@ -100,26 +100,55 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/img_adhar_pay"
-            android:layout_width="@dimen/dashboard_icon_w"
-            android:layout_height="@dimen/dashboard_icon_w"
-            android:background="@drawable/aeps_border"
-            android:layout_marginTop="@dimen/large_margin"
-            android:gravity="center"
-            android:orientation="vertical">
-            <ImageView
-                android:layout_width="@dimen/aeps_icon_w"
-                android:layout_height="@dimen/aeps_icon_h"
-                app:srcCompat="@drawable/ic_cash_payout"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/title_activity_aadhar_pay"
-                android:textColor="@color/app_blue_color_light"
-                android:textSize="@dimen/dashboard_icon_name_size"
-                android:textStyle="bold"
-                android:minLines="2"
-                android:gravity="center_horizontal"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/img_adhar_pay"
+                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:background="@drawable/aeps_border"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/ic_cash_payout"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_activity_aadhar_pay"
+                    android:textColor="@color/app_blue_color_light"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:minLines="2"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/img_register"
+                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:background="@drawable/aeps_border"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/ic_cash_payout"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_activity_registration"
+                    android:textColor="@color/app_blue_color_light"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:minLines="2"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout

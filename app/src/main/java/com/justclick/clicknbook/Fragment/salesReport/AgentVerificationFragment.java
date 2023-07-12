@@ -284,7 +284,7 @@ public class AgentVerificationFragment extends Fragment implements View.OnClickL
                 case VERIFICATION:
                     ForgetPasswordModel agentVerificationModel = new Gson().fromJson(response.string(), ForgetPasswordModel.class);
                     hideCustomDialog();
-                    if(agentVerificationModel!=null && agentVerificationModel.StatusCode.equalsIgnoreCase("0")){
+                    if(agentVerificationModel!=null && agentVerificationModel.statusCode.equalsIgnoreCase("0")){
 //                            getBusBookingList( reportListRequestModel, NO_PROGRESS);
 //                            listForAgentVerificationAdapter.notifyDataSetChanged();
                         Toast.makeText(context,agentVerificationModel.Data.Message, Toast.LENGTH_LONG).show();

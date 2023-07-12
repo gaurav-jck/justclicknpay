@@ -103,7 +103,7 @@ class LicFragment : Fragment() {
     }
 
     class LicRequest{
-        val Mode = "App"
+        val Mode = "offline"
         val Merchant= ApiConstants.MerchantId
         var AgentCode: String? = null
         var PolicyNumber: String? = null
@@ -156,6 +156,11 @@ class LicFragment : Fragment() {
             var dueTo:String?=null
             var validationId:String?=null
             var billId:String?=null
+//            newly added
+            var netamount:String?=null
+            var customerName:String?=null
+            var duedatefromto:String?=null
+            var status:Int?=null
         }
 
         inner class BillDetail{
@@ -248,7 +253,7 @@ class LicFragment : Fragment() {
 //        Toast.makeText(context, commonResponse.licBill!!.get(0).customerName,Toast.LENGTH_LONG).show()
         policyEdt!!.isEnabled=false
         emailEdt!!.isEnabled=false
-        amountEdt!!.setText(commonResponse.licBill!!.get(0).bill_Fetch!!.billAmount)
+        amountEdt!!.setText(commonResponse.licBill!!.get(0).bill_Fetch!!.netamount)
         nameEdt!!.setText(commonResponse.licBill!!.get(0).customerName.toString())
         dateEdt!!.setText(commonResponse.licBill!!.get(0).dueDate.toString())
         submitBtn!!.setText("Pay bill")
@@ -263,7 +268,7 @@ class LicFragment : Fragment() {
         licPayBillRequest!!.AgentCode=request.AgentCode
         licPayBillRequest!!.userData=request.userData
         licPayBillRequest!!.token=request.token
-        licPayBillRequest!!.Amount=commonResponse.licBill!!.get(0).bill_Fetch!!.billAmount!!.toFloat()
+        licPayBillRequest!!.Amount=commonResponse.licBill!!.get(0).bill_Fetch!!.netamount!!.toFloat()
 //        licPayBillRequest!!.Amount=1f
         licPayBillRequest!!.Ad1=emailEdt!!.text.toString().trim()
         licPayBillRequest!!.Ad2=commonResponse.licBill!!.get(0).ad2
@@ -273,6 +278,7 @@ class LicFragment : Fragment() {
         licPayBillRequest!!.bill_Fetch=commonResponse.licBill!!.get(0).bill_Fetch
 
     }
+
 
     private fun payBill(){
         var req=Gson().toJson(licPayBillRequest)

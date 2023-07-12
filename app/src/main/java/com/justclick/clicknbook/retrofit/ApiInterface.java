@@ -577,4 +577,7 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> creditCard(@Path("methodName") String method, @Body Object data,
                                   @Header("userData") String userData, @Header("Authorization") String token);
+
+    @POST("V2.R/Payout/JustClick")
+    Call<ResponseBody> forgetPass(@Body Object data);
 }

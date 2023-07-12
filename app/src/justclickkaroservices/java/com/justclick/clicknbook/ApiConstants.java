@@ -17,8 +17,8 @@ public class ApiConstants
 //    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //test insurance url
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
 //    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //live insurance url
-//    public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
-    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
+    public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
+//    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
     public static final String BASE_URL_PAYOUT_OLD="https://payout.justclicknpay.com/";  //live payout url
 //    public static final String BASE_URL_PAYOUT="http://wluatcashout.justclicknpay.com/";  //uat payout url
@@ -35,7 +35,7 @@ public class ApiConstants
         public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
         public static final String BASE_URL_PAYTM_UAT="https://Uatremittance.justclicknpay.com/";
         public static final String BASE_URL_PAYTM=BASE_URL_LIC;
-//    public static final String BASE_URL_AEPS=BASE_URL_JCT_MONEY;   // AEPS URL new
+    public static final String BASE_URL_FORGET="https://payout.justclicknpay.com/";
  //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
     public static final String AEPS_EXCEL_DOWNLOAD_URL="https://tinyurl.com/t4qe23w";   // AEPS Excel downloadURL
     public static final String BASE_URL_TEMP_AIR="http://www.myhotelbox.com/mobile/";

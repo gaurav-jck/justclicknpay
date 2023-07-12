@@ -38,6 +38,7 @@ import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.DateAndTimeUtils
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import kotlinx.android.synthetic.main.fragment_train_booking_details.view.*
@@ -83,7 +84,10 @@ class TrainBookingDetailsFragment : Fragment() {
             scrollView =view.findViewById(R.id.scrollView)
             fromStationTv.text=trainResponse!!.transactionDetails.get(0).boarding
             toStationTv.text=trainResponse!!.transactionDetails.get(0).resvUpto
-            dateTv.text=trainResponse!!.transactionDetails.get(0).dateOfJourney
+//            dateTv.text=trainResponse!!.transactionDetails.get(0).dateOfJourney
+            dateTv.text=DateAndTimeUtils.formatDateFromDateString(
+                DateAndTimeUtils.DateTrainInput,
+                DateAndTimeUtils.DateTrainOutput, trainResponse!!.transactionDetails.get(0).dateOfJourney)
 
             setData(view)
         }
@@ -174,10 +178,16 @@ class TrainBookingDetailsFragment : Fragment() {
         var journeyDetail=trainResponse!!.transactionDetails.get(0);
         view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainnumber+")"
         try{
-            view.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
-                    journeyDetail.scheduledDeparture.substring(11, journeyDetail.scheduledDeparture.length)
-            view.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
-                    journeyDetail.scheduledArrival.substring(11, journeyDetail.scheduledArrival.length)
+//            view.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
+//                    journeyDetail.scheduledDeparture.substring(11, journeyDetail.scheduledDeparture.length)
+            view.startTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
+                DateAndTimeUtils.DateTrainInput,
+                DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledDeparture)
+//            view.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
+//                    journeyDetail.scheduledArrival.substring(11, journeyDetail.scheduledArrival.length)
+            view.endTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
+                DateAndTimeUtils.DateTrainInput,
+                DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledArrival)
         }catch (e:Exception){
 
         }

@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity;
 import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity;
+import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity;
 import com.justclick.clicknbook.jctPayment.newaeps.Balance_Enquiry_Activity_N;
 import com.justclick.clicknbook.jctPayment.newaeps.Cash_Withdrawl_Activity_N;
 import com.justclick.clicknbook.model.LoginModel;
@@ -59,6 +60,8 @@ public class GetAepsCredential {
                                     ((Balance_Enquiry_Activity_N)context).captureData();
                                 }else if(context instanceof Cash_Withdrawl_Activity_N){
                                     ((Cash_Withdrawl_Activity_N)context).captureData();
+                                }else if(context instanceof AepsRegistrationActivity){
+                                    ((AepsRegistrationActivity)context).captureData();
                                 }else {
                                     ((Cash_Withdrawl_Activity)context).captureData();
                                 }

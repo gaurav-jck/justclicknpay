@@ -234,19 +234,7 @@
 
                                         />
 
-                                    <TextView
-                                        android:id="@+id/forget_password_tv"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="2"
-                                        android:text="Forgot?"
-                                        android:paddingTop="@dimen/padding_3dp"
-                                        android:paddingBottom="@dimen/padding_3dp"
-                                        android:textColor="@color/app_red_color"
-                                        android:layout_gravity="center_vertical"
-                                        android:textSize="@dimen/text_size_14sp"
-                                        android:gravity="right"
-                                        android:visibility="gone"/>
+
                                 </LinearLayout>
 
                                 <View
@@ -402,6 +390,21 @@
                                         android:text="@string/remember_me"
                                         android:layout_gravity="center_vertical"
                                         />
+
+                                    <TextView
+                                        android:id="@+id/forget_password_tv"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="2"
+                                        android:text="@string/forget_password"
+                                        android:paddingTop="@dimen/padding_3dp"
+                                        android:paddingBottom="@dimen/padding_3dp"
+                                        android:textColor="@color/app_blue_color"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="@dimen/text_size_14sp"
+                                        android:gravity="right"
+                                        android:paddingRight="@dimen/margin_8dp"
+                                        android:visibility="visible"/>
                                 </LinearLayout>
 
                                 <TextView

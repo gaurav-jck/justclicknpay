@@ -16,9 +16,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.gson.Gson;
-import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
+import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity;
 import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity;
 import com.justclick.clicknbook.jctPayment.BankDetailsActivity;
 import com.justclick.clicknbook.jctPayment.CashPayoutHistoryActivity;
@@ -26,22 +25,13 @@ import com.justclick.clicknbook.jctPayment.CashPayoutRequestActivity;
 import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
-import com.justclick.clicknbook.jctPayment.fino.FinoConstants;
-import com.justclick.clicknbook.jctPayment.fino.FinoUtils;
-import com.justclick.clicknbook.jctPayment.fino.finomvvm.view.FinoCashWithdrawActivity;
-import com.justclick.clicknbook.model.LoginModel;
-import com.justclick.clicknbook.network.NetworkCall;
-import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import okhttp3.ResponseBody;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -66,6 +56,7 @@ public class Services_Fragment extends Fragment implements View.OnClickListener 
         rootView.findViewById(R.id.img_mini_stmt).setOnClickListener(this);
         rootView.findViewById(R.id.img_cash_payout).setOnClickListener(this);
         rootView.findViewById(R.id.img_cash_payout_history).setOnClickListener(this);
+        rootView.findViewById(R.id.img_register).setOnClickListener(this);
         rootView.findViewById(R.id.img_bank_details).setOnClickListener(this);
 
         return rootView;
@@ -92,6 +83,9 @@ public class Services_Fragment extends Fragment implements View.OnClickListener 
                 break;
             case R.id.img_cash_payout_history:
                 startActivity(new Intent(getContext(), CashPayoutHistoryActivity.class));
+                break;
+            case R.id.img_register:
+                startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
                 break;
             case R.id.img_bank_details:
                 getBankDetailAndAmount(BANK_DETAILS);

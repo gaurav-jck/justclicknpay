@@ -2,7 +2,6 @@ package com.justclick.clicknbook.Activity;
 
 import android.Manifest;
 import android.app.Dialog;
-import android.app.DownloadManager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -178,7 +177,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
             ((TextView)findViewById(R.id.appVerTv)).setText("Ver "+ pinfo.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.5.7+"/*+ BuildConfig.VERSION_NAME*/);
+            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.5.13+"/*+ BuildConfig.VERSION_NAME*/);
         }
         remember_me_checkbox = findViewById(R.id.remember_me_checkbox);
         findViewById(R.id.scrollView).setOnClickListener(this);
@@ -399,12 +398,12 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                     ForgetPasswordModel forgetPasswordModel = new Gson().fromJson(response.string(), ForgetPasswordModel.class);
                     hideCustomDialog();
                     if(forgetPasswordModel!=null){
-                        if(forgetPasswordModel.StatusCode.equalsIgnoreCase("0")){
-                            Toast.makeText(context, forgetPasswordModel.Data.Message, Toast.LENGTH_SHORT).show();
+                        if(forgetPasswordModel.statusCode.equalsIgnoreCase("00")){
+                            Toast.makeText(context, forgetPasswordModel.statusMessage, Toast.LENGTH_SHORT).show();
                             forgetDialog.dismiss();
-                            otpDialog(FORGET_PASSWORD_SERVICE);
+//                            otpDialog(FORGET_PASSWORD_SERVICE);
                         }else {
-                            Toast.makeText(context, forgetPasswordModel.Status, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, forgetPasswordModel.statusMessage, Toast.LENGTH_SHORT).show();
                         }
                     }else {
                         Toast.makeText(context,R.string.response_failure_message,Toast.LENGTH_SHORT).show();
@@ -468,52 +467,57 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
-    private void forgetPassword(){
+    private void forgetPassword(String email){
         forgetDialog = new Dialog(context);
         forgetDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         forgetDialog.setContentView(R.layout.forget_password_layout);
-        final EditText email= (EditText) forgetDialog.findViewById(R.id.email_edt);
+        final EditText email_edt= (EditText) forgetDialog.findViewById(R.id.email_edt);
+        final EditText mobile_edt= (EditText) forgetDialog.findViewById(R.id.mobile_edt);
+        if(email.contains("@")){
+        email_edt.setText(email);}
         Button submit= (Button) forgetDialog.findViewById(R.id.submit_btn);
         ImageButton dialogCloseButton = (ImageButton) forgetDialog.findViewById(R.id.close_btn);
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Common.checkInternetConnection(context)){
-                    if(Common.isEmailValid(email.getText().toString().trim())) {
-                        ForgetPasswordRequestModel requestModel=new ForgetPasswordRequestModel();
-                        requestModel.Email=email.getText().toString().trim();
-                        requestModel.MerchantID=ApiConstants.MerchantId;
-
-                        showCustomDialog();
-                        new NetworkCall().callMobileService(requestModel,ApiConstants.FORGETPASSWORD, context, new NetworkCall.RetrofitResponseListener() {
-                            @Override
-                            public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                                if(response!=null){
-                                    responseHandler(response, FORGET_PASSWORD_SERVICE);
-                                }else {
-                                    hideCustomDialog();
-                                    Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
-                    }else {
-                        Toast.makeText(context,R.string.empty_and_invalid_email,Toast.LENGTH_LONG).show();
-                    }
-//                    forgetDialog.dismiss();
+                Common.hideSoftInputFromDialog(forgetDialog,context);
+                String email=email_edt.getText().toString().trim();
+                String mobile=mobile_edt.getText().toString().trim();
+                if(!Common.isEmailValid(email)) {
+                    Toast.makeText(context,R.string.empty_and_invalid_email,Toast.LENGTH_LONG).show();
+                }else if(!Common.isMobileValid(mobile)) {
+                    Toast.makeText(context,R.string.empty_and_invalid_mobile,Toast.LENGTH_LONG).show();
                 }else {
-                    Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
+                    forgotPass(email, mobile);
                 }
             }
         });
         dialogCloseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+                Common.hideSoftInputFromDialog(forgetDialog,context);
                 forgetDialog.dismiss();
             }
         });
         forgetDialog.show();
+    }
+
+    private void forgotPass(String email, String mobile) {
+        ForgetPasswordRequestModel requestModel=new ForgetPasswordRequestModel();
+        requestModel.Email=email;
+        requestModel.MerchantID=ApiConstants.MerchantId;
+        requestModel.MobileNo=mobile;
+
+        new NetworkCall().callService(NetworkCall.getForgetPassApiInterface().forgetPass(requestModel),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response, FORGET_PASSWORD_SERVICE);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void otpDialog(final int TYPE){
@@ -669,7 +673,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
 
             case R.id.forget_password_tv:
                 if(Common.checkInternetConnection(context)) {
-                    forgetPassword();
+                    forgetPassword(email_edt.getText().toString());
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
                 }

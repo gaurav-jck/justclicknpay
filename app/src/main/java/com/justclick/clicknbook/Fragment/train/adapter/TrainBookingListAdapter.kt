@@ -14,6 +14,7 @@ import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
+import com.justclick.clicknbook.utils.DateAndTimeUtils
 import kotlinx.android.synthetic.main.train_booking_lists_item.view.*
 
 
@@ -40,8 +41,12 @@ class TrainBookingListAdapter(
         holder.trainNameTv.text = item.trainName+" ("+item.trainNumber+")"
         holder.fromStnTv.text = item.source+"\n("+item.sourceCode+")"
         holder.toStnTv.text = item.destination+"\n("+item.destinationCode+")"
-        holder.deptDataTv.text = item.departDate
-        holder.arrivalDataTv.text = item.arriveDate
+//        holder.deptDataTv.text = item.departDate
+        holder.deptDataTv.text = DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
+        DateAndTimeUtils.DateTrainOutput, item.departDate)
+//        holder.arrivalDataTv.text = item.arriveDate
+        holder.arrivalDataTv.text = DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
+            DateAndTimeUtils.DateTrainOutput, item.arriveDate)
         holder.durationTv.text = item.journeyClass+" | "+item.journeyQuota
         holder.boardingStn.text = "Boarding Stn : "+item.boardingStn
 

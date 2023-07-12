@@ -181,7 +181,7 @@
     <!--text-->
     <string name="login_txt">SIGN IN</string>
     <string name="create_account">REGISTER</string>
-    <string name="forget_password">Forget Password</string>
+    <string name="forget_password"><u>Forget Password</u></string>
     <string name="reset_pin">Reset Pin</string>
     <string name="login_pin">Login Pin</string>
     <string name="new_pin">New Pin</string>
@@ -191,7 +191,7 @@
     <string name="email_mobile_hint">Email or Phone</string>
     <string name="otp_hint">Enter OTP</string>
     <string name="password_hint">Password</string>
-    <string name="forget_detail">Please enter your information below. If everything is correct, we will email you a copy of your password!</string>
+    <string name="forget_detail">Please enter your information below. If everything is correct, we will send you a copy of your password!</string>
     <string name="reset_pin_detail">Please enter your new login pin below. If everything is correct, we will email you a copy of your login pin!</string>
     <string name="forget_passForgot">Your Password?</string>
     <string name="please_wait">Please wait...</string>
@@ -684,9 +684,11 @@
 
     <string name="title_activity_cash_deposit">Cash Deposit</string>
     <string name="title_activity_cash_withdraw">Cash Withdrawal</string>
+    <string name="title_activity_authentication">AEPS Authentication</string>
     <string name="title_activity_balance_enquiry">Balance Enquiry</string>
     <string name="title_activity_mini_stmt">Mini Statement</string>
     <string name="title_activity_aadhar_pay">Aadhar Pay</string>
+    <string name="title_activity_registration">AEPS Authentication</string>
     <string name="title_activity_topup_request">Top Up Request</string>
     <string name="title_activity_receipt">Receipt</string>
     <string name="title_activity_bank_details">Bank Details</string>

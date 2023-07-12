@@ -5,7 +5,7 @@ package com.justclick.clicknbook.model;
  */
 
 public class ForgetPasswordModel {
-    public String Status,StatusCode;
+    public String statusMessage,statusCode;
     public Data Data;
     public class Data{
         public String Message;

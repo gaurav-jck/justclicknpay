@@ -4,6 +4,7 @@ import android.content.Context
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
+import com.google.gson.JsonObject
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.model.TrainRouteModel
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
@@ -11,6 +12,7 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.CodeEnum
 import okhttp3.ResponseBody
+import org.json.JSONObject
 
 
 class TrainSearchRepository {
@@ -24,11 +26,19 @@ class TrainSearchRepository {
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-//                responseString=responseString.replace("avlClasses\":\"", "avlClasses\":[\"")
-//                responseString=responseString.replace("\",\"departureTime", "\"],\"departureTime")
+                responseString=responseString.replace("avlClasses\":\"", "avlClasses\":[\"")
+                responseString=responseString.replace("\",\"departureTime", "\"],\"departureTime")
 
-//                responseString=responseString.replace("trainBtwnStnsList\":{", "trainBtwnStnsList\":[{")
-//                responseString=responseString.replace("},\"vikalpInSpecialTrainsAccomFlag", "}],\"vikalpInSpecialTrainsAccomFlag")
+                var jsonObject=JSONObject(responseString)
+
+                /*var trainBtwnStnsList=jsonObject.getJSONArray("trainBtwnStnsList")
+                for(i in 0 until trainBtwnStnsList.length()){
+                    var json=trainBtwnStnsList.getJSONObject(i)
+
+                }*/
+
+                responseString=responseString.replace("trainBtwnStnsList\":{", "trainBtwnStnsList\":[{")
+                responseString=responseString.replace("},\"vikalpInSpecialTrainsAccomFlag", "}],\"vikalpInSpecialTrainsAccomFlag")
 
                 val trainSearchDataModel = Gson().fromJson(responseString, TrainSearchDataModel::class.java)
                 trainSearchResponseLiveData!!.postValue(trainSearchDataModel)
