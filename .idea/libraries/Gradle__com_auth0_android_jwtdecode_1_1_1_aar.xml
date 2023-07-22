@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.auth0.android:jwtdecode:1.1.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/be86eba2ef201cc46b3003455bb8b0af/transformed/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/be86eba2ef201cc46b3003455bb8b0af/transformed/jetified-jwtdecode-1.1.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/be86eba2ef201cc46b3003455bb8b0af/transformed/jetified-jwtdecode-1.1.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/com.auth0.android/jwtdecode/1.1.1/334ddca4cf7f1eb007b3590b9be748662666b290/jwtdecode-1.1.1-javadoc.jar!/" />

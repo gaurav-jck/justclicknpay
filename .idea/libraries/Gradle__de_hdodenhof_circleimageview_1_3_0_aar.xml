@@ -4,8 +4,8 @@
       <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/6aef819d585b1dac60cc00e4cdb3e6b7/transformed/jetified-circleimageview-1.3.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/6aef819d585b1dac60cc00e4cdb3e6b7/transformed/jetified-circleimageview-1.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/6aef819d585b1dac60cc00e4cdb3e6b7/transformed/jetified-circleimageview-1.3.0/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/6aef819d585b1dac60cc00e4cdb3e6b7/transformed/jetified-circleimageview-1.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/6aef819d585b1dac60cc00e4cdb3e6b7/transformed/jetified-circleimageview-1.3.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>

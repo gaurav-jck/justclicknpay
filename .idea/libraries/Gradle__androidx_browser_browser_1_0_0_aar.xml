@@ -5,8 +5,8 @@
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/aa8551a921aad0cc13479d52c3472f01/transformed/browser-1.0.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/aa8551a921aad0cc13479d52c3472f01/transformed/browser-1.0.0/res" />
       <root url="file://$USER_HOME$/.jdks/caches/transforms-3/aa8551a921aad0cc13479d52c3472f01/transformed/browser-1.0.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/aa8551a921aad0cc13479d52c3472f01/transformed/browser-1.0.0/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

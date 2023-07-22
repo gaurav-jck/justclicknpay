@@ -24,14 +24,14 @@
 # hide the original source file Name.
 #-renamesourcefileattribute SourceFile
 
--dontwarn java.awt.**
--dontwarn javax.annotation.**
--dontwarn javax.imageio.**
--dontwarn com.facebook.infer.**
--dontwarn org.bouncycastle.**
--dontwarn com.itextpdf.**
--dontwarn javax.xml.crypto.**
--dontwarn org.apache.**
--dontwarn java.nio.**
--dontwarn java.lang.**
--dontwarn org.codehaus.**
+#-dontwarn java.awt.**
+#-dontwarn javax.annotation.**
+#-dontwarn javax.imageio.**
+#-dontwarn com.facebook.infer.**
+#-dontwarn org.bouncycastle.**
+#-dontwarn com.itextpdf.**
+#-dontwarn javax.xml.crypto.**
+#-dontwarn org.apache.**
+#-dontwarn java.nio.**
+#-dontwarn java.lang.**
+#-dontwarn org.codehaus.**

@@ -188,29 +188,6 @@ public class MyLoginActivityAeps extends AppCompatActivity implements View.OnCli
                 else {
                     lin_id_container.setVisibility(View.GONE);}
                 lin_id_container.removeAllViews();
-                if(dataBaseHelper.getAllLoginIds(s.toString(),2).size()==0){
-                    lin_id_container.setVisibility(View.GONE);
-                }
-                for(int i=0; i<dataBaseHelper.getAllLoginIds(s.toString(),2).size(); i++){
-                    final TextView textView=new TextView(context);
-                    textView.setPadding(50,5,0,0);
-//                    textView.setGravity(Gravity.RIGHT);
-                    textView.setText(dataBaseHelper.getAllLoginIds(s.toString(),2).get(i));
-                    textView.setTextColor(getResources().getColor(R.color.app_blue_color));
-
-                    Typeface typeface = Common.EditTextTypeFace(context);
-                    textView.setTypeface(typeface);
-
-                    textView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            email_edt.setText(textView.getText().toString());
-                            lin_id_container.setVisibility(View.GONE);
-                        }
-                    });
-
-                    lin_id_container.addView(textView);
-                }
 
             }
             @Override

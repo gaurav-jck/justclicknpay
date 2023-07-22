@@ -70,10 +70,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String SQL_CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_LOGIN_ID + "( "
-                + PRIMARY_KEY_ID + " INTEGER PRIMARY KEY ,"
-                + KEY_LOGIN_ID + " TEXT NOT NULL , " +
-                "CONSTRAINT LoginUnique UNIQUE ( "+KEY_LOGIN_ID+" ))";
 
         String SQL_CREATE_STATE_TABLE = "CREATE TABLE " + TABLE_STATES_NAMES + "( "
                 + PRIMARY_KEY_ID + " INTEGER PRIMARY KEY ,"
@@ -84,12 +80,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
                 + PRIMARY_KEY_ID + " INTEGER PRIMARY KEY ,"
                 + KEY_CIY_NAME + " TEXT NOT NULL , " +
                 "CONSTRAINT LoginUnique UNIQUE ("+KEY_CIY_NAME+"))";
-
-        String SQL_CREATE_RELATION_TABLE = "CREATE TABLE " + TABLE_RBL_RELATION + "( "
-                + PRIMARY_KEY_ID + " INTEGER PRIMARY KEY ,"
-                + KEY_RELATION_NAME + " TEXT NOT NULL , "
-                + KEY_RELATION_KEY + " TEXT NOT NULL , " +
-                "CONSTRAINT LoginUnique UNIQUE ("+KEY_RELATION_KEY+"))";
 
         String SQL_CREATE_RBL_BANKS_TABLE = "CREATE TABLE " + TABLE_RBL_BANKS + "( "
                 + PRIMARY_KEY_ID + " INTEGER PRIMARY KEY ,"
@@ -114,10 +104,8 @@ public class DataBaseHelper extends SQLiteOpenHelper {
 
 
 //        Toast.makeText(context, "onCreate", Toast.LENGTH_LONG).show();
-        db.execSQL(SQL_CREATE_LOGIN_TABLE);
         db.execSQL(SQL_CREATE_STATE_TABLE);
         db.execSQL(SQL_CREATE_CITY_TABLE);
-        db.execSQL(SQL_CREATE_RELATION_TABLE);
         db.execSQL(SQL_CREATE_RBL_BANKS_TABLE);
         db.execSQL(SQL_CREATE_OPERATOR_TABLE);
         db.execSQL(SQL_CREATE_JCT_BANKS_TABLE);
@@ -135,28 +123,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertLoginIds(String value) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(KEY_LOGIN_ID, value);
-        db.insert(TABLE_LOGIN_ID, null, contentValues);
-        return true;
-    }
-    public ArrayList<String> getAllLoginIds(String email, int limit) {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        //hp = new HashMap();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query="SELECT * FROM "+TABLE_LOGIN_ID+" WHERE "+KEY_LOGIN_ID+" Like '"+email+"%' ORDER BY "+KEY_LOGIN_ID+" DESC LIMIT "+limit;
-        Cursor res =  db.rawQuery( query, null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(KEY_LOGIN_ID)));
-            res.moveToNext();
-        }
-        return array_list;
-    }
     public boolean insertStateNames(String value , String valueArr[]) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -244,43 +210,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         }
         return array_list;
     }
-    public boolean insertCityNames(String value[]) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        for(int i=0; i<value.length; i++){
-            contentValues.put(KEY_CIY_NAME, value[i]);
-        }
-        db.insert(TABLE_CITY_NAMES, null, contentValues);
-        return true;
-    }
-    public ArrayList<String> getAllCityNames(String email) {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        //hp = new HashMap();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query="SELECT * FROM "+TABLE_CITY_NAMES;
-        Cursor res =  db.rawQuery( query, null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(KEY_LOGIN_ID)));
-            res.moveToNext();
-        }
-        return array_list;
-    }
-
-    public boolean insertOperatorNames(int optType , ArrayList<OptModel.OptData> list) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        for(int i=0; i<list.size(); i++){
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(KEY_OPERATOR_TYPE, optType);
-            contentValues.put(KEY_OPERATOR_ID, list.get(i).OptId);
-            contentValues.put(KEY_OPERATOR_NAME, list.get(i).OptName);
-            db.insert(TABLE_OPERATOR_NAME, null, contentValues);
-        }
-
-        return true;
-    }
 
     public ArrayList<OptModel.OptData> getAllOperatorNames(int type) {
         ArrayList<OptModel.OptData> array_list = new ArrayList<>();
@@ -302,39 +231,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public int numberOfRows(){
-        int numRows=0;
-
-        try {
-            SQLiteDatabase db = this.getReadableDatabase();
-            numRows = (int) DatabaseUtils.queryNumEntries(db, TABLE_LOGIN_ID);
-
-        }catch (Exception e){
-
-        }
-        return numRows;
-    }
-
-    public void deleteLoginTableData(){
-        final String SQL_DELETE_ENTRIES =
-                "DELETE " + TABLE_LOGIN_ID;
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOGIN_ID);
-//        db.execSQL(SQL_DELETE_ENTRIES);
-    }
-
-    public boolean insertJctBankNamesWithIFSC(ArrayList<JctIfscByCodeResponse> array_list) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        for(int i=0; i<array_list.size(); i++){
-            ContentValues contentValues = new ContentValues();
-            contentValues.put(KEY_RBL_BANK_KEY, array_list.get(i).Key);
-            contentValues.put(KEY_RBL_BANK_NAME, array_list.get(i).Name);
-            contentValues.put(KEY_RBL_BANK_DIGIT, array_list.get(i).Digit);
-            db.insert(TABLE_JCT_BANKS, null, contentValues);
-        }
-
-        return true;
-    }
     public ArrayList<JctIfscByCodeResponse> getJctBankNamesWithIFSC() {
         ArrayList<JctIfscByCodeResponse> array_list = new ArrayList<>();
 
@@ -350,21 +246,6 @@ public class DataBaseHelper extends SQLiteOpenHelper {
             jctIfscByCodeResponse.Key=res.getString(res.getColumnIndex(KEY_JCT_BANK_KEY));
             jctIfscByCodeResponse.Digit=res.getString(res.getColumnIndex(KEY_JCT_BANK_DIGIT));
             array_list.add(jctIfscByCodeResponse);
-            res.moveToNext();
-        }
-        return array_list;
-    }
-    public ArrayList<String> getAllLognIds(String email, int limit) {
-        ArrayList<String> array_list = new ArrayList<String>();
-
-        //hp = new HashMap();
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query="SELECT * FROM "+TABLE_LOGIN_ID+" WHERE "+KEY_LOGIN_ID+" Like '"+email+"%' ORDER BY "+KEY_LOGIN_ID+" DESC LIMIT "+limit;
-        Cursor res =  db.rawQuery( query, null );
-        res.moveToFirst();
-
-        while(res.isAfterLast() == false){
-            array_list.add(res.getString(res.getColumnIndex(KEY_LOGIN_ID)));
             res.moveToNext();
         }
         return array_list;

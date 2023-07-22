@@ -24,6 +24,8 @@ import com.justclick.clicknbook.utils.MyPreferences
 
 import kotlinx.android.synthetic.main.train_lists_item.view.*
 import okhttp3.ResponseBody
+import org.json.JSONArray
+import org.json.JSONObject
 
 
 class TrainListAdapter(
@@ -209,16 +211,17 @@ class TrainListAdapter(
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
                 var responseString=response.string()
-                if(responseString.contains("applicableBerthTypes")){
+                /*if(responseString.contains("applicableBerthTypes")){
                     responseString=responseString.replace("applicableBerthTypes\":\"", "applicableBerthTypes\":[\"")
                     responseString=responseString.replace("\",\"atasEnable", "\"],\"atasEnable")
                 }
                 if(responseString.contains("avlDayList") && responseString.contains("bkgCfg")){
                     responseString=responseString.replace("avlDayList\":{", "avlDayList\":[{")
                     responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
-                }
+                }*/
 
-                val fareRuleResponse = Gson().fromJson(responseString, FareRuleResponse::class.java)
+                val fareRuleResponse = parseDataManually(responseString)
+//                val fareRuleResponse = Gson().fromJson(responseString, FareRuleResponse::class.java)
                 mValues!!.get(position).fareRuleResponse=fareRuleResponse
 //                notifyDataSetChanged()
                 notifyItemChanged(position)
@@ -227,6 +230,75 @@ class TrainListAdapter(
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun parseDataManually(responseString:String): FareRuleResponse? {
+        var fareRuleResponse=FareRuleResponse()
+
+        var jsonObject= JSONObject(responseString)
+
+        fareRuleResponse.trainName=jsonObject.getString("trainName")
+        fareRuleResponse.distance=jsonObject.getString("distance")
+        fareRuleResponse.reqEnqParam=jsonObject.getString("reqEnqParam")
+        fareRuleResponse.quota=jsonObject.getString("quota")
+        fareRuleResponse.enqClass=jsonObject.getString("enqClass")
+        fareRuleResponse.from=jsonObject.getString("from")
+        fareRuleResponse.to=jsonObject.getString("to")
+        fareRuleResponse.trainNo=jsonObject.getString("trainNo")
+        fareRuleResponse.baseFare=jsonObject.getString("baseFare")
+        fareRuleResponse.reservationCharge=jsonObject.getString("reservationCharge")
+        fareRuleResponse.superfastCharge=jsonObject.getString("superfastCharge")
+        fareRuleResponse.tatkalFare=jsonObject.getString("tatkalFare")
+        fareRuleResponse.serviceTax=jsonObject.getString("serviceTax")
+        fareRuleResponse.dynamicFare=jsonObject.getString("dynamicFare")
+        fareRuleResponse.totalFare=jsonObject.getString("totalFare")
+        fareRuleResponse.serverId=jsonObject.getString("serverId")
+        fareRuleResponse.timeStamp=jsonObject.getString("timeStamp")
+
+
+        var avlDayList:Any = jsonObject.get("avlDayList")
+
+        var avlDayListArray= JSONArray()
+        if(avlDayList is JSONObject){
+            var avlDay=jsonObject.getJSONObject("avlDayList")
+            avlDayListArray.put(avlDay)
+        }else{
+            avlDayListArray=jsonObject.getJSONArray("avlDayList")
+        }
+
+        var avlDayArray:ArrayList<FareRuleResponse.avlDayList> = ArrayList()
+        for(i in 0 until avlDayListArray.length()){
+            var avlData:FareRuleResponse.avlDayList= fareRuleResponse.avlDayList()
+            val jsonObject = avlDayListArray.getJSONObject(i)
+
+            avlData.availablityDate=jsonObject.getString("availablityDate")
+            avlData.availablityStatus=jsonObject.getString("availablityStatus")
+
+            avlDayArray.add(avlData)
+        }
+
+        fareRuleResponse.avlDayList=avlDayArray
+
+        var bkgData: FareRuleResponse.bkgCfg=fareRuleResponse.bkgCfg()
+        var bkgObj=jsonObject.getJSONObject("bkgCfg")
+        var berthList:Any = bkgObj.get("applicableBerthTypes")
+        var berthListArray= JSONArray()
+        if(berthList is String){
+            val quotaClass = bkgObj.getString("applicableBerthTypes")
+            berthListArray.put(quotaClass)
+        }else{
+            berthListArray=bkgObj.getJSONArray("applicableBerthTypes")
+        }
+        var berthArray= Array(berthListArray.length()){""}
+        for(i in 0 until berthArray.size){
+            berthArray[i]=berthListArray.optString(i)
+        }
+        bkgData.applicableBerthTypes=berthArray
+        bkgData.foodChoiceEnabled=bkgObj.getString("foodChoiceEnabled")
+
+        fareRuleResponse.bkgCfg=bkgData
+
+        return fareRuleResponse
     }
 
     private fun getQuotaChoice(berthValue: String): String? {

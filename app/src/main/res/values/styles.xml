@@ -112,5 +112,12 @@
         <item name="android:divider">#d1d1d1</item>
         <item name="android:dividerHeight">0.5dp</item>
     </style>
+    
+    <style name="CustomEdittextTheme">
+        <item name="android:textSelectHandle">@drawable/zero_px</item>
+        <item name="android:textSelectHandleLeft">@drawable/zero_px</item>
+        <item name="android:textSelectHandleRight">@drawable/zero_px</item>
+    </style>
+        
 
 </resources>

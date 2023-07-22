@@ -98,8 +98,14 @@
                 android:singleLine="true"
                 android:textSize="@dimen/text_size_18sp"
                 android:textColor="@color/black_text_color"
+                android:longClickable="false"
+                tools:ignore="Autofill"
+                style="@style/CustomEdittextTheme"
                 />
+
         </com.google.android.material.textfield.TextInputLayout>
+<!--        android:textIsSelectable="false"
+                android:importantForAutofill="no"-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/amount"

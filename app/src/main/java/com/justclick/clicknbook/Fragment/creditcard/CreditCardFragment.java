@@ -4,9 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.arch.core.internal.SafeIterableMap;
 import androidx.fragment.app.Fragment;
 
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -82,6 +86,8 @@ public class CreditCardFragment extends Fragment implements View.OnClickListener
         setCardTypeAdapter();
 
         checkCredential();
+
+        Common.preventCopyPaste(card_number_edt);
 
         return view;
     }

@@ -499,7 +499,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                                 sendMobileTransaction();
                             }else {
                                 Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
-                                sendMobileTransaction();
+//                                sendMobileTransaction();
                             }
                         }
                         break;
@@ -690,10 +690,10 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                 params.put("AgentCode",MyPreferences.getLoginData(new LoginModel(),context).Data.DoneCardUser );
                 params.put("Merchant",ApiConstants.MerchantId);
                 params.put("Mode","APP");
-//                params.put("Latitude", mCurrentLocation.getLatitude() + "");
-//                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-                params.put("Latitude", 28.70 + "");
-                params.put("Longitude", 77.1 + "");
+                params.put("Latitude", mCurrentLocation.getLatitude() + "");
+                params.put("Longitude", mCurrentLocation.getLongitude() + "");
+//                params.put("Latitude", 28.70 + "");
+//                params.put("Longitude", 77.1 + "");
 
                 /*params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
                 params.put("Mobile", MyPreferences.getLoginData(new LoginModel(), context).Data.Mobile);

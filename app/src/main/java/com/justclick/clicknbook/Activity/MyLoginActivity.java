@@ -29,6 +29,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -94,7 +95,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_login2);
         context = this;
         dataBaseHelper = new DataBaseHelper(context);
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
         initializeViews();
 //        FirebaseApp.initializeApp(context);
         initializeFirebase();
@@ -177,7 +178,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
             ((TextView)findViewById(R.id.appVerTv)).setText("Ver "+ pinfo.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.5.13+"/*+ BuildConfig.VERSION_NAME*/);
+            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.6.0+"/*+ BuildConfig.VERSION_NAME*/);
         }
         remember_me_checkbox = findViewById(R.id.remember_me_checkbox);
         findViewById(R.id.scrollView).setOnClickListener(this);

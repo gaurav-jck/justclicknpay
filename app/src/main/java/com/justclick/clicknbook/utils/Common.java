@@ -17,9 +17,13 @@ import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
+import android.view.ActionMode;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.justclick.clicknbook.R;
@@ -385,6 +389,30 @@ public final class Common {
         view.setClickable(true);
       }
     }, 600);
+  }
+
+  public static void preventCopyPaste(final EditText view){
+    view.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
+      @Override
+      public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+        return false;
+      }
+
+      @Override
+      public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+        return false;
+      }
+
+      @Override
+      public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+        return false;
+      }
+
+      @Override
+      public void onDestroyActionMode(ActionMode mode) {
+
+      }
+    });
   }
 
   public static String loadJSONFromAsset(Context context, String fileName) {
