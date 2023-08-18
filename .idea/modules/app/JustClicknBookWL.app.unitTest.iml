@@ -24,8 +24,9 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
+                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/justclickkaroservicesDebug/R.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/271b4d5d0e2c7fac23de2c33717aa7e9/transformed/jetified-simple-xml-2.7.1.jar</arg>
-                <arg>$USER_HOME$/.jdks/caches/transforms-3/96633b4c258936748b904736209726a0/transformed/jetified-onboard_uat_v2.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/6060e108de93194e597e4cb25e26dcca/transformed/jetified-finalonboardinglib-release_v1_0_9-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/4d667eefe42ce4f945b19b46dcaa5835/transformed/jetified-PS_MATM_2.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/792489b1ac24afdfda6a7e947ca32383/transformed/jetified-FINO_PS_MATM-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/3754ff257341cb097e9dc63eb20bfca8/transformed/jetified-android-image-cropper-2.8.0-api.jar</arg>

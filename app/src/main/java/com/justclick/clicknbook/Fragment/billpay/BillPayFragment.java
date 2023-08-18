@@ -48,19 +48,20 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
 
     public static final int POSTPAID_TYPE =1, WATER_TYPE =2,
             DATACARD_TYPE=3, ELECTRICITY_TYPE=4,
-            LANDLINE_TYPE=5, GAS_TYPE=6, INSURANCE_TYPE=7, EMI_TYPE=8;
+            LANDLINE_TYPE=5, GAS_TYPE=6, EMI_TYPE=7;
     public static final String categoryElectricity="Electricity",categoryGas="Gas",categoryPostpaid="Postpaid",
             categoryWater="Water",categoryInsurance="Insurance",categoryDatacardPrepaid="DatacardPrepaid",
             categoryLandline="Landline",categoryEMI="EMI", categoryFastTag="FastTag";
     private boolean isElectricityOperator, isGasOperator, isPostpaidOperator, isWaterOperator, isDatacardOperator,
-            isLandlineOperator;
+            isLandlineOperator, isEmiOperator;
     private Context context;
     private LoginModel loginModel;
     private View view;
     private TextView proceedBtn;
     private LinearLayout recharge_layout_mobile, recharge_layout_dth,
             recharge_layout_datacard, recharge_layout_electricity,
-            recharge_layout_landline, recharge_layout_gas;
+            recharge_layout_landline, recharge_layout_gas,
+            recharge_layout_emi;
     private int rechargeType= POSTPAID_TYPE;
     //    mobile_icon_black
 
@@ -68,7 +69,8 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             userIdInputElectricity, userIdInput2Electricity,
             userIdInputDatacard, userIdInput2Datacard,
             userIdInputLandline, userIdInput2Landline,
-            userIdInputGas, userIdInput2Gas;
+            userIdInputGas, userIdInput2Gas,
+            userIdInputEmi, userIdInput2Emi;
 
     private String mobileOperator="";
     private Spinner spinner_postpaid_operator;
@@ -96,16 +98,21 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private Spinner spinner_gas_operator;
     private EditText userIdEdtGas, userIdEdt2Gas;
     private String gasOperator="";
+    //    emi
+    private Spinner spinner_emi_operator;
+    private EditText userIdEdtEmi, userIdEdt2Emi;
+    private String emiOperator="";
 
     private ArrayList<OperatorResponseModel.operatorlistDetails> postpaidOperatorArrayList, waterOperatorArrayList,
             datacardOperatorArrayList, elecricityOperatorArrayList,
-            landlineOperatorArrayList, gasOperatorArrayList;
+            landlineOperatorArrayList, gasOperatorArrayList,
+            emiOperatorArrayList;
     private OperatorResponseModel.operatorlistDetails operatorPostpaidSelector, operatorWaterSelector, operatorDatacardSelector,
-            operatorElectricitySelector, operatorLandlineSelector, operatorGasSelector;
+            operatorElectricitySelector, operatorLandlineSelector, operatorGasSelector, operatorEmiSelector;
     private ToolBarTitleChangeListener titleChangeListener;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private static BillPayFragment postpaidFragmentInstance,waterFragmentInstance, dataCardFragmentInstance,
-            electricityFragmentInstance,landlineFragmentInstance, gasFragmentInstance;
+            electricityFragmentInstance,landlineFragmentInstance, gasFragmentInstance, emiFragmentInstance;
 
     public BillPayFragment()
     {
@@ -153,6 +160,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                 }
                 gasFragmentInstance.setArguments(args);
                 return gasFragmentInstance;
+            case EMI_TYPE:
+                if(emiFragmentInstance==null){
+                    emiFragmentInstance =new BillPayFragment();
+                }
+                emiFragmentInstance.setArguments(args);
+                return emiFragmentInstance;
         }
         return new BillPayFragment();
     }
@@ -179,6 +192,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         elecricityOperatorArrayList =new ArrayList<>();
         landlineOperatorArrayList =new ArrayList<>();
         gasOperatorArrayList =new ArrayList<>();
+        emiOperatorArrayList =new ArrayList<>();
         rechargeType=getArguments().getInt("FragmentToShow");
     }
 
@@ -204,6 +218,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             spinner_electricity_operator.setAdapter(setSpinnerAdapter(elecricityOperatorArrayList));
             spinner_landline_operator.setAdapter(setSpinnerAdapter(landlineOperatorArrayList));
             spinner_gas_operator.setAdapter(setSpinnerAdapter(gasOperatorArrayList));
+            spinner_emi_operator.setAdapter(setSpinnerAdapter(emiOperatorArrayList));
         }
 
 
@@ -230,6 +245,9 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             case GAS_TYPE:
                 titleChangeListener.onToolBarTitleChange(categoryGas);
                 break;
+            case EMI_TYPE:
+                titleChangeListener.onToolBarTitleChange(categoryEMI);
+                break;
         }
     }
 
@@ -241,6 +259,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         recharge_layout_electricity =  view.findViewById(R.id.recharge_layout_electricity);
         recharge_layout_landline = view.findViewById(R.id.recharge_layout_landline);
         recharge_layout_gas =  view.findViewById(R.id.recharge_layout_gas);
+        recharge_layout_emi =  view.findViewById(R.id.recharge_layout_emi);
         proceedBtn  = view.findViewById(R.id.proceedBtn);
         proceedBtn.setOnClickListener(this);
         view.findViewById(R.id.rel_mobile).setOnClickListener(this);
@@ -251,6 +270,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         initializeElectricityView();
         initializeLandLineView();
         initializeGasView();
+        initializeEmiView();
     }
 
     private void initializePostpaidView() {
@@ -303,6 +323,15 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         userIdEdt2Gas=view.findViewById(R.id.userIdEdt2Gas);
         userIdInputGas = view.findViewById(R.id.userIdInputGas);
         userIdInput2Gas = view.findViewById(R.id.userIdInput2Gas);
+    }
+
+    private void initializeEmiView() {
+        spinner_emi_operator = view.findViewById(R.id.spinner_emi_operator);
+        spinner_emi_operator.setOnItemSelectedListener(this);
+        userIdEdtEmi=view.findViewById(R.id.userIdEdtEmi);
+        userIdEdt2Emi=view.findViewById(R.id.userIdEdt2Emi);
+        userIdInputEmi = view.findViewById(R.id.userIdInputEmi);
+        userIdInput2Emi = view.findViewById(R.id.userIdInput2Emi);
     }
 
     class OperatorListRequest{
@@ -394,10 +423,24 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                         }
                         break;
                     case GAS_TYPE:
+//                        gasOperatorArrayList.clear();
+//                        gasOperatorArrayList.addAll(responseModel.operatorlistDetails);
+//                        spinner_gas_operator.setAdapter(setSpinnerAdapter(gasOperatorArrayList));
+//                        isGasOperator=true;
+
                         gasOperatorArrayList.clear();
                         gasOperatorArrayList.addAll(responseModel.operatorlistDetails);
                         spinner_gas_operator.setAdapter(setSpinnerAdapter(gasOperatorArrayList));
                         isGasOperator=true;
+                        if(!isEmiOperator) {
+                            callOperator(categoryEMI, EMI_TYPE, false);
+                        }
+                        break;
+                    case EMI_TYPE:
+                        emiOperatorArrayList.clear();
+                        emiOperatorArrayList.addAll(responseModel.operatorlistDetails);
+                        spinner_emi_operator.setAdapter(setSpinnerAdapter(emiOperatorArrayList));
+                        isEmiOperator=true;
                         break;
                 }
             }
@@ -546,6 +589,15 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                 request.ad1=userIdEdt2Gas.getText().toString().trim();}
                 operatorData=operatorGasSelector;
                 break;
+            case EMI_TYPE:
+//                Toast.makeText(context, categoryGas, Toast.LENGTH_SHORT).show();
+                request.Category=categoryEMI;
+                request.canumber=userIdEdtEmi.getText().toString().trim();
+                request.operatorId=operatorEmiSelector.operaterid;
+                if(operatorEmiSelector.ad1code){
+                    request.ad1=userIdEdt2Emi.getText().toString().trim();}
+                operatorData=operatorEmiSelector;
+                break;
         }
 
         OperatorResponseModel.operatorlistDetails finalOperatorData = operatorData;
@@ -602,6 +654,8 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                 return isLandlineValid();
             case GAS_TYPE:
                 return isGasValid();
+            case EMI_TYPE:
+                return isEmiValid();
             default:
                 return false;
         }
@@ -703,6 +757,26 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         return true;
     }
 
+    private boolean isEmiValid() {
+//        Toast.makeText(context, categoryGas+"\n"+userIdEdtGas.getText().toString().trim()
+//                +"\n"+operatorGasSelector.operaterid+"-"+operatorGasSelector.name+"\n"+
+//                operatorGasSelector.regex, Toast.LENGTH_SHORT).show();
+        if(emiOperator.length()==0){
+            Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(!Common.isRegexValid(userIdEdtEmi.getText().toString().trim(), operatorEmiSelector.regex)){
+            Toast.makeText(context, operatorEmiSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }/*else if(operatorEmiSelector.ad1code && !Common.isRegexValid(userIdEdt2Emi.getText().toString().trim(), operatorEmiSelector.ad1_regex)){
+            Toast.makeText(context, operatorEmiSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }*/else if(operatorEmiSelector.ad1code && userIdEdt2Emi.getText().toString().trim().isEmpty()){
+            Toast.makeText(context, "Please enter mobile",Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
     public void fragmentToShow(int type){
         switch (type){
             case POSTPAID_TYPE:
@@ -759,6 +833,15 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                     callOperator(categoryGas, GAS_TYPE, true);
                 }
                 break;
+            case EMI_TYPE:
+                rechargeType= EMI_TYPE;
+                setOtherVisibilityGone();
+                recharge_layout_emi.setVisibility(View.VISIBLE);
+//                gasOperatorArrayList=dataBaseHelper.getAllOperatorNames(GAS_TYPE);
+                if(emiOperatorArrayList.size()==0){
+                    callOperator(categoryEMI, EMI_TYPE, true);
+                }
+                break;
         }
     }
 
@@ -769,6 +852,7 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         recharge_layout_electricity.setVisibility(View.GONE);
         recharge_layout_landline.setVisibility(View.GONE);
         recharge_layout_gas.setVisibility(View.GONE);
+        recharge_layout_emi.setVisibility(View.GONE);
     }
 
     @Override
@@ -791,6 +875,9 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
                 break;
             case R.id.spinner_gas_operator:
                 gasOperatorSelector(position,spinner_gas_operator.getSelectedItem().toString());
+                break;
+            case R.id.spinner_emi_operator:
+                emiOperatorSelector(position,spinner_emi_operator.getSelectedItem().toString());
                 break;
         }
     }
@@ -863,6 +950,22 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             userIdInput2Gas.setHint(operatorGasSelector.ad1_name);
         }else {
             userIdInput2Gas.setVisibility(View.GONE);
+        }
+    }
+
+    private void emiOperatorSelector(int position, String selectedValue) {
+        emiOperator=selectedValue;
+        operatorEmiSelector=emiOperatorArrayList.get(position);
+        userIdInputEmi.setHint(operatorEmiSelector.displayname);
+        if(operatorEmiSelector.ad1code){
+            userIdInput2Emi.setVisibility(View.VISIBLE);
+            if(operatorEmiSelector.ad1_name!=null && operatorEmiSelector.ad1_name.length()>0){
+                userIdInput2Emi.setHint(operatorEmiSelector.ad1_name);
+            }else {
+                userIdInput2Emi.setHint("Mobile number");
+            }
+        }else {
+            userIdInput2Emi.setVisibility(View.GONE);
         }
     }
 

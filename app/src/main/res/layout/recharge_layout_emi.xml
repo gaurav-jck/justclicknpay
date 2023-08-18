@@ -5,19 +5,18 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center"
-    android:id="@+id/recharge_layout_gas"
+    android:id="@+id/recharge_layout_landline"
     tools:context="com.justclick.clicknbook.Fragment.recharge.RechargeConfirmationFragment"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/transparent"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
         android:layout_marginTop="@dimen/large_margin">
         <Spinner
-            android:id="@+id/spinner_gas_operator"
+            android:id="@+id/spinner_emi_operator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
@@ -26,30 +25,30 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/view_spinner_landline_operator"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
         android:background="@color/color_light_black"/>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/very_small_margin">
-    <EditText
-         android:id="@+id/gas_amount_edt"
+        android:layout_marginTop="@dimen/medium_margin">
+     <EditText
+         android:id="@+id/emi_amount_edt"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:hint="@string/enter_amount"
-        android:textColorHint="@color/flightSearchHintColor"
-        android:textColor="@color/black_text_color"
+         android:textColorHint="@color/flightSearchHintColor"
+         android:textColor="@color/black_text_color"
          android:inputType="numberDecimal"
          android:maxLength="10"
          android:textSize="@dimen/simple_content_text_size"/>
-    </com.google.android.material.textfield.TextInputLayout>
+</com.google.android.material.textfield.TextInputLayout>
 
     <!--<View
         android:layout_width="match_parent"
@@ -59,25 +58,27 @@
         android:background="@color/app_blue_color"/>-->
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/view_landline_account_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
         android:layout_marginTop="@dimen/very_small_margin">
     <EditText
-        android:id="@+id/gas_account_edt"
+        android:id="@+id/emi_account_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_customer_id"
+        android:hint="@string/enter_account_id"
         android:textColorHint="@color/flightSearchHintColor"
         android:textColor="@color/black_text_color"
+        android:maxLength="10"
         android:textSize="@dimen/simple_content_text_size"
         android:inputType="number"
-        android:maxLength="15"
         />
     </com.google.android.material.textfield.TextInputLayout>
 
-   <!-- <View
+    <!--<View
+        android:id="@+id/view_landline_account_edt"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginLeft="@dimen/medium_margin"
@@ -85,32 +86,23 @@
         android:background="@color/app_blue_color"/>-->
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/view_gas_billGroup_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
         android:layout_marginTop="@dimen/very_small_margin">
     <EditText
-        android:id="@+id/gas_billGroup_edt"
+        android:id="@+id/emi_mobile_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/enter_bill_group"
+        android:hint="@string/enter_landline_number"
         android:textColorHint="@color/flightSearchHintColor"
         android:textColor="@color/black_text_color"
         android:textSize="@dimen/simple_content_text_size"
         android:inputType="number"
-        android:maxLength="8"
+        android:maxLength="15"
         />
     </com.google.android.material.textfield.TextInputLayout>
-
-   <!-- <View
-        android:id="@+id/view_gas_billGroup_edt"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:layout_marginRight="@dimen/medium_margin"
-        android:background="@color/app_blue_color"/>-->
 
 
 </LinearLayout>

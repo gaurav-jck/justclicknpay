@@ -58,7 +58,7 @@
             android:id="@+id/idInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
             >
             <EditText
                 android:id="@+id/idEdt"
@@ -75,7 +75,7 @@
             android:id="@+id/dateInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin">
+            android:layout_marginTop="@dimen/medium_margin">
             <EditText
                 android:id="@+id/dateEdt"
                 android:layout_width="match_parent"
@@ -91,7 +91,7 @@
             android:id="@+id/amountInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/large_margin"
+            android:layout_marginTop="@dimen/medium_margin"
             >
             <EditText
                 android:id="@+id/amountEdt"
@@ -107,6 +107,173 @@
                 android:singleLine="true"
                 android:inputType="number"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/size_15dp">
+            <RadioButton
+                android:id="@+id/online"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OnLine"/>
+            <RadioButton
+                android:id="@+id/offline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OffLine"
+                android:layout_marginLeft="@dimen/size_15dp"/>
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/chargesDetailLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/small_margin"
+            android:visibility="gone"
+            android:background="@drawable/edittext_border_hotel">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:id="@+id/type1"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Net Amount"/>
+                <TextView
+                    android:id="@+id/netAmount"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:id="@+id/type2"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Agent Comm"/>
+                <TextView
+                    android:id="@+id/agentComm"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Agent TDS"/>
+                <TextView
+                    android:id="@+id/agentTds"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Agent GST"/>
+                <TextView
+                    android:id="@+id/agentGst"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Agent Comm Perc"/>
+                <TextView
+                    android:id="@+id/agentPer"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:background="@color/gray_color"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_2dp">
+                <TextView
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="Agent Service Charge"/>
+                <TextView
+                    android:id="@+id/agentCharge"
+                    android:layout_width="@dimen/size_0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/small_text_size"
+                    android:text="000"/>
+            </LinearLayout>
+        </LinearLayout>
 
 
         <TextView
@@ -124,6 +291,7 @@
             android:layout_marginBottom="@dimen/small_margin"
             android:textColor="@color/color_white"
             android:textSize="@dimen/title_text_size"
+            android:visibility="gone"
             android:layout_alignParentBottom="true"/>
 
     </LinearLayout>

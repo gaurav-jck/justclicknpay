@@ -779,7 +779,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(layoutInflater.inflate(R.layout.train_passanger_view, null))
         var radioGroup:RadioGroup?=dialog.findViewById(R.id.genderRadioGroup)
-        var nameEdt: TextView? =dialog.findViewById(R.id.nameEdt)
+        var nameEdt: EditText? =dialog.findViewById(R.id.nameEdt)
         var ageEdt: EditText? =dialog.findViewById(R.id.ageEdt)
         var berthCheck: CheckBox? =dialog.findViewById(R.id.berthCheck)
         var textView: TextView? =dialog.findViewById(R.id.passengerCountTv)
@@ -821,7 +821,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 
         var isAdd:Boolean
         if(position<passengerArray!!.size){
-            nameEdt!!.text=passengerArray!!.get(position).passengerName
+            nameEdt!!.setText(passengerArray!!.get(position).passengerName)
             ageEdt!!.setText(passengerArray!!.get(position).passengerAge)
             if(Integer.parseInt(passengerArray!!.get(position).passengerAge)<12){
                 berthCheck!!.isEnabled=true;

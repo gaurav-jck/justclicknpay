@@ -9,8 +9,9 @@ import java.util.Locale;
 
 public class DateAndTimeUtils {
 
-  public static final String DateTrainInput="dd/MM/yyyy KK:mm:ss aaa";
-  public static final String DateTrainOutput="dd/MM/yyyy HH:mm:ss";
+//  public static final String DateTrainInput="dd/MM/yyyy KK:mm:ss aaa";
+  public static final String DateTrainInput="dd/MM/yyyy h:mm:ss aaa";
+  public static final String DateTrainOutput="dd/MM/yyyy HH:mm";
 
   public static SimpleDateFormat getFlightDateTimeFormat2(){
     return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.US);

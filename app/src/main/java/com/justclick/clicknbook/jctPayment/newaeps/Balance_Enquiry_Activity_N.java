@@ -1339,8 +1339,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                                 JSONObject myObject = jsonArray.getJSONObject(i);
 
                                 //adding the bank to herolist
-                                bankArray.add(myObject.getString("bankName"));
-                                bank_iin.put(myObject.getString("bankName"),myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
+                                bankArray.add(myObject.getString("bankName").trim());
+                                bank_iin.put(myObject.getString("bankName").trim(),myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
                             }
                             //spinner
                             arrayAdapter = new ArrayAdapter(context, R.layout.item_bank_list, bankArray);

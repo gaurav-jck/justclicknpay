@@ -296,6 +296,25 @@ class TrainListAdapter(
         bkgData.applicableBerthTypes=berthArray
         bkgData.foodChoiceEnabled=bkgObj.getString("foodChoiceEnabled")
 
+        if(bkgData.foodChoiceEnabled.equals("true", true)){
+//
+            var foodDetails:Any = bkgObj.get("foodDetails")
+            var foodDetailsArray= JSONArray()
+            if(foodDetails is String){
+                val foodDetails = bkgObj.getString("foodDetails")
+                foodDetailsArray.put(foodDetails)
+            }else{
+                foodDetailsArray=bkgObj.getJSONArray("foodDetails")
+            }
+            var foodArray= Array(foodDetailsArray.length()){""}
+            for(i in 0 until foodArray.size){
+                foodArray[i]=foodDetailsArray.optString(i)
+            }
+            bkgData.foodDetails=foodArray
+        }
+
+
+
         fareRuleResponse.bkgCfg=bkgData
 
         return fareRuleResponse

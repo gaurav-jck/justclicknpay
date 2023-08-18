@@ -225,6 +225,7 @@ public class ApiConstants
     public static final String Operatorlist   ="Operatorlist";
     public static final String Fetchbilldetails   ="Fetchbilldetails";
     public static final String PayBillpayments   ="PayBillpayments";
+    public static final String getcommission   ="getcommission";
 
 //    PaytmWallet
     public static final String SendOtp="SendOtp";

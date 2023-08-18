@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +42,8 @@ import static com.justclick.clicknbook.Fragment.billpay.BillPayFragment.WATER_TY
 
 public class BillConfirmationFragment extends Fragment {
 
-    private final int GenerateToken=1, BillPay=2;
+    private final String OnLine="OnLine", OffLine="OffLine";
+    private final int GenerateToken=1, BillPay=2, Commission=3;
     private Context context;
     private RechargeRequestModel rechargeRequestModel;
     private TextView payBtn;
@@ -50,6 +53,13 @@ public class BillConfirmationFragment extends Fragment {
     private int rechargeType;
     private TextInputLayout idInput, amountInput,nameInput,dateInput;
     private EditText idEdt,amountEdt, nameEdt,dateEdt;
+    private CheckResponseClass credentialResponseModel;
+    private boolean isGetCredentials=true;
+    private String paymentMode;
+    private LinearLayout chargesDetailLin;
+    private RadioGroup radioGroup;
+    private RadioButton online, offline;
+    private TextView netAmount, agentComm, agentTds, agentGst, agentPer, agentCharge;
 
     public BillConfirmationFragment() {
         // Required empty public constructor
@@ -77,6 +87,8 @@ public class BillConfirmationFragment extends Fragment {
 
         initializeView(view);
 
+        getCredential();
+
         Bundle bundle=getArguments();
         try {
             if(bundle!=null){
@@ -89,7 +101,54 @@ public class BillConfirmationFragment extends Fragment {
 
         }
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if(checkedId==R.id.online){
+                    paymentMode=OnLine;
+                    chargesDetailLin.setVisibility(View.VISIBLE);
+                    getCommission(OnLine);
+                }else {
+                    paymentMode=OffLine;
+                    chargesDetailLin.setVisibility(View.VISIBLE);
+                    getCommission(OffLine);
+                }
+            }
+        });
+
         return view;
+    }
+
+    private void getCommission(String mode) {
+        BillGetCommissionRequest request=new BillGetCommissionRequest();
+        request.AgentCode=loginModel.Data.DoneCardUser;
+        request.operatorid=billDetail.operatorid;
+        request.Canumber=billDetail.canumber;
+        request.billdate=billDetail.dueDate;
+        request.dueDate=billDetail.dueDate;
+        request.cellNumber=billDetail.billNumber;
+        request.userName=billDetail.customerName;
+        request.Email=loginModel.Data.Email;
+        request.Suppliercode=operatorDetail.Suppliercode;
+        request.category=billDetail.category;
+        request.fetchbillstring=billDetail.fetchbillstring;
+        request.BillAmount= Float.parseFloat(amountEdt.getText().toString());
+        request.Billnetamount= Float.parseFloat(amountEdt.getText().toString());
+        request.acceptPayment="1";
+        request.acceptPartPay="False";
+        request.PayBillType=mode;
+        request.Paymentmode=mode;
+
+        new NetworkCall().callBillPayService(request, ApiConstants.getcommission, context, credentialResponseModel.credentialData.get(0).userData,
+                credentialResponseModel.credentialData.get(0).token, true, (response, responseCode) -> {
+            hideCustomDialog();
+//            responseHandler(response, BillPay);
+            if(response!=null){
+                responseHandler(response, Commission);
+            }else {
+                Toast.makeText(context, R.string.no_data_found, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setValues() {
@@ -140,6 +199,16 @@ public class BillConfirmationFragment extends Fragment {
         dateInput=view.findViewById(R.id.dateInput);
         dateEdt=view.findViewById(R.id.dateEdt);
         payBtn=  view.findViewById(R.id.payBtn);
+        radioGroup=  view.findViewById(R.id.radioGroup);
+        online=  view.findViewById(R.id.online);
+        offline=  view.findViewById(R.id.offline);
+        chargesDetailLin=  view.findViewById(R.id.chargesDetailLin);
+        netAmount=  view.findViewById(R.id.netAmount);
+        agentComm=  view.findViewById(R.id.agentComm);
+        agentTds=  view.findViewById(R.id.agentTds);
+        agentGst=  view.findViewById(R.id.agentGst);
+        agentPer=  view.findViewById(R.id.agentPer);
+        agentCharge=  view.findViewById(R.id.agentCharge);
 
         view.findViewById(R.id.back_arrow).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,7 +222,12 @@ public class BillConfirmationFragment extends Fragment {
             public void onClick(View v) {
                 if(Common.checkInternetConnection(context)) {
                     Common.preventFrequentClick(payBtn);
-                    getCredential();
+                    if(isGetCredentials){
+                        getCredential();
+                    }else {
+                        payBill(credentialResponseModel.credentialData.get(0).userData, credentialResponseModel.credentialData.get(0).token);
+                    }
+
 //                    Toast.makeText(context,"Bill",Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
@@ -182,7 +256,7 @@ public class BillConfirmationFragment extends Fragment {
     class PayBillRequest{
         public String Operatorid,Canumber,billdate,dueDate,cellNumber,userName,AgentCode,Email,Suppliercode,Category,fetchbillstring;
         public String Lattitude="27.2233",Longitude="78.26535",Mode="offline",acceptPayment="",acceptPartPay="",
-                Merchant=ApiConstants.MerchantId,Type="App", PayBillType="";
+                Merchant=ApiConstants.MerchantId,Type="App", PayBillType="", PaymentMode, paymentMode;
         public float BillAmount,Billnetamount;
         /*{"Operatorid": "12",
     "BillAmount": 12.0,
@@ -231,10 +305,17 @@ public class BillConfirmationFragment extends Fragment {
     private void responseHandler(ResponseBody response, int type) {
         try {
             if(type==GenerateToken){
-                CheckResponseClass responseModel=new Gson().fromJson(response.string(),CheckResponseClass.class);
+                credentialResponseModel=new Gson().fromJson(response.string(),CheckResponseClass.class);
+                if(credentialResponseModel!=null && credentialResponseModel.statusCode.equals("00")){
+                    isGetCredentials=false;
+//                    Toast.makeText(context, credentialResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context, credentialResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                }
+            }else if(type==Commission){
+                BillGetCommissionResponse responseModel=new Gson().fromJson(response.string(),BillGetCommissionResponse.class);
                 if(responseModel!=null && responseModel.statusCode.equals("00")){
-//                    Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                    payBill(responseModel.credentialData.get(0).userData, responseModel.credentialData.get(0).token);
+                    showCharges(responseModel.rechargeCommsion);
                 }else {
                     Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_SHORT).show();
                 }
@@ -250,6 +331,17 @@ public class BillConfirmationFragment extends Fragment {
         }catch (Exception e){
 
         }
+    }
+
+    private void showCharges(BillGetCommissionResponse.rechargeCommsion responseModel) {
+        payBtn.setVisibility(View.VISIBLE);
+        chargesDetailLin.setVisibility(View.VISIBLE);
+        netAmount.setText(responseModel.netAmount+"");
+        agentComm.setText(responseModel.agentComm+"");
+        agentTds.setText(responseModel.agentTds+"");
+        agentGst.setText(responseModel.agentGst+"");
+        agentPer.setText(responseModel.agentCommPerc+"");
+        agentCharge.setText(responseModel.agentservicechage+"");
     }
 
     private void openReceipt(PayBillResponse responseModel) {
@@ -301,6 +393,8 @@ public class BillConfirmationFragment extends Fragment {
         request.fetchbillstring=billDetail.fetchbillstring;
         request.BillAmount= Float.parseFloat(amountEdt.getText().toString());
         request.Billnetamount= Float.parseFloat(amountEdt.getText().toString());
+        request.PaymentMode= paymentMode;
+        request.paymentMode= paymentMode;
 //        request.BillAmount= 10.0f;
 //        request.Billnetamount=10.0f;
         showCustomDialog();

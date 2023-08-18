@@ -23,7 +23,7 @@ import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
  */
 public class BillPayMainPagerFragment extends Fragment implements TabLayout.OnTabSelectedListener{
 
-    private static final int NUM_PAGES = 6;
+    private static final int NUM_PAGES = 7;
     private Context context;
     private ToolBarTitleChangeListener titleChangeListener;
     private ViewPager viewPager;
@@ -33,7 +33,7 @@ public class BillPayMainPagerFragment extends Fragment implements TabLayout.OnTa
     private Fragment mobileFragment;
     private String[] tabTitle = new  String[]{BillPayFragment.categoryPostpaid,BillPayFragment.categoryWater,
             BillPayFragment.categoryDatacardPrepaid, BillPayFragment.categoryElectricity,
-            BillPayFragment.categoryLandline,BillPayFragment.categoryGas};
+            BillPayFragment.categoryLandline,BillPayFragment.categoryGas,BillPayFragment.categoryEMI};
 
     public BillPayMainPagerFragment()
     {
@@ -92,6 +92,7 @@ public class BillPayMainPagerFragment extends Fragment implements TabLayout.OnTa
         tabLayout.addTab(tabLayout.newTab().setText(BillPayFragment.categoryElectricity));
         tabLayout.addTab(tabLayout.newTab().setText(BillPayFragment.categoryLandline));
         tabLayout.addTab(tabLayout.newTab().setText(BillPayFragment.categoryGas));
+        tabLayout.addTab(tabLayout.newTab().setText(BillPayFragment.categoryEMI));
 //        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 //
 //        //Adding onTabSelectedListener to swipe views

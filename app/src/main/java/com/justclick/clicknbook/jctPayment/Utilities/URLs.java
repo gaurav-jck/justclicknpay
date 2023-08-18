@@ -53,7 +53,7 @@ public class URLs {
     public static final String BankStatment =BASE_URL_N+"B2B/AdharPayment/"+"BankStatment";
     public static final String AadharPay =   BASE_URL_N+"B2B/AdharPayment/"+"AadharPay";
     public static String aepstest="https://Fantasy.justclicknpay.com/";
-    public static final String AepsRegister =   aepstest+"B2B/AdharPayment/"+"Registration";
-    public static final String AepsAuthenticate =   aepstest+"B2B/AdharPayment/"+"Authentication";
+    public static final String AepsRegister =   BASE_URL_N+"B2B/AdharPayment/"+"Registration";
+    public static final String AepsAuthenticate =   BASE_URL_N+"B2B/AdharPayment/"+"Authentication";
     public static final String StatusEnquiry ="StatusEnquiry";
 }

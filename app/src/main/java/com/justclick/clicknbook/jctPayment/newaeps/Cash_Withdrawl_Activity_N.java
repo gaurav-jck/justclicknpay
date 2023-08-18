@@ -1252,7 +1252,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
                                 //adding the bank to herolist
                                 bankArray.add(myObject.getString("bankName"));
-                                bank_iin.put(myObject.getString("bankName"), myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
+                                bank_iin.put(myObject.getString("bankName").trim(), myObject.getString("iinno")/*+"+"+myObject.getString("acquire_id")*/);
                             }
                             //spinner
                             aa = new ArrayAdapter(context, R.layout.item_bank_list, bankArray);

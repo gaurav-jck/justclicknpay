@@ -14,6 +14,8 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -151,7 +153,8 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        URL =URLs.AepsAuthenticate;
+        URL =URLs.AepsRegister;
+//        URL =URLs.AepsAuthenticate;
 
         // init views
         btn_capture = findViewById(R.id.btn_capture);
@@ -221,6 +224,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             @Override
             public void onClick(View v) {
                 Common.preventFrequentClick(btn_capture);
+                str_aadhar = et_aadhar.getText().toString().trim();
 //                startActivity(new Intent(context, Receipt_Activity.class));
                 if(!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
@@ -235,6 +239,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             @Override
             public void onClick(View v) {
                 Common.preventFrequentClick(btn_submit);
+                str_aadhar = et_aadhar.getText().toString().trim();
                 /*str_aadhar = et_aadhar.getText().toString().trim();
                 if (validation()) {
                     checkPermissions();
@@ -242,9 +247,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 }*/
 
                 if(!isGetAgain) {
-                    URL =URLs.AepsRegistration;
                     GetAepsCredential.checkAepsCredential(context);
                 }else {
+                    URL =URLs.AepsRegister;
                     captureData();
                 }
             }
@@ -313,8 +318,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 }
             } else if (d_type.equals(MORPHO) && validation()) {
                 if (searchPackageName(MORPHO_PACKAGE)) {
-                    String pidOptXML = createPidOptXML();  //old
-//                    String pidOptXML = getPIDOptions();   // change
+//                    String pidOptXML = createPidOptXML();  //old
+                    String pidOptXML = getPIDOptionsPay();  //paysprint
+//                    String pidOptXML = getPIDOptionsPay2();  //paysprint2
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
                     capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
@@ -329,12 +335,23 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         btn_capture.setTextColor(getResources().getColor(R.color.black_text_color));
         btn_capture.setBackgroundResource(R.color.gray_color);
         btn_capture.setAlpha(0.4f);
+
+        btn_submit.setEnabled(false);
+        btn_submit.setTextColor(getResources().getColor(R.color.black_text_color));
+        btn_submit.setBackgroundResource(R.color.gray_color);
+        btn_submit.setAlpha(0.4f);
     }
     private void showCapture() {
         btn_capture.setEnabled(true);
         btn_capture.setTextColor(getResources().getColor(R.color.color_white));
         btn_capture.setBackgroundResource(R.drawable.button_shep);
         btn_capture.setAlpha(1f);
+
+        btn_submit.setEnabled(true);
+        btn_submit.setTextColor(getResources().getColor(R.color.color_white));
+        btn_submit.setBackgroundResource(R.drawable.button_shep);
+        btn_submit.setAlpha(1f);
+
         et_aadhar.setError(null);
     }
 
@@ -457,6 +474,24 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         });
     }
 
+  /*  ActivityResultLauncher<Intent> startActivityForScanDevice = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    Intent intent = result.getData();
+                    PID_DATA = intent.getStringExtra("PID_DATA");
+                    Log.d("PID_DATA", PID_DATA);
+                    if (PID_DATA.contains("Device not ready") || PID_DATA.contains("Please connect") || PID_DATA.contains("Not connected")) {
+                        ErrorDialog.createErrorDialog(activity, "Device Not Connected");
+                    } else if (PID_DATA.contains("Bluetooth Connection Failed") || PID_DATA.contains("Bluetooth connection failed")) {
+                        ErrorDialog.createErrorDialog(activity, "Please pair your device");
+                    } else {
+                        checkAePSService();
+                    }
+
+                }
+
+            });*/
+
     private void capture(String packageName, String pidOptXML, int requestCode) {
 //        sessionCheckMethod(false);
         String selectedPackage = packageName;
@@ -465,6 +500,14 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         intent1.putExtra("PID_OPTIONS", pidOptXML);
         intent1.setPackage(selectedPackage);
         startActivityForResult(intent1, requestCode);
+
+       /* String pidOption = getPIDOptions();
+        Intent intent2 = new Intent();
+        intent2.setPackage(packageName);
+        intent2.setAction("in.gov.uidai.rdservice.fp.CAPTURE");
+        intent2.putExtra("PID_OPTIONS", pidOption);
+        //startActivityForResult(intent2, 1);
+        startActivityForScanDevice.launch(intent2);*/
     }
 
     private void logEvents(String str_token, String message) {
@@ -561,10 +604,10 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                                 AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
                                 if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    openReceipt(commonResponseModel);
+                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
+//                                    openReceipt(commonResponseModel);
                                 }else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                                 }
                             }else {
                                 AepsMiniResponse commonResponseModel = new Gson().fromJson(response, AepsMiniResponse.class);
@@ -576,7 +619,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                                         Toast.makeText(context, "No transaction is showing for this account.", Toast.LENGTH_SHORT).show();
                                     }
                                 }else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                                 }
                             }
 
@@ -612,10 +655,11 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 params.put("Mobile", MyPreferences.getLoginData(new LoginModel(), context).Data.Mobile);
                 params.put("Merchant", ApiConstants.MerchantId);
                 params.put("Mode", "APP");
+                params.put("AadharNumber", str_aadhar);
 //                params.put("Latitude", mCurrentLocation.getLatitude() + "");
 //                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-                params.put("Latitude", 28.70111 + "");
-                params.put("Longitude", 77.10000 + "");
+                params.put("Lattitude", 28.70111 + "");
+                params.put("Longitude", 77.10112 + "");
                 params.put("PId", pidDataXML);
                 if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
                     params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")
@@ -720,18 +764,55 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         return true;
     }
 
+    private String getPIDOptionsPay() {
+
+        return "<?xml version=\"1.0\"?><PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" wadh=\"\" posh=\"UNKNOWN\" env=\"P\" /><CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts></PidOptions>";
+
+    }
+
+    private String getPIDOptionsPay2() {
+        try {
+            String posh = "UNKNOWN";
+
+            Opts opts = new Opts();
+            opts.fCount = "1";
+            opts.fType = "2";
+            opts.iCount = "0";
+            opts.iType = "0";
+            opts.pCount = "0";
+            opts.pType = "0";
+            opts.format = "0";
+            opts.pidVer = "2.0";
+            opts.timeout = "20000";
+//            opts.otp = "123456";
+//            opts.wadh = "Hello";
+            opts.posh = posh;
+            opts.env = "P";
+
+            PidOptions pidOptions = new PidOptions();
+            pidOptions.ver = "1.0";
+            pidOptions.Opts = opts;
+
+            Serializer serializer = new Persister();
+            StringWriter writer = new StringWriter();
+            serializer.write(pidOptions, writer);
+            return writer.toString();
+        } catch (Exception e) {
+            Log.e("Error", e.toString());
+        }
+        return null;
+    }
+
     // pid data xml for startek
     private String createPidOptXML() {
         String tmpOptXml = "";
         try {
             String fCount = "1";
-//            String fType = "0";  //old
             String fType = "2";
             String iCount = "0";
             String iType = "0";
             String pCount = "0";
             String pType = "0";
-//            String format = "1"; // old
             String format = "0";
             String pidVer = "2.0";
             String timeout = "20000";
