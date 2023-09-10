@@ -91,6 +91,29 @@
                 android:textSize="@dimen/aeps_input_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobile_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:hint="@string/enter_mobile"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/txt_mobileno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:digits="@string/mobile_digit"
+                android:maxLines="1"
+                android:maxLength="@integer/mobileMaxLength"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/aeps_input_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"

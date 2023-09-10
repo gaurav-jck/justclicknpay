@@ -1275,7 +1275,7 @@ public class NetworkCall {
 //                        String body=object.getString("msgDesc");
 //                    }
                     responseBody=response.body();
-                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+                    retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
                 }catch (Exception e){
                     responseBody=null;
                     hideCustomDialog();

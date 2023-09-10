@@ -3,7 +3,7 @@ package com.justclick.clicknbook.rapipayMatm;
 import com.justclick.clicknbook.ApiConstants;
 
 public class InitiateMatmTxnRequest {
-    private String AgentCode, Merchant= ApiConstants.MerchantId, TxnType, Mode="APP";
+    private String AgentCode, Merchant= ApiConstants.MerchantId, TxnType, Mode="APP", Mobile;
     private float Amount;
 
     public String getAgentCode() {
@@ -28,5 +28,9 @@ public class InitiateMatmTxnRequest {
 
     public void setTxnType(String txnType) {
         TxnType = txnType;
+    }
+
+    public void setMobile(String mobile) {
+        Mobile = mobile;
     }
 }

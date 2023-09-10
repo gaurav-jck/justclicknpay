@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="Gradle: C (3)">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/simple-xml-2.7.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/jxl-2.6.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

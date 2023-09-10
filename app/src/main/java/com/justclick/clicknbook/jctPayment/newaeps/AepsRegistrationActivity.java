@@ -125,9 +125,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     private Context context;
     private FirebaseAnalytics mFirebaseAnalytics;
     private Button btn_capture, btn_submit;
-    EditText et_aadhar;
+    EditText et_aadhar, txt_mobileno;
     private TextInputLayout aadhar_no;
-    String str_aadhar;
+    String str_aadhar, mobileNo;
     String pidDataXML = "";
     String d_type = MANTRA, adharType = ADHAR_UID;
     int TYPE=BAL_ENQ;
@@ -160,6 +160,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         btn_capture = findViewById(R.id.btn_capture);
         btn_submit = findViewById(R.id.btn_register);
         et_aadhar = findViewById(R.id.txt_aadharno);
+        txt_mobileno = findViewById(R.id.txt_mobileno);
         aadhar_no = findViewById(R.id.aadhar_no);
 
         findViewById(R.id.rb_virtual_id).setVisibility(View.GONE);
@@ -225,12 +226,16 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             public void onClick(View v) {
                 Common.preventFrequentClick(btn_capture);
                 str_aadhar = et_aadhar.getText().toString().trim();
-//                startActivity(new Intent(context, Receipt_Activity.class));
-                if(!isGetAgain) {
-                    GetAepsCredential.checkAepsCredential(context);
+                mobileNo = txt_mobileno.getText().toString().trim();
+                if(Common.isMobileValid(mobileNo)){
+                    if(!isGetAgain) {
+                        GetAepsCredential.checkAepsCredential(context);
+                    }else {
+                        URL =URLs.AepsAuthenticate;
+                        captureData();
+                    }
                 }else {
-                    URL =URLs.AepsAuthenticate;
-                    captureData();
+                    Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -240,17 +245,16 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             public void onClick(View v) {
                 Common.preventFrequentClick(btn_submit);
                 str_aadhar = et_aadhar.getText().toString().trim();
-                /*str_aadhar = et_aadhar.getText().toString().trim();
-                if (validation()) {
-                    checkPermissions();
-//                    sessionCheckMethod(true);
-                }*/
-
-                if(!isGetAgain) {
-                    GetAepsCredential.checkAepsCredential(context);
+                mobileNo = txt_mobileno.getText().toString().trim();
+                if(Common.isMobileValid(mobileNo)){
+                    if(!isGetAgain) {
+                        GetAepsCredential.checkAepsCredential(context);
+                    }else {
+                        URL =URLs.AepsRegister;
+                        captureData();
+                    }
                 }else {
-                    URL =URLs.AepsRegister;
-                    captureData();
+                    Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -445,7 +449,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                                 sendMobileTransaction();
                             }else {
                                 Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
-                                sendMobileTransaction();
+//                                sendMobileTransaction();
                             }
                         }
                         break;
@@ -652,14 +656,14 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 Map<String, String> params = new HashMap<>();
 
                 params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
-                params.put("Mobile", MyPreferences.getLoginData(new LoginModel(), context).Data.Mobile);
+                params.put("Mobile", mobileNo);
                 params.put("Merchant", ApiConstants.MerchantId);
                 params.put("Mode", "APP");
                 params.put("AadharNumber", str_aadhar);
-//                params.put("Latitude", mCurrentLocation.getLatitude() + "");
-//                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-                params.put("Lattitude", 28.70111 + "");
-                params.put("Longitude", 77.10112 + "");
+                params.put("Latitude", mCurrentLocation.getLatitude() + "");
+                params.put("Longitude", mCurrentLocation.getLongitude() + "");
+//                params.put("Lattitude", 28.70111 + "");
+//                params.put("Longitude", 77.10112 + "");
                 params.put("PId", pidDataXML);
                 if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
                     params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")

@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/cardBackground"
+    app:cardCornerRadius="@dimen/margin_7dp"
+    app:cardElevation="5dp"
+    android:layout_margin="3dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/margin_2dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Agent Id"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/agentIdTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Id"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Agency Name"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/agencyTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Confirmation Id"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/confirmIdTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Id"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1.4"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Booking Ref No"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/refNoTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Transaction Date"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/dateTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Debit"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/app_red_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/debitTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/app_red_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Credit"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/green"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/creditTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/green"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Balance"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/balanceTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Transaction Type"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/typeTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Remarks"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/remarksTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1.3"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Updated By"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/updatedByTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

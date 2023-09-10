@@ -76,6 +76,21 @@
         android:layout_marginRight="@dimen/medium_margin"
         android:layout_marginTop="@dimen/margin_30dp"
         android:textSize="@dimen/simple_content_text_size" />
+
+    <EditText
+        android:id="@+id/mobile_edt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Contact number"
+        android:text=""
+        android:inputType="number"
+        android:maxLength="10"
+        android:digits="@string/mobile_digit"
+        android:padding="@dimen/medium_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:textSize="@dimen/simple_content_text_size" />
     <TextView
         android:padding="10dp"
         android:id="@+id/input_texts"

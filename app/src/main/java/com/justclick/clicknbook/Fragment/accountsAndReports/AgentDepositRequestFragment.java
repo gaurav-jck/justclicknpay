@@ -73,10 +73,6 @@ import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
-/**
- * Created by Lenovo on 03/28/2017.
- */
-
 public class AgentDepositRequestFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private final int REQUEST_AMOUNT=1, MY_PERMISSIONS_REQUEST_STORAGE=2, REQUEST_IMAGE_CAPTURE = 1, REQUEST_IMAGE_GALLERY = 1;
     private final int VOLLEY_TIMEOUT=120000;
@@ -435,99 +431,6 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
         return image;
     }
 
-
-    private void dispatchTakePictureIntent1() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
-            // Create the File where the photo should go
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-//                Uri photoURI = FileProvider.getUriForFile(context,
-//                        "com.example.android.fileprovider",
-//                        photoFile);
-                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile.getAbsolutePath());
-                AgentDepositRequestFragment.this.startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
-    /**
-     * Start the camera by dispatching a camera intent.
-     */
-    protected void dispatchTakePictureIntent2() {
-
-        // Check if there is a camera.
-        Context context = getActivity();
-        PackageManager packageManager = context.getPackageManager();
-        if(packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA) == false){
-            Toast.makeText(getActivity(), "This device does not have a camera.", Toast.LENGTH_SHORT)
-                    .show();
-            return;
-        }
-
-        // Camera exists? Then proceed...
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        // Ensure that there's a camera activity to handle the intent
-        if (takePictureIntent.resolveActivity(context.getPackageManager()) != null) {
-            // Create the File where the photo should go.
-            // If you don't do this, you may get a crash in some devices.
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-                // Error occurred while creating the File
-                Toast toast = Toast.makeText(context, "There was a problem saving the photo...", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-            // Continue only if the File was successfully created
-            if (photoFile != null) {
-                Uri fileUri = Uri.fromFile(photoFile);
-//                activity.setCapturedImageURI(fileUri);
-//                activity.setCurrentPhotoPath(fileUri.getPath());
-//                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT,
-//                        activity.getCapturedImageURI());
-                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-            }
-        }
-    }
-    private void galleryAddPic() {
-        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        File f = new File(currentPhotoPath);
-        Uri contentUri = Uri.fromFile(f);
-        mediaScanIntent.setData(contentUri);
-        context.sendBroadcast(mediaScanIntent);
-    }
-    private void setPic() {
-        // Get the dimensions of the View
-        int targetW = imageFile.getWidth();
-        int targetH = imageFile.getHeight();
-
-        // Get the dimensions of the bitmap
-        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        // Determine how much to scale down the image
-        int scaleFactor = Math.min(photoW/targetW, photoH/targetH);
-
-        // Decode the image file into a Bitmap sized to fill the View
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-
-        Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath, bmOptions);
-        imageFile.setImageBitmap(bitmap);
-    }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -568,58 +471,10 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
                     Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
                 }
             }
-           /*BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                Bitmap bitmap=BitmapFactory.decodeFile(imagepath, bmOptions);
-                imageFile.setImageBitmap(bitmap);*/
-
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 0, baos);
-//                byte[] imageBytes = baos.toByteArray();
-//                encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-
-               /* int compressUnit=100;
-                boolean largeSize=false;
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, compressUnit, baos);
-                byte[] imageBytes = baos.toByteArray();
-                while(imageBytes.length>(1024*1024*4)){
-                    compressUnit=compressUnit-5;
-                    baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, compressUnit, baos);
-                    imageBytes = baos.toByteArray();
-                    if(imageBytes.length>(1024*1024*4) && compressUnit==0){
-                        Toast.makeText(context, "Image too large.", Toast.LENGTH_SHORT).show();
-                        largeSize=true;
-                        break;
-                    }
-                }
-//            File file=
-                if(!largeSize){
-//                    imageFile.setImageBitmap(bitmap);
-                    networkOutputStream = new ByteArrayOutputStream();
-                }*/
         }
         else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-    }
-    private void decodeImage(final String path) {
-        int targetW = imageFile.getWidth();
-        int targetH = imageFile.getHeight();
-
-        final BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-        bmOptions.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, bmOptions);
-        int photoW = bmOptions.outWidth;
-        int photoH = bmOptions.outHeight;
-
-        int scaleFactor = Math.min(photoW / targetW, photoH / targetH);
-
-        bmOptions.inJustDecodeBounds = false;
-        bmOptions.inSampleSize = scaleFactor;
-        bmOptions.inPurgeable = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
-        imageFile.setImageBitmap(bitmap);
     }
 
     public String getPath(Uri uri) {

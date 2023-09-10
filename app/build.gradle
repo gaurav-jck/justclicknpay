@@ -4,11 +4,11 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.justclick.clicknbook"
         minSdkVersion 21
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -30,8 +30,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 69
-            versionName "1.6.2"
+            versionCode 73
+            versionName "1.6.5"
 //            applicationIdSuffix ".qa"
 
         }
@@ -164,21 +164,21 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-//    androidTestImplementation 'androidx.test:core:1.1.0'
-    //large size library
-    //    implementation 'com.itextpdf:itextpdf:5.0.6'
-//    implementation('com.crashlytics.sdk.android:crashlytics:17.2.2@aar') {
-//        transitive = true;
-//    }
-//    implementation 'com.google.firebase:firebase-crashlytics:18.0.0'
-//added for ssl security purpose   //fino
+
+//    excel jar
+    implementation files('libs/jxl-2.6.12.jar')
+
     implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+//    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.core:core-ktx:1.2.0"
-    implementation 'com.google.android.material:material:1.4.0'
+//    implementation "androidx.core:core-ktx:1.10.1"
+//    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'

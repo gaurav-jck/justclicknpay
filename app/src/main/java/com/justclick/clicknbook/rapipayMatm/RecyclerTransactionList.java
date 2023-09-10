@@ -65,7 +65,7 @@ public class RecyclerTransactionList extends RecyclerView.Adapter<RecyclerView.V
                 myViewHolder.jckTxnId.setText(info.getJckTransactionId());
                 myViewHolder.txnAmount.setText("Rs "+info.getTxnAmount());
                 myViewHolder.bankName.setText(info.getBankName());
-                myViewHolder.mobile.setText( info.getMobile());
+                myViewHolder.mobile.setText( "M. "+info.getMobile());
                 myViewHolder.ifsc.setVisibility(View.GONE);
                 myViewHolder.account.setText("Ac no. "+info.getAccountNo());
                 myViewHolder.date.setText( info.getCreatedDate());
@@ -77,11 +77,11 @@ public class RecyclerTransactionList extends RecyclerView.Adapter<RecyclerView.V
                 }else {
                     myViewHolder.bankName.setVisibility(View.VISIBLE);
                 }
-              /*  if(info.getMobile()==null || info.getMobile().length()==0){
+                if(info.getMobile()==null || info.getMobile().length()==0){
                     myViewHolder.mobile.setVisibility(View.GONE);
                 }else {
                     myViewHolder.mobile.setVisibility(View.VISIBLE);
-                }*/
+                }
                 if(info.getAccountNo()==null || info.getAccountNo().length()==0){
                     myViewHolder.account.setVisibility(View.GONE);
                 }else {

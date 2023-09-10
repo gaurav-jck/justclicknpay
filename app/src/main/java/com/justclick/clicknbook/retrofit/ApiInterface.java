@@ -178,6 +178,9 @@ public interface ApiInterface {
     @POST("MobileServices.svc/{methodName}")
     Call<DepositReportListModel> getDepositReportListPost(@Path("methodName") String method, @Body Object data);
 
+    @POST("apiAccounts/Accounts/{methodName}")
+    Call<ResponseBody> accountStmtPost(@Path("methodName") String method, @Body Object data);
+
 
     //Rbl Services
 

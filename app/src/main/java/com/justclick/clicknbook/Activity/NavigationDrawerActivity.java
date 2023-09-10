@@ -55,6 +55,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminDepositReportFragment;
 import com.justclick.clicknbook.Fragment.AgentChattingListFragment;
@@ -70,7 +72,6 @@ import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.cashout.SenderDetailFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
-import com.justclick.clicknbook.Fragment.flight.FlightSearchFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.flights.fragments.PlacesSearch;
 import com.justclick.clicknbook.Fragment.flights.responseModel.FlightCityModel;
@@ -82,13 +83,11 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.AirCancellationListF
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirRefundReportFragment;
 import com.justclick.clicknbook.Fragment.BalanceCheckFragment;
 import com.justclick.clicknbook.Fragment.HomeFragment;
-import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
-import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
@@ -99,7 +98,6 @@ import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
-import com.justclick.clicknbook.Fragment.train.TrainPnrSearchFragment;
 import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
 import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
@@ -121,7 +119,6 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
-import com.justclick.clicknbook.rapipayMatm.RapipayFragment;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
 import com.justclick.clicknbook.requestmodels.CommonRequestModel;
 import com.justclick.clicknbook.utils.CodeEnum;
@@ -296,7 +293,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         mobileFragmentNew=new RechargeMainPagerFragment();
         agentSearchFragment =new AgentSearchFragment();
         agentCreditRequestFragment =new AgentCreditRequestFragment();
-        agentDepositRequestFragment =new AgentDepositRequestFragment();
+        agentDepositRequestFragment =new AgentDepositRequestFragmentNew();
         agentChattingListFragment =new AgentChattingListFragment();
         trainPnrCheckFragment =new TrainBookingCheckFragment();
         homeFragment =new HomeFragment();
@@ -505,6 +502,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TransactionListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.AccountStatement:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new AccountStatementListFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.LIC:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new LicFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -608,6 +609,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.UtilityList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.CreditCardList:
+                return R.drawable.ic_icon_list_view;
+            case MenuCodes.AccountStatement:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.TrainBookingList:
                 return R.drawable.ic_icon_list_view;
@@ -948,6 +951,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         ccList.SubMenu=MenuCodes.CreditCardList;
                         ccList.SubMenuCode=MenuCodes.CreditCardList;
                         subMenuArrayList.add(ccList);
+                    }else if(loginModel.DataList.get(i).subMenu.get(j).SubMenuCode.equals(MenuCodes.AccountStatement)){
+                        loginModel.DataList.get(i).subMenu.get(j).SubMenu="Account\nStatement";
                     }
                     subMenuArrayList.add(loginModel.DataList.get(i).subMenu.get(j));
                 }

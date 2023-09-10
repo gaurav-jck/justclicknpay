@@ -55,6 +55,7 @@ public class MainMatmFragment : Fragment() {
     val ret="www.justclicknpay.in"
     var agentCode:String?=null
     var mobile:String?=null
+    var customerMobile:String?=null
     protected var btAdapter: BluetoothAdapter? = null
     protected val REQUEST_BLUETOOTH = 101
     var transactionType: String? = null
@@ -170,8 +171,11 @@ public class MainMatmFragment : Fragment() {
         transactionType = CASH_WITH
         view.btn_submit_aeps.setOnClickListener{
             Common.preventFrequentClick(view.btn_submit_aeps)
+            customerMobile=view.mobile_edt.text.toString()
             if(transactionType.equals(CASH_WITH) && view.input_amount.text.toString().isEmpty()){
                 Toast.makeText(activity, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
+            }else if(customerMobile!!.length<10){
+                Toast.makeText(activity, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show()
             }else{
                 Common.hideSoftKeyboard(activity)
                 initiateMatmTxn(WITH)
@@ -276,6 +280,7 @@ public class MainMatmFragment : Fragment() {
         val request = InitiateMatmTxnRequest()
         agentCode = loginModel.Data.DoneCardUser
         mobile = loginModel.Data.Mobile
+        request.setMobile(customerMobile)
         request.agentCode = agentCode    // uncomment this
 //        request.agentCode = "JC0A42217"
 //        request.agentCode = "JC0A36575"

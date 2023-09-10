@@ -86,10 +86,66 @@
             android:orientation="vertical"
             android:background="@color/white">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginRight="@dimen/margin_2dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/logo1"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/irctc_rail"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/logo2"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.1"
+                    android:src="@drawable/irctc_azadi"
+                    android:layout_toRightOf="@+id/logo1"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/logo_app"
+                    android:layout_width="90dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.1"
+                    android:src="@drawable/app_logo"
+                    android:layout_centerHorizontal="true"/>
+
+                <ImageView
+                    android:id="@+id/logo3"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.1"
+                    android:src="@drawable/irctc_g20_logo"
+                    android:layout_toLeftOf="@+id/logo4"
+                    android:layout_centerVertical="true"/>
+
+                <ImageView
+                    android:id="@+id/logo4"
+                    android:layout_width="45dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1.1"
+                    android:src="@drawable/irctc_logo"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginTop="@dimen/margin_2dp"
                 android:layout_marginLeft="@dimen/small_margin"
                 android:layout_marginRight="@dimen/small_margin"
                 >
@@ -100,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/small_margin"
-                    android:text="Pnr : 121345"
+                    android:text="Pnr : "
                     android:textAllCaps="true"
                     android:textColor="@color/dark_blue_color"
                     android:textSize="@dimen/simple_content_text_size"

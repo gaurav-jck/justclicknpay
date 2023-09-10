@@ -25,6 +25,7 @@ public class ApiConstants
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
 //    public static final String BASE_URL_PAYOUT="https://uatcashout.justclicknpay.com/";  //test payout url
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
+    public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
     public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //live train url
 //    public static final String BASE_URL_TRAIN="https://Fantasy.justclicknpay.com/";  //test train url
         public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
@@ -84,6 +85,10 @@ public class ApiConstants
     public static final String AirRefundReport ="AirRefundReport";
     public static final String AirSalesReport ="AirSalesReport";
     public static final String TRAVELSESSION ="TRAVELSESSION";
+
+//    Account Stmt
+    public static final String TransactionType ="TransactionType";
+    public static final String AccountStatementList ="AccountStatementList";
 
     //Sales Report
     public static final String SalesAgentDetail ="SalesAgentDetails";

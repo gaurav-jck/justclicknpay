@@ -16,6 +16,8 @@ import android.widget.ViewFlipper;
 
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminDepositReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentCreditListFragment;
@@ -28,22 +30,18 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.AirRefundReportFragm
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirSalesReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragment;
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
-import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
-import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
-import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
-import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
@@ -52,8 +50,6 @@ import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
-import com.justclick.clicknbook.Fragment.train.TrainPnrSearchFragment;
-import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
@@ -62,7 +58,6 @@ import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
-import com.justclick.clicknbook.rapipayMatm.RapipayFragment;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.squareup.picasso.Picasso;
 
@@ -192,7 +187,7 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.AgentDepositRequestFragment://7
                 ((NavigationDrawerActivity)context).
-                        replaceFragmentWithBackStack(new AgentDepositRequestFragment());
+                        replaceFragmentWithBackStack(new AgentDepositRequestFragmentNew());
                 break;
             case MenuCodes.MobileFragment://8
                 ((NavigationDrawerActivity)context).
@@ -277,6 +272,9 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.SalesAccountStatement://23
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new SalesAccountListFragment());
+                break;
+            case MenuCodes.AccountStatement://23
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new AccountStatementListFragment());
                 break;
             case MenuCodes.ApproveAgent://24
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(AgentVerificationFragment.newInstance());
