@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_credit_card" />
-                            <entry key="sourceFile" value="C:\Users\admin\Downloads\flight_icon.svg" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="icons8_graph_report_64" />
+                            <entry key="sourceFile" value="C:\Users\admin\Downloads\icons8-graph-report-64.svg" />
                           </map>
                         </option>
                       </PersistentState>

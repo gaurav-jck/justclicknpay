@@ -74,7 +74,8 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
     private LinearLayoutManager layoutManager;
     private LinearLayout airLin,dmtLin,mobileLin,railLin,busLin,hotelLin,jctMoneyLin,lin;
     private ImageView airImage,dmtImage,mobileImage,railImage,busImage,hotelImage,jctMoneyImage;
-    private TextView startDateTv,tap,totalAgentTv,totalRailTv,totalAirTv,totalDmtTv,totalMobileTv,totalTv;
+    private TextView startDateTv,tap,totalAgentTv,totalRailTv,totalAirTv,totalDmtTv,totalMobileTv,totalTv,
+            totalAepsTv, totalMatmTv, totalUtilityTv;
     private RelativeLayout filter_image_rel;
     private Dialog filterDialog,openAgentFilterDialog;
     private Calendar startDateCalendar, endDateCalendar;
@@ -163,6 +164,9 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
         totalAirTv= (TextView) view.findViewById(R.id.totalAirTv);
         totalDmtTv= (TextView) view.findViewById(R.id.totalDmtTv);
         totalMobileTv= (TextView) view.findViewById(R.id.totalMobileTv);
+        totalAepsTv= (TextView) view.findViewById(R.id.totalAepsTv);
+        totalMatmTv= (TextView) view.findViewById(R.id.totalMatmTv);
+        totalUtilityTv= (TextView) view.findViewById(R.id.totalUtilityTv);
         totalTv= (TextView) view.findViewById(R.id.totalTv);
         lin= (LinearLayout) view.findViewById(R.id.lin);
 
@@ -565,6 +569,9 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                             totalAirTv.setText(agentModel.AirTotal);
                             totalDmtTv.setText(agentModel.DMTTotal);
                             totalMobileTv.setText(agentModel.MobileTotal);
+                            totalAepsTv.setText(agentModel.AepsTotal);
+                            totalMatmTv.setText(agentModel.MatmTotal);
+                            totalUtilityTv.setText(agentModel.UtilityTotap);
                             totalTv.setText(agentModel.Totalsales);
                             }
                             else {

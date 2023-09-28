@@ -70,6 +70,9 @@ public class NetSalesReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 vh.dmtTotalTv.setText(arrayList.get(position).DMTPay);
                 vh.railTotalTv.setText(arrayList.get(position).RailPay);
                 vh.mobileTotalTv.setText(arrayList.get(position).MobilePay);
+                vh.aepsTotalTv.setText(arrayList.get(position).Aepspay);
+                vh.matmTotalTv.setText(arrayList.get(position).Matmpay);
+                vh.utilityTotalTv.setText(arrayList.get(position).Utlitiypay);
                 vh.totalTv.setText(arrayList.get(position).TotalPay);
                 Typeface face = Common.listAgencyNameTypeFace(context);
                 vh.agencyNameTv.setTypeface(face);
@@ -107,7 +110,8 @@ public class NetSalesReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView agencyNameTv,airTotalTv,dmtTotalTv,railTotalTv,
-                mobileTotalTv,totalTv,totalMobileTv,totalAgentTv,totalRailTv,totalDmtTv,totalAirTv;
+                mobileTotalTv,totalTv,totalMobileTv,totalAgentTv,totalRailTv,totalDmtTv,totalAirTv,
+                aepsTotalTv, matmTotalTv, utilityTotalTv;
         public MyViewHolder(View view) {
             super(view);
             agencyNameTv = (TextView) view.findViewById(R.id.agencyNameTv);
@@ -120,6 +124,9 @@ public class NetSalesReportAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             totalAirTv = (TextView) view.findViewById(R.id.totalAirTv);
             totalDmtTv = (TextView) view.findViewById(R.id.totalDmtTv);
             totalMobileTv = (TextView) view.findViewById(R.id.totalMobileTv);
+            aepsTotalTv = (TextView) view.findViewById(R.id.aepsTotalTv);
+            matmTotalTv = (TextView) view.findViewById(R.id.matmTotalTv);
+            utilityTotalTv = (TextView) view.findViewById(R.id.utilityTotalTv);
             totalTv = (TextView) view.findViewById(R.id.totalTv);
         }
     }

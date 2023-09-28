@@ -25,10 +25,25 @@
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:text="MATM Txn List"
-            android:textSize="@dimen/title_text_size"
             android:textColor="@color/color_white"
-            android:layout_centerInParent="true"/>
+            android:layout_toRightOf="@id/back_arrow"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <TextView
+            android:id="@+id/exportExcelTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="Export To Excel"
+            android:textColor="@color/white"
+            android:padding="@dimen/margin_3dp"
+            android:background="@drawable/edittext_border_hotel"
+            android:textSize="@dimen/text_size_14sp"
+            />
 
     </RelativeLayout>
 

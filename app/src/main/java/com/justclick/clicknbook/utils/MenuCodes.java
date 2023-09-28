@@ -102,7 +102,8 @@ public class MenuCodes {
 
   public static final String MenuCodesSales="SalesAccStatement,NetSalesReport,ApproveAgent";
   public static final String MenuCodesDistributor="UpdateCredit,DepositList,CreditList";
-  public static final String ImplementedMenuCodes="JCTMoneyList"+","+MenuCodesDistributor+","+MenuCodesSales+","+AccountStatement;    //,Top-UpDetails,BusBookingList
+  public static final String ImplementedMenuCodes="JCTMoneyList"+","+MenuCodesDistributor+","+MenuCodesSales+","+AccountStatement
+          +","+AirBookingList;    //,Top-UpDetails,BusBookingList
 
 //    public static final String ImplementedMenuCodes="";
 

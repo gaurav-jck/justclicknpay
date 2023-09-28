@@ -111,6 +111,7 @@ public class TrainWebViewFragment extends Fragment {
             } else if(url.contains(responseUrl)){
                 getBookingData();
             }else {
+//                return true;
                 view.loadUrl(url);
             }
             return true;

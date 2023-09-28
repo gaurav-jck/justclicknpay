@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt
+package com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist
 
 import android.Manifest
 import android.app.DatePickerDialog
@@ -32,6 +32,7 @@ import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import jxl.Workbook
@@ -49,13 +50,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class AccountStatementListFragment : Fragment(), View.OnClickListener {
+class AirBookingListFragment : Fragment(), View.OnClickListener {
     private var mView:View?=null
     private var recyclerView: RecyclerView? = null
     private var startDateToSend: String? = null
     private var endDateToSend: String? = null
-    private var arrayList: ArrayList<AccountStmtResponse.accountStatementList>? = null
-    private var listAdapter: AccountStatementAdapter? = null
+    private var arrayList: ArrayList<AirBookingListResponse.travelsListDetail>? = null
+    private var listAdapter: AirBookingListAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
     private var startDateTv: TextView? = null
     private var noRecordTv: TextView? = null
@@ -75,14 +76,19 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     private var dateFormat: SimpleDateFormat? = null
     private var dayFormat: SimpleDateFormat? = null
     private var dateToServerFormat: SimpleDateFormat? = null
-    private var accountStmtRequest: AccountStmtRequest? = null
+    private var bookingListRequest: AirBookingListRequest? = null
     private var loginModel: LoginModel? = null
     private var toolBarHideFromFragmentListener:ToolBarHideFromFragmentListener?=null
     private var listFilterDialog:Dialog?=null
-    private var txnTypeArray:Array<String?> = emptyArray()
-    private var confirmationId=""
-    private var transactionType="1"
-    private var updatedBy=""
+    private var orderNo=""
+    private var refId=""
+    private var paxName=""
+    private var paxMobile=""
+    private var pageStart = 1
+    private var Length = 10
+    private var totalCount = 0
+    private val SHOW_PROGRESS = true
+    private val NO_PROGRESS = false
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -92,7 +98,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arrayList = ArrayList()
-        accountStmtRequest = AccountStmtRequest()
+        bookingListRequest = AirBookingListRequest()
         loginModel = LoginModel()
         loginModel = MyPreferences.getLoginData(loginModel, context)
         initializeDates()
@@ -140,18 +146,20 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             noRecordTv = mView!!.findViewById(R.id.noRecordTv)
             noRecordTv!!.setVisibility(View.GONE)
 
-            mView!!.findViewById<TextView>(R.id.titleTv).setText("Account Statement")
+            mView!!.findViewById<TextView>(R.id.titleTv).setText("Air Booking List")
             mView!!.findViewById<View>(R.id.lin_dateFilter).setOnClickListener(this)
             mView!!.findViewById<View>(R.id.linFilter).setOnClickListener(this)
             mView!!.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
-            mView!!.findViewById<View>(R.id.exportExcelTv).setOnClickListener(this);
+            mView!!.findViewById<View>(R.id.exportExcelTv).setOnClickListener(this)
+            mView!!.findViewById<View>(R.id.exportExcelTv).visibility=View.GONE
+
 
             //initialize date values
             setDates()
 
 //        addValueToModel();
             listAdapter =
-                AccountStatementAdapter(
+                AirBookingListAdapter(
                     context,
                     { view, list, data, position ->
                         when (view.id) {
@@ -170,13 +178,37 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             layoutManager = LinearLayoutManager(context)
             mView!!.recyclerView!!.setLayoutManager(layoutManager)
             mView!!.recyclerView.setAdapter(listAdapter)
-
-            getTxnType()
-            getAccountStmt()
+            mView!!.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
+//            getTxnType()
+            getBookingList(SHOW_PROGRESS)
         }
 
         return mView
     }
+
+    //    https://medium.com/@etiennelawlor/pagination-with-recyclerview-1cb7e66a502b
+    private val recyclerViewOnScrollListener: RecyclerView.OnScrollListener =
+        object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val visibleItemCount = layoutManager!!.childCount
+                val totalItemCount = layoutManager!!.itemCount
+                val firstVisibleItemPosition = layoutManager!!.findFirstVisibleItemPosition()
+
+//            if (!isLoading && !isLastPage) {
+                if (visibleItemCount + firstVisibleItemPosition >= totalItemCount && firstVisibleItemPosition >= 0 && totalItemCount <= totalCount && dy > 0) {
+                    if ((pageStart*Length) <= totalItemCount) {
+                        pageStart += 1
+                        getBookingList(NO_PROGRESS)
+                    }
+                }
+                //            }
+            }
+        }
 
     private fun openFilterDialog() {
         filterDialog = Dialog(requireContext())
@@ -197,48 +229,34 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         filterDialog!!.show()
     }
 
-    fun getTxnType() {
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface::class.java)
-        val call = apiService.accountStmtPost(ApiConstants.TransactionType, "")
-        NetworkCall().callService(call,context,false
-        ) { response, responseCode ->
-            if (response != null && responseCode==200) {
-                val txnTypeResponse = Gson().fromJson(response!!.string(), TxnTypeResponse::class.java)
-                if(txnTypeResponse!=null){
-                    txnTypeArray= arrayOfNulls(txnTypeResponse.ttype.size+1)
-                    txnTypeArray[0]="All"
-                    for(i in 1..txnTypeResponse.ttype.size){
-                        txnTypeArray[i]=txnTypeResponse.ttype.get(i-1)
-                    }
-                }
-            } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+    fun getBookingList(progress: Boolean) {
+        bookingListRequest!!.FromDate=startDateToSend
+        bookingListRequest!!.UptoDate=endDateToSend
 
-    fun getAccountStmt() {
-        accountStmtRequest!!.FromDate=startDateToSend
-        accountStmtRequest!!.UptoDate=endDateToSend
-        accountStmtRequest!!.UserType=loginModel!!.Data.UserType
-//        accountStmtRequest!!.UserType="OOU"
-        accountStmtRequest!!.TransactionType=transactionType
-        accountStmtRequest!!.AgentID=loginModel!!.Data.UserId
-        accountStmtRequest!!.RefId=confirmationId
-        accountStmtRequest!!.RefAgency=loginModel!!.Data.RefAgency
-        accountStmtRequest!!.JUpdatedBy=updatedBy
-        accountStmtRequest!!.distributordid=""
-        if(accountStmtRequest!!.UserType.equals("O") || accountStmtRequest!!.UserType.equals("OOU")){
-            accountStmtRequest!!.Donecarduser=""
+        bookingListRequest!!.Distributor=""
+        bookingListRequest!!.orderno=orderNo
+        bookingListRequest!!.reforderid=refId
+        bookingListRequest!!.PaxName=paxName
+        bookingListRequest!!.PaxMobileNumber=paxMobile
+        bookingListRequest!!.TravelType=""
+        bookingListRequest!!.TripType=""
+        bookingListRequest!!.BookingType=""
+        bookingListRequest!!.Length=Length
+//        bookingListRequest!!.RowCount=""
+//        bookingListRequest!!.Result="0"
+        bookingListRequest!!.Start=pageStart
+
+        if(loginModel!!.Data.UserType.equals("O") || loginModel!!.Data.UserType.equals("OOU")){
+            bookingListRequest!!.donecarduser=""
         }else{
-            accountStmtRequest!!.Donecarduser=loginModel!!.Data.DoneCardUser
+            bookingListRequest!!.donecarduser=loginModel!!.Data.DoneCardUser
         }
 
-        val json = Gson().toJson(accountStmtRequest)
+        val json = Gson().toJson(bookingListRequest)
 
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface::class.java)
-        val call = apiService.accountStmtPost(ApiConstants.AccountStatementList, accountStmtRequest)
-        NetworkCall().callService(call,context,true
+        val call = apiService.airBookingList(ApiConstants.TravelBookingList, bookingListRequest)
+        NetworkCall().callService(call,context,progress
         ) { response, responseCode ->
             if (response != null) {
                 responseHandler(response)
@@ -250,18 +268,18 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 
     private fun responseHandler(response: ResponseBody) {
         try {
-            val commonResponse = Gson().fromJson(response.string(), AccountStmtResponse::class.java)
+            val commonResponse = Gson().fromJson(response.string(), AirBookingListResponse::class.java)
             if (commonResponse != null) {
-                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
-                    noRecordTv!!.visibility = View.GONE
-                    arrayList!!.clear()
-                    arrayList!!.addAll(commonResponse.accountStatementList)
-//                    totalPageCount = commonResponse.totalCount
-//                    listAdapter!!.setCount(totalPageCount)
-                    listAdapter!!.notifyDataSetChanged()
-                    if (commonResponse.accountStatementList != null &&
-                        commonResponse.accountStatementList.size == 0) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true) || commonResponse.travelsListDetail != null) {
+                    if (commonResponse.travelsListDetail.size == 0) {
+                        totalCount=0
                         noRecordTv!!.visibility = View.VISIBLE
+                    }else{
+                        noRecordTv!!.visibility = View.GONE
+                        totalCount=commonResponse.totalCount
+                        listAdapter!!.setCount(totalCount)
+                        arrayList!!.addAll(commonResponse.travelsListDetail)
+                        listAdapter!!.notifyDataSetChanged()
                     }
                 }else {
                     noRecordTv!!.visibility = View.VISIBLE
@@ -305,10 +323,10 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                         dayFormat!!.format(endDateCalendar!!.time) + " " +
                         dateFormat!!.format(endDateCalendar!!.time)
 
-                accountStmtRequest!!.FromDate=startDateToSend
-                accountStmtRequest!!.UptoDate=endDateToSend
-
-                getAccountStmt()
+//                bookingListRequest!!.FromDate=startDateToSend
+//                bookingListRequest!!.UptoDate=endDateToSend
+                pageStart=1
+                getBookingList(SHOW_PROGRESS)
             }
             R.id.startDateLinear -> try {
                 openStartDatePicker()
@@ -379,9 +397,6 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-//    https://stackoverflow.com/questions/43510418/generate-excel-from-android-listview
-//    https://medium.com/geekculture/creating-an-excel-in-android-cd9c22198619
-
     private fun createExcelSheet() {
         val fileName = "jck_accountStmt" + System.currentTimeMillis() + ".xls"
         var myFile= File(requireContext().getExternalFilesDir(null)!!.path, fileName)
@@ -410,16 +425,16 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             for(i in 0 until arrayList!!.size){
                 var r=i+1
                 labelList.add(Label(0, r, r.toString()))
-                labelList.add(Label(1, r, arrayList!!.get(i).referenceid))
-                labelList.add(Label(2, r, ""))
-                labelList.add(Label(3, r, arrayList!!.get(i).txndate))
-                labelList.add(Label(4, r, arrayList!!.get(i).txnAMTD))
-                labelList.add(Label(5, r, arrayList!!.get(i).txnAMTC))
-                labelList.add(Label(6, r, arrayList!!.get(i).balance))
-                labelList.add(Label(7, r, arrayList!!.get(i).transactionType))
-                labelList.add(Label(8, r, arrayList!!.get(i).currentCreditAmount))
-                labelList.add(Label(9, r, arrayList!!.get(i).remarks))
-                labelList.add(Label(10, r, arrayList!!.get(i).updatedBy))
+//                labelList.add(Label(1, r, arrayList!!.get(i).referenceid))
+//                labelList.add(Label(2, r, ""))
+//                labelList.add(Label(3, r, arrayList!!.get(i).txndate))
+//                labelList.add(Label(4, r, arrayList!!.get(i).txnAMTD))
+//                labelList.add(Label(5, r, arrayList!!.get(i).txnAMTC))
+//                labelList.add(Label(6, r, arrayList!!.get(i).balance))
+//                labelList.add(Label(7, r, arrayList!!.get(i).transactionType))
+//                labelList.add(Label(8, r, arrayList!!.get(i).currentCreditAmount))
+//                labelList.add(Label(9, r, arrayList!!.get(i).remarks))
+//                labelList.add(Label(10, r, arrayList!!.get(i).updatedBy))
             }
 
             try {
@@ -482,37 +497,26 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 //        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         listFilterDialog = Dialog(requireContext())
         listFilterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        listFilterDialog!!.setContentView(R.layout.account_stmt_filter)
-        val typeSpinner = listFilterDialog!!.findViewById<Spinner>(R.id.typeSpinner)
-        val confirmIdEdt = listFilterDialog!!.findViewById<EditText>(R.id.confirmIdEdt)
-        val updatedByEdt = listFilterDialog!!.findViewById<EditText>(R.id.updatedByEdt)
+        listFilterDialog!!.setContentView(R.layout.air_booking_filter)
 
-        val adapter = ArrayAdapter(requireContext(),
-            R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, txnTypeArray)
-        adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
-        typeSpinner.adapter = adapter
-//        typeSpinner.setSelection(txnStatusPosition)
-        typeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long) {
-                if (position == 0) {
-                    transactionType="1"
-                } else {
-                    transactionType=txnTypeArray.get(position)!!
-                }
-            }
+        val orderNoEdt = listFilterDialog!!.findViewById<EditText>(R.id.orderNoEdt)
+        val refIdEdt = listFilterDialog!!.findViewById<EditText>(R.id.refIdEdt)
+        val nameEdt = listFilterDialog!!.findViewById<EditText>(R.id.nameEdt)
+        val mobileEdt = listFilterDialog!!.findViewById<EditText>(R.id.mobileEdt)
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
         listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
-            typeSpinner.setSelection(0)
-            confirmIdEdt.setText("")
-            updatedByEdt.setText("")
+            orderNoEdt.setText("")
+            refIdEdt.setText("")
+            nameEdt.setText("")
+            mobileEdt.setText("")
         }
         listFilterDialog!!.findViewById<View>(R.id.applyTv).setOnClickListener {
             listFilterDialog!!.dismiss()
-            confirmationId = confirmIdEdt.text.toString().trim { it <= ' ' }
-            updatedBy = updatedByEdt.text.toString().trim { it <= ' ' }
+            orderNo = orderNoEdt.text.toString().trim { it <= ' ' }
+            refId = refIdEdt.text.toString().trim { it <= ' ' }
+            paxName = nameEdt.text.toString().trim { it <= ' ' }
+            paxMobile = mobileEdt.text.toString().trim { it <= ' ' }
             applyFilter()
         }
 
@@ -525,19 +529,8 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     private fun applyFilter() {
         arrayList!!.clear()
         listAdapter!!.notifyDataSetChanged()
-        //set date to fragment
-        startDateTv!!.text = dayFormat!!.format(startDateCalendar!!.time) + " " +
-                dateFormat!!.format(startDateCalendar!!.time) + "   -   " +
-                dayFormat!!.format(endDateCalendar!!.time) + " " +
-                dateFormat!!.format(endDateCalendar!!.time)
-        getAccountStmt()
-    }
-
-    private fun setSpinnerAdapter(data: Array<String>): ArrayAdapter<String> {
-        val adapter = ArrayAdapter(requireContext(),
-            R.layout.mobile_operator_spinner_item, R.id.operator_tv, data)
-        adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
-        return adapter
+        pageStart=1
+        getBookingList(SHOW_PROGRESS)
     }
 
     private fun openStartDatePicker() {

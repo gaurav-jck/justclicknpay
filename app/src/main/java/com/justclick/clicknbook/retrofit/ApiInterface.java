@@ -292,6 +292,8 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getHotelTransaction(@Url String url, @Header("token") String token);
 
+    @POST("api/Payments/{methodName}")
+    Call<ResponseBody> airBookingList(@Path("methodName") String method, @Body Object data);
 
     // JctMoney Service
     @POST("api/JCTMoney/{methodName}")

@@ -17,13 +17,13 @@ import android.widget.ViewFlipper;
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminDepositReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentCreditListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentCreditRequestFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositListFragment;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentSearchFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirCancellationListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirRefundReportFragment;
@@ -262,6 +262,10 @@ public class HomeFragment extends Fragment {
             case MenuCodes.CreditCardList://20
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new TransactionListFragment());
+                break;
+            case MenuCodes.AirBookingList:
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new AirBookingListFragment());
                 break;
             case MenuCodes.TopUpDetails://21
                 ((NavigationDrawerActivity)context).

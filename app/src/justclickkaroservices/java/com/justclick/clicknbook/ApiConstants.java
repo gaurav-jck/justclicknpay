@@ -9,18 +9,15 @@ public class ApiConstants
     public static final String GOOGLE_PLAY_STORE_URL ="https://play.google.com/store/apps/details?id=com.justclicknpay.justclickkaroservices";
     //    public static final String BASE_URL_LIVE_OLD ="https://ms.justclickkaro.com/";
     public static final String BASE_URL_TEST="http://uatms.justclicknpay.com/";
-    public static final String BASE_URL_TEST2="http://uatms.justclicknpay.com:116/";
-    public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";
+    public static final String BASE_URL_TEST2="http://150.242.14.48:812/";
+    public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
     public static final String BASE_URL=BASE_URL_LIVE;
-//    public static final String BASE_URL_JCT_MONEY="http://uatmb.justclicktravels.com/";  //test jct money url
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
 //    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //test insurance url
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
-//    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //live insurance url
     public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
 //    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
-    public static final String BASE_URL_PAYOUT_OLD="https://payout.justclicknpay.com/";  //live payout url
 //    public static final String BASE_URL_PAYOUT="http://wluatcashout.justclicknpay.com/";  //uat payout url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
 //    public static final String BASE_URL_PAYOUT="https://uatcashout.justclicknpay.com/";  //test payout url
@@ -160,6 +157,7 @@ public class ApiConstants
     public static final String FARE_QUOTE = "fareQuote";
     public static final String ADD_CART = "cart";
     public static final String FLIGHT_HOLD = "book";
+    public static final String TravelBookingList = "TravelBookingList";
     public static final String CoPassengers =ApiConstants.BASE_URL_LOGIN+"user/CoPassengers";
 
     //JctMoney services

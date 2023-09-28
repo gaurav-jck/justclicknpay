@@ -55,10 +55,11 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:text="Air  -"
+                    android:text="Air  :"
                     android:textStyle="bold"
                     android:textColor="@color/listItemDateColorLight"
                     android:textSize="@dimen/text_size_14sp" />
@@ -67,7 +68,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:layout_weight="1.6"
                     android:gravity="left"
                     android:paddingRight="@dimen/medium_margin"
                     android:text="100"
@@ -81,10 +82,11 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:text="DMT     -"
+                    android:text="DMT    :"
                     android:textStyle ="bold"
                     android:textColor="@color/listItemDateColorLight"
                     android:textSize="@dimen/text_size_14sp" />
@@ -93,7 +95,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:layout_weight="1.6"
                     android:gravity="left"
                     android:paddingRight="@dimen/medium_margin"
                     android:text="100"
@@ -117,10 +119,11 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:text="Rail -"
+                    android:text="Rail :"
                     android:textStyle="bold"
                     android:textColor="@color/listItemDateColorLight"
                     android:textSize="@dimen/text_size_14sp" />
@@ -129,7 +132,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
+                    android:layout_weight="1.6"
                     android:gravity="left"
                     android:paddingRight="@dimen/medium_margin"
                     android:text="100"
@@ -143,15 +146,144 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:layout_gravity="center_vertical"
-                    android:text="Mobile -"
+                    android:text="Mobile :"
                     android:textStyle="bold"
                     android:textColor="@color/listItemDateColorLight"
                     android:textSize="@dimen/text_size_14sp" />
                 <TextView
                     android:id="@+id/mobileTotalTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.6"
+                    android:gravity="left"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:text="100"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="AEPS :"
+                    android:textStyle="bold"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+                <TextView
+                    android:id="@+id/aepsTotalTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.6"
+                    android:gravity="left"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:text="100"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="MATM  :"
+                    android:textStyle="bold"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+                <TextView
+                    android:id="@+id/matmTotalTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.6"
+                    android:gravity="left"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:text="100"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="Utility :"
+                    android:textStyle="bold"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+                <TextView
+                    android:id="@+id/utilityTotalTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.6"
+                    android:gravity="left"
+                    android:paddingRight="@dimen/medium_margin"
+                    android:text="100"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="Pancard -"
+                    android:textStyle="bold"
+                    android:textColor="@color/listItemDateColorLight"
+                    android:textSize="@dimen/text_size_14sp" />
+                <TextView
+                    android:id="@+id/pancardTotalTv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"

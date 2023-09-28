@@ -119,8 +119,8 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     private final String MANTRA = "MANTRA", STARTEK = "STARTEK", MORPHO = "MORPHO", ADHAR_UID = "uid", VIRTUAL_ID = "vid";
     private final String MANTRA_PACKAGE = "com.mantra.rdservice", STARTEK_PACKAGE = "com.acpl.registersdk",
             MORPHO_PACKAGE = "com.scl.rdservice";
-    private final int BAL_ENQ=1,MINI_STMT=2;
-    private final int CAPTURE_REQUEST_CODE = 123, FINO_AEPS_CODE=12;
+    private final int BAL_ENQ = 1, MINI_STMT = 2;
+    private final int CAPTURE_REQUEST_CODE = 123, FINO_AEPS_CODE = 12;
     private FusedLocationProviderClient fusedLocationClient;
     private Context context;
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -130,7 +130,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     String str_aadhar, mobileNo;
     String pidDataXML = "";
     String d_type = MANTRA, adharType = ADHAR_UID;
-    int TYPE=BAL_ENQ;
+    int TYPE = BAL_ENQ;
     String URL;
     private boolean isGetAgain;
 
@@ -153,7 +153,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        URL =URLs.AepsRegister;
+        URL = URLs.AepsRegister;
 //        URL =URLs.AepsAuthenticate;
 
         // init views
@@ -176,7 +176,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         hideCapture();
         et_aadhar.setFilters(filter12);
 
-        ((RadioGroup)findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -192,7 +192,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 }
             }
         });
-        ((RadioGroup)findViewById(R.id.radio_group_adhar)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        ((RadioGroup) findViewById(R.id.radio_group_adhar)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -201,9 +201,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         aadhar_no.setHint(getResources().getString(R.string.aadharNoHint));
                         et_aadhar.setFilters(filter12);
 //                        showCapture();
-                        if(validation()){
+                        if (validation()) {
                             showCapture();
-                        }else {
+                        } else {
                             hideCapture();
                         }
                         break;
@@ -211,9 +211,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         adharType = VIRTUAL_ID;
                         aadhar_no.setHint(getResources().getString(R.string.virtualIdHint));
                         et_aadhar.setFilters(filter16);
-                        if(validation()){
+                        if (validation()) {
                             showCapture();
-                        }else {
+                        } else {
                             hideCapture();
                         }
                         break;
@@ -221,41 +221,35 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             }
         });
 
-        btn_capture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Common.preventFrequentClick(btn_capture);
-                str_aadhar = et_aadhar.getText().toString().trim();
-                mobileNo = txt_mobileno.getText().toString().trim();
-                if(Common.isMobileValid(mobileNo)){
-                    if(!isGetAgain) {
-                        GetAepsCredential.checkAepsCredential(context);
-                    }else {
-                        URL =URLs.AepsAuthenticate;
-                        captureData();
-                    }
-                }else {
-                    Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
+        btn_capture.setOnClickListener(v -> {
+            Common.preventFrequentClick(btn_capture);
+            str_aadhar = et_aadhar.getText().toString().trim();
+            mobileNo = txt_mobileno.getText().toString().trim();
+            if (Common.isMobileValid(mobileNo)) {
+                if (!isGetAgain) {
+                    GetAepsCredential.checkAepsCredential(context);
+                } else {
+                    URL = URLs.AepsAuthenticate;
+                    captureData();
                 }
+            } else {
+                Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
             }
         });
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Common.preventFrequentClick(btn_submit);
-                str_aadhar = et_aadhar.getText().toString().trim();
-                mobileNo = txt_mobileno.getText().toString().trim();
-                if(Common.isMobileValid(mobileNo)){
-                    if(!isGetAgain) {
-                        GetAepsCredential.checkAepsCredential(context);
-                    }else {
-                        URL =URLs.AepsRegister;
-                        captureData();
-                    }
-                }else {
-                    Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
+        btn_submit.setOnClickListener(v -> {
+            Common.preventFrequentClick(btn_submit);
+            str_aadhar = et_aadhar.getText().toString().trim();
+            mobileNo = txt_mobileno.getText().toString().trim();
+            if (Common.isMobileValid(mobileNo)) {
+                if (!isGetAgain) {
+                    GetAepsCredential.checkAepsCredential(context);
+                } else {
+                    URL = URLs.AepsRegister;
+                    captureData();
                 }
+            } else {
+                Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -287,10 +281,10 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                     hideCapture();
                 } else if (adharType.equals(VIRTUAL_ID) && et_aadhar.getText().toString().length() < 16) {
                     hideCapture();
-                }else{
-                    if(validation()){
+                } else {
+                    if (validation()) {
                         showCapture();
-                    }else {
+                    } else {
                         hideCapture();
                     }
                 }
@@ -305,7 +299,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     }
 
     public void captureData() {
-        isGetAgain=true;
+        isGetAgain = true;
         try {
             if (d_type.equals(STARTEK) && validation()) {
                 if (searchPackageName(STARTEK_PACKAGE)) {
@@ -345,6 +339,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         btn_submit.setBackgroundResource(R.color.gray_color);
         btn_submit.setAlpha(0.4f);
     }
+
     private void showCapture() {
         btn_capture.setEnabled(true);
         btn_capture.setTextColor(getResources().getColor(R.color.color_white));
@@ -359,7 +354,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         et_aadhar.setError(null);
     }
 
-    protected static final int REQUEST_CHECK_SETTINGS = 0x1, REQUEST_ID_MULTIPLE_PERMISSIONS=0x2;
+    protected static final int REQUEST_CHECK_SETTINGS = 0x1, REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
     public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
@@ -368,7 +363,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
             UPDATE_INTERVAL_IN_MILLISECONDS / 2;
 
-    private void checkPermissions(){
+    private void checkPermissions() {
         int permissionLocation = ContextCompat.checkSelfPermission(context,
                 android.Manifest.permission.ACCESS_FINE_LOCATION);
         List<String> listPermissionsNeeded = new ArrayList<>();
@@ -378,7 +373,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 ActivityCompat.requestPermissions(this,
                         listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
             }
-        }else{
+        } else {
             displayLocationSettingsRequest();
         }
 
@@ -394,7 +389,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         }
     }
 
-    private void  displayLocationSettingsRequest() {
+    private void displayLocationSettingsRequest() {
         mGoogleApiClient = new GoogleApiClient.Builder(context)
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
@@ -444,12 +439,12 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 //                                    Toast.LENGTH_SHORT).show();
 //                            sessionCheckMethod(true);
 //                            sendMobileTransaction();
-                            if(mCurrentLocation!=null){
+                            if (mCurrentLocation != null) {
 //                                mobileTxn();
                                 sendMobileTransaction();
-                            }else {
-                                Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
-//                                sendMobileTransaction();
+                            } else {
+//                                Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
+                                sendMobileTransaction();
                             }
                         }
                         break;
@@ -523,72 +518,75 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
     }
 
-    public class AepsTxnRequest{
-        public String AgentCode,Mode="APP", Merchant=ApiConstants.MerchantId,SessionKey,SessionRefNo,
-                Lattitude,Longitude,DeviceId,TxnType="AADHAAR",AadharNumber,PId,
-                BankIIN, BankName, Mobile, CustomerName="";
+    public class AepsTxnRequest {
+        public String AgentCode, Mode = "APP", Merchant = ApiConstants.MerchantId, SessionKey, SessionRefNo,
+                Lattitude, Longitude, DeviceId, TxnType = "AADHAAR", AadharNumber, PId,
+                BankIIN, BankName, Mobile, CustomerName = "";
     }
 
-    public class AepsResponse{
-        public String statusCode,statusMessage;
+    public class AepsResponse {
+        public String statusCode, statusMessage;
         public ArrayList<balEnQDetails> balEnqDetails;
-        public class balEnQDetails{
-            public String bankName, availableBalance, rrn, accountNumber,status,transactionId,
-                    txnAmount,agentCode,timeStamp, jckTransactionId, apiTxnId,txnType;
+
+        public class balEnQDetails {
+            public String bankName, availableBalance, rrn, accountNumber, status, transactionId,
+                    txnAmount, agentCode, timeStamp, jckTransactionId, apiTxnId, txnType;
         }
         //{"statusCode":"00","statusMessage":"Success","balEnQDetails":[{"bankName":"India Post Payment Bank","":"JC0A13387","availableBalance":"306.2","rrn":"113119689889","txnAmount":"00","":"BalanceEnquiry","":"5/11/2021 7:39:51 PM","accountNumber":"XXXXXXXX5016","status":"SUCCESS","":"MA11051TUEKJC0A13387","":"130707547032"}]}
     }
-    public class AepsMiniResponse{
-        public String statusCode,statusMessage;
+
+    public class AepsMiniResponse {
+        public String statusCode, statusMessage;
         public ArrayList<msDetails> msDetails;
-        public class msDetails{
-            public String date, txnType, amount,narration;
+
+        public class msDetails {
+            public String date, txnType, amount, narration;
         }
 //        { "statusCode": "00", "statusMessage": "Success", "msDetails": [{ "date": "06/07/2021", "txnType": "Dr", "amount": "350.00", "narration": " UPI/11873111709" }
     }
 
-    public void mobileTxn(){
-        AepsTxnRequest request=new AepsTxnRequest();
-        LoginModel loginModel=new LoginModel();
-        request.AgentCode=MyPreferences.getLoginData(loginModel,context).Data.DoneCardUser;
-        request.SessionKey=MyPreferences.getSessionKey(context);
-        request.SessionRefNo=MyPreferences.getSessionRefNo(context);
-        request.Lattitude=mCurrentLocation.getLatitude() + "";
-        request.Longitude=mCurrentLocation.getLongitude() + "";
-        request.DeviceId=Common.getDeviceId(context);
-        request.AadharNumber=str_aadhar;
-        if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
-            request.PId=Base64.encodeToString(pidDataXML.
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
-        }else {
-            request.PId=Base64.encodeToString(("<?xml version=\"1.0\"?>"+pidDataXML).
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n","");
+    public void mobileTxn() {
+        AepsTxnRequest request = new AepsTxnRequest();
+        LoginModel loginModel = new LoginModel();
+        request.AgentCode = MyPreferences.getLoginData(loginModel, context).Data.DoneCardUser;
+        request.SessionKey = MyPreferences.getSessionKey(context);
+        request.SessionRefNo = MyPreferences.getSessionRefNo(context);
+        request.Lattitude = mCurrentLocation.getLatitude() + "";
+        request.Longitude = mCurrentLocation.getLongitude() + "";
+        request.DeviceId = Common.getDeviceId(context);
+        request.AadharNumber = str_aadhar;
+        if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+            request.PId = Base64.encodeToString(pidDataXML.
+                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
+        } else {
+            request.PId = Base64.encodeToString(("<?xml version=\"1.0\"?>" + pidDataXML).
+                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
         }
-        isGetAgain=false;
+        isGetAgain = false;
         new NetworkCall().callAepsServiceHeaderNew(request, URL, context,
                 new NetworkCall.RetrofitResponseListener() {
                     @Override
                     public void onRetrofitResponse(ResponseBody response, int responseCode) {
                         MyCustomDialog.hideCustomDialog();
-                        if(response!=null){
+                        if (response != null) {
                             try {
 //                                Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
                                 AepsResponse commonResponseModel = new Gson().fromJson(response.string(), AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                     openReceipt(commonResponseModel);
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
-                        }else {
+                        } else {
                             Toast.makeText(context, "no response", Toast.LENGTH_SHORT).show();
                         }
                     }
-                },MyPreferences.getUserData(context),MyPreferences.getAepsToken(context));
+                }, MyPreferences.getUserData(context), MyPreferences.getAepsToken(context));
     }
 
     private void sendMobileTransaction() {
@@ -604,25 +602,25 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         try {
-                            if(TYPE==BAL_ENQ){
+                            if (TYPE == BAL_ENQ) {
                                 AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
 //                                    openReceipt(commonResponseModel);
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                                 }
-                            }else {
+                            } else {
                                 AepsMiniResponse commonResponseModel = new Gson().fromJson(response, AepsMiniResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    if(commonResponseModel.msDetails!=null && commonResponseModel.msDetails.size()>0) {
-                                    }else {
+                                    if (commonResponseModel.msDetails != null && commonResponseModel.msDetails.size() > 0) {
+                                    } else {
                                         Toast.makeText(context, "No transaction is showing for this account.", Toast.LENGTH_SHORT).show();
                                     }
-                                }else {
+                                } else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -639,7 +637,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         progressDialog.dismiss();
                         error.printStackTrace();
                         Toast.makeText(context, getResources().getString(R.string.transactionErrorBal)/*+"\n"+error.getMessage()*/, Toast.LENGTH_LONG).show();
-                        logEvents(str_token,error.getMessage());
+                        logEvents(str_token, error.getMessage());
                     }
                 }) {
             @Override
@@ -660,15 +658,15 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 params.put("Merchant", ApiConstants.MerchantId);
                 params.put("Mode", "APP");
                 params.put("AadharNumber", str_aadhar);
-                params.put("Latitude", mCurrentLocation.getLatitude() + "");
-                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-//                params.put("Lattitude", 28.70111 + "");
-//                params.put("Longitude", 77.10112 + "");
+//                params.put("Latitude", mCurrentLocation.getLatitude() + "");
+//                params.put("Longitude", mCurrentLocation.getLongitude() + "");
+                params.put("Lattitude", 28.70111 + "");
+                params.put("Longitude", 77.10112 + "");
                 params.put("PId", pidDataXML);
-                if(d_type.equals(MORPHO) || d_type.equals(STARTEK)){
-                    params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")
-                }else {
-                    params.put("PId", ("<?xml version=\"1.0\"?>"+pidDataXML).replace("\n",""));
+                if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+                    params.put("PId", pidDataXML.replace("\n", ""));  //.replace("\n","")
+                } else {
+                    params.put("PId", ("<?xml version=\"1.0\"?>" + pidDataXML).replace("\n", ""));
                 }
                 /*if(d_type.equals(MORPHO)){
                     params.put("PId", Base64.encodeToString(pidDataXML.
@@ -696,8 +694,8 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         Window window = dialog.getWindow();
         window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT);
-        TextView cardHolderTv,agentCodeTv;
-        ((TextView)dialog.findViewById(R.id.title)).setText("AEPS Receipt");
+        TextView cardHolderTv, agentCodeTv;
+        ((TextView) dialog.findViewById(R.id.title)).setText("AEPS Receipt");
         cardHolderTv = dialog.findViewById(R.id.cardHolderTv);
         agentCodeTv = dialog.findViewById(R.id.agentCodeTv);
         TextView bankNameTv = dialog.findViewById(R.id.bankNameTv);
@@ -714,21 +712,21 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         LinearLayout cardNameLin = dialog.findViewById(R.id.cardNameLin);
         cardNameLin.setVisibility(View.GONE);
 //        cardHolderTv.setText("xxxxxxxx"+str_aadhar.substring(str_aadhar.length()-4));
-        AepsResponse.balEnQDetails detail=responseModel.balEnqDetails.get(0);
+        AepsResponse.balEnQDetails detail = responseModel.balEnqDetails.get(0);
         agentCodeTv.setText(detail.agentCode);
-        bankNameTv.setText( detail.bankName);
-        if(detail.accountNumber!=null && detail.accountNumber.length()>6){
-            accountNoTv.setText("XXXXXXXX"+detail.accountNumber.substring(detail.accountNumber.length()-4));
-        }else{
+        bankNameTv.setText(detail.bankName);
+        if (detail.accountNumber != null && detail.accountNumber.length() > 6) {
+            accountNoTv.setText("XXXXXXXX" + detail.accountNumber.substring(detail.accountNumber.length() - 4));
+        } else {
             accountNoTv.setText(detail.accountNumber);
         }
 //        benIdTv.setText(detail.transactionId);
-        apiTxnIdTv.setText( detail.apiTxnId);
-        jckTxnIdTv.setText( detail.jckTransactionId);
-        bankRefNoTv.setText( detail.rrn);
+        apiTxnIdTv.setText(detail.apiTxnId);
+        jckTxnIdTv.setText(detail.jckTransactionId);
+        bankRefNoTv.setText(detail.rrn);
         txnTypeTv.setText(detail.txnType);
-        txnStatusTv.setText( detail.status);
-        remitAmountTv.setText( detail.txnAmount+"");
+        txnStatusTv.setText(detail.status);
+        remitAmountTv.setText(detail.txnAmount + "");
         availBalTv.setText(detail.availableBalance);
         txnDateTv.setText(detail.timeStamp);
         dialog.findViewById(R.id.back_tv).setOnClickListener(new View.OnClickListener() {
@@ -916,7 +914,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     // pid data xml
     private String createPidOptXMLStartek() {
         String tmpOptXml = "";
-        try{
+        try {
             String fTypeStr = "0";
             String timeOutStr = "20000";
             //            uat
@@ -1026,8 +1024,8 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             tmpOptXml = tmpOptXml.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
 
             return tmpOptXml;
-        }catch(Exception ex){
-            showMessageDialogue("EXCEPTION- " + ex.getMessage(),"EXCEPTION");
+        } catch (Exception ex) {
+            showMessageDialogue("EXCEPTION- " + ex.getMessage(), "EXCEPTION");
             return "";
         }
     }
@@ -1242,10 +1240,10 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         PackageManager packageManager = getPackageManager();
         List<PackageInfo> packageList = packageManager
                 .getInstalledPackages(PackageManager.GET_PERMISSIONS);
-        boolean isPackage=false;
-        for(PackageInfo pl: packageList){
-            if(pl.applicationInfo.packageName.equals(mPackageName)){
-                isPackage=true;
+        boolean isPackage = false;
+        for (PackageInfo pl : packageList) {
+            if (pl.applicationInfo.packageName.equals(mPackageName)) {
+                isPackage = true;
             }
         }
 
@@ -1287,7 +1285,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 return;
             }
             mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if(mCurrentLocation!=null){
+            if (mCurrentLocation != null) {
 //            Toast.makeText(context, mCurrentLocation.getLatitude()+"",
 //                    Toast.LENGTH_SHORT).show();
             }
@@ -1318,6 +1316,17 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     @Override
     protected void onResume() {
         super.onResume();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                     @Override
@@ -1325,7 +1334,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             // Logic to handle location object
-                            mCurrentLocation=location;
+                            mCurrentLocation = location;
                         }
                     }
                 });

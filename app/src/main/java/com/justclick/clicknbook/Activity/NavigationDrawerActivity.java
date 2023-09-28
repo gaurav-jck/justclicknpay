@@ -56,6 +56,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminDepositReportFragment;
@@ -63,7 +64,6 @@ import com.justclick.clicknbook.Fragment.AgentChattingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentCreditListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentCreditRequestFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositListFragment;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirSalesReportFragment;
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
 import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
@@ -502,6 +502,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TransactionListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.AirBookingList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new AirBookingListFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.AccountStatement:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new AccountStatementListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -609,6 +613,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.UtilityList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.CreditCardList:
+                return R.drawable.ic_icon_list_view;
+            case MenuCodes.AirBookingList:
                 return R.drawable.ic_icon_list_view;
             case MenuCodes.AccountStatement:
                 return R.drawable.ic_icon_list_view;
