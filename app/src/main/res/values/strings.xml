@@ -31,7 +31,7 @@
     <string name="empty_address">Please enter your address</string>
     <string name="empty_post">Please select your postal address</string>
     <string name="select_operator">Please select operator</string>
-    <string name="empty_and_invalid_email">Invalid EmailId</string>
+    <string name="empty_and_invalid_email">Email-Id is empty or invalid</string>
     <string name="empty_and_invalid_userId">User ID is empty or invalid</string>
     <string name="empty_and_invalid_otp">OTP is empty or invalid</string>
     <string name="empty_and_invalid_company">Company name is empty or invalid</string>
@@ -425,7 +425,7 @@
     <string name="trainRouteMapFragmentTitle">Train Route Map</string>
     <string name="empty_and_invalid_departure_city">empty and invalid departure city</string>
     <string name="empty_and_invalid_train_Number">empty and invalid train Number</string>
-    <string name="traveller_name_as_id">Name should be same as on Government ID proof</string>
+    <string name="traveller_name_as_id">Full Name (Name should be same as on Government ID proof)</string>
     <string name="contact_detail">Your ticket will be sent to below mobile number and emailId</string>
     <string name="travel_insurance">Do you want to take travel insurance?</string>
     <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>

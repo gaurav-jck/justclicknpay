@@ -164,6 +164,14 @@
     <color name="grey">#757575</color>
     <color name="green">#04730e</color>
 
+<!--    Train-->
+    <color name="train_background1">#9ec2e6</color>
+    <color name="train_background2">#bbc5d9ed</color>
+    <color name="train_background3">#dcdcdc</color>
+    <color name="train_background4">#aafacfd2</color>
+    <color name="train_background5">#f5e8ab</color>
+    <color name="train_background6">#b8e8bf</color>
+
 
     <!--JCT Payment-->
 

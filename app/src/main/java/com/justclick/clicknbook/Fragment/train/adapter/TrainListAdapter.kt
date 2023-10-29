@@ -281,19 +281,23 @@ class TrainListAdapter(
 
         var bkgData: FareRuleResponse.bkgCfg=fareRuleResponse.bkgCfg()
         var bkgObj=jsonObject.getJSONObject("bkgCfg")
-        var berthList:Any = bkgObj.get("applicableBerthTypes")
-        var berthListArray= JSONArray()
-        if(berthList is String){
-            val quotaClass = bkgObj.getString("applicableBerthTypes")
-            berthListArray.put(quotaClass)
-        }else{
-            berthListArray=bkgObj.getJSONArray("applicableBerthTypes")
+
+        if(bkgObj.has("applicableBerthTypes")){
+            var berthList:Any = bkgObj.get("applicableBerthTypes")
+            var berthListArray= JSONArray()
+            if(berthList is String){
+                val quotaClass = bkgObj.getString("applicableBerthTypes")
+                berthListArray.put(quotaClass)
+            }else{
+                berthListArray=bkgObj.getJSONArray("applicableBerthTypes")
+            }
+            var berthArray= Array(berthListArray.length()){""}
+            for(i in 0 until berthArray.size){
+                berthArray[i]=berthListArray.optString(i)
+            }
+            bkgData.applicableBerthTypes=berthArray
         }
-        var berthArray= Array(berthListArray.length()){""}
-        for(i in 0 until berthArray.size){
-            berthArray[i]=berthListArray.optString(i)
-        }
-        bkgData.applicableBerthTypes=berthArray
+
         bkgData.foodChoiceEnabled=bkgObj.getString("foodChoiceEnabled")
 
         if(bkgData.foodChoiceEnabled.equals("true", true)){

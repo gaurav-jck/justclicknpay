@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="1dp"
+    android:layout_marginRight="1dp"
+    android:layout_marginTop="1dp"
+    android:padding="@dimen/very_small_margin"
+    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardCornerRadius="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:paddingLeft="@dimen/small_padding"
+        android:background="@color/listItemBackground"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/agencyNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="AgencyName/code"
+                android:textColor="@color/listItemTextColorBlue"
+                android:textSize="@dimen/list_view_name_field_text_size" />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="Total Amount "
+                android:textStyle="bold"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+            <TextView
+                android:id="@+id/totalTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.2"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="100"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="Dist Comm"
+                android:textStyle="bold"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+            <TextView
+                android:id="@+id/distCommTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.2"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="100"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            android:layout_marginTop="@dimen/very_small_margin">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="Net Amount "
+                android:textStyle="bold"
+                android:textColor="@color/listItemDateColorLight"
+                android:textSize="@dimen/text_size_14sp" />
+            <TextView
+                android:id="@+id/netTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.2"
+                android:gravity="left"
+                android:paddingRight="@dimen/medium_margin"
+                android:text="100"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

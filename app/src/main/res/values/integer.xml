@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="remarks_maxLength">150</integer>
+    <integer name="query_maxLength">200</integer>
     <integer name="pincode_maxLength">10</integer>
     <integer name="otp_maxLength">10</integer>
     <integer name="otp_maxLength6">6</integer>

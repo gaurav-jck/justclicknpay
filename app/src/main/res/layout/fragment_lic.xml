@@ -81,6 +81,30 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:visibility="visible">
+
+            <EditText
+                android:id="@+id/dobTv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="DOB"
+                android:text=""
+                android:maxLength="@integer/emailMaxLength"
+                android:inputType="none"
+                android:singleLine="true"
+                android:textSize="@dimen/simple_content_text_size"
+                android:editable="false"
+                android:focusable="false"
+                android:textColor="@color/app_blue_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

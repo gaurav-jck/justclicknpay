@@ -248,6 +248,9 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
 
         if(loginModel!!.Data.UserType.equals("O") || loginModel!!.Data.UserType.equals("OOU")){
             bookingListRequest!!.donecarduser=""
+        }else if(loginModel!!.Data.UserType.equals("D")){
+            bookingListRequest!!.Distributor=loginModel!!.Data.DoneCardUser
+            bookingListRequest!!.donecarduser=null
         }else{
             bookingListRequest!!.donecarduser=loginModel!!.Data.DoneCardUser
         }

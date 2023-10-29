@@ -1,13 +1,21 @@
 package com.justclick.clicknbook.Fragment.lic
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -20,10 +28,12 @@ import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_lic.view.*
-import kotlinx.android.synthetic.main.lic_receipt_dialog.*
-import kotlinx.android.synthetic.main.lic_receipt_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_lic.view.back_arrow
+import kotlinx.android.synthetic.main.lic_receipt_dialog.back_tv
 import okhttp3.ResponseBody
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 /**
  * A simple [Fragment] subclass.
@@ -36,6 +46,7 @@ class LicFragment : Fragment() {
     var toolBarHideFromFragmentListener:ToolBarHideFromFragmentListener?=null
     var policyEdt:EditText?=null
     var emailEdt:EditText?=null
+    var dobTv:EditText?=null
     var amountEdt:EditText?=null
     var dateEdt:EditText?=null
     var nameEdt:EditText?=null
@@ -43,6 +54,13 @@ class LicFragment : Fragment() {
     var amountField: TextInputLayout?=null
     var dateField: TextInputLayout?=null
     var submitBtn: Button?=null
+    private var dateServerFormat: SimpleDateFormat? = null
+    private var dob: String? = null
+    private var startDateDay = 0
+    private var startDateMonth = 0
+    private var startDateYear = 0
+    private var currentDate: Calendar? = null
+    private var dobDateCalendar: Calendar? = null
 
     var licPayBillRequest:LicRequest?= LicRequest()
 
@@ -59,6 +77,7 @@ class LicFragment : Fragment() {
 
         policyEdt=view.findViewById(R.id.policyEdt)
         emailEdt=view.findViewById(R.id.emailEdt)
+        dobTv=view.findViewById(R.id.dobTv)
         nameEdt=view.findViewById(R.id.nameEdt)
         amountEdt=view.findViewById(R.id.amountEdt)
         dateEdt=view.findViewById(R.id.dateEdt)
@@ -68,6 +87,11 @@ class LicFragment : Fragment() {
         submitBtn=view.findViewById(R.id.submitBtn)
         view.back_arrow.setOnClickListener{
             parentFragmentManager.popBackStack()
+        }
+
+        initializeDates()
+        dobTv!!.setOnClickListener {
+            openDatePicker()
         }
 
         submitBtn!!.setOnClickListener{
@@ -81,15 +105,50 @@ class LicFragment : Fragment() {
         return view
     }
 
+    private fun initializeDates() {
+        //Date formats
+        dateServerFormat = SimpleDateFormat("yyyy-MM-dd", Locale.US)
+
+        //default start Date
+        dobDateCalendar = Calendar.getInstance()
+        currentDate = Calendar.getInstance()
+        startDateDay = currentDate!!.get(Calendar.DAY_OF_MONTH)
+        startDateMonth = currentDate!!.get(Calendar.MONTH)
+        startDateYear = currentDate!!.get(Calendar.YEAR)
+
+        dob = dateServerFormat!!.format(currentDate!!.getTime())
+    }
+
+    private fun openDatePicker() {
+        //Date formats
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            R.style.DatePickerTheme,
+            { view, year, monthOfYear, dayOfMonth ->
+                dobDateCalendar!![year, monthOfYear] = dayOfMonth
+                dobTv!!.setText(dateServerFormat!!.format(dobDateCalendar!!.time))
+            }, startDateYear, startDateMonth, startDateDay
+        )
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            datePickerDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        }
+        datePickerDialog.datePicker.maxDate = currentDate!!.timeInMillis
+        datePickerDialog.show()
+    }
+
     private fun checkValidation() {
         var policy=policyEdt!!.text.toString().trim()
         var email=emailEdt!!.text.toString().trim()
+        var dob=dobTv!!.text.toString().trim()
 
         if(policy.isEmpty()){
             Toast.makeText(context, "Please enter policy number", Toast.LENGTH_SHORT).show()
             return
         }else if(!Common.isEmailValid(email)){
             Toast.makeText(context, R.string.empty_and_invalid_email, Toast.LENGTH_SHORT).show()
+            return
+        }else if(dob.isEmpty()){
+            Toast.makeText(context, "Please select DOB", Toast.LENGTH_SHORT).show()
             return
         }else{
             var loginModel = LoginModel()
@@ -98,6 +157,8 @@ class LicFragment : Fragment() {
             request.AgentCode = loginModel.Data.DoneCardUser
             request.PolicyNumber = policy
             request.Email = email
+            request.Dob = dob
+            request.Ad2 = dob
             getCredentials(request)
         }
     }
@@ -108,6 +169,7 @@ class LicFragment : Fragment() {
         var AgentCode: String? = null
         var PolicyNumber: String? = null
         var Email: String? = null
+        var Dob: String? = null
         var userData: String? = null
         var token: String? = null
 
@@ -203,6 +265,7 @@ class LicFragment : Fragment() {
             if (response != null) {
                 responseHandler(response, BILL, request) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
             } else {      //{"AgentCode":"JC0A13387","Merchant":"JUSTCLICKTRAVELS","Mode":"App"}
+                hideCustomDialog()
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }

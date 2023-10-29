@@ -14,4 +14,5 @@ public class NetSalesResponseModel
                 Serial, TCount,TotalPay,
                 Aepspay, Matmpay, Utlitiypay;
     }
+
 }

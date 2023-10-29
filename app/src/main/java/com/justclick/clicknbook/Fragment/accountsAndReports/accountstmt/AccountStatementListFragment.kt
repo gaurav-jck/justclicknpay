@@ -200,7 +200,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     fun getTxnType() {
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface::class.java)
         val call = apiService.accountStmtPost(ApiConstants.TransactionType, "")
-        NetworkCall().callService(call,context,false
+        NetworkCall().callServiceWithoutDialog(call,context
         ) { response, responseCode ->
             if (response != null && responseCode==200) {
                 val txnTypeResponse = Gson().fromJson(response!!.string(), TxnTypeResponse::class.java)
@@ -230,6 +230,9 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         accountStmtRequest!!.distributordid=""
         if(accountStmtRequest!!.UserType.equals("O") || accountStmtRequest!!.UserType.equals("OOU")){
             accountStmtRequest!!.Donecarduser=""
+        }else if(accountStmtRequest!!.UserType.equals("D")){
+            accountStmtRequest!!.distributordid=loginModel!!.Data.DoneCardUser
+            accountStmtRequest!!.Donecarduser=null
         }else{
             accountStmtRequest!!.Donecarduser=loginModel!!.Data.DoneCardUser
         }

@@ -108,7 +108,7 @@
                 android:paddingBottom="@dimen/small_margin"
                 android:paddingLeft="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/large_margin"
-                android:background="@color/gray_color_very_light"
+                android:background="@color/train_background2"
                 />
 
             <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -356,7 +356,7 @@
                 android:paddingBottom="@dimen/small_margin"
                 android:paddingLeft="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/gray_color_very_light"
+                android:background="@color/train_background3"
                 />
 
             <LinearLayout
@@ -375,8 +375,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray_color_very_light"
-                    android:padding="@dimen/medium_margin"
+                    android:background="@color/train_background4"
+                    android:paddingTop="@dimen/small_margin"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/medium_margin"
                     android:text="Fare Details"
                     android:textColor="@color/text_dark_gray"
                     android:textSize="@dimen/simple_content_text_size" />

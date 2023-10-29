@@ -47,6 +47,7 @@ import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
+import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
@@ -273,6 +274,7 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.NetSalesReport://22
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragment());
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragmentNew());
                 break;
             case MenuCodes.SalesAccountStatement://23
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new SalesAccountListFragment());

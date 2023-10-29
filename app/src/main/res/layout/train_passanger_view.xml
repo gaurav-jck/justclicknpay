@@ -58,7 +58,7 @@
             android:id="@+id/nameEdt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Full name"
+            android:hint="@string/traveller_name_as_id"
             android:inputType="textPersonName"
             android:maxLines="1"
             android:singleLine="true"

@@ -35,6 +35,7 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
     var toolBarHideFromFragmentListener:ToolBarHideFromFragmentListener?=null
     var viewModel:TrainSearchViewModel?=null
     private var startDateCalendar: Calendar? = null
+    private var maxDateCalendar: Calendar? = null
     private var dateToSend: String? = null
     private var startDateDay = 0
     private var startDateMonth = 0
@@ -152,6 +153,9 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         startDateYear = startDateCalendar!!.get(Calendar.YEAR)
 
         dateToSend = dateToServerFormat!!.format(startDateCalendar!!.getTime())
+
+        maxDateCalendar = Calendar.getInstance()
+        maxDateCalendar!!.add(Calendar.MONTH,4);
     }
 
     private fun setDates(view: View) {
@@ -203,6 +207,7 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
             datePickerDialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         }
         datePickerDialog.datePicker.minDate = System.currentTimeMillis()
+        datePickerDialog.datePicker.maxDate = maxDateCalendar!!.timeInMillis
         datePickerDialog.show()
     }
 

@@ -55,6 +55,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
@@ -95,6 +96,7 @@ import com.justclick.clicknbook.Fragment.TrainBookingCheckFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragment;
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
+import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
@@ -308,6 +310,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.balance_lin).setOnClickListener(this);
         findViewById(R.id.home_lin).setOnClickListener(this);
 //        findViewById(R.id.chatting_lin).setOnClickListener(this);
+        findViewById(R.id.query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
@@ -527,7 +530,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.NetSalesReport:
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragment());
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragmentNew());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.SalesAccountStatement:
@@ -675,6 +679,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case R.id.train_lin:
                 replaceFragmentWithBackStack(new TrainSearchFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.query_lin:
+                replaceFragmentWithBackStack(new SupportQueryFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.logout_lin:

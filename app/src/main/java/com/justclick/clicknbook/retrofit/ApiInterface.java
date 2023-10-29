@@ -585,4 +585,9 @@ public interface ApiInterface {
 
     @POST("V2.R/Payout/JustClick")
     Call<ResponseBody> forgetPass(@Body Object data);
+
+//    support
+    @POST("api/supports/{methodName}")
+    Call<ResponseBody> getSupportPost(@Path("methodName") String method, @Body Object data);
+
 }

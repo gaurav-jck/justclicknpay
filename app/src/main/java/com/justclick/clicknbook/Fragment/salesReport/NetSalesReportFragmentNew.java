@@ -8,9 +8,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -19,14 +16,20 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
@@ -34,13 +37,16 @@ import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.AutocompleteAdapter;
 import com.justclick.clicknbook.adapter.NetSalesReportAdapter;
+import com.justclick.clicknbook.adapter.NetSalesReportAdapterNew;
 import com.justclick.clicknbook.model.AgentNameModel;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.model.NetSalesResponseModel;
-import com.justclick.clicknbook.requestmodels.NetSalesReportModel;
+import com.justclick.clicknbook.model.NetSalesResponseModelNew;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentNameRequestModel;
+import com.justclick.clicknbook.requestmodels.NetSalesReportModel;
+import com.justclick.clicknbook.requestmodels.NetSalesReportModelNew;
 import com.justclick.clicknbook.retrofit.APIClient;
 import com.justclick.clicknbook.retrofit.ApiInterface;
 import com.justclick.clicknbook.utils.Common;
@@ -56,12 +62,13 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Lenovo on 09/27/2017.
  */
 
-public class NetSalesReportFragment extends Fragment implements View.OnClickListener{
+public class NetSalesReportFragmentNew extends Fragment implements View.OnClickListener{
     private final int START_DATE=1, END_DATE=2;
     private final int CALL_AGENT=1;
     private ToolBarTitleChangeListener titleChangeListener;
@@ -69,13 +76,12 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
     private Context context;
     private RecyclerView recyclerView;
     private String startDateToSend, endDateToSend;
-    private ArrayList<NetSalesResponseModel.Data> netSalesListDataArrayList;
-    private NetSalesReportAdapter netSalesReportAdapter;
+    private ArrayList<NetSalesResponseModelNew.aadharPayResponceList> netSalesListDataArrayList;
+    private NetSalesReportAdapterNew netSalesReportAdapter;
     private LinearLayoutManager layoutManager;
     private LinearLayout airLin,dmtLin,mobileLin,railLin,busLin,hotelLin,jctMoneyLin,lin;
     private ImageView airImage,dmtImage,mobileImage,railImage,busImage,hotelImage,jctMoneyImage;
-    private TextView startDateTv,tap,totalAgentTv,totalRailTv,totalAirTv,totalDmtTv,totalMobileTv,totalTv,
-            totalAepsTv, totalMatmTv, totalUtilityTv;
+    private TextView startDateTv,tap, totalTv, totalCommTv, totalNetTv;
     private RelativeLayout filter_image_rel;
     private Dialog filterDialog,openAgentFilterDialog;
     private Calendar startDateCalendar, endDateCalendar;
@@ -85,13 +91,17 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
             endDateDay, endDateMonth, endDateYear;
     private SimpleDateFormat dateFormat, dayFormat, dateToServerFormat;
     private int pageStart=1, pageEnd=10, totalPageCount=0;
-    private NetSalesReportModel netSalesListRequestModel;
+    private NetSalesReportModelNew netSalesListRequestModel;
     private LoginModel loginModel;
     private String SalesTypeFromDialog="",agentDoneCardUser,agentName="", agentDoneCard="";
     private AgentNameModel agentNameModel;
     AutocompleteAdapter autocompleteAdapter;
     private EditText agent_search_edt;
     private ListView agencyList,list_agent;
+    private String[] title = { "AadharPay", "AEPS", "Air", "BillPay", "Bus", "DMT", "DTH", "Hotel", "JCK Money",
+            "Lic", "MicroAtm", "Mobile Recharge", "Rail", "Wallet"};
+    private String productType="DMT";
+    private Spinner productTypeSpinner;
 
     @Override
     public void onAttach(Context context) {
@@ -108,7 +118,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
         super.onCreate(savedInstanceState);
         context=getActivity();
         netSalesListDataArrayList =new ArrayList<>();
-        netSalesListRequestModel=new NetSalesReportModel();
+        netSalesListRequestModel=new NetSalesReportModelNew();
         loginModel=new LoginModel();
         loginModel=MyPreferences.getLoginData(loginModel,context);
         initializeDates();
@@ -152,23 +162,43 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_net_sales_report, container, false);
+        View view= inflater.inflate(R.layout.fragment_net_sales_report_new, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         startDateTv = (TextView) view.findViewById(R.id.startDateTv);
         agent_search_edt = (EditText) view.findViewById(R.id.agent_search_edt);
         agencyList = (ListView) view.findViewById(R.id.agencyList);
         titleChangeListener.onToolBarTitleChange(getString(R.string.net_sales_report));
         tap= (TextView) view.findViewById(R.id.tap);
-        totalAgentTv= (TextView) view.findViewById(R.id.totalAgentTv);
-        totalRailTv= (TextView) view.findViewById(R.id.totalRailTv);
-        totalAirTv= (TextView) view.findViewById(R.id.totalAirTv);
-        totalDmtTv= (TextView) view.findViewById(R.id.totalDmtTv);
-        totalMobileTv= (TextView) view.findViewById(R.id.totalMobileTv);
-        totalAepsTv= (TextView) view.findViewById(R.id.totalAepsTv);
-        totalMatmTv= (TextView) view.findViewById(R.id.totalMatmTv);
-        totalUtilityTv= (TextView) view.findViewById(R.id.totalUtilityTv);
+        totalNetTv= view.findViewById(R.id.totalNetTv);
+        totalCommTv= view.findViewById(R.id.totalCommTv);
         totalTv= (TextView) view.findViewById(R.id.totalTv);
         lin= (LinearLayout) view.findViewById(R.id.lin);
+        productTypeSpinner =  view.findViewById(R.id.productTypeSpinner);
+
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                title);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        productTypeSpinner.setAdapter(ad);
+
+        productTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                productType=productTypeSpinner.getSelectedItem().toString();
+                netSalesListDataArrayList.clear();
+                netSalesReportAdapter.notifyDataSetChanged();
+                callAgent(SHOW_PROGRESS);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //initialize date values
         setDates();
@@ -182,30 +212,25 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
             }
         });
 
-        netSalesReportAdapter=new NetSalesReportAdapter(context, new NetSalesReportAdapter.OnRecyclerItemClickListener() {
+        netSalesReportAdapter=new NetSalesReportAdapterNew(context, (view1, list, position) -> {
 
-            @Override
-            public void onRecyclerItemClick(View view, ArrayList<NetSalesResponseModel.Data
-                    > list, int position) {
-
-            }
         }, netSalesListDataArrayList, totalPageCount);
         layoutManager=new LinearLayoutManager(context);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(netSalesReportAdapter);
 
-        if(netSalesListDataArrayList!=null && netSalesListDataArrayList.size()==0) {
+        /*if(netSalesListDataArrayList!=null && netSalesListDataArrayList.size()==0) {
             pageStart=1;
             pageEnd=10;
 
             if(Common.checkInternetConnection(context)) {
-                callAgent(netSalesListRequestModel, SHOW_PROGRESS);
+                callAgent(SHOW_PROGRESS);
             }else {
                 Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
             }
         }else {
             netSalesReportAdapter.notifyDataSetChanged();
-        }
+        }*/
 
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener);
 
@@ -213,14 +238,6 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(View v) {
                 openFilterDialog();
-            }
-        });
-
-        view.findViewById(R.id.lin_sales_type_Filter).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                openAgentFilterDialog();
             }
         });
 
@@ -286,7 +303,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                         if(Common.checkInternetConnection(context)) {
                             netSalesListDataArrayList.clear();
                             netSalesReportAdapter.notifyDataSetChanged();
-                            callAgent(netSalesListRequestModel, SHOW_PROGRESS);
+                            callAgent(SHOW_PROGRESS);
                         }else {
                             Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
                         }
@@ -361,12 +378,23 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
     private void openAgentFilterDialog() {
         openAgentFilterDialog = new Dialog(context,R.style.Theme_Design_Light);
         openAgentFilterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        openAgentFilterDialog.setContentView(R.layout.agent_list_filter);
+        openAgentFilterDialog.setContentView(R.layout.sales_report_list_filter);
 
         agent_search_edt = (EditText) openAgentFilterDialog.findViewById(R.id.agent_search_edt);
-        list_agent = (ListView) openAgentFilterDialog.findViewById(R.id.list_agent);
+        Spinner productTypeSpinner =  openAgentFilterDialog.findViewById(R.id.productTypeSpinner);
+        list_agent =  openAgentFilterDialog.findViewById(R.id.list_agent);
         openAgentFilterDialog.findViewById(R.id.cancelTv).setOnClickListener(this);
         openAgentFilterDialog.findViewById(R.id.applyTv).setOnClickListener(this);
+
+        ArrayAdapter ad
+                = new ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                title);
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+        productTypeSpinner.setAdapter(ad);
 
         if(agentNameModel!=null && agentNameModel.Data!=null && agentNameModel.Data.size()>0){
             autocompleteAdapter = new AutocompleteAdapter(context, agentNameModel);
@@ -443,6 +471,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
             public void onClick(View v) {
                 openAgentFilterDialog.dismiss();
                 agentName=agent_search_edt.getText().toString().trim();
+                productType=productTypeSpinner.getSelectedItem().toString();
                 applyFilter();
             }
         });
@@ -505,36 +534,49 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                     pageStart = pageStart + 10;
                     pageEnd = pageEnd + 10;
 
-                    callAgent( netSalesListRequestModel, NO_PROGRESS);
+                    callAgent(NO_PROGRESS);
                 }
             }
 //            }
         }
     };
 
-    public void callAgent(NetSalesReportModel reportListRequestModel, boolean progress) {
-        netSalesListRequestModel.EndPage =pageEnd+"";
-        netSalesListRequestModel.StartPage =pageStart+"";
-        netSalesListRequestModel.DoneCardUser=loginModel.Data.DoneCardUser;
-        netSalesListRequestModel.DeviceId=Common.getDeviceId(context);
-        netSalesListRequestModel.InTotal=true;
-        netSalesListRequestModel.LoginSessionId= EncryptionDecryptionClass.EncryptSessionId(EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
-        netSalesListRequestModel.FromDate=startDateToSend+"";
-        netSalesListRequestModel.ToDate=endDateToSend+"";
+    public void callAgent(boolean progress) {
+
+        netSalesListRequestModel.Agent=loginModel.Data.DoneCardUser;
+        netSalesListRequestModel.UserType=loginModel.Data.UserType;
+        netSalesListRequestModel.FromD=startDateToSend+"";
+        netSalesListRequestModel.ToD=endDateToSend+"";
+        netSalesListRequestModel.Uid="";
+        netSalesListRequestModel.DistDoneCardU="";
+        netSalesListRequestModel.Ttype="EKO";
+        netSalesListRequestModel.reportType="addharpay";
+        netSalesListRequestModel.Product=productType;
+        netSalesListRequestModel.TxnType="CW";
+
+        String json = new Gson().toJson(netSalesListRequestModel);
 
         if(progress){
             showCustomDialog();
         }
-        new NetworkCall().callMobileService(reportListRequestModel, ApiConstants.NetSalesReport, context,
-                new NetworkCall.RetrofitResponseListener() {
-                    @Override
-                    public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                        if(response!=null){
-                            responseHandler(response, CALL_AGENT);
-                        }else {
-                            hideCustomDialog();
-                            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-                        }
+        /*new NetworkCall().callMobileService(reportListRequestModel, ApiConstants.NetSalesReport, context,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response, CALL_AGENT);
+                    }else {
+                        hideCustomDialog();
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });*/
+        new NetworkCall().callService(NetworkCall.getAccountStmtApiInterface().accountStmtPost(ApiConstants.SalesReport,
+                        netSalesListRequestModel),
+                context,false,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response, CALL_AGENT);
+                    }else {
+                        hideCustomDialog();
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -543,24 +585,25 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
         try {
             switch (TYPE){
                 case CALL_AGENT:
-                    NetSalesResponseModel agentModel = new Gson().fromJson(response.string(), NetSalesResponseModel.class);
                     hideCustomDialog();
+                    NetSalesResponseModelNew agentModel = new Gson().fromJson(response.string(), NetSalesResponseModelNew.class);
                     if(agentModel!=null ){
 
-                        if(agentModel.StatusCode.equalsIgnoreCase("0")){
-                            if(agentModel.Data.size()>0){
-                            netSalesListDataArrayList.addAll(agentModel.Data);
+                        if(agentModel.statusCode.equalsIgnoreCase("00")){
+                            if(agentModel.aadharPayResponceList!=null && agentModel.aadharPayResponceList.size()>0){
+                            netSalesListDataArrayList.addAll(agentModel.aadharPayResponceList);
                             netSalesReportAdapter.notifyDataSetChanged();
-                            totalPageCount= Integer.parseInt(agentModel.Data.get(0).TCount);
-                            totalAgentTv.setText(agentModel.Data.get(0).TCount);
-                            totalRailTv.setText(agentModel.RailTotal);
-                            totalAirTv.setText(agentModel.AirTotal);
-                            totalDmtTv.setText(agentModel.DMTTotal);
-                            totalMobileTv.setText(agentModel.MobileTotal);
-                            totalAepsTv.setText(agentModel.AepsTotal);
-                            totalMatmTv.setText(agentModel.MatmTotal);
-                            totalUtilityTv.setText(agentModel.UtilityTotap);
-                            totalTv.setText(agentModel.Totalsales);
+                            totalPageCount= agentModel.totalCount;
+
+                            float total=0, net=0, comm=0;
+                            for(int i=0; i<agentModel.aadharPayResponceList.size(); i++){
+                                total=total+agentModel.aadharPayResponceList.get(i).totalRecharge;
+                                net=net+agentModel.aadharPayResponceList.get(i).totalNetRecharge;
+                                comm=comm+agentModel.aadharPayResponceList.get(i).totalRechargeDistCom;
+                            }
+                            totalTv.setText(total+"");
+                            totalNetTv.setText(net+"");
+                            totalCommTv.setText(comm+"");
                             }
                             else {
                                 Toast.makeText(context,"No record found", Toast.LENGTH_LONG).show();
@@ -568,7 +611,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                         }else {
                             netSalesListDataArrayList.clear();
                             netSalesReportAdapter.notifyDataSetChanged();
-                            Toast.makeText(context,agentModel.Status, Toast.LENGTH_LONG).show();
+                            Toast.makeText(context,agentModel.statusMessage, Toast.LENGTH_LONG).show();
                         }
                     }else {
                         Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
@@ -578,7 +621,8 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
         }catch (Exception e){
             e.printStackTrace();
             hideCustomDialog();
-            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No record found", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -631,7 +675,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                 pageEnd=10;
 
                 if(Common.checkInternetConnection(context)) {
-                    callAgent(netSalesListRequestModel, SHOW_PROGRESS);
+                    callAgent(SHOW_PROGRESS);
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
                 }
@@ -647,7 +691,7 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
                 pageEnd=10;
 
                 if(Common.checkInternetConnection(context)) {
-                    callAgent(netSalesListRequestModel, SHOW_PROGRESS);
+                    callAgent(SHOW_PROGRESS);
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
                 }

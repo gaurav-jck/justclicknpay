@@ -53,27 +53,23 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         try {
-            if (holder!=null && holder instanceof MyViewHolder) {
-                final MyViewHolder myViewHolder = (MyViewHolder) holder;
+//            if (holder!=null && holder instanceof MyViewHolder) {
+//
+//            }
+            final MyViewHolder myViewHolder = (MyViewHolder) holder;
 
-                final AccountStmtResponse.accountStatementList info = infoList.get(position);
+            final AccountStmtResponse.accountStatementList info = infoList.get(position);
 
-                myViewHolder.agentIdTv.setText(info.agencyCode);
-                myViewHolder.agencyTv.setText(info.agencyName);
-                myViewHolder.confirmIdTv.setText(info.referenceid);
-                myViewHolder.dateTv.setText(info.txndate);
-                myViewHolder.debitTv.setText(info.txnAMTD);
-                myViewHolder.creditTv.setText(info.txnAMTC);
-                myViewHolder.balanceTv.setText(info.balance);
-                myViewHolder.typeTv.setText(info.transactionType);
-                myViewHolder.remarksTv.setText(info.remarks);
-                myViewHolder.updatedByTv.setText(info.updatedBy);
-
-
-//                myViewHolder.refundLin.setOnClickListener(v -> listener.onRecyclerItemClick(myViewHolder.refundLin,
-//                        (ArrayList<AccountStmtResponse.accountStatementList>) infoList,info,position));
-
-            }
+            myViewHolder.agentIdTv.setText(info.agencyCode);
+            myViewHolder.agencyTv.setText(info.agencyName);
+            myViewHolder.confirmIdTv.setText(info.referenceid);
+            myViewHolder.dateTv.setText(info.txndate);
+            myViewHolder.debitTv.setText(info.txnAMTD);
+            myViewHolder.creditTv.setText(info.txnAMTC);
+            myViewHolder.balanceTv.setText(info.balance);
+            myViewHolder.typeTv.setText(info.transactionType);
+            myViewHolder.remarksTv.setText(info.remarks);
+            myViewHolder.updatedByTv.setText(info.updatedBy);
         }catch (Exception e){}
 
     }

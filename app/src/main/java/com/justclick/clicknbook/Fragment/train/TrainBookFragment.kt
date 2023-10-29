@@ -104,6 +104,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             removePassTv=view.findViewById(R.id.removePassTv)
             removePassTv!!.setOnClickListener(this)
             view.gstLabelRel.setOnClickListener(this)
+            view.otherPrefRel.setOnClickListener(this)
             view.fareLabelRel.setOnClickListener(this)
             passengerContainerLin=view.findViewById(R.id.passengerContainerLin)
             infantContainerLin=view.findViewById(R.id.infantContainerLin)
@@ -221,6 +222,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 validate()
             R.id.gstLabelRel->
                 showHideGst()
+            R.id.otherPrefRel->
+                showHidePref()
             R.id.fareLabelRel->
                 showHideFare()
             R.id.cityAtv-> {
@@ -259,6 +262,15 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             gstView.visibility= GONE
         }else{
             gstView.visibility= VISIBLE
+        }
+    }
+    private fun showHidePref() {
+        if(autoUpgradeCheck.visibility== VISIBLE){
+            autoUpgradeCheck.visibility= GONE
+            bookOnlyCheck.visibility= GONE
+        }else{
+            autoUpgradeCheck.visibility= VISIBLE
+            bookOnlyCheck.visibility= VISIBLE
         }
     }
 
@@ -762,7 +774,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             val senderResponse = Gson().fromJson(response.string(), CheckCredentialResponse::class.java)
             if (senderResponse != null) {
                 if (senderResponse.statusCode == "00") {
-                    Toast.makeText(requireContext(),senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(requireContext(),senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
                     bookTrain(senderResponse.credentialData[0].token, senderResponse.credentialData[0].userData)
                 } else {
                     Toast.makeText(requireContext(), senderResponse.statusMessage, Toast.LENGTH_LONG).show()

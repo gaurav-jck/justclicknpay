@@ -30,8 +30,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 77
-            versionName "1.6.7"
+            versionCode 81
+            versionName "1.6.11"
 //            applicationIdSuffix ".qa"
 
         }

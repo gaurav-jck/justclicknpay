@@ -1295,6 +1295,33 @@ public class NetworkCall {
         });
     }
 
+    public void callServiceWithoutDialog(Call<ResponseBody> responseBodyCall,
+                            final Context context, RetrofitResponseListener listener) {
+        this.context=context;
+        retrofitResponseListener= listener;
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    responseBody=response.body();
+                    retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
+                }catch (Exception e){
+                    responseBody=null;
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+//                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                responseBody=null;
+                retrofitResponseListener.onRetrofitResponse(null,0);
+//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
     public void callRailService(Call<ResponseBody> responseBodyCall,
                                 final Context context, boolean isDialog, RetrofitResponseListener listener) {
         this.context=context;
@@ -1611,7 +1638,8 @@ public class NetworkCall {
     }
 
     public static ApiInterface getCashFreeQRApiInterface(){
-        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);
+//        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
+        return APIClient.getClient(ApiConstants.BASE_URL_QR).create(ApiInterface.class);  // new changes
     }
 
     public static ApiInterface getFastTagApiInterface(){
@@ -1628,6 +1656,10 @@ public class NetworkCall {
 
     public static ApiInterface getForgetPassApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_FORGET).create(ApiInterface.class);
+    }
+
+    public static ApiInterface getAccountStmtApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface.class);
     }
 
 

@@ -97,7 +97,7 @@
                 android:textColor="@color/text_dark_gray"
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/margin_2dp"
                 />
 
             <TextView
@@ -109,6 +109,7 @@
                 android:paddingLeft="@dimen/medium_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
+                android:visibility="gone"
                 android:background="@color/gray_color_very_light"
                 />
 
@@ -119,8 +120,8 @@
                 android:textColor="@color/text_dark_gray"
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/gray_color_very_light"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/train_background2"
                 />
 
             <LinearLayout
@@ -221,7 +222,7 @@
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/gray_color_very_light"
+                android:background="@color/train_background3"
                 />
 
             <TextView
@@ -271,17 +272,34 @@
                     android:maxLines="1"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Other Preferences"
-                android:textColor="@color/text_dark_gray"
-                android:textSize="@dimen/simple_content_text_size"
-                android:padding="@dimen/medium_margin"
-                android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/gray_color_very_light"
-                />
+
+    <RelativeLayout
+        android:id="@+id/otherPrefRel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/train_background4"
+        android:layout_marginTop="@dimen/very_large_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_margin"
+            android:text="Other Preferences"
+            android:textColor="@color/text_dark_gray"
+            android:textSize="@dimen/simple_content_text_size" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/arrow_left_back"
+            app:tint="@color/gray_color"
+            android:rotation="270"
+            android:layout_marginRight="@dimen/medium_margin"/>
+    </RelativeLayout>
+
             <CheckBox
+                android:id="@+id/autoUpgradeCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Consider for auto upgradation"
@@ -289,14 +307,18 @@
                 android:layout_marginTop="@dimen/small_margin"
                 android:paddingLeft="@dimen/small_margin"
                 android:textColor="@color/color_light_black2"
+                android:visibility="gone"
                 />
             <CheckBox
+                android:id="@+id/bookOnlyCheck"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Book only if confirm birth are allocated"
                 android:layout_marginLeft="@dimen/small_margin"
                 android:paddingLeft="@dimen/small_margin"
-                android:textColor="@color/color_light_black2"/>
+                android:textColor="@color/color_light_black2"
+                android:visibility="gone"
+                />
 
 <!--    Destination address-->
     <!--<TextView
@@ -415,7 +437,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray_color_very_light"
+                    android:background="@color/train_background2"
                     android:padding="@dimen/medium_margin"
                     android:text="GSTIN Details"
                     android:textColor="@color/text_dark_gray"
@@ -755,7 +777,7 @@
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/medium_margin"
                 android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/gray_color_very_light"
+                android:background="@color/train_background3"
                 />
 
             <TextView
@@ -782,6 +804,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/travel_insurance_yes"
                     android:textColor="@color/listItemLightBlack"
+                    android:checked="true"
                     android:paddingLeft="@dimen/small_margin"/>
                 <RadioButton
                     android:id="@+id/travelRadioNo"
@@ -789,7 +812,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/travel_insurance_no"
                     android:paddingLeft="@dimen/small_margin"
-                    android:checked="true"
                     android:textColor="@color/listItemLightBlack" />
             </RadioGroup>
 
