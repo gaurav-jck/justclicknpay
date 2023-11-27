@@ -86,6 +86,20 @@ class TrainSearchRepository {
             trainData.runningSat=jsonObject.getString("runningSat")
             trainData.runningSun=jsonObject.getString("runningSun")
 
+            if(jsonObject.has("trainType")){
+                var trainType:Any = jsonObject.get("trainType")
+                if(trainType is String){
+                    trainData.trainType=jsonObject.getString("trainType")
+                    trainData.trainTypeName=getTrainType(trainData.trainType)
+                }else{
+                    trainData.trainType=jsonObject.getJSONArray("trainType").getString(0)
+                    trainData.trainTypeName=getTrainType(trainData.trainType)
+                }
+            }else{
+                trainData.trainType="O"
+                trainData.trainTypeName="Others"
+            }
+
             var availClass:Any = jsonObject.get("avlClasses")
             var availArray=JSONArray()
             if(availClass is String){
@@ -121,6 +135,22 @@ class TrainSearchRepository {
         trainSearchDataModel.quotaList=quotaArray
 
         return trainSearchDataModel
+    }
+
+    private fun getTrainType(trainType: String?):String {
+        when(trainType){
+            "SV" -> return "Suvidha Trains"
+            "ST" -> return "Special Tatkal Trains"
+            "SP" -> return "Special Trains"
+            "G" -> return "GARIB RATH"
+            "Y" -> return "YUVA EXPRESS"
+            "O" -> return "OTHERS"
+            "D" -> return "DURONTO"
+            "R" -> return "RAJDHANI"
+            "JS" -> return "JAN SHATABDI"
+            "S" -> return "SHATABDI "
+        }
+        return "OTHERS"
     }
 
     fun getTrainSearchResponseLiveData(): MutableLiveData<TrainSearchDataModel>? {

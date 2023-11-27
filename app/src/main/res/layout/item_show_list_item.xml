@@ -9,7 +9,7 @@
     android:layout_marginRight="1dp"
     android:layout_marginTop="@dimen/small_margin"
     android:padding="@dimen/very_small_margin"
-    card_view:cardBackgroundColor="@color/splash_white_light"
+    card_view:cardBackgroundColor="@color/train_dashboard1"
     card_view:cardCornerRadius="1dp">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -36,7 +36,7 @@
         android:layout_margin="@dimen/small_margin"
         android:scrollIndicators="end"
         android:paddingTop="@dimen/small_margin"
-        android:background="@drawable/white_round_button_background">
+        android:background="@drawable/home_round_background">
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>
     </androidx.cardview.widget.CardView>

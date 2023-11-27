@@ -34,6 +34,9 @@ class TrainSearchDataModel :Serializable{
         var runningFri:String?=null
         var runningSat:String?=null
 
+        var trainType:String?=null
+        var trainTypeName:String?=null
+
 //        var avlClasses:String?=null
         var avlClasses:Array<String>?=null
         var avlClassesList:ArrayList<avlClass>?=null

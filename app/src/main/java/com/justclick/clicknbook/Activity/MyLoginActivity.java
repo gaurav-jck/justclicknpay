@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.provider.Settings;
 
 import androidx.annotation.NonNull;
@@ -24,7 +25,9 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -59,6 +62,8 @@ import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel;
 import com.justclick.clicknbook.requestmodels.LoginRequestModel;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
+import com.justclick.clicknbook.utils.GenericKeyEvent;
+import com.justclick.clicknbook.utils.GenericTextWatcher;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
@@ -385,7 +390,14 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                             startActivity(in);
                             finish();
                         }else if(loginModel.StatusCode.equalsIgnoreCase("2")){
-                            otpDialog(LOGIN_SERVICE);
+                            if(otpDialog==null) {
+                                otpDialog(LOGIN_SERVICE);
+                            }else {
+                                if(otpDialog.isShowing()){
+                                    otpDialog.dismiss();
+                                }
+                                otpDialog(LOGIN_SERVICE);
+                            }
                         } else {
 //                            Toast.makeText(context,loginModel.Status,Toast.LENGTH_SHORT).show();
                             errorPopup(loginModel.Status);
@@ -526,9 +538,80 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
         otpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         otpDialog.setContentView(R.layout.send_otp_layout);
         otpDialog.setCancelable(false);
-        final EditText otp_edt= (EditText) otpDialog.findViewById(R.id.otp_edt);
+        final EditText otpEdt1= otpDialog.findViewById(R.id.otpEdt1);
+        final EditText otpEdt2= otpDialog.findViewById(R.id.otpEdt2);
+        final EditText otpEdt3= otpDialog.findViewById(R.id.otpEdt3);
+        final EditText otpEdt4= otpDialog.findViewById(R.id.otpEdt4);
+        final TextView otpErrorTv= otpDialog.findViewById(R.id.otpErrorTv);
         final Button submit= (Button) otpDialog.findViewById(R.id.submit_btn);
+        final TextView resendOtpTv= otpDialog.findViewById(R.id.resendOtpTv);
+        final TextView timerTv= otpDialog.findViewById(R.id.timerTv);
         ImageButton dialogCloseButton = (ImageButton) otpDialog.findViewById(R.id.close_btn);
+
+        new CountDownTimer(31000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                timerTv.setVisibility(View.VISIBLE);
+                timerTv.setText("Resend otp in : " + (millisUntilFinished / 1000)+" seconds");
+                resendOtpTv.setVisibility(View.GONE);
+            }
+
+            public void onFinish() {
+                timerTv.setVisibility(View.GONE);
+                resendOtpTv.setVisibility(View.VISIBLE);
+            }
+
+        }.start();
+
+        //GenericTextWatcher here works only for moving to next EditText when a number is entered
+//first parameter is the current EditText and second parameter is next EditText
+        otpEdt1.addTextChangedListener(new GenericTextWatcher(otpEdt1, otpEdt2));
+        otpEdt2.addTextChangedListener(new GenericTextWatcher(otpEdt2, otpEdt3));
+        otpEdt3.addTextChangedListener(new GenericTextWatcher(otpEdt3, otpEdt4));
+        otpEdt4.addTextChangedListener(new GenericTextWatcher(otpEdt4, null));
+
+//GenericKeyEvent here works for deleting the element and to switch back to previous EditText
+//first parameter is the current EditText and second parameter is previous EditText
+        otpEdt1.setOnKeyListener(new GenericKeyEvent(otpEdt1, null));
+        otpEdt2.setOnKeyListener(new GenericKeyEvent(otpEdt2, otpEdt1));
+        otpEdt3.setOnKeyListener(new GenericKeyEvent(otpEdt3, otpEdt2));
+        otpEdt4.setOnKeyListener(new GenericKeyEvent(otpEdt4,otpEdt3));
+
+        otpEdt1.requestFocus();
+//        otpEdt1.setFocusableInTouchMode(true);
+
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(otpEdt1, InputMethodManager.SHOW_IMPLICIT);
+
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+        resendOtpTv.setOnClickListener(view -> login(null));
+
+        otpEdt4.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String otp="";
+                otp=otp+otpEdt1.getText().toString();
+                otp=otp+otpEdt2.getText().toString();
+                otp=otp+otpEdt3.getText().toString();
+                otp=otp+otpEdt4.getText().toString();
+                if (otp.length()==4){
+                    otpErrorTv.setVisibility(View.INVISIBLE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -541,16 +624,24 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
 
                 }
 
+                String otp="";
+                otp=otp+otpEdt1.getText().toString();
+                otp=otp+otpEdt2.getText().toString();
+                otp=otp+otpEdt3.getText().toString();
+                otp=otp+otpEdt4.getText().toString();
+
                 if(Common.checkInternetConnection(context)){
-                    if(otp_edt.getText().toString().trim().length()>3) {
+                    if(otp.length()>3) {
+                        otpErrorTv.setVisibility(View.INVISIBLE);
                         if(TYPE==LOGIN_SERVICE){
-                            login(otp_edt.getText().toString().trim());
+                            login(otp);
                         }else {
-                            forgetOtp(otp_edt.getText().toString().trim());
+                            forgetOtp(otp);
                         }
 
                     }else {
                         Toast.makeText(context,R.string.empty_and_invalid_otp,Toast.LENGTH_LONG).show();
+                        otpErrorTv.setVisibility(View.VISIBLE);
                     }
 //                    forgetDialog.dismiss();
                 }else {

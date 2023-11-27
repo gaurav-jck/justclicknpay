@@ -62,6 +62,7 @@
             android:inputType="textPersonName"
             android:maxLines="1"
             android:singleLine="true"
+            android:maxLength="@integer/trainPassNameMaxLength"
             android:textSize="@dimen/text_size_16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 

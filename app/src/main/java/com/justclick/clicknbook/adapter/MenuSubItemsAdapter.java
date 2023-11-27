@@ -65,13 +65,13 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 final String subMenuCode = arrayList.get(position).SubMenuCode;
                 MyViewHolder vh = (MyViewHolder) holder;
 
-                DisplayMetrics displaymetrics = new DisplayMetrics();
-                ((NavigationDrawerActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
-                int screenWidth = displaymetrics.widthPixels;
-                int screenHeight = displaymetrics.heightPixels;
-
-                vh.linear_sub_menu.requestLayout();
-                vh.linear_sub_menu.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT));
+//                DisplayMetrics displaymetrics = new DisplayMetrics();
+//                ((NavigationDrawerActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+//                int screenWidth = displaymetrics.widthPixels;
+//                int screenHeight = displaymetrics.heightPixels;
+//
+//                vh.linear_sub_menu.requestLayout();
+//                vh.linear_sub_menu.setLayoutParams(new LinearLayout.LayoutParams(screenWidth/3, ViewGroup.LayoutParams.WRAP_CONTENT));
 
                 Typeface face = Common.homeSubMenuItemTypeFace(context);
                 vh.sub_item_title.setTypeface(face);
@@ -122,7 +122,7 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.train_home_icon );
 //                    homeIcon.setColorFilter(appColor);
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
-                    vh.imageView_sub_item.setImageResource(R.drawable.train_home_icon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.train_home_vector);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
 //                    homeIcon.setColorFilter(appColor);

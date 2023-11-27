@@ -697,10 +697,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
                 params.put("Merchant", ApiConstants.MerchantId);
                 params.put("Mode", "APP");
-                params.put("Latitude", mCurrentLocation.getLatitude() + "");
-                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-//                params.put("Latitude", 28.70 + "");
-//                params.put("Longitude", 77.1 + "");
+//                params.put("Latitude", mCurrentLocation.getLatitude() + "");
+//                params.put("Longitude", mCurrentLocation.getLongitude() + "");
+                params.put("Latitude", 28.70010 + "");
+                params.put("Longitude", 77.11001 + "");
                 params.put("PId", pidDataXML);
                 return params;
             }
@@ -1181,7 +1181,8 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
 //                        Toast.makeText(context, "Confirmed", Toast.LENGTH_SHORT).show();
-                        checkPermissions();
+//                        checkPermissions();
+                        sendMobileTransaction();
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

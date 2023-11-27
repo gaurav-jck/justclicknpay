@@ -4,13 +4,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/linear_sub_menu"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/small_margin"
+    android:padding="@dimen/margin_3dp"
     android:gravity="center">
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/margin_5dp"
+        app:cardElevation="@dimen/margin_3dp"
+        app:cardBackgroundColor="@color/cardMobileBackground"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_marginTop="@dimen/margin_3dp"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,9 +30,10 @@
             android:layout_margin="2dp">
             <ImageView
                 android:id="@+id/imageView_sub_item"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/mobile_icon"
+                android:padding="@dimen/margin_5dp"
                 />
 
             <TextView
@@ -36,6 +46,6 @@
                 android:textColor="@color/main_text_color"
                 android:textSize="@dimen/small_text_size"/>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/train_background22"/>
+
+    <stroke
+        android:width="2dp"
+        android:color="@color/gray_color"
+        />
+
+    <stroke
+        android:width="1.5dp"
+        android:color="@color/app_blue_color_light"
+        />
+
+    <corners
+        android:radius="5dp"/>
+
+
+</shape>

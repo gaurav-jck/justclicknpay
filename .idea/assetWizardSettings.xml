@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialiconsoutlined/contact_support/outline_contact_support_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/filter_alt/baseline_filter_alt_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="query_support" />
+                            <entry key="color" value="100d0d" />
+                            <entry key="outputName" value="filter_vector_icon" />
                             <entry key="sourceFile" value="C:\Users\admin\Downloads\icons8-graph-report-64.svg" />
                           </map>
                         </option>

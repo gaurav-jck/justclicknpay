@@ -119,7 +119,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     private final String MANTRA = "MANTRA", STARTEK = "STARTEK", MORPHO = "MORPHO", ADHAR_UID = "uid", VIRTUAL_ID = "vid";
     private final String MANTRA_PACKAGE = "com.mantra.rdservice", STARTEK_PACKAGE = "com.acpl.registersdk",
             MORPHO_PACKAGE = "com.scl.rdservice";
-    private final int BAL_ENQ = 1, MINI_STMT = 2;
+    private final int BAL_ENQ = 1;
     private final int CAPTURE_REQUEST_CODE = 123, FINO_AEPS_CODE = 12;
     private FusedLocationProviderClient fusedLocationClient;
     private Context context;
@@ -602,29 +602,14 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                     public void onResponse(String response) {
                         progressDialog.dismiss();
                         try {
-                            if (TYPE == BAL_ENQ) {
-                                AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
+                            AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
+                            if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
 //                                    openReceipt(commonResponseModel);
-                                } else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
-                                }
                             } else {
-                                AepsMiniResponse commonResponseModel = new Gson().fromJson(response, AepsMiniResponse.class);
-//                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    if (commonResponseModel.msDetails != null && commonResponseModel.msDetails.size() > 0) {
-                                    } else {
-                                        Toast.makeText(context, "No transaction is showing for this account.", Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
-                                }
+                                Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                             }
-
                         } catch (Exception e) {
                             e.printStackTrace();
                             Toast.makeText(context, getResources().getString(R.string.transactionExceptionBal), Toast.LENGTH_LONG).show();
@@ -637,7 +622,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         progressDialog.dismiss();
                         error.printStackTrace();
                         Toast.makeText(context, getResources().getString(R.string.transactionErrorBal)/*+"\n"+error.getMessage()*/, Toast.LENGTH_LONG).show();
-                        logEvents(str_token, error.getMessage());
+//                        logEvents(str_token, error.getMessage());
                     }
                 }) {
             @Override
@@ -1219,7 +1204,8 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
 //                        Toast.makeText(context, "Confirmed", Toast.LENGTH_SHORT).show();
-                        checkPermissions();
+//                        checkPermissions();
+                        sendMobileTransaction();
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

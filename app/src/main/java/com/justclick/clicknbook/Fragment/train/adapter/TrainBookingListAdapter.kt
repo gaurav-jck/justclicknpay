@@ -61,6 +61,8 @@ class TrainBookingListAdapter(
         holder.statusTv.setText(item.status)
         if(item.status.equals("CNF")){
             holder.statusTv.setTextColor(context!!.resources.getColor(R.color.green))
+        }else if(item.status.equals("CAN")){
+            holder.statusTv.setTextColor(context!!.resources.getColor(R.color.app_new_red_color))
         }else{
             holder.statusTv.setTextColor(context!!.resources.getColor(R.color.black_text_color))
         }

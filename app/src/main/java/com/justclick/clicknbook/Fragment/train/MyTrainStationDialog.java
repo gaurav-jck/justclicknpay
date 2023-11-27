@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,7 +35,20 @@ import com.justclick.clicknbook.retrofit.ApiInterface;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.MyPreferences;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -43,10 +58,11 @@ import retrofit2.Response;
 public class MyTrainStationDialog {
     private static Dialog dialog;
     private static Context context;
-    private static EditText city_edt;
+//    private static EditText city_edt;
+    private static AutoCompleteTextView city_edt;
     private static ImageView back_arrow;
     private static ImageView cross;
-    private static ListView list_agent;
+//    private static ListView list_agent;
     private static String agentName="";
     private static AutocompleteAdapter autocompleteAdapter;
     private static LoginModel loginModel;
@@ -63,7 +79,7 @@ public class MyTrainStationDialog {
             onCityDialogResult= (OnCityDialogResult) busSearchFragment;
             dialog = new Dialog(context, R.style.Theme_Design_Light);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.activity_bus_from_city);
+            dialog.setContentView(R.layout.train_station_search_dialog);
             final Window window= dialog.getWindow();
             window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
@@ -73,7 +89,14 @@ public class MyTrainStationDialog {
             city_edt=( dialog.findViewById(R.id.city_edt));
             back_arrow=( dialog.findViewById(R.id.back_arrow));
             cross=( dialog.findViewById(R.id.cross));
-            list_agent=( dialog.findViewById(R.id.list_agent));
+//            list_agent=( dialog.findViewById(R.id.list_agent));
+
+            getData();
+
+            Common.showSoftInput(context);
+
+            ArrayAdapter adapter= new ArrayAdapter(context, R.layout.train_autocomplete_layout, R.id.name_tv, stationArray);
+            city_edt.setAdapter(adapter);
 
             city_edt.setHint(msg);
             loginModel=new LoginModel();
@@ -92,8 +115,16 @@ public class MyTrainStationDialog {
                 }
             });
 
+            city_edt.setOnItemClickListener(
+                    (parent, view, position, id) -> {
+                        Common.hideSoftInputFromDialog(dialog,context);
+//                        Common.hideSoftKeyboard((NavigationDrawerActivity)context);
+                        city_edt.setVisibility(View.VISIBLE);
+                        onCityDialogResult.setResult(key,stnListHash.get(city_edt.getText().toString()));
+                        dialog.dismiss();
+                    });
 
-            list_agent.setOnItemClickListener(
+            /*list_agent.setOnItemClickListener(
                     new AdapterView.OnItemClickListener()
                     {
                         @Override
@@ -111,7 +142,7 @@ public class MyTrainStationDialog {
                             dialog.dismiss();
                         }
                     });
-
+*/
             city_edt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -119,29 +150,29 @@ public class MyTrainStationDialog {
                 }
             });
 
-            city_edt.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
-                    if(Common.checkInternetConnection(context)) {
-                        if(s.length()>=2) {
-                            citySearch(s.toString());
-                        }
-                    }else {
-                        Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable s) {
-
-                }
-            });
+//            city_edt.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                    if(Common.checkInternetConnection(context)) {
+//                        if(s.length()>=2) {
+//                            citySearch(s.toString());
+//                        }
+//                    }else {
+//                        Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//
+//                }
+//            });
 
 
             dialog.setCancelable(true);
@@ -161,6 +192,56 @@ public class MyTrainStationDialog {
         return false;
     }
 
+    static ArrayList<TrainStationModel.Items> stnList = new ArrayList();
+    static HashMap<String, TrainStationModel.Items> stnListHash = new HashMap();
+    static String[] stationArray= null;
+
+    static void getData() throws Exception {
+        InputStream istream = null;
+        istream = context.getAssets().open("trainstations.xml");
+
+        // Steps to convert this input stream into a list
+        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = builderFactory.newDocumentBuilder();
+        Document doc = null;
+        doc = docBuilder.parse(istream);
+        NodeList nList  = doc.getElementsByTagName("stationname");
+
+        stationArray= new String[nList.getLength()];
+        // Iterating through this list
+        for (int i=0; i<nList.getLength(); i++) {
+            if (nList.item(0).getNodeType() == Node.ELEMENT_NODE) {
+                TrainStationModel.Items stn= new TrainStationModel.Items();
+//                    val user: HashMap<String, String?> = HashMap()
+                Element elm = (Element) nList.item(i);
+                stn.setStation_code(getNodeValue("stncode", elm));
+                stn.setStation_name(getNodeValue("stnname", elm));
+                String station=stn.getStation_name()+" [ "+stn.getStation_code()+" ]";
+                stnList.add(stn);
+                stnListHash.put(station, stn);
+                stationArray[i]=station;
+            }
+        }
+
+    }
+
+    static String getNodeValue(String tag, Element element) {
+        NodeList nodeList = element.getElementsByTagName(tag);
+        Node node = nodeList.item(0);
+        if (node != null) {
+            if (node.hasChildNodes()) {
+                Node child = node.getFirstChild();
+                while (child != null) {
+                    if (child.getNodeType() == Node.TEXT_NODE) {
+                        return child.getNodeValue();
+                    }
+                }
+            }
+        }
+        // Returns nothing if nothing was found
+        return "";
+    }
+
     public static void citySearch(String city) {
 
         new NetworkCall().callTrainStationServiceGet(ApiConstants.StationSearch, city, context, false, new NetworkCall.RetrofitResponseListener() {
@@ -174,12 +255,8 @@ public class MyTrainStationDialog {
                             for(int i=0; i<trainSearchDataModel.getItems().size(); i++){
                                 array[i]=trainSearchDataModel.getItems().get(i).getStation_name();
                             }
-//                    val array = Array<String>(6)
-//                    for (i in array.indices) {
-//                        array[i] = trainSearchDataModel!!.items!!.get(i).station_name.toString()
-//                    }
                             autocompleteAdapter = new AutocompleteAdapter(context, trainSearchDataModel);
-                            list_agent.setAdapter(autocompleteAdapter);
+//                            list_agent.setAdapter(autocompleteAdapter);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

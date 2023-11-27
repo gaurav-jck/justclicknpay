@@ -285,8 +285,9 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     }
 
     private fun callBoardingStation() {
-        val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getBoardingStn("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
+        val url=ApiConstants.BASE_URL_TRAIN;
+        val apiService = APIClient.getClient(url).create(ApiInterface::class.java)
+        val call = apiService.getBoardingStn(url+"apiV1/RailEngine/BoardingStation?Trainno="
                 +fareRuleResponse!!.trainNo+"&Date="+journeyDate()+"&fromStation="+
                 trainResponse!!.trainBtwnStnsList!!.get(position).fromStnCode+
                 "&toStation="+trainResponse!!.trainBtwnStnsList!!.get(position).toStnCode+"&className="+fareRuleResponse!!.enqClass,
@@ -852,6 +853,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     if(a in 5..11){
                         berthCheck!!.isEnabled=true
                         berthCheck!!.isChecked=true
+                    }else if(a>120){
+                        ageEdt!!.error = "Age must be smaller than 120"
                     }else{
                         berthCheck!!.isEnabled=false
                     }
@@ -868,7 +871,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.addPassTv.setOnClickListener {
             if(!Common.isNameValid(nameEdt!!.text.toString())){
                 nameEdt!!.setError("Please enter valid name")
-            }else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5){
+            }else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
                 ageEdt.setError("Please enter valid age")
             }else{
                 var genderRadio:RadioButton?=dialog.findViewById(radioGroup!!.checkedRadioButtonId)

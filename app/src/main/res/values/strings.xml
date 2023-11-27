@@ -416,6 +416,7 @@
     <string name="tabStation">By Station</string>
     <string name="tabTrain">By Train Name</string>
     <string name="from_Station">From Station</string>
+    <string name="to_Station">To Station</string>
     <string name="type_departure_city">Type departure city</string>
     <string name="train_name">Train Number</string>
     <string name="type_train_name">Type train Number</string>

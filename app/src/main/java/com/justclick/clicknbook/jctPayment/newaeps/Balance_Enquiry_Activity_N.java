@@ -254,6 +254,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                 str_aadhar = et_aadhar.getText().toString().trim();
                 if (validation()) {
                     checkPermissions();
+//                    sendMobileTransaction();
 //                    sessionCheckMethod(true);
                 }
             }
@@ -1267,7 +1268,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
 //                        Toast.makeText(context, "Confirmed", Toast.LENGTH_SHORT).show();
-                        checkPermissions();
+//                        checkPermissions();
+                        sendMobileTransaction();
                     }
                 })
                 .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

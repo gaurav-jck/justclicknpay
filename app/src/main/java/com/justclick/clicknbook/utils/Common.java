@@ -111,6 +111,14 @@ public final class Common {
       inputMethodManager.hideSoftInputFromWindow(dialog.getWindow().getCurrentFocus().getWindowToken(), 0);}
     catch (NullPointerException e){}
   }
+  public static void showSoftInput(Context context) {
+    try {
+      InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+      inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    }
+    catch (NullPointerException e){}
+  }
+
 
   public static float roundOffDecimalValue(Float decimal)
   {
@@ -368,6 +376,19 @@ public final class Common {
   }
   public static SimpleDateFormat getFullDateTimeFormat(){
     return new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+  }
+
+  public static Calendar getDateCalendarFromString(String date) {
+    try {
+      SimpleDateFormat mInputDateFormat =
+              new SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
+      Date date1=mInputDateFormat.parse(date);
+      Calendar calendar=Calendar.getInstance();
+      calendar.setTime(date1);
+      return calendar;
+    }catch (ParseException e){
+      return Calendar.getInstance();
+    }
   }
 
   public static String getJCTMoneyTime(String time){

@@ -74,7 +74,7 @@
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginBottom="@dimen/small_margin"
         android:layout_below="@id/viewFlipper"
-        card_view:cardBackgroundColor="@color/splash_white_light"
+        card_view:cardBackgroundColor="@color/train_dashboard1"
         card_view:cardCornerRadius="4dp">
 <!--androidx.recyclerview.widget.RecyclerView-->
     <androidx.recyclerview.widget.RecyclerView

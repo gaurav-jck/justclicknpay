@@ -48,6 +48,7 @@
     <color name="login_cardview_background">#ddFFFFFF</color>
     <color name="login_text_color">#2c67b5</color>
     <color name="login_hint_color">#88FFFFFF</color>
+    <color name="otp_background_color">#10000000</color>
     <color name="login_hint_color_new">#aa2c67b5</color>
     <color name="login_background_image_color">#bb000000</color>
     <color name="transparent">#00ffffff</color>
@@ -163,14 +164,32 @@
     <color name="background">#E0E0E0</color>
     <color name="grey">#757575</color>
     <color name="green">#04730e</color>
+    <color name="green_dark">#03600B</color>
 
 <!--    Train-->
+    <color name="train_list_icon_color_gray">#79678A</color>
+    <color name="train_red">#D31B1B</color>
     <color name="train_background1">#9ec2e6</color>
     <color name="train_background2">#bbc5d9ed</color>
+    <color name="train_background22">#88c5d9ed</color>
     <color name="train_background3">#dcdcdc</color>
     <color name="train_background4">#aafacfd2</color>
     <color name="train_background5">#f5e8ab</color>
     <color name="train_background6">#b8e8bf</color>
+
+    <color name="train_dashboard1">#f3f5f9</color>
+    <color name="train_dashboard2">#e4eefa</color>
+    <color name="train_dashboard22">#6882a0</color>
+    <color name="train_dashboard222">#526478</color>
+    <color name="train_dashboard3">#f2e4ff</color>
+    <color name="train_dashboard33">#9a85ae</color>
+    <color name="train_dashboard333">#79678A</color>
+    <color name="train_dashboard4">#fdf2de</color>
+    <color name="train_dashboard44">#8c855b</color>
+    <color name="train_dashboard444">#736C3F</color>
+    <color name="train_dashboard5">#e2f5ce</color>
+    <color name="train_dashboard55">#97af7d</color>
+    <color name="train_dashboard555">#5C7740</color>
 
 
     <!--JCT Payment-->

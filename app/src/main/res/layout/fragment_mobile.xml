@@ -76,7 +76,7 @@
                     android:visibility="gone"/>
 
                 <include
-                    android:id="@+id/recharge_layout_datacard"
+                    android:id="@+id/recharge_layout_fasttag"
                     layout="@layout/recharge_layout_fasttag"
                     android:visibility="gone"/>
 

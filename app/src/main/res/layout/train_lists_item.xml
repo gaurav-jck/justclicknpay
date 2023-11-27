@@ -24,7 +24,8 @@
             android:padding="@dimen/small_margin"
             android:textColor="@color/text_dark_gray"
             android:textSize="@dimen/text_size_14sp"
-            android:background="@drawable/edittext_border_hotel" />
+            android:fontFamily="sans-serif-medium"
+            android:background="@drawable/train_border_background" />
 
         <TextView
             android:id="@+id/trainNameTv"
@@ -37,6 +38,7 @@
             android:layout_marginLeft="@dimen/medium_margin"
             android:textColor="@color/text_dark_gray"
             android:textSize="@dimen/text_size_14sp"
+            android:fontFamily="sans-serif-medium"
             />
 
         <TextView
@@ -161,6 +163,7 @@
             android:textColor="@color/text_dark_gray"
             android:text="Saharanpur"
             android:layout_marginTop="@dimen/very_small_margin"
+            android:fontFamily="sans-serif-medium"
             />
 
         <TextView
@@ -174,6 +177,7 @@
             android:textColor="@color/text_dark_gray"
             android:text="Delhi"
             android:layout_marginTop="@dimen/very_small_margin"
+            android:fontFamily="sans-serif-medium"
             />
 
         <LinearLayout

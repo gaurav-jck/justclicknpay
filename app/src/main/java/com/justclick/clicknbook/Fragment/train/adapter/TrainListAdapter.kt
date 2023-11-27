@@ -104,53 +104,53 @@ class TrainListAdapter(
         }
 
         if(item.runningSun.equals("Y")){
-            holder.sunday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.sunday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.sunday.alpha=1f
         }else{
-            holder.sunday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.sunday.alpha=0.5f
+            holder.sunday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.sunday.alpha=0.4f
         }
         if(item.runningMon.equals("Y")){
-            holder.monday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.monday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.monday.alpha=1f
         }else{
-            holder.monday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.monday.alpha=0.5f
+            holder.monday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.monday.alpha=0.4f
         }
         if(item.runningTue.equals("Y")){
-            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.tuesday.alpha=1f
         }else{
-            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.tuesday.alpha=0.5f
+            holder.tuesday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.tuesday.alpha=0.4f
         }
         if(item.runningWed.equals("Y")){
-            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.wednesday.alpha=1f
         }else{
-            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.wednesday.alpha=0.5f
+            holder.wednesday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.wednesday.alpha=0.4f
         }
         if(item.runningThu.equals("Y")){
-            holder.thursday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.thursday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.thursday.alpha=1f
         }else{
-            holder.thursday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.thursday.alpha=0.5f
+            holder.thursday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.thursday.alpha=0.4f
         }
         if(item.runningFri.equals("Y")){
-            holder.friday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.friday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.friday.alpha=1f
         }else{
-            holder.friday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.friday.alpha=0.5f
+            holder.friday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.friday.alpha=0.4f
         }
         if(item.runningSat.equals("Y")){
-            holder.saturday.setTextColor(context!!.resources.getColor(R.color.green))
+            holder.saturday.setTextColor(context!!.resources.getColor(R.color.green_dark))
             holder.saturday.alpha=1f
         }else{
-            holder.saturday.setTextColor(context!!.resources.getColor(R.color.grey_dark))
-            holder.saturday.alpha=0.5f
+            holder.saturday.setTextColor(context!!.resources.getColor(R.color.train_red))
+            holder.saturday.alpha=0.4f
         }
 
         if(mValues.get(position).fareRuleResponse!=null){

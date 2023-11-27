@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: C (1)">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/23833d4312e8cd9d8b845f518d06a8fe/transformed/jetified-PS_MATM_2.0.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/23833d4312e8cd9d8b845f518d06a8fe/transformed/jetified-PS_MATM_2.0.2/res" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/23833d4312e8cd9d8b845f518d06a8fe/transformed/jetified-PS_MATM_2.0.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/15133693c482bf6590aea1ece52ba215/transformed/jetified-PS_MATM_2.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/15133693c482bf6590aea1ece52ba215/transformed/jetified-PS_MATM_2.0.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/15133693c482bf6590aea1ece52ba215/transformed/jetified-PS_MATM_2.0.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

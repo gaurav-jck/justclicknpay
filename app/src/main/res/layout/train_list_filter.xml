@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:background="@color/color_white"
+    android:weightSum="1">
+    <LinearLayout
+        android:id="@+id/titleLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/small_margin"
+        android:background="@color/app_blue_color">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:text="Filter"
+            android:gravity="center"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/titleLin"
+        android:layout_above="@+id/applyLin">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PREFERRED CLASS"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/classLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin"
+                android:orientation="vertical">
+
+<!--                <CheckBox-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    />-->
+
+            </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FROM STATION"
+            android:padding="@dimen/small_margin"
+            android:textColor="@color/app_blue_color"
+            android:background="@color/color_white_hint"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:textSize="@dimen/simple_content_text_size"/>
+
+        <LinearLayout
+            android:id="@+id/fromLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/medium_margin"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TO STATION"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/toLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TRAIN TYPE"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/simple_content_text_size"/>
+
+            <LinearLayout
+                android:id="@+id/typeLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/medium_margin"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/applyLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/large_margin"
+        android:padding="@dimen/margin_5dp">
+        <TextView
+            android:id="@+id/cancelTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:padding="@dimen/margin_7dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"
+            android:gravity="center"
+            android:background="@drawable/app_blue_round_button_background"
+            />
+        <TextView
+            android:id="@+id/applyTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Apply"
+            android:padding="@dimen/margin_7dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:gravity="center"
+            android:background="@drawable/app_blue_round_button_background"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+
