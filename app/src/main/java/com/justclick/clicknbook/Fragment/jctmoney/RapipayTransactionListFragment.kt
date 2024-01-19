@@ -25,6 +25,7 @@ import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.jctmoney.adapter.RecyclerTransactionList
 import com.justclick.clicknbook.Fragment.jctmoney.request.DmtListRequestModel
+import com.justclick.clicknbook.Fragment.jctmoney.request.RefundRequest
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
@@ -56,6 +57,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     private val CALL_AGENT = 2
     private val STATUS_CHECK = 3
     private val REFUND = 4
+    private val REFUND_OTP = 5
     private val SHOW_PROGRESS = true
     private val NO_PROGRESS = false
     private var recyclerView: RecyclerView? = null
@@ -170,9 +172,13 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         listAdapter = RecyclerTransactionList(context, RecyclerTransactionList.OnRecyclerItemClickListener { view, list, data, position ->
             when (view.id) {
                 R.id.print_tv -> try {
-//                    Toast.makeText(context, "print", Toast.LENGTH_LONG).show()
-//                    openPrintDialog(list[position])
-                    openReceipt(data)
+//                    openReceipt(data)
+                    refundRequest= RefundRequest()
+                    refundRequest!!.TransactionId=data.transactionId
+                    refundRequest!!.LoggedInAgentCode=loginModel!!.Data.DoneCardUser
+                    refundRequest!!.AgentCode=data.agentCode
+                    refundRequest!!.referenceid=data.transactionId
+                    sendRefundOtp()
                 } catch (e: Exception) {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
@@ -184,8 +190,6 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                         val statusCheck=StatusCheck()
                         statusCheck.setTransactionId(data.jckTransactionId)
                         statusCheck.setLoggedInAgentCode(loginModel!!.Data.DoneCardUser)
-//                    statusCheck.setLoggedInAgentCode("JC0A39395")  //hard code
-//                    statusCheck.setLoggedInAgentCode("jc0o188")  //hard code
                         getStatus(statusCheck)
                     }
                 }
@@ -194,16 +198,21 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                     val statusCheck=StatusCheck()
                     statusCheck.setTransactionId(data.jckTransactionId)
                     statusCheck.setLoggedInAgentCode(loginModel!!.Data.DoneCardUser)
-//                    getStatus(statusCheck)
-//                    Toast.makeText(context, "Txn status="+data.txnStatus, Toast.LENGTH_SHORT).show()
 
-                    if(data.txnStatus.equals("3")){
+                    /*if(data.txnStatus.equals("3")){
 //                        Toast.makeText(context, "Pending refund="+data.txnStatus, Toast.LENGTH_SHORT).show()
                         getPendingRefundDialog(statusCheck)
                     }else{
 //                        Toast.makeText(context, "Reject refund="+data.txnStatus, Toast.LENGTH_SHORT).show()
                         getRejectRefund(statusCheck)
-                    }
+                    }*/
+
+                    refundRequest= RefundRequest()
+                    refundRequest!!.TransactionId=data.transactionId
+                    refundRequest!!.LoggedInAgentCode=loginModel!!.Data.DoneCardUser
+                    refundRequest!!.AgentCode=data.agentCode
+                    refundRequest!!.referenceid=data.transactionId
+                    sendRefundOtp()
                 }
 
             }
@@ -212,23 +221,29 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         view.recyclerView.setLayoutManager(layoutManager)
         view.recyclerView.setAdapter(listAdapter)
         if (arrayList != null && arrayList!!.size == 0) {
-            pageStart = 1
-            pageEnd = 10
-            transactionListRequestModel!!.setRowEnd(pageEnd)
-            transactionListRequestModel!!.setRowStart(pageStart)
-            transactionListRequestModel!!.setFromdate(startDateToSend + "")
-            transactionListRequestModel!!.setTodate(endDateToSend + "")
-            if (Common.checkInternetConnection(context)) {
-                callAgent(transactionListRequestModel, SHOW_PROGRESS)
-            } else {
-                Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_LONG).show()
-            }
+            refreshList()
         } else {
             listAdapter!!.notifyDataSetChanged()
         }
         view.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
         return view
     }
+
+    private fun refreshList() {
+        arrayList!!.clear()
+        pageStart = 1
+        pageEnd = 10
+        transactionListRequestModel!!.setRowEnd(pageEnd)
+        transactionListRequestModel!!.setRowStart(pageStart)
+        transactionListRequestModel!!.setFromdate(startDateToSend + "")
+        transactionListRequestModel!!.setTodate(endDateToSend + "")
+        if (Common.checkInternetConnection(context)) {
+            callAgent(transactionListRequestModel, SHOW_PROGRESS)
+        } else {
+            Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_LONG).show()
+        }
+    }
+
 
     private fun getStatus(statusCheck: StatusCheck) {
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface::class.java)
@@ -245,13 +260,14 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun getRejectRefund(statusCheck: StatusCheck) {
+    private fun sendRefundOtp() {
+        val json=Gson().toJson(refundRequest)
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface::class.java)
-        val call = apiService.getRapipayCommonPost(ApiConstants.Reject, statusCheck)
+        val call = apiService.getRapipayCommonPost(ApiConstants.Reject, refundRequest)
         NetworkCall().callService(call,context,true
         ) { response, responseCode ->
             if (response != null) {
-                responseHandler(response, STATUS_CHECK)
+                responseHandler(response, REFUND_OTP)
             } else {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
                     .show()
@@ -260,7 +276,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun getPendingRefundDialog(statusCheck: StatusCheck) {
+    private fun getPendingRefundDialog() {
         var refundDialog = Dialog(requireContext())
         refundDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         refundDialog.setContentView(R.layout.pending_refund_layout)
@@ -268,13 +284,13 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         val otp_edt = refundDialog.findViewById<View>(R.id.otp_edt) as EditText
         val submit = refundDialog.findViewById<View>(R.id.submit_btn) as Button
         val cancel_btn = refundDialog.findViewById<View>(R.id.cancel_btn) as Button
-        val dialogCloseButton = refundDialog.findViewById<View>(R.id.close_btn) as ImageButton
         submit.setOnClickListener {
             Common.preventFrequentClick(submit)
             if (Common.checkInternetConnection(context)) {
                 if (otp_edt.text.toString().trim().length > 3) {
-                    statusCheck.setPin(otp_edt.text.toString().trim())
-                    getPendingRefund(statusCheck)
+                    refundRequest!!.otp=otp_edt.text.toString().trim()
+                    refundDialog.dismiss()
+                    claimRefund()
                 } else {
                     Toast.makeText(context, R.string.empty_and_invalid_pin, Toast.LENGTH_LONG).show()
                 }
@@ -290,13 +306,15 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         refundDialog.show()
     }
 
-    private fun getPendingRefund(statusCheck: StatusCheck) {
+    private fun claimRefund() {
+//        {"referenceid":"240113201450010","ackno":"84922408","otp":"195699","AgentCode":"JC0A44794"}
+        var json = Gson().toJson(refundRequest)
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface::class.java)
-        val call = apiService.getRapipayCommonPost(ApiConstants.PendingRefund, statusCheck)
+        val call = apiService.getRapipayCommonPost(ApiConstants.ClaimRefund, refundRequest)
         NetworkCall().callService(call,context,true
         ) { response, responseCode ->
             if (response != null) {
-                responseHandler(response, STATUS_CHECK)
+                responseHandler(response, REFUND)
             } else {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
                     .show()
@@ -305,6 +323,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private var refundRequest:RefundRequest?=null
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
         when (TYPE) {
             CALL_AGENT -> try {
@@ -358,7 +377,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
 //                        arrayList!!.get(statusPosition).txnStatusDesc="Success"
 //                        listAdapter!!.notifyItemChanged(statusPosition)
                         Toast.makeText(context, commonResponse.getStatusMessage(), Toast.LENGTH_LONG).show()
-                        if(commonResponse.getTxnStatusCode().equals("0")){
+                        /*if(commonResponse.getTxnStatusCode().equals("0")){
                             arrayList!!.get(statusPosition).txnStatus=commonResponse.getTxnStatusCode()
                             arrayList!!.get(statusPosition).txnStatusDesc="Success"
                         }else if(commonResponse.getTxnStatusCode().equals("1")){
@@ -374,7 +393,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                             arrayList!!.get(statusPosition).txnStatus=commonResponse.getTxnStatusCode()
                         }
 
-                        listAdapter!!.notifyItemChanged(statusPosition)
+                        listAdapter!!.notifyItemChanged(statusPosition)*/
 
                     } /*else if(commonResponse.getStatusCode().equals("02", ignoreCase = true)) {
                         arrayList!!.get(statusPosition).txnStatusDesc="Pending"
@@ -391,15 +410,30 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
             } catch (e: Exception) {
                 e.printStackTrace()
             }
+            REFUND_OTP -> try {
+                val commonResponse = Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse::class.java)
+                if (commonResponse != null) {
+                    if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                        Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                        getPendingRefundDialog()
+                    } else {
+                        Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
             REFUND -> try {
                 val commonResponse = Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse::class.java)
                 if (commonResponse != null) {
-                    if (commonResponse.statusCode.equals("0", ignoreCase = true)) {
+                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    refreshList()
+                    /*if (commonResponse.statusCode.equals("0", ignoreCase = true)) {
 //                            openPrintDialog(commonResponse);
                         Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
                     } else {
                         Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

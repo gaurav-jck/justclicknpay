@@ -404,7 +404,7 @@
                                         android:textSize="@dimen/text_size_14sp"
                                         android:gravity="right"
                                         android:paddingRight="@dimen/margin_8dp"
-                                        android:visibility="visible"/>
+                                        android:visibility="gone"/>
                                 </LinearLayout>
 
                                 <TextView

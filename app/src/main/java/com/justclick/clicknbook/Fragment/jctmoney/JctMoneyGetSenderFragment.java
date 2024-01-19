@@ -4,6 +4,9 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,6 +139,25 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
         Typeface face = Common.TextViewTypeFace(context);
         get_tv.setTypeface(face);
         view.findViewById(R.id.back_arrow).setOnClickListener(this);
+
+       /* number_edt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if(charSequence.length()==10){
+                    getClicked();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });*/
     }
 
     private void getSenderDetail() {
@@ -257,20 +279,25 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                 break;
 
             case R.id.get_tv:
-                Common.hideSoftKeyboard((NavigationDrawerActivity)context);
-                Common.preventFrequentClick(get_tv);
-                if(Common.checkInternetConnection(context)) {
-                    if(isCheckCredential){
-                        checkCredential();
-                    }else {
-                        getSenderDetail();
-                    }
-                }else {
-                    Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
-                }
+                getClicked();
                 break;
         }
     }
+
+    private void getClicked() {
+        Common.hideSoftKeyboard((NavigationDrawerActivity)context);
+        Common.preventFrequentClick(get_tv);
+        if(Common.checkInternetConnection(context)) {
+            if(isCheckCredential){
+                checkCredential();
+            }else {
+                getSenderDetail();
+            }
+        }else {
+            Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private Boolean validate() {
 
         if (number_edt.getText().toString().length() < 10)

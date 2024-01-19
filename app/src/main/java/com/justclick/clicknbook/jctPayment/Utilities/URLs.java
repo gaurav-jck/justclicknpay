@@ -1,15 +1,16 @@
 package com.justclick.clicknbook.jctPayment.Utilities;
 
-import com.google.android.gms.common.api.Api;
+
 import com.justclick.clicknbook.ApiConstants;
+
 
 public class URLs {
     public static final String BASE_URL_NEW = ApiConstants.BASE_URL_AEPS;
     public static final String BASE_URL = ApiConstants.BASE_URL_AEPS_OLD;
+//    public static final String BASE_URL_N = ApiConstants.BASE_URL_AEPS_N;
     public static final String BASE_URL_N = ApiConstants.BASE_URL_AEPS_N;
+//    public static final String BASE_URL_N_Test = ApiConstants.BASE_URL_AEPS_N_test;
 //    public static final String BASE_URL = "http://uataeps-api-yes.justclicknpay.com/";
-//        public static final String BASE_URL = "http://13.232.248.121:8000/";
-//        public static final String BASE_URL = "http://172.25.25.69:8000/";
 //        public static final String BASE_URL = "https://aeps.justclicknpay.com/";
         public static final String AEPS_EXCEL_DOWNLOAD_URL = ApiConstants.AEPS_EXCEL_DOWNLOAD_URL;
     public static final String LIVE_BASE_URL = BASE_URL+"api/";
@@ -48,11 +49,11 @@ public class URLs {
 
     public static final String CheckKyc ="CheckKyc";
     public static final String InitiateOnBoard ="InitiateOnBoard";
-    public static final String WithdrawCash =BASE_URL_N+"B2B/AdharPayment/"+"WithdrawCash";
+    public static final String WithdrawCash =BASE_URL_N+"B2B/AdharPayment/"+"WithdrawCashAuthentication";
+    public static final String WithdrawAuth =BASE_URL_N+"B2B/AdharPayment/"+"Authenticity";
     public static final String BalanceCheck =BASE_URL_N+"B2B/AdharPayment/"+"BalanceCheck";
     public static final String BankStatment =BASE_URL_N+"B2B/AdharPayment/"+"BankStatment";
     public static final String AadharPay =   BASE_URL_N+"B2B/AdharPayment/"+"AadharPay";
-    public static String aepstest="https://Fantasy.justclicknpay.com/";
     public static final String AepsRegister =   BASE_URL_N+"B2B/AdharPayment/"+"Registration";
     public static final String AepsAuthenticate =   BASE_URL_N+"B2B/AdharPayment/"+"Authentication";
     public static final String StatusEnquiry ="StatusEnquiry";

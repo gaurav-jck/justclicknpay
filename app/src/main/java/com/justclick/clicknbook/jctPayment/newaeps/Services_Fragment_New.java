@@ -14,6 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -50,10 +54,10 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
     private final int BAL_ENQ=0, WITHDRAW=1, MINISTMT=2, AadharPay=3, REGISTER=4;
     private Context context;
     ProgressDialog progressDialog;
-//    private String partnerKey = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk=";
-    private String partnerKey = "UFMwMDE2NDdiMWVhYzI1MzRiODUyNDBhYWY2NDk2Mzc4ODcxOTY0";
-//    private String partnerId = "PS0068";
-    private String partnerId = "PS00164";
+    private String partnerKey = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk=";  //live
+//    private String partnerKey = "UFMwMDE2NDdiMWVhYzI1MzRiODUyNDBhYWY2NDk2Mzc4ODcxOTY0";
+    private String partnerId = "PS0068";   //live
+//    private String partnerId = "PS00164";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -201,16 +205,40 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
         intent.putExtra("pId", partnerId);
         intent.putExtra("pApiKey", partnerKey);
         intent.putExtra("mCode",loginModel.Data.DoneCardUser);
-//        intent.putExtra("mCode","JCG0125");
+//        intent.putExtra("mCode","JC0A46947");
         intent.putExtra("mobile", loginModel.Data.Mobile);
-//        intent.putExtra("mobile", "9012345688");
-        intent.putExtra("lat", "42.10");
-        intent.putExtra("lng", "76.00");
+//        intent.putExtra("mobile", "9012836576");
+        intent.putExtra("lat", "42.10101");
+        intent.putExtra("lng", "76.00101");
         intent.putExtra("firm", "JustClick");
         intent.putExtra("email", loginModel.Data.Email);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-        startActivityForResult(intent, 999);
+        onboardActivityResultLauncher.launch(intent);
     }
+
+    ActivityResultLauncher<Intent> onboardActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        boolean status = data.getBooleanExtra("status", false);
+                        int response = data.getIntExtra("response", 0);
+                        String message = data.getStringExtra("message");
+
+                        String detailedResponse = "Status: "+status+",  " +
+                                "Response: " +response+ "Message: "+message ;
+
+//                Toast.makeText(context, detailedResponse, Toast.LENGTH_SHORT).show();
+//                        Snackbar.make(getView(), detailedResponse, Snackbar.LENGTH_SHORT).show();
+                        alertBox(detailedResponse);
+//                Log.i("OnBoard: ", detailedResponse);
+                    }else {
+                        Toast.makeText(context, "Request cancelled.", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
     private void openWebView(String url) {
 //        Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
@@ -220,29 +248,6 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
 
 //        Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 //        context.startActivity(browser);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 999) {
-            if (resultCode == Activity.RESULT_OK) {
-                boolean status = data.getBooleanExtra("status", false);
-                int response = data.getIntExtra("response", 0);
-                String message = data.getStringExtra("message");
-
-                String detailedResponse = "Status: "+status+",  " +
-                        "Response: " +response+ "Message: "+message ;
-
-//                Toast.makeText(context, detailedResponse, Toast.LENGTH_SHORT).show();
-                Snackbar.make(getView(), detailedResponse, Snackbar.LENGTH_SHORT).show();
-                alertBox(detailedResponse);
-//                Log.i("OnBoard: ", detailedResponse);
-            }else {
-                Toast.makeText(context, "Request cancelled.", Toast.LENGTH_LONG).show();
-            }
-        }
-
     }
 
     private void alertBox(String detailedResponse) {

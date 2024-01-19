@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/app_blue_color"
-            android:hint="Enter Pin"
+            android:hint="Enter OTP"
             android:maxLines="1"
             android:text=""
             android:maxLength="@integer/otp_maxLength"

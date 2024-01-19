@@ -46,12 +46,12 @@ class KycActivity : AppCompatActivity(), View.OnClickListener {
         intent.putExtra("pId", partnerId)
         intent.putExtra("pApiKey", partnerKey)
 //        intent.putExtra("mCode",loginModel.Data.DoneCardUser);
-//        intent.putExtra("mCode",loginModel.Data.DoneCardUser);
-        intent.putExtra("mCode", "JCG0125")
-//        intent.putExtra("mobile", loginModel.Data.Mobile)
-        intent.putExtra("mobile", "9012345688")
-        intent.putExtra("lat", "42.10")
-        intent.putExtra("lng", "76.00")
+        intent.putExtra("mCode",loginModel.Data.DoneCardUser)
+//        intent.putExtra("mCode", "JCG0125")
+        intent.putExtra("mobile", loginModel.Data.Mobile)
+//        intent.putExtra("mobile", "9012345688")
+        intent.putExtra("lat", "42.10101")
+        intent.putExtra("lng", "76.00101")
         intent.putExtra("firm", "JustClick")
         intent.putExtra("email", loginModel.Data.Email)
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)

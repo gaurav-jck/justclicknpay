@@ -1,0 +1,151 @@
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Transaction Authenticate"
+        android:textSize="@dimen/simple_content_text_size"
+        android:textColor="@color/color_white"
+        android:background="@drawable/blue_rect_button_background"
+        android:padding="@dimen/medium_margin"
+        android:gravity="center"
+        />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center_vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/aadhar_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:hint="@string/aadharNoHint"
+        android:textColorHint="@color/colorHint">
+
+        <EditText
+            android:id="@+id/txt_aadharno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:digits="@string/mobile_digit"
+            android:maxLines="1"
+            android:maxLength="12"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/mobile_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:hint="@string/enter_mobile"
+        android:textColorHint="@color/colorHint">
+
+        <EditText
+            android:id="@+id/txt_mobileno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="6"
+            android:digits="@string/mobile_digit"
+            android:maxLines="1"
+            android:maxLength="@integer/mobileMaxLength"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/colorText"
+            android:textSize="@dimen/aeps_input_text_size" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/margin_30dp"
+        >
+
+        <RadioButton
+            android:id="@+id/rb_mantra"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="Mantra"
+            android:checked="true"
+            android:buttonTint="@color/darkBlueColor"
+            android:textColor="@color/darkBlueColor"/>
+
+        <RadioButton
+            android:id="@+id/rb_morpho"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Morpho"
+            android:buttonTint="@color/darkBlueColor"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/darkBlueColor"
+            android:visibility="visible"/>
+
+        <RadioButton
+            android:id="@+id/rb_startek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Startek"
+            android:layout_marginLeft="20dp"
+            android:buttonTint="@color/darkBlueColor"
+            android:textColor="@color/darkBlueColor"
+            android:visibility="visible"/>
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_40dp"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/color_white"
+            android:background="@drawable/button_shep"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/btn_authenticate"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Authenticate"
+            android:textSize="@dimen/simple_content_text_size"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:background="@drawable/button_shep"
+            android:layout_marginLeft="5dp"/>
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/withdraw_auth_note"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_size_13sp"
+            android:layout_marginTop="@dimen/size_20dp"/>
+    </LinearLayout>
+</LinearLayout>

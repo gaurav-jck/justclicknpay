@@ -97,6 +97,9 @@ public class MyTrainStationDialog {
 
             ArrayAdapter adapter= new ArrayAdapter(context, R.layout.train_autocomplete_layout, R.id.name_tv, stationArray);
             city_edt.setAdapter(adapter);
+            city_edt.requestFocus();
+            city_edt.setFocusable(true);
+            city_edt.setFocusableInTouchMode(true);
 
             city_edt.setHint(msg);
             loginModel=new LoginModel();

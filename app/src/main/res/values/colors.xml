@@ -57,6 +57,10 @@
     <color name="registration_text_color">#2c67b5</color>
     <color name="signUpSalutationColor">#119bc9</color>
 
+    <!--Bank details color-->
+    <color name="bankLabelColor">#404040</color>
+    <color name="bankValueColor">#09528f</color>
+
     <!--Mobile Fragment-->
     <color name="mobile_cardview_background">#90000000</color>
     <color name="mobile_background_image_color">#aa000000</color>

@@ -27,6 +27,8 @@
     <dimen name="text_size_14sp">14sp</dimen>
     <dimen name="text_size_13sp">13sp</dimen>
 
+    <dimen name="bankDetailsTextSize">13sp</dimen>
+
     <!--margins-->
     <dimen name="very_small_margin">3dp</dimen>
     <dimen name="small_margin">5dp</dimen>

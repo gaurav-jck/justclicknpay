@@ -132,6 +132,13 @@ class TrainBookingResponseFragment : Fragment() {
                         // same time, respect the user's decision. Don't link to system
                         // settings in an effort to convince the user to change their
                         // decision.
+
+                        try {
+                            bitmap = loadBitmapFromView(scrollView, scrollView!!.getWidth(), scrollView!!.getChildAt(0).getMeasuredHeight());
+                            createPdf();
+                        }catch (e:Exception){
+                            Toast.makeText(requireContext(), "Unable to create PDF !", Toast.LENGTH_SHORT).show()
+                        }
                     }
                 }
 

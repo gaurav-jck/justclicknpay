@@ -27,7 +27,7 @@
                 <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/justclickkaroservicesDebug/R.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/00e93d42601ec988712e51b5e214ca21/transformed/jetified-jxl-2.6.12.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/3680444ea36b36a135c7bf7e1aa3b058/transformed/jetified-simple-xml-2.7.1.jar</arg>
-                <arg>$USER_HOME$/.jdks/caches/transforms-3/a1c67394a498a83c83d489ffa6231873/transformed/jetified-finalonboardinglib-release_v1_0_9-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/36da643dc8bb2b7ffda86bcb257817e5/transformed/jetified-onboardinglib_V.1.1.13-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/a0a00c7b2463b68252109099a1f4487a/transformed/jetified-PS_MATM_2.0.2-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/a2d2a4f539572e0df8e7012adc860d96/transformed/jetified-FINO_PS_MATM-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/96a9e02920b1564f71bb87a8d5514884/transformed/jetified-android-image-cropper-2.8.0-api.jar</arg>
@@ -230,6 +230,9 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug" type="java-resource" />
@@ -243,6 +246,9 @@
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/justclickkaroservices/debug" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />

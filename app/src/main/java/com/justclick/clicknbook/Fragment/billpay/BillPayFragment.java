@@ -670,8 +670,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
 
-        }else if(!Common.isRegexValid(userIdEdt.getText().toString().trim(), operatorPostpaidSelector.regex)){
-            Toast.makeText(context, operatorPostpaidSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorPostpaidSelector.regex!=null && operatorPostpaidSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdt.getText().toString().trim(), operatorPostpaidSelector.regex)){
+            Toast.makeText(context, ((operatorPostpaidSelector.displayname!=null &&
+                    operatorPostpaidSelector.displayname.length()>0)?operatorPostpaidSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdt.getText().toString().trim().length()<7){
+            Toast.makeText(context, "Please enter valid number",Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;
@@ -683,8 +689,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(waterOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtWater.getText().toString().trim(), operatorWaterSelector.regex)){
-            Toast.makeText(context, operatorWaterSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorWaterSelector.regex!=null && operatorWaterSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtWater.getText().toString().trim(), operatorWaterSelector.regex)){
+            Toast.makeText(context, ((operatorWaterSelector.displayname!=null &&
+                    operatorWaterSelector.displayname.length()>0)?operatorWaterSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtWater.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }else if(operatorWaterSelector.ad1code && !Common.isRegexValid(userIdEdt2Water.getText().toString().trim(), operatorPostpaidSelector.ad1_regex)){
             Toast.makeText(context, operatorWaterSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -699,8 +711,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(datacardOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtDatacard.getText().toString().trim(), operatorDatacardSelector.regex)){
-            Toast.makeText(context, operatorDatacardSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorDatacardSelector.regex!=null && operatorDatacardSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtDatacard.getText().toString().trim(), operatorDatacardSelector.regex)){
+            Toast.makeText(context, ((operatorDatacardSelector.displayname!=null &&
+                    operatorDatacardSelector.displayname.length()>0)?operatorDatacardSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtDatacard.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }else if(operatorDatacardSelector.ad1code && !Common.isRegexValid(userIdEdt2Datacard.getText().toString().trim(), operatorDatacardSelector.ad1_regex)){
             Toast.makeText(context, operatorDatacardSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -715,8 +733,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(electricityOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtElectricity.getText().toString().trim(), operatorElectricitySelector.regex)){
-            Toast.makeText(context, operatorElectricitySelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorElectricitySelector.regex!=null && operatorElectricitySelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtElectricity.getText().toString().trim(), operatorElectricitySelector.regex)){
+            Toast.makeText(context, ((operatorElectricitySelector.displayname!=null &&
+                    operatorElectricitySelector.displayname.length()>0)?operatorElectricitySelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtElectricity.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }else if(operatorElectricitySelector.ad1code && !Common.isRegexValid(userIdEdt2Electricity.getText().toString().trim(), operatorElectricitySelector.ad1_regex)){
             Toast.makeText(context, operatorElectricitySelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -731,8 +755,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(landlineOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtLandline.getText().toString().trim(), operatorLandlineSelector.regex)){
-            Toast.makeText(context, operatorLandlineSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorLandlineSelector.regex!=null && operatorLandlineSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtLandline.getText().toString().trim(), operatorLandlineSelector.regex)){
+            Toast.makeText(context, ((operatorLandlineSelector.displayname!=null &&
+                    operatorLandlineSelector.displayname.length()>0)?operatorLandlineSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtLandline.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }else if(operatorLandlineSelector.ad1code && !Common.isRegexValid(userIdEdt2Landline.getText().toString().trim(), operatorLandlineSelector.ad1_regex)){
             Toast.makeText(context, operatorLandlineSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -747,8 +777,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(gasOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtGas.getText().toString().trim(), operatorGasSelector.regex)){
-            Toast.makeText(context, operatorGasSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorGasSelector.regex!=null && operatorGasSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtGas.getText().toString().trim(), operatorGasSelector.regex)){
+            Toast.makeText(context, ((operatorGasSelector.displayname!=null &&
+                    operatorGasSelector.displayname.length()>0)?operatorGasSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtGas.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }else if(operatorGasSelector.ad1code && !Common.isRegexValid(userIdEdt2Gas.getText().toString().trim(), operatorGasSelector.ad1_regex)){
             Toast.makeText(context, operatorGasSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -764,8 +800,14 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
         if(emiOperator.length()==0){
             Toast.makeText(context,R.string.select_operator,Toast.LENGTH_SHORT).show();
             return false;
-        }else if(!Common.isRegexValid(userIdEdtEmi.getText().toString().trim(), operatorEmiSelector.regex)){
-            Toast.makeText(context, operatorEmiSelector.displayname+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+        }else if(operatorEmiSelector.regex!=null && operatorEmiSelector.regex.length()>0 &&
+                !Common.isRegexValid(userIdEdtEmi.getText().toString().trim(), operatorEmiSelector.regex)){
+            Toast.makeText(context, ((operatorEmiSelector.displayname!=null &&
+                    operatorEmiSelector.displayname.length()>0)?operatorEmiSelector.displayname:"Bill Number")
+                    +" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
+            return false;
+        }else if(userIdEdtEmi.getText().toString().trim().length()<5){
+            Toast.makeText(context, "Please enter valid bill number",Toast.LENGTH_SHORT).show();
             return false;
         }/*else if(operatorEmiSelector.ad1code && !Common.isRegexValid(userIdEdt2Emi.getText().toString().trim(), operatorEmiSelector.ad1_regex)){
             Toast.makeText(context, operatorEmiSelector.ad1_name+" "+getString(R.string.empty_and_invalid_regex),Toast.LENGTH_SHORT).show();
@@ -889,14 +931,24 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void postpaidOperatorSelector(int position, String selectedValue) {
         mobileOperator=selectedValue;
         operatorPostpaidSelector =postpaidOperatorArrayList.get(position);
-        userIdInput.setHint(operatorPostpaidSelector.displayname);
+        String displayName=operatorPostpaidSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInput.setHint(displayName);
+        }else {
+            userIdInput.setHint("Bill Number");
+        }
 //        Toast.makeText(context,mobileOperator+"\nregex="+ operatorPostpaidSelector.regex,Toast.LENGTH_SHORT).show();
     }
 
     private void waterOperatorSelector(int position, String selectedValue) {
         waterOperator =selectedValue;
         operatorWaterSelector=waterOperatorArrayList.get(position);
-        userIdInputWater.setHint(operatorWaterSelector.displayname);
+        String displayName=operatorWaterSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputWater.setHint(displayName);
+        }else {
+            userIdInputWater.setHint("Bill Number");
+        }
         if(operatorWaterSelector.ad1code){
             userIdInput2Water.setVisibility(View.VISIBLE);
             userIdInput2Water.setHint(operatorWaterSelector.ad1_name);
@@ -909,7 +961,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void datacardOperatorSelector(int position, String selectedValue) {
         datacardOperator=selectedValue;
         operatorDatacardSelector=datacardOperatorArrayList.get(position);
-        userIdInputDatacard.setHint(operatorDatacardSelector.displayname);
+        String displayName=operatorDatacardSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputDatacard.setHint(displayName);
+        }else {
+            userIdInputDatacard.setHint("Bill Number");
+        }
         if(operatorDatacardSelector.ad1code){
             userIdInput2Datacard.setVisibility(View.VISIBLE);
             userIdInput2Datacard.setHint(operatorDatacardSelector.ad1_name);
@@ -921,7 +978,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void electricityOperatorSelector(int position, String selectedValue) {
         electricityOperator=selectedValue;
         operatorElectricitySelector=elecricityOperatorArrayList.get(position);
-        userIdInputElectricity.setHint(operatorElectricitySelector.displayname);
+        String displayName=operatorElectricitySelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputElectricity.setHint(displayName);
+        }else {
+            userIdInputElectricity.setHint("Bill Number");
+        }
         if(operatorElectricitySelector.ad1code){
             userIdInput2Electricity.setVisibility(View.VISIBLE);
             userIdInput2Electricity.setHint(operatorElectricitySelector.ad1_name);
@@ -933,7 +995,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void landlineOperatorSelector(int position, String selectedValue) {
         landlineOperator=selectedValue;
         operatorLandlineSelector=landlineOperatorArrayList.get(position);
-        userIdInputLandline.setHint(operatorLandlineSelector.displayname);
+        String displayName=operatorLandlineSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputLandline.setHint(displayName);
+        }else {
+            userIdInputLandline.setHint("Bill Number");
+        }
         if(operatorLandlineSelector.ad1code){
             userIdInput2Landline.setVisibility(View.VISIBLE);
             userIdInput2Landline.setHint(operatorLandlineSelector.ad1_name);
@@ -944,7 +1011,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void gasOperatorSelector(int position, String selectedValue) {
         gasOperator=selectedValue;
         operatorGasSelector=gasOperatorArrayList.get(position);
-        userIdInputGas.setHint(operatorGasSelector.displayname);
+        String displayName=operatorGasSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputGas.setHint(displayName);
+        }else {
+            userIdInputGas.setHint("Bill Number");
+        }
         if(operatorGasSelector.ad1code){
             userIdInput2Gas.setVisibility(View.VISIBLE);
             userIdInput2Gas.setHint(operatorGasSelector.ad1_name);
@@ -956,7 +1028,12 @@ public class BillPayFragment extends Fragment implements View.OnClickListener, A
     private void emiOperatorSelector(int position, String selectedValue) {
         emiOperator=selectedValue;
         operatorEmiSelector=emiOperatorArrayList.get(position);
-        userIdInputEmi.setHint(operatorEmiSelector.displayname);
+        String displayName=operatorEmiSelector.displayname;
+        if(displayName!=null && displayName.length()>0){
+            userIdInputEmi.setHint(displayName);
+        }else {
+            userIdInputEmi.setHint("Bill Number");
+        }
         if(operatorEmiSelector.ad1code){
             userIdInput2Emi.setVisibility(View.VISIBLE);
             if(operatorEmiSelector.ad1_name!=null && operatorEmiSelector.ad1_name.length()>0){

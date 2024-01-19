@@ -291,7 +291,7 @@
             android:layout_marginBottom="@dimen/small_margin"
             android:textColor="@color/color_white"
             android:textSize="@dimen/title_text_size"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_alignParentBottom="true"/>
 
     </LinearLayout>

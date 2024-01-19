@@ -9,49 +9,44 @@ public class ApiConstants
     public static final String GOOGLE_PLAY_STORE_URL ="https://play.google.com/store/apps/details?id=com.justclicknpay.justclickkaroservices";
     //    public static final String BASE_URL_LIVE_OLD ="https://ms.justclickkaro.com/";
     public static final String BASE_URL_TEST="http://uatms.justclicknpay.com/";
-    public static final String BASE_URL_TEST2="http://150.242.14.48:812/";
     public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
     public static final String BASE_URL=BASE_URL_LIVE;
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
-//    public static final String BASE_URL_INSURANCE="http://uatmb.justclicknpay.com/";  //test insurance url
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
     public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
-//    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
+    //    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
-//    public static final String BASE_URL_PAYOUT="http://wluatcashout.justclicknpay.com/";  //uat payout url
+    //    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
     public static final String BASE_URL_QR="https://payout.justclicknpay.com/";  //qr old url
-//    public static final String BASE_URL_QR="https://b2bpayoutApi.justclicknpay.com/";  //qr new url
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
+//    public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
     public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
-//    public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //live train url 21-Oct-23
+    //    public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //live train url 21-Oct-23
 //    public static final String BASE_URL_TRAIN="https://b2brailapi.justclicknpay.com/";  //change train url
     public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //change train url 2
-        public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
-        public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
-        public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N
-//        public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
-        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
-        public static final String BASE_URL_CREDIT="https://fantasy.justclicknpay.com/";
-        public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
-        public static final String BASE_URL_PAYTM_UAT="https://Uatremittance.justclicknpay.com/";
-        public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
+    public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
+    public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
+    public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
+    //        public static final String BASE_URL_AEPS_N="https://Uatmatm.justclicknpay.com/";   // AEPS URL N Test
+    public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
+    //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
+    public static final String BASE_URL_CREDIT="https://fantasy.justclicknpay.com/";
+    public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
+    public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_FORGET="https://payout.justclicknpay.com/";
- //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
+    //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
     public static final String AEPS_EXCEL_DOWNLOAD_URL="https://tinyurl.com/t4qe23w";   // AEPS Excel downloadURL
-    public static final String BASE_URL_TEMP_AIR="http://www.myhotelbox.com/mobile/";
-    public static final String BASE_URL_BUS_TEST="http://uatms.justclicknpay.com:116/";
     public static final String BASE_URL_RBL_TEST="http://uatms.justclickkaro.com/";
     public static final String BASE_URL_RBL_LIVE="http://rbldmt.justclickkaro.com/";   //API for app session
     public static final String BASE_URL_RBL = BASE_URL_RBL_TEST;
     public static final String TermsAndConditionUrl="https://www.justclickkaro.com/Registerterms.htm";
-    public static final String FlightImageBaseUrlOld="https://client.justclicktravels.in/jct/flightimage/";
     public static final String FlightImageBaseUrl="https://client.justclickkaro.com/jct/flightimage/";
     public static final String RblPage="RBLService.svc/";
     public static final String MobilePage="MobileServices.svc/";
     public static final String MerchantId="JUSTCLICKTRAVELS";
     public static final String AGENTLOGIN="AGENTLOGIN";
-//    public static final String LOGIN="LOGIN";
+    //    public static final String LOGIN="LOGIN";
     public static final String LOGIN="INDIALOGIN";
     public static final String REGISTRATION="REGISTRATION";
     public static final String UploadFile="UploadFile";
@@ -86,7 +81,7 @@ public class ApiConstants
     public static final String AirSalesReport ="AirSalesReport";
     public static final String TRAVELSESSION ="TRAVELSESSION";
 
-//    Account Stmt
+    //    Account Stmt
     public static final String TransactionType ="TransactionType";
     public static final String AccountStatementList ="AccountStatementList";
 
@@ -179,7 +174,7 @@ public class ApiConstants
     public static final String GetRefund ="GetRefund";
     public static final String TransactionStatus ="TransactionStatus";
 
-//    Rapipay
+    //    Rapipay
     public static final String CheckCredential ="CheckCredential";
     public static final String SenderDetail ="SenderDetail";
     public static final String DeleteBenificiary ="DeleteBenificiary";
@@ -192,19 +187,20 @@ public class ApiConstants
     public static final String DmtTransactionList   ="DmtTransactionList";
     public static final String Reject   ="Reject";
     public static final String PendingRefund   ="PendingRefund";
+    public static final String ClaimRefund   ="ClaimRefund";
 
-//    MATM
+    //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";
     public static final String PaysprintCashWithDraw   ="PaysprintCashWithDraw";
     public static final String TransactionListMatm   ="TransactionList";
     public static final String MatmAppLog   ="MatmAppLog";
     public static final String StatusCheck   ="StatusCheck";
 
-//    insurance
+    //    insurance
     public static final String InsValidateExePA ="InsValidateExePA";
     public static final String InsTransactionList ="InsTransactionList";
 
-//    Train
+    //    Train
     public static final String Availablity="Availablity";
     public static final String TrainRoute="TrainRoute";
     public static final String StationSearch="common_city_station_search.json";
@@ -215,12 +211,12 @@ public class ApiConstants
     public static final String CancelTicket="CancelTicket";
     public static final String VerifyOtpRefund="VerifyOtpRefund";
 
-//    Payout
+    //    Payout
     public static final String ValidateCredential="ValidateCredential";
     public static final String CashfreeTrans="Transaction";
     public static final String PayoutTransactionList="TransactionList";
     public static final String CheckStatus="CheckStatus";
-//    qr
+    //    qr
     public static final String Authentication="Authentication";
     public static final String VPACheck="VPACheck";
 
@@ -229,24 +225,27 @@ public class ApiConstants
     public static final String FetchLicBill   ="FetchLicBill";
     public static final String PayLicBill   ="PayLicBill";
 
-//    Bill Pay
+    //    Bill Pay
     public static final String Operatorlist   ="Operatorlist";
     public static final String Fetchbilldetails   ="Fetchbilldetails";
     public static final String PayBillpayments   ="PayBillpayments";
     public static final String getcommission   ="getcommission";
 
-//    PaytmWallet
+    //    PaytmWallet
     public static final String SendOtp="SendOtp";
     public static final String VerifyOtp="VerifyOtp";
     public static final String TopUp="TopUp";
-//    PaytmNew
+    //    PaytmNew
     public static final String WalletTransfer="WalletTransfer";
 
-//    Credit card
+    //    Credit card
     public static final String generateOTP="generateOTP";
     public static final String ccinitiatetrans="ccinitiatetrans";
 
-//    support
+    //    support
     public static final String query="query";
 
 }
+
+//urls
+//login url=https://ams.justclicknpay.com/MobileServices.svc/INDIALOGIN

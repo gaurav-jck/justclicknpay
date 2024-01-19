@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: C">
     <CLASSES>
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/98da28aa66fe1e0b66b83b0fae232763/transformed/jetified-finalonboardinglib-release_v1_0_9/res" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/98da28aa66fe1e0b66b83b0fae232763/transformed/jetified-finalonboardinglib-release_v1_0_9/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/98da28aa66fe1e0b66b83b0fae232763/transformed/jetified-finalonboardinglib-release_v1_0_9/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/e395f67133db215f21e517df8abbc550/transformed/jetified-onboardinglib_V.1.1.13/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/e395f67133db215f21e517df8abbc550/transformed/jetified-onboardinglib_V.1.1.13/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/e395f67133db215f21e517df8abbc550/transformed/jetified-onboardinglib_V.1.1.13/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

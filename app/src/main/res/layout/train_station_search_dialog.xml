@@ -64,6 +64,8 @@
             android:paddingLeft="@dimen/medium_margin"
             android:singleLine="true"
             android:text=""
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:maxLength="150"
             android:minHeight="40dp"
             android:textSize="@dimen/text_size_18sp"

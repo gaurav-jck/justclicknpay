@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -127,8 +128,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     String d_type = MANTRA, adharType = ADHAR_UID;
     private ArrayList<String> positions;
     int TYPE = CASH_WITH;
-    String URL;
-    private boolean isGetAgain;
+    String URL, AuthUrl=URLs.WithdrawAuth, MerAuthTxnId;
+    Dialog authDialog;
+    private boolean isGetAgain, isTxnAuthenticated;
 
 
     @Override
@@ -377,6 +379,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
             }
         });
+
+        if(!isTxnAuthenticated && TYPE==CASH_WITH){
+            openTxnAuthDialog();
+        }
     }
 
     public void captureData() {
@@ -556,7 +562,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     public class AepsTxnRequest {
         public String AgentCode, Mode = "APP", Merchant = ApiConstants.MerchantId, SessionKey, SessionRefNo,
                 Lattitude, Longitude, DeviceId, TxnType = "AADHAAR", AadharNumber, PId,
-                BankIIN, BankName, Mobile, CustomerName = "";
+                BankIIN, BankName, Mobile, CustomerName = "", MerAuthTxnId;
         public int Amount;
     }
 
@@ -580,52 +586,170 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
         } //        {"statusCode":"01","statusMessage":"Issuer bank is inoperative","cashWithdrawal":[{"bankName":"Punjab National Bank","availableBalance":"","rrn":"112518295010","accountNumber":"XXXXXXXX2683","status":"Failed","transactionId":"MA05051WS4SJC0A13387"}]}
     }
 
-    public void mobileTxn() {
-        AepsTxnRequest request = new AepsTxnRequest();
-        LoginModel loginModel = new LoginModel();
-        request.AgentCode = MyPreferences.getLoginData(loginModel, context).Data.DoneCardUser;
-        request.SessionKey = MyPreferences.getSessionKey(context);
-        request.SessionRefNo = MyPreferences.getSessionRefNo(context);
-        request.Lattitude = mCurrentLocation.getLatitude() + "";
-        request.Longitude = mCurrentLocation.getLongitude() + "";
-        request.DeviceId = Common.getDeviceId(context);
-        request.AadharNumber = str_aadhar;
-        request.Mobile = str_mobile;
-        request.Amount = Integer.parseInt(str_amount);
-        request.BankName = str_b_name;
-        request.BankIIN = bank_iin.get(str_b_name);
-        if (d_type.equals(MORPHO)) {
-            request.PId = Base64.encodeToString(pidDataXML.
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
-        } else {
-            request.PId = Base64.encodeToString(("<?xml version=\"1.0\"?>" + pidDataXML).
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
+    public void openTxnAuthDialog(){
+        isTxnAuthenticated=false;
+        authDialog = new Dialog(context, R.style.Theme_Design_Light);
+        authDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        authDialog.setContentView(R.layout.txn_auth_dialog);
+        authDialog.setCancelable(false);
+//        Window window = authDialog.getWindow();
+//        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
+//                LinearLayout.LayoutParams.MATCH_PARENT);
+
+        EditText txt_aadharno = authDialog.findViewById(R.id.txt_aadharno);
+        EditText txt_mobileno = authDialog.findViewById(R.id.txt_mobileno);
+        Button btn_cancel = authDialog.findViewById(R.id.btn_cancel);
+        Button btn_authenticate = authDialog.findViewById(R.id.btn_authenticate);
+
+        txt_aadharno.setText(MyPreferences.getAgentAdhar(context));
+        txt_mobileno.setText(MyPreferences.getAgentMobile(context));
+
+        ((RadioGroup) authDialog.findViewById(R.id.radio_group)).setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.rb_mantra:
+                    d_type = MANTRA;
+                    break;
+                case R.id.rb_startek:
+                    d_type = STARTEK;
+                    break;
+                case R.id.rb_morpho:
+                    d_type = MORPHO;
+                    break;
+            }
+        });
+
+        btn_cancel.setOnClickListener(v->{
+            finish();
+        });
+        btn_authenticate.setOnClickListener(v->{
+            str_aadhar=txt_aadharno.getText().toString();
+            str_mobile=txt_mobileno.getText().toString();
+            if(str_aadhar.length()<12){
+                txt_aadharno.setError("Please enter 12 digit aadhar number");
+            }else if(str_mobile.length()<10){
+                txt_mobileno.setError("Please enter 10 digit mobile number");
+            }else {
+                captureDataAuth();
+            }
+        });
+        authDialog.show();
+    }
+
+    public void captureDataAuth() {
+        try {
+            if (d_type.equals(STARTEK)) {
+                if (searchPackageName(STARTEK_PACKAGE)) {
+                    String pidOptXML = createPidOptXML();
+                    capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                }
+            } else if (d_type.equals(MANTRA)) {
+                if (searchPackageName(MANTRA_PACKAGE)) {
+//                    String pidOptXML = getPIDOptions();
+//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                    capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                }
+            } else if (d_type.equals(MORPHO)) {
+                if (searchPackageName(MORPHO_PACKAGE)) {
+//                    String pidOptXML = createPidOptXML();
+//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"morphokey\" value=\"\" /></CustOpts> </PidOptions>";
+                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"morphokey\" value=\"\" /></CustOpts> </PidOptions>";
+                    capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                }
+            }
+        } catch (Exception e) {
+            showMessageDialogue(getString(R.string.captureError), "Capture Error");
         }
-        isGetAgain = false;
-        new NetworkCall().callAepsServiceHeaderNew(request, URLs.CashWithdrawal, context,
-                new NetworkCall.RetrofitResponseListener() {
+    }
+    public class AuthResponse {
+        public String statusCode, statusMessage, merAuthTxnId;
+    }
+    private void sendAuthTransaction() {
+        final String str_token = MyPreferences.getToken(context);
+        final ProgressDialog progressDialog = new ProgressDialog(context);
+        progressDialog.setMessage("Sending The Request....");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, AuthUrl,
+                new Response.Listener<String>() {
                     @Override
-                    public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                        MyCustomDialog.hideCustomDialog();
-                        if (response != null) {
-                            try {
-//                                Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
-                                AepsResponse commonResponseModel = new Gson().fromJson(response.string(), AepsResponse.class);
+                    public void onResponse(String response) {
+                        progressDialog.dismiss();
+                        try {
+                            AuthResponse commonResponseModel = new Gson().fromJson(response, AuthResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    openReceipt(commonResponseModel);
-                                } else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                            if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                isTxnAuthenticated=true;
+                                MerAuthTxnId=commonResponseModel.merAuthTxnId;
+                                if(authDialog!=null){
+                                    authDialog.dismiss();
                                 }
-                            } catch (Exception e) {
-                                Toast.makeText(context, "exception", Toast.LENGTH_SHORT).show();
+//                                    openReceipt(commonResponseModel);
+                            } else {
+                                Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
                             }
-                        } else {
-                            Toast.makeText(context, "no response", Toast.LENGTH_SHORT).show();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            Toast.makeText(context, getResources().getString(R.string.transactionExceptionBal), Toast.LENGTH_LONG).show();
                         }
                     }
-                }, MyPreferences.getUserData(context), MyPreferences.getAepsToken(context));
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        progressDialog.dismiss();
+                        error.printStackTrace();
+                        Toast.makeText(context, getResources().getString(R.string.transactionErrorBal)/*+"\n"+error.getMessage()*/, Toast.LENGTH_LONG).show();
+//                        logEvents(str_token, error.getMessage());
+                    }
+                }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> pars = new HashMap<String, String>();
+                //pars.put("Content-Type", "application/x-www-form-urlencoded");
+                pars.put("UserData", MyPreferences.getUserData(context));
+                pars.put("token", MyPreferences.getAepsToken(context));
+                return pars;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+
+                params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
+                params.put("Mobile", str_mobile);
+                params.put("Merchant", ApiConstants.MerchantId);
+                params.put("Mode", "APP");
+                params.put("AadharNumber", str_aadhar);
+//                params.put("Latitude", mCurrentLocation.getLatitude() + "");
+//                params.put("Longitude", mCurrentLocation.getLongitude() + "");
+                params.put("Lattitude", 28.70111 + "");
+                params.put("Longitude", 77.10112 + "");
+                params.put("PId", pidDataXML);
+                if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+                    params.put("PId", pidDataXML.replace("\n", ""));  //.replace("\n","")
+                } else {
+                    params.put("PId", ("<?xml version=\"1.0\"?>" + pidDataXML).replace("\n", ""));
+                }
+                /*if(d_type.equals(MORPHO)){
+                    params.put("PId", Base64.encodeToString(pidDataXML.
+                            getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n",""));
+                }else {
+                    params.put("PId", Base64.encodeToString(("<?xml version=\"1.0\"?>"+pidDataXML).
+                            getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n",""));
+                }*/
+                return params;
+            }
+
+        };
+
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(120000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     private void sendMobileTransaction() {
@@ -645,11 +769,21 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                             if (TYPE == CASH_WITH) {
                                 AepsResponse commonResponseModel = new Gson().fromJson(response, AepsResponse.class);
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    openReceipt(commonResponseModel);
-                                } else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                if(commonResponseModel!=null){
+                                    if (commonResponseModel.statusCode.equalsIgnoreCase("00")) {
+                                        Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                        MerAuthTxnId=null;
+                                        openTxnAuthDialog();
+                                        openReceipt(commonResponseModel);
+                                    } else if(commonResponseModel.cashWithdrawal!=null){
+                                        Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                        MerAuthTxnId=null;
+                                        openTxnAuthDialog();
+                                    }else {
+                                        Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
+                                    }
+                                }else {
+                                    Toast.makeText(context, "Please check transaction history before retry..", Toast.LENGTH_LONG).show();
                                 }
                             } else {
                                 AdharPayResponse commonResponseModel = new Gson().fromJson(response, AdharPayResponse.class);
@@ -696,6 +830,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 params.put("AadharNumber", str_aadhar);
                 params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
                 params.put("Merchant", ApiConstants.MerchantId);
+                params.put("MerAuthTxnId", MerAuthTxnId);
                 params.put("Mode", "APP");
 //                params.put("Latitude", mCurrentLocation.getLatitude() + "");
 //                params.put("Longitude", mCurrentLocation.getLongitude() + "");
@@ -850,7 +985,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 //            et_aadhar.requestFocus();
             return false;
         } else if (adharType.equals(ADHAR_UID) && str_aadhar.length() != 12) {
-            et_aadhar.setError("Please enter 12 digiet Aadhar Number");
+            et_aadhar.setError("Please enter 12 digit Aadhar Number");
 //            et_aadhar.requestFocus();
             return false;
         } else if (adharType.equals(VIRTUAL_ID) && TextUtils.isEmpty(str_aadhar)) {
@@ -993,11 +1128,6 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     // pid data xml for mantra
     private String getPIDOptions() {
         try {
-            /*int fingerCount = spinnerTotalFingerCount.getSelectedItemPosition() + 1;
-            int fingerType = spinnerTotalFingerType.getSelectedItemPosition();
-            int fingerFormat = spinnerTotalFingerFormat.getSelectedItemPosition();
-            String pidVer = edtxPidVer.getText().toString();
-            String timeOut = edtxTimeOut.getText().toString();*/
             String posh = "UNKNOWN";
             if (positions.size() > 0) {
                 posh = positions.toString().replace("[", "").replace("]", "").replaceAll("[\\s+]", "");
@@ -1141,9 +1271,11 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 String s_status = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errCode").getNodeValue();
 
                 if (s_status.equals("0")) {
-//                    isDataCaptured=true;
-                    showTransactionAlert();
-//                    showMessageDialogue("Data captured", "Fingerprint data status");
+                    if(!isTxnAuthenticated && TYPE==CASH_WITH){
+                        sendAuthTransaction();
+                    }else {
+                        showTransactionAlert();
+                    }
                 } else {
                     String s_message = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errInfo").getNodeValue();
                     showMessageDialogue(s_message, "Fingerprint data status");
@@ -1180,8 +1312,6 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
-//                        Toast.makeText(context, "Confirmed", Toast.LENGTH_SHORT).show();
-//                        checkPermissions();
                         sendMobileTransaction();
                     }
                 })
@@ -1196,9 +1326,6 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 
     // serach package
     private boolean searchPackageName(String mPackageName) {
-//        PackageManager pm = this.getPackageManager();
-        //String packageName = "com.acpl.registersdk";
-//        String packageName = "com.mantra.rdservice";
 
         PackageManager packageManager = getPackageManager();
         List<PackageInfo> packageList = packageManager
@@ -1209,11 +1336,6 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 isPackage = true;
             }
         }
-
-//        String packageName = mPackageName;
-//        Intent intent = new Intent();
-//        intent.setPackage(packageName);
-//        List listTemp = pm.queryIntentActivities(intent, PackageManager.PERMISSION_GRANTED);
 
 //        if (listTemp.size() <= 0) {
         if (!isPackage) {

@@ -187,37 +187,13 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/sales_report_lin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/large_margin"
-                android:visibility="gone"
-                >
-
-                <ImageView
-                    android:layout_width="@dimen/drawer_image_size"
-                    android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_cash_black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Recharge History"
-                    android:textSize="@dimen/drawer_content_text_size"
-                    android:textColor="@color/main_text_color"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
-            </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@color/color_black_hint"
                 android:layout_marginTop="@dimen/small_margin"
-                android:alpha="0.4">
+                android:alpha="0.4"
+                android:visibility="gone">
 
             </View>
 
@@ -226,81 +202,8 @@
                 android:id="@+id/menu_items_lin_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/insurance_lin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/large_margin"
-                android:visibility="gone"
-                >
-                <ImageView
-                    android:id="@+id/iv_insurance"
-                    android:layout_width="@dimen/drawer_image_size"
-                    android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_rupee" />
-                <TextView
-                    android:id="@+id/tv_insurance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_insurance"
-                    android:textSize="@dimen/drawer_content_text_size"
-                    android:textColor="@color/main_text_color"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/insurance_list_lin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/large_margin"
-                android:visibility="gone"
-                >
-                <ImageView
-                    android:id="@+id/iv_insurance_list"
-                    android:layout_width="@dimen/drawer_image_size"
-                    android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_rupee" />
-                <TextView
-                    android:id="@+id/tv_insurance_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_insurance"
-                    android:textSize="@dimen/drawer_content_text_size"
-                    android:textColor="@color/main_text_color"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/train_lin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:paddingLeft="@dimen/large_margin"
-                android:visibility="gone"
-                >
-                <ImageView
-                    android:id="@+id/iv_train"
-                    android:layout_width="@dimen/drawer_image_size"
-                    android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/train_booking_check_icon" />
-                <TextView
-                    android:id="@+id/tv_rapipay"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/nav_train_search"
-                    android:textSize="@dimen/drawer_content_text_size"
-                    android:textColor="@color/main_text_color"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+                android:orientation="vertical"
+                android:visibility="gone">
 
             </LinearLayout>
 
@@ -322,6 +225,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/nav_chatting"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bank_details_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                >
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/bank_account_icon" />
+                <TextView
+                    android:id="@+id/bankDetailsTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Bank Details"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"

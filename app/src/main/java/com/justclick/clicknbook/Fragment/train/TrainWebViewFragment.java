@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -147,7 +148,15 @@ public class TrainWebViewFragment extends Fragment {
                         ((NavigationDrawerActivity)context).replaceFragment(fragment);
 //                        getParentFragmentManager().popBackStack();
                     }else {
-                        Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_LONG).show();
+                        String pnr="", resId="";
+                        if(responseModel.pnr!=null && responseModel.pnr.length()>0){
+                            pnr="Pnr="+responseModel.pnr;
+                        }
+                        if(responseModel.reservationid!=null && responseModel.reservationid.length()>0){
+                            resId="ReservationId="+responseModel.reservationid;
+                        }
+                        showCustomAlertDialog(context, responseModel.statusMessage+"\n"+pnr+"\n"+resId, "Api Response");
+//                        Toast.makeText(context, responseModel.statusMessage, Toast.LENGTH_LONG).show();
                     }
                 }
             }else {
@@ -156,6 +165,24 @@ public class TrainWebViewFragment extends Fragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void showCustomAlertDialog(Context context, String message, String title) {
+        // Create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.setCancelable(false);
+
+        // add a button
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // send data from the AlertDialog to the Activity
+            dialog.dismiss();
+            getParentFragmentManager().popBackStack();
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
@@ -261,6 +288,8 @@ public class TrainWebViewFragment extends Fragment {
             "    ]\n" +
             "}\n" +
             "\n";
+
+    String response2="{\"statusCode\":\"01\",\"statusMessage\":\"FLUSHED PNR / PNR NOT YET GENERATED- (134381610)\",\"reservationid\":\"R100148HUZJC0A46372\",\"pnr\":\"8112981878\",\"transactionDetails\":null,\"passengerDetails\":null,\"agentDetails\":null,\"fareDetails\":null}";
 
 
 }

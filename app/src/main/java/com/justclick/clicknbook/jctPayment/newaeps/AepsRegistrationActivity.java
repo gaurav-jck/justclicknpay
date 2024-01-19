@@ -164,6 +164,14 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         aadhar_no = findViewById(R.id.aadhar_no);
 
         findViewById(R.id.rb_virtual_id).setVisibility(View.GONE);
+        et_aadhar.setText(MyPreferences.getAgentAdhar(context));
+        txt_mobileno.setText(MyPreferences.getAgentMobile(context));
+        if(et_aadhar.getText().toString().length()==12){
+            showCapture();
+        }else {
+            hideCapture();
+        }
+
 
 //        sessionCheckMethod(false);
 
@@ -172,8 +180,6 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 
         final InputFilter[] filter16 = new InputFilter[1];
         filter16[0] = new InputFilter.LengthFilter(16);
-
-        hideCapture();
         et_aadhar.setFilters(filter12);
 
         ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -225,11 +231,11 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             Common.preventFrequentClick(btn_capture);
             str_aadhar = et_aadhar.getText().toString().trim();
             mobileNo = txt_mobileno.getText().toString().trim();
+            URL = URLs.AepsAuthenticate;
             if (Common.isMobileValid(mobileNo)) {
                 if (!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
                 } else {
-                    URL = URLs.AepsAuthenticate;
                     captureData();
                 }
             } else {
@@ -241,11 +247,11 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             Common.preventFrequentClick(btn_submit);
             str_aadhar = et_aadhar.getText().toString().trim();
             mobileNo = txt_mobileno.getText().toString().trim();
+            URL = URLs.AepsRegister;
             if (Common.isMobileValid(mobileNo)) {
                 if (!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
                 } else {
-                    URL = URLs.AepsRegister;
                     captureData();
                 }
             } else {
@@ -606,6 +612,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
                             if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                 Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();
+                                MyPreferences.saveAepsAgentData(str_aadhar, mobileNo, context);
 //                                    openReceipt(commonResponseModel);
                             } else {
                                 Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_LONG).show();

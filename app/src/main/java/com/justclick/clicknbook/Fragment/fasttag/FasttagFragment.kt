@@ -35,6 +35,7 @@ class FasttagFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private lateinit var viewModel: FasttagViewModel
     private var spinner_operator:Spinner?=null
+    private var mView:View?=null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,12 +45,12 @@ class FasttagFragment : Fragment(), AdapterView.OnItemSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel=ViewModelProvider(this).get(FasttagViewModel::class.java)
-        viewModel.getOperatorLiveData()!!.observe(this, {operatorList->
+        viewModel.getOperatorLiveData()!!.observe(this) { operatorList ->
             bindOperatorList(operatorList)
-        })
-        viewModel.fetchBillLiveData()!!.observe(this, {billDetails->
+        }
+        viewModel.fetchBillLiveData()!!.observe(this) { billDetails ->
             fetchBillDetails(billDetails)
-        })
+        }
     }
 
     private fun fetchBillDetails(billDetails: BillPayFragment.FetchBillResponseModel?) {
@@ -71,31 +72,32 @@ class FasttagFragment : Fragment(), AdapterView.OnItemSelectedListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view= inflater.inflate(R.layout.fasttag_fragment, container, false)
-        toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-        spinner_operator=view.findViewById(R.id.spinner_operator)
-        userIdEdt=view.findViewById(R.id.userIdEdt)
-        spinner_operator!!.setOnItemSelectedListener(this)
-        viewModel.getOperatorList(context)
+        if(mView==null){
+            mView= inflater.inflate(R.layout.fasttag_fragment, container, false)
+            toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
+            spinner_operator=mView!!.findViewById(R.id.spinner_operator)
+            userIdEdt=mView!!.findViewById(R.id.userIdEdt)
+            spinner_operator!!.onItemSelectedListener = this
+            viewModel.getOperatorList(context)
 
-        view.findViewById<TextView>(R.id.getBillTv).setOnClickListener{
-            if(userIdEdt!!.getText().toString().trim().isEmpty()){
-                Toast.makeText(context, "Please enter vehicle number", Toast.LENGTH_SHORT).show()
-            }else{
-                var billRequest= FetchBillRequest()
-                billRequest.Category = BillPayFragment.categoryFastTag
-                billRequest.canumber = userIdEdt!!.getText().toString().trim()
-                billRequest.operatorId = operatorData!!.operaterid
-                billRequest.AgentCode=MyPreferences.getLoginData(loginModel,context).Data.DoneCardUser
-                viewModel.fetchBillDetails(context, billRequest)
+            mView!!.findViewById<TextView>(R.id.getBillTv).setOnClickListener{
+                if(userIdEdt!!.getText().toString().trim().isEmpty()){
+                    Toast.makeText(context, "Please enter vehicle number", Toast.LENGTH_SHORT).show()
+                }else{
+                    var billRequest= FetchBillRequest()
+                    billRequest.Category = BillPayFragment.categoryFastTag
+                    billRequest.canumber = userIdEdt!!.getText().toString().trim()
+                    billRequest.operatorId = operatorData!!.operaterid
+                    billRequest.AgentCode=MyPreferences.getLoginData(loginModel,context).Data.DoneCardUser
+                    viewModel.fetchBillDetails(context, billRequest)
+                }
+            }
+
+            mView!!.findViewById<ImageView>(R.id.back_arrow).setOnClickListener{
+                parentFragmentManager.popBackStack()
             }
         }
-
-        view.findViewById<ImageView>(R.id.back_arrow).setOnClickListener{
-            parentFragmentManager.popBackStack()
-        }
-
-        return view
+        return mView!!
     }
 
     class FetchBillRequest {

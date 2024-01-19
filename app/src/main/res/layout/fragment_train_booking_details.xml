@@ -695,6 +695,237 @@
                     android:textSize="@dimen/text_size_13sp"/>
             </LinearLayout>
 
+            <RelativeLayout
+                android:id="@+id/agentLabelRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_color_very_light"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:paddingTop="@dimen/margin_2dp"
+                    android:paddingBottom="@dimen/margin_2dp"
+                    android:text="Agent Details"
+                    android:textColor="@color/text_dark_gray"
+                    android:textSize="@dimen/small_text_size" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:rotation="270"
+                    android:src="@drawable/arrow_left_back"
+                    app:tint="@color/gray_color" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/agentView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Principle Agent Name"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/principleAgentTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.3"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size11sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Customer Care Email"
+                        android:maxLines="1"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/agentEmailTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Customer Care Contact"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/agentMobileTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RSP Name"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/rspNameTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RSP Id"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/rspIdTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:layout_marginTop="@dimen/margin_2dp">
+
+                    <TextView
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="RSP Address"
+                        android:textSize="@dimen/small_text_size"/>
+
+                    <TextView
+                        android:id="@+id/rspAddressTv"
+                        android:layout_width="@dimen/size_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.2"
+                        android:text="1234"
+                        android:textColor="@color/color_grey"
+                        android:gravity="right"
+                        android:textSize="@dimen/small_text_size"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/instructionLabelRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/gray_color_very_light"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:paddingTop="@dimen/margin_2dp"
+                    android:paddingBottom="@dimen/margin_2dp"
+                    android:text="Instruction"
+                    android:textColor="@color/text_dark_gray"
+                    android:textSize="@dimen/small_text_size" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:rotation="270"
+                    android:src="@drawable/arrow_left_back"
+                    app:tint="@color/gray_color" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/instructionTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/irctc_instruction"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:textSize="@dimen/small_text_size10sp"
+                android:textColor="@color/grey_dark"/>
         </LinearLayout>
 
 

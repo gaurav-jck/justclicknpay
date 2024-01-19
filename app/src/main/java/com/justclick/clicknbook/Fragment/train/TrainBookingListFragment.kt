@@ -92,8 +92,8 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
 
     private fun changeBoardingStn(list: TrainBookingListResponseModel.reservationlist) {
         showCustomDialog()
-        val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getBoardingStnForChange("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getBoardingStnForChange(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/BoardingStation?Trainno="
                 +list!!.trainNumber+"&Date="+journeyDate(list.departDate)+"&fromStation="+
                 list.sourceCode+ "&toStation="+list.destinationCode+"&className="+list.journeyClass,
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
@@ -198,7 +198,7 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
         val call = apiService.getTrainBookingList(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/GetTopDetails",
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
-//                "", "OOU", ApiConstants.MerchantId, "App")   //JC0O188   "JC0A30527"
+//                "JC0A30527", "A", ApiConstants.MerchantId, "App")   //JC0O188   "JC0A30527"
         call.enqueue(object : Callback<TrainBookingListResponseModel?> {
             override fun onResponse(call: Call<TrainBookingListResponseModel?>, response: Response<TrainBookingListResponseModel?>) {
                 try {

@@ -425,7 +425,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         ((TextView) dialog.findViewById(R.id.confirm_message_tv)).setText(message);
         ((TextView) dialog.findViewById(R.id.cancel_tv)).setText(cancel);
         ((TextView) dialog.findViewById(R.id.submit_tv)).setText(submit);
-        dialog.findViewById(R.id.remark_edt).setVisibility(View.GONE); ;
+        dialog.findViewById(R.id.remark_edt).setVisibility(View.GONE);
 
         dialog.findViewById(R.id.cancel_tv).setOnClickListener(new View.OnClickListener() {
             @Override

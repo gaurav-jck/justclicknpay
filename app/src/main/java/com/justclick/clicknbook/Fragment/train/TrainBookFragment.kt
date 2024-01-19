@@ -55,6 +55,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private val Veg="Veg"
     private val NonVeg="Non Veg"
     private val DoNotSelect="No Food"
+    private val Snacks="Snacks"
     var loginModel:LoginModel?=null
     var passengerContainerLin:LinearLayout?=null
     var infantContainerLin:LinearLayout?=null
@@ -336,8 +337,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         if (!MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }
-        val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getServiceCityPinResponse("https://rail.justclicknpay.com/apiV1/RailEngine/PostOffice?pincode="+pin)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getServiceCityPinResponse(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/PostOffice?pincode="+pin)
         call.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 try {
@@ -375,8 +376,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         if (!MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }
-        val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getServiceCityPin("https://rail.justclicknpay.com/apiV1/RailEngine/Postofficecity?pincode="+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getServiceCityPin(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/Postofficecity?pincode="+
                 pin+"&pincity="+cityName)
         call.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
@@ -430,8 +431,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         if (!MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }
-        val apiService = APIClient.getClient("https://rail.justclicknpay.com/").create(ApiInterface::class.java)
-        val call = apiService.getServiceCityPinResponse("https://rail.justclicknpay.com/apiV1/RailEngine/PostOffice?pincode="+pin)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        val call = apiService.getServiceCityPinResponse(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/PostOffice?pincode="+pin)
         call.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 try {
@@ -968,6 +969,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             return NonVeg
         }else if(value.equals("D")){
             return DoNotSelect
+        }else if(value.equals("E")){
+            return Snacks
         }else{
             return value!!
         }
@@ -979,6 +982,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             Veg -> food="V"
             NonVeg -> food="N"
             DoNotSelect -> food="D"
+            Snacks -> food="E"
             else -> { // Note the block
                 food=value
             }

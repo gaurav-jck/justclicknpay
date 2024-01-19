@@ -89,11 +89,29 @@ class TrainBookingDetailsFragment : Fragment() {
                 DateAndTimeUtils.DateTrainInput,
                 DateAndTimeUtils.DateTrainOutput, trainResponse!!.transactionDetails.get(0).dateOfJourney)
 
-            setData(view)
+            try {
+                setData(view)
+            }catch (e:NullPointerException){
+
+            }
         }
 
         view.fareLabelRel.setOnClickListener {
             showHideFare(view)
+        }
+        view.agentLabelRel.setOnClickListener {
+            if(view.agentView.visibility== AdapterView.VISIBLE){
+                view.agentView.visibility= AdapterView.GONE
+            }else{
+                view.agentView.visibility= AdapterView.VISIBLE
+            }
+        }
+        view.instructionLabelRel.setOnClickListener {
+            if(view.instructionTv.visibility== AdapterView.VISIBLE){
+                view.instructionTv.visibility= AdapterView.GONE
+            }else{
+                view.instructionTv.visibility= AdapterView.VISIBLE
+            }
         }
 
         view.back_arrow.setOnClickListener {
@@ -127,6 +145,12 @@ class TrainBookingDetailsFragment : Fragment() {
                     // same time, respect the user's decision. Don't link to system
                     // settings in an effort to convince the user to change their
                     // decision.
+                    try {
+                        bitmap = loadBitmapFromView(scrollView, scrollView!!.getWidth(), scrollView!!.getChildAt(0).getMeasuredHeight());
+                        createPdf();
+                    }catch (e:Exception){
+                        Toast.makeText(requireContext(), "Unable to create PDF !", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
 
@@ -215,14 +239,14 @@ class TrainBookingDetailsFragment : Fragment() {
             var nameTv:TextView=child.findViewById(R.id.nameTv)
             nameTv.text= list.name
             var ageTv:TextView=child.findViewById(R.id.ageTv)
-            var seatNoTv:TextView=child.findViewById(R.id.seatNoTv)
             var statusTv:TextView=child.findViewById(R.id.statusTv)
+            var currentStatusTv:TextView=child.findViewById(R.id.currentStatusTv)
             ageTv.text= list.age
             child.genderTv.text= list.sex
             count.text=(view.passengerContainerLin!!.childCount+1).toString()
 
-            seatNoTv.text="Seat no."/*+list.sNo*/
             statusTv.text=list.bookingStatus
+            currentStatusTv.text=list.currentStatus
 
             view.passengerContainerLin!!.addView(child)
         }
@@ -235,6 +259,14 @@ class TrainBookingDetailsFragment : Fragment() {
         view.insuranceTv.setText(fareDetails.travelInsurancePremium.toString())
         view.serviceChargeTv.setText(fareDetails.travelAgentServiceCharge.toString())
         view.totalFareTv.setText(fareDetails.totalFare.toString())
+//        Agent details
+        var agentDetails=trainResponse!!.agentDetails.get(0)
+        view.principleAgentTv.setText(agentDetails.principleAgent)
+        view.agentEmailTv.setText(agentDetails.emailID)
+        view.agentMobileTv.setText(agentDetails.contactNumber)
+        view.rspNameTv.setText(agentDetails.agentName)
+        view.rspIdTv.setText(agentDetails.corporateName)
+        view.rspAddressTv.setText(agentDetails.address)
 
     }
 
@@ -249,7 +281,7 @@ class TrainBookingDetailsFragment : Fragment() {
     private fun changeBoardingStn(list: TrainBookingListResponseModel.reservationlist) {
         showCustomDialog()
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
-        val call = apiService.getBoardingStnForChange("https://rail.justclicknpay.com/apiV1/RailEngine/BoardingStation?Trainno="
+        val call = apiService.getBoardingStnForChange(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/BoardingStation?Trainno="
                 +list!!.trainNumber+"&Date="+journeyDate(list.departDate)+"&fromStation="+
                 list.sourceCode+ "&toStation="+list.destinationCode+"&className="+list.journeyClass,
             loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
@@ -356,12 +388,13 @@ class TrainBookingDetailsFragment : Fragment() {
 //        Resources mResources = getResources();
 //        Bitmap bitmap = BitmapFactory.decodeResource(mResources, R.drawable.screenshot);
         val document = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create()
+//        val pageInfo = PdfDocument.PageInfo.Builder(convertWidth, convertHighet, 1).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(bitmap!!.width, bitmap!!.height, 1).create()
         val page = document.startPage(pageInfo)
         val canvas = page.canvas
         val paint = Paint()
         canvas.drawPaint(paint)
-        bitmap = Bitmap.createScaledBitmap(bitmap!!, convertWidth, convertHighet, true)
+//        bitmap = Bitmap.createScaledBitmap(bitmap!!, convertWidth, convertHighet, true)      // uncomment if you want it according to screen
         paint.color = Color.WHITE
         canvas.drawBitmap(bitmap!!, 0f, 0f, null)
         document.finishPage(page)

@@ -432,6 +432,39 @@
     <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>
     <string name="travel_insurance_no">No, I don not want travel insurance</string>
     <string name="change"><u>Change</u></string>
+    <string name="irctc_instruction">1. Prescribed Original ID proofs are:- Voter Identity Card / Passport / PAN Card / Driving License / Photo ID card issued by Central / State Govt. / Public Sector
+Undertakings of State / Central Government ,District Administrations , Municipal bodies and Panchayat Administrations which are having serial number / Student
+Identity Card with photograph issued by recognized School or College for their students / Nationalized Bank Passbook with photograph /Credit Cards issued by
+Banks with laminated photograph/Unique Identification Card "Aadhaar", m-Aadhaar, e-Aadhaar. /Passenger showing the Aadhaar/Driving Licence from the
+"Issued Document" section by logging into his/her DigiLocker account considered as valid proof of identity. (Documents uploaded by the user i.e. the document in
+"Uploaded Document" section will not be considered as a valid proof of identity).\n
+2. PNRs having fully waitlisted status will be dropped and automatic refund of the booking amount shall be credited to the account used for payment for booking
+of the ticket. Fully waitlisted e-ticket are not allowed to board the train. However, the names of PARTIALLY waitlisted/confirmed and RAC ticket passenger will
+appear in the chart and will be allowed to board the train.\n
+3. Passengers travelling on a fully waitlisted e-ticket will be treated as Ticketless.\n
+4. Obtain certificate from the TTE /Conductor in case of (a) PARTIALLY waitlisted e-ticket when LESS NO. OF PASSENGERS travel, (b)A.C FAILURE, (c)TRAVEL IN
+LOWER CLASS. This original certificate must be sent to GGM (IT), IRCTC, Internet Ticketing Centre, IRCA Building, State Entry Road, New Delhi-110055 after filing
+TDR online within prescribed time for claiming refund.\n
+5. In case, on a party e-ticket or a family e-ticket issued for travel of more than one passenger, some passengers have confirmed reservation and others are on
+RAC or waiting list, full refund of fare, less clerkage, shall be admissible for confirmed passengers also subject to the condition that the ticket shall be cancelled
+online or online TDR shall be filed for all the passengers upto thirty minutes before the scheduled departure of the train.\n
+6. In case of train cancellation on its entire run, full refund is granted automatically by the system. However, if the train is cancelled partially on its run or diverted
+and not touching boarding/destination station, passengers are required to file online TDR within 72 hours of scheduled departure of the train from passengers
+boarding station.\n
+7. Never purchase e-ticket from unauthorized agents or persons using their personal IDs for commercial purposes. Such tickets are liable to be cancelled and
+forfeited without any refund of money, under section (143) of the Indian Railway Act 1989. List of authorized agents are available on www.irctc.com E-Ticket
+Agent Locator\n
+8. For detail, Rules, Refund rules, Terms &amp; Conditions of E-Ticketing services, Travel Insurance facility etc. Please visit www.irctc.co.in\n
+9. While booking this ticket, you have agreed of having read the Health Protocol of Destination State of your travel. You are again advised to clearly read the
+Health Protocol advisory of destination state before start of your travel and follow them properly.\n
+10. The FIR forms are available with on board ticket checking staff, train guard and train escorting RPF/GRP staff.\n
+11. Variety of meals available in more than 1500 trains. For delivery of meal of your choice on your seat log on to www.ecatering.irctc.co.in or call 1323 Toll Free.
+For any suggestions/complaints related to Catering services, contact Toll Free No. 1800-111-321 (07.00 hrs to 22.00 hrs)\n
+12. E-ticket cancellations are permitted through respective agent only.\n
+13. Agent Service Charge for E-Ticket inclusive of tax (non-refundable) Class Service Charge Non-AC class Rs.20/- AC class including FC
+Rs.40/-\n
+14. National Consumer Helpline (NCH) Toll Free Number: 1800-11-400 or 14404\n
+15. You can book unreserved ticket from UTS APP or ATVMs (Automatic Ticket Vending Machines) located in Railway Stations.</string>
 
     <!--Deposit Report Fragment-->
     <string name="bank_ledger_reference">Bank Ledger Reference</string>
@@ -646,6 +679,7 @@
     <string name="virtualIdHint">Enter 16 digits Virtual Id </string>
     <string name="aadharNoError">Please enter 12 digits Aadhar Number</string>
     <string name="virtualIdError">Please enter 16 digits Virtual Id </string>
+    <string name="withdraw_auth_note"><b>Note:</b> Agent is required to authenticate before completing a cash withdraw transaction as per the Vendor Rule</string>
 
     <!--Cash Transfer -->
     <string name="cash_transfer_enter_ifsc_code">ENTER IFSC CODE</string>
@@ -673,6 +707,12 @@
     <string name="beneName">Beneficiary Name</string>
     <string name="accountNo">Account Number</string>
     <string name="ifsc">IFSC code</string>
+
+<!--    JCK Bank Details-->
+    <string name="bankDetailsNote"><b>Please Note :-</b> Any cash deposited in banks other than the ones specified below will attract Rs. 20 per Rs. 1000.
+        <b><i>“For faster upload, please mention your Just Click Code in the bank narration".</i></b></string>
+    <string name="bankDetailsImportantNote"><b>**Important Notice -</b> Kindly note we do not authorise any sales person to collect cash on behalf of our company. Any agent/distributor dealing in such matter will be solely doing on their individual liability and Just Click Karo Services will not bear any liability/loss for the same.\n
+        <b><i>Cash Deposit in ICICI Bank is now chargeable at Re.1 per Rs.1000 deposited.</i></b></string>
 
     <!--Top Up related strings-->
     <string name="topup_amount_fragment">Amount - </string>
@@ -728,7 +768,7 @@
     <!--    fasttag-->
     <string name="fasttag">FastTag</string>
 
-<!--    credit card-->
+    <!--    credit card-->
     <string name="card_number">Card Number</string>
 
 </resources>

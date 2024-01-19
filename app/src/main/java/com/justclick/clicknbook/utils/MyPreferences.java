@@ -34,6 +34,8 @@ public class MyPreferences {
   private static final String JWTToken = "JWTToken";
   private static final String KEY_AUTH_TOKEN = "authkey";
   private static final String KEY_AEPS_TOKEN = "aepsToken";
+  private static final String KEY_AGENT_ADHAR = "AGENT_ADHAR";
+  private static final String KEY_AGENT_MOBILE = "AGENT_MOBILE";
   private static final String KEY_USER_DATA = "userData";
   private static final String KEY_SESSION_KEY= "sessionKey";
   private static final String KEY_SESSION_REF_NO= "sessionRefNo";
@@ -248,6 +250,21 @@ public class MyPreferences {
 
   public static String getAepsToken(Context context){
     return EncryptionDecryptionClass.Decryption(getPreferences(context).getString(KEY_AEPS_TOKEN, ""), context);
+  }
+
+  public static void saveAepsAgentData(String adhar, String mobile, Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putString(KEY_AGENT_ADHAR, EncryptionDecryptionClass.Encryption(adhar, context));
+    prefsEditor.putString(KEY_AGENT_MOBILE, EncryptionDecryptionClass.Encryption(mobile, context));
+    prefsEditor.commit();
+  }
+
+
+  public static String getAgentAdhar(Context context){
+    return EncryptionDecryptionClass.Decryption(getPreferences(context).getString(KEY_AGENT_ADHAR, ""), context);
+  }
+  public static String getAgentMobile(Context context){
+    return EncryptionDecryptionClass.Decryption(getPreferences(context).getString(KEY_AGENT_MOBILE, ""), context);
   }
 
   public static void saveUserData(String token, Context context){

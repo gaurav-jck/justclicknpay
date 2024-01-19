@@ -55,6 +55,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
@@ -164,7 +165,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
             busSearchFragment,
             hotelSearchFragment, jctMoneyGetSenderFragment;
     private DrawerLayout drawer_layout;
-    private LinearLayout menu_items_lin_container;
+//    private LinearLayout menu_items_lin_container;
     private AlertDialog dialog2;
     private LoginModel loginModel;
     private ListView agencyListOfFragment;
@@ -193,7 +194,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         menu_filter=  findViewById(R.id.menu_filter);
         tv_agency_name=  findViewById(R.id.tv_agency_name);
         tv_email_id=  findViewById(R.id.tv_email_id);
-        menu_items_lin_container =  findViewById(R.id.menu_items_lin_container);
+//        menu_items_lin_container =  findViewById(R.id.menu_items_lin_container);
 
         menu_filter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,7 +208,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         try {
             loginModel= MyPreferences.getLoginData(loginModel,context);
             tv_agency_name.setText(loginModel.Data.AgencyName);
-            tv_email_id.setText(loginModel.Data.Email);
+            tv_email_id.setText(loginModel.Data.Email+"\n"+"( "+loginModel.Data.DoneCardUser.toUpperCase()+" )");
         }catch (NullPointerException e){
 
         }
@@ -309,15 +310,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private void navigationDrawerInitialize() {
         findViewById(R.id.balance_lin).setOnClickListener(this);
         findViewById(R.id.home_lin).setOnClickListener(this);
-//        findViewById(R.id.chatting_lin).setOnClickListener(this);
+        findViewById(R.id.bank_details_lin).setOnClickListener(this);
         findViewById(R.id.query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
-        findViewById(R.id.sales_report_lin).setOnClickListener(this);
-        findViewById(R.id.insurance_lin).setOnClickListener(this);
-        findViewById(R.id.insurance_list_lin).setOnClickListener(this);
-        findViewById(R.id.train_lin).setOnClickListener(this);
 
         try {
             list = getHomeScreenProductMenus();
@@ -356,7 +353,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subItemContainer.addView(subItem);
             }
 
-            menu_items_lin_container.addView(view);
+//            menu_items_lin_container.addView(view);
         }
 
     }
@@ -665,20 +662,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 replaceFragmentWithBackStack(agentCreditRequestFragment);
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
-            case R.id.sales_report_lin:
-                replaceFragmentWithBackStack(new RechargeListFragment());
-                drawer_layout.closeDrawer(GravityCompat.START);
-                break;
-            case R.id.insurance_lin:
-                replaceFragmentWithBackStack(new InsuranceFragment());
-                drawer_layout.closeDrawer(GravityCompat.START);
-                break;
-            case R.id.insurance_list_lin:
-                replaceFragmentWithBackStack(new InsuranceListFragment());
-                drawer_layout.closeDrawer(GravityCompat.START);
-                break;
-            case R.id.train_lin:
-                replaceFragmentWithBackStack(new TrainSearchFragment());
+            case R.id.bank_details_lin:
+                replaceFragmentWithBackStack(new BankDetailsFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.query_lin:
@@ -829,6 +814,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     public ArrayList<LoginModel.DataList> getHomeScreenProductMenus() throws NullPointerException {
         ArrayList<LoginModel.DataList> list=new ArrayList<>();
+        boolean isUtilityBill=false;
+        boolean isPayout=false;
 
         if(loginModel.ProductList!=null && loginModel.ProductList.size()>0){
             LoginModel.DataList dataList=loginModel.new DataList();
@@ -860,11 +847,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     subMenu.SubMenuCode=modules[i].substring(0,modules[i].indexOf("-"));
                     if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.DMT)){
                         subMenu.SubMenu="DMT";
+                        isPayout=true;
                         findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
                         subMenu.SubMenu="Recharge";
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
                         subMenu.SubMenu="AEPS";
+                        isPayout=true;
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.PAYTM)){
                         subMenu.SubMenu="Paytm Wallet";
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
@@ -873,6 +862,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         subMenu.SubMenu="QR Code";
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.BILL_PAY)){
                         subMenu.SubMenu="Utility Bill";
+                        isUtilityBill=true;
                     }
                         /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
                             LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
@@ -893,45 +883,30 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 
 //            hardcoded
-//            LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
-//            subMenuHotel.SubMenu=MenuCodes.MATM;
-//            subMenuHotel.SubMenuCode=MenuCodes.MATM;
-//            subMenuArrayList.add(subMenuHotel);
 
-            LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
-            fasttag.SubMenu=MenuCodes.FAST_TAG;
-            fasttag.SubMenuCode=MenuCodes.FAST_TAG;
-            subMenuArrayList.add(fasttag);
+            if(isUtilityBill){
+                LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
+                fasttag.SubMenu=MenuCodes.FAST_TAG;
+                fasttag.SubMenuCode=MenuCodes.FAST_TAG;
+                subMenuArrayList.add(fasttag);
 
-//            LoginModel.DataList.subMenu subMenuTrain=dataList.new subMenu();
-//            subMenuTrain.SubMenu=MenuCodes.TRAIN;
-//            subMenuTrain.SubMenuCode=MenuCodes.TRAIN;
-//            subMenuArrayList.add(subMenuTrain);
+                LoginModel.DataList.subMenu subLic=dataList.new subMenu();
+                subLic.SubMenu=MenuCodes.LIC;
+                subLic.SubMenuCode=MenuCodes.LIC;
+                subMenuArrayList.add(subLic);
 
-            LoginModel.DataList.subMenu subLic=dataList.new subMenu();
-            subLic.SubMenu=MenuCodes.LIC;
-            subLic.SubMenuCode=MenuCodes.LIC;
-            subMenuArrayList.add(subLic);
+                LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
+                subPaytm.SubMenu=MenuCodes.CREDIT;
+                subPaytm.SubMenuCode=MenuCodes.CREDIT;
+                subMenuArrayList.add(subPaytm);
+            }
+            if(isPayout) {
+                LoginModel.DataList.subMenu subMenuCashOut = dataList.new subMenu();
+                subMenuCashOut.SubMenu = MenuCodes.CASH_OUT;
+                subMenuCashOut.SubMenuCode = MenuCodes.CASH_OUT;
+                subMenuArrayList.add(subMenuCashOut);
+            }
 
-           /* LoginModel.DataList.subMenu subBill=dataList.new subMenu();
-            subBill.SubMenu=MenuCodes.BILL_PAY;
-            subBill.SubMenuCode=MenuCodes.BILL_PAY;
-            subMenuArrayList.add(subBill);*/
-
-            LoginModel.DataList.subMenu subMenuCashOut=dataList.new subMenu();
-            subMenuCashOut.SubMenu=MenuCodes.CASH_OUT;
-            subMenuCashOut.SubMenuCode=MenuCodes.CASH_OUT;
-            subMenuArrayList.add(subMenuCashOut);
-
-            LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
-            subPaytm.SubMenu=MenuCodes.CREDIT;
-            subPaytm.SubMenuCode=MenuCodes.CREDIT;
-            subMenuArrayList.add(subPaytm);
-
-//            LoginModel.DataList.subMenu subQR=dataList.new subMenu();
-//            subQR.SubMenu=MenuCodes.CASHFREE_QR;
-//            subQR.SubMenuCode=MenuCodes.CASHFREE_QR;
-//            subMenuArrayList.add(subQR);
 
             /*if(subMenuArrayList.size()>3){
                 Collections.swap(subMenuArrayList, 1,3);

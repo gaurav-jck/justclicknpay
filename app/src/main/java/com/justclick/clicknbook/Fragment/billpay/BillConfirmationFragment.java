@@ -158,7 +158,11 @@ public class BillConfirmationFragment extends Fragment {
         rechargeRequestModel.DoneCardUser =loginModel.Data.DoneCardUser;
         rechargeRequestModel.Password = MyPreferences.getLoginPassword(context);
 
-        idInput.setHint(operatorDetail.displayname);
+        if(operatorDetail.displayname!=null && operatorDetail.displayname.length()>0){
+            idInput.setHint(operatorDetail.displayname);
+        }else {
+            idInput.setHint("Bill Number");
+        }
         idEdt.setText(billDetail.canumber);
         amountInput.setHint("Amount");
         amountEdt.setText(billDetail.billAmount+"");
