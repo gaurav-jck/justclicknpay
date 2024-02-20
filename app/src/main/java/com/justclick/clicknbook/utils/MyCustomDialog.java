@@ -22,7 +22,7 @@ public class MyCustomDialog {
     try {
       AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
       final View dialogView = LayoutInflater.from(context).
-              inflate(R.layout.custom_dialog_view, null);
+              inflate(R.layout.custom_dialog_view_gif, null);
       messageTv=dialogView.findViewById(R.id.tv_progressmsg);
       messageTv.setText(message);
       dialogBuilder.setView(dialogView);

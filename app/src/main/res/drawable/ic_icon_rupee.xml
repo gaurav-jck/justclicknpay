@@ -14,7 +14,7 @@
       C39.1324,3.0562 28.0435,0.1397 18,2.5324z"
       android:fillColor="#00000000"
       android:strokeColor="#000000"
-      android:strokeWidth="@integer/width2dp"/>
+      android:strokeWidth="@integer/width3dp"/>
   <path
       android:pathData="M19,5.5579C7.316,8.6231 1.3633,23.3672 6.6883,34
       C11.1447,42.8985 21.4963,47.1088 31,44.3619

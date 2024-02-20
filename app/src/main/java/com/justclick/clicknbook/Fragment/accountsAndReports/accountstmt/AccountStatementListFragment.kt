@@ -26,12 +26,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
+import com.justclick.clicknbook.requestmodels.AgentNameRequestModel
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import jxl.Workbook
@@ -83,6 +86,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     private var confirmationId=""
     private var transactionType="1"
     private var updatedBy=""
+    private var filterDoneCardUser=""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -194,7 +198,76 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         start_day_value_tv!!.setText(dayFormat!!.format(startDateCalendar!!.time))
         end_date_value_tv!!.setText(dateFormat!!.format(endDateCalendar!!.time))
         end_day_value_tv!!.setText(dayFormat!!.format(endDateCalendar!!.time))
+
         filterDialog!!.show()
+    }
+
+    private fun getDistributorAgents(agent_auto: AutoCompleteTextView) {
+        val model = AgentNameRequestModel()
+        model.AgencyName = ""
+        model.DeviceId = Common.getDeviceId(context)
+        model.DoneCardUser = loginModel!!.Data.DoneCardUser
+        model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
+            EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context
+        )
+        model.Type = loginModel!!.Data.UserType
+        model.RequiredType = loginModel!!.Data.UserType
+
+        val json = Gson().toJson(model)
+
+        val apiService = APIClient.getClient().create(ApiInterface::class.java)
+        val call = apiService.agentNamePostNew(ApiConstants.GetAgentName, model)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerAgent(response, agent_auto)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    var agentArray:ArrayList<AgentNameModel.AgentName> = ArrayList()
+    private fun responseHandlerAgent(response: ResponseBody, agent_auto: AutoCompleteTextView) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), AgentNameModel::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.StatusCode.equals("0", ignoreCase = true)) {
+//                    listAdapter!!.notifyDataSetChanged()
+                    if (commonResponse.Data != null &&
+                        commonResponse.Data.size > 0) {
+//                        Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+                        val arr = arrayOfNulls<String>(commonResponse.Data.size)
+                        agentArray.addAll(commonResponse.Data)
+                        for (p in commonResponse.Data.indices) {
+                            arr[p] = commonResponse.Data.get(p).AgencyName.replace("(","( ").
+                            replace(")"," )")
+                        }
+
+                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                    }else{
+                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
+                    }
+                }else {
+                    Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun getSpinnerAdapter(arr: Array<String?>): ArrayAdapter<String>? {
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            requireContext(),
+            R.layout.mobile_operator_spinner_item, R.id.operator_tv, arr
+        )
+        adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
+
+        return adapter
     }
 
     fun getTxnType() {
@@ -232,7 +305,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             accountStmtRequest!!.Donecarduser=""
         }else if(accountStmtRequest!!.UserType.equals("D")){
             accountStmtRequest!!.distributordid=loginModel!!.Data.DoneCardUser
-            accountStmtRequest!!.Donecarduser=null
+            accountStmtRequest!!.Donecarduser=filterDoneCardUser
         }else{
             accountStmtRequest!!.Donecarduser=loginModel!!.Data.DoneCardUser
         }
@@ -331,7 +404,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 //                askSelfPermission()
             }
             R.id.linFilter -> {
-                if(listFilterDialog==null){
+                if(listFilterDialog==null || (agentArray.size==0 && !loginModel!!.Data.UserType.equals("A"))){
                     openListFilterDialog()
                 }else{
                     listFilterDialog!!.show()
@@ -489,6 +562,8 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         val typeSpinner = listFilterDialog!!.findViewById<Spinner>(R.id.typeSpinner)
         val confirmIdEdt = listFilterDialog!!.findViewById<EditText>(R.id.confirmIdEdt)
         val updatedByEdt = listFilterDialog!!.findViewById<EditText>(R.id.updatedByEdt)
+        val agentLabelTv = listFilterDialog!!.findViewById<TextView>(R.id.agentLabelTv)
+        val agent_auto = listFilterDialog!!.findViewById<AutoCompleteTextView>(R.id.agent_auto)
 
         val adapter = ArrayAdapter(requireContext(),
             R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, txnTypeArray)
@@ -511,12 +586,26 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             typeSpinner.setSelection(0)
             confirmIdEdt.setText("")
             updatedByEdt.setText("")
+            agent_auto.setText("")
         }
         listFilterDialog!!.findViewById<View>(R.id.applyTv).setOnClickListener {
             listFilterDialog!!.dismiss()
             confirmationId = confirmIdEdt.text.toString().trim { it <= ' ' }
             updatedBy = updatedByEdt.text.toString().trim { it <= ' ' }
+            var agent=agent_auto.text.toString()
+            if(agent.contains("(") && agent.contains(")")) {
+                filterDoneCardUser = agent.substring(agent.indexOf("( ") + 1, agent.indexOf(" )")).trim()
+            }
             applyFilter()
+        }
+
+        if(loginModel!!.Data.UserType.equals("A")){
+            agentLabelTv.visibility=View.GONE
+            agent_auto.visibility=View.GONE
+        }else{
+            agentLabelTv.visibility=View.VISIBLE
+            agent_auto.visibility=View.VISIBLE
+            getDistributorAgents(agent_auto)
         }
 
         val window = listFilterDialog!!.window

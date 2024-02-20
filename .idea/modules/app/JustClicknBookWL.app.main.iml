@@ -38,6 +38,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/47b50db6989477bbbb3b20f92f2e4320/transformed/multidex-2.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/87d1c376defde82417eca4129b0b6737/transformed/material-1.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/454b62a6651003ce17c9b35e4d6d16e0/transformed/constraintlayout-2.0.4-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/bc3184a755967ddb355ec1b4a23f9ff9/transformed/biometric-1.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/5efd9b03b73368c4664ef09b128f51bc/transformed/jetified-firebase-ui-database-1.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/4ef2bf55fc4c52596fb1043dd54f9763/transformed/jetified-uploadservice-3.0.3-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/23ed6eb94729685ba165f04585e50e88/transformed/jetified-crystalrangeseekbar-1.1.3-api.jar</arg>
@@ -60,6 +61,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/a9a85292c60b916cc180c4892f6e38be/transformed/jetified-firebase-messaging-22.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/a7ae78838c50ead1e9d65c908cd7e0b1/transformed/jetified-firebase-core-20.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/c6702c60615eee48c81a8f79330d89b1/transformed/jetified-firebase-analytics-20.0.1-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/f7b6d4c1f335b66e4f349a5757a9e88c/transformed/jetified-android-gif-drawable-1.2.22-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/9bfd0c3796a916c9ac2d063d8945348c/transformed/jetified-QRGenearator-1.0.3-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/f0071b955bebeac58ca736d7f7824752/transformed/jetified-firebase-config-21.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/a92200e7e04e514f492bd27cbbbcf713/transformed/jetified-play-services-maps-18.2.0-api.jar</arg>
@@ -401,6 +403,8 @@
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-api:20.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:20.0.1@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.android.gms:play-services-measurement-sdk:20.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: androidx.biometric:biometric:1.0.1@aar" level="project" />
+    <orderEntry type="library" name="Gradle: pl.droidsonroids.gif:android-gif-drawable:1.2.22@aar" level="project" />
     <orderEntry type="library" name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-config:21.0.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.google.firebase:firebase-abt:21.0.0@aar" level="project" />

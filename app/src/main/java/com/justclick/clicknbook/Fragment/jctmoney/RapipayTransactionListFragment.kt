@@ -172,13 +172,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         listAdapter = RecyclerTransactionList(context, RecyclerTransactionList.OnRecyclerItemClickListener { view, list, data, position ->
             when (view.id) {
                 R.id.print_tv -> try {
-//                    openReceipt(data)
-                    refundRequest= RefundRequest()
-                    refundRequest!!.TransactionId=data.transactionId
-                    refundRequest!!.LoggedInAgentCode=loginModel!!.Data.DoneCardUser
-                    refundRequest!!.AgentCode=data.agentCode
-                    refundRequest!!.referenceid=data.transactionId
-                    sendRefundOtp()
+                    openReceipt(data)
                 } catch (e: Exception) {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }

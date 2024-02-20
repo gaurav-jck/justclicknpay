@@ -119,6 +119,9 @@ public interface ApiInterface {
     Call<AgentNameModel> agentNamePost(@Path("methodName") String method, @Body Object data);
 
     @POST("MobileServices.svc/{methodName}")
+    Call<ResponseBody> agentNamePostNew(@Path("methodName") String method, @Body Object data);
+
+    @POST("MobileServices.svc/{methodName}")
     Call<AgentDetails> agentdetailPost(@Path("methodName") String method, @Body Object data);
 
     @POST("MobileServices.svc/{methodName}")

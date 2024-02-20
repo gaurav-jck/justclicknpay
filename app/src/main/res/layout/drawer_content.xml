@@ -11,13 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:orientation="horizontal"
-        android:background="@drawable/icon6"
+        android:background="@drawable/icon_drawer"
         >
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#502c67b5"/>
+            android:background="#606BA7F6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
 <!--#902c67b5-->
         <ImageView
         android:id="@+id/messengerImageView"
-        android:layout_marginLeft="@dimen/drawer_content_left_margin"
+        android:layout_marginLeft="@dimen/size_20dp"
         android:layout_marginTop="@dimen/medium_margin"
             android:layout_width="@dimen/drawer_logo_height"
         android:layout_height="@dimen/drawer_logo_height"
@@ -85,7 +85,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:visibility="visible"
+                android:background="@color/drawer_very_light_color"
                 >
 
                 <ImageView
@@ -112,7 +115,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:visibility="visible"
+                android:background="@color/drawer_very_light_color"
                 >
 
                 <ImageView
@@ -139,14 +145,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:visibility="gone"
+                android:background="@color/drawer_very_light_color"
                 >
 
                 <ImageView
                     android:id="@+id/credit_request_img"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    android:src="@drawable/credit_icon" />
+                    android:src="@drawable/ic_wallet_border" />
 
                 <TextView
                     android:id="@+id/credit_request_tv"
@@ -166,7 +175,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:visibility="gone"
+                android:background="@color/drawer_very_light_color"
                 >
 
                 <ImageView
@@ -186,16 +198,6 @@
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
 
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_black_hint"
-                android:layout_marginTop="@dimen/small_margin"
-                android:alpha="0.4"
-                android:visibility="gone">
-
-            </View>
 
             <!--Menu item container-->
             <LinearLayout
@@ -238,6 +240,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/drawer_very_light_color"
                 >
                 <ImageView
                     android:layout_width="@dimen/drawer_image_size"
@@ -261,6 +266,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/drawer_very_light_color"
                 >
                 <ImageView
                     android:id="@+id/iv_query"
@@ -285,6 +293,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/drawer_very_light_color"
                 >
                 <ImageView
                     android:id="@+id/iv_logout"

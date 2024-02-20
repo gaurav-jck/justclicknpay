@@ -162,11 +162,11 @@
             <ImageView
                 android:layout_width="@dimen/aeps_icon_w"
                 android:layout_height="@dimen/aeps_icon_h"
-                app:srcCompat="@drawable/ic_cash_payout"/>
+                app:srcCompat="@drawable/account_box_aeps"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KYC"
+                android:text="KYC\n(Onboard)"
                 android:textColor="@color/app_blue_color_light"
                 android:textSize="@dimen/dashboard_icon_name_size"
                 android:textStyle="bold"

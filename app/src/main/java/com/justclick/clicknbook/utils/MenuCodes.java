@@ -26,6 +26,7 @@ public class MenuCodes {
   public static final String  AirBookingList="AirBookingList";
   public static final String  TopUpDetails="Top-UpDetails";
   public static final String  TrainBookingList="TrainBookingList";
+  public static final String  TrainBookingListDisplay="Train Booking List";
   public static final String  TrainFailedList="TrainFailedList";
   public static final String  TrainBookingcheck="TrainBookingcheck";
   public static final String  DMTTransactionList="DMTTransactionList";

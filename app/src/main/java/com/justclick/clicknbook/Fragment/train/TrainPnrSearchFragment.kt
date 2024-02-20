@@ -60,6 +60,7 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
 
             view.back_arrow.setOnClickListener(this)
             view.get_tv.setOnClickListener(this)
+            view.res_tv.setOnClickListener(this)
             view.status_tv.setOnClickListener(this)
 
         }
@@ -67,8 +68,8 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
         return fragView
     }
 
-    private fun searchPnr(reservationID: String) {
-        NetworkCall().callTrainServiceFinalGet(ApiConstants.GetPnrDetails, reservationID, "", "",
+    private fun searchPnr(reservationID: String, pnr: String) {
+        NetworkCall().callTrainServiceFinalGet(ApiConstants.GetPnrDetails, reservationID, pnr, "",
                 context, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
@@ -113,11 +114,23 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
             R.id.back_arrow->
                 parentFragmentManager.popBackStack()
             R.id.get_tv->{
-                if(!number_edt.text.toString().isEmpty()){
-                    Common.hideSoftKeyboard((context as Activity))
-                    searchPnr(number_edt.text.toString())
-                }else{
+                var pnr=number_edt.text.toString()
+                if(pnr.isEmpty()){
                     Toast.makeText(context, "Please enter pnr number", Toast.LENGTH_SHORT).show()
+                }else if(pnr.trim().length<10){
+                    Toast.makeText(context, "Please enter valid pnr number", Toast.LENGTH_SHORT).show()
+                }else{
+                    searchPnr("",pnr.trim())
+                }
+            }
+            R.id.res_tv->{
+                var pnr=number_edt.text.toString()
+                if(pnr.isEmpty()){
+                    Toast.makeText(context, "Please enter reservation-Id", Toast.LENGTH_SHORT).show()
+                }else if(pnr.trim().length<10){
+                    Toast.makeText(context, "Please enter valid reservation-Id", Toast.LENGTH_SHORT).show()
+                }else{
+                    searchPnr(pnr.trim(), "")
                 }
             }
             R.id.statusTv->{

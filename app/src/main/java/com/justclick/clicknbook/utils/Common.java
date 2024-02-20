@@ -119,6 +119,13 @@ public final class Common {
     catch (NullPointerException e){}
   }
 
+  public static void showSoftKeyboard(Context context, View view) {
+    if (view.requestFocus()) {
+      InputMethodManager imm = context.getSystemService(InputMethodManager.class);
+      imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+    }
+  }
+
 
   public static float roundOffDecimalValue(Float decimal)
   {
@@ -334,7 +341,7 @@ public final class Common {
             "fonts/klinicSlabMedium.otf");
 
   }
-  public static Typeface HomeMenu3TypeFace(Context context){
+  public static Typeface ralewayMedium(Context context){
     return Typeface.createFromAsset(context.getAssets(),
             "fonts/raleway_medium.ttf");
   }

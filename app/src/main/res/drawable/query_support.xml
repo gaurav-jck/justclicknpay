@@ -4,7 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="@color/black_text_color"
         android:pathData="M11,23.59v-3.6c-5.01,-0.26 -9,-4.42 -9,-9.49C2,5.26 6.26,1 11.5,1S21,5.26 21,10.5c0,4.95 -3.44,9.93 -8.57,12.4l-1.43,0.69z"/>
-    <path android:fillColor="@color/white"
+    <path android:fillColor="@color/drawer_very_light_color"
         android:pathData="M11.5,3C7.36,3 4,6.36 4,10.5S7.36,18 11.5,18L13,18v2.3c3.64,-2.3 6,-6.08 6,-9.8C19,6.36 15.64,3 11.5,3z"/>
     <path android:fillColor="@color/app_icon_color2"
         android:pathData="M10.5,14.5h2v2h-2z"/>

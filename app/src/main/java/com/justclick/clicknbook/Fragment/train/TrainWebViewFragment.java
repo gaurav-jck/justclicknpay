@@ -113,7 +113,14 @@ public class TrainWebViewFragment extends Fragment {
                 getBookingData();
             }else {
 //                return true;
-                view.loadUrl(url);
+                String driveUrl="https://drive.google.com/viewerng/viewer?embedded=true&url=";
+                String termsUrlHttp="http://contents.irctc.co.in/en/RulesAndRegulations-2013.pdf";
+                String termsUrlHttps="https://contents.irctc.co.in/en/RulesAndRegulations-2013.pdf";
+                if(url.equals(termsUrlHttp) || url.equals(termsUrlHttps)){
+                    view.loadUrl(driveUrl+termsUrlHttps);
+                }else {
+                    view.loadUrl(url);
+                }
             }
             return true;
         }

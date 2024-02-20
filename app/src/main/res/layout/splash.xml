@@ -27,7 +27,7 @@
             android:padding="@dimen/medium_margin">
 
             <ImageView
-                android:id="@+id/tv_title"
+                android:id="@+id/tv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

@@ -206,6 +206,34 @@
     <color name="text_dark_gray">#262626</color>
     <color name="text_light_gray">#9f9f9f</color>
     <color name="text_inr">#666666</color>
+
+
+<!--    new colors-->
+    <color name="alabaster_color">#fafafa</color>
+    <color name="periwinkle_color">#b5b7f3</color>
+    <color name="iris_color">#5e5bfc</color>
+    <color name="bluebell_color">#8485af</color>
+    <color name="gunmetal_color">#22262b</color>
+    <color name="navi_blue_color">#7360DF</color>
+    <color name="navi_light_color">#C499F3</color>
+    <color name="peach_color">#FF6868</color>
+    <color name="peach_light_color">#E6A4B4</color>
+    <color name="peach_very_light_color">#F2AFEF</color>
+    <color name="teal_color">#80BCBD</color>
+    <color name="teal_light_color">#AAD9BB</color>
+    <color name="teal_very_light_color">#D5F0C1</color>
+    <color name="blue_color">#3085C3</color>
+    <color name="blue_light_color">#5FBDFF</color>
+    <color name="blue_very_light_color">#aae0ebfd</color>
+    <color name="teal2_color">#8EACCD</color>
+    <color name="red_color">#BF3131</color>
+    <color name="red_light_color">#EF4040</color>
+    <color name="green_color">#65B741</color>
+    <color name="green_very_light_color">#C1F2B0</color>
+    <color name="drawer_very_light_color">#f8f8f8</color>
+    <color name="home_item_very_light_color">#E2E6EB</color>
+    <color name="home_background_color">#DFE6E8</color>
+
 </resources>
 
 <!--<color name="colorPrimary">@color/app_blue_color_light</color>-->

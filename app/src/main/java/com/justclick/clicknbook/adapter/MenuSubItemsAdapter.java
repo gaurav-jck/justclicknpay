@@ -219,7 +219,7 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_clipboards);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.NetSalesReport)){
-                    vh.imageView_sub_item.setImageResource(R.drawable.net_sales_report_blue);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_net_sales_report);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.SalesAccountStatement)){
                     vh.imageView_sub_item.setImageResource(R.drawable.sales_account_statement_big);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.ApproveAgent)){

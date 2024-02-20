@@ -555,7 +555,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
     }
 
     public class AepsResponse{
-        public String statusCode,statusMessage;
+        public String statusCode,statusMessage, balanceAmount;
         public ArrayList<balEnQDetails> balEnqDetails;
         public class balEnQDetails{
             public String bankName, availableBalance, rrn, accountNumber,status,transactionId,
@@ -748,11 +748,11 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
 
         recyclerView.setAdapter(new MiniStatementAdapter(context, responseModel.msDetails));
 
-        if(responseModel.msDetails!=null && responseModel.msDetails.size()>0){
+        /*if(responseModel.msDetails!=null && responseModel.msDetails.size()>0){
             Toast.makeText(context, responseModel.msDetails.size()+"\n"+responseModel.msDetails.get(0).amount, Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(context, "No mini statement found for given data.", Toast.LENGTH_SHORT).show();
-        }
+        }*/
         dialog.show();
     }
 

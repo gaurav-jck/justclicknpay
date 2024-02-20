@@ -199,6 +199,12 @@
     <string name="rbl_ben_non_verify_text">Verify @ 5 RS.</string>
     <string name="rbl_ben_verify_text">Verified</string>
 
+    <string name="biometric_txt">Authorize Biometric Login</string>
+    <string name="prompt_info_title">Biometric Authentication</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">JCnP is using Android biometric authentication</string>
+    <string name="prompt_info_use_app_password">Use app password</string>
+    <string name="secret_key_name">biometric_sample_encryption_key</string>
 
     <string name="activity_title_about_us">About Us</string>
     <string name="activity_title_privacy_policy">Privacy Policy</string>

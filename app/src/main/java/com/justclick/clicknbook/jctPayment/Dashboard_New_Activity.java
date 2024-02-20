@@ -18,6 +18,7 @@ import android.view.MenuItem;
 
 import com.google.android.material.tabs.TabLayout;
 import com.justclick.clicknbook.Activity.MyLoginActivity;
+import com.justclick.clicknbook.Activity.MyLoginActivityNew;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.Fragments.Services_Fragment;
 import com.justclick.clicknbook.jctPayment.Fragments.TransactionListFragment;
@@ -129,7 +130,7 @@ public class Dashboard_New_Activity extends AppCompatActivity {
         }
         if (id == R.id.action_logout){
             SessionManager.getInstance(context).logout();
-            Intent intent = new Intent(getApplicationContext(), MyLoginActivity.class);
+            Intent intent = new Intent(getApplicationContext(), MyLoginActivityNew.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }

@@ -671,8 +671,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.logout_lin:
-                MyPreferences.logoutUser(context);
-                startActivity(new Intent(context, MyLoginActivity.class));
+                MyPreferences.logoutUserRemember(context);
+                startActivity(new Intent(context, MyLoginActivityNew.class));
                 finish();
                 break;
 
@@ -728,20 +728,26 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
     public void replaceFragment(Fragment fragment){
         FragmentManager fm= getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.container,fragment,fragment.getTag()).commit();
+        fm.beginTransaction()
+                .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left, R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right)
+                .replace(R.id.container,fragment,fragment.getTag()).commit();
     }
 
     public void replaceFragmentWithBackStack(Fragment fragment){
         FragmentManager fm= getSupportFragmentManager();
         if(!fragment.isVisible()) {
-            fm.beginTransaction().replace(R.id.container, fragment, fragment.getTag()).addToBackStack(null).commit();
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left, R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right)
+            .replace(R.id.container, fragment, fragment.getTag()).addToBackStack(null).commit();
         }
     }
 
     public void replaceFragmentWithTag(Fragment fragment, String tag){
         FragmentManager fm= getSupportFragmentManager();
         if(!fragment.isVisible()) {
-            fm.beginTransaction().replace(R.id.container, fragment, tag).addToBackStack(null).commit();
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left, R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right)
+                    .replace(R.id.container, fragment, tag).addToBackStack(null).commit();
         }
     }
 
@@ -835,7 +841,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         modules[i].contains(MenuCodes.BusSearch+"-1")   ||
                         modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
                         modules[i].contains(MenuCodes.MATM+"-1") ||
-                        modules[i].contains(MenuCodes.PAYTM+"-1") ||
+                        modules[i].contains(MenuCodes.PAYTM+"-0") ||
                         modules[i].contains(MenuCodes.TRAIN+"-1") ||
                         modules[i].contains(MenuCodes.CASHFREE_QR+"-1")||
                         modules[i].contains(MenuCodes.FlightSearch+"-1")||
@@ -895,10 +901,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subLic.SubMenuCode=MenuCodes.LIC;
                 subMenuArrayList.add(subLic);
 
-                LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
+                //Credit card hide
+                /*LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
                 subPaytm.SubMenu=MenuCodes.CREDIT;
                 subPaytm.SubMenuCode=MenuCodes.CREDIT;
-                subMenuArrayList.add(subPaytm);
+                subMenuArrayList.add(subPaytm);*/
             }
             if(isPayout) {
                 LoginModel.DataList.subMenu subMenuCashOut = dataList.new subMenu();
@@ -940,6 +947,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         ccList.SubMenu=MenuCodes.CreditCardList;
                         ccList.SubMenuCode=MenuCodes.CreditCardList;
                         subMenuArrayList.add(ccList);
+
+                        if(loginModel.Data.UserType.equals("D")){
+                            LoginModel.DataList.subMenu irctcList=loginModel.new DataList().new subMenu();
+                            irctcList.SubMenu=MenuCodes.TrainBookingListDisplay;
+                            irctcList.SubMenuCode=MenuCodes.TrainBookingList;
+                            subMenuArrayList.add(irctcList);
+                        }
                     }else if(loginModel.DataList.get(i).subMenu.get(j).SubMenuCode.equals(MenuCodes.AccountStatement)){
                         loginModel.DataList.get(i).subMenu.get(j).SubMenu="Account\nStatement";
                     }
@@ -1435,8 +1449,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //                    logged in
         } else {
 //                    logged out
-            MyPreferences.logoutUser(context);
-            startActivity(new Intent(context, MyLoginActivity.class));
+            MyPreferences.logoutUserRemember(context);
+            startActivity(new Intent(context, MyLoginActivityNew.class));
             finish();
         }
 //        Toast.makeText(context, "Activity OnResume", Toast.LENGTH_LONG).show();

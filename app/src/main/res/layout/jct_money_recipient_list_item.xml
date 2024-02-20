@@ -20,8 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/arrowImg"
-            android:padding="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
             android:text="Name"
             android:textColor="@color/black"
             android:textSize="@dimen/simple_content_text_size" />
@@ -89,7 +90,8 @@
             android:layout_weight="1"
             android:textColor="@color/transactionListLabelColor"
             android:textSize="@dimen/text_size_14sp"
-            android:text="Account No"/>
+            android:text="Account No"
+            android:fontFamily="@font/klinic_slab_medium"/>
         <TextView
             android:id="@+id/accountTv"
             android:layout_width="0dp"
@@ -97,8 +99,8 @@
             android:text="0.00"
             android:gravity="right"
             android:textSize="@dimen/text_size_14sp"
-            android:textStyle="bold"
             android:textColor="@color/dark_blue_color"
+            android:fontFamily="@font/museo_regular"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -116,7 +118,8 @@
             android:layout_weight="1"
             android:textColor="@color/transactionListLabelColor"
             android:textSize="@dimen/text_size_14sp"
-            android:text="Mobile"/>
+            android:text="Mobile"
+            android:fontFamily="@font/klinic_slab_medium"/>
         <TextView
             android:id="@+id/mobileTv"
             android:layout_width="0dp"
@@ -124,8 +127,8 @@
             android:text="0.00"
             android:gravity="right"
             android:textSize="@dimen/text_size_14sp"
-            android:textStyle="bold"
             android:textColor="@color/dark_blue_color"
+            android:fontFamily="@font/museo_regular"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -143,6 +146,7 @@
             android:layout_weight="1"
             android:textColor="@color/transactionListLabelColor"
             android:textSize="@dimen/text_size_14sp"
+            android:fontFamily="@font/klinic_slab_medium"
             android:text="Bank Name"/>
         <TextView
             android:id="@+id/bankNameTv"
@@ -151,9 +155,9 @@
             android:text="0.00"
             android:gravity="right"
             android:textSize="@dimen/text_size_14sp"
-            android:textStyle="bold"
             android:textColor="@color/dark_blue_color"
-            android:layout_weight="1"/>
+            android:fontFamily="@font/museo_regular"
+            android:layout_weight="1.8"/>
 
     </LinearLayout>
 
@@ -170,6 +174,7 @@
             android:layout_weight="1"
             android:textColor="@color/transactionListLabelColor"
             android:textSize="@dimen/text_size_14sp"
+            android:fontFamily="@font/klinic_slab_medium"
             android:text="IFSC code"/>
         <TextView
             android:id="@+id/ifscTv"
@@ -178,8 +183,8 @@
             android:text="0.00"
             android:gravity="right"
             android:textSize="@dimen/text_size_14sp"
-            android:textStyle="bold"
             android:textColor="@color/dark_blue_color"
+            android:fontFamily="@font/museo_regular"
             android:layout_weight="1"/>
 
     </LinearLayout>
@@ -188,7 +193,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/margin_7dp"
             android:layout_marginBottom="@dimen/medium_margin"
             >
             <RelativeLayout
@@ -205,6 +210,7 @@
                     android:gravity="center_vertical"
                     android:layout_centerVertical="true"
                     android:textColor="@color/dark_blue_color"
+                    android:fontFamily="@font/museo_regular"
                     android:text="Not verified"/>
                 <ImageView
                     android:id="@+id/imageVerify"
@@ -222,7 +228,8 @@
                     android:padding="@dimen/very_small_margin"
                     android:gravity="right"
                     android:layout_alignParentRight="true"
-                    android:background="@color/app_green_color"
+                    android:background="@color/green_color"
+                    android:fontFamily="@font/museo_regular"
                     />
             </RelativeLayout>
 
@@ -264,6 +271,7 @@
             android:paddingBottom="@dimen/very_small_margin"
             android:paddingLeft="@dimen/large_margin"
             android:paddingRight="@dimen/large_margin"
+            android:fontFamily="@font/raleway_semi_bold"
             android:text="Delete"/>
 
         <TextView
@@ -279,6 +287,7 @@
             android:paddingBottom="@dimen/very_small_margin"
             android:paddingLeft="@dimen/large_margin"
             android:paddingRight="@dimen/large_margin"
+            android:fontFamily="@font/raleway_semi_bold"
             android:text="   Pay   "/>
 
 

@@ -28,6 +28,7 @@ public class ApiConstants
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
+//    public static final String BASE_URL_AEPS_N="https://fantasy.justclicknpay.com/";   // AEPS URL N Live
     //        public static final String BASE_URL_AEPS_N="https://Uatmatm.justclicknpay.com/";   // AEPS URL N Test
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
     //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";

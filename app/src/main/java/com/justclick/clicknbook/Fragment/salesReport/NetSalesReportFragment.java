@@ -329,8 +329,8 @@ public class NetSalesReportFragment extends Fragment implements View.OnClickList
 
     public AgentNameModel call_agent(AgentNameRequestModel model, final ListView agencyList) {
 //        agent.DATA.clear();
+        String json = new Gson().toJson(model);
         ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
-
         Call<AgentNameModel> call = apiService.agentNamePost(ApiConstants.GetAgentName, model);
         call.enqueue(new Callback<AgentNameModel>() {
             @Override

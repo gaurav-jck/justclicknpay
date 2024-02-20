@@ -180,8 +180,10 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                                 }
                             }else {
                                 if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    if(commonResponseModel.boardDetails!=null && commonResponseModel.boardDetails.size()>0){
-                                    openWebView(commonResponseModel.boardDetails.get(0).url);}
+                                    if(commonResponseModel.boardDetails!=null && commonResponseModel.boardDetails.size()>0) {
+                                        onboardSdk();
+//                                    openWebView(commonResponseModel.boardDetails.get(0).url);
+                                    }
                                 }else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                 }
@@ -205,9 +207,9 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
         intent.putExtra("pId", partnerId);
         intent.putExtra("pApiKey", partnerKey);
         intent.putExtra("mCode",loginModel.Data.DoneCardUser);
-//        intent.putExtra("mCode","JC0A46947");
+//        intent.putExtra("mCode","JC0A1212");
         intent.putExtra("mobile", loginModel.Data.Mobile);
-//        intent.putExtra("mobile", "9012836576");
+//        intent.putExtra("mobile", "9002020022");
         intent.putExtra("lat", "42.10101");
         intent.putExtra("lng", "76.00101");
         intent.putExtra("firm", "JustClick");

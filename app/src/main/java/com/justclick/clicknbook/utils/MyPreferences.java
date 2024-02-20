@@ -15,8 +15,10 @@ public class MyPreferences {
 
   private static final String MyPrefName="MyPref";
   private static final String IsLogin="IsLogin";
+  private static final String IsBiometric="IsBiometric";
   private static final String MyLoginDataClass="MyLoginDataClass";
   private static final String Password="Password";
+  private static final String fingerToken="fingerToken";
   private static final String EmailId="emailId";
   private static final String fromCity="fromCity";
   private static final String toCity="toCity";
@@ -70,7 +72,17 @@ public class MyPreferences {
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
     prefsEditor.putBoolean(IsLogin, false);
 //        prefsEditor.putString(EmailId, "");
-    prefsEditor.putString(Password, "");
+//    prefsEditor.putString(Password, "");
+    prefsEditor.commit();
+  }
+  public static void rememberLogin(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(IsLogin, true);
+    prefsEditor.commit();
+  }
+  public static void logoutUserRemember(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(IsLogin, false);
     prefsEditor.commit();
   }
 
@@ -78,14 +90,16 @@ public class MyPreferences {
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
     prefsEditor.putBoolean(IsLogin, true);
     prefsEditor.putString(EmailId, email);
-    prefsEditor.putString(Password, password);
+//    prefsEditor.putString(Password, password);
+    prefsEditor.putString(fingerToken, password);
     prefsEditor.commit();
   }
 
   public static void saveEmailPassword(Context context,String email,String password){
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
     prefsEditor.putString(EmailId, email);
-    prefsEditor.putString(Password, password);
+//    prefsEditor.putString(Password, password);
+    prefsEditor.putString(fingerToken, password);
     prefsEditor.commit();
   }
 
@@ -98,7 +112,23 @@ public class MyPreferences {
   }
 
   public static String getLoginPassword(Context context){
-    return getPreferences(context).getString(Password, "");
+//    return getPreferences(context).getString(Password, "");
+    return getPreferences(context).getString(fingerToken, "");
+  }
+
+  public static void enableBiometric(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(IsBiometric, true);
+    prefsEditor.commit();
+  }
+  public static void disableBiometric(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(IsBiometric, false);
+    prefsEditor.putString(fingerToken, "");
+    prefsEditor.commit();
+  }
+  public static Boolean isBiometric(Context context){
+    return getPreferences(context).getBoolean(IsBiometric, false);
   }
 
   public static void setForceLoginData(Context context, ForceLoginData data){

@@ -80,7 +80,7 @@ import okhttp3.ResponseBody;
 public class MyLoginActivity extends AppCompatActivity implements View.OnClickListener, LocationListener, ForceUpdateChecker.OnUpdateNeededListener {
     private final int LOGIN_SERVICE=1, FORGET_PASSWORD_SERVICE=2;
     private Context context;
-    private TextView login_tv, create_account_tv, forget_password_tv, reset_pin_tv;
+    private TextView login_tv, create_account_tv, forget_password_tv, reset_pin_tv, biometric_tv;
     private EditText email_edt, password_edt, pin_edt, captchaEdt;
     private LinearLayout lin_id_container;
     private ImageView captchaImg;
@@ -155,6 +155,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
         pin_edt =  findViewById(R.id.pin_edt);
         login_tv = findViewById(R.id.login_tv);
         forget_password_tv =  findViewById(R.id.forget_password_tv);
+        biometric_tv =  findViewById(R.id.biometric_tv);
         reset_pin_tv =  findViewById(R.id.reset_pin_tv);
         create_account_tv =  findViewById(R.id.create_account_tv);
         lin_id_container =  findViewById(R.id.lin_id_container);
@@ -183,12 +184,13 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
             ((TextView)findViewById(R.id.appVerTv)).setText("Ver "+ pinfo.versionName);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.6.18+"/*+ BuildConfig.VERSION_NAME*/);
+            ((TextView)findViewById(R.id.appVerTv)).setText("Ver 1.7.0+"/*+ BuildConfig.VERSION_NAME*/);
         }
         remember_me_checkbox = findViewById(R.id.remember_me_checkbox);
         findViewById(R.id.scrollView).setOnClickListener(this);
         login_tv.setOnClickListener(this);
         forget_password_tv.setOnClickListener(this);
+        biometric_tv.setOnClickListener(this);
         reset_pin_tv.setOnClickListener(this);
         create_account_tv.setOnClickListener(this);
 
@@ -387,7 +389,7 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                         if(loginModel.Data!=null && loginModel.StatusCode.equalsIgnoreCase("0")){
                             //store values to shared preferences
 //                            dataBaseHelper.insertLoginIds(email_edt.getText().toString());
-//                            loginModel.Data.DoneCardUser="JC0A44794";
+//                            loginModel.Data.DoneCardUser="JC0A47008";
                             MyPreferences.saveLoginData(loginModel,context);
                             if(remember_me_checkbox.isChecked()){
                                 MyPreferences.loginUser(context, email_edt.getText().toString(), password_edt.getText().toString().trim());
@@ -781,6 +783,9 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                 }else {
                     Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
                 }
+                break;
+            case R.id.biometric_tv:
+                startActivity(new Intent(context, EnableBiometricLoginActivity.class));
                 break;
             case R.id.reset_pin_tv:
                 if(Common.checkInternetConnection(context)) {

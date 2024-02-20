@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -93,7 +94,7 @@ public class MyTrainStationDialog {
 
             getData();
 
-            Common.showSoftInput(context);
+            dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
             ArrayAdapter adapter= new ArrayAdapter(context, R.layout.train_autocomplete_layout, R.id.name_tv, stationArray);
             city_edt.setAdapter(adapter);

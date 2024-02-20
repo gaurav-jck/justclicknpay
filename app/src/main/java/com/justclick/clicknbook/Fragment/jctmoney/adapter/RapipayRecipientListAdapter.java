@@ -61,7 +61,7 @@ public class RapipayRecipientListAdapter extends RecyclerView.Adapter<RecyclerVi
             vh.bankNameTv.setText(arrayList.get(position).getBankName());
             vh.ifscTv.setText(arrayList.get(position).getIfsc());
 
-            Typeface face = Common.listAgencyNameTypeFace(context);
+            Typeface face = Common.ralewayMedium(context);
             vh.recipientTv.setTypeface(face);
 
             if(arrayList.get(position).isVisible){
