@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/colorWhite"
+    >
+    <item android:id="@android:id/mask"
+        android:drawable="@color/app_blue_color"
+        >
+    </item>
+    <item
+        android:drawable="@drawable/app_blue_round_button_background">
+    </item>
+
+</ripple>

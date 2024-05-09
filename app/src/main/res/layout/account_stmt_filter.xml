@@ -75,6 +75,7 @@
         android:maxLines="1"
         android:singleLine="true"
         android:layout_margin="@dimen/small_margin"
+        android:textSize="@dimen/text_size_15sp"
         android:padding="@dimen/small_margin"
         android:textColor="@color/black"/>
 
@@ -95,6 +96,8 @@
         android:text=""
         android:maxLines="1"
         android:singleLine="true"
+        android:maxLength="@integer/maxLength30"
+        android:textSize="@dimen/text_size_15sp"
         android:digits="@string/filter_editText_digits"
         android:layout_margin="@dimen/small_margin"
         android:padding="@dimen/small_margin"
@@ -124,6 +127,7 @@
             android:maxLines="1"
             android:singleLine="true"
             android:maxLength="40"
+            android:textSize="@dimen/text_size_15sp"
             android:digits="@string/filter_editText_digits"
             android:layout_margin="@dimen/small_margin"
             android:padding="@dimen/small_margin"

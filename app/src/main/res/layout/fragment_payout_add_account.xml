@@ -1,0 +1,364 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Add Account"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/small_margin"
+            card_view:cardBackgroundColor="@color/cardMobileBackground"
+            card_view:cardCornerRadius="4dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/very_small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/person_detail_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="@dimen/small_margin"
+                    android:text="PERSONAL DETAIL"
+                    android:textColor="@color/color_black"
+                    android:textSize="@dimen/text_size_16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:gravity="center"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/mr_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/app_blue_color"
+                        android:gravity="center"
+                        android:padding="@dimen/small_margin"
+                        android:text="MR"
+                        android:textColor="@color/color_white" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color" />
+
+
+                    <TextView
+                        android:id="@+id/ms_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="@dimen/small_margin"
+                        android:text="MS"
+                        android:textColor="@color/app_blue_color" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/dark_blue_color" />
+
+                    <TextView
+                        android:id="@+id/mrs_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:padding="@dimen/small_margin"
+                        android:text="MRS"
+                        android:textColor="@color/app_blue_color" />
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/atv_bank_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    >
+                <AutoCompleteTextView
+                    android:id="@+id/atv_bank"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/text_light_gray"
+                    android:textColorHint="@color/text_light_gray"
+                    android:inputType="text"
+                    android:paddingLeft="6dp"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:text=""
+                    android:textSize="@dimen/money_transfer_input_text_size"
+                    android:hint="@string/bank_name"
+                    android:textColor="@color/app_blue_color"
+                    android:digits="@string/bank_name_digit"
+                    android:textCursorDrawable="@color/white"
+                    android:completionThreshold="1"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/account_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/account_no_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="6"
+                        android:hint="Bank account number"
+                        android:maxLines="1"
+                        android:maxLength="@integer/bankAccountMaxLength"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/registration_hint_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/confirmAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:visibility="visible">
+
+                    <EditText
+                        android:id="@+id/confirmAccountEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/account_number_confirm"
+                        android:text=""
+                        android:maxLength="@integer/bankAccountMaxLength"
+                        android:inputType="number"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/Address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:hint="Bank IFSC">
+<!--android:hint="Bank IFSC"-->
+                    <EditText
+                        android:id="@+id/ifscEdt"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/address_editText_digits"
+                        android:inputType="textCapCharacters"
+                        android:maxLength="15"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textAllCaps="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/name_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:digits="@string/personName_editText_digits"
+                        android:hint="Beneficiary Name"
+                        android:maxLength="@integer/nameMaxLength"
+                        android:singleLine="true"
+                        android:text=""
+                        android:textColor="@color/app_blue_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/user_mobile_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:hint="Beneficiary Mobile"
+                        android:inputType="number"
+                        android:maxLength="10"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/registration_hint_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Account Proof"
+                    android:textColor="@color/app_blue_color"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/medium_margin"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:background="@drawable/edittext_border_hotel"
+                    >
+
+                    <TextView
+                        android:id="@+id/fileNameTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/margin_5dp"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:layout_marginEnd="@dimen/margin_5dp"
+                        android:layout_marginBottom="@dimen/margin_5dp"
+                        android:hint="fileName"
+                        android:paddingLeft="@dimen/margin_5dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true">
+                        <TextView
+                            android:id="@+id/uploadTv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_toLeftOf="@+id/viewPanTv"
+                            android:background="@drawable/solid_round_blue_background"
+                            android:drawableRight="@drawable/upload"
+                            android:gravity="center"
+                            android:padding="@dimen/margin_10dp"
+                            android:text="Upload File"
+                            android:textColor="@color/white"
+                            android:drawablePadding="@dimen/margin_5dp"/>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/large_margin">
+
+                    <TextView
+                        android:id="@+id/verifyAccountTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:background="@drawable/blue_round_button_background"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:paddingRight="@dimen/small_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:text="Validate Account"
+                        android:maxLines="1"
+                        android:visibility="visible"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:id="@+id/submit_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:background="@color/orange_color"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:paddingRight="@dimen/small_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:text="Add Account"
+                        android:maxLines="1"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/color_white" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+</LinearLayout>

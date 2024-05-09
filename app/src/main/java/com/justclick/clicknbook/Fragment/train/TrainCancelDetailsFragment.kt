@@ -123,16 +123,17 @@ class TrainCancelDetailsFragment : Fragment() {
                 remarkLin.visibility=View.GONE
                 refundStatusTv.visibility=View.VISIBLE
             }else{
+                isCancel=true
                 refundStatusTv.visibility=View.GONE
             }
 
             if(!isRefund && list.currentStatus.equals("CAN")){
                 isRefund=true
             }
-            if(!isCancel && (list.currentStatus.equals("CNF") || list.currentStatus.equals("RAC") || list.currentStatus.equals("WL")
+            /*if(!isCancel && (list.currentStatus.equals("CNF") || list.currentStatus.equals("RAC") || list.currentStatus.equals("WL")
                         || list.currentStatus.equals("TQWL"))){
                 isCancel=true
-            }
+            }*/
 
             view.passengerContainerLin!!.addView(child)
         }

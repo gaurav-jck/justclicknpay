@@ -136,6 +136,8 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     recipientRecycleView!!.setLayoutManager(LinearLayoutManager(context))
     addRecTv!!.setOnClickListener(this)
     view.findViewById<View>(R.id.limitLin).visibility= View.GONE
+//    view.findViewById<View>(R.id.limitLin).visibility= View.VISIBLE
+    view.findViewById<View>(R.id.limitDetailLin).visibility= View.GONE
   }
 
   private fun getAdapter(benificiaryDetailData: ArrayList<benificiaryDetailData>): RapipayRecipientListAdapter {
@@ -661,7 +663,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
   }
 
   private fun makeTransaction(token:String, userData:String) {
-    Common.hideSoftInputFromDialog(pinDialog, context)
+    Common.hideSoftInputFromDialog(paymentDialog, context)
     val requestModel = PayoutRequestModel()
     requestModel.AgentCode = loginModel!!.Data.DoneCardUser
     requestModel.MobileNumber = senderInfo!!.mobile

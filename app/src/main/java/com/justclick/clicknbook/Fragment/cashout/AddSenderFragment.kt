@@ -19,7 +19,7 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
-import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment
+import com.justclick.clicknbook.Fragment.cashoutnew.PayoutBeneFragment
 import com.justclick.clicknbook.Fragment.jctmoney.request.AddSenderRequest
 import com.justclick.clicknbook.Fragment.jctmoney.request.CommonParams
 import com.justclick.clicknbook.Fragment.jctmoney.request.SenderDetailRequest
@@ -68,6 +68,7 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
     private var otpLin: LinearLayout? = null
     private var loginModel: LoginModel? = null
     private var isVerify = false
+    private var isNewApi=false
     private var senderDetailResponse: SenderDetailResponse? = null
     private var addSenderResponse: AddSenderResponse? = null
     private var pinCityResponseArrayList: ArrayList<PostOffice>? = null
@@ -144,11 +145,20 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
             address = pinCityResponseArrayList!![position].district
             state_edt!!.setText(state)
         })
-        if (senderDetailResponse != null && senderDetailResponse!!.statusCode == ADD_SENDER) {
-            addSenderRequired()
+        if (commonParams!!.apiService == "1") {
+            number_edt!!.isEnabled = false
+            otpLin!!.setVisibility(View.VISIBLE) // new change
+            otpDetailTv!!.setVisibility(View.VISIBLE) // new change
+            titleTv!!.setText("Add Sender")
+            isNewApi = true
         } else {
-            updateRequired()
+            if (senderDetailResponse != null && senderDetailResponse!!.statusCode == ADD_SENDER) {
+                addSenderRequired()
+            } else {
+                updateRequired()
+            }
         }
+
         pin_edt!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
@@ -430,14 +440,16 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
             if (senderResponse != null) {
                 parentFragmentManager.popBackStack()
                 if (senderResponse.statusCode == "00") {
-                    val bundle = Bundle()
-                    bundle.putSerializable("senderResponse", senderResponse)
-                    commonParams!!.sessionKey = senderResponse.sessionKey
-                    commonParams!!.sessionRefNo = senderResponse.sessionRefId
-                    bundle.putSerializable("commonParams", commonParams)
-                    val senderDetailFragment = SenderDetailFragment()
-                    senderDetailFragment.arguments = bundle
-                    (context as NavigationDrawerActivity?)!!.replaceFragmentWithTag(senderDetailFragment, FragmentTags.jctMoneySenderDetailFragment)
+//                    val bundle = Bundle()
+//                    bundle.putSerializable("senderResponse", senderResponse)
+//                    commonParams!!.sessionKey = senderResponse.sessionKey
+//                    commonParams!!.sessionRefNo = senderResponse.sessionRefId
+//                    bundle.putSerializable("commonParams", commonParams)
+//                    val senderDetailFragment = SenderDetailFragment()
+//                    senderDetailFragment.arguments = bundle
+//                    (context as NavigationDrawerActivity?)!!.replaceFragmentWithTag(senderDetailFragment, FragmentTags.jctMoneySenderDetailFragment)
+                    (context as NavigationDrawerActivity?)!!.replaceFragmentWithTag(
+                        PayoutBeneFragment(), FragmentTags.payoutSenderDetailFragment)
                 } else if (senderResponse.statusCode == "05") {
 //                    add sender
 //                    getsender ka response requestfor me dena h

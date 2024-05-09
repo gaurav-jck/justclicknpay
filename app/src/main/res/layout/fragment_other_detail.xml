@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.cashoutnew.registration.ContactDetailFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/small_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other Details"
+            android:textColor="@color/white"
+            android:padding="@dimen/margin_7dp"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:fontFamily="@font/klinic_slab_medium"
+            android:background="@drawable/red_rectangle_button_background"/>
+
+        <!--address proof spinner-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/large_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/user_name_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address Proof"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:textSize="@dimen/small_text_size"/>
+                <Spinner
+                    android:id="@+id/addressProofSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--pan card number-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pancard_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/addressProofEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/user_address_no"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:maxLength="20"
+                    android:singleLine="true"
+                    android:text=""
+                    android:inputType="text|textCapCharacters"
+                    android:textColorHint="@color/registration_hint_color"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <!--choose pan card copy-->
+        <LinearLayout
+            android:id="@+id/chooseAddressProofLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+
+            <TextView
+                android:id="@+id/addressProofTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/login_text_color"
+                android:hint="Choose address proof copy"
+                />
+
+            <ImageView
+                android:id="@+id/addressProofFile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/choose_file"/>
+
+
+        </LinearLayout>
+
+        <!--pan card name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/large_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pancard_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+                <EditText
+                    android:id="@+id/pan_card_name_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:maxLength="40"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/user_pancardName"
+                    android:digits="@string/personName_editText_digits"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <!--pan card number-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pancard_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/pan_card_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/user_pancard"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:text=""
+                    android:inputType="text|textCapCharacters"
+                    android:textColorHint="@color/registration_hint_color"
+                    android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890"
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <!--choose pan card copy-->
+        <LinearLayout
+            android:id="@+id/choosePancardLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+
+            <TextView
+                android:id="@+id/panCardTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/login_text_color"
+                android:hint="Choose pan card copy"
+                />
+
+            <ImageView
+                android:id="@+id/imagePan"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/choose_file"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chooseShopLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+
+            <TextView
+                android:id="@+id/shopTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/login_text_color"
+                android:hint="Choose shop exterior photo"
+                />
+
+            <ImageView
+                android:id="@+id/imageShop"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/choose_file"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chooseSalesLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+
+            <TextView
+                android:id="@+id/salesTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/login_text_color"
+                android:hint="Pic with sales person"
+                />
+
+            <ImageView
+                android:id="@+id/imageSales"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/choose_file"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chooseAgencyLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+
+            <TextView
+                android:id="@+id/agencyTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/login_text_color"
+                android:hint="Choose Agency address proof"
+                />
+
+            <ImageView
+                android:id="@+id/imageAgency"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/choose_file"/>
+
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/registration_edittext_back"
+            android:layout_marginTop="@dimen/medium_margin"
+            >
+            <EditText
+                android:id="@+id/remarkEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/padding_3dp"
+                android:layout_margin="@dimen/small_margin"
+                android:maxLength="150"
+                android:textColor="@color/login_text_color"
+                android:hint="Remarks"
+                android:digits="@string/remarks_editText_digits"
+                android:singleLine="true"
+                android:minLines="2"
+                android:maxLines="2"
+                android:inputType="text"
+                android:textColorHint="@color/registration_hint_color"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:gravity="center_horizontal">
+            <CheckBox
+                android:id="@+id/terms_checkbox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:button="@drawable/checkbox_custom"
+                android:text="I accept"
+                android:paddingLeft="@dimen/small_margin"
+                android:textSize="@dimen/text_size_15sp"
+                android:textColor="@color/blue_color"/>
+            <TextView
+                android:id="@+id/termsTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/terms_condition"
+                android:textSize="@dimen/text_size_15sp"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/blue_color"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/continue_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_blue_button_background"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_16sp"
+            android:text="Submit"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:layout_marginLeft="@dimen/login_content_margin"
+            android:layout_marginRight="@dimen/login_content_margin" />
+
+    </LinearLayout>
+</ScrollView>

@@ -252,7 +252,11 @@ class TrainListAdapter(
         fareRuleResponse.serviceTax=jsonObject.getString("serviceTax")
         fareRuleResponse.dynamicFare=jsonObject.getString("dynamicFare")
         fareRuleResponse.totalFare=jsonObject.getString("totalFare")
-        fareRuleResponse.serverId=jsonObject.getString("serverId")
+        if(jsonObject.has("serverId")){
+            fareRuleResponse.serverId=jsonObject.getString("serverId")
+        }else{
+            fareRuleResponse.serverId=""
+        }
         fareRuleResponse.timeStamp=jsonObject.getString("timeStamp")
 
 

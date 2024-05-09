@@ -1,6 +1,7 @@
 package com.justclick.clicknbook.Fragment.accountsAndReports;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,6 +21,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.provider.MediaStore;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.core.content.ContextCompat;
@@ -207,10 +211,10 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
             }else if (remark_edt.getText().toString().length()==0) {
                 Toast.makeText(context, R.string.empty_remark, Toast.LENGTH_LONG).show();
                 return false;
-            }else if (networkOutputStream==null) {
+            }/*else if (networkOutputStream==null) {
                 Toast.makeText(context, "please choose receipt image file", Toast.LENGTH_LONG).show();
                 return false;
-            }
+            }*/
         }catch (Exception e){
             Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
         }
@@ -296,35 +300,98 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
                 break;
 
             case R.id.chooseFileLin:
-                ActivityCompat.requestPermissions((NavigationDrawerActivity)context,
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_STORAGE);
-                if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
-                        == PackageManager.PERMISSION_GRANTED) {
-                    chooseFile(1);
-                }
+                askSelfPermission();
                 break;
 
         }
     }
 
-    private void chooseFile(int type) {
-//        Toast.makeText(context, "Choose file", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-//        intent.setType("*/*");
-//
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
+    private ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    selectFile();
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });
 
-//        dispatchTakePictureIntent1();
-//        Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(Intent.createChooser(takePhotoIntent, "Select file to upload"), REQUEST_IMAGE_CAPTURE);
-        startActivityForResult(Intent.createChooser(getPickImageIntent(context), "Select file to upload"), type);
+    private void askSelfPermission() {
 
-//        reference
-//        https://www.androidpit.com/forum/626144/android-image-uploading-to-server-from-gallery
+        String readImagePermission;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            readImagePermission=Manifest.permission.READ_MEDIA_IMAGES;
+        else
+            readImagePermission=Manifest.permission.READ_EXTERNAL_STORAGE;
 
+        if (ContextCompat.checkSelfPermission(
+                requireContext(), readImagePermission) ==
+                PackageManager.PERMISSION_GRANTED) {
+            // You can use the API that requires the permission.
+            selectFile();
+        } else {
+            // You can directly ask for the permission.
+            // The registered ActivityResultCallback gets the result of this request.
+            requestPermissionLauncher.launch(
+                    readImagePermission);
+        }
     }
+
+    private void selectFile() {
+        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+        chooseFile.setType("image/*");
+        chooseFile = Intent.createChooser(chooseFile, "Select file to upload");
+        launchSomeActivity.launch(chooseFile);
+    }
+
+    ActivityResultLauncher<Intent> launchSomeActivity
+            = registerForActivityResult(
+            new ActivityResultContracts
+                    .StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == RESULT_OK && result.getData() != null){
+                    if(result.getData().getExtras()!=null) {
+                        Bundle extras = result.getData().getExtras();
+                        Bitmap imageBitmap = (Bitmap) extras.get("data");
+//                imagepath = MediaStore.Images.Media.insertImage(context.getContentResolver(), imageBitmap, "Deposit", null);
+                        if (imagepath != null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg") ||
+                                imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
+                            if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
+                                Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
+                            }
+                            try {
+                                imageFile.setImageBitmap(imageBitmap);
+                                networkOutputStream = new ByteArrayOutputStream();
+                            } catch (Exception e) {
+                                Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }else {
+                            Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        Uri selectedImageUri = result.getData().getData();
+                        imagepath = getPath(selectedImageUri);
+                        if(imagepath!=null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg")||
+                                imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
+                            if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
+                                Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
+                            }else {
+                                imagepath = getPath(selectedImageUri);
+                                BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+                                Bitmap bitmap = BitmapFactory.decodeFile(imagepath, bmOptions);
+                                imageFile.setImageBitmap(bitmap);
+                                networkOutputStream = new ByteArrayOutputStream();
+                            }
+                        }else {
+                            Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            });
+
     public Intent getPickImageIntent(Context context) {
         Intent chooserIntent = null;
 
@@ -340,18 +407,7 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
         } catch (IOException e) {
             e.printStackTrace();
         }
-//        Uri apkURI = null;
-//        try {
-//            apkURI = FileProvider.getUriForFile(
-//                    context,
-//                    context.getApplicationContext()
-//                            .getPackageName() + ".provider", createImageFile());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, apkURI);
-//        takePhotoIntent.setData(apkURI);
-//        takePhotoIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
         intentList = addIntentsToList(context, intentList, pickIntent);
         intentList = addIntentsToList(context, intentList, takePhotoIntent);
 
@@ -376,45 +432,6 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_STORAGE:
-//                Toast.makeText(context, "Permission Result case call", Toast.LENGTH_SHORT).show();
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    Toast.makeText(context, "PERMISSION_GRANTED", Toast.LENGTH_SHORT).show();
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                } else {
-//                    Toast.makeText(context, "PERMISSION_NOT_GRANTED", Toast.LENGTH_SHORT).show();
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                break;
-            default:
-//            Toast.makeText(context, "Permission Result default", Toast.LENGTH_SHORT).show();
-          /*  case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }*/
-
-                // other 'case' lines to check for other
-                // permissions this app might request.
-        }
-    }
-
-    String currentPhotoPath;
-
     private File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -429,52 +446,6 @@ public class AgentDepositRequestFragment extends Fragment implements View.OnClic
         // Save a file: path for use with ACTION_VIEW intents
         imagepath = image.getAbsolutePath();
         return image;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && data != null){
-            if(data.getExtras()!=null) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-//                imagepath = MediaStore.Images.Media.insertImage(context.getContentResolver(), imageBitmap, "Deposit", null);
-                if (imagepath != null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg") ||
-                        imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
-                    if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
-                        Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
-                    }
-                    try {
-                        imageFile.setImageBitmap(imageBitmap);
-                        networkOutputStream = new ByteArrayOutputStream();
-                    } catch (Exception e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                Uri selectedImageUri = data.getData();
-                imagepath = getPath(selectedImageUri);
-                if(imagepath!=null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg")||
-                        imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
-                    if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
-                        Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
-                    }else {
-                        imagepath = getPath(selectedImageUri);
-                        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                        Bitmap bitmap = BitmapFactory.decodeFile(imagepath, bmOptions);
-                        imageFile.setImageBitmap(bitmap);
-                        networkOutputStream = new ByteArrayOutputStream();
-                    }
-                }else {
-                    Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
     }
 
     public String getPath(Uri uri) {

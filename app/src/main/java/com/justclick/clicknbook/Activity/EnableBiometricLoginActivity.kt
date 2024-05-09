@@ -140,7 +140,16 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         Common.hideSoftKeyboard(context as EnableBiometricLoginActivity?)
         val uName = email_edt!!.text.toString()
         val uPass = password_edt!!.text.toString()
-        val DID = Common.getDeviceId(context)
+        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        val check2 = "9797141435"
+
+        val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
+            MyPreferences.getLoginId(context).equals(check2)) {
+            "JustClicknPayOtp"
+        } else {
+            Common.getDeviceId(context)
+        }
+//        val DID = Common.getDeviceId(context)
         if (validate(uName, uPass)) {
             try {
                 val loginRequestModel = LoginRequestModel()
@@ -170,7 +179,16 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
 
     private fun loginCall() {
         Common.hideSoftKeyboard(context as EnableBiometricLoginActivity?)
-        val DID = Common.getDeviceId(context)
+        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        val check2 = "9797141435"
+
+        val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
+            MyPreferences.getLoginId(context).equals(check2)) {
+            "JustClicknPayOtp"
+        } else {
+            Common.getDeviceId(context)
+        }
+//        val DID = Common.getDeviceId(context)
         try {
             val loginRequestModel = LoginRequestModel()
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)

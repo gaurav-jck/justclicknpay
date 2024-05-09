@@ -12,10 +12,9 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.cashoutnew.PayoutBeneFragment
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyCreateSenderFragment
 import com.justclick.clicknbook.Fragment.jctmoney.JctMoneySenderDetailFragment
-import com.justclick.clicknbook.Fragment.jctmoney.RapipayAddSenderFragment
-import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment
 import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest
 import com.justclick.clicknbook.Fragment.jctmoney.request.CommonParams
 import com.justclick.clicknbook.Fragment.jctmoney.request.SenderDetailRequest
@@ -95,6 +94,20 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
                     commonParams!!.userData = senderResponse.credentialData[0].userData
                     commonParams!!.kycStatus = senderResponse.credentialData[0].kycStatus
                     commonParams!!.apiService = senderResponse.apiServices
+
+                    commonParams!!.setSessionKey(senderResponse.getCredentialData().get(0).getSessionKey());
+                    commonParams!!.setSessionRefNo(senderResponse.getCredentialData().get(0).getSessionRefNo());
+                    commonParams!!.setToken(senderResponse.getCredentialData().get(0).getToken());
+                    commonParams!!.setUserData(senderResponse.getCredentialData().get(0).getUserData());
+                    commonParams!!.setKycStatus(senderResponse.getCredentialData().get(0).getKycStatus());
+                    commonParams!!.setApiService(senderResponse.apiServices);
+                    commonParams!!.setAddress(senderResponse.getCredentialData().get(0).address);
+                    commonParams!!.setPinCode(senderResponse.getCredentialData().get(0).pinCode);
+                    commonParams!!.setState(senderResponse.getCredentialData().get(0).state);
+                    commonParams!!.setCity(senderResponse.getCredentialData().get(0).city);
+                    commonParams!!.setStatecode(senderResponse.getCredentialData().get(0).statecode);
+                    commonParams!!.isBank2= senderResponse.getCredentialData().get(0).isBank2;
+                    commonParams!!.isBank3= senderResponse.getCredentialData().get(0).isBank3;
                     if (isCheckCredential) {
                         isCheckCredential = false
                         senderDetail
@@ -156,9 +169,9 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
                     commonParams!!.sessionKey = senderResponse.sessionKey
                     commonParams!!.sessionRefNo = senderResponse.sessionRefId
                     bundle.putSerializable("commonParams", commonParams)
-                    val senderDetailFragment = SenderDetailFragment()
-                    senderDetailFragment.arguments = bundle
-                    (context as NavigationDrawerActivity?)!!.replaceFragmentWithTag(senderDetailFragment, FragmentTags.jctMoneySenderDetailFragment)
+                    val payoutBeneFragment = PayoutBeneFragment()
+                    payoutBeneFragment.arguments = bundle
+                    (context as NavigationDrawerActivity?)!!.replaceFragmentWithTag(payoutBeneFragment, FragmentTags.payoutSenderDetailFragment)
                 } else if (senderResponse.statusCode == "05") {
 //                    add sender
 //                    getsender ka response requestfor me dena h

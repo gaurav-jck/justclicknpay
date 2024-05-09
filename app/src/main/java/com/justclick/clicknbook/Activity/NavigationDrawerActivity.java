@@ -70,8 +70,11 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.AirSalesReportFragme
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
 import com.justclick.clicknbook.Fragment.bus.BusSearchFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
+import com.justclick.clicknbook.Fragment.cashfreeQR.QRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.cashout.SenderDetailFragment;
+import com.justclick.clicknbook.Fragment.cashoutnew.PayoutBeneFragment;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.flights.fragments.FlightSearch;
@@ -313,6 +316,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.bank_details_lin).setOnClickListener(this);
         findViewById(R.id.query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
+        findViewById(R.id.changePassLin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
 
@@ -526,6 +530,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.DYNAMIC_QR:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.NetSalesReport:
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragmentNew());
@@ -596,6 +604,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.PAYTM:
                 return R.drawable.account_balance_wallet;
             case MenuCodes.CASHFREE_QR:
+                return R.drawable.ic_qr_code;
+            case MenuCodes.DYNAMIC_QR:
                 return R.drawable.ic_qr_code;
             case MenuCodes.BILL_PAY:
                 return R.drawable.ic_icon_mobile_payment_black;
@@ -668,6 +678,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case R.id.query_lin:
                 replaceFragmentWithBackStack(new SupportQueryFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.changePassLin:
+                replaceFragmentWithBackStack(new ChangePasswordFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.logout_lin:
@@ -822,6 +836,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         ArrayList<LoginModel.DataList> list=new ArrayList<>();
         boolean isUtilityBill=false;
         boolean isPayout=false;
+        boolean isQR=false;
 
         if(loginModel.ProductList!=null && loginModel.ProductList.size()>0){
             LoginModel.DataList dataList=loginModel.new DataList();
@@ -866,6 +881,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         subMenu.SubMenu="IRCTC";
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.CASHFREE_QR)){
                         subMenu.SubMenu="QR Code";
+                        isQR=true;
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.BILL_PAY)){
                         subMenu.SubMenu="Utility Bill";
                         isUtilityBill=true;
@@ -1405,6 +1421,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
             if(classType.equals(CodeEnum.Rapipay)){
                 ((RapipaySenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.jctMoneySenderDetailFragment)).
                         getSenderDetail(0);
+            }else if(classType.equals(CodeEnum.PayoutNew)){
+                ((PayoutBeneFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.payoutSenderDetailFragment)).
+                        getBankDetails(false);
             }else {
                 ((SenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.jctMoneySenderDetailFragment)).
                         getSenderDetail(0);

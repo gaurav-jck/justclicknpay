@@ -235,6 +235,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug" type="java-resource" />
@@ -248,6 +249,7 @@
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/res/rs/justclickkaroservices/debug" />
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />

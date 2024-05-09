@@ -126,6 +126,7 @@ public class MenuCodes {
   public static final String  PAYTM="Wallet";
   public static final String  CREDIT="Credit Card";
   public static final String  CASHFREE_QR="QRCODE";
+  public static final String  DYNAMIC_QR="Dynamic QRCode";
   public static final String  AgentChattingFragment="S0";
   public static final String  AgentDepositRequestFragment="DepositRequest";
   public static final String  AgentCreditRequestFragment="CreditRequest";

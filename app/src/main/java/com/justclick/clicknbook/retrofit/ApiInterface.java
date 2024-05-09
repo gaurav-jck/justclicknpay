@@ -516,15 +516,18 @@ public interface ApiInterface {
     @GET("V2/Cashfree/{methodName}")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getVPACheck(@Path("methodName") String method,
-                                   @Header("userData") String userData, @Header("Authorization") String token/*,
-                                   @Header("Identifier") String doneCard, @Header("LoggedInUserType") String type,
-                                   @Header("Merchant") String merchant, @Header("Mode") String mode*/);
+                                   @Header("userData") String userData, @Header("Authorization") String token);
 
     @GET("V2/Cashfree/VPAActive?Active=1")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> activeVPA(@Header("userData") String userData, @Header("Authorization") String token,
                                  @Header("Identifier") String doneCard, @Header("LoggedInUserType") String type,
                                  @Header("Merchant") String merchant, @Header("Mode") String mode);
+
+    @POST("V2/Cashfree/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getQROTP(@Path("methodName") String method, @Body Object data,
+                                @Header("userData") String userData, @Header("Authorization") String token);
 
     //MATM
     @POST("api_V1/PaymentEngine/{methodName}")
@@ -592,5 +595,86 @@ public interface ApiInterface {
 //    support
     @POST("api/supports/{methodName}")
     Call<ResponseBody> getSupportPost(@Path("methodName") String method, @Body Object data);
+
+//    Payout new
+    @POST("V2/Cashfree/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getPayoutNew(@Path("methodName") String method, @Body Object data,
+                                   @Header("userData") String userData, @Header("Authorization") String token);
+
+    @Multipart
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> addAccountPart(@Path("methodName") String method,
+                                      @Part("AgentCode") RequestBody userId,
+                                      @Part("BankName") RequestBody remark,
+                                      @Part("bankid") RequestBody bankid,
+                                      @Part("IFSCCode") RequestBody amount,
+                                      @Part("AccountNo") RequestBody credit,
+                                      @Part("MobileNo") RequestBody mobile,
+                                      @Part("AccountHolderName") RequestBody name,
+                                      @Part("Mode") RequestBody mode,
+                                      @Part("isVerified") RequestBody isVerified,
+                                      @Part MultipartBody.Part file,
+                                      @Header("userData") String userData,
+                                      @Header("Authorization") String auth);
+
+    @Multipart
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> addAccountPartNoFile(@Path("methodName") String method,
+                                      @Part("AgentCode") RequestBody userId,
+                                      @Part("Id") RequestBody id,
+                                      @Part("BankName") RequestBody remark,
+                                      @Part("bankid") RequestBody bankid,
+                                      @Part("IFSCCode") RequestBody amount,
+                                      @Part("AccountNo") RequestBody credit,
+                                      @Part("MobileNo") RequestBody mobile,
+                                      @Part("AccountHolderName") RequestBody name,
+                                      @Part("Mode") RequestBody mode,
+                                      @Part("isVerified") RequestBody isVerified,
+                                      @Header("userData") String userData,
+                                      @Header("Authorization") String auth);
+
+    @Multipart
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> agentRegistration(@Path("methodName") String method,
+                                      @Part("email") RequestBody email,
+                                      @Part("salutation") RequestBody salutation ,
+                                      @Part("firstname") RequestBody firstname,
+                                      @Part("lastname") RequestBody lastname ,
+                                      @Part("mobile") RequestBody mobile,
+                                      @Part("landline") RequestBody landline,
+                                      @Part("usertype") RequestBody usertype,
+                                      @Part("companyname") RequestBody companyname,
+                                      @Part("state") RequestBody state,
+                                      @Part("city") RequestBody city,
+                                      @Part("country") RequestBody country,
+                                      @Part("pincode") RequestBody pincode,
+                                      @Part("address") RequestBody address,
+                                      @Part("userpin") RequestBody userpin,
+                                      @Part("gstnumber") RequestBody gstnumber,
+                                      @Part("addressproof") RequestBody addressproof,
+                                      @Part("addproofnumber") RequestBody addproofnumber,
+                                      @Part("pancardname") RequestBody pancardname ,
+                                      @Part("pannumber") RequestBody pannumber ,
+                                      @Part("visited") RequestBody visited ,
+                                      @Part("salepersonjctid") RequestBody salepersonjctid ,
+                                      @Part("remark") RequestBody remark ,
+                                      @Part("MerchantId") RequestBody MerchantId ,
+                                      @Part("bookuusertype") RequestBody bookuusertype ,
+                                      @Part("bookuserid") RequestBody bookuserid ,
+                                      @Part("bookvalidationcode") RequestBody bookvalidationcode ,
+                                      @Part("ipAddress") RequestBody ipAddress ,
+                                      @Part("hostName") RequestBody hostName ,
+                                      @Part("Mode") RequestBody mode,
+                                      @Part MultipartBody.Part addproofdocument,
+                                      @Part MultipartBody.Part panfile,
+                                      @Part MultipartBody.Part shopexterior,
+                                      @Part MultipartBody.Part picwithsaleperson,
+                                      @Part MultipartBody.Part agencyAddressProof,
+                                      @Header("userData") String userData,
+                                      @Header("Authorization") String auth);
+
+    @GET("V2/Cashfree/{methodName}")
+    Call<ResponseBody> getStateCity(@Path("methodName") String method);
 
 }

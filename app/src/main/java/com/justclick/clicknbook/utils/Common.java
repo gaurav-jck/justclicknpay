@@ -217,6 +217,14 @@ public final class Common {
     }
   }
 
+  public static boolean isGSTValid(String name){
+    String pattern = "^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$";
+    if(name.length()>0 && name.matches(pattern)){
+      return true;
+    }else {
+      return false;
+    }
+  }
 
   public static boolean isTrainReferenceValid(String name){
     String pattern = "[a-zA-Z0-9]*";

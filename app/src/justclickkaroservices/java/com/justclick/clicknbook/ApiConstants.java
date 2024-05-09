@@ -18,24 +18,23 @@ public class ApiConstants
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
     //    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
-    public static final String BASE_URL_QR="https://payout.justclicknpay.com/";  //qr old url
+    public static final String BASE_URL_QR_old="https://payout.justclicknpay.com/";  //qr old url
+    public static final String BASE_URL_QR="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
 //    public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
     public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
-    //    public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //live train url 21-Oct-23
-//    public static final String BASE_URL_TRAIN="https://b2brailapi.justclicknpay.com/";  //change train url
-    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //change train url 2
+        public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
+//    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
-//    public static final String BASE_URL_AEPS_N="https://fantasy.justclicknpay.com/";   // AEPS URL N Live
-    //        public static final String BASE_URL_AEPS_N="https://Uatmatm.justclicknpay.com/";   // AEPS URL N Test
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
     //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
     public static final String BASE_URL_CREDIT="https://fantasy.justclicknpay.com/";
     public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_FORGET="https://payout.justclicknpay.com/";
+    public static final String BASE_URL_PAYOUT_NEW="https://uatapitravel.justclicknpay.com/";
     //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
     public static final String AEPS_EXCEL_DOWNLOAD_URL="https://tinyurl.com/t4qe23w";   // AEPS Excel downloadURL
     public static final String BASE_URL_RBL_TEST="http://uatms.justclickkaro.com/";
@@ -81,6 +80,9 @@ public class ApiConstants
     public static final String AirRefundReport ="AirRefundReport";
     public static final String AirSalesReport ="AirSalesReport";
     public static final String TRAVELSESSION ="TRAVELSESSION";
+
+    public static final String newregistration ="newregistration";
+    public static final String getcityandstate ="getcityandstate";
 
     //    Account Stmt
     public static final String TransactionType ="TransactionType";
@@ -217,9 +219,16 @@ public class ApiConstants
     public static final String CashfreeTrans="Transaction";
     public static final String PayoutTransactionList="TransactionList";
     public static final String CheckStatus="CheckStatus";
+    //    Payout new
+    public static final String getagentbankdetails="getagentbankdetails";
+    public static final String addPayoutBene="addPayoutBene";
+    public static final String deletebenepayout="deletebenepayout";
+    public static final String TransactionPayout="TransactionPayout";
+    public static final String payoutlimit="payoutlimit";
     //    qr
     public static final String Authentication="Authentication";
     public static final String VPACheck="VPACheck";
+    public static final String cashfreedynamicQR="cashfreedynamicQR";
 
     //    LIC
     public static final String GenerateToken   ="GenerateToken";
@@ -245,6 +254,10 @@ public class ApiConstants
 
     //    support
     public static final String query="query";
+
+//    change password
+    public static final String otpChangePassword="otpChangePassword";
+    public static final String ChangePassword="ChangePassword";
 
 }
 

@@ -421,6 +421,27 @@
                                     android:layout_marginLeft="@dimen/login_content_margin"
                                     android:layout_marginRight="@dimen/login_content_margin" />
 
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:gravity="center"
+                                    android:visibility="visible"
+                                    android:layout_marginTop="10dp">
+                                    <TextView
+                                        android:id="@+id/create_account_tv"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:padding="@dimen/large_padding"
+                                        android:textColor="@color/app_blue_color"
+                                        android:textSize="@dimen/title_text_size"
+                                        android:text="@string/create_account"
+                                        android:layout_marginLeft="@dimen/login_content_margin"
+                                        android:layout_marginRight="@dimen/login_content_margin"
+                                        android:background="@drawable/login_create_account_background"/>
+                                </LinearLayout>
+
                                 <RelativeLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -447,27 +468,6 @@
                                         />
                                 </RelativeLayout>
 
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:gravity="center"
-                                    android:visibility="gone"
-                                    android:layout_marginTop="18dp">
-                                    <TextView
-                                        android:id="@+id/create_account_tv"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center"
-                                        android:padding="@dimen/large_padding"
-                                        android:textColor="@color/app_blue_color"
-                                        android:textSize="@dimen/title_text_size"
-                                        android:text="@string/create_account"
-                                        android:layout_marginLeft="@dimen/login_content_margin"
-                                        android:layout_marginRight="@dimen/login_content_margin"
-                                        android:background="@drawable/login_create_account_background"/>
-                                </LinearLayout>
 
                             </LinearLayout>
 

@@ -155,6 +155,8 @@
             android:layout_height="wrap_content"
             android:hint="Enter amount"
             android:text=""
+            android:maxLength="@integer/dmtMaxLength"
+            android:digits="@string/mobile_digit"
             android:inputType="numberDecimal"
             android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>

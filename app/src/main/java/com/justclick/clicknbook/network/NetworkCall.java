@@ -1637,9 +1637,20 @@ public class NetworkCall {
         return APIClient.getClientTrain().create(ApiInterface.class);
     }
 
+    public static ApiInterface getCashFreeQRApiInterfaceOld(){
+//        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
+        return APIClient.getClient(ApiConstants.BASE_URL_QR_old).create(ApiInterface.class);  // new changes
+    }
     public static ApiInterface getCashFreeQRApiInterface(){
 //        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
         return APIClient.getClient(ApiConstants.BASE_URL_QR).create(ApiInterface.class);  // new changes
+    }
+
+    public static ApiInterface getPayoutNewApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT_NEW).create(ApiInterface.class);  // new changes
+    }
+    public static ApiInterface getRegisterApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT_NEW).create(ApiInterface.class);  // new changes
     }
 
     public static ApiInterface getFastTagApiInterface(){

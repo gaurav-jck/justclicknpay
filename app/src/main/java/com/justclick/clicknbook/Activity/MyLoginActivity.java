@@ -389,7 +389,8 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
                         if(loginModel.Data!=null && loginModel.StatusCode.equalsIgnoreCase("0")){
                             //store values to shared preferences
 //                            dataBaseHelper.insertLoginIds(email_edt.getText().toString());
-//                            loginModel.Data.DoneCardUser="JC0A47008";
+//                            loginModel.Data.DoneCardUser="JC0D3571";
+//                            loginModel.Data.UserType="D";
                             MyPreferences.saveLoginData(loginModel,context);
                             if(remember_me_checkbox.isChecked()){
                                 MyPreferences.loginUser(context, email_edt.getText().toString(), password_edt.getText().toString().trim());

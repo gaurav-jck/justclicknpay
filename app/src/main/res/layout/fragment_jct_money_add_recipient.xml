@@ -161,7 +161,7 @@
                         android:layout_weight="6"
                         android:hint="Bank account number"
                         android:maxLines="1"
-                        android:maxLength="20"
+                        android:maxLength="@integer/bankAccountMaxLength"
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/app_blue_color"
@@ -184,6 +184,7 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/account_number_confirm"
                         android:text=""
+                        android:maxLength="@integer/bankAccountMaxLength"
                         android:inputType="number"
                         android:textColor="@color/app_blue_color"
                         android:textSize="@dimen/money_transfer_input_text_size" />

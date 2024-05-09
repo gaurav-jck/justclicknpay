@@ -32,7 +32,9 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragm
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
+import com.justclick.clicknbook.Fragment.cashfreeQR.QRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
+import com.justclick.clicknbook.Fragment.cashoutnew.PayoutBeneFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
@@ -51,6 +53,7 @@ import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
+import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
@@ -300,6 +303,7 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.CASH_OUT://26
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new GetSenderFragment());
+//                ((NavigationDrawerActivity) context).replaceFragmentWithTag(new PayoutBeneFragment(), FragmentTags.payoutSenderDetailFragment);
                 break;
             case MenuCodes.LIC://27
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new LicFragment());
@@ -310,13 +314,18 @@ public class HomeFragment extends Fragment {
             case MenuCodes.PAYTM://29
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
                 break;
-            case MenuCodes.CASHFREE_QR://29
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
+            case MenuCodes.CASHFREE_QR://30
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
                 break;
-            case MenuCodes.TrainBookingList://30
+            case MenuCodes.DYNAMIC_QR://31
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                break;
+            case MenuCodes.TrainBookingList://32
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListFragment());
                 break;
-            case MenuCodes.CREDIT://31
+            case MenuCodes.CREDIT://33
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CreditCardFragment());
                 break;
             default:

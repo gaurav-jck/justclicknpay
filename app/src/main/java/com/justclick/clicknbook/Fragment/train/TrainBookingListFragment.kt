@@ -196,8 +196,15 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
     private fun callBookingList() {
         showCustomDialog()
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
+        var userId=""
+        if(loginModel!!.Data.UserType.equals("A")){
+            userId=loginModel!!.Data.DoneCardUser
+        }else{
+            userId=loginModel!!.Data.DoneCardUser
+//            userId=loginModel!!.Data.UserId
+        }
         val call = apiService.getTrainBookingList(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/GetTopDetails",
-                loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
+                userId, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App")
 //                "JC0A30527", "A", ApiConstants.MerchantId, "App")   //JC0O188   "JC0A30527"
         call.enqueue(object : Callback<TrainBookingListResponseModel?> {
             override fun onResponse(call: Call<TrainBookingListResponseModel?>, response: Response<TrainBookingListResponseModel?>) {
@@ -208,6 +215,8 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                             arrayList!!.addAll(response.body()!!.reservationlist)
                             adapter!!.notifyDataSetChanged()
 //                            Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show()
+                        }else{
+                            Toast.makeText(requireContext(), response.body()!!.statusMessage, Toast.LENGTH_SHORT).show()
                         }
                     } else {
                         hideCustomDialog()

@@ -220,7 +220,7 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
             }else if (remark_edt.getText().toString().length()==0) {
                 Toast.makeText(context, R.string.empty_remark, Toast.LENGTH_LONG).show();
                 return false;
-            }else if (networkOutputStream==null) {
+            }else if (networkOutputStream==null && spinner_submit_type.getSelectedItem().toString().equals("Cash")) {
                 Toast.makeText(context, "please choose receipt image file", Toast.LENGTH_LONG).show();
                 return false;
             }
@@ -438,8 +438,13 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
         }else {
 //            Uri selectedUri = data.getData();
             imagepath = getPath(selectedImageUri);
-            if(imagepath!=null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg")||
-                    imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
+            String imageType="";
+            if(imagepath!=null){
+                imageType=imagepath.substring(imagepath.lastIndexOf("."));
+            }
+            if(imagepath!=null && (imageType.equalsIgnoreCase(".jpg")||
+                    imageType.equalsIgnoreCase(".png")) ||
+                    imageType.equalsIgnoreCase(".jpeg")) {
                 if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
                     Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
                 }else {
@@ -595,19 +600,8 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
 //        showCustomDialog();
 
         new UploadFileTask(model).execute();
-//        new NetworkCall().getFormDataFromServer(ApiConstants.MobilePage, ApiConstants.AgentDepositRequest, model);
-       /* new NetworkCall().callFormMobileService(model, ApiConstants.AgentDepositRequest, context,
-                new NetworkCall.RetrofitResponseListener() {
-                    @Override
-                    public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                        if(response!=null){
-                            responseHandler(response, REQUEST_AMOUNT);
-                        }else {
-                            hideCustomDialog();
-                            Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
+//        new UploadFileTask(model).onPreExecute();
+
     }
 
     private void responseHandler(String response, int TYPE) {

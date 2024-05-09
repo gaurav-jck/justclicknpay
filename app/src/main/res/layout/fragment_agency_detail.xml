@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment.cashoutnew.registration.ContactDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/small_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Agency Details"
+            android:textColor="@color/white"
+            android:padding="@dimen/margin_7dp"
+            android:textSize="@dimen/text_size_16sp"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:fontFamily="@font/klinic_slab_medium"
+            android:background="@drawable/red_rectangle_button_background"/>
+
+        <!--user type-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/large_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/user_name_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="User Type"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:textSize="@dimen/small_text_size"/>
+                <Spinner
+                    android:id="@+id/userTypeSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!--company name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/company_name_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+                <EditText
+                    android:id="@+id/company_name_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="@dimen/small_margin"
+                    android:layout_weight="6"
+                    android:background="@android:color/transparent"
+                    android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                    android:hint="@string/company_name"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:padding="@dimen/padding_3dp"
+                    android:textColor="@color/login_text_color"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <!--country name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/country_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Country"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:textSize="@dimen/small_text_size"/>
+                <Spinner
+                    android:id="@+id/country_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--state name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/state_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="State"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:textSize="@dimen/small_text_size"/>
+                <Spinner
+                    android:id="@+id/state_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--city name-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/city_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:textSize="@dimen/small_text_size"/>
+                <Spinner
+                    android:id="@+id/city_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/login_text_color"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!--address-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/home_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/address_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/user_address"
+                    android:digits="@string/address_editText_digits"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textColorHint="@color/registration_hint_color"
+
+                    />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <!--pin code-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pincode_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/pincode_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="@string/pinCode"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:maxLength="@integer/pincode_maxLength"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <!--gst number-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/pincode_icon"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/gst_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="GST Number"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:maxLength="15"
+                    android:inputType="number"
+                    android:digits="@string/alphaNumeric_editText_digits"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <!--user pin code-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/large_margin"
+            android:visibility="visible"
+            android:background="@drawable/registration_edittext_back"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_icon_password"
+                android:layout_gravity="center_vertical"
+                />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@color/login_text_color"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="6"
+                >
+
+
+                <EditText
+                    android:id="@+id/user_pin_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="6"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_3dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:hint="User Pin"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:digits="0123456789"
+                    android:textColorHint="@color/registration_hint_color"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/continue_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ripple_blue_button_background"
+            android:gravity="center"
+            android:padding="12dp"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/text_size_16sp"
+            android:text="Continue"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:layout_marginLeft="@dimen/login_content_margin"
+            android:layout_marginRight="@dimen/login_content_margin" />
+
+    </LinearLayout>
+</ScrollView>

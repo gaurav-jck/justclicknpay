@@ -288,6 +288,32 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/changePassLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/drawer_very_light_color"
+                >
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/change_password_iv" />
+                <TextView
+                    android:id="@+id/changePassTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Change Password"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/logout_lin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -11,6 +11,8 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -202,22 +204,30 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         filterDialog!!.show()
     }
 
-    private fun getDistributorAgents(agent_auto: AutoCompleteTextView) {
+    private fun getDistributorAgents(agent_auto: AutoCompleteTextView, agencyName: String) {
         val model = AgentNameRequestModel()
-        model.AgencyName = ""
+//        model.AgencyName = ""
+//        model.DeviceId = Common.getDeviceId(context)
+//        model.DoneCardUser = loginModel!!.Data.DoneCardUser
+//        model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
+//            EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context
+//        )
+        model.Type = loginModel!!.Data.UserType
+        model.RequiredType = loginModel!!.Data.UserType
+        model.AgencyName = agencyName
+        model.MerchantID = loginModel!!.Data.MerchantID
+        model.RefAgency = loginModel!!.Data.RefAgency
         model.DeviceId = Common.getDeviceId(context)
         model.DoneCardUser = loginModel!!.Data.DoneCardUser
         model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
             EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context
         )
-        model.Type = loginModel!!.Data.UserType
-        model.RequiredType = loginModel!!.Data.UserType
 
         val json = Gson().toJson(model)
 
         val apiService = APIClient.getClient().create(ApiInterface::class.java)
         val call = apiService.agentNamePostNew(ApiConstants.GetAgentName, model)
-        NetworkCall().callService(call,context,true
+        NetworkCall().callService(call,context,false
         ) { response, responseCode ->
             if (response != null) {
                 responseHandlerAgent(response, agent_auto)
@@ -238,6 +248,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                         commonResponse.Data.size > 0) {
 //                        Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
                         val arr = arrayOfNulls<String>(commonResponse.Data.size)
+                        agentArray.clear()
                         agentArray.addAll(commonResponse.Data)
                         for (p in commonResponse.Data.indices) {
                             arr[p] = commonResponse.Data.get(p).AgencyName.replace("(","( ").
@@ -245,11 +256,12 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                         }
 
                         agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.showDropDown()
                     }else{
-                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
                     }
                 }else {
-                    Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
                 }
             } else {
                 Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
@@ -599,13 +611,24 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             applyFilter()
         }
 
+//        agent_auto.addTextChangedListener(TextWatcher)
+        agent_auto.addTextChangedListener(object : TextWatcher {
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+                if(s.length>1) {
+                    getDistributorAgents(agent_auto, s.toString())
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+            override fun afterTextChanged(s: Editable) {}
+        })
+
         if(loginModel!!.Data.UserType.equals("A")){
             agentLabelTv.visibility=View.GONE
             agent_auto.visibility=View.GONE
         }else{
             agentLabelTv.visibility=View.VISIBLE
             agent_auto.visibility=View.VISIBLE
-            getDistributorAgents(agent_auto)
+//            getDistributorAgents(agent_auto, "")
         }
 
         val window = listFilterDialog!!.window

@@ -52,6 +52,7 @@ import com.justclick.clicknbook.firebase.ForceUpdateChecker
 import com.justclick.clicknbook.model.ForgetPasswordModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
+import com.justclick.clicknbook.Fragment.cashoutnew.registration.RegistrationActivityNew
 import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
@@ -154,6 +155,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         forget_password_tv!!.setOnClickListener(this)
         biometric_tv!!.setOnClickListener(this)
         fingerImg!!.setOnClickListener(this)
+        (findViewById<View>(R.id.create_account_tv)).setOnClickListener(this)
         (findViewById<View>(R.id.appVerTv) as TextView).text = "Ver " + BuildConfig.VERSION_NAME
         setFont()
 
@@ -176,7 +178,15 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         Common.hideSoftKeyboard(context as MyLoginActivityNew?)
         val uName = email_edt!!.text.toString()
         val uPass = password_edt!!.text.toString()
-        val DID = Common.getDeviceId(context)
+
+        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        val check2 = "9797141435"
+
+        val DID: String = if (uName == check1 || uName == check2 ) {
+            "JustClicknPayOtp"
+        } else {
+            Common.getDeviceId(context)
+        }
         if (validate(uName, uPass)) {
             try {
                 val loginRequestModel = LoginRequestModel()
@@ -206,7 +216,16 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
 
     private fun loginCall() {
         Common.hideSoftKeyboard(context as MyLoginActivityNew?)
-        val DID = Common.getDeviceId(context)
+        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        val check2 = "9797141435"
+
+        val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
+            MyPreferences.getLoginId(context).equals(check2)) {
+            "JustClicknPayOtp"
+        } else {
+            Common.getDeviceId(context)
+        }
+//        val DID = Common.getDeviceId(context)
         try {
             val loginRequestModel = LoginRequestModel()
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)
@@ -240,18 +259,27 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                     hideCustomDialog()
                     if (loginModel != null) {
                         if (loginModel.Data != null && loginModel.StatusCode.equals("0", ignoreCase = true)) {
-                            //store values to shared preferences
-                            MyPreferences.saveLoginData(loginModel, context)
-                            if (remember_me_checkbox!!.isChecked) {
-                                MyPreferences.rememberLogin(context)
-                            } else {
-                                MyPreferences.logoutUserRemember(context)
+
+                            if(loginModel.Data.remainpassdays.toInt()<0){
+//                                change your password
+//                                Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+                                Common.showResponsePopUp(context,"Please change your password for security reasons.\n" +
+                                        "Please visit out website for change password now, later you can change your password from App also.")
+                            }else{
+                                //store values to shared preferences
+
+                                MyPreferences.saveLoginData(loginModel, context)
+                                if (remember_me_checkbox!!.isChecked) {
+                                    MyPreferences.rememberLogin(context)
+                                } else {
+                                    MyPreferences.logoutUserRemember(context)
+                                }
+                                MyPreferences.setAppCurrentTime(context)
+                                MyPreferences.saveLoginId(context, email_edt!!.text.toString())
+                                val intent = Intent(context, NavigationDrawerActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             }
-                            MyPreferences.setAppCurrentTime(context)
-                            MyPreferences.saveLoginId(context, email_edt!!.text.toString())
-                            val intent = Intent(context, NavigationDrawerActivity::class.java)
-                            startActivity(intent)
-                            finish()
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
                                 otpDialog(LOGIN_SERVICE)
@@ -486,6 +514,10 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                 } else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
                 }
+            }R.id.create_account_tv -> {
+                Common.preventFrequentClick(login_tv)
+                Common.hideSoftKeyboard(context as MyLoginActivityNew?)
+                startActivity(Intent(context, RegistrationActivityNew::class.java))
             }
             R.id.forget_password_tv -> {
                 if (Common.checkInternetConnection(context)) {

@@ -3,40 +3,87 @@ package com.justclick.clicknbook.Fragment.train
 import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
+import android.text.SpannableStringBuilder
+import android.text.Spanned
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
-import android.widget.AdapterView.*
-import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse
-import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse.PostOffice
-import com.justclick.clicknbook.R
-import com.justclick.clicknbook.retrofit.APIClient
-import com.justclick.clicknbook.retrofit.ApiInterface
-import com.justclick.clicknbook.utils.Common
-import com.justclick.clicknbook.utils.MyCustomDialog
-import kotlinx.android.synthetic.main.fragment_train_book.*
-import kotlinx.android.synthetic.main.fragment_train_book.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.lang.Exception
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.widget.AdapterView
+import android.widget.AdapterView.GONE
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.AdapterView.VISIBLE
+import android.widget.ArrayAdapter
+import android.widget.CheckBox
+import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import android.widget.Spinner
+import android.widget.TextView
+import android.widget.Toast
+import androidx.core.view.get
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
-import com.justclick.clicknbook.Fragment.train.model.*
+import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse
+import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse.PostOffice
+import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
+import com.justclick.clicknbook.Fragment.train.model.TrainBookingRequest
+import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
+import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
+import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
+import com.justclick.clicknbook.retrofit.APIClient
+import com.justclick.clicknbook.retrofit.ApiInterface
+import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.train_passanger_show.view.*
+import com.justclick.clicknbook.utils.MySpannable
+import kotlinx.android.synthetic.main.fragment_train_book.addPassTv
+import kotlinx.android.synthetic.main.fragment_train_book.boardingStnLabelRel
+import kotlinx.android.synthetic.main.fragment_train_book.cityEdt2
+import kotlinx.android.synthetic.main.fragment_train_book.emailEdt
+import kotlinx.android.synthetic.main.fragment_train_book.fareView
+import kotlinx.android.synthetic.main.fragment_train_book.gstEdt
+import kotlinx.android.synthetic.main.fragment_train_book.gstFlatEdt
+import kotlinx.android.synthetic.main.fragment_train_book.gstNameEdt
+import kotlinx.android.synthetic.main.fragment_train_book.gstView
+import kotlinx.android.synthetic.main.fragment_train_book.insuranceRadioGroup
+import kotlinx.android.synthetic.main.fragment_train_book.mobileEdt
+import kotlinx.android.synthetic.main.fragment_train_book.pin_edt2
+import kotlinx.android.synthetic.main.fragment_train_book.spinnerBoardingStn
+import kotlinx.android.synthetic.main.fragment_train_book.state_edt2
+import kotlinx.android.synthetic.main.fragment_train_book.view.addInfantTv
+import kotlinx.android.synthetic.main.fragment_train_book.view.addPassTv
+import kotlinx.android.synthetic.main.fragment_train_book.view.back_arrow
+import kotlinx.android.synthetic.main.fragment_train_book.view.baseFareEdt
+import kotlinx.android.synthetic.main.fragment_train_book.view.bookTv
+import kotlinx.android.synthetic.main.fragment_train_book.view.concessionEdt
+import kotlinx.android.synthetic.main.fragment_train_book.view.fareLabelRel
+import kotlinx.android.synthetic.main.fragment_train_book.view.gstLabelRel
+import kotlinx.android.synthetic.main.fragment_train_book.view.mobileNoteTv
+import kotlinx.android.synthetic.main.fragment_train_book.view.otherPrefRel
+import kotlinx.android.synthetic.main.fragment_train_book.view.pgChargeEdt
+import kotlinx.android.synthetic.main.fragment_train_book.view.pin_edt2
+import kotlinx.android.synthetic.main.fragment_train_book.view.removeInfantTv
+import kotlinx.android.synthetic.main.fragment_train_book.view.serviceChargeEdt
+import kotlinx.android.synthetic.main.fragment_train_book.view.spinnerBoardingStn
+import kotlinx.android.synthetic.main.fragment_train_book.view.totalFareEdt
+import kotlinx.android.synthetic.main.train_passanger_show.view.genderTv
 import okhttp3.ResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.util.*
-import kotlin.collections.ArrayList
+import java.util.Locale
 
 
 /**
@@ -45,6 +92,12 @@ import kotlin.collections.ArrayList
 class TrainBookFragment : Fragment(), View.OnClickListener {
     private val ADULT:Int=1
     private val INFANT:Int=2
+    private val NoChoice="99"
+    private val OnlyConfirm="4"
+    private val SameCoach="1"
+    private val OneLower="2"
+    private val TwoLower="3"
+    private val ConfirmSame="5"
     private val NoPreference="No Preference"
     private val LowerBerth="Lower Berth"
     private val UpperBerth="Upper Berth"
@@ -59,6 +112,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     var loginModel:LoginModel?=null
     var passengerContainerLin:LinearLayout?=null
     var infantContainerLin:LinearLayout?=null
+    var preferenceRadioGroup:RadioGroup?=null
+    var reservationChoice:String=NoChoice
     var doj:String?=null
     private val gender = ""
     private  var post:String? = ""
@@ -109,6 +164,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             view.fareLabelRel.setOnClickListener(this)
             passengerContainerLin=view.findViewById(R.id.passengerContainerLin)
             infantContainerLin=view.findViewById(R.id.infantContainerLin)
+            preferenceRadioGroup=view.findViewById(R.id.preferenceRadioGroup)
 
             if(arguments!=null) {
                 trainResponse = requireArguments().getSerializable("trainResponse") as TrainSearchDataModel
@@ -128,6 +184,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             view.concessionEdt.setText("0")
             view.pgChargeEdt.setText("0")
             view.serviceChargeEdt.setText("0")
+
+            makeTextViewResizable(view.mobileNoteTv, 2, "View More", true)
 
             /*view.pin_edt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -171,6 +229,41 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             setFonts()
 
             callBoardingStation()
+
+            preferenceRadioGroup!!.setOnCheckedChangeListener { radioGroup: RadioGroup?, checkedId: Int ->
+                when (checkedId) {
+                    R.id.noChoice -> {
+                        reservationChoice=NoChoice
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.onlyConfirm -> {
+                        reservationChoice=OnlyConfirm
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.sameCoach -> {
+                        reservationChoice=SameCoach
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.oneLower -> {
+                        reservationChoice=OneLower
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.twoLower -> {
+                        reservationChoice=TwoLower
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                    R.id.confirmSame -> {
+                        reservationChoice=ConfirmSame
+//                        var radioButton:RadioButton = radioGroup!!.findViewById(checkedId)
+//                        Toast.makeText(context, reservationChoice+", value="+radioButton.text.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
 
             view.spinnerBoardingStn.onItemSelectedListener = object : OnItemSelectedListener {
                 override fun onItemSelected(
@@ -266,12 +359,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         }
     }
     private fun showHidePref() {
-        if(autoUpgradeCheck.visibility== VISIBLE){
-            autoUpgradeCheck.visibility= GONE
-            bookOnlyCheck.visibility= GONE
+        if(preferenceRadioGroup!!.visibility== VISIBLE){
+            preferenceRadioGroup!!.visibility= GONE
         }else{
-            autoUpgradeCheck.visibility= VISIBLE
-            bookOnlyCheck.visibility= VISIBLE
+            preferenceRadioGroup!!.visibility= VISIBLE
         }
     }
 
@@ -622,7 +713,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         journey.journeyDate=journeyDate()
         journey.moreThanOneDay="True"
         journey.enquiryType="3"
-        journey.reservationChoice="99"
+        journey.reservationChoice=reservationChoice
         journey.ticketType="F"
         var checkbox=insuranceRadioGroup.findViewById<RadioButton>(R.id.travelRadioYes)
         if(checkbox.isChecked){
@@ -1139,6 +1230,98 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private fun hideCustomDialog() {
         MyCustomDialog.hideCustomDialog()
     }
+
+    private fun makeTextViewResizable(hotelDescriptionTv: TextView, i: Int, s: String, b: Boolean) {
+        run {
+            if (hotelDescriptionTv.tag == null) {
+                hotelDescriptionTv.tag = hotelDescriptionTv.text
+            }
+            val vto = hotelDescriptionTv.viewTreeObserver
+            vto.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val obs = hotelDescriptionTv.viewTreeObserver
+                    obs.removeGlobalOnLayoutListener(this)
+                    if (i == 0) {
+                        val lineEndIndex = hotelDescriptionTv.layout.getLineEnd(0)
+                        val text =
+                            hotelDescriptionTv.text.subSequence(0, lineEndIndex - s.length + 1)
+                                .toString() + " " + s
+                        hotelDescriptionTv.text = text
+                        hotelDescriptionTv.movementMethod = LinkMovementMethod.getInstance()
+                        hotelDescriptionTv.setText(
+                            addClickablePartTextViewResizable(
+                                Html.fromHtml(hotelDescriptionTv.text.toString()),
+                                hotelDescriptionTv,
+                                i,
+                                s,
+                                b
+                            ), TextView.BufferType.SPANNABLE
+                        )
+                    } else if (i > 0 && hotelDescriptionTv.lineCount >= i) {
+                        val lineEndIndex = hotelDescriptionTv.layout.getLineEnd(i - 1)
+                        val text =
+                            hotelDescriptionTv.text.subSequence(0, lineEndIndex - s.length + 1)
+                                .toString() + " " + s
+                        hotelDescriptionTv.text = text
+                        hotelDescriptionTv.movementMethod = LinkMovementMethod.getInstance()
+                        hotelDescriptionTv.setText(
+                            addClickablePartTextViewResizable(
+                                Html.fromHtml(hotelDescriptionTv.text.toString()),
+                                hotelDescriptionTv,
+                                i,
+                                s,
+                                b
+                            ), TextView.BufferType.SPANNABLE
+                        )
+                    } else {
+                        val lineEndIndex = hotelDescriptionTv.layout
+                            .getLineEnd(hotelDescriptionTv.layout.lineCount - 1)
+                        val text =
+                            hotelDescriptionTv.text.subSequence(0, lineEndIndex)
+                                .toString() + " " + s
+                        hotelDescriptionTv.text = text
+                        hotelDescriptionTv.movementMethod = LinkMovementMethod.getInstance()
+                        hotelDescriptionTv.setText(
+                            addClickablePartTextViewResizable(
+                                Html.fromHtml(hotelDescriptionTv.text.toString()),
+                                hotelDescriptionTv,
+                                lineEndIndex,
+                                s,
+                                b
+                            ), TextView.BufferType.SPANNABLE
+                        )
+                    }
+                }
+            })
+        }
+    }
+
+    private fun addClickablePartTextViewResizable(
+        strSpanned: Spanned, tv: TextView,
+        i: Int, spanableText: String, viewMore: Boolean
+    ): SpannableStringBuilder? {
+        val str = strSpanned.toString()
+        val ssb = SpannableStringBuilder(strSpanned)
+        if (str.contains(spanableText)) {
+            ssb.setSpan(object : MySpannable(false) {
+                override fun onClick(widget: View) {
+                    if (viewMore) {
+                        tv.layoutParams = tv.layoutParams
+                        tv.setText(tv.tag.toString(), TextView.BufferType.SPANNABLE)
+                        tv.invalidate()
+                        makeTextViewResizable(tv, -1, "See Less", false)
+                    } else {
+                        tv.layoutParams = tv.layoutParams
+                        tv.setText(tv.tag.toString(), TextView.BufferType.SPANNABLE)
+                        tv.invalidate()
+                        makeTextViewResizable(tv, 3, ".. See More", true)
+                    }
+                }
+            }, str.indexOf(spanableText), str.indexOf(spanableText) + spanableText.length, 0)
+        }
+        return ssb
+    }
+
 
     var requestString="{\n" +
             "  \"journeyDetails\": [\n" +

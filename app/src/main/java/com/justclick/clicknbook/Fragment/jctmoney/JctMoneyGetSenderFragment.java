@@ -45,6 +45,8 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
     private CommonParams commonParams;
     private String kycStatus;
     private boolean isCheckCredential =false;
+    private View mView;
+    private TextWatcher textWatcher;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,13 +69,15 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_jct_money_get_sender, container, false);
-        toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
-        if(commonParams.getToken()==null && commonParams.getUserData()==null){
-            checkCredential();
+        if(mView==null){
+            mView = inflater.inflate(R.layout.fragment_jct_money_get_sender, container, false);
+            toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
+            if(commonParams.getToken()==null && commonParams.getUserData()==null){
+                checkCredential();
+            }
+            initializeViews(mView);
         }
-        initializeViews(view);
-        return view;
+        return mView;
     }
 
     private void checkCredential() {
@@ -140,14 +144,14 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
         get_tv.setTypeface(face);
         view.findViewById(R.id.back_arrow).setOnClickListener(this);
 
-       /* number_edt.addTextChangedListener(new TextWatcher() {
+        textWatcher=new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void beforeTextChanged(CharSequence charSequence, int start, int before, int count) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
                 if(charSequence.length()==10){
                     getClicked();
                 }
@@ -157,7 +161,9 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
             public void afterTextChanged(Editable editable) {
 
             }
-        });*/
+        };
+
+//        number_edt.addTextChangedListener(textWatcher);
     }
 
     private void getSenderDetail() {
@@ -308,5 +314,16 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
         return true;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        number_edt.addTextChangedListener(textWatcher);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        number_edt.removeTextChangedListener(textWatcher);
+    }
 }
 

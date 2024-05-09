@@ -37,6 +37,8 @@
             android:textColor="@color/black_text_color"
             android:textColorHint="@color/grayTextHintColorFlight"
             android:singleLine="true"
+            android:digits="@string/bill_edittext_digits"
+            android:maxLength="@integer/billNumberMaxLength"
             android:textSize="@dimen/simple_content_text_size"/>
     </com.google.android.material.textfield.TextInputLayout>
 

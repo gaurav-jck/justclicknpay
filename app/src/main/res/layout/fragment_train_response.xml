@@ -91,9 +91,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_2dp"
+                android:layout_marginLeft="@dimen/small_margin"
                 android:layout_marginTop="@dimen/small_margin"
-                android:layout_marginRight="@dimen/margin_2dp"
+                android:layout_marginRight="@dimen/small_margin"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -112,7 +112,8 @@
                     android:layout_weight="1.1"
                     android:src="@drawable/irctc_azadi"
                     android:layout_toRightOf="@+id/logo1"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/logo_app"
@@ -131,7 +132,8 @@
                     android:layout_weight="1.1"
                     android:src="@drawable/irctc_g20_logo"
                     android:layout_toLeftOf="@+id/logo4"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/logo4"

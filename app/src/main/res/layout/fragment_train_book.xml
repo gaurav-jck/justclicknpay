@@ -272,6 +272,19 @@
                     android:maxLines="1"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/mobileNoteTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/travellerTv"
+        android:text="@string/rail_booking_mobile_note"
+        android:textColor="@color/grey_dark"
+        android:textSize="12sp"
+        android:paddingLeft="@dimen/padding_5dp"
+        android:paddingRight="@dimen/padding_5dp"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingBottom="@dimen/small_margin"
+        />
 
     <RelativeLayout
         android:id="@+id/otherPrefRel"
@@ -298,27 +311,69 @@
             android:layout_marginRight="@dimen/medium_margin"/>
     </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/autoUpgradeCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Consider for auto upgradation"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:layout_marginTop="@dimen/small_margin"
-                android:paddingLeft="@dimen/small_margin"
-                android:textColor="@color/color_light_black2"
-                android:visibility="gone"
-                />
-            <CheckBox
-                android:id="@+id/bookOnlyCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Book only if confirm birth are allocated"
-                android:layout_marginLeft="@dimen/small_margin"
-                android:paddingLeft="@dimen/small_margin"
-                android:textColor="@color/color_light_black2"
-                android:visibility="gone"
-                />
+    <RadioGroup
+        android:id="@+id/preferenceRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <RadioButton
+            android:id="@+id/noChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Choice"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:checked="true"
+            android:textColor="@color/color_light_black2"
+            />
+        <RadioButton
+            android:id="@+id/onlyConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Only Confirm"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:textColor="@color/color_light_black2"
+            />
+        <RadioButton
+            android:id="@+id/sameCoach"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book ,only if all berths are allotted in same coach."
+            android:layout_marginLeft="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:textColor="@color/color_light_black2"
+            />
+        <RadioButton
+            android:id="@+id/oneLower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book, only if at least 1 lower berth is allotted"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:textColor="@color/color_light_black2"
+            />
+        <RadioButton
+            android:id="@+id/twoLower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Book, only if 2 lower berths are allotted."
+            android:layout_marginLeft="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:textColor="@color/color_light_black2"
+            />
+        <RadioButton
+            android:id="@+id/confirmSame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OnlyConfirm and In same coach."
+            android:layout_marginLeft="@dimen/small_margin"
+            android:paddingLeft="@dimen/small_margin"
+            android:textColor="@color/color_light_black2"
+            />
+    </RadioGroup>
+
 
 <!--    Destination address-->
     <!--<TextView

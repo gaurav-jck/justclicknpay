@@ -134,6 +134,7 @@
     <string name="About_us">About Us</string>
     <string name="terms_and_condition">Terms and Conditions</string>
     <string name="accept_terms_and_condition">I accept</string>
+    <string name="terms_condition"><b><i><u>Terms and Conditions</u></i></b></string>
     <string name="nav_product_balance_check">Product Balance Check</string>
 
     <!--Xml Rendering -->
@@ -150,6 +151,7 @@
     <string name="bookTrain">Search Train</string>
 
     <!--    QR code-->
+    <string name="qrCodePayment">Payment Details</string>
     <string name="qrCode">QR Code</string>
 
     <!--Sales Fragment-->
@@ -181,7 +183,7 @@
     <!--text-->
     <string name="login_txt">SIGN IN</string>
     <string name="create_account">REGISTER</string>
-    <string name="forget_password"><u>Forget Password</u></string>
+    <string name="forget_password"><u>Forgot Password</u></string>
     <string name="reset_pin">Reset Pin</string>
     <string name="login_pin">Login Pin</string>
     <string name="new_pin">New Pin</string>
@@ -434,6 +436,9 @@
     <string name="empty_and_invalid_train_Number">empty and invalid train Number</string>
     <string name="traveller_name_as_id">Full Name (Name should be same as on Government ID proof)</string>
     <string name="contact_detail">Your ticket will be sent to below mobile number and emailId</string>
+    <string name="rail_booking_mobile_note"><b><u>Note</u> : </b>Please enter only the correct customer mobile number for booking and refund process otherwise refund not get.
+We have observed that travel agents are using only one mobile number for multiple railway bookings, and are also using the wrong mobile number at the time of booking.
+        It has come to our notice that this practice is in violation of IRCTC terms and conditions. As per the existing policy, the RSP is required to enter the correct mobile number and not to repeat the same mobile number at the time of booking . if any Retailer don\'t proper compliance of Do\'s and Don\'t rule of IRCTC. Then ID will be closed and penalty of Rs. 5,000/- (taxes extra) per case would be imposed.</string>
     <string name="travel_insurance">Do you want to take travel insurance?</string>
     <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>
     <string name="travel_insurance_no">No, I don not want travel insurance</string>
@@ -631,6 +636,7 @@ Rs.40/-\n
     <string name="alphaNumericSpace_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
     <string name="remarks_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM-/.&amp;@ </string>
     <string name="filter_editText_digits">0123456789 qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM-/.&amp;@ </string>
+    <string name="bill_edittext_digits">0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
     <string name="personName_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="flightPersonName_editText_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="address_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321/-+=_|\,.[]{}!@#$%^:;?~&amp;&lt;&gt;*()</string>
@@ -714,7 +720,7 @@ Rs.40/-\n
     <string name="accountNo">Account Number</string>
     <string name="ifsc">IFSC code</string>
 
-<!--    JCK Bank Details-->
+    <!--    JCK Bank Details-->
     <string name="bankDetailsNote"><b>Please Note :-</b> Any cash deposited in banks other than the ones specified below will attract Rs. 20 per Rs. 1000.
         <b><i>“For faster upload, please mention your Just Click Code in the bank narration".</i></b></string>
     <string name="bankDetailsImportantNote"><b>**Important Notice -</b> Kindly note we do not authorise any sales person to collect cash on behalf of our company. Any agent/distributor dealing in such matter will be solely doing on their individual liability and Just Click Karo Services will not bear any liability/loss for the same.\n
@@ -776,5 +782,48 @@ Rs.40/-\n
 
     <!--    credit card-->
     <string name="card_number">Card Number</string>
+    <string name="title_activity_registration_new">RegistrationActivityNew</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
 
 </resources>
