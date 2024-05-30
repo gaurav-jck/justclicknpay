@@ -34,7 +34,8 @@ public class ApiConstants
     public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_FORGET="https://payout.justclicknpay.com/";
-    public static final String BASE_URL_PAYOUT_NEW="https://uatapitravel.justclicknpay.com/";
+//    public static final String BASE_URL_PAYOUT_NEW="https://uatapitravel.justclicknpay.com/";
+    public static final String BASE_URL_PAYOUT_NEW="https://payout.justclicknpay.com/";   //live changes
     //   public static final String BASE_URL_AEPS="http://uat-aeps-api-yes.justclicknpay.com/";   // AEPS URL UAT
     public static final String AEPS_EXCEL_DOWNLOAD_URL="https://tinyurl.com/t4qe23w";   // AEPS Excel downloadURL
     public static final String BASE_URL_RBL_TEST="http://uatms.justclickkaro.com/";
@@ -258,6 +259,7 @@ public class ApiConstants
 //    change password
     public static final String otpChangePassword="otpChangePassword";
     public static final String ChangePassword="ChangePassword";
+    public static final String checkdataexists="checkdataexists";
 
 }
 

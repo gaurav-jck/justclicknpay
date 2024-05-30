@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.cashoutnew.registration
+package com.justclick.clicknbook.Fragment.registration
 
 import android.content.Context
 import android.os.Bundle
@@ -11,8 +11,15 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.gson.Gson
+import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordRequest
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordResponse
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
+import okhttp3.ResponseBody
 
 private var registrationRequest: RegistrationRequest?=null
 
@@ -50,18 +57,67 @@ class ContactDetailFragment : Fragment() {
         mView!!.findViewById<TextView>(R.id.continue_tv).setOnClickListener {
             continueClicked()
         }
+        mView!!.findViewById<TextView>(R.id.backTv).setOnClickListener {
+            requireActivity().finish()
+        }
 
         return mView
     }
 
     private fun continueClicked() {
         if(validateDetails()){
+            checkUser()
+        }
+    }
 
-            (mContext as RegistrationActivityNew).replaceFragmentWithBackStack(
-                AgencyDetailFragment.newInstance(
-                    registrationRequest
-                )
+    private fun checkUser() {
+
+        val params: MutableMap<String, String> = HashMap()
+        params["Emailid"] = mView!!.findViewById<TextView>(R.id.email_edt).text.toString()
+        params["mobilenno"] = mView!!.findViewById<TextView>(R.id.mobile_edt).text.toString()
+        params["MerchantId"] = ApiConstants.MerchantId
+
+        NetworkCall().callServiceWithError(NetworkCall.getPayoutNewApiInterface().changePassword(ApiConstants.checkdataexists, params),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandler(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandler(response: ResponseBody, responseCode: Int) {
+        try {
+            val senderResponse = Gson().fromJson(
+                response.string(),
+                PaytmWalletFragment.CommonResponse::class.java
             )
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+//                    Toast.makeText(context,senderResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    (mContext as RegistrationActivityNew).replaceFragmentWithBackStack(
+                        AgencyDetailFragment.newInstance(
+                            registrationRequest
+                        )
+                    )
+                } else if (senderResponse.statusMessage != null) {
+                    Common.showResponsePopUp(context, "     "+senderResponse.statusMessage+"     ")
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Error in checking user, please try after some time.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
     }
 

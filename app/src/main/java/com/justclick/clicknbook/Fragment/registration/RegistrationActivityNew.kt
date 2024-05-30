@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.cashoutnew.registration
+package com.justclick.clicknbook.Fragment.registration
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.cashoutnew.registration
+package com.justclick.clicknbook.Fragment.registration
 
 import android.Manifest
 import android.app.Activity
@@ -115,6 +115,9 @@ class OtherDetailFragment : Fragment(), View.OnClickListener {
 
         mView!!.findViewById<TextView>(R.id.continue_tv).setOnClickListener {
             continueClicked()
+        }
+        mView!!.findViewById<TextView>(R.id.backTv).setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
         mView!!.findViewById<LinearLayout>(R.id.chooseAddressProofLin).setOnClickListener(this)
         mView!!.findViewById<LinearLayout>(R.id.choosePancardLin).setOnClickListener(this)

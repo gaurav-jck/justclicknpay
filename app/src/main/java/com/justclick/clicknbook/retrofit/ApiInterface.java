@@ -51,6 +51,7 @@ import com.justclick.clicknbook.model.TrainRouteMapResponseModel;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Map;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -58,6 +59,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
@@ -676,5 +679,9 @@ public interface ApiInterface {
 
     @GET("V2/Cashfree/{methodName}")
     Call<ResponseBody> getStateCity(@Path("methodName") String method);
+
+    @POST("V2/Cashfree/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> changePassword(@Path("methodName") String method, @FieldMap Map<String,String> params);
 
 }

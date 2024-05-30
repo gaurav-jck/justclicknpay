@@ -279,7 +279,7 @@
         <item>Ms</item>
     </string-array>
     <string-array name="jct_list_array">
-        <item>( Select Status )</item>
+        <item>( All Status )</item>
         <item>Initiated</item>
         <item>Failed</item>
         <item>Refund Pending</item>

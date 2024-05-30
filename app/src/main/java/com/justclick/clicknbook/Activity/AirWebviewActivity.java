@@ -75,7 +75,7 @@ public class AirWebviewActivity extends AppCompatActivity {
 
 
     public static class AirSessionRequest{
-        public String MemberCode, UserName, IPAddress="103.139.75.200";
+        public String MemberCode, UserName, IPAddress="103.139.75.200", Mode="App", Sessionid;
     }
 
     public static void airSession(Context context) {
@@ -84,6 +84,7 @@ public class AirWebviewActivity extends AppCompatActivity {
         AirSessionRequest request=new AirSessionRequest();
         request.MemberCode=loginModel.Data.DoneCardUser;
         request.UserName=MyPreferences.getLoginId(context);
+        request.Sessionid=loginModel.LoginSessionId;
         MyCustomDialog.showCustomDialog(context, "Validating, please wait..");
         new NetworkCall().callMobileService(request, ApiConstants.TRAVELSESSION, context,
                 (response, responseCode) -> {
@@ -91,13 +92,12 @@ public class AirWebviewActivity extends AppCompatActivity {
                     if(response!=null){
                         try {
                             String url=response.string().replace("\"","").replace("\\", "");
-                            if(!url.isEmpty()){
+                            if(!url.isEmpty() && url.contains("https")){
                                 Intent intent=new Intent(context, AirWebviewActivity.class);
                                 intent.putExtra("url", url);
                                 context.startActivity(intent);
                             }else {
                                 Toast.makeText(context, url, Toast.LENGTH_SHORT).show();
-                                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                             }
                         }catch (Exception e){
                             Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();

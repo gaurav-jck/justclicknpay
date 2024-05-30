@@ -5,7 +5,7 @@ import com.justclick.clicknbook.ApiConstants;
 public class DmtListRequestModel {
     private String AgentCode,UserType,Merchant= ApiConstants.MerchantId, Fromdate, Todate, RRn, JckTransactionId;
     private int RowStart, RowEnd;
-    public String TxnType, DistCode, TxnDescription="", TxnStatus;
+    public String TxnType, DistCode, TxnDescription="", TxnStatus, LoggedinAgentCode, SenderMobile, AgentId;
 
     public void setUserType(String userType) {
         UserType = userType;

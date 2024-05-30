@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.cashoutnew.registration.ContactDetailFragment">
+    tools:context=".Fragment.registration.ContactDetailFragment">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -455,19 +455,39 @@
                 android:textColor="@color/blue_color"/>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/continue_tv"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ripple_blue_button_background"
-            android:gravity="center"
-            android:padding="12dp"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/text_size_16sp"
-            android:text="Submit"
-            android:layout_marginTop="@dimen/very_large_margin"
-            android:layout_marginLeft="@dimen/login_content_margin"
-            android:layout_marginRight="@dimen/login_content_margin" />
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/backTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_red_button_background"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_16sp"
+                android:text="Back"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_marginLeft="@dimen/login_content_margin"
+                android:layout_marginRight="@dimen/login_content_margin" />
+
+            <TextView
+                android:id="@+id/continue_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/ripple_blue_button_background"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/text_size_16sp"
+                android:text="Submit"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:layout_marginLeft="@dimen/login_content_margin"
+                android:layout_marginRight="@dimen/login_content_margin" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

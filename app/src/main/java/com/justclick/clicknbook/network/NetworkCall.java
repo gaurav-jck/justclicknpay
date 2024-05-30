@@ -1295,6 +1295,46 @@ public class NetworkCall {
         });
     }
 
+    public void callServiceWithError(Call<ResponseBody> responseBodyCall,
+                            final Context context, boolean isDialog, RetrofitResponseListener listener) {
+        this.context=context;
+        retrofitResponseListener= listener;
+        if(isDialog){
+            showCustomDialog();}
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    hideCustomDialog();
+                    if(response.code()==401 || response.code()==400) {
+                        responseBody=response.errorBody();
+                    }else if(response.code()==500){
+                        Toast.makeText(context, "Internal server error, api is not currently working.", Toast.LENGTH_LONG).show();
+                    } else if (response.code() == 200) {
+                        responseBody=response.body();
+                    }else {
+                        responseBody=response.body();
+                    }
+                    retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
+                }catch (Exception e){
+                    responseBody=null;
+                    hideCustomDialog();
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                responseBody=null;
+                retrofitResponseListener.onRetrofitResponse(null,0);
+                hideCustomDialog();
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
     public void callServiceWithoutDialog(Call<ResponseBody> responseBodyCall,
                             final Context context, RetrofitResponseListener listener) {
         this.context=context;

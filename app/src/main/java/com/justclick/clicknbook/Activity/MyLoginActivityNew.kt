@@ -45,6 +45,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.BuildConfig
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordActivity
+import com.justclick.clicknbook.Fragment.registration.RegistrationActivityNew
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.biometric.BiometricPromptUtils
 import com.justclick.clicknbook.biometric.CryptographyManager
@@ -52,7 +54,6 @@ import com.justclick.clicknbook.firebase.ForceUpdateChecker
 import com.justclick.clicknbook.model.ForgetPasswordModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
-import com.justclick.clicknbook.Fragment.cashoutnew.registration.RegistrationActivityNew
 import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
@@ -263,8 +264,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                             if(loginModel.Data.remainpassdays.toInt()<0){
 //                                change your password
 //                                Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
-                                Common.showResponsePopUp(context,"Please change your password for security reasons.\n" +
-                                        "Please visit out website for change password now, later you can change your password from App also.")
+                                showPasswordChangeAlert("Please change your password for security reasons.")
                             }else{
                                 //store values to shared preferences
 
@@ -315,6 +315,24 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
             hideCustomDialog()
             Toast.makeText(context, getString(R.string.exception_message), Toast.LENGTH_SHORT).show()
         }
+    }
+    private fun showPasswordChangeAlert(message: String) {
+        val responseDialog = Dialog(context!!)
+        responseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        responseDialog.setContentView(R.layout.change_password_alert_dialog)
+        responseDialog.setCancelable(false)
+        val textView = responseDialog.findViewById<TextView>(R.id.detail_tv)
+        textView.text = message
+        responseDialog.findViewById<View>(R.id.submit_btn).setOnClickListener {
+            responseDialog.dismiss()
+            MyPreferences.logoutUser(context)
+            context!!.startActivity(Intent(context, ChangePasswordActivity::class.java))
+            finish()
+        }
+        responseDialog.findViewById<View>(R.id.cancelTv).setOnClickListener {
+            responseDialog.dismiss()
+        }
+        responseDialog.show()
     }
 
     private fun errorPopup(status: String) {
@@ -580,6 +598,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         requestModel.Email = email
         requestModel.MerchantID = ApiConstants.MerchantId
         requestModel.MobileNo = mobile
+        var requestString=Gson().toJson(requestModel)
         NetworkCall().callService(
             NetworkCall.getForgetPassApiInterface().forgetPass(requestModel),
             context, true

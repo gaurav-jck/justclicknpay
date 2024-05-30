@@ -101,7 +101,6 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
     private var txnStatusPosition = 0
     private var autocompleteAdapter: AutocompleteAdapter? = null
     private var agentNameModel: AgentNameModel? = null
-    private var list_agent: ListView? = null
     private var statusPosition=0
     private var toolBarHideFromFragmentListener:ToolBarHideFromFragmentListener?=null
 
@@ -339,30 +338,6 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         filterDialog!!.show()
     }
 
-    fun call_agent(model: AgentNameRequestModel?): AgentNameModel? {
-//        agent.DATA.clear()
-        val apiService = APIClient.getClient().create(ApiInterface::class.java)
-        val call = apiService.agentNamePost(ApiConstants.GetAgentName, model)
-        call.enqueue(object : Callback<AgentNameModel?> {
-            override fun onResponse(call: Call<AgentNameModel?>, response: Response<AgentNameModel?>) {
-                try {
-                    agentNameModel = response.body()
-                    if (agentNameModel!!.StatusCode.equals("0", ignoreCase = true)) {
-                        autocompleteAdapter = AutocompleteAdapter(context, agentNameModel)
-                        list_agent!!.adapter = autocompleteAdapter
-                        list_agent!!.visibility = View.VISIBLE
-                    }
-                } catch (e: Exception) {
-                }
-            }
-
-            override fun onFailure(call: Call<AgentNameModel?>, t: Throwable) {
-                val a = 0
-                //                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-            }
-        })
-        return agentNameModel
-    }
 
     private val recyclerViewOnScrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -490,10 +465,8 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         val statusSpinner = dialog.findViewById<Spinner>(R.id.statusSpinner)
         val txnEdt = dialog.findViewById<EditText>(R.id.txnEdt)
         val mobileEdt = dialog.findViewById<EditText>(R.id.mobileEdt)
-        val agent_search_edt = dialog.findViewById<EditText>(R.id.agent_search_edt)
-        list_agent = dialog.findViewById(R.id.list_agent)
-        //        final RelativeLayout agent_search_rel = (RelativeLayout) dialog.findViewById(R.id.agent_search_rel);
-//        final EditText agentEdt= dialog.findViewById(R.id.agentEdt);
+        val agent_search_edt = dialog.findViewById<AutoCompleteTextView>(R.id.agent_search_edt)
+
         if (loginModel!!.Data.UserType.equals("A", ignoreCase = true)) {
             agent_search_edt.visibility = View.GONE
             dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
@@ -525,43 +498,19 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         }
         if (agentNameModel != null && agentNameModel!!.Data != null && agentNameModel!!.Data.size > 0) {
             autocompleteAdapter = AutocompleteAdapter(context, agentNameModel)
-            list_agent!!.setAdapter(autocompleteAdapter)
         }
-        list_agent!!.setOnItemClickListener(
-                OnItemClickListener { parent, view, position, id ->
-                    agentName = autocompleteAdapter!!.getItem(position).AgencyName
-                    agentDoneCard = agentName.substring(agentName.indexOf("(") + 1, agentName.indexOf(")"))
-                    //                        Active = autocompleteAdapter.getItem(position).Active;
-                    list_agent!!.setVisibility(View.GONE)
-                    //                        agent_name_tv.setText(agentName);
-//                        agent_search_rel.setVisibility(View.VISIBLE);
-                    agent_search_edt.setText(agentName)
-                    agent_search_edt.setSelection(agent_search_edt.text.length)
-                    Common.hideSoftKeyboard(context as NavigationDrawerActivity?)
-                })
+
         agent_search_edt.setOnClickListener {
             agent_search_edt.setText("")
             agentName = ""
             agentDoneCard = ""
-            //                Active="False";
-            list_agent!!.setVisibility(View.VISIBLE)
         }
         agent_search_edt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (Common.checkInternetConnection(context)) {
-                    if (s.length >= 2) {
-                        val term = s.toString()
-                        val model = AgentNameRequestModel()
-                        model.AgencyName = term
-                        model.DeviceId = Common.getDeviceId(context)
-                        model.DoneCardUser = loginModel!!.Data.DoneCardUser
-                        model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
-                                EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context)
-                        model.Type = loginModel!!.Data.UserType
-                        model.RequiredType = loginModel!!.Data.UserType
-                        call_agent(model)
-                        //                    Toast.makeText(context, s.toString() + " " + start + " " + before + " " + count, Toast.LENGTH_LONG).show();
+                    if(s.length>1) {
+                        getDistributorAgents(agent_search_edt, s.toString())
                     }
                 } else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
@@ -574,6 +523,81 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
         dialog.show()
+    }
+    private fun getDistributorAgents(agent_auto: AutoCompleteTextView, agencyName: String) {
+        val model = AgentNameRequestModel()
+//        model.AgencyName = ""
+//        model.DeviceId = Common.getDeviceId(context)
+//        model.DoneCardUser = loginModel!!.Data.DoneCardUser
+//        model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
+//            EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context
+//        )
+        model.Type = loginModel!!.Data.UserType
+        model.RequiredType = loginModel!!.Data.UserType
+        model.AgencyName = agencyName
+        model.MerchantID = loginModel!!.Data.MerchantID
+        model.RefAgency = loginModel!!.Data.RefAgency
+        model.DeviceId = Common.getDeviceId(context)
+        model.DoneCardUser = loginModel!!.Data.DoneCardUser
+        model.LoginSessionId = EncryptionDecryptionClass.EncryptSessionId(
+            EncryptionDecryptionClass.Decryption(loginModel!!.LoginSessionId, context), context
+        )
+
+        val json = Gson().toJson(model)
+
+        val apiService = APIClient.getClient().create(ApiInterface::class.java)
+        val call = apiService.agentNamePostNew(ApiConstants.GetAgentName, model)
+        NetworkCall().callService(call,context,false
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerAgent(response, agent_auto)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    var agentArray:ArrayList<AgentNameModel.AgentName> = ArrayList()
+    private fun responseHandlerAgent(response: ResponseBody, agent_auto: AutoCompleteTextView) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), AgentNameModel::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.StatusCode.equals("0", ignoreCase = true)) {
+//                    listAdapter!!.notifyDataSetChanged()
+                    if (commonResponse.Data != null &&
+                        commonResponse.Data.size > 0) {
+//                        Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+                        val arr = arrayOfNulls<String>(commonResponse.Data.size)
+                        agentArray.clear()
+                        agentArray.addAll(commonResponse.Data)
+                        for (p in commonResponse.Data.indices) {
+                            arr[p] = commonResponse.Data.get(p).AgencyName.replace("(","( ").
+                            replace(")"," )")
+                        }
+
+                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.showDropDown()
+                    }else{
+//                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
+                    }
+                }else {
+//                    Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun getSpinnerAdapter(arr: Array<String?>): ArrayAdapter<String>? {
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            requireContext(),
+            R.layout.mobile_operator_spinner_item, R.id.operator_tv, arr
+        )
+        adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
+
+        return adapter
     }
 
     private fun applyFilter() {

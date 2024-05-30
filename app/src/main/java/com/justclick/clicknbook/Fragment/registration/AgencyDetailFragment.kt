@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.cashoutnew.registration
+package com.justclick.clicknbook.Fragment.registration
 
 import android.content.Context
 import android.os.Build
@@ -65,6 +65,9 @@ class AgencyDetailFragment : Fragment() {
 
         mView!!.findViewById<TextView>(R.id.continue_tv).setOnClickListener {
             continueClicked()
+        }
+        mView!!.findViewById<TextView>(R.id.backTv).setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
 
         userTypeSpinner=mView!!.findViewById(R.id.userTypeSpinner)
