@@ -227,6 +227,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 
         val apiService = APIClient.getClient().create(ApiInterface::class.java)
         val call = apiService.agentNamePostNew(ApiConstants.GetAgentName, model)
+//        val call = apiService.testUatService(ApiConstants.GetAgentName, model)
         NetworkCall().callService(call,context,false
         ) { response, responseCode ->
             if (response != null) {
@@ -306,6 +307,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         accountStmtRequest!!.FromDate=startDateToSend
         accountStmtRequest!!.UptoDate=endDateToSend
         accountStmtRequest!!.UserType=loginModel!!.Data.UserType
+        accountStmtRequest!!.UserType="D"
 //        accountStmtRequest!!.UserType="OOU"
         accountStmtRequest!!.TransactionType=transactionType
         accountStmtRequest!!.AgentID=loginModel!!.Data.UserId

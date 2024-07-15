@@ -420,6 +420,17 @@
 
     <!--<string name="action_settings">Settings</string>-->
 
+<!--    Contact us details-->
+    <string name="rail_email">rail@justclicknpay.in\nkamal.k@justclicknpay.in</string>
+    <string name="hotel_email">hotels@justclicknpay.in</string>
+    <string name="bus_email">rail@justclicknpay.in\nkamal.k@justclicknpay.in</string>
+    <string name="flight_email">support@justclicknpay.in</string>
+    <string name="upload_email">manish@justclicknpay.in\ndeposits@justclicknpay.in</string>
+    <string name="utility_email">utility@justclicknpay.in\nkamal.k@justclicknpay.in</string>
+    <string name="dmt_email">dmt@justclicknpay.in\npankaj@justclicknpay.in\naeps@justclicknpay.in</string>
+    <string name="account_email">surendra@justclicknpay.in</string>
+    <string name="tech_email">abhishek.n@justclicknpay.in</string>
+
     <!--Train Fragment-->
     <string name="tabStation">By Station</string>
     <string name="tabTrain">By Train Name</string>
@@ -639,6 +650,7 @@ Rs.40/-\n
     <string name="bill_edittext_digits">0123456789qwertzuiopasdfghjklyxcvbnmQWERTYUIOPLKJHGFDSAZXCVBNM</string>
     <string name="personName_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="flightPersonName_editText_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="alphabats_digits">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
     <string name="address_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321/-+=_|\,.[]{}!@#$%^:;?~&amp;&lt;&gt;*()</string>
     <string name="commonAllInputs_editText_digits">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ0987654321/-+=_|\,.[]{}!@#$%^:;?~&amp;&lt;&gt;*()</string>
     <string name="title_activity_maps32">Map</string>

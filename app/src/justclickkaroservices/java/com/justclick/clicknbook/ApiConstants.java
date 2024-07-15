@@ -11,6 +11,7 @@ public class ApiConstants
     public static final String BASE_URL_TEST="http://uatms.justclicknpay.com/";
     public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
     public static final String BASE_URL=BASE_URL_LIVE;
+//    public static final String BASE_URL="https://uatapitravel.justclicknpay.com/";
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
     public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
@@ -18,11 +19,11 @@ public class ApiConstants
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
     //    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
-    public static final String BASE_URL_QR_old="https://payout.justclicknpay.com/";  //qr old url
-    public static final String BASE_URL_QR="https://Fantasy.justclicknpay.com/";  //qr testing
+    public static final String BASE_URL_QR="https://payout.justclicknpay.com/";  //qr old url
+    public static final String BASE_URL_QR_old="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
-//    public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
-    public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
+    public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
+//    public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
 //    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
@@ -30,7 +31,7 @@ public class ApiConstants
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
     //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
-    public static final String BASE_URL_CREDIT="https://fantasy.justclicknpay.com/";
+    public static final String BASE_URL_CREDIT="https://payout.justclicknpay.com/";
     public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_FORGET="https://payout.justclicknpay.com/";
@@ -44,7 +45,8 @@ public class ApiConstants
     public static final String TermsAndConditionUrl="https://www.justclickkaro.com/Registerterms.htm";
     public static final String FlightImageBaseUrl="https://client.justclickkaro.com/jct/flightimage/";
     public static final String RblPage="RBLService.svc/";
-    public static final String MobilePage="MobileServices.svc/";
+//    public static final String MobilePage="MobileServices.svc/";
+    public static final String MobilePage="v2/android/api/Auth/";
     public static final String MerchantId="JUSTCLICKTRAVELS";
     public static final String AGENTLOGIN="AGENTLOGIN";
     //    public static final String LOGIN="LOGIN";
@@ -214,6 +216,8 @@ public class ApiConstants
     public static final String GetPnrDetails="GetPnrDetails";
     public static final String CancelTicket="CancelTicket";
     public static final String VerifyOtpRefund="VerifyOtpRefund";
+    public static final String getrailbookinglist="getrailbookinglist";
+    public static final String getPassenger="getPassenger";
 
     //    Payout
     public static final String ValidateCredential="ValidateCredential";

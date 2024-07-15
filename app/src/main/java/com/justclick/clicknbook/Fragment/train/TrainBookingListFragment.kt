@@ -114,8 +114,8 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                                     arr[pos]=boardingStnResponse.boardingStationList!!.get(pos).stnNameCode
                                 }
 
-                                val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
-                                (requireContext() as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
+//                                val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
+//                                (requireContext() as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
 
                             }else{
                                 Toast.makeText(requireContext(), boardingStnResponse.errorMessage, Toast.LENGTH_LONG).show()

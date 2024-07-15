@@ -744,8 +744,8 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
 // file name could found file base or direct access from real path
 // for now just get bitmap data from ImageView
 //                Calendar
-                params.put("Image", new DataPart("_"+System.currentTimeMillis()+"DepositReceipt.jpg", getFileDataFromDrawable(context, imageFile.getDrawable()), "image/jpeg"));
-//                params.put("cover", new DataPart("file_cover.jpg", getFileDataFromDrawable(context, imageFile.getDrawable()), "image/jpeg"));
+//                params.put("Image", new DataPart("_"+System.currentTimeMillis()+"DepositReceipt.jpg", getFileDataFromDrawable(context, imageFile.getDrawable()), "image/jpeg"));
+                params.put("File", new DataPart("_"+System.currentTimeMillis()+"DepositReceipt.jpg", getFileDataFromDrawable(context, imageFile.getDrawable()), "image/jpeg"));
                 return params;
             }
         };

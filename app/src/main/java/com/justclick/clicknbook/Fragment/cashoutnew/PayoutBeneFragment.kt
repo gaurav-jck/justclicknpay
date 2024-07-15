@@ -3,6 +3,8 @@ package com.justclick.clicknbook.Fragment.cashoutnew
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,6 +35,7 @@ import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
+import com.justclick.clicknbook.utils.Words
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -408,6 +411,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.WRAP_CONTENT)
         val amountEdt = paymentDialog!!.findViewById<EditText>(R.id.amountEdt)
+        var amountWordsTv:TextView = paymentDialog!!.findViewById(R.id.amountWordsTv)
         val otpEdt = paymentDialog!!.findViewById<EditText>(R.id.otpEdt)
         val cancelTv = paymentDialog!!.findViewById<TextView>(R.id.cancelTv)
         val payNowTv = paymentDialog!!.findViewById<TextView>(R.id.payNowTv)
@@ -417,17 +421,26 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         val transactionTypeIMPSTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeIMPSTv)
         val transactionTypeNEFTTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeNEFTTv)
 
-//        transactionTypeNEFTTv.visibility= View.GONE
+        amountEdt!!.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
 
-//        Toast.makeText(context, list.available_channel, Toast.LENGTH_SHORT).show();
-        /*if (beneData!!.isIMPS != "Y") {
-            TType = NEFT
-            transactionTypeIMPSTv.visibility = View.GONE
-            transactionTypeNEFTTv.setBackgroundResource(R.drawable.blue_rect_button_background)
-            transactionTypeNEFTTv.setTextColor(resources.getColor(R.color.color_white))
-        } else if (beneData!!.isNEFT != "Y") {
-            transactionTypeNEFTTv.visibility = View.GONE
-        }*/
+            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                try {
+//                    val number = text.toString().toLong()
+//                    val returnz = Words.convert(number)
+                    val returnz = Words.convertToIndianCurrency(text.toString());
+                    amountWordsTv.setText(returnz)
+                } catch (e: NumberFormatException) {
+                    amountWordsTv.setText("")
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+        })
+
         transactionTypeIMPSTv.setOnClickListener {
             TType = IMPS
             transactionTypeIMPSTv.setBackgroundResource(R.drawable.blue_rect_button_background)
@@ -455,13 +468,8 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
                 } else {
                     amountEdt!!.setEnabled(true)
                     //                        paymentDialog.dismiss();
-                    openTxnConfirmationDialog("Confirm this transaction", """
-     Please confirm, you want to make this transaction.
-     Amount=$amount
-     Account no=${beneData!!.accountNo}
-     Name=${beneData!!.agencyName}
-     """.trimIndent(),
-                        "Cancel", "Submit",credentialResponse.token,credentialResponse.userData)
+                    openTxnConfirmationDialogNew(amount,beneData!!.accountNo,beneData!!.accountHolderName,
+                        credentialResponse.token,credentialResponse.userData)
                 }
             } else {
                 Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
@@ -480,6 +488,24 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         (dialog.findViewById<View>(R.id.cancel_tv) as TextView).text = cancel
         (dialog.findViewById<View>(R.id.submit_tv) as TextView).text = submit
         dialog.findViewById<View>(R.id.remark_edt).visibility = View.GONE
+        dialog.findViewById<View>(R.id.cancel_tv).setOnClickListener { dialog.dismiss() }
+        val submitTv=dialog.findViewById<View>(R.id.submit_tv)
+        submitTv.setOnClickListener {
+            dialog.dismiss()
+            Common.preventFrequentClick(submitTv)
+            makeTransaction(token,userData)
+        }
+        dialog.show()
+    }
+
+    private fun openTxnConfirmationDialogNew(amount: Int, account: String, name: String,
+                                             token: String, userData: String) {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dmt_txn_confirmation_dialog)
+        (dialog.findViewById<View>(R.id.amountTv) as TextView).text = amount.toString()
+        (dialog.findViewById<View>(R.id.accountTv) as TextView).text = account
+        (dialog.findViewById<View>(R.id.nameTv) as TextView).text = name
         dialog.findViewById<View>(R.id.cancel_tv).setOnClickListener { dialog.dismiss() }
         val submitTv=dialog.findViewById<View>(R.id.submit_tv)
         submitTv.setOnClickListener {

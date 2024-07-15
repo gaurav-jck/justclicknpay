@@ -56,6 +56,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.Fragment.BankDetailsFragment;
+import com.justclick.clicknbook.Fragment.ContactDetailsFragment;
 import com.justclick.clicknbook.Fragment.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
@@ -103,6 +104,7 @@ import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
+import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
 import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
 import com.justclick.clicknbook.FragmentTags;
@@ -125,6 +127,7 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
+import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
 import com.justclick.clicknbook.requestmodels.CommonRequestModel;
 import com.justclick.clicknbook.utils.CodeEnum;
@@ -314,6 +317,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.balance_lin).setOnClickListener(this);
         findViewById(R.id.home_lin).setOnClickListener(this);
         findViewById(R.id.bank_details_lin).setOnClickListener(this);
+        findViewById(R.id.contact_details_lin).setOnClickListener(this);
         findViewById(R.id.query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.changePassLin).setOnClickListener(this);
@@ -544,7 +548,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.TrainBookingList:
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListNewFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case MenuCodes.AepsList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new com.justclick.clicknbook.jctPayment.Fragments.TransactionListFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case MenuCodes.MatmList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MatmTransactionListFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.ApproveAgent:
@@ -674,6 +686,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case R.id.bank_details_lin:
                 replaceFragmentWithBackStack(new BankDetailsFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.contact_details_lin:
+                replaceFragmentWithBackStack(new ContactDetailsFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.query_lin:
@@ -856,7 +872,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         modules[i].contains(MenuCodes.BusSearch+"-1")   ||
                         modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
                         modules[i].contains(MenuCodes.MATM+"-1") ||
-                        modules[i].contains(MenuCodes.PAYTM+"-0") ||
+//                        modules[i].contains(MenuCodes.PAYTM+"-1") ||
                         modules[i].contains(MenuCodes.TRAIN+"-1") ||
                         modules[i].contains(MenuCodes.CASHFREE_QR+"-1")||
                         modules[i].contains(MenuCodes.FlightSearch+"-1")||
@@ -969,6 +985,17 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             irctcList.SubMenu=MenuCodes.TrainBookingListDisplay;
                             irctcList.SubMenuCode=MenuCodes.TrainBookingList;
                             subMenuArrayList.add(irctcList);
+                        }
+                        if(loginModel.Data.UserType.equals("D") || loginModel.Data.UserType.equals("A")){
+                            LoginModel.DataList.subMenu aepsList=loginModel.new DataList().new subMenu();
+                            aepsList.SubMenu=MenuCodes.AepsListDisplay;
+                            aepsList.SubMenuCode=MenuCodes.AepsList;
+                            subMenuArrayList.add(aepsList);
+
+                            LoginModel.DataList.subMenu matmList=loginModel.new DataList().new subMenu();
+                            matmList.SubMenu=MenuCodes.MatmListDisplay;
+                            matmList.SubMenuCode=MenuCodes.MatmList;
+                            subMenuArrayList.add(matmList);
                         }
                     }else if(loginModel.DataList.get(i).subMenu.get(j).SubMenuCode.equals(MenuCodes.AccountStatement)){
                         loginModel.DataList.get(i).subMenu.get(j).SubMenu="Account\nStatement";

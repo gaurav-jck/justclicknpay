@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
+import com.justclick.clicknbook.Fragment.train.model.TrainListResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
@@ -29,14 +30,14 @@ private const val ARG_PARAM2 = "param2"
 
 class TrainChangeBoardingStnFragment : Fragment() {
     // TODO: Rename and change types of parameters
-    private var listData: TrainBookingListResponseModel.reservationlist? = null
+    private var listData: TrainListResponse.reservationlist? = null
     private var boardingArray: Array<String?> = emptyArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             boardingArray = it.getSerializable(ARG_PARAM1) as Array<String?>
-            listData = it.getSerializable(ARG_PARAM2) as TrainBookingListResponseModel.reservationlist
+            listData = it.getSerializable(ARG_PARAM2) as TrainListResponse.reservationlist
         }
     }
 
@@ -63,11 +64,11 @@ class TrainChangeBoardingStnFragment : Fragment() {
 
     private fun setPnrStatusData(view: View) {
         view.pnrTv.setText("PNR : "+listData!!.pnRno)
-        view.trainNameTv.setText(listData!!.trainName+" ("+listData!!.trainNumber+")")
+        view.trainNameTv.setText(listData!!.trainname+" ("+listData!!.trainNumber+")")
         view.fromStnTv.setText(listData!!.source.replace("(", "\n("))
         view.toStnTv.setText(listData!!.destination.replace("(", "\n("))
         view.durationTv.setText(listData!!.journeyClass+" | "+listData!!.journeyQuota)
-        view.boardingStn.setText("Boarding point - "+listData!!.boardingStn+
+        view.boardingStn.setText("Boarding point - "+listData!!.source+
                 "\nDate Of Journey - "+listData!!.departDate)
 
         view.spinnerBoardingStn.adapter=getSpinnerAdapter(boardingArray)
@@ -146,7 +147,7 @@ class TrainChangeBoardingStnFragment : Fragment() {
     companion object {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
-        fun newInstance(param1: Array<String?>, param2: TrainBookingListResponseModel.reservationlist) =
+        fun newInstance(param1: Array<String?>, param2: TrainListResponse.reservationlist) =
                 TrainChangeBoardingStnFragment().apply {
                     arguments = Bundle().apply {
                         putSerializable(ARG_PARAM1, param1)

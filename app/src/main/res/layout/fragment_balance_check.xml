@@ -53,6 +53,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/filterBackground"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/large_margin">
 
                 <TextView
@@ -103,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/filterBackground"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/large_margin">
 
                 <TextView
@@ -151,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/filterBackground"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/large_margin">
 
                 <TextView
@@ -209,10 +212,10 @@
                     android:text="Distributor"
                     android:textColor="@color/app_blue_color"
                     android:background="@color/transparent"
+                    android:paddingTop="@dimen/small_margin"
                     android:textSize="@dimen/simple_content_text_size"
                     android:paddingLeft="@dimen/medium_margin"
                     android:paddingRight="@dimen/medium_margin"
-                    android:layout_gravity="center_vertical"
                     />
 
                 <TextView
@@ -262,9 +265,9 @@
                     android:textColor="@color/app_blue_color"
                     android:background="@color/transparent"
                     android:textSize="@dimen/simple_content_text_size"
+                    android:paddingTop="@dimen/small_margin"
                     android:paddingLeft="@dimen/medium_margin"
                     android:paddingRight="@dimen/medium_margin"
-                    android:layout_gravity="center_vertical"
                     />
 
                 <TextView

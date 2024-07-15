@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Amount"
                 android:text=""
-                android:maxLength="@integer/emailMaxLength"
+                android:maxLength="@integer/amountMaxLengthSmall"
                 android:inputType="number"
                 android:digits="@string/mobile_digit"
                 android:singleLine="true"

@@ -83,6 +83,9 @@ public interface ApiInterface {
     @POST("MobileServices.svc/{methodName}")
     Call<ResponseBody> getMobileCommonData(@Path("methodName") String method, @Body Object data);
 
+//    @POST("v2/android/api/Auth/{methodName}")
+//    Call<ResponseBody> testUatService(@Path("methodName") String method, @Body Object data);
+
     @POST("MobileServices.svc/{methodName}")
     @Multipart
     Call<ResponseBody> getMobileFormCommonData(@Part("Image\"; filename=\"file\" ") RequestBody file);
@@ -466,6 +469,9 @@ public interface ApiInterface {
                                          @Header("Merchant") String merchant,
                                          @Header("Mode") String mode);
 
+    @POST("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> getTrainList(@Path("methodName") String method, @Body Object data);
+
     //    fino
     @POST("api/Aeps/{methodName}")
     Call<ResponseBody> getFinoCommonPost(@Path("methodName") String method, @Body Object data);
@@ -683,5 +689,13 @@ public interface ApiInterface {
     @POST("V2/Cashfree/{methodName}")
     @FormUrlEncoded
     Call<ResponseBody> changePassword(@Path("methodName") String method, @FieldMap Map<String,String> params);
+
+    @Headers({"Content-Type: application/json"})
+    @GET("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> getCustomerDetails(@Path("methodName") String method,
+                                     @Header("Identifier") String doneCard,
+                                     @Header("LoggedInUserType") String type,
+                                     @Header("Merchant") String merchant, @Header("Mode") String mode,
+                                          @Header("mobileno") String mobileno);
 
 }

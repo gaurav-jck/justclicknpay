@@ -91,6 +91,7 @@ public class NetworkCall {
 //            showCustomDialog();}
         ApiInterface service = APIClient.getClient().create(ApiInterface.class);
         Call<ResponseBody> call = service.getMobileCommonData(methodName,model);
+//        Call<ResponseBody> call = service.testUatService(methodName,model);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1678,8 +1679,8 @@ public class NetworkCall {
     }
 
     public static ApiInterface getCashFreeQRApiInterfaceOld(){
-//        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
-        return APIClient.getClient(ApiConstants.BASE_URL_QR_old).create(ApiInterface.class);  // new changes
+        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
+//        return APIClient.getClient(ApiConstants.BASE_URL_QR_old).create(ApiInterface.class);  // new changes
     }
     public static ApiInterface getCashFreeQRApiInterface(){
 //        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code

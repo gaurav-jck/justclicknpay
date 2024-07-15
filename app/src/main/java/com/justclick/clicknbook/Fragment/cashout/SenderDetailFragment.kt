@@ -3,6 +3,8 @@ package com.justclick.clicknbook.Fragment.cashout
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +34,8 @@ import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
+import com.justclick.clicknbook.utils.Words
+import kotlinx.android.synthetic.main.jct_paynow_dialog.amountWordsTv
 import okhttp3.ResponseBody
 import java.util.*
 
@@ -244,6 +248,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
       LinearLayout.LayoutParams.WRAP_CONTENT)
     amountEdt = paymentDialog!!.findViewById(R.id.amountEdt)
+    var amountWordsTv:TextView = paymentDialog!!.findViewById(R.id.amountWordsTv)
     val otpEdt = paymentDialog!!.findViewById<EditText>(R.id.otpEdt)
     val cancelTv = paymentDialog!!.findViewById<TextView>(R.id.cancelTv)
     val payNowTv = paymentDialog!!.findViewById<TextView>(R.id.payNowTv)
@@ -253,9 +258,25 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     val transactionTypeIMPSTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeIMPSTv)
     val transactionTypeNEFTTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeNEFTTv)
 
-//        transactionTypeNEFTTv.visibility= View.GONE
+    amountEdt!!.addTextChangedListener(object :TextWatcher{
+      override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+      }
 
-//        Toast.makeText(context, list.available_channel, Toast.LENGTH_SHORT).show();
+      override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
+        try {
+          val number = text.toString().toLong()
+          val returnz = Words.convert(number)
+          amountWordsTv.setText(returnz)
+        } catch (e: NumberFormatException) {
+          amountWordsTv.setText("")
+        }
+      }
+
+      override fun afterTextChanged(p0: Editable?) {
+      }
+
+    })
+
     if (beneData!!.isIMPS != "Y") {
       TType = NEFT
       transactionTypeIMPSTv.visibility = View.GONE

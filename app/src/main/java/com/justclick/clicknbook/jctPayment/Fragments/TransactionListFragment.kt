@@ -26,14 +26,16 @@ import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
+import com.justclick.clicknbook.jctPayment.Adapters.AepsListAdapter
+import com.justclick.clicknbook.jctPayment.Models.AepsListResponseModel
 import com.justclick.clicknbook.jctPayment.Utilities.URLs
 import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.model.RblPrintResponse
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.rapipayMatm.RecyclerTransactionList
 import com.justclick.clicknbook.rapipayMatm.TxnListRequestModel
-import com.justclick.clicknbook.rapipayMatm.TxnListResponseModel
 import com.justclick.clicknbook.requestmodels.AgentNameRequestModel
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
@@ -62,8 +64,8 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     private var recyclerView: RecyclerView? = null
     private var startDateToSend: String? = null
     private var endDateToSend: String? = null
-    private var arrayList: ArrayList<TxnListResponseModel.transactionListDetail>? = null
-    private var listAdapter: RecyclerTransactionList? = null
+    private var arrayList: ArrayList<AepsListResponseModel.transactionListDetail>? = null
+    private var listAdapter: AepsListAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
     private var startDateTv: TextView? = null
     private var noRecordTv: TextView? = null
@@ -100,9 +102,11 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     private var agentNameModel: AgentNameModel? = null
     private var list_agent: ListView? = null
     private var statusPosition=0
+    private var toolBarHideFromFragmentListener:ToolBarHideFromFragmentListener?=null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
+        toolBarHideFromFragmentListener = context as ToolBarHideFromFragmentListener
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -153,22 +157,22 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transactions_, container, false)
+        toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
         view.noRecordTv.setVisibility(View.GONE)
-
         startDateTv = view.findViewById(R.id.startDateTv)
         noRecordTv = view.findViewById(R.id.noRecordTv)
         noRecordTv!!.setVisibility(View.GONE)
 
         view.findViewById<View>(R.id.lin_dateFilter).setOnClickListener(this)
         view.findViewById<View>(R.id.linFilter).setOnClickListener(this)
-//        view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
+        view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
         //        view.findViewById(R.id.lin_sortList).setOnClickListener(this);
 
         //initialize date values
         setDates()
 
 //        addValueToModel();
-        listAdapter = RecyclerTransactionList(context, RecyclerTransactionList.OnRecyclerItemClickListener { view, list, data, position ->
+        listAdapter = AepsListAdapter(context, AepsListAdapter.OnRecyclerItemClickListener { view, list, data, position ->
             when (view.id) {
                 R.id.print_tv -> try {
 //                    Toast.makeText(context, "print", Toast.LENGTH_LONG).show()
@@ -230,16 +234,16 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
         when (TYPE) {
             CALL_AGENT -> try {
-                val commonResponse = Gson().fromJson(response.string(), TxnListResponseModel::class.java)
+                val commonResponse = Gson().fromJson(response.string(), AepsListResponseModel::class.java)
                 if (commonResponse != null) {
                     if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
                         noRecordTv!!.visibility = View.GONE
-                        arrayList!!.addAll(commonResponse.transactionListDetail)
+                        arrayList!!.addAll(commonResponse.transactionListDetail!!)
                         totalPageCount = commonResponse.totalCount
                         listAdapter!!.setCount(totalPageCount)
                         listAdapter!!.notifyDataSetChanged()
                         if (commonResponse.transactionListDetail != null &&
-                                commonResponse.transactionListDetail.size == 0) {
+                                commonResponse.transactionListDetail!!.size == 0) {
                             noRecordTv!!.visibility = View.VISIBLE
                         }
                     } else if (commonResponse.statusCode.equals("2", ignoreCase = true)) {
@@ -443,7 +447,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
             }
             R.id.lin_dateFilter -> openFilterDialog()
             R.id.linFilter -> openListFilterDialog()
-//            R.id.back_arrow -> fragmentManager!!.popBackStack()
+            R.id.back_arrow -> parentFragmentManager.popBackStack()
         }
     }
 
@@ -623,7 +627,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
         datePickerDialog.show()
     }
 
-    private fun openReceipt(senderResponse: TxnListResponseModel.transactionListDetail) {
+    private fun openReceipt(senderResponse: AepsListResponseModel.transactionListDetail) {
         val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.rapipay_matm_receipt_dialog)

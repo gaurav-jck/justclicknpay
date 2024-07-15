@@ -78,8 +78,11 @@ public class BalanceCheckFragment extends Fragment {
             agent.setText(agentDetails.Data.AgencyName+"\n("+agentDoneCard+")");
             AvlBal.setText(agentDetails.Data.ActualBalance);
             AvlCrd.setText(agentDetails.Data.Credit);
-            ((EditText)view.findViewById(R.id.distributor_edt)).setText(agentDetails.Data.Distributor);
-            ((EditText)view.findViewById(R.id.sales_person_edt)).setText(agentDetails.Data.SalesPerson);
+            String distMob=agentDetails.Data.DistMobNo.isEmpty()?"":"\nM. "+agentDetails.Data.DistMobNo;
+            ((EditText)view.findViewById(R.id.distributor_edt)).setText(agentDetails.Data.Distributor+distMob);
+            String salesMob=agentDetails.Data.SalesMobNo.isEmpty()?"":"\nM. "+agentDetails.Data.SalesMobNo;
+            ((EditText)view.findViewById(R.id.sales_person_edt)).setText(agentDetails.Data.SalesPerson+salesMob);
+
             DecimalFormat df = new DecimalFormat("#.##");
             String t=df.format(Double.parseDouble(agentDetails.Data.ActualBalance)+Double.parseDouble(agentDetails.Data.Credit));
             ((EditText)view.findViewById(R.id.et_total)).setText(t+"");

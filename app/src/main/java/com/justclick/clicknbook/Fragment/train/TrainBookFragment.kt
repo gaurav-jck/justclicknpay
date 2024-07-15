@@ -1,6 +1,7 @@
 package com.justclick.clicknbook.Fragment.train
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.Html
@@ -12,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.Window
 import android.widget.AdapterView
 import android.widget.AdapterView.GONE
 import android.widget.AdapterView.OnItemSelectedListener
@@ -25,15 +27,16 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse.PostOffice
+import com.justclick.clicknbook.Fragment.train.model.CustomerDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingRequest
 import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
@@ -68,6 +71,7 @@ import kotlinx.android.synthetic.main.fragment_train_book.view.baseFareEdt
 import kotlinx.android.synthetic.main.fragment_train_book.view.bookTv
 import kotlinx.android.synthetic.main.fragment_train_book.view.concessionEdt
 import kotlinx.android.synthetic.main.fragment_train_book.view.fareLabelRel
+import kotlinx.android.synthetic.main.fragment_train_book.view.getDetails
 import kotlinx.android.synthetic.main.fragment_train_book.view.gstLabelRel
 import kotlinx.android.synthetic.main.fragment_train_book.view.mobileNoteTv
 import kotlinx.android.synthetic.main.fragment_train_book.view.otherPrefRel
@@ -84,6 +88,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Locale
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+import kotlin.collections.MutableMap
+import kotlin.collections.indices
+import kotlin.collections.iterator
+import kotlin.collections.set
 
 
 /**
@@ -127,6 +137,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     var removePassTv:TextView?=null
     var addInfantTv:TextView?=null
     var addPassTv:TextView?=null
+    var cusMobileEdt:EditText?=null
     private var pinCityResponseArrayList: ArrayList<PostOffice>? = null
     var trainResponse:TrainSearchDataModel?=null
     var fareRuleResponse:FareRuleResponse?=null
@@ -152,6 +163,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             fragView=view
             addInfantTv=view.findViewById(R.id.addInfantTv)
             addPassTv=view.findViewById(R.id.addPassTv)
+            cusMobileEdt=view.findViewById(R.id.cusMobileEdt)
             view.back_arrow.setOnClickListener(this)
             view.addPassTv.setOnClickListener(this)
             view.addInfantTv.setOnClickListener(this)
@@ -162,6 +174,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             view.gstLabelRel.setOnClickListener(this)
             view.otherPrefRel.setOnClickListener(this)
             view.fareLabelRel.setOnClickListener(this)
+            view.getDetails.setOnClickListener(this)
             passengerContainerLin=view.findViewById(R.id.passengerContainerLin)
             infantContainerLin=view.findViewById(R.id.infantContainerLin)
             preferenceRadioGroup=view.findViewById(R.id.preferenceRadioGroup)
@@ -286,6 +299,111 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    private fun getCustomerDetails() {
+        val request = ChangePasswordRequest()
+        request.oldpassword = mobileEdt.getText().toString()
+        request.BookUserID = loginModel!!.Data.UserId
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
+                .getCustomerDetails(ApiConstants.getPassenger, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                    ApiConstants.MerchantId, "App", cusMobileEdt!!.text.toString()),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandler(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandler(response: ResponseBody, responseCode: Int) {
+        try {
+            val senderResponse = Gson().fromJson(response.string(), CustomerDetailResponse::class.java)
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+//                    Toast.makeText(context,senderResponse.description,Toast.LENGTH_SHORT).show();
+                    customerListDialog(senderResponse.passengerList)
+                } else if (senderResponse.statusMessage != null) {
+                    Common.showResponsePopUp(context, senderResponse.statusMessage)
+                } else {
+                    Toast.makeText(
+                        context, "Unable to get customer details", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    var filterDialog:Dialog?=null
+    var listName=""
+    private fun customerListDialog(list: ArrayList<CustomerDetailResponse.passengerList>) {
+        listName = ""
+        filterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        filterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        filterDialog!!.setContentView(R.layout.customer_details_pnr_layout)
+
+        var classLinear: LinearLayout = filterDialog!!.findViewById(R.id.classLinear)
+
+        var classFilterItem = ""
+
+        for (i in 0 until list!!.size) {
+//            classFilterItem+=arrayList!!.get(i).avlClasses!![c]
+            var checkBox = CheckBox(requireContext())
+            checkBox.text = list!!.get(i).name+"  [ "+list!!.get(i).age+"-"+list!!.get(i).sex+" ]"
+            checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+//                    className += checkBox.text.toString()
+//                    addPassenger(list.get(i).name, list.get(i).age, list.get(i).sex)
+//                    addCustomerPassenger(list.get(i).name, list.get(i).age, list.get(i).sex)
+//                            Toast.makeText(requireContext(), checkBox.text.toString(), Toast.LENGTH_SHORT).show()
+                } else {
+//                    className = className.replace(checkBox.text.toString(), "")
+//                            Toast.makeText(requireContext(), checkBox.text.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+            classLinear.addView(checkBox)
+        }
+//        className += arrayList!!.get(i).avlClasses!![c]
+
+        filterDialog!!.findViewById<TextView>(R.id.cancelTv).setOnClickListener {
+            for(i in 0 until classLinear.childCount){
+                var checkBox:CheckBox= classLinear.getChildAt(i) as CheckBox
+                if(checkBox.isChecked && passengerArray!!.size<6){
+                    addCustomerPassenger(list.get(i).name, list.get(i).age, list.get(i).sex)
+//                    Toast.makeText(requireContext(), checkBox.text.toString(), Toast.LENGTH_SHORT).show()
+                }
+            }
+            filterDialog!!.cancel()
+        }
+        /*filterDialog!!.findViewById<TextView>(R.id.applyTv).setOnClickListener {
+            filterDialog!!.cancel()
+        }*/
+
+        filterDialog!!.show()
+    }
+
+    private fun addCustomerPassenger(name: String, age: String, sex: String) {
+        var passenger:TrainBookingRequest.adultRequest=TrainBookingRequest().adultRequest()
+        passenger.passengerName=name
+        passenger.passengerAge=age
+        passenger.passengerGender=sex
+        passenger.passengerBerthChoice=""
+        if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
+            passenger.passengerFoodChoice=""
+        }
+        passenger.childBerthFlag=null
+        passenger.type=ADULT
+        passengerArray!!.add(passenger)
+        addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender)
+    }
+
     private fun changeBoardingStn(stationCode: String) {
         var stnName:String=stationCode.split("-")[0].trim()
         var stnCode:String=stationCode.split("-")[1].trim()
@@ -320,6 +438,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 showHidePref()
             R.id.fareLabelRel->
                 showHideFare()
+             R.id.getDetails->{
+                 if(cusMobileEdt!!.text.toString().length<10){
+                     Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
+                 }else{
+                     getCustomerDetails()
+                 }
+             }
             R.id.cityAtv-> {
                 Common.hideSoftKeyboard(context as Activity?)
 //                cityAtv.showDropDown()

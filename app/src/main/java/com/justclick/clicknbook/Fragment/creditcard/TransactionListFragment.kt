@@ -163,6 +163,7 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
 
         view.findViewById<TextView>(R.id.titleTv).setText("CreditCard List")
         view.findViewById<View>(R.id.lin_dateFilter).setOnClickListener(this)
+        view.findViewById<View>(R.id.linFilter).visibility=View.GONE
         view.findViewById<View>(R.id.linFilter).setOnClickListener(this)
         view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
         //        view.findViewById(R.id.lin_sortList).setOnClickListener(this);
@@ -480,8 +481,10 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
             } catch (e: Exception) {
             }
             R.id.lin_dateFilter -> openFilterDialog()
-            R.id.linFilter -> openListFilterDialog()
-            R.id.back_arrow -> requireFragmentManager().popBackStack()
+            R.id.linFilter -> {
+//                openListFilterDialog()
+            }
+            R.id.back_arrow -> parentFragmentManager.popBackStack()
         }
     }
 

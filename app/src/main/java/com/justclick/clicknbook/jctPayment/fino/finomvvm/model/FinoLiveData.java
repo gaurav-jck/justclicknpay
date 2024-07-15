@@ -45,6 +45,7 @@ public class FinoLiveData {
 //            showCustomDialog();}
         ApiInterface service = APIClient.getClient().create(ApiInterface.class);
         Call<ResponseBody> call = service.getMobileCommonData(methodName,model);
+//        Call<ResponseBody> call = service.testUatService(methodName,model);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

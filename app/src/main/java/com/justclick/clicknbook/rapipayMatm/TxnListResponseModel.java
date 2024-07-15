@@ -76,11 +76,11 @@ public class TxnListResponseModel implements Serializable {
             return serviceType;
         }
 
-        private String serviceType;
-        private float txnAmount, netAmount, agentComm, balanceAmount;
+        private String serviceType, balanceAmount;
+        private float txnAmount, netAmount, agentComm;
         private int totalCount;
 
-        public float getBalanceAmount() {
+        public String getBalanceAmount() {
             return balanceAmount;
         }
 

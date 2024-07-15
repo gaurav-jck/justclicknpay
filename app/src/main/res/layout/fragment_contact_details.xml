@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/contactUsLightBackground"
+    tools:context=".Fragment.BankDetailsFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Contact Details"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/rel_top">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/small_margin">
+            <RelativeLayout
+                android:id="@+id/trainRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/train_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg"
+                    android:layout_toRightOf="@+id/iconImg"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Railway"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/trainLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/rail_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Railway Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-01143436301, 302,303,304,305"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=" 9717963242,7428094447,9311378890"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 10:00am to 07:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/hotelRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/hotel_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg2"
+                    android:layout_toRightOf="@+id/iconImg2"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Hotels"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/hotelLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/hotel_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Hotel Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436322"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/medium_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="9599182274 / 9719762243"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 10:00am to 07:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/busRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/bus_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg3"
+                    android:layout_toRightOf="@+id/iconImg3"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Bus"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/busLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/bus_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Bus &amp; Recharge Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436301, 302,303,304,305"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/medium_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="9717963242,7428094447,9311378890"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 10:00am to 07:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/flightRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    android:rotation="30"
+                    app:srcCompat="@drawable/flight_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg4"
+                    android:layout_toRightOf="@+id/iconImg4"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Flight"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/flightLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/flight_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Flight Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436314,315,316"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="9599182271,9599182272,9599182273"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/medium_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="For Refund "/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="(Ext : 379) 7428094442"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 10:00am to 07:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/depositRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/rupee_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg5"
+                    android:layout_toRightOf="@+id/iconImg5"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Uploads / Deposit"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/depositLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/upload_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Upload &amp; activation"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436310 ,311,312,313"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="9310892153,7428094444,9560404215"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 09:00am to 09:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/utilityRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/phone_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg6"
+                    android:layout_toRightOf="@+id/iconImg6"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Utility"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/utilityLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/utility_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Utily payment Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436301, 302,303,304,305"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="@dimen/medium_margin">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="9717963242,7428094447,9311378890"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 10:00am to 07:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/dmtRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/rupee_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg7"
+                    android:layout_toRightOf="@+id/iconImg7"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="DMT"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/dmtLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/dmt_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Bank &amp; Services Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436307,308,319"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+                
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="DMT Activation / Queries"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text=" 011-43436307,308,319"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="AEPS Activation /\nTechnical issue"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text=" 011-43436307,308,319"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 09:30am to 08:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/accountRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/rupee_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg8"
+                    android:layout_toRightOf="@+id/iconImg8"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Accounts"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/accountLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/account_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Accounts Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011-43436319,320,321,322"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=" 7428094442,7428094444"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="Time 9:00am to 9:00pm"
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/techRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/contactUsGrayBackground"
+                android:orientation="horizontal"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/iconImg9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/rupee_icon_vector" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/arrowImg9"
+                    android:layout_toRightOf="@+id/iconImg9"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:text="Technical"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+
+                <ImageView
+                    android:id="@+id/arrowImg9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/very_small_margin"
+                    app:srcCompat="@drawable/down_arrow"
+                    android:visibility="invisible"
+                    app:tint="@color/white" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/techLinear"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_margin"
+                android:visibility="visible"
+                android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Email Id"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="@string/tech_email"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text="Technical Ext"
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text="011- 43436323"
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text="Contact Number"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:gravity="left"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular"
+                        android:layout_weight="1.8"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:fontFamily="@font/klinic_slab_medium"
+                        android:text=""/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.8"
+                        android:text=""
+                        android:textColor="@color/contactUsYellow"
+                        android:layout_gravity="center_horizontal"
+                        android:textSize="@dimen/text_size_13sp"/>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

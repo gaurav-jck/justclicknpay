@@ -301,8 +301,8 @@ class TrainBookingDetailsFragment : Fragment() {
                                 arr[pos]=boardingStnResponse.boardingStationList!!.get(pos).stnNameCode
                             }
 
-                            val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
-                            (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
+//                            val pnrDetailFragment= TrainChangeBoardingStnFragment.newInstance(arr!!,list)
+//                            (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(pnrDetailFragment)
 
                         }
                     } else {

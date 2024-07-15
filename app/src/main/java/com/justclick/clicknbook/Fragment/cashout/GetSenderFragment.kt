@@ -2,6 +2,8 @@ package com.justclick.clicknbook.Fragment.cashout
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +42,7 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
     private var commonParams: CommonParams? = null
     private val kycStatus: String? = null
     private var isCheckCredential = false
+    var textWatcher:TextWatcher?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         commonParams = CommonParams()
@@ -135,6 +138,35 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
         val face = Common.TextViewTypeFace(context)
         getTv!!.setTypeface(face)
         view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
+
+        textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(
+                charSequence: CharSequence, start: Int, before: Int, count: Int) {
+            }
+
+            override fun onTextChanged(
+                charSequence: CharSequence, start: Int, before: Int, count: Int) {
+                if (charSequence.length == 10) {
+                    getClicked()
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+        }
+    }
+
+    private fun getClicked() {
+        Common.hideSoftKeyboard(context as NavigationDrawerActivity?)
+        Common.preventFrequentClick(getTv)
+        if (Common.checkInternetConnection(context)) {
+            if (isCheckCredential) {
+                checkCredential()
+            } else {
+                senderDetail
+            }
+        } else {
+            Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     //{"AgentCode":"JC0A13387","Mobile":"8468862808","SessionKey":"DBS210101215032S856120185611","SessionRefId":"V015563577","MerchantId":"JUSTCLICKTRAVELS","Mode":"App"}
@@ -267,5 +299,15 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
             return false
         }
         return true
+    }
+
+    override fun onResume() {
+        super.onResume()
+        number_edt!!.addTextChangedListener(textWatcher)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        number_edt!!.removeTextChangedListener(textWatcher)
     }
 }

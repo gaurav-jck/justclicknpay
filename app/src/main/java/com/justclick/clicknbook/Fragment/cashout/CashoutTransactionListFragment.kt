@@ -453,7 +453,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                     listFilterDialog!!.show()
                 }
             }
-            R.id.back_arrow -> requireFragmentManager().popBackStack()
+            R.id.back_arrow -> parentFragmentManager.popBackStack()
         }
     }
 

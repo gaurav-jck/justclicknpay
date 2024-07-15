@@ -259,7 +259,7 @@ class OtherDetailFragment : Fragment(), View.OnClickListener {
         registrationRequest!!.landline=""
         registrationRequest!!.visited="test"
         registrationRequest!!.salepersonjctid=""
-        registrationRequest!!.bookuusertype="00U"
+        registrationRequest!!.bookuusertype="OOU"
         registrationRequest!!.bookuserid="00"
         registrationRequest!!.bookvalidationcode="00"
         registrationRequest!!.ipAddress="0000"

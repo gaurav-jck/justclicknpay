@@ -16,7 +16,8 @@ public class AgentDetails implements Serializable
     public class Detail implements Serializable{
         public String AgencyName, Credit,
                 ActualBalance,SalesPerson, Distributor, Active,
-                CreditExpiery,Sid, LastTrancactionDate, BookBalance ;
+                CreditExpiery,Sid, LastTrancactionDate, BookBalance,
+                DistMobNo, SalesMobNo;
     }
 
     public class GetTransactionTypes implements Serializable{

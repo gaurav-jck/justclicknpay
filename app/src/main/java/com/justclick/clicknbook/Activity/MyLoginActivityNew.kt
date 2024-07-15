@@ -89,6 +89,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         context = this
 
         initializeFirebase()
+        ForceUpdateChecker.with(context!!).onUpdateNeeded(this).check()
         initializeViews()
 
         var loginModel = LoginModel()
@@ -135,7 +136,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         remoteConfigDefaults[ForceUpdateChecker.KEY_CURRENT_VERSION] = BuildConfig.VERSION_NAME
         remoteConfigDefaults[ForceUpdateChecker.KEY_UPDATE_URL] = ApiConstants.GOOGLE_PLAY_STORE_URL
         firebaseRemoteConfig!!.setDefaultsAsync(remoteConfigDefaults)
-        firebaseRemoteConfig!!.fetch(60) // fetch every minutes
+        firebaseRemoteConfig!!.fetch(60*15) // fetch every 15 minutes
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d("Remote config ", "remote config is fetched.")
@@ -267,7 +268,6 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                                 showPasswordChangeAlert("Please change your password for security reasons.")
                             }else{
                                 //store values to shared preferences
-
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)

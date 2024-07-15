@@ -22,11 +22,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.billpay.UtilityRecyclerTransactionList
 import com.justclick.clicknbook.Fragment.cashout.model.PayoutListRequestModel
-import com.justclick.clicknbook.Fragment.jctmoney.request.DmtListRequestModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
 import com.justclick.clicknbook.model.AgentNameModel
@@ -34,8 +32,6 @@ import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.model.RblPrintResponse
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
-import com.justclick.clicknbook.rapipayMatm.RecyclerTransactionList
-import com.justclick.clicknbook.rapipayMatm.TxnListRequestModel
 import com.justclick.clicknbook.rapipayMatm.TxnListResponseModel
 import com.justclick.clicknbook.requestmodels.AgentNameRequestModel
 import com.justclick.clicknbook.retrofit.APIClient
@@ -46,9 +42,6 @@ import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -99,6 +92,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
     private var agentDoneCard = ""
     private var CustMobile = ""
     private var txnStatusPosition = 0
+    private var listFilterDialog:Dialog?=null
     private var autocompleteAdapter: AutocompleteAdapter? = null
     private var agentNameModel: AgentNameModel? = null
     private var statusPosition=0
@@ -375,7 +369,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
 //        transactionListRequestModel!!.setUserType("OOU") // hardcode
 //        transactionListRequestModel!!.rechargeType="CCBILLPAY"            //remove
         transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
-        transactionListRequestModel!!.setAgentCode("")
+        transactionListRequestModel!!.setAgentCode(agentDoneCard)
         if(transactionListRequestModel!!.userType.equals("O") || transactionListRequestModel!!.userType.equals("OOU")){
             transactionListRequestModel!!.AgentID="";
         }else{
@@ -448,28 +442,29 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
             } catch (e: Exception) {
             }
             R.id.lin_dateFilter -> openFilterDialog()
-            R.id.linFilter -> openListFilterDialog()
-            R.id.back_arrow -> requireFragmentManager().popBackStack()
+            R.id.linFilter -> {
+                if(listFilterDialog==null || (agentArray.size==0 && !loginModel!!.Data.UserType.equals("A"))){
+                    openListFilterDialog()
+                }else{
+                    listFilterDialog!!.show()
+                }
+            }
+            R.id.back_arrow -> parentFragmentManager.popBackStack()
         }
     }
 
     private fun openListFilterDialog() {
-        txnId = ""
-        txnStatus = ""
-        agentDoneCard = ""
-        agentName = ""
-        CustMobile = ""
-        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setContentView(R.layout.jct_txn_list_filter)
-        val statusSpinner = dialog.findViewById<Spinner>(R.id.statusSpinner)
-        val txnEdt = dialog.findViewById<EditText>(R.id.txnEdt)
-        val mobileEdt = dialog.findViewById<EditText>(R.id.mobileEdt)
-        val agent_search_edt = dialog.findViewById<AutoCompleteTextView>(R.id.agent_search_edt)
+        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        listFilterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        listFilterDialog!!.setContentView(R.layout.jct_txn_list_filter)
+        val statusSpinner = listFilterDialog!!.findViewById<Spinner>(R.id.statusSpinner)
+        val txnEdt = listFilterDialog!!.findViewById<EditText>(R.id.txnEdt)
+        val mobileEdt = listFilterDialog!!.findViewById<EditText>(R.id.mobileEdt)
+        val agent_search_edt = listFilterDialog!!.findViewById<AutoCompleteTextView>(R.id.agent_search_edt)
 
         if (loginModel!!.Data.UserType.equals("A", ignoreCase = true)) {
             agent_search_edt.visibility = View.GONE
-            dialog.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
+            listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
         val adapter = ArrayAdapter(requireContext(),
                 R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
@@ -489,11 +484,22 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        dialog.findViewById<View>(R.id.cancelTv).setOnClickListener { dialog.dismiss() }
-        dialog.findViewById<View>(R.id.applyTv).setOnClickListener {
-            dialog.dismiss()
+        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
+            statusSpinner.setSelection(0)
+            txnEdt.setText("")
+            mobileEdt.setText("")
+            agent_search_edt.setText("")
+            clearFilter()
+        }
+        listFilterDialog!!.findViewById<View>(R.id.applyTv).setOnClickListener {
+            listFilterDialog!!.dismiss()
             txnId = txnEdt.text.toString().trim { it <= ' ' }
             CustMobile = mobileEdt.text.toString().trim { it <= ' ' }
+            var agent=agent_search_edt.text.toString()
+            if(agent.contains("(") && agent.contains(")")) {
+                agentDoneCard = agent.substring(agent.indexOf("( ") + 1, agent.indexOf(" )")).trim()
+            }
             applyFilter()
         }
         if (agentNameModel != null && agentNameModel!!.Data != null && agentNameModel!!.Data.size > 0) {
@@ -519,10 +525,10 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun afterTextChanged(s: Editable) {}
         })
-        val window = dialog.window
+        val window = listFilterDialog!!.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
-        dialog.show()
+        listFilterDialog!!.show()
     }
     private fun getDistributorAgents(agent_auto: AutoCompleteTextView, agencyName: String) {
         val model = AgentNameRequestModel()
@@ -600,6 +606,13 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         return adapter
     }
 
+    private fun clearFilter() {
+        txnId = ""
+        txnStatus = ""
+        agentDoneCard = ""
+        agentName = ""
+        CustMobile = ""
+    }
     private fun applyFilter() {
         arrayList!!.clear()
         listAdapter!!.notifyDataSetChanged()
@@ -615,6 +628,9 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         transactionListRequestModel!!.setFromdate(startDateToSend + "")
         transactionListRequestModel!!.setTodate(endDateToSend + "")
+        transactionListRequestModel!!.transactionId=txnId
+        transactionListRequestModel!!.TxnDescription=txnStatus
+        transactionListRequestModel!!.rechargeNumber=CustMobile
         if (Common.checkInternetConnection(context)) {
             callAgent(transactionListRequestModel, SHOW_PROGRESS)
         } else {

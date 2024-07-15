@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:id="@+id/mainLayout"
+    android:background="@color/color_white"
+    android:weightSum="1">
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"
+            app:srcCompat="@drawable/arrow_left_back" />
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:padding="@dimen/margin_7dp"
+            android:text="List Filter"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rel_top"
+        android:layout_above="@+id/applyLin">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/agentLabelTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Agent"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/small_margin"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/agent_auto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Agent Search"
+                android:text=""
+                android:maxLines="1"
+                android:singleLine="true"
+                android:layout_margin="@dimen/small_margin"
+                android:textSize="@dimen/text_size_15sp"
+                android:textColor="@color/black"/>
+<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PNR"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/pnrEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter PNR"
+                android:inputType="number"
+                android:text=""
+                android:textSize="@dimen/text_size_16sp"
+                android:digits="@string/mobile_digit"
+                android:maxLength="@integer/mobileMaxLength"
+                android:layout_margin="@dimen/margin_7dp"
+                android:singleLine="true"
+                android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Reservation Id"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/resIdEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter resewrvation Id"
+                android:inputType="text"
+                android:digits="@string/alphaNumeric_editText_digits"
+                android:text=""
+                android:textSize="@dimen/text_size_16sp"
+                android:maxLength="@integer/train_res_id_max_length"
+                android:layout_margin="@dimen/margin_7dp"
+                android:singleLine="true"
+                android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Train Number"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/trainNoEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter train number"
+                android:inputType="number"
+                android:text=""
+                android:textSize="@dimen/text_size_16sp"
+                android:maxLength="@integer/train_number_max_length"
+                android:digits="@string/mobile_digit"
+                android:layout_margin="@dimen/margin_7dp"
+                android:singleLine="true"
+                android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Source Station Code"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/sourceEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter source station code"
+                android:inputType="text|textCapCharacters"
+                android:textAllCaps="true"
+                android:text=""
+                android:digits="@string/alphabats_digits"
+                android:textSize="@dimen/text_size_16sp"
+                android:maxLength="@integer/train_station_code_max_length"
+                android:layout_margin="@dimen/margin_7dp"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:maxLines="1"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Destination Station Code"
+                android:padding="@dimen/small_margin"
+                android:textColor="@color/app_blue_color"
+                android:background="@color/color_white_hint"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:visibility="gone"
+                android:textSize="@dimen/text_size_15sp"/>
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/destinationEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter destination station code"
+                android:inputType="text|textCapCharacters"
+                android:textAllCaps="true"
+                android:text=""
+                android:textSize="@dimen/text_size_16sp"
+                android:maxLength="@integer/train_station_code_max_length"
+                android:digits="@string/alphabats_digits"
+                android:layout_margin="@dimen/margin_7dp"
+                android:singleLine="true"
+                android:visibility="gone"
+                android:maxLines="1"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/applyLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="@dimen/large_margin"
+        android:padding="@dimen/margin_5dp">
+        <TextView
+            android:id="@+id/resetTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reset"
+            android:padding="@dimen/margin_7dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"
+            android:gravity="center"
+            android:background="@drawable/app_blue_round_button_background"
+            />
+        <TextView
+            android:id="@+id/applyTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Apply"
+            android:padding="@dimen/margin_7dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15sp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:gravity="center"
+            android:background="@drawable/app_blue_round_button_background"
+            />
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+
+

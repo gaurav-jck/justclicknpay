@@ -19,6 +19,7 @@ import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.newaeps.AepsWebviewActivity;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.network.NetworkCall;
+import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
@@ -75,7 +76,8 @@ public class AirWebviewActivity extends AppCompatActivity {
 
 
     public static class AirSessionRequest{
-        public String MemberCode, UserName, IPAddress="103.139.75.200", Mode="App", Sessionid;
+        public String MemberCode, UserName, IPAddress="103.139.75.200", Mode="App", Sessionid,
+                AgencyCode;
     }
 
     public static void airSession(Context context) {
@@ -83,8 +85,11 @@ public class AirWebviewActivity extends AppCompatActivity {
         loginModel= MyPreferences.getLoginData(loginModel,context);
         AirSessionRequest request=new AirSessionRequest();
         request.MemberCode=loginModel.Data.DoneCardUser;
+        request.AgencyCode=loginModel.Data.DoneCardUser;
         request.UserName=MyPreferences.getLoginId(context);
         request.Sessionid=loginModel.LoginSessionId;
+//        request.Sessionid= EncryptionDecryptionClass.EncryptSessionId(
+//                EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
         MyCustomDialog.showCustomDialog(context, "Validating, please wait..");
         new NetworkCall().callMobileService(request, ApiConstants.TRAVELSESSION, context,
                 (response, responseCode) -> {

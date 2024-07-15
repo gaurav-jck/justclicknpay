@@ -92,7 +92,9 @@ public class MyTrainStationDialog {
             cross=( dialog.findViewById(R.id.cross));
 //            list_agent=( dialog.findViewById(R.id.list_agent));
 
-            getData();
+            if(stationArray==null || stationArray.length==0) {
+                getData();
+            }
 
             dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 

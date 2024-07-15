@@ -3,6 +3,8 @@ package com.justclick.clicknbook.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,7 @@ import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
+import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
 import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
@@ -62,6 +65,7 @@ import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
+import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.squareup.picasso.Picasso;
 
@@ -323,7 +327,13 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
                 break;
             case MenuCodes.TrainBookingList://32
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListNewFragment());
+                break;
+            case MenuCodes.AepsList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new com.justclick.clicknbook.jctPayment.Fragments.TransactionListFragment());
+                break;
+            case MenuCodes.MatmList:
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MatmTransactionListFragment());
                 break;
             case MenuCodes.CREDIT://33
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CreditCardFragment());

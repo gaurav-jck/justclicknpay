@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +43,7 @@ import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
+import com.justclick.clicknbook.utils.Words;
 
 import java.util.ArrayList;
 
@@ -328,6 +331,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
                 LinearLayout.LayoutParams.WRAP_CONTENT);
 
         amountEdt= paymentDialog.findViewById(R.id.amountEdt);
+        TextView amountWordsTv= paymentDialog.findViewById(R.id.amountWordsTv);
         final EditText otpEdt=  paymentDialog.findViewById(R.id.otpEdt);
         final TextView cancelTv= paymentDialog.findViewById(R.id.cancelTv);
         final TextView payNowTv=  paymentDialog.findViewById(R.id.payNowTv);
@@ -381,6 +385,30 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
             }
         });
 
+        amountEdt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    final long number = Long.parseLong(charSequence.toString());
+//                    String returnz = Words.convert(number);
+                    String returnz = Words.convertToIndianCurrency(charSequence.toString());
+                    amountWordsTv.setText(returnz);
+                } catch ( NumberFormatException e) {
+                    amountWordsTv.setText("");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         limitTv.setText("Remaining limit is: "+senderDetailResponse.getRemainingLimit()+"");
 
         cancelTv.setOnClickListener(new View.OnClickListener() {
@@ -404,10 +432,7 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
                     else {
                         amountEdt.setEnabled(true);
 //                        paymentDialog.dismiss();
-                        openTxnConfirmationDialog("Confirm this transaction","Please confirm," +
-                                        " you want to make this transaction.\n"+"Amount="+amount+
-                                        "\nAccount no="+beneData.getAccountNumber()+"\nName="+beneData.getAccountHolderName(),
-                                "Cancel","Submit");
+                        openTxnConfirmationDialogNew(amount,beneData.getAccountNumber(),beneData.getAccountHolderName());
                     }
                 }else {
                     Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show();
@@ -432,6 +457,40 @@ public class RapipaySenderDetailFragment extends Fragment implements View.OnClic
         TextView submitTv=dialog.findViewById(R.id.submit_tv);
         submitTv.setText(submit);
         dialog.findViewById(R.id.remark_edt).setVisibility(View.GONE);
+
+        dialog.findViewById(R.id.cancel_tv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        submitTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.preventFrequentClick(submitTv);
+                dialog.dismiss();
+                makeTransaction();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void openTxnConfirmationDialogNew(int amount,
+                                           String account, String name) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dmt_txn_confirmation_dialog);
+
+        final Window window= dialog.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+
+        ((TextView) dialog.findViewById(R.id.amountTv)).setText(amount+"");
+        ((TextView) dialog.findViewById(R.id.accountTv)).setText(account);
+        ((TextView) dialog.findViewById(R.id.nameTv)).setText(name);
+        TextView submitTv=dialog.findViewById(R.id.submit_tv);
 
         dialog.findViewById(R.id.cancel_tv).setOnClickListener(new View.OnClickListener() {
             @Override

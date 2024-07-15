@@ -36,6 +36,10 @@ public class MenuCodes {
   public static final String  PayoutList="PayoutList";
   public static final String  UtilityList="UtilityList";
   public static final String  CreditCardList="CreditCard List";
+  public static final String  AepsList="AepsList";
+  public static final String  AepsListDisplay="AEPS List";
+  public static final String  MatmList="MatmList";
+  public static final String  MatmListDisplay="MATM List";
   //AirBookingList,Top-UpDetails,TrainBookingList,TrainFailedList,TrainBookingcheck,DMTTransactionList,GiftBookingList
 
   //Accounts

@@ -60,7 +60,7 @@ class TrainDashboardFragment : Fragment(), View.OnClickListener {
                 (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainPnrStatusFragment())
             }
             R.id.bookingList->{
-                (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainBookingListFragment())
+                (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainBookingListNewFragment())
             }
         }
     }

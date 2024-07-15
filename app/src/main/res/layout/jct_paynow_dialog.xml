@@ -161,6 +161,19 @@
             android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/amountWordsTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textAllCaps="true"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin"
+        android:textColor="@color/black_text_color"
+        android:textSize="@dimen/text_size_14sp"
+        />
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

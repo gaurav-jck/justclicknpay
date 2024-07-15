@@ -25,10 +25,10 @@
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="MATM Txn List"
-            android:textSize="@dimen/title_text_size"
             android:textColor="@color/color_white"
-            android:layout_centerInParent="true"/>
+            android:textSize="@dimen/title_text_size" />
 
     </RelativeLayout>
 

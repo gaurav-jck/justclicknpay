@@ -68,7 +68,7 @@ public class Dashboard_New_Activity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TransactionListFragment(), "Transactions");
+//        adapter.addFragment(new TransactionListFragment(), "Transactions");
         adapter.addFragment(new Services_Fragment_New(), "Services");
 
         viewPager.setAdapter(adapter);

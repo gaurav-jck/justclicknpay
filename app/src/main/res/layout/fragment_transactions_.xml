@@ -178,64 +178,31 @@
     </FrameLayout>
 
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0.5dp"
-        android:background="@color/app_blue_color_light"
-        android:orientation="horizontal">
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:padding="10dp"
-            android:text="Recent Transaction"
-            android:gravity="center"
-            android:textColor="@color/white" />
+            android:layout_centerInParent="true"
+            android:text="AEPS Txn List"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
 
-        <TextView
-            android:id="@+id/tv_all_transaction"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:gravity="right"
-            android:padding="10dp"
-            android:visibility="gone"
-            android:textStyle="bold|italic"
-            android:text="Show All"
-            android:textColor="@color/white" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-
-        <TextView
-            android:id="@+id/tv_all_transaction_details"
-            android:layout_width="0dp"
-            android:layout_marginLeft="45dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".7"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:text="Transaction Details"
-            android:textColor="@color/app_blue_color" />
-
-        <TextView
-            android:id="@+id/tv_all_transaction_amount"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight=".3"
-            android:gravity="left"
-            android:text="Amount"
-            android:textColor="@color/app_blue_color" />
-
-    </LinearLayout>
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/date_lin"
