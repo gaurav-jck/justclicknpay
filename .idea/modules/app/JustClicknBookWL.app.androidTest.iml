@@ -181,7 +181,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/72692cc1cc042f6541d7de721d19887b/transformed/jetified-imagepipeline-base-1.10.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/cfcaf9088f7f9f9fcc40a490d33c5504/transformed/jetified-kotlin-stdlib-common-1.6.20.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/1f77877cca374e0a7fb9e7118e2e9099/transformed/jetified-annotations-13.0.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-33/android.jar</arg>
+                <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-34/android.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
               </args>
             </stringArg>
@@ -253,7 +253,7 @@
     <content url="file://$MODULE_DIR$/../../../app/src/androidTestDebug" />
     <content url="file://$MODULE_DIR$/../../../app/src/androidTestJustclickkaroservices" />
     <content url="file://$MODULE_DIR$/../../../app/src/androidTestJustclickkaroservicesDebug" />
-    <orderEntry type="jdk" jdkName="Android API 33 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="JustClicknBookWL.app.main" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.annotation:annotation:1.2.0" level="project" />

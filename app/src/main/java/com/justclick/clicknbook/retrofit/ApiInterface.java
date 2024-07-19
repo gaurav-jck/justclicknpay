@@ -83,8 +83,8 @@ public interface ApiInterface {
     @POST("MobileServices.svc/{methodName}")
     Call<ResponseBody> getMobileCommonData(@Path("methodName") String method, @Body Object data);
 
-//    @POST("v2/android/api/Auth/{methodName}")
-//    Call<ResponseBody> testUatService(@Path("methodName") String method, @Body Object data);
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> testUatService(@Path("methodName") String method, @Body Object data);
 
     @POST("MobileServices.svc/{methodName}")
     @Multipart
@@ -697,5 +697,16 @@ public interface ApiInterface {
                                      @Header("LoggedInUserType") String type,
                                      @Header("Merchant") String merchant, @Header("Mode") String mode,
                                           @Header("mobileno") String mobileno);
+
+//    @Multipart
+//    @POST("MobileServices.svc/{methodName}")
+//    Call<ResponseBody> depositRequest(@Path("methodName") String method,
+//                                      @Part("RequestData") RequestBody RequestData,
+//                                      @Part MultipartBody.Part Image);
+    @Multipart
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> depositRequest(@Path("methodName") String method,
+                                      @Part("RequestData") RequestBody RequestData,
+                                      @Part MultipartBody.Part Image);
 
 }

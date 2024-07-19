@@ -171,7 +171,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/72692cc1cc042f6541d7de721d19887b/transformed/jetified-imagepipeline-base-1.10.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/83c7bc20abad6dddde29dcf56d3da418/transformed/jetified-eventbus-java-3.3.1.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/3eb28c974f5595ecd9a1a35d12c36f48/transformed/jetified-rxjava-2.0.1.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-33/android.jar</arg>
+                <arg>$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-34/android.jar</arg>
                 <arg>$USER_HOME$/AppData/Local/Android/Sdk/build-tools/30.0.3/core-lambda-stubs.jar</arg>
               </args>
             </stringArg>
@@ -280,7 +280,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/src/main/res" type="java-resource" />
     </content>
-    <orderEntry type="jdk" jdkName="Android API 33 Platform" jdkType="Android SDK" />
+    <orderEntry type="jdk" jdkName="Android API 34, extension level 7 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Gradle: androidx.annotation:annotation:1.2.0" level="project" />
     <orderEntry type="library" name="Gradle: androidx.lifecycle:lifecycle-common:2.4.1" level="project" />

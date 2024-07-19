@@ -1714,6 +1714,10 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface.class);
     }
 
+    public static ApiInterface getDepositRequestInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_UAT_DEPOSIT).create(ApiInterface.class);
+    }
+
 
     private void showCustomDialog() {
         MyCustomDialog.showCustomDialog(context,"Please wait...");

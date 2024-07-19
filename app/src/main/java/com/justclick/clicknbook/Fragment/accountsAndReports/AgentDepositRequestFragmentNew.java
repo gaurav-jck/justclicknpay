@@ -1,11 +1,17 @@
 package com.justclick.clicknbook.Fragment.accountsAndReports;
 
+import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
+import static android.Manifest.permission.READ_MEDIA_IMAGES;
+import static android.Manifest.permission.READ_MEDIA_VIDEO;
+import static android.Manifest.permission.READ_MEDIA_VISUAL_USER_SELECTED;
 import static android.app.Activity.RESULT_OK;
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -43,11 +49,13 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 //import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -59,13 +67,16 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.jctmoney.response.CommonRapiResponse;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.imageUpload.VolleyMultipartRequest;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
 import com.justclick.clicknbook.model.DepositRequestResponseModel;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
+import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentDepositRequestRequestModel;
+import com.justclick.clicknbook.utils.CodeEnum;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.FileUtils;
@@ -76,6 +87,7 @@ import com.justclick.clicknbook.utils.MyPreferences;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -83,6 +95,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 
 
 public class AgentDepositRequestFragmentNew extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
@@ -306,7 +323,8 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
                 break;
 
             case R.id.chooseFileLin:
-                askSelfPermission();
+//                askSelfPermission();
+                askSelfPermission2();
                 break;
 
         }
@@ -359,26 +377,90 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
             });
 
     String readImagePermission;
+    String[] readImagePermission2;
     private void askSelfPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
-            readImagePermission=Manifest.permission.READ_MEDIA_IMAGES;
+            readImagePermission= READ_MEDIA_IMAGES;
         else
-            readImagePermission=Manifest.permission.READ_EXTERNAL_STORAGE;
+            readImagePermission= READ_EXTERNAL_STORAGE;
 
         if (ContextCompat.checkSelfPermission(
                 requireContext(), readImagePermission) ==
-                PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
+                PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
                 requireContext(), Manifest.permission.CAMERA) ==
-                PackageManager.PERMISSION_GRANTED) {
+                PERMISSION_GRANTED) {
             // You can use the API that requires the permission.
             selectFile();
         }else if(ContextCompat.checkSelfPermission(
                 requireContext(), readImagePermission) !=
-                PackageManager.PERMISSION_GRANTED){
+                PERMISSION_GRANTED){
             launchStoragePermission();
         }else {
             launchCameraPermission();
         }
+    }
+
+    ActivityResultLauncher<String[]> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestMultiplePermissions(), result -> {
+                if (result.size()>0) {
+                    boolean allGranted=true;
+                    for (String key: result.keySet()) {
+                        allGranted=allGranted && result.get(key);
+                    }
+                    if(allGranted){
+                        selectFile();
+                    }
+                    // Permission is granted. Continue the action or workflow in your
+                    // app.
+                } else {
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });
+    private ActivityResultLauncher<String> storagePermissionLauncher2 =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    selectFile();
+                } else {
+//                    requestPermission();
+                    // Explain to the user that the feature is unavailable because the
+                    // feature requires a permission that the user has denied. At the
+                    // same time, respect the user's decision. Don't link to system
+                    // settings in an effort to convince the user to change their
+                    // decision.
+                }
+            });
+
+    private void askSelfPermission2() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU)
+            readImagePermission= READ_MEDIA_IMAGES;
+        else
+            readImagePermission= READ_EXTERNAL_STORAGE;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+                        ContextCompat.checkSelfPermission(context, READ_MEDIA_IMAGES) == PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, READ_MEDIA_VISUAL_USER_SELECTED) == PERMISSION_GRANTED) {
+            // Partial access on Android 14 (API level 34) or higher
+            selectFile();
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE &&
+                (ContextCompat.checkSelfPermission(context, READ_MEDIA_IMAGES) != PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(context, READ_MEDIA_VISUAL_USER_SELECTED) != PERMISSION_GRANTED)){
+            requestPermissionLauncher.launch(new String[]{READ_MEDIA_IMAGES, READ_MEDIA_VISUAL_USER_SELECTED});
+        }else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                ContextCompat.checkSelfPermission(requireContext(), readImagePermission) == PERMISSION_GRANTED) {
+            selectFile();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU &&
+                ContextCompat.checkSelfPermission(requireContext(), readImagePermission) != PERMISSION_GRANTED) {
+            storagePermissionLauncher2.launch(READ_MEDIA_IMAGES);
+        } else if (ContextCompat.checkSelfPermission(requireContext(), readImagePermission) == PERMISSION_GRANTED) {
+            selectFile();
+        }else {
+            storagePermissionLauncher2.launch(READ_EXTERNAL_STORAGE);
+        }
+
     }
 
     private void selectFile() {
@@ -515,53 +597,6 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
         return image;
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == RESULT_OK && data != null){
-            if(data.getExtras()!=null) {
-                Bundle extras = data.getExtras();
-                Bitmap imageBitmap = (Bitmap) extras.get("data");
-//                imagepath = MediaStore.Images.Media.insertImage(context.getContentResolver(), imageBitmap, "Deposit", null);
-                if (imagepath != null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg") ||
-                        imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
-                    if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
-                        Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
-                    }
-                    try {
-                        imageFile.setImageBitmap(imageBitmap);
-                        networkOutputStream = new ByteArrayOutputStream();
-                    } catch (Exception e) {
-                        Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                Uri selectedImageUri = data.getData();
-                imagepath = getPath(selectedImageUri);
-                if(imagepath!=null && (imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".jpg")||
-                        imagepath.substring(imagepath.lastIndexOf(".")).equalsIgnoreCase(".png"))) {
-                    if (new File(imagepath).length() > IMAGE_MAX_SIZE) {
-                        Toast.makeText(context, "Image too large. Please select image less than 3 MB", Toast.LENGTH_LONG).show();
-                    }else {
-                        imagepath = getPath(selectedImageUri);
-                        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-                        Bitmap bitmap = BitmapFactory.decodeFile(imagepath, bmOptions);
-                        imageFile.setImageBitmap(bitmap);
-                        networkOutputStream = new ByteArrayOutputStream();
-                    }
-                }else {
-                    Toast.makeText(context, "Please select image in JPEG or PNG format", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-        }
-        else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
-
     public String getPath(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
         Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
@@ -599,8 +634,8 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
     private void requestAmount(AgentDepositRequestRequestModel model) {
 //        showCustomDialog();
 
-        new UploadFileTask(model).execute();
-//        new UploadFileTask(model).onPreExecute();
+//        new UploadFileTask(model).execute();
+        addAccount(model);
 
     }
 
@@ -649,6 +684,69 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
         MyCustomDialog.hideCustomDialog();
     }
 
+    private void addAccount(AgentDepositRequestRequestModel model) {
+        new NetworkCall().callService(NetworkCall.getDepositRequestInterface().depositRequest(ApiConstants.AgentDepositRequest,
+                        createRequestBody(new Gson().toJson(model)),
+                        sendFile("File", new File(imagepath))),
+                requireContext(), true, (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerNew(response);
+                    }else {
+                        Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerNew(ResponseBody response) {
+        try {
+            DepositRequestResponseModel responseModel = new Gson().fromJson(response.string(), DepositRequestResponseModel.class);
+            hideCustomDialog();
+            if(responseModel!=null){
+                if(responseModel.DepositRequestResult.StatusCode.equals("0")) {
+                    Toast.makeText(context, responseModel.DepositRequestResult.Data.Message, Toast.LENGTH_SHORT).show();
+                    amount_edt.setText("");
+                    receipt_no_edt.setText("");
+                    networkOutputStream=null;
+                    imageFile.setImageResource(R.drawable.choose_file);
+                    Common.showResponsePopUp(context, responseModel.DepositRequestResult.Data.Message);
+                }else {
+                    Toast.makeText(context, responseModel.DepositRequestResult.Status, Toast.LENGTH_LONG).show();
+                }
+            }else {
+                Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private RequestBody createRequestBody(String userId) {
+        return RequestBody.create(MediaType.parse("multipart/form-data"),
+                userId);
+//        return RequestBody.create(MediaType.parse("text/plain"),
+//                userId);
+    }
+
+    private MultipartBody.Part sendFile(String paramName, File imageFile){
+        if(imageFile==null)
+            return null;
+        Uri uri = FileProvider.getUriForFile(
+                requireContext(),
+                requireContext().getPackageName() + ".provider",
+                imageFile
+        );
+        RequestBody requestFile =
+                RequestBody.create(
+                        MediaType.parse(requireContext().getContentResolver().getType(uri)),
+                        imageFile
+                );
+
+        // MultipartBody.Part is used to send also the actual file name
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData(paramName, imageFile.getName(), requestFile);
+        return body;
+    }
+
 
     private class UploadFileTask extends AsyncTask<Object, Void, String> {
         AgentDepositRequestRequestModel request;
@@ -682,30 +780,7 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
         }
 
         protected void onPostExecute(String result) {
-            /* try{
-             *//*hideCustomDialog();
-                if(result!=null && result.length()>0) {
-                    DepositRequestResponseModel responseModel = new Gson().fromJson(result, DepositRequestResponseModel.class);
-//                    hideCustomDialog();
-                    if(responseModel!=null){
-                        if(responseModel.DepositRequestResult.StatusCode.equals("0")) {
-                            Toast.makeText(context, responseModel.DepositRequestResult.Data.Message, Toast.LENGTH_SHORT).show();
-                            amount_edt.setText("");
-                            receipt_no_edt.setText("");
-                            Common.showResponsePopUp(context, responseModel.DepositRequestResult.Data.Message);
-                        }else {
-                            Toast.makeText(context, responseModel.DepositRequestResult.Status, Toast.LENGTH_LONG).show();
-                        }
-                    }else {
-                        Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
-                    }
-                }else {
-                    Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
-                }*//*
-            }catch (Exception e){
-                hideCustomDialog();
-                Toast.makeText(context,R.string.exception_message,Toast.LENGTH_SHORT).show();
-            }*/
+
         }
     }
 
@@ -754,15 +829,6 @@ public class AgentDepositRequestFragmentNew extends Fragment implements View.OnC
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         VolleySingleton.getInstance(context).addToRequestQueue(multipartRequest);
-    }
-
-
-    public static byte[] getFileDataFromDrawable(Context context, int id) {
-        Drawable drawable = ContextCompat.getDrawable(context, id);
-        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, byteArrayOutputStream);
-        return byteArrayOutputStream.toByteArray();
     }
 
     public static byte[] getFileDataFromDrawable(Context context, Drawable drawable) {

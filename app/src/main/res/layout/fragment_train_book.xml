@@ -103,6 +103,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_margin="@dimen/small_margin">
                 <EditText
                     android:id="@+id/cusMobileEdt"
@@ -120,7 +121,7 @@
                     android:singleLine="true"
                     android:maxLines="1"/>
                 <TextView
-                    android:id="@+id/getDetails"
+                    android:id="@+id/getDetails2"
                     android:layout_width="@dimen/size_0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -146,102 +147,7 @@
                 android:background="@color/gray_color_very_light"
                 />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Passenger Information"
-                android:textColor="@color/text_dark_gray"
-                android:textSize="@dimen/simple_content_text_size"
-                android:padding="@dimen/margin_8dp"
-                android:layout_marginTop="@dimen/medium_margin"
-                android:background="@color/train_background2"
-                />
 
-            <LinearLayout
-                android:id="@+id/passengerContainerLin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/large_margin"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin">
-
-                <TextView
-                    android:id="@+id/removePassTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Remove Passanger"
-                    android:textColor="@color/app_blue_color"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:padding="@dimen/small_margin"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/addInfantTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="+ ADD INFANT"
-                    android:gravity="right"
-                    android:textColor="@color/app_blue_color"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:padding="@dimen/small_margin"/>
-                <TextView
-                    android:id="@+id/addPassTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="+ ADD PASSENGER"
-                    android:gravity="right"
-                    android:textColor="@color/app_blue_color"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:padding="@dimen/small_margin"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/infantContainerLin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginTop="@dimen/large_margin"
-                android:visibility="gone"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginLeft="@dimen/medium_margin"
-                android:layout_marginRight="@dimen/medium_margin"
-                android:visibility="gone">
-
-                <TextView
-                    android:id="@+id/removeInfantTv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Remove Infant"
-                    android:textColor="@color/app_blue_color"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:padding="@dimen/small_margin"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/addInfantTv2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Add Infant"
-                    android:gravity="right"
-                    android:textColor="@color/app_blue_color"
-                    android:textSize="@dimen/text_size_16sp"
-                    android:padding="@dimen/small_margin"/>
-            </LinearLayout>
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -254,8 +160,8 @@
                 android:textColor="@color/text_dark_gray"
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/margin_8dp"
-                android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/train_background3"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@color/train_background2"
                 />
 
             <TextView
@@ -269,23 +175,42 @@
                 android:paddingBottom="@dimen/small_margin"
                 />
 
-            <com.google.android.material.textfield.TextInputLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/medium_margin"
+            android:background="@null">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mobileEdt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/medium_margin"
-                android:background="@null">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/mobileEdt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Mobile"
-                    android:inputType="number"
-                    android:text=""
-                    android:textSize="@dimen/text_size_16sp"
-                    android:maxLength="@integer/mobileMaxLength"
-                    android:singleLine="true"
-                    android:maxLines="1"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Mobile"
+                android:inputType="number"
+                android:text=""
+                android:textSize="@dimen/text_size_16sp"
+                android:maxLength="@integer/mobileMaxLength"
+                android:singleLine="true"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/getDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/small_margin"
+            android:textSize="@dimen/text_size_15sp"
+            android:text="Get Details"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:background="@drawable/app_blue_round_button_background"/>
+    </RelativeLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -318,6 +243,65 @@
         android:paddingTop="@dimen/small_margin"
         android:paddingBottom="@dimen/small_margin"
         />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Passenger Information"
+        android:textColor="@color/text_dark_gray"
+        android:textSize="@dimen/simple_content_text_size"
+        android:padding="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/very_large_margin"
+        android:background="@color/train_background3"
+        />
+
+    <LinearLayout
+        android:id="@+id/passengerContainerLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/large_margin"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginLeft="@dimen/medium_margin"
+        android:layout_marginRight="@dimen/medium_margin">
+
+        <TextView
+            android:id="@+id/removePassTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Remove Passanger"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/text_size_16sp"
+            android:padding="@dimen/small_margin"
+            android:visibility="gone"
+            />
+        <TextView
+            android:id="@+id/addInfantTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+ ADD INFANT"
+            android:gravity="right"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/text_size_15sp"
+            android:padding="@dimen/small_margin"/>
+        <TextView
+            android:id="@+id/addPassTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+ ADD PASSENGER"
+            android:gravity="right"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/text_size_15sp"
+            android:padding="@dimen/small_margin"/>
+    </LinearLayout>
+
 
     <RelativeLayout
         android:id="@+id/otherPrefRel"

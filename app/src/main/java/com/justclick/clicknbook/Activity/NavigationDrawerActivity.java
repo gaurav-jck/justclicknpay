@@ -922,7 +922,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 //            hardcoded
 
-            if(isUtilityBill){
+            if(isUtilityBill && !loginModel.Data.UserType.equals("D")){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
                 fasttag.SubMenu=MenuCodes.FAST_TAG;
                 fasttag.SubMenuCode=MenuCodes.FAST_TAG;
@@ -944,6 +944,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subMenuCashOut.SubMenu = MenuCodes.CASH_OUT;
                 subMenuCashOut.SubMenuCode = MenuCodes.CASH_OUT;
                 subMenuArrayList.add(subMenuCashOut);
+            }
+
+            if(loginModel.Data.UserType.equals("D")){
+                LoginModel.DataList.subMenu qr=loginModel.new DataList().new subMenu();
+                qr.SubMenu=MenuCodes.CASHFREE_QR;
+                qr.SubMenuCode=MenuCodes.CASHFREE_QR;
+                subMenuArrayList.add(qr);
             }
 
 

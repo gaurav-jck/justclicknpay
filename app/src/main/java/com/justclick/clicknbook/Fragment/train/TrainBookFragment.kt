@@ -77,7 +77,6 @@ import kotlinx.android.synthetic.main.fragment_train_book.view.mobileNoteTv
 import kotlinx.android.synthetic.main.fragment_train_book.view.otherPrefRel
 import kotlinx.android.synthetic.main.fragment_train_book.view.pgChargeEdt
 import kotlinx.android.synthetic.main.fragment_train_book.view.pin_edt2
-import kotlinx.android.synthetic.main.fragment_train_book.view.removeInfantTv
 import kotlinx.android.synthetic.main.fragment_train_book.view.serviceChargeEdt
 import kotlinx.android.synthetic.main.fragment_train_book.view.spinnerBoardingStn
 import kotlinx.android.synthetic.main.fragment_train_book.view.totalFareEdt
@@ -121,7 +120,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private val Snacks="Snacks"
     var loginModel:LoginModel?=null
     var passengerContainerLin:LinearLayout?=null
-    var infantContainerLin:LinearLayout?=null
     var preferenceRadioGroup:RadioGroup?=null
     var reservationChoice:String=NoChoice
     var doj:String?=null
@@ -137,7 +135,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     var removePassTv:TextView?=null
     var addInfantTv:TextView?=null
     var addPassTv:TextView?=null
-    var cusMobileEdt:EditText?=null
+//    var cusMobileEdt:EditText?=null
     private var pinCityResponseArrayList: ArrayList<PostOffice>? = null
     var trainResponse:TrainSearchDataModel?=null
     var fareRuleResponse:FareRuleResponse?=null
@@ -163,11 +161,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             fragView=view
             addInfantTv=view.findViewById(R.id.addInfantTv)
             addPassTv=view.findViewById(R.id.addPassTv)
-            cusMobileEdt=view.findViewById(R.id.cusMobileEdt)
+//            cusMobileEdt=view.findViewById(R.id.cusMobileEdt)
             view.back_arrow.setOnClickListener(this)
             view.addPassTv.setOnClickListener(this)
             view.addInfantTv.setOnClickListener(this)
-            view.removeInfantTv.setOnClickListener(this)
             view.bookTv.setOnClickListener(this)
             removePassTv=view.findViewById(R.id.removePassTv)
             removePassTv!!.setOnClickListener(this)
@@ -176,7 +173,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             view.fareLabelRel.setOnClickListener(this)
             view.getDetails.setOnClickListener(this)
             passengerContainerLin=view.findViewById(R.id.passengerContainerLin)
-            infantContainerLin=view.findViewById(R.id.infantContainerLin)
             preferenceRadioGroup=view.findViewById(R.id.preferenceRadioGroup)
 
             if(arguments!=null) {
@@ -306,7 +302,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         val json = Gson().toJson(request)
         NetworkCall().callService(NetworkCall.getTrainApiInterface()
                 .getCustomerDetails(ApiConstants.getPassenger, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
-                    ApiConstants.MerchantId, "App", cusMobileEdt!!.text.toString()),
+                    ApiConstants.MerchantId, "App", mobileEdt!!.text.toString()),
             context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
@@ -343,6 +339,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 
     var filterDialog:Dialog?=null
     var listName=""
+    var noPassenger=0
     private fun customerListDialog(list: ArrayList<CustomerDetailResponse.passengerList>) {
         listName = ""
         filterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
@@ -352,6 +349,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var classLinear: LinearLayout = filterDialog!!.findViewById(R.id.classLinear)
 
         var classFilterItem = ""
+        noPassenger=0
 
         for (i in 0 until list!!.size) {
 //            classFilterItem+=arrayList!!.get(i).avlClasses!![c]
@@ -359,13 +357,14 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             checkBox.text = list!!.get(i).name+"  [ "+list!!.get(i).age+"-"+list!!.get(i).sex+" ]"
             checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
-//                    className += checkBox.text.toString()
-//                    addPassenger(list.get(i).name, list.get(i).age, list.get(i).sex)
-//                    addCustomerPassenger(list.get(i).name, list.get(i).age, list.get(i).sex)
-//                            Toast.makeText(requireContext(), checkBox.text.toString(), Toast.LENGTH_SHORT).show()
+                    noPassenger++
+                    if(passengerArray!!.size+noPassenger>6){
+                        Toast.makeText(requireContext(),"Number of passenger should not be greater than 6", Toast.LENGTH_SHORT).show()
+                        checkBox.isChecked=false
+                        noPassenger--
+                    }
                 } else {
-//                    className = className.replace(checkBox.text.toString(), "")
-//                            Toast.makeText(requireContext(), checkBox.text.toString(), Toast.LENGTH_SHORT).show()
+                    noPassenger--
                 }
             }
             classLinear.addView(checkBox)
@@ -439,7 +438,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             R.id.fareLabelRel->
                 showHideFare()
              R.id.getDetails->{
-                 if(cusMobileEdt!!.text.toString().length<10){
+                 if(mobileEdt!!.text.toString().length<10){
                      Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
                  }else{
                      getCustomerDetails()
