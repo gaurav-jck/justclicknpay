@@ -21,6 +21,7 @@ import android.widget.AdapterView.VISIBLE
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -28,6 +29,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
@@ -36,51 +39,25 @@ import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.PinCityResponse.PostOffice
+import com.justclick.clicknbook.Fragment.train.adapter.GSTListAdapter
 import com.justclick.clicknbook.Fragment.train.model.CustomerDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
+import com.justclick.clicknbook.Fragment.train.model.GSTDetailRequest
+import com.justclick.clicknbook.Fragment.train.model.GSTDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingRequest
 import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainBookBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
+import com.justclick.clicknbook.utils.CodeEnum
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import com.justclick.clicknbook.utils.MySpannable
-import kotlinx.android.synthetic.main.fragment_train_book.addPassTv
-import kotlinx.android.synthetic.main.fragment_train_book.boardingStnLabelRel
-import kotlinx.android.synthetic.main.fragment_train_book.cityEdt2
-import kotlinx.android.synthetic.main.fragment_train_book.emailEdt
-import kotlinx.android.synthetic.main.fragment_train_book.fareView
-import kotlinx.android.synthetic.main.fragment_train_book.gstEdt
-import kotlinx.android.synthetic.main.fragment_train_book.gstFlatEdt
-import kotlinx.android.synthetic.main.fragment_train_book.gstNameEdt
-import kotlinx.android.synthetic.main.fragment_train_book.gstView
-import kotlinx.android.synthetic.main.fragment_train_book.insuranceRadioGroup
-import kotlinx.android.synthetic.main.fragment_train_book.mobileEdt
-import kotlinx.android.synthetic.main.fragment_train_book.pin_edt2
-import kotlinx.android.synthetic.main.fragment_train_book.spinnerBoardingStn
-import kotlinx.android.synthetic.main.fragment_train_book.state_edt2
-import kotlinx.android.synthetic.main.fragment_train_book.view.addInfantTv
-import kotlinx.android.synthetic.main.fragment_train_book.view.addPassTv
-import kotlinx.android.synthetic.main.fragment_train_book.view.back_arrow
-import kotlinx.android.synthetic.main.fragment_train_book.view.baseFareEdt
-import kotlinx.android.synthetic.main.fragment_train_book.view.bookTv
-import kotlinx.android.synthetic.main.fragment_train_book.view.concessionEdt
-import kotlinx.android.synthetic.main.fragment_train_book.view.fareLabelRel
-import kotlinx.android.synthetic.main.fragment_train_book.view.getDetails
-import kotlinx.android.synthetic.main.fragment_train_book.view.gstLabelRel
-import kotlinx.android.synthetic.main.fragment_train_book.view.mobileNoteTv
-import kotlinx.android.synthetic.main.fragment_train_book.view.otherPrefRel
-import kotlinx.android.synthetic.main.fragment_train_book.view.pgChargeEdt
-import kotlinx.android.synthetic.main.fragment_train_book.view.pin_edt2
-import kotlinx.android.synthetic.main.fragment_train_book.view.serviceChargeEdt
-import kotlinx.android.synthetic.main.fragment_train_book.view.spinnerBoardingStn
-import kotlinx.android.synthetic.main.fragment_train_book.view.totalFareEdt
-import kotlinx.android.synthetic.main.train_passanger_show.view.genderTv
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -88,11 +65,8 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Locale
 import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.collections.MutableMap
 import kotlin.collections.indices
 import kotlin.collections.iterator
-import kotlin.collections.set
 
 
 /**
@@ -143,6 +117,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     var passengerArray:ArrayList<TrainBookingRequest.adultRequest>?=null
     var position:Int=0
     var fragView:View?=null
+    var binding:FragmentTrainBookBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -158,20 +133,23 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         if(fragView==null){
             val view= inflater.inflate(R.layout.fragment_train_book, container, false)
+            binding=FragmentTrainBookBinding.bind(view)
             fragView=view
             addInfantTv=view.findViewById(R.id.addInfantTv)
             addPassTv=view.findViewById(R.id.addPassTv)
 //            cusMobileEdt=view.findViewById(R.id.cusMobileEdt)
-            view.back_arrow.setOnClickListener(this)
-            view.addPassTv.setOnClickListener(this)
-            view.addInfantTv.setOnClickListener(this)
-            view.bookTv.setOnClickListener(this)
+            binding!!.backArrow.setOnClickListener(this)
+            binding!!.addPassTv.setOnClickListener(this)
+            binding!!.addInfantTv.setOnClickListener(this)
+            binding!!.bookTv.setOnClickListener(this)
             removePassTv=view.findViewById(R.id.removePassTv)
             removePassTv!!.setOnClickListener(this)
-            view.gstLabelRel.setOnClickListener(this)
-            view.otherPrefRel.setOnClickListener(this)
-            view.fareLabelRel.setOnClickListener(this)
-            view.getDetails.setOnClickListener(this)
+            binding!!.gstLabelRel.setOnClickListener(this)
+            binding!!.otherPrefRel.setOnClickListener(this)
+            binding!!.fareLabelRel.setOnClickListener(this)
+            binding!!.getDetails.setOnClickListener(this)
+            binding!!.addGstDetails.setOnClickListener(this)
+            binding!!.getGstDetails.setOnClickListener(this)
             passengerContainerLin=view.findViewById(R.id.passengerContainerLin)
             preferenceRadioGroup=view.findViewById(R.id.preferenceRadioGroup)
 
@@ -188,13 +166,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 dateTv.text=fareRuleResponse!!.availablityDate
             }
 
-            view.baseFareEdt.setText(fareRuleResponse!!.baseFare)
-            view.totalFareEdt.setText(fareRuleResponse!!.totalFare)
-            view.concessionEdt.setText("0")
-            view.pgChargeEdt.setText("0")
-            view.serviceChargeEdt.setText("0")
+            binding!!.baseFareEdt.setText(fareRuleResponse!!.baseFare)
+            binding!!.totalFareEdt.setText(fareRuleResponse!!.totalFare)
+            binding!!.concessionEdt.setText("0")
+            binding!!.pgChargeEdt.setText("0")
+            binding!!.serviceChargeEdt.setText("0")
 
-            makeTextViewResizable(view.mobileNoteTv, 2, "View More", true)
+            makeTextViewResizable(binding!!.mobileNoteTv, 2, "View More", true)
 
             /*view.pin_edt.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -210,30 +188,20 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 override fun afterTextChanged(s: Editable) {}
             })*/
 
-            view.pin_edt2.addTextChangedListener(object : TextWatcher {
+            binding!!.pinEdt2.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
                 override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
 //                Toast.makeText(context, "count="+count+"  text="+s.toString(),Toast.LENGTH_SHORT).show();
-                    if (s.length == 6 && before!=6) {
+                    if (s.length == 6 && before!=6 && start!=0) {
                         getGstCity(s.toString())
 //                        getCityState2(s.toString())
-                    } else {
+                    } else if(start!=0) {
                         clearCityState2()
                     }
                 }
 
                 override fun afterTextChanged(s: Editable) {}
             })
-
-            /*view.cityAtv.onItemClickListener = OnItemClickListener { parent, view, position, id ->
-//                post = view.cityAtv.text.toString()
-//                city = pinCityResponseArrayList!![position].district
-//                state = pinCityResponseArrayList!![position].state
-//                address = pinCityResponseArrayList!![position].district
-//                state_edt.setText(state)
-//                cityEdt.setText(city)
-            }
-            view.cityAtv.setOnClickListener(this)*/
 
             setFonts()
 
@@ -274,7 +242,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 }
             }
 
-            view.spinnerBoardingStn.onItemSelectedListener = object : OnItemSelectedListener {
+            binding!!.spinnerBoardingStn.onItemSelectedListener = object : OnItemSelectedListener {
                 override fun onItemSelected(
                         parent: AdapterView<*>,
                         view: View,
@@ -297,12 +265,12 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 
     private fun getCustomerDetails() {
         val request = ChangePasswordRequest()
-        request.oldpassword = mobileEdt.getText().toString()
+        request.oldpassword = binding!!.mobileEdt.getText().toString()
         request.BookUserID = loginModel!!.Data.UserId
         val json = Gson().toJson(request)
         NetworkCall().callService(NetworkCall.getTrainApiInterface()
                 .getCustomerDetails(ApiConstants.getPassenger, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
-                    ApiConstants.MerchantId, "App", mobileEdt!!.text.toString()),
+                    ApiConstants.MerchantId, "App", binding!!.mobileEdt!!.text.toString()),
             context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
@@ -393,9 +361,14 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         passenger.passengerName=name
         passenger.passengerAge=age
         passenger.passengerGender=sex
-        passenger.passengerBerthChoice=""
         if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
-            passenger.passengerFoodChoice=""
+            if(fareRuleResponse!!.bkgCfg!!.foodDetails!=null && fareRuleResponse!!.bkgCfg!!.foodDetails.isNotEmpty())
+            passenger.passengerFoodChoice=fareRuleResponse!!.bkgCfg!!.foodDetails[0]
+            else{
+                passenger.passengerBerthChoice=""
+            }
+        }else{
+            passenger.passengerBerthChoice=""
         }
         passenger.childBerthFlag=null
         passenger.type=ADULT
@@ -438,16 +411,258 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             R.id.fareLabelRel->
                 showHideFare()
              R.id.getDetails->{
-                 if(mobileEdt!!.text.toString().length<10){
+                 if(binding!!.mobileEdt!!.text.toString().length<10){
                      Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
                  }else{
                      getCustomerDetails()
                  }
              }
+            R.id.getGstDetails->{
+                getGSTDetails()
+             }
+            R.id.addGstDetails->{
+                addGstDialog()
+            }
             R.id.cityAtv-> {
                 Common.hideSoftKeyboard(context as Activity?)
 //                cityAtv.showDropDown()
             }
+        }
+    }
+
+    private fun getGSTDetails() {
+        val request = GSTDetailRequest()
+        request.NameonGST = "Dummy"
+        request.gstNumber = GSTDetailRequest.dummyGstNumber
+        request.action = GSTDetailRequest.SELECT
+        request.Pincode="110001"
+        request.City="City"
+        request.Flat="Flatt"
+        request.State="State"
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
+            .getGSTDetails(ApiConstants.addagentgstdetails, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                ApiConstants.MerchantId, "App"),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerGST(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerGST(response: ResponseBody, responseCode: Int) {
+        try {
+            val senderResponse = Gson().fromJson(response.string(), GSTDetailResponse::class.java)
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+//                    Toast.makeText(context,senderResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    if(senderResponse.gstDetailsList!=null && senderResponse.gstDetailsList.size>0){
+                        gstListDialog(senderResponse.gstDetailsList)
+                    }else{
+                        Toast.makeText(context,"No GST detail found for this ID, please add details.",Toast.LENGTH_LONG).show();
+                    }
+                } else if (senderResponse.statusMessage != null) {
+                    Common.showResponsePopUp(context, senderResponse.statusMessage)
+                } else {
+                    Toast.makeText(
+                        context, "Unable to get GST details", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    interface OnGSTListListener {
+        // TODO: Update argument type and name
+        fun onGstListInteraction(item: ArrayList<GSTDetailResponse.gstDetailsList>?, id: Int, listPosition: Int, type: CodeEnum)
+    }
+    var gstListDialog:Dialog?=null
+    private fun gstListDialog(gstDetailsList: java.util.ArrayList<GSTDetailResponse.gstDetailsList>?) {
+        gstListDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        gstListDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        gstListDialog!!.setContentView(R.layout.gst_list_dialog)
+
+        var back_arrow=gstListDialog!!.findViewById<ImageView>(R.id.back_arrow)
+        var gstRecycler=gstListDialog!!.findViewById<RecyclerView>(R.id.gstRecycler)
+
+        gstRecycler.layoutManager= LinearLayoutManager(context)
+        gstRecycler.adapter= GSTListAdapter(gstDetailsList,object : OnGSTListListener {
+            override fun onGstListInteraction(item: ArrayList<GSTDetailResponse.gstDetailsList>?, id: Int, listPosition: Int, type: CodeEnum) {
+                if(type==CodeEnum.GSTDelete){
+                    deleteGstDetail(item!!.get(listPosition))
+                }
+                else if(type==CodeEnum.GSTDetail){
+                    Toast.makeText(context, item!!.get(listPosition).gstin, Toast.LENGTH_SHORT).show()
+                    setGstData(item!!.get(listPosition))
+                    gstListDialog!!.dismiss()
+                }
+            }
+        })
+
+        back_arrow.setOnClickListener {
+            gstListDialog!!.dismiss()
+        }
+
+        gstListDialog!!.show()
+    }
+
+    private fun setGstData(gstDetail: GSTDetailResponse.gstDetailsList) {
+        binding!!.gstEdt.setText(gstDetail.gstin)
+        binding!!.gstNameEdt.setText(gstDetail.nameOnGST)
+        binding!!.gstFlatEdt.setText(gstDetail.flat)
+        binding!!.cityEdt2.setText(gstDetail.city)
+        binding!!.pinEdt2.setText(gstDetail.pincode)
+        binding!!.stateEdt2.setText(gstDetail.state)
+    }
+
+    private fun deleteGstDetail(gstDetail: GSTDetailResponse.gstDetailsList) {
+        val request = GSTDetailRequest()
+        request.id = gstDetail.sid
+        request.NameonGST = gstDetail.nameOnGST
+        request.gstNumber = gstDetail.gstin
+        request.action = GSTDetailRequest.DELETE
+        request.Pincode=gstDetail.pincode
+        request.City=gstDetail.city
+        request.Flat=gstDetail.flat
+        request.State=gstDetail.state
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
+            .getGSTDetails(ApiConstants.addagentgstdetails, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                ApiConstants.MerchantId, "App"),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerDelete(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerDelete(response: ResponseBody, responseCode: Int) {
+        try {
+            val senderResponse = Gson().fromJson(response.string(), GSTDetailResponse::class.java)
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+                    Toast.makeText(context,senderResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    gstListDialog!!.dismiss()
+                    getGSTDetails()
+                } else if (senderResponse.statusMessage != null) {
+                    Common.showResponsePopUp(context, senderResponse.statusMessage)
+                } else {
+                    Toast.makeText(
+                        context, "Unable to delete GST details", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    var addGstDialog:Dialog?=null
+    private fun addGstDialog() {
+        addGstDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        addGstDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        addGstDialog!!.setContentView(R.layout.add_gst_dialog)
+
+        var back_arrow=addGstDialog!!.findViewById<ImageView>(R.id.back_arrow)
+        var submitGstDetails=addGstDialog!!.findViewById<TextView>(R.id.submitGstDetails)
+        var gstEdt=addGstDialog!!.findViewById<EditText>(R.id.gstEdt)
+        var gstNameEdt=addGstDialog!!.findViewById<EditText>(R.id.gstNameEdt)
+        var gstFlatEdt=addGstDialog!!.findViewById<EditText>(R.id.gstFlatEdt)
+        var pin_edt2=addGstDialog!!.findViewById<EditText>(R.id.pin_edt2)
+        var state_edt2=addGstDialog!!.findViewById<EditText>(R.id.state_edt2)
+        var cityEdt2=addGstDialog!!.findViewById<EditText>(R.id.cityEdt2)
+
+
+        back_arrow.setOnClickListener {
+            addGstDialog!!.dismiss()
+        }
+        submitGstDetails.setOnClickListener{
+            var gstNumber=gstEdt.text.toString()
+            var gstName=gstNameEdt.text.toString()
+            var gstFlat=gstFlatEdt.text.toString()
+            var gstPin=pin_edt2.text.toString()
+            var state=state_edt2.text.toString()
+            var city=cityEdt2.text.toString()
+            if(gstNumber.isEmpty() || gstNumber.length<15){
+                Toast.makeText(requireContext(), "GST number is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else if(gstName.isEmpty() || !Common.isNameValid(gstName)){
+                Toast.makeText(requireContext(), "Name is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else if(gstFlat.isEmpty() || gstFlat.length<5){
+                Toast.makeText(requireContext(), "Flat number is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else if(gstPin.isEmpty() || gstPin.length<6){
+                Toast.makeText(requireContext(), "Pincode number is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else if(state.isEmpty() || gstPin.length<3){
+                Toast.makeText(requireContext(), "State is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else if(city.isEmpty() || city.length<3){
+                Toast.makeText(requireContext(), "City is empty or invalid", Toast.LENGTH_SHORT).show()
+            }else{
+                var request:GSTDetailRequest= GSTDetailRequest()
+                request.gstNumber=gstNumber
+                request.NameonGST=gstName
+                request.Flat=gstFlat
+                request.Pincode=gstPin
+                request.State=state
+                request.City=city
+                request.action=GSTDetailRequest.INSET
+                addGstDetails(request)
+            }
+        }
+
+        addGstDialog!!.show()
+    }
+
+    private fun addGstDetails(request: GSTDetailRequest) {
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
+            .getGSTDetails(ApiConstants.addagentgstdetails, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                ApiConstants.MerchantId, "App"),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerGSTAdd(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerGSTAdd(response: ResponseBody, responseCode: Int) {
+        try {
+            val senderResponse = Gson().fromJson(response.string(), GSTDetailResponse::class.java)
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+                    Toast.makeText(context,senderResponse.statusMessage,Toast.LENGTH_SHORT).show()
+                    addGstDialog?.dismiss()
+                } else if (senderResponse.statusMessage != null) {
+                    Common.showResponsePopUp(context, senderResponse.statusMessage)
+                } else {
+                    Toast.makeText(
+                        context, "Unable to add GST details", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -468,18 +683,18 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     }
 
     private fun showHideFare() {
-        if(fareView.visibility== VISIBLE){
-            fareView.visibility= GONE
+        if(binding!!.fareView.visibility== VISIBLE){
+            binding!!.fareView.visibility= GONE
         }else{
-            fareView.visibility= VISIBLE
+            binding!!.fareView.visibility= VISIBLE
         }
     }
 
     private fun showHideGst() {
-        if(gstView.visibility== VISIBLE){
-            gstView.visibility= GONE
+        if(binding!!.gstView.visibility== VISIBLE){
+            binding!!.gstView.visibility= GONE
         }else{
-            gstView.visibility= VISIBLE
+            binding!!.gstView.visibility= VISIBLE
         }
     }
     private fun showHidePref() {
@@ -513,14 +728,14 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 try {
                     if (response != null && response.body() != null && response.body()!!.boardingStationList!=null) {
                         if(response.body()!!.boardingStationList!!.size>0){
-                            boardingStnLabelRel.visibility = VISIBLE
+                            binding!!.boardingStnLabelRel.visibility = VISIBLE
 
                             var arr: Array<String?> =arrayOfNulls<String>(response.body()!!.boardingStationList!!.size)
                             for(pos in response.body()!!.boardingStationList!!.indices){
                                 arr[pos]=response.body()!!.boardingStationList!!.get(pos).stnNameCode
                             }
 
-                            spinnerBoardingStn.adapter=getSpinnerAdapter(arr)
+                            binding!!.spinnerBoardingStn.adapter=getSpinnerAdapter(arr)
 
                         }
                     } else {
@@ -659,8 +874,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                         responseString=responseString.replace("\",\"serverId", "\"],\"serverId")
 
                         val pinCity = Gson().fromJson(responseString, CityPinResponse::class.java)
-                        cityEdt2.setText(pinCity.cityList!!.get(0))
-                        state_edt2.setText(pinCity!!.state)
+                        binding!!.cityEdt2.setText(pinCity.cityList!!.get(0))
+                        binding!!.stateEdt2.setText(pinCity!!.state)
                     } else {
                         hideCustomDialog()
                         clearCityState2()
@@ -702,8 +917,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                         hideCustomDialog()
                         if (response.body()!![0].postOffice != null) {
                             Common.hideSoftKeyboard(context as Activity?)
-                            cityEdt2.setText(response.body()!![0].postOffice.get(0).district)
-                            state_edt2.setText(response.body()!![0].postOffice.get(0).state)
+                            binding!!.cityEdt2.setText(response.body()!![0].postOffice.get(0).district)
+                            binding!!.stateEdt2.setText(response.body()!![0].postOffice.get(0).state)
                         } else {
                             Toast.makeText(requireContext(), response.body()!![0].message, Toast.LENGTH_LONG).show()
                             clearCityState2()
@@ -728,8 +943,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private fun clearCityState2() {
         city2 = ""
         state2 = ""
-        cityEdt2.setText("")
-        state_edt2.setText("")
+        binding!!.cityEdt2.setText("")
+        binding!!.stateEdt2.setText("")
     }
 
     private fun validate() {
@@ -740,8 +955,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 break
             }
         }
-        var mobile=mobileEdt.text.toString()
-        var email=emailEdt.text.toString()
+        var mobile=binding!!.mobileEdt.text.toString()
+        var email=binding!!.emailEdt.text.toString()
         if(!isPass){
             Toast.makeText(requireContext(), "Please add passenger", Toast.LENGTH_SHORT).show()
         }else if(!isGstValid()){
@@ -839,7 +1054,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         journey.enquiryType="3"
         journey.reservationChoice=reservationChoice
         journey.ticketType="F"
-        var checkbox=insuranceRadioGroup.findViewById<RadioButton>(R.id.travelRadioYes)
+        var checkbox=binding!!.insuranceRadioGroup.findViewById<RadioButton>(R.id.travelRadioYes)
         if(checkbox.isChecked){
             journey.travelInsuranceOpted="True"
         }else{
@@ -863,12 +1078,12 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         destinationList.add(destination)
 
         var gstDetail:TrainBookingRequest.gstDetails=trainBookingRequest!!.gstDetails()
-        gstDetail.gst=gstEdt.text.toString()
-        gstDetail.gstName=gstNameEdt.text.toString()
-        gstDetail.flat=gstFlatEdt.text.toString()
-        gstDetail.city=cityEdt2.text.toString()
-        gstDetail.pinCode=pin_edt2.text.toString()
-        gstDetail.stateCity=state_edt2.text.toString()
+        gstDetail.gst=binding!!.gstEdt.text.toString()
+        gstDetail.gstName=binding!!.gstNameEdt.text.toString()
+        gstDetail.flat=binding!!.gstFlatEdt.text.toString()
+        gstDetail.city=binding!!.cityEdt2.text.toString()
+        gstDetail.pinCode=binding!!.pinEdt2.text.toString()
+        gstDetail.stateCity=binding!!.stateEdt2.text.toString()
         gstList.add(gstDetail)
 
         var fareDetail:TrainBookingRequest.fareDetail=trainBookingRequest!!.fareDetail()
@@ -884,8 +1099,8 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         additionalDetail.adultCount=getCount(ADULT)
         additionalDetail.childCount=getCount(INFANT)
         additionalDetail.coach=""
-        additionalDetail.email=emailEdt.text.toString()
-        additionalDetail.mobile=mobileEdt.text.toString()
+        additionalDetail.email=binding!!.emailEdt.text.toString()
+        additionalDetail.mobile=binding!!.mobileEdt.text.toString()
         additionalDetail.totalPaxCount=additionalDetail.adultCount+additionalDetail.childCount
         additionalDetail.preference="LB"
         additionalDetail.remarks="JustClick"
@@ -1084,7 +1299,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             }
         })
 
-        dialog.addPassTv.setOnClickListener {
+        dialog.findViewById<TextView>(R.id.addPassTv)!!.setOnClickListener {
             if(!Common.isNameValid(nameEdt!!.text.toString())){
                 nameEdt!!.setError("Please enter valid name")
             }else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
@@ -1243,7 +1458,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             isAdd=true
         }
 
-        dialog.addPassTv.setOnClickListener {
+        dialog.findViewById<TextView>(R.id.addPassTv)!!.setOnClickListener {
             if(!Common.isNameValid(nameEdt!!.text.toString())){
                 nameEdt!!.setError("Please enter valid name")
             }else{
@@ -1315,9 +1530,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             nameTv.text= list.passengerName
             var ageTv:TextView=child.findViewById(R.id.ageTv)
             var delete:TextView=child.findViewById(R.id.delete)
+            var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.passengerAge
             count.text=(passengerContainerLin!!.childCount+1).toString()
-            child.genderTv.text=list.passengerGender
+            genderTv.text=list.passengerGender
 
             child.setOnClickListener{
                 if(passengerArray!!.get(passengerContainerLin!!.indexOfChild(child)).type==ADULT){

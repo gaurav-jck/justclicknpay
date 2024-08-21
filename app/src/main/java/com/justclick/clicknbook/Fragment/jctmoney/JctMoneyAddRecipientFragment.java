@@ -459,7 +459,7 @@ public class JctMoneyAddRecipientFragment extends Fragment implements View.OnCli
                         verifyAccountTv.setVisibility(View.GONE);
                         Toast.makeText(context,senderResponse.message,Toast.LENGTH_SHORT).show();
                         backPress.onJctDetailBackPress(CodeEnum.Rapipay);
-                        getFragmentManager().popBackStack();
+                        getParentFragmentManager().popBackStack();
                     } else {
 //                        verifyAccountTv.setVisibility(View.INVISIBLE);
                         Toast.makeText(context,senderResponse.message,Toast.LENGTH_SHORT).show();

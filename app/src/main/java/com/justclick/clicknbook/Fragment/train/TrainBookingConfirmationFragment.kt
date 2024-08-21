@@ -15,10 +15,9 @@ import com.justclick.clicknbook.Fragment.train.model.TrainBookingRequest
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainBookingConfirmationBinding
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
-import kotlinx.android.synthetic.main.fragment_train_booking_confirmation.*
-import kotlinx.android.synthetic.main.fragment_train_booking_confirmation.view.*
 import okhttp3.ResponseBody
 import java.lang.Exception
 import java.util.*
@@ -28,6 +27,7 @@ class TrainBookingConfirmationFragment : Fragment() {
 
     var trainBookingRequest: TrainBookingRequest?=null
     var trainPreBookResponse: TrainPreBookResponse?=null
+    var binding:FragmentTrainBookingConfirmationBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +37,7 @@ class TrainBookingConfirmationFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=  inflater.inflate(R.layout.fragment_train_booking_confirmation, container, false)
-
+        binding=FragmentTrainBookingConfirmationBinding.bind(view)
         if(arguments!=null) {
             trainBookingRequest = requireArguments().getSerializable("trainRequest") as TrainBookingRequest
             trainPreBookResponse = requireArguments().getSerializable("trainPreBookResponse") as TrainPreBookResponse
@@ -51,14 +51,14 @@ class TrainBookingConfirmationFragment : Fragment() {
             setData(view)
         }
 
-        view.fareLabelRel.setOnClickListener {
+        binding!!.fareLabelRel.setOnClickListener {
             showHideFare(view)
         }
 
-        view.confirmBookingTv.setOnClickListener {
+        binding!!.confirmBookingTv.setOnClickListener {
             makeBooking()
         }
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
@@ -66,39 +66,39 @@ class TrainBookingConfirmationFragment : Fragment() {
     }
 
     private fun showHideFare(view: View) {
-        if(view.fareView.visibility== AdapterView.VISIBLE){
-            view.fareView.visibility= AdapterView.GONE
+        if(binding!!.fareView.visibility== AdapterView.VISIBLE){
+            binding!!.fareView.visibility= AdapterView.GONE
         }else{
-            view.fareView.visibility= AdapterView.VISIBLE
+            binding!!.fareView.visibility= AdapterView.VISIBLE
         }
     }
 
     private fun setData(view: View) {
         var journeyDetail=trainBookingRequest!!.journeyDetails.get(0);
         var journeyDetail2=trainPreBookResponse!!.bookingDetails.journeyDetails.get(0)
-        view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
-        view.startTimeTv.text = journeyDetail.departTime+"\n"+trainBookingRequest!!.dateToSet
-        view.endTimeTv.text = journeyDetail.arrivalTime+"\n"+getArrivalDate(journeyDetail.departTime,journeyDetail.duration)
-        view.fromStnTv.text = journeyDetail.fromStation+"\n("+journeyDetail.fromStationCode+")"
-        view.toStnTv.text = journeyDetail.reservationUpTo+"\n("+journeyDetail.reservationUpToCode+")"
-        view.durationTv.text = journeyDetail.duration!!.replace(":"," h ")+" m"
-//        view.classTv.text = "Class  "+journeyDetail.journeyClass
-        view.classTv.text = "Adult = "+trainPreBookResponse!!.bookingDetails.passengerAdditionalDetail.get(0).adultCount+" | "+
+        binding!!.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
+        binding!!.startTimeTv.text = journeyDetail.departTime+"\n"+trainBookingRequest!!.dateToSet
+        binding!!.endTimeTv.text = journeyDetail.arrivalTime+"\n"+getArrivalDate(journeyDetail.departTime,journeyDetail.duration)
+        binding!!.fromStnTv.text = journeyDetail.fromStation+"\n("+journeyDetail.fromStationCode+")"
+        binding!!.toStnTv.text = journeyDetail.reservationUpTo+"\n("+journeyDetail.reservationUpToCode+")"
+        binding!!.durationTv.text = journeyDetail.duration!!.replace(":"," h ")+" m"
+//        binding!!.classTv.text = "Class  "+journeyDetail.journeyClass
+        binding!!.classTv.text = "Adult = "+trainPreBookResponse!!.bookingDetails.passengerAdditionalDetail.get(0).adultCount+" | "+
                 "Child = "+trainPreBookResponse!!.bookingDetails.passengerAdditionalDetail.get(0).childCount+" | "+
                 "Class = "+journeyDetail.journeyClass + " | "+ "Quota = "+journeyDetail.quota
-        view.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ( "+journeyDetail.boardingStationCode+" )"
+        binding!!.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ( "+journeyDetail.boardingStationCode+" )"
 
         var seats=trainBookingRequest!!.availableSeats
-        view.seatsTv.text = seats
+        binding!!.seatsTv.text = seats
 
         if(seats.contains("AVAIL")||
                 seats.contains("AVBL")){
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
         }else{
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
         }
 
-        view.passengerContainerLin!!.removeAllViews()
+        binding!!.passengerContainerLin!!.removeAllViews()
         for(list in trainBookingRequest!!.adultRequest.iterator()){
             val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
             var count:TextView=child.findViewById(R.id.passengerCountTv)
@@ -109,10 +109,10 @@ class TrainBookingConfirmationFragment : Fragment() {
             var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.passengerAge
             genderTv.text= list.passengerGender
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+            count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
 
             delete.visibility=View.GONE
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
         for(list in trainBookingRequest!!.childRequest.iterator()){
             val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
@@ -124,20 +124,20 @@ class TrainBookingConfirmationFragment : Fragment() {
             var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.passengerAge
             genderTv.text= list.passengerGender
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+            count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
 
             delete.visibility=View.GONE
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
 
         var fareDetails=trainPreBookResponse!!.confirmFareDetail.get(0)
-        view.baseFareTv.setText(fareDetails.ticketFare.toString())
-        view.serviceChargeTv.setText(fareDetails.serviceCharge.toString())
-        view.agentChargeTv.setText(fareDetails.agentServiceCharge.toString())
-        view.insuranceChargeTv.setText(fareDetails.insurance.toString())
-        view.pgChargeTv.setText(fareDetails.pgCharge.toString())
-        view.concessionTv.setText(fareDetails.concession.toString())
-        view.totalFareTv.setText(fareDetails.totalFare.toString())
+        binding!!.baseFareTv.setText(fareDetails.ticketFare.toString())
+        binding!!.serviceChargeTv.setText(fareDetails.serviceCharge.toString())
+        binding!!.agentChargeTv.setText(fareDetails.agentServiceCharge.toString())
+        binding!!.insuranceChargeTv.setText(fareDetails.insurance.toString())
+        binding!!.pgChargeTv.setText(fareDetails.pgCharge.toString())
+        binding!!.concessionTv.setText(fareDetails.concession.toString())
+        binding!!.totalFareTv.setText(fareDetails.totalFare.toString())
 
     }
 
@@ -185,7 +185,7 @@ class TrainBookingConfirmationFragment : Fragment() {
                         var bundle=Bundle()
                         senderResponse.railBookDetail.get(0).agent=agentCode
                         senderResponse.railBookDetail.get(0).userType=userType
-                        senderResponse.railBookDetail.get(0).duration=durationTv.text.toString()
+                        senderResponse.railBookDetail.get(0).duration=binding!!.durationTv.text.toString()
                         bundle.putSerializable("BookingData", senderResponse.railBookDetail.get(0))
                         bundle.putSerializable("TrainPreBookResponse", trainPreBookResponse)
                         val webview= TrainWebViewFragment()

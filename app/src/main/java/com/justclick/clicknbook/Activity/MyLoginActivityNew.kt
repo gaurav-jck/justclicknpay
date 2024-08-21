@@ -199,13 +199,15 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                 if (otp != null) {
                     loginRequestModel.OTP = EncryptionDecryptionClass.Encryption(otp, context)
                 }
-                showCustomDialog()
-                NetworkCall().callMobileService(loginRequestModel, ApiConstants.LOGIN, context
+                var json = Gson().toJson(loginRequestModel);
+//                showCustomDialog()
+                NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
+                    context, true,
                 ) { response, responseCode ->
                     if (response != null) {
                         responseHandler(response, LOGIN_SERVICE)
                     } else {
-                        hideCustomDialog()
+//                        hideCustomDialog()
                         Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -265,6 +267,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                             if(loginModel.Data.remainpassdays.toInt()<0){
 //                                change your password
 //                                Toast.makeText(context, "", Toast.LENGTH_SHORT).show()
+                                MyPreferences.saveLoginData(loginModel, context)
                                 showPasswordChangeAlert("Please change your password for security reasons.")
                             }else{
                                 //store values to shared preferences
@@ -615,7 +618,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
     override fun onUpdateNeeded(updateUrl: String?, isForceLogin: Boolean?) {
         appUpdateDialog = AlertDialog.Builder(this)
             .setTitle("New version available")
-            .setMessage("Please, update app to new version to continue reporting.")
+            .setMessage("We have made some necessary changes in our app.\nPlease, update app to new version to continue reporting.")
             .setPositiveButton(
                 "Update"
             ) { dialog, which -> redirectStore(updateUrl) }.setNegativeButton(

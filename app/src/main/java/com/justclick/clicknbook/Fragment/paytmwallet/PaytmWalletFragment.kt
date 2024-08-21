@@ -14,14 +14,13 @@ import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentPaytmWalletBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_lic.view.*
-import kotlinx.android.synthetic.main.lic_receipt_dialog.*
 import okhttp3.ResponseBody
 
 /**
@@ -56,6 +55,7 @@ class PaytmWalletFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        var binding=FragmentPaytmWalletBinding.inflate(layoutInflater)
         var view= inflater.inflate(R.layout.fragment_paytm_wallet, container, false)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
@@ -67,7 +67,7 @@ class PaytmWalletFragment : Fragment() {
         otpField=view.findViewById(R.id.otp)
         resendTv=view.findViewById(R.id.resendTv)
         submitBtn=view.findViewById(R.id.submitBtn)
-        view.back_arrow.setOnClickListener{
+        binding.backArrow.setOnClickListener{
             parentFragmentManager.popBackStack()
         }
 
@@ -343,7 +343,7 @@ class PaytmWalletFragment : Fragment() {
         operatorIdTv.text=commonResponse.txnDetail!!.get(0).apiReferenceId
         statusTv.text=commonResponse.txnDetail!!.get(0).txnStatus
 
-        dialog.back_tv.setOnClickListener{
+        dialog.findViewById<TextView>(R.id.back_tv).setOnClickListener{
             dialog.dismiss()
         }
 

@@ -35,7 +35,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import com.justclick.clicknbook.utils.Words
-import kotlinx.android.synthetic.main.jct_paynow_dialog.amountWordsTv
 import okhttp3.ResponseBody
 import java.util.*
 

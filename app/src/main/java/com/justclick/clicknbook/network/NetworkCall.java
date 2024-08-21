@@ -1717,6 +1717,12 @@ public class NetworkCall {
     public static ApiInterface getDepositRequestInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_UAT_DEPOSIT).create(ApiInterface.class);
     }
+    public static ApiInterface getLoginRequestInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_UAT_DEPOSIT).create(ApiInterface.class);
+    }
+    public static ApiInterface getAepsInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
+    }
 
 
     private void showCustomDialog() {

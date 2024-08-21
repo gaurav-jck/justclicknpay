@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.itextpdf.text.pdf.PdfFileSpecification.url
 import com.justclick.clicknbook.R
-import kotlinx.android.synthetic.main.activity_aeps_webview.*
+import com.justclick.clicknbook.databinding.ActivityAepsWebviewBinding
 
 
 class AepsWebviewActivity : AppCompatActivity() {
@@ -19,20 +19,21 @@ class AepsWebviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aeps_webview)
-        back_arrow.setOnClickListener {
+        var binding=ActivityAepsWebviewBinding.inflate(layoutInflater)
+        binding.backArrow.setOnClickListener {
             finish()
         }
-        webView.webViewClient=MyWebViewClient(this)
-        webView.settings.javaScriptEnabled=true
-        webView.settings.loadWithOverviewMode=true
-        webView.settings.useWideViewPort=true
-        webView.settings.pluginState=WebSettings.PluginState.ON
-        webView.settings.allowFileAccess=true
+        binding.webView.webViewClient=MyWebViewClient(this)
+        binding.webView.settings.javaScriptEnabled=true
+        binding.webView.settings.loadWithOverviewMode=true
+        binding.webView.settings.useWideViewPort=true
+        binding.webView.settings.pluginState=WebSettings.PluginState.ON
+        binding.webView.settings.allowFileAccess=true
 
-        webView.webChromeClient=WebChromeClient()
+        binding.webView.webChromeClient=WebChromeClient()
 //        webView.settings.useWideViewPort=true
         try{
-            webView.loadUrl(intent.getStringExtra("URL").toString())
+            binding.webView.loadUrl(intent.getStringExtra("URL").toString())
 //            webView.loadUrl("https://www.journaldev.com")
         }catch (e:Exception){
 

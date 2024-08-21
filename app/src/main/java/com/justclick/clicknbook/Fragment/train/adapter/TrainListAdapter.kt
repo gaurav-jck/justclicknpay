@@ -17,12 +17,12 @@ import com.justclick.clicknbook.Fragment.train.TrainListsFragment.OnListFragment
 import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.TrainListsItemBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.CodeEnum
 import com.justclick.clicknbook.utils.MyPreferences
 
-import kotlinx.android.synthetic.main.train_lists_item.view.*
 import okhttp3.ResponseBody
 import org.json.JSONArray
 import org.json.JSONObject
@@ -386,23 +386,24 @@ class TrainListAdapter(
     override fun getItemCount(): Int = mValues!!.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val trainNumber: TextView = mView.trainNoTv
-        val trainName: TextView = mView.trainNameTv
-        val startTimeTv: TextView = mView.startTimeTv
-        val endTimeTv: TextView = mView.endTimeTv
-        val durationTv: TextView = mView.durationTv
-        val fromStnTv: TextView = mView.fromStnTv
-        val toStnTv: TextView = mView.toStnTv
-        val sunday: TextView = mView.sunday
-        val monday: TextView = mView.monday
-        val tuesday: TextView = mView.tuesday
-        val wednesday: TextView = mView.wednesday
-        val thursday: TextView = mView.thursday
-        val friday: TextView = mView.friday
-        val saturday: TextView = mView.saturday
-        val classLin:LinearLayout=mView.classLin
-        val fareContainerLin:LinearLayout=mView.fareContainerLin
-        val fareTv:TextView=mView.fareTv
+        var binding=TrainListsItemBinding.bind(mView)
+        val trainNumber: TextView = binding.trainNoTv
+        val trainName: TextView = binding.trainNameTv
+        val startTimeTv: TextView = binding.startTimeTv
+        val endTimeTv: TextView = binding.endTimeTv
+        val durationTv: TextView = binding.durationTv
+        val fromStnTv: TextView = binding.fromStnTv
+        val toStnTv: TextView = binding.toStnTv
+        val sunday: TextView = binding.sunday
+        val monday: TextView = binding.monday
+        val tuesday: TextView = binding.tuesday
+        val wednesday: TextView = binding.wednesday
+        val thursday: TextView = binding.thursday
+        val friday: TextView = binding.friday
+        val saturday: TextView = binding.saturday
+        val classLin:LinearLayout=binding.classLin
+        val fareContainerLin:LinearLayout=binding.fareContainerLin
+        val fareTv:TextView=binding.fareTv
 
         override fun toString(): String {
             return super.toString() + " '" + trainName.text + "'"

@@ -11,6 +11,7 @@ public class ApiConstants
     public static final String BASE_URL_TEST="http://uatms.justclicknpay.com/";
     public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
     public static final String BASE_URL=BASE_URL_LIVE;
+    public static final String BASE_URL_UAT_LOGIN="https://wlremittance.justclicknpay.com/";
     public static final String BASE_URL_UAT_DEPOSIT="https://uatapitravel.justclicknpay.com/";
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
@@ -218,6 +219,7 @@ public class ApiConstants
     public static final String VerifyOtpRefund="VerifyOtpRefund";
     public static final String getrailbookinglist="getrailbookinglist";
     public static final String getPassenger="getPassenger";
+    public static final String addagentgstdetails="addagentgstdetails";
 
     //    Payout
     public static final String ValidateCredential="ValidateCredential";

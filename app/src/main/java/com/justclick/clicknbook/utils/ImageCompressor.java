@@ -33,7 +33,8 @@ public class ImageCompressor {
       //fall back
       cacheDir = context.getCacheDir();
 
-    String rootDir = cacheDir.getAbsolutePath() + "/ImageCompressor";
+//    String rootDir = cacheDir.getAbsolutePath() + "/ImageCompressor";
+    String rootDir = cacheDir.getAbsolutePath();
     File root = new File(rootDir);
 
     //Create ImageCompressor folder if it doesnt already exists.

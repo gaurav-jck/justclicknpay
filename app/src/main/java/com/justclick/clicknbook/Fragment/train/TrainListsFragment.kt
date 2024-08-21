@@ -1,6 +1,7 @@
 package com.justclick.clicknbook.Fragment.train
 
 import android.app.Dialog
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.ArrayAdapter
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -27,11 +29,10 @@ import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.Fragment.train.model.TrainStationModel
 import com.justclick.clicknbook.Fragment.train.viewmodel.TrainSearchViewModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainListBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.utils.CodeEnum
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_list.view.*
-import kotlinx.android.synthetic.main.train_route_dialog.*
 import org.w3c.dom.Document
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -75,6 +76,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
     var toName=""
     var trainType=""
     var mView:View?=null
+    var binding:FragmentTrainListBinding?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -154,7 +156,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
                               savedInstanceState: Bundle?): View? {
         if(mView==null) {
             mView = inflater.inflate(R.layout.fragment_train_list, container, false)
-
+            binding=FragmentTrainListBinding.bind(mView!!)
             recycleView = mView!!.findViewById(R.id.recycleView)
             quotaSpinner = mView!!.findViewById(R.id.quotaSpinner)
             fromStationTv = mView!!.findViewById(R.id.fromStationTv)
@@ -177,9 +179,9 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
                 doj = requireArguments().getString("DOJ")
 
                 //top title
-                mView!!.fromStationTv.text = trainResponse!!.fromStnName
-                mView!!.toStationTv.text = trainResponse!!.toStnName
-                mView!!.dateTv.text = trainResponse!!.date
+                binding!!.fromStationTv.text = trainResponse!!.fromStnName
+                binding!!.toStationTv.text = trainResponse!!.toStnName
+                binding!!.dateTv.text = trainResponse!!.date
 
                 fromStnCode = trainResponse!!.fromStnCode
                 fromStnName = trainResponse!!.fromStnName
@@ -207,15 +209,15 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
 //                var adapter= ArrayAdapter(requireContext(), R.layout.spinner_item, R.id.name_tv, trainResponse!!.quotaList!!)
                 quotaSpinner!!.adapter = adapter
 
-                mView!!.filterImg.setOnClickListener(this)
-                mView!!.modifyImg.setOnClickListener(this)
+                binding!!.filterImg.setOnClickListener(this)
+                binding!!.modifyImg.setOnClickListener(this)
 
             }
 
             adapter = TrainListAdapter(
                 doj,
                 arrayListTemp,
-                mView!!.quotaSpinner,
+                binding!!.quotaSpinner,
                 object : OnListFragmentInteractionListener {
                     override fun onListFragmentInteraction(
                         list: ArrayList<TrainSearchDataModel.TrainBtwnStnsList>?,
@@ -227,6 +229,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
                         if (type.equals(CodeEnum.TrainDetail)) {
                             var trainBookFragment = TrainBookFragment()
                             val bundle = Bundle()
+                            trainResponse!!.trainBtwnStnsList=list
                             bundle.putSerializable("trainResponse", trainResponse)
                             bundle.putSerializable("fareRuleResponse", fareRuleResponse)
                             bundle.putString("DOJ", doj)
@@ -255,7 +258,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
             recycleView!!.layoutManager = layoutManager
             recycleView!!.adapter = adapter
 
-            mView!!.back_arrow.setOnClickListener(this)
+            binding!!.backArrow.setOnClickListener(this)
             getData()   //read xml data for sttaion
         }
 
@@ -290,14 +293,17 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
         val window = dialog.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
-        dialog.titleTv.text= "Train Route-"+trainNumber+"\n"+trainName
-        dialog.routeRecycler.layoutManager=LinearLayoutManager(context)
-        dialog.routeRecycler.adapter= TrainRouteAdapter(trainResponse.stationList,object : OnRouteListListener{
+        var titleTv=dialog.findViewById<TextView>(R.id.titleTv)
+        var back_arrow=dialog.findViewById<ImageView>(R.id.back_arrow)
+        var routeRecycler=dialog.findViewById<RecyclerView>(R.id.routeRecycler)
+        titleTv.text= "Train Route-"+trainNumber+"\n"+trainName
+        routeRecycler.layoutManager=LinearLayoutManager(context)
+        routeRecycler.adapter= TrainRouteAdapter(trainResponse.stationList,object : OnRouteListListener{
             override fun onListFragmentInteraction(item: ArrayList<TrainRouteModel.StationList>?, id: Int, listPosition: Int, type: CodeEnum) {
             }
         })
 
-        dialog.back_arrow.setOnClickListener {
+        back_arrow.setOnClickListener {
             dialog.dismiss()
         }
 

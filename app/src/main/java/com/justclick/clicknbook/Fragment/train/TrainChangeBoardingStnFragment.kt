@@ -9,14 +9,12 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
-import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
 import com.justclick.clicknbook.Fragment.train.model.TrainListResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainChangeBoardingBinding
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.MyCustomDialog
-import kotlinx.android.synthetic.main.fragment_train_change_boarding.*
-import kotlinx.android.synthetic.main.fragment_train_change_boarding.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -32,6 +30,7 @@ class TrainChangeBoardingStnFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var listData: TrainListResponse.reservationlist? = null
     private var boardingArray: Array<String?> = emptyArray()
+    var binding:FragmentTrainChangeBoardingBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,17 +44,17 @@ class TrainChangeBoardingStnFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view= inflater.inflate(R.layout.fragment_train_change_boarding, container, false)
-
+        binding=FragmentTrainChangeBoardingBinding.bind(view)
         if(listData!=null){
 //            Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
             setPnrStatusData(view)
         }
 
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
-        view.submitTv.setOnClickListener {
+        binding!!.submitTv.setOnClickListener {
             changeBoardingStn()
         }
 
@@ -63,15 +62,15 @@ class TrainChangeBoardingStnFragment : Fragment() {
     }
 
     private fun setPnrStatusData(view: View) {
-        view.pnrTv.setText("PNR : "+listData!!.pnRno)
-        view.trainNameTv.setText(listData!!.trainname+" ("+listData!!.trainNumber+")")
-        view.fromStnTv.setText(listData!!.source.replace("(", "\n("))
-        view.toStnTv.setText(listData!!.destination.replace("(", "\n("))
-        view.durationTv.setText(listData!!.journeyClass+" | "+listData!!.journeyQuota)
-        view.boardingStn.setText("Boarding point - "+listData!!.source+
+        binding!!.pnrTv.setText("PNR : "+listData!!.pnRno)
+        binding!!.trainNameTv.setText(listData!!.trainname+" ("+listData!!.trainNumber+")")
+        binding!!.fromStnTv.setText(listData!!.source.replace("(", "\n("))
+        binding!!.toStnTv.setText(listData!!.destination.replace("(", "\n("))
+        binding!!.durationTv.setText(listData!!.journeyClass+" | "+listData!!.journeyQuota)
+        binding!!.boardingStn.setText("Boarding point - "+listData!!.source+
                 "\nDate Of Journey - "+listData!!.departDate)
 
-        view.spinnerBoardingStn.adapter=getSpinnerAdapter(boardingArray)
+        binding!!.spinnerBoardingStn.adapter=getSpinnerAdapter(boardingArray)
     }
 
     private fun getSpinnerAdapter(data: Array<String?>): ArrayAdapter<String?> {
@@ -132,7 +131,7 @@ class TrainChangeBoardingStnFragment : Fragment() {
     }
 
     private fun getStnCode(): String? {
-        var stn=spinnerBoardingStn.selectedItem.toString()
+        var stn=binding!!.spinnerBoardingStn.selectedItem.toString()
         return stn.split("-")[1].trim()
     }
 

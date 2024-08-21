@@ -46,6 +46,7 @@ public class URLs {
     public static final String MiniStatment ="MiniStatment";
     public static final String TransactionListAeps ="TransactionList";
     public static final String AepsRegistration ="AepsRegistration";
+    public static final String getagentadhar ="getagentadhar";
 
 
     public static final String CheckKyc ="CheckKyc";

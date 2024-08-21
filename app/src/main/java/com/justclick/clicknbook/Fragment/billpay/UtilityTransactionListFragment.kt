@@ -27,6 +27,8 @@ import com.justclick.clicknbook.Fragment.billpay.UtilityRecyclerTransactionList
 import com.justclick.clicknbook.Fragment.cashout.model.PayoutListRequestModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
+import com.justclick.clicknbook.databinding.ActivityTxnListBinding
+import com.justclick.clicknbook.databinding.FragmentAccountStatementBinding
 import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.model.RblPrintResponse
@@ -40,7 +42,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
 import java.text.SimpleDateFormat
 import java.util.*
@@ -147,8 +148,9 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.activity_txn_list, container, false)
+        var binding= ActivityTxnListBinding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-        view.noRecordTv.setVisibility(View.GONE)
+        binding.noRecordTv.setVisibility(View.GONE)
 
         startDateTv = view.findViewById(R.id.startDateTv)
         noRecordTv = view.findViewById(R.id.noRecordTv)
@@ -199,8 +201,8 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
             }
         }, arrayList)
         layoutManager = LinearLayoutManager(context)
-        view.recyclerView.setLayoutManager(layoutManager)
-        view.recyclerView.setAdapter(listAdapter)
+        binding.recyclerView.setLayoutManager(layoutManager)
+        binding.recyclerView.setAdapter(listAdapter)
         if (arrayList != null && arrayList!!.size == 0) {
             pageStart = 1
             pageEnd = 10
@@ -222,7 +224,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
         } else {
             listAdapter!!.notifyDataSetChanged()
         }
-        view.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
+        binding.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
         return view
     }
 

@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/smartphone/baseline_smartphone_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/delete/baseline_delete_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -29,7 +29,7 @@
                         <option name="values">
                           <map>
                             <entry key="color" value="100d0d" />
-                            <entry key="outputName" value="phone_icon_vector" />
+                            <entry key="outputName" value="delete_icon" />
                             <entry key="sourceFile" value="C:\Users\admin\Downloads\icons8-graph-report-64.svg" />
                           </map>
                         </option>

@@ -44,7 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/bankDetailsNote"
-                android:textColor="@color/bankLabelColor"/>
+                android:textColor="@color/bankLabelColor"
+                android:layout_marginBottom="@dimen/small_margin"/>
 
             <androidx.cardview.widget.CardView
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -53,8 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/small_margin"
                 android:padding="@dimen/very_small_margin"
+                android:visibility="gone"
                 card_view:cardBackgroundColor="@color/train_dashboard1"
                 card_view:cardCornerRadius="1dp">
                 <LinearLayout

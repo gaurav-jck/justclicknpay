@@ -26,6 +26,7 @@ import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
+import com.justclick.clicknbook.databinding.FragmentTransactionsBinding
 import com.justclick.clicknbook.jctPayment.Adapters.AepsListAdapter
 import com.justclick.clicknbook.jctPayment.Models.AepsListResponseModel
 import com.justclick.clicknbook.jctPayment.Utilities.URLs
@@ -43,7 +44,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -157,8 +157,9 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_transactions_, container, false)
+        var binding=FragmentTransactionsBinding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-        view.noRecordTv.setVisibility(View.GONE)
+        binding.noRecordTv.setVisibility(View.GONE)
         startDateTv = view.findViewById(R.id.startDateTv)
         noRecordTv = view.findViewById(R.id.noRecordTv)
         noRecordTv!!.setVisibility(View.GONE)
@@ -193,14 +194,14 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
             }
         }, arrayList)
         layoutManager = LinearLayoutManager(context)
-        view.recyclerView.setLayoutManager(layoutManager)
-        view.recyclerView.setAdapter(listAdapter)
+        binding.recyclerView.setLayoutManager(layoutManager)
+        binding.recyclerView.setAdapter(listAdapter)
         /*if (arrayList != null && arrayList!!.size == 0) {
             getTransactions();
         } else {
             listAdapter!!.notifyDataSetChanged()
         }*/
-        view.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
+        binding.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
         return view
     }
 

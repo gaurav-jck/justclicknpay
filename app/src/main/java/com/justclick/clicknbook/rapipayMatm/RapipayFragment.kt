@@ -26,10 +26,6 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
-//import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.MatmArrSyncActivity
-//import com.mposaar.rapipaymatm10arr.rapipaymatm100.activity.NewMatmArrActivity
-import kotlinx.android.synthetic.main.activity_main_rapipay.*
-import kotlinx.android.synthetic.main.activity_main_rapipay.view.*
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -42,8 +38,10 @@ import android.bluetooth.BluetoothManager
 import android.content.pm.PackageManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.justclick.clicknbook.Activity.TestActivity
+import com.justclick.clicknbook.databinding.ActivityMainRapipayBinding
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment
 
 
@@ -65,6 +63,7 @@ public class RapipayFragment : Fragment() {
     var tType=CashWith
     private var isInitiateTxn = false
     private var clientRefId: String? = null; var smId:String? = null; var jckTransactionId:String?="1234"; var mobile:String?=null
+    var binding:ActivityMainRapipayBinding?=null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -74,11 +73,12 @@ public class RapipayFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_main_rapipay,container,false)
+        binding=ActivityMainRapipayBinding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
         bluetooth()
 
-        view.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
+        binding!!.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
                 if (checkedId == R.id.cashid) {
                     assignBundleValue(0)
@@ -88,9 +88,9 @@ public class RapipayFragment : Fragment() {
             }
         })
         transactionType = CASH_WITH
-        view.btn_submit_aeps.setOnClickListener{
-            Common.preventFrequentClick(view.btn_submit_aeps)
-            if(transactionType.equals(CASH_WITH) && view.input_amount.text.toString().isEmpty()){
+        binding!!.btnSubmitAeps.setOnClickListener{
+            Common.preventFrequentClick(binding!!.btnSubmitAeps)
+            if(transactionType.equals(CASH_WITH) && binding!!.inputAmount.text.toString().isEmpty()){
                 Toast.makeText(activity, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
             }else{
                 Common.hideSoftKeyboard(activity)
@@ -100,8 +100,8 @@ public class RapipayFragment : Fragment() {
 //            Toast.makeText(getActivity(), "Click!", Toast.LENGTH_SHORT).show();
         }
 
-        view.syc_btn.setOnClickListener {
-            Common.preventFrequentClick(view.syc_btn)
+        binding!!.sycBtn.setOnClickListener {
+            Common.preventFrequentClick(binding!!.sycBtn)
             Common.hideSoftKeyboard(activity)
             if(mobile==null || mobile!!.length==0){
                 initiateMatmTxn(SYN)
@@ -110,14 +110,14 @@ public class RapipayFragment : Fragment() {
             }
         }
 
-        view.txn_btn.setOnClickListener {
-            Common.preventFrequentClick(txn_btn)
+        binding!!.txnBtn.setOnClickListener {
+            Common.preventFrequentClick(binding!!.txnBtn)
             Common.hideSoftKeyboard(activity)
             (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(MatmTransactionListFragment())
 //            getTxnList()
         }
 
-        view.back_arrow.setOnClickListener{
+        binding!!.backArrow.setOnClickListener{
             parentFragmentManager.popBackStack()
         }
 
@@ -128,13 +128,13 @@ public class RapipayFragment : Fragment() {
         if (position == 0) {
             transactionType = CASH_WITH
             tType=CashWith
-            view?.input_amount?.setText("")
-            view?.input_amount?.isEnabled = true
+            binding!!.inputAmount.setText("")
+            binding!!.inputAmount.isEnabled = true
         } else if (position == 1) {
             transactionType = BAL_INQ
             tType=BalEnq
-            view?.input_amount?.setText("0")
-            view?.input_amount?.isEnabled = false
+            binding!!.inputAmount.setText("0")
+            binding!!.inputAmount.isEnabled = false
         }
     }
 
@@ -192,6 +192,20 @@ public class RapipayFragment : Fragment() {
     var bluetoothName: String? = null
 
     private fun accessBluetoothDetails(): String? {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.BLUETOOTH_CONNECT
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return ""
+        }
         if (btAdapter!!.bondedDevices != null) if (btAdapter!!.bondedDevices.size > 0) {
             val pairedDevices = btAdapter!!.bondedDevices
             val devices = ArrayList<String>()
@@ -253,7 +267,7 @@ public class RapipayFragment : Fragment() {
             request.amount=0f
             request.txnType = "SYNC"
         }else{
-            request.amount = input_amount!!.text.toString().toFloat()
+            request.amount = binding!!.inputAmount.text.toString().toFloat()
             request.txnType = tType
         }
 
@@ -298,7 +312,7 @@ public class RapipayFragment : Fragment() {
 
     private fun makeTxn() {
         try {
-            if (!accessBluetoothDetails()!!.isEmpty() && transactionType != null && !input_amount!!.text.toString().isEmpty()) {
+            if (!accessBluetoothDetails()!!.isEmpty() && transactionType != null && !binding!!.inputAmount.text.toString().isEmpty()) {
                 val date = Calendar.getInstance().time
                 val timestamp = SimpleDateFormat("yyyymmddHH").format(date)
 //                val timestamps = SimpleDateFormat("yyyymmddHHmm").format(date)
@@ -317,7 +331,7 @@ public class RapipayFragment : Fragment() {
                 b.putString("clientRefID", clientRefId)
 //                b.putString("timestamp", timestamp)
                 b.putString("HashData", strhasdata)
-                b.putString("Amount", input_amount!!.text.toString()) //
+                b.putString("Amount", binding!!.inputAmount.text.toString()) //
                 b.putString("TransactionType", transactionType)
                 //            04:23:33:2A:13:93
                 b.putString("BluetoothId", accessBluetoothDetails())

@@ -25,7 +25,7 @@
             android:id="@+id/titleTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Train Route\ntrftyrtff"
+            android:text="Train Route\n"
             android:textSize="@dimen/simple_content_text_size"
             android:layout_marginLeft="@dimen/medium_margin"
             android:textColor="@color/color_white"

@@ -17,6 +17,7 @@ import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseMod
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainBookingListBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
@@ -25,7 +26,6 @@ import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_booking_list.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,6 +58,7 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         if(fragView==null){
             val view = inflater.inflate(R.layout.fragment_train_booking_list, container, false)
+            var binding=FragmentTrainBookingListBinding.bind(view)
             fragView=view
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
             arrayList= ArrayList()
@@ -79,10 +80,10 @@ class TrainBookingListFragment : Fragment(), View.OnClickListener {
                 }
             })
 
-            view.recycleView.layoutManager=layoutManager
-            view.recycleView.adapter=adapter
+            binding.recycleView.layoutManager=layoutManager
+            binding.recycleView.adapter=adapter
 
-            view.back_arrow.setOnClickListener(this)
+            binding.backArrow.setOnClickListener(this)
 
             callBookingList()
         }

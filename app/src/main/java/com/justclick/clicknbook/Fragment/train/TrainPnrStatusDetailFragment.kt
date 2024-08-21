@@ -16,10 +16,10 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.databinding.FragmentTrainPnrStatusDetailBinding
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_pnr_status_detail.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +40,7 @@ class TrainPnrStatusDetailFragment : Fragment() {
     private var pnrResponse: PnrStatusResponse? = null
     private var param2: String? = null
     private var loginModel:LoginModel?=null
+    var binding:FragmentTrainPnrStatusDetailBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +57,7 @@ class TrainPnrStatusDetailFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view= inflater.inflate(R.layout.fragment_train_pnr_status_detail, container, false)
-
+        binding=FragmentTrainPnrStatusDetailBinding.bind(view)
         if(pnrResponse!=null){
 //            Toast.makeText(context, "Success", Toast.LENGTH_LONG).show()
     try {
@@ -65,7 +66,7 @@ class TrainPnrStatusDetailFragment : Fragment() {
 
         }
 
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
         /*view.cancelTv.setOnClickListener{
@@ -76,15 +77,15 @@ class TrainPnrStatusDetailFragment : Fragment() {
     }
 
     private fun setPnrStatusData(view: View, pnrResponse: PnrStatusResponse) {
-        view.pnrTv.setText("PNR : "+pnrResponse.pnrEnqueryresponse.pnrNumber)
-        view.trainNameTv.setText(pnrResponse.pnrEnqueryresponse.trainName+" ("+pnrResponse.pnrEnqueryresponse.trainNumber+")")
-        view.fromStnTv.setText(pnrResponse.pnrEnqueryresponse.sourceStation)
-        view.toStnTv.setText(pnrResponse.pnrEnqueryresponse.destinationStation)
-        view.durationTv.setText(pnrResponse.pnrEnqueryresponse.journeyClass+" | "+pnrResponse.pnrEnqueryresponse.quota)
-        view.boardingStn.setText("Boarding point - "+pnrResponse.pnrEnqueryresponse.boardingPoint+
+        binding!!.pnrTv.setText("PNR : "+pnrResponse.pnrEnqueryresponse.pnrNumber)
+        binding!!.trainNameTv.setText(pnrResponse.pnrEnqueryresponse.trainName+" ("+pnrResponse.pnrEnqueryresponse.trainNumber+")")
+        binding!!.fromStnTv.setText(pnrResponse.pnrEnqueryresponse.sourceStation)
+        binding!!.toStnTv.setText(pnrResponse.pnrEnqueryresponse.destinationStation)
+        binding!!.durationTv.setText(pnrResponse.pnrEnqueryresponse.journeyClass+" | "+pnrResponse.pnrEnqueryresponse.quota)
+        binding!!.boardingStn.setText("Boarding point - "+pnrResponse.pnrEnqueryresponse.boardingPoint+
                 "\nDate Of Journey - "+pnrResponse.pnrEnqueryresponse.dateOfJourney)
 
-        view.passengerContainerLin!!.removeAllViews()
+        binding!!.passengerContainerLin!!.removeAllViews()
         for(list in pnrResponse.pnrEnqueryresponse.passengerinfo.iterator()){
             val child: View = layoutInflater.inflate(R.layout.train_passanger_status, null)
             var sno: TextView =child.findViewById(R.id.snoTv)
@@ -99,7 +100,7 @@ class TrainPnrStatusDetailFragment : Fragment() {
             }else{
                 currentStatus.text= list.currentStatus
             }
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
     }
 

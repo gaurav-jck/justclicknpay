@@ -14,8 +14,6 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -23,8 +21,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.InputFilter;
@@ -35,9 +31,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -68,8 +61,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.jctPayment.Models.GetAadharRequest;
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.Adapters.MiniStatementAdapter;
+import com.justclick.clicknbook.jctPayment.Models.GetAadharResponse;
 import com.justclick.clicknbook.jctPayment.Models.Opts;
 import com.justclick.clicknbook.jctPayment.Models.PidOptions;
 import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential;
@@ -81,9 +76,6 @@ import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
 import org.w3c.dom.Attr;
@@ -302,6 +294,44 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             }
         });
 
+        getAdharNumber();
+
+    }
+
+    private void getAdharNumber() {
+        LoginModel loginModel=new LoginModel();
+        GetAadharRequest request=new GetAadharRequest();
+        request.AgentCode= MyPreferences.getLoginData(loginModel,context).Data.DoneCardUser;
+
+        String json = new Gson().toJson(request);
+
+        new NetworkCall().callService(NetworkCall.getAepsInterface().aepsPostServiceN(URLs.getagentadhar, request),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response);
+                    }else {
+//                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandler(ResponseBody response) {
+        try {
+            GetAadharResponse senderResponse = new Gson().fromJson(response.string(),
+                    GetAadharResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.statusCode.equals("00")) {
+//                    Toast.makeText(context,senderResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    et_aadhar.setText(senderResponse.adharno);
+                    txt_mobileno.setText(senderResponse.mobileno);
+                }
+            }else {
+//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+//            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void captureData() {

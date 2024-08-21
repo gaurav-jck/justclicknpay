@@ -25,6 +25,8 @@
     <integer name="train_station_code_max_length">4</integer>
     <integer name="train_res_id_max_length">20</integer>
     <integer name="train_number_max_length">5</integer>
+    <integer name="gst_number_max_length">20</integer>
+    <integer name="state_city_max_length">25</integer>
 
     <!--icons widh-->
     <integer name="width1dp">1</integer>

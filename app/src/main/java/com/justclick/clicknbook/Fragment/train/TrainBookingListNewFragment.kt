@@ -33,6 +33,8 @@ import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResp
 import com.justclick.clicknbook.Fragment.train.model.TrainListRequest
 import com.justclick.clicknbook.Fragment.train.model.TrainListResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainBookingListBinding
+import com.justclick.clicknbook.databinding.FragmentTrainBookingListNewBinding
 import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
@@ -44,7 +46,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_booking_list_new.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -107,6 +108,7 @@ private var filterDialog: Dialog? = null
                               savedInstanceState: Bundle?): View? {
         if(fragView==null){
             val view = inflater.inflate(R.layout.fragment_train_booking_list_new, container, false)
+            var binding= FragmentTrainBookingListNewBinding.bind(view)
             fragView=view
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
             arrayList= ArrayList()
@@ -128,12 +130,12 @@ private var filterDialog: Dialog? = null
                 }
             })
 
-            view.recycleView.layoutManager=layoutManager
-            view.recycleView.adapter=adapter
-            view.lin_dateFilter.setOnClickListener(this)
-            view.linFilter.setOnClickListener(this)
-            view.back_arrow.setOnClickListener(this)
-            startDateTv=view.startDateTv
+            binding.recycleView.layoutManager=layoutManager
+            binding.recycleView.adapter=adapter
+            binding.linDateFilter.setOnClickListener(this)
+            binding.linFilter.setOnClickListener(this)
+            binding.backArrow.setOnClickListener(this)
+            startDateTv=binding.startDateTv
             setDates()
             callBookingList()
         }

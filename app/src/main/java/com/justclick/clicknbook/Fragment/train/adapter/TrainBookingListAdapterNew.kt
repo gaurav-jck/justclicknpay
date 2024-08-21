@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment
 import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment
 
 
 import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
-import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
 import com.justclick.clicknbook.Fragment.train.model.TrainListResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.TrainBookingListsItemBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.utils.DateAndTimeUtils
-import kotlinx.android.synthetic.main.train_booking_lists_item.view.*
 
 
 class TrainBookingListAdapterNew(
@@ -87,19 +85,20 @@ class TrainBookingListAdapterNew(
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
         val view: View = mView
-        val pnrTv: TextView = mView.pnrTv
-        val resIdTv: TextView = mView.resIdTv
-        val trainNameTv: TextView = mView.trainNameTv
-        val fromStnTv: TextView = mView.fromStnTv
-        val toStnTv: TextView = mView.toStnTv
-        val durationTv: TextView = mView.durationTv
-        val deptDataTv: TextView = mView.deptDataTv
-        val arrivalDataTv: TextView = mView.arrivalDataTv
-        val boardingStn: TextView = mView.boardingStn
-        val changeBoarding: TextView = mView.changeBoarding
-        val cancelTicket: TextView = mView.cancelTicket
-        val statusTv: TextView = mView.statusTv
-        val operationLin: LinearLayout = mView.operationLin
+        var binding= TrainBookingListsItemBinding.bind(view)
+        val pnrTv: TextView = binding.pnrTv
+        val resIdTv: TextView = binding.resIdTv
+        val trainNameTv: TextView = binding.trainNameTv
+        val fromStnTv: TextView = binding.fromStnTv
+        val toStnTv: TextView = binding.toStnTv
+        val durationTv: TextView = binding.durationTv
+        val deptDataTv: TextView = binding.deptDataTv
+        val arrivalDataTv: TextView = binding.arrivalDataTv
+        val boardingStn: TextView = binding.boardingStn
+        val changeBoarding: TextView = binding.changeBoarding
+        val cancelTicket: TextView = binding.cancelTicket
+        val statusTv: TextView = binding.statusTv
+        val operationLin: LinearLayout = binding.operationLin
 
         override fun toString(): String {
             return super.toString() + " '" + pnrTv.text + "'"

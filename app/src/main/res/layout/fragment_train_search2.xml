@@ -42,7 +42,6 @@
         android:layout_marginTop="@dimen/large_margin">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabStation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tabStation"/>

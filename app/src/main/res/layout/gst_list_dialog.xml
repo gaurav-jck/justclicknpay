@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GST Detail"
+            android:textSize="@dimen/simple_content_text_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:textColor="@color/color_white"
+            android:layout_toRightOf="@id/back_arrow"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gstRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="LinearLayoutManager"
+        android:layout_below="@id/rel_top"
+        android:paddingTop="@dimen/small_margin"
+        tools:listitem="@layout/gst_list_item"
+        />
+
+</RelativeLayout>

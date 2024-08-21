@@ -10,8 +10,8 @@ import com.justclick.clicknbook.Fragment.train.TrainListsFragment
 
 import com.justclick.clicknbook.Fragment.train.model.TrainRouteModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.TrainRouteListItemBinding
 
-import kotlinx.android.synthetic.main.train_route_list_item.view.*
 
 
 class TrainRouteAdapter(
@@ -54,12 +54,13 @@ class TrainRouteAdapter(
     override fun getItemCount(): Int = mValues!!.size
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val stnNameTv: TextView = mView.stnNameTv
-        val dayTv: TextView = mView.dayTv
-        val arrivalTv: TextView = mView.arrivalTv
-        val stopTimeTv: TextView = mView.stopTimeTv
-        val departureTv: TextView = mView.departureTv
-        val view: View = mView.view
+        var binding= TrainRouteListItemBinding.bind(mView)
+        val stnNameTv: TextView = binding.stnNameTv
+        val dayTv: TextView = binding.dayTv
+        val arrivalTv: TextView = binding.arrivalTv
+        val stopTimeTv: TextView = binding.stopTimeTv
+        val departureTv: TextView = binding.departureTv
+        val view: View = binding.view
 
         override fun toString(): String {
             return super.toString() + " '" + stnNameTv.text + "'"

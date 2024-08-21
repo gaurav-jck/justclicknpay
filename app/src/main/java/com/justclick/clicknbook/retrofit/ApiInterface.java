@@ -698,6 +698,13 @@ public interface ApiInterface {
                                      @Header("Merchant") String merchant, @Header("Mode") String mode,
                                           @Header("mobileno") String mobileno);
 
+    @Headers({"Content-Type: application/json"})
+    @POST("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> getGSTDetails(@Path("methodName") String method,@Body Object data,
+                                          @Header("Identifier") String doneCard,
+                                          @Header("LoggedInUserType") String type,
+                                          @Header("Merchant") String merchant, @Header("Mode") String mode);
+
 //    @Multipart
 //    @POST("MobileServices.svc/{methodName}")
 //    Call<ResponseBody> depositRequest(@Path("methodName") String method,
@@ -708,5 +715,9 @@ public interface ApiInterface {
     Call<ResponseBody> depositRequest(@Path("methodName") String method,
                                       @Part("RequestData") RequestBody RequestData,
                                       @Part MultipartBody.Part Image);
+
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> loginRequest(@Path("methodName") String method,
+                                    @Body Object data);
 
 }

@@ -1,21 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/agentDepositRequestFragmentTitle"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+        android:id="@+id/depositView"
+        android:visibility="visible"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="@dimen/card_margin_2dp"
-        card_view:cardCornerRadius="2dp"
-        card_view:cardBackgroundColor="@color/cardMobileBackground"
-        android:layout_alignParentTop="true"
+        app:cardCornerRadius="2dp"
+        android:layout_margin="@dimen/margin_2dp"
+        app:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_below="@id/rel_top"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -26,9 +52,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/medium_margin"
                 android:orientation="vertical">
-
 
                 <TextView
                     android:id="@+id/agency_name_tv"
@@ -37,6 +61,7 @@
                     android:gravity="center"
                     android:layout_marginLeft="@dimen/small_margin"
                     android:layout_marginRight="@dimen/small_margin"
+                    android:layout_marginTop="@dimen/medium_margin"
                     android:textSize="@dimen/title_text_size"
                     android:textColor="@color/dark_blue_color"
                     android:text="(just click demo)"/>
@@ -227,7 +252,6 @@
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/choose_file"/>
 
-
                 </LinearLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -291,5 +315,51 @@
             </LinearLayout>
         </ScrollView>
     </androidx.cardview.widget.CardView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cameraView"
+        android:visibility="gone"
+        android:layout_below="@id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/viewFinder"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageCaptureButton"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="50dp"
+            android:elevation="2dp"
+            android:text="Take Photo"
+            android:src="@drawable/ic_shutter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+        <ImageView
+            android:id="@+id/imageViewPre"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="50dp"
+            android:layout_marginEnd="20dp"
+            android:elevation="2dp"
+            android:text="Capture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/vertical_centerline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".50" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

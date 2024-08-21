@@ -15,6 +15,7 @@ import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainCancelDetailsBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
@@ -22,11 +23,6 @@ import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_cancel_details.*
-import kotlinx.android.synthetic.main.fragment_train_cancel_details.passengerContainerLin
-import kotlinx.android.synthetic.main.fragment_train_cancel_details.view.*
-import kotlinx.android.synthetic.main.train_passanger_seats_show.view.*
-import kotlinx.android.synthetic.main.train_passanger_seats_show.view.statusTv
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,6 +33,7 @@ class TrainCancelDetailsFragment : Fragment() {
 
     var trainResponse: TrainCancelTicketDetailResponse?=null
     var loginModel:LoginModel?=null
+    var binding:FragmentTrainCancelDetailsBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,21 +45,21 @@ class TrainCancelDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=  inflater.inflate(R.layout.fragment_train_cancel_details, container, false)
-
+        binding=FragmentTrainCancelDetailsBinding.bind(view)
         if(arguments!=null) {
             trainResponse = requireArguments().getSerializable("cancelResponse") as TrainCancelTicketDetailResponse
             setData(view)
         }
 
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
-        view.okTv.setOnClickListener {
+        binding!!.okTv.setOnClickListener {
             checkSelected()
         }
 
-        view.refundTv.setOnClickListener {
+        binding!!.refundTv.setOnClickListener {
             getCancelIdForRefund()
         }
 
@@ -71,34 +68,34 @@ class TrainCancelDetailsFragment : Fragment() {
 
     private fun setData(view: View) {
 
-        view.statusTv.text="ResId : "+trainResponse!!.trainCancelDetail.get(0).transactionId
-        view.pnrTv.text="Pnr : "+trainResponse!!.trainCancelDetail.get(0).pnr
+        binding!!.statusTv.text="ResId : "+trainResponse!!.trainCancelDetail.get(0).transactionId
+        binding!!.pnrTv.text="Pnr : "+trainResponse!!.trainCancelDetail.get(0).pnr
 
         var journeyDetail=trainResponse!!.trainCancelDetail.get(0);
-        view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
+        binding!!.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainNo+")"
         try{
-            view.startTimeTv.text = journeyDetail.fromStation
-            view.endTimeTv.text = journeyDetail.toStation
+            binding!!.startTimeTv.text = journeyDetail.fromStation
+            binding!!.endTimeTv.text = journeyDetail.toStation
         }catch (e:Exception){
 
         }
-        view.fromStnTv.text = journeyDetail.fromStationCode
-        view.toStnTv.text = journeyDetail.toStationCode
-        view.durationTv.text = ""
-        view.classTv.text = "Passenger = "+trainResponse!!.paxCancelDetail.size+" | "+ "Quota = "+journeyDetail.quota
-        view.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ("+journeyDetail.boardingStationCode+")"
+        binding!!.fromStnTv.text = journeyDetail.fromStationCode
+        binding!!.toStnTv.text = journeyDetail.toStationCode
+        binding!!.durationTv.text = ""
+        binding!!.classTv.text = "Passenger = "+trainResponse!!.paxCancelDetail.size+" | "+ "Quota = "+journeyDetail.quota
+        binding!!.boardingStn.text="Boarding point - "+journeyDetail.boardingStation+" ("+journeyDetail.boardingStationCode+")"
 
         var seats=""
-        view.seatsTv.text = seats
+        binding!!.seatsTv.text = seats
 
         if(seats.contains("AVAIL")||
                 seats.contains("AVBL")){
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
         }else{
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
         }
 
-        view.passengerContainerLin!!.removeAllViews()
+        binding!!.passengerContainerLin!!.removeAllViews()
         var isRefund=false
         var isCancel=false
         for(list in trainResponse!!.paxCancelDetail.iterator()){
@@ -111,9 +108,10 @@ class TrainCancelDetailsFragment : Fragment() {
             var statusTv:TextView=child.findViewById(R.id.statusTv)
             var refundStatusTv:TextView=child.findViewById(R.id.refundStatusTv)
             var remarkLin:LinearLayout=child.findViewById(R.id.remarkLin)
+            var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.age.toString()
-            child.genderTv.text= list.gender
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+            genderTv.text= list.gender
+            count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
 
             seatNoTv.text="Booking Status:"+list.bookingStatus
             statusTv.text="Current Status:"+list.currentStatus
@@ -135,18 +133,18 @@ class TrainCancelDetailsFragment : Fragment() {
                 isCancel=true
             }*/
 
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
 
         if(isRefund){
-            view.refundTv.visibility=View.VISIBLE
+            binding!!.refundTv.visibility=View.VISIBLE
         }else{
-            view.refundTv.visibility=View.GONE
+            binding!!.refundTv.visibility=View.GONE
         }
         if(isCancel){
-            view.okTv.visibility=View.VISIBLE
+            binding!!.okTv.visibility=View.VISIBLE
         }else{
-            view.okTv.visibility=View.GONE
+            binding!!.okTv.visibility=View.GONE
         }
 
     }
@@ -323,7 +321,7 @@ class TrainCancelDetailsFragment : Fragment() {
         var cancelRequest=CancelRequest()
         var list:ArrayList<CancelRequest.PaxData>?=ArrayList()
         var count=0
-        for(pass in passengerContainerLin.children){
+        for(pass in binding!!.passengerContainerLin.children){
             var checkBox=pass.findViewById<CheckBox>(R.id.checkbox)
             var remark=pass.findViewById<EditText>(R.id.remarkEdt)
             var pax:CancelRequest.PaxData=CancelRequest.PaxData()

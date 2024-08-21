@@ -59,6 +59,8 @@ import com.justclick.clicknbook.Fragment.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.ContactDetailsFragment;
 import com.justclick.clicknbook.Fragment.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNeww;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
@@ -302,7 +304,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         mobileFragmentNew=new RechargeMainPagerFragment();
         agentSearchFragment =new AgentSearchFragment();
         agentCreditRequestFragment =new AgentCreditRequestFragment();
-        agentDepositRequestFragment =new AgentDepositRequestFragmentNew();
+//        agentDepositRequestFragment =new AgentDepositRequestFragmentNew();
+        agentDepositRequestFragment =new AgentDepositRequestFragmentNewww();
         agentChattingListFragment =new AgentChattingListFragment();
         trainPnrCheckFragment =new TrainBookingCheckFragment();
         homeFragment =new HomeFragment();

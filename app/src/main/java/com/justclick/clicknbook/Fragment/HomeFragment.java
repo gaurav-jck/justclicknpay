@@ -19,6 +19,8 @@ import android.widget.ViewFlipper;
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNeww;
+import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AdminCreditReportFragment;
@@ -194,8 +196,8 @@ public class HomeFragment extends Fragment {
                         replaceFragmentWithBackStack(new AgentCreditRequestFragment());
                 break;
             case MenuCodes.AgentDepositRequestFragment://7
-                ((NavigationDrawerActivity)context).
-                        replaceFragmentWithBackStack(new AgentDepositRequestFragmentNew());
+//                ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(new AgentDepositRequestFragmentNeww());
+                ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(new AgentDepositRequestFragmentNewww());
                 break;
             case MenuCodes.MobileFragment://8
                 ((NavigationDrawerActivity)context).

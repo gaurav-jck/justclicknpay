@@ -128,9 +128,11 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     String d_type = MANTRA, adharType = ADHAR_UID;
     private ArrayList<String> positions;
     int TYPE = CASH_WITH;
-    String URL, AuthUrl=URLs.WithdrawAuth, MerAuthTxnId;
+    String URL, AuthUrl=URLs.WithdrawAuth;
     Dialog authDialog;
-    private boolean isGetAgain, isTxnAuthenticated;
+    private boolean isGetAgain;
+//    private String MerAuthTxnId;
+//    private boolean isTxnAuthenticated;
 
 
     @Override
@@ -380,9 +382,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
             }
         });
 
-        if(!isTxnAuthenticated && TYPE==CASH_WITH){
+        /*if(!isTxnAuthenticated && TYPE==CASH_WITH){
             openTxnAuthDialog();
-        }
+        }*/
     }
 
     public void captureData() {
@@ -587,7 +589,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
     }
 
     public void openTxnAuthDialog(){
-        isTxnAuthenticated=false;
+//        isTxnAuthenticated=false;
         authDialog = new Dialog(context, R.style.Theme_Design_Light);
         authDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         authDialog.setContentView(R.layout.txn_auth_dialog);
@@ -681,8 +683,8 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
 //                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
                             if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                 Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                isTxnAuthenticated=true;
-                                MerAuthTxnId=commonResponseModel.merAuthTxnId;
+//                                isTxnAuthenticated=true;
+//                                MerAuthTxnId=commonResponseModel.merAuthTxnId;
                                 if(authDialog!=null){
                                     authDialog.dismiss();
                                 }
@@ -772,13 +774,13 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                                 if(commonResponseModel!=null){
                                     if (commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                         Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                        MerAuthTxnId=null;
-                                        openTxnAuthDialog();
+//                                        MerAuthTxnId=null;
+//                                        openTxnAuthDialog();
                                         openReceipt(commonResponseModel);
                                     } else if(commonResponseModel.cashWithdrawal!=null){
                                         Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                        MerAuthTxnId=null;
-                                        openTxnAuthDialog();
+//                                        MerAuthTxnId=null;
+//                                        openTxnAuthDialog();
                                     }else {
                                         Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
                                     }
@@ -830,7 +832,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 params.put("AadharNumber", str_aadhar);
                 params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
                 params.put("Merchant", ApiConstants.MerchantId);
-                params.put("MerAuthTxnId", MerAuthTxnId);
+                params.put("MerAuthTxnId", "");
                 params.put("Mode", "APP");
 //                params.put("Latitude", mCurrentLocation.getLatitude() + "");
 //                params.put("Longitude", mCurrentLocation.getLongitude() + "");
@@ -1271,11 +1273,12 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity implements Goog
                 String s_status = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errCode").getNodeValue();
 
                 if (s_status.equals("0")) {
-                    if(!isTxnAuthenticated && TYPE==CASH_WITH){
+                    /*if(!isTxnAuthenticated && TYPE==CASH_WITH){
                         sendAuthTransaction();
                     }else {
                         showTransactionAlert();
-                    }
+                    }*/
+                    showTransactionAlert();
                 } else {
                     String s_message = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errInfo").getNodeValue();
                     showMessageDialogue(s_message, "Fingerprint data status");

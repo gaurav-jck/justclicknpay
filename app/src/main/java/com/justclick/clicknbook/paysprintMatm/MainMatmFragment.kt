@@ -26,8 +26,6 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.activity_main_rapipay.*
-import kotlinx.android.synthetic.main.activity_main_rapipay.view.*
 import okhttp3.ResponseBody
 import org.json.JSONException
 import org.json.JSONObject
@@ -38,6 +36,7 @@ import android.bluetooth.BluetoothManager
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat.getSystemService
+import com.justclick.clicknbook.databinding.ActivityMainRapipayBinding
 import com.justclick.clicknbook.rapipayMatm.*
 import com.service.finopayment.Hostnew
 import java.lang.StringBuilder
@@ -67,6 +66,7 @@ public class MainMatmFragment : Fragment() {
     var line=""
     var partnerId = "PS0068"
     var key = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk="
+    var binding:ActivityMainRapipayBinding?=null
     var chars = charArrayOf(
         'A',
         'B',
@@ -140,6 +140,7 @@ public class MainMatmFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.activity_main_rapipay,container,false)
+        binding=ActivityMainRapipayBinding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
         line="141"
@@ -159,7 +160,7 @@ public class MainMatmFragment : Fragment() {
                 .show()
         }
         line="143"
-        view.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
+        binding!!.myRadioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener {
             override fun onCheckedChanged(group: RadioGroup, checkedId: Int) {
                 if (checkedId == R.id.cashid) {
                     assignBundleValue(0)
@@ -169,10 +170,10 @@ public class MainMatmFragment : Fragment() {
             }
         })
         transactionType = CASH_WITH
-        view.btn_submit_aeps.setOnClickListener{
-            Common.preventFrequentClick(view.btn_submit_aeps)
-            customerMobile=view.mobile_edt.text.toString()
-            if(transactionType.equals(CASH_WITH) && view.input_amount.text.toString().isEmpty()){
+        binding!!.btnSubmitAeps.setOnClickListener{
+            Common.preventFrequentClick(binding!!.btnSubmitAeps)
+            customerMobile=binding!!.mobileEdt.text.toString()
+            if(transactionType.equals(CASH_WITH) && binding!!.inputAmount.text.toString().isEmpty()){
                 Toast.makeText(activity, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show()
             }else if(customerMobile!!.length<10){
                 Toast.makeText(activity, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show()
@@ -185,8 +186,8 @@ public class MainMatmFragment : Fragment() {
         }
 
 
-        view.txn_btn.setOnClickListener {
-            Common.preventFrequentClick(txn_btn)
+        binding!!.txnBtn.setOnClickListener {
+            Common.preventFrequentClick(binding!!.txnBtn)
             Common.hideSoftKeyboard(activity)
             (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(
                 MatmTransactionListFragment()
@@ -194,7 +195,7 @@ public class MainMatmFragment : Fragment() {
 //            getTxnList()
         }
 
-        view.back_arrow.setOnClickListener{
+        binding!!.backArrow.setOnClickListener{
             parentFragmentManager.popBackStack()
         }
 
@@ -205,13 +206,13 @@ public class MainMatmFragment : Fragment() {
         if (position == 0) {
             transactionType = CASH_WITH
             tType=CashWith
-            view?.input_amount?.setText("")
-            view?.input_amount?.isEnabled = true
+            binding!!.inputAmount.setText("")
+            binding!!.inputAmount.isEnabled = true
         } else if (position == 1) {
             transactionType = BAL_INQ
             tType=BalEnq
-            view?.input_amount?.setText("0")
-            view?.input_amount?.isEnabled = false
+            binding!!.inputAmount.setText("0")
+            binding!!.inputAmount.isEnabled = false
         }
     }
 
@@ -288,7 +289,7 @@ public class MainMatmFragment : Fragment() {
             request.amount=0f
             request.txnType = "SYNC"
         }else{
-            request.amount = input_amount!!.text.toString().toFloat()
+            request.amount = binding!!.inputAmount.text.toString().toFloat()
             request.txnType = tType
         }
 
@@ -330,12 +331,12 @@ public class MainMatmFragment : Fragment() {
 
     private fun makeTxn() {
         try {
-            if (/*accessBluetoothDetails()!! &&*/ transactionType != null && !input_amount!!.text.toString().isEmpty()) {
+            if (/*accessBluetoothDetails()!! &&*/ transactionType != null && !binding!!.inputAmount.text.toString().isEmpty()) {
                 val intent = Intent(requireContext(), Hostnew::class.java)
                 intent.putExtra("partnerId", partnerId)
                 intent.putExtra("apiKey", key)
                 intent.putExtra("transactionType", tType)
-                intent.putExtra("amount", input_amount!!.text.toString().trim())
+                intent.putExtra("amount", binding!!.inputAmount.text.toString().trim())
                 intent.putExtra("merchantCode", agentCode)
 //                intent.putExtra("merchantCode", "JC0A36575")
 //                intent.putExtra("merchantCode", "JC0A45929")

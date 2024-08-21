@@ -20,13 +20,12 @@ import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.Fragment.train.model.TrainStationModel
 import com.justclick.clicknbook.Fragment.train.viewmodel.TrainSearchViewModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainSearch2Binding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
 import com.justclick.clicknbook.utils.enums.TrainQuotaEnum
-import kotlinx.android.synthetic.main.fragment_train_search2.*
-import kotlinx.android.synthetic.main.fragment_train_search2.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -49,6 +48,7 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
     private var toStnCode:String?=null
     private var toStnName:String?=null
     private var quota:String?=null
+    var binding:FragmentTrainSearch2Binding?=null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -70,11 +70,11 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         if (trainResponse != null && trainResponse.trainBtwnStnsList!=null) {
 //            Toast.makeText(context, trainResponse.trainBtwnStnsList!!.size.toString(),Toast.LENGTH_SHORT).show()
             val bundle = Bundle()
-            trainResponse.fromStnCode=fromStnCodeTv.text.toString()
-            trainResponse.fromStnName=fromStnNameTv.text.toString()
-            trainResponse.toStnCode=toStnCodeTv.text.toString()
-            trainResponse.toStnName=toStnNameTv.text.toString()
-            trainResponse.date=departDayNameTv.text.toString()+", "+departDayTv.text.toString()+" "+departMonthTv.text.toString()
+            trainResponse.fromStnCode=binding!!.fromStnCodeTv.text.toString()
+            trainResponse.fromStnName=binding!!.fromStnNameTv.text.toString()
+            trainResponse.toStnCode=binding!!.toStnCodeTv.text.toString()
+            trainResponse.toStnName=binding!!.toStnNameTv.text.toString()
+            trainResponse.date=binding!!.departDayNameTv.text.toString()+", "+binding!!.departDayTv.text.toString()+" "+binding!!.departMonthTv.text.toString()
             trainResponse.doj=dateToSend
             trainResponse.quota=quota
             bundle.putSerializable("trainResponse", trainResponse)
@@ -91,9 +91,10 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_train_search2, container, false)
+        binding= FragmentTrainSearch2Binding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
-        view.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        binding!!.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
@@ -112,14 +113,14 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
 
         setDates(view)
         setStation(view)
-        view.searchTrainsTv.setOnClickListener(this)
-        view.fromStnCodeTv.setOnClickListener(this)
-        view.fromStnNameTv.setOnClickListener(this)
-        view.toStnNameTv.setOnClickListener(this)
-        view.toStnCodeTv.setOnClickListener(this)
-        view.back_arrow.setOnClickListener(this)
-        view.dateConst.setOnClickListener(this)
-        view.arrowImg.setOnClickListener(this)
+        binding!!.searchTrainsTv.setOnClickListener(this)
+        binding!!.fromStnCodeTv.setOnClickListener(this)
+        binding!!.fromStnNameTv.setOnClickListener(this)
+        binding!!.toStnNameTv.setOnClickListener(this)
+        binding!!.toStnCodeTv.setOnClickListener(this)
+        binding!!.backArrow.setOnClickListener(this)
+        binding!!.dateConst.setOnClickListener(this)
+        binding!!.arrowImg.setOnClickListener(this)
 
         setQuota(view)
 
@@ -129,14 +130,14 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
     private fun setQuota(view: View) {
         var list = TrainQuotaEnum.values()
         var adapter= ArrayAdapter<TrainQuotaEnum>(requireContext(), R.layout.spinner_item, R.id.name_tv, list)
-        view.quotaSpinner!!.adapter=adapter
+        binding!!.quotaSpinner!!.adapter=adapter
     }
 
     private fun setStation(view: View) {
-        view.fromStnCodeTv.text=fromStnCode
-        view.fromStnNameTv.text=fromStnName
-        view.toStnCodeTv.text=toStnCode
-        view.toStnNameTv.text=toStnName
+        binding!!.fromStnCodeTv.text=fromStnCode
+        binding!!.fromStnNameTv.text=fromStnName
+        binding!!.toStnCodeTv.text=toStnCode
+        binding!!.toStnNameTv.text=toStnName
     }
 
     private fun initializeDates() {
@@ -160,9 +161,9 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
 
     private fun setDates(view: View) {
         //set default date
-        view.departDayTv!!.text = dateFormat!!.format(startDateCalendar!!.time)
-        view.departMonthTv!!.text = monthFormat!!.format(startDateCalendar!!.time)
-        view.departDayNameTv!!.text = dayFormat!!.format(startDateCalendar!!.time)
+        binding!!.departDayTv!!.text = dateFormat!!.format(startDateCalendar!!.time)
+        binding!!.departMonthTv!!.text = monthFormat!!.format(startDateCalendar!!.time)
+        binding!!.departDayNameTv!!.text = dayFormat!!.format(startDateCalendar!!.time)
     }
 
     override fun onClick(v: View?) {
@@ -197,9 +198,9 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
                         startDateDay = dayOfMonth
                         startDateMonth = monthOfYear
                         startDateYear = year
-                        departDayTv!!.text = dateFormat!!.format(startDateCalendar!!.time)
-                        departMonthTv!!.text = monthFormat!!.format(startDateCalendar!!.time)
-                        departDayNameTv!!.text = dayFormat!!.format(startDateCalendar!!.time)
+                    binding!!.departDayTv!!.text = dateFormat!!.format(startDateCalendar!!.time)
+                    binding!!.departMonthTv!!.text = monthFormat!!.format(startDateCalendar!!.time)
+                    binding!!.departDayNameTv!!.text = dayFormat!!.format(startDateCalendar!!.time)
                         dateToSend = dateToServerFormat!!.format(startDateCalendar!!.time)
 //                    }
                 }, startDateYear, startDateMonth, startDateDay)
@@ -224,10 +225,10 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         }else{
             var loginModel=LoginModel()
             loginModel=MyPreferences.getLoginData(loginModel,requireContext())
-            var quota1=quotaSpinner.selectedItem
-            var quotaPos=quotaSpinner.selectedItemPosition
+            var quota1=binding!!.quotaSpinner.selectedItem
+            var quotaPos=binding!!.quotaSpinner.selectedItemPosition
             quota=TrainQuotaEnum.values().get(quotaPos).name
-            viewModel!!.searchTrains(fromStnCodeTv.text.toString(), toStnCodeTv.text.toString(), dateToSend, requireContext(),
+            viewModel!!.searchTrains(binding!!.fromStnCodeTv.text.toString(), binding!!.toStnCodeTv.text.toString(), dateToSend, requireContext(),
                     loginModel.Data.DoneCardUser, loginModel.Data.UserType)
         }
     }
@@ -236,13 +237,13 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         if(type==1){
             fromStnCode= data.station_code
             fromStnName=data.station_name
-            fromStnCodeTv.text= fromStnCode
-            fromStnNameTv.text=fromStnName
+            binding!!.fromStnCodeTv.text= fromStnCode
+            binding!!.fromStnNameTv.text=fromStnName
         }else{
             toStnCode=data.station_code
             toStnName=data.station_name
-            toStnCodeTv.text=toStnCode
-            toStnNameTv.text=toStnName
+            binding!!.toStnCodeTv.text=toStnCode
+            binding!!.toStnNameTv.text=toStnName
         }
     }
 
@@ -253,14 +254,14 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         fromStnCode=toStnCode
         toStnName=fromStn
         toStnCode=fromCode
-        fromStnCodeTv.text=fromStnCode
-        fromStnNameTv.text=fromStnName
-        toStnCodeTv.text=toStnCode
-        toStnNameTv.text=toStnName
-        if(arrowImg.rotationX==0f){
-            arrowImg.rotationX=180f
+        binding!!.fromStnCodeTv.text=fromStnCode
+        binding!!.fromStnNameTv.text=fromStnName
+        binding!!.toStnCodeTv.text=toStnCode
+        binding!!.toStnNameTv.text=toStnName
+        if(binding!!.arrowImg.rotationX==0f){
+            binding!!.arrowImg.rotationX=180f
         }else{
-            arrowImg.rotationX=0f
+            binding!!.arrowImg.rotationX=0f
         }
     }
 

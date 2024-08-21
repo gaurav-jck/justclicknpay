@@ -15,10 +15,6 @@ import android.graphics.pdf.PdfDocument.PageInfo
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.os.FileUriExposedException
-import android.os.Handler
-import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,44 +26,14 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import com.itextpdf.text.Document
-import com.itextpdf.text.DocumentException
-import com.itextpdf.text.Font
-import com.itextpdf.text.Paragraph
-import com.itextpdf.text.pdf.PdfWriter
 import com.justclick.clicknbook.Fragment.train.model.PnrResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainResponseBinding
 import com.justclick.clicknbook.utils.DateAndTimeUtils
-import kotlinx.android.synthetic.main.fragment_train_response.view.back_arrow
-import kotlinx.android.synthetic.main.fragment_train_response.view.baseFareTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.boardingStn
-import kotlinx.android.synthetic.main.fragment_train_response.view.cateringTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.classTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.conFeeTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.durationTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.endTimeTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.fareLabelRel
-import kotlinx.android.synthetic.main.fragment_train_response.view.fareView
-import kotlinx.android.synthetic.main.fragment_train_response.view.fromStnTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.insuranceTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.okTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.passengerContainerLin
-import kotlinx.android.synthetic.main.fragment_train_response.view.pdfTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.pgChargeTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.pnrTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.seatsTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.serviceChargeTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.startTimeTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.statusTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.toStnTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.totalFareTv
-import kotlinx.android.synthetic.main.fragment_train_response.view.trainNameTv
-import kotlinx.android.synthetic.main.train_passanger_seats_show.view.genderTv
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -79,6 +45,7 @@ class TrainBookingResponseFragment : Fragment() {
     var trainPreBookResponse: TrainPreBookResponse?=null
     private var bitmap: Bitmap? = null
     private var scrollView:ScrollView?=null
+    var binding:FragmentTrainResponseBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +55,7 @@ class TrainBookingResponseFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=  inflater.inflate(R.layout.fragment_train_response, container, false)
-
+        binding=FragmentTrainResponseBinding.bind(view)
         if(arguments!=null) {
             trainResponse = requireArguments().getSerializable("trainResponse") as PnrResponse
             trainPreBookResponse = requireArguments().getSerializable("TrainPreBookResponse") as TrainPreBookResponse
@@ -105,15 +72,15 @@ class TrainBookingResponseFragment : Fragment() {
             setData(view)
         }
 
-        view.fareLabelRel.setOnClickListener {
+        binding!!.fareLabelRel.setOnClickListener {
             showHideFare(view)
         }
 
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
-        view.okTv.setOnClickListener {
+        binding!!.okTv.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
@@ -143,7 +110,7 @@ class TrainBookingResponseFragment : Fragment() {
                 }
 
 
-        view.pdfTv.setOnClickListener {
+        binding!!.pdfTv.setOnClickListener {
 
             when {
                 ContextCompat.checkSelfPermission(
@@ -292,50 +259,50 @@ class TrainBookingResponseFragment : Fragment() {
     }
 
     private fun showHideFare(view: View) {
-        if(view.fareView.visibility== AdapterView.VISIBLE){
-            view.fareView.visibility= AdapterView.GONE
+        if(binding!!.fareView.visibility== AdapterView.VISIBLE){
+            binding!!.fareView.visibility= AdapterView.GONE
         }else{
-            view.fareView.visibility= AdapterView.VISIBLE
+            binding!!.fareView.visibility= AdapterView.VISIBLE
         }
     }
 
     private fun setData(view: View) {
 
-        view.statusTv.text=trainResponse!!.statusMessage
-        view.pnrTv.text="Pnr : "+trainResponse!!.pnr
+        binding!!.statusTv.text=trainResponse!!.statusMessage
+        binding!!.pnrTv.text="Pnr : "+trainResponse!!.pnr
 
         var journeyDetail=trainResponse!!.transactionDetails.get(0);
         var trainDetail=trainPreBookResponse!!.bookingDetails.journeyDetails.get(0);
-        view.trainNameTv.text = journeyDetail.trainName
-       /* view.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
+        binding!!.trainNameTv.text = journeyDetail.trainName
+       /* binding!!.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
                 journeyDetail.scheduledDeparture.substring(11, journeyDetail.scheduledDeparture.length)
-        view.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
+        binding!!.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
                 journeyDetail.scheduledArrival.substring(11, journeyDetail.scheduledArrival.length)*/
 
         try{
-            view.startTimeTv.text =DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
+            binding!!.startTimeTv.text =DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
             DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledDeparture)
-            view.endTimeTv.text =DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
+            binding!!.endTimeTv.text =DateAndTimeUtils.formatDateFromDateString(DateAndTimeUtils.DateTrainInput,
                 DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledArrival)
         }catch (e:Exception){}
-        view.fromStnTv.text = trainDetail.fromStation+"\n("+trainDetail.fromStationCode+")"
-        view.toStnTv.text = trainDetail.toStation+"\n("+trainDetail.toStationCode+")"
-        view.durationTv.text = journeyDetail.duration
-        view.classTv.text = "Adult = "+journeyDetail.adult+" | "+"Child = "+journeyDetail.child +
+        binding!!.fromStnTv.text = trainDetail.fromStation+"\n("+trainDetail.fromStationCode+")"
+        binding!!.toStnTv.text = trainDetail.toStation+"\n("+trainDetail.toStationCode+")"
+        binding!!.durationTv.text = journeyDetail.duration
+        binding!!.classTv.text = "Adult = "+journeyDetail.adult+" | "+"Child = "+journeyDetail.child +
                 " | "+"Class = "+journeyDetail.journeyClass + " | "+ "Quota = "+journeyDetail.quota
-        view.boardingStn.text="Boarding point - "+trainDetail.boardingStation+" ( "+trainDetail.boardingStationCode+" )"
+        binding!!.boardingStn.text="Boarding point - "+trainDetail.boardingStation+" ( "+trainDetail.boardingStationCode+" )"
 
         var seats=""
-        view.seatsTv.text = seats
+        binding!!.seatsTv.text = seats
 
         if(seats.contains("AVAIL")||
                 seats.contains("AVBL")){
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
         }else{
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
         }
 
-        view.passengerContainerLin!!.removeAllViews()
+        binding!!.passengerContainerLin!!.removeAllViews()
         for(list in trainResponse!!.passengerDetails.iterator()){
             val child: View = layoutInflater.inflate(R.layout.train_passanger_seats_show, null)
             var count:TextView=child.findViewById(R.id.passengerCountTv)
@@ -344,24 +311,25 @@ class TrainBookingResponseFragment : Fragment() {
             var ageTv:TextView=child.findViewById(R.id.ageTv)
             var seatNoTv:TextView=child.findViewById(R.id.seatNoTv)
             var statusTv:TextView=child.findViewById(R.id.statusTv)
+            var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.age
-            child.genderTv.text= list.sex
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+            genderTv.text= list.sex
+            count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
 
             seatNoTv.text="Seat no."/*+list.sNo*/
             statusTv.text=list.bookingStatus
 
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
 
         var fareDetails=trainResponse!!.fareDetails.get(0)
-        view.baseFareTv.setText(fareDetails.ticketFar.toString())
-        view.cateringTv.setText(fareDetails.cateringCharge.toString())
-        view.conFeeTv.setText(fareDetails.convenienceFee.toString())
-        view.pgChargeTv.setText(fareDetails.pgCharges.toString())
-        view.insuranceTv.setText(fareDetails.travelInsurancePremium.toString())
-        view.serviceChargeTv.setText(fareDetails.travelAgentServiceCharge.toString())
-        view.totalFareTv.setText(fareDetails.totalFare.toString())
+        binding!!.baseFareTv.setText(fareDetails.ticketFar.toString())
+        binding!!.cateringTv.setText(fareDetails.cateringCharge.toString())
+        binding!!.conFeeTv.setText(fareDetails.convenienceFee.toString())
+        binding!!.pgChargeTv.setText(fareDetails.pgCharges.toString())
+        binding!!.insuranceTv.setText(fareDetails.travelInsurancePremium.toString())
+        binding!!.serviceChargeTv.setText(fareDetails.travelAgentServiceCharge.toString())
+        binding!!.totalFareTv.setText(fareDetails.totalFare.toString())
 
     }
 }

@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentAccountStatementBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
@@ -42,7 +43,6 @@ import jxl.write.WritableSheet
 import jxl.write.WritableWorkbook
 import jxl.write.WriteException
 import jxl.write.biff.RowsExceededException
-import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.IOException
@@ -139,8 +139,9 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         if(mView==null){
             mView = inflater.inflate(R.layout.fragment_account_statement, container, false)
+            var binding= FragmentAccountStatementBinding.bind(mView!!)
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-            mView!!.noRecordTv.setVisibility(View.GONE)
+            binding.noRecordTv.setVisibility(View.GONE)
 
             startDateTv = mView!!.findViewById(R.id.startDateTv)
             noRecordTv = mView!!.findViewById(R.id.noRecordTv)
@@ -176,9 +177,9 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
                     arrayList
                 )
             layoutManager = LinearLayoutManager(context)
-            mView!!.recyclerView!!.setLayoutManager(layoutManager)
-            mView!!.recyclerView.setAdapter(listAdapter)
-            mView!!.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
+            binding.recyclerView.setLayoutManager(layoutManager)
+            binding.recyclerView.setAdapter(listAdapter)
+            binding.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
 //            getTxnType()
             getBookingList(SHOW_PROGRESS)
         }

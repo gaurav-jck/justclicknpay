@@ -28,6 +28,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentAccountStatementBinding
 import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
@@ -46,7 +47,6 @@ import jxl.write.WritableSheet
 import jxl.write.WritableWorkbook
 import jxl.write.WriteException
 import jxl.write.biff.RowsExceededException
-import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
 import java.io.File
 import java.io.IOException
@@ -139,8 +139,9 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         if(mView==null){
             mView = inflater.inflate(R.layout.fragment_account_statement, container, false)
+            var binding=FragmentAccountStatementBinding.bind(mView!!)
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-            mView!!.noRecordTv.setVisibility(View.GONE)
+            binding.noRecordTv.setVisibility(View.GONE)
 
             startDateTv = mView!!.findViewById(R.id.startDateTv)
             noRecordTv = mView!!.findViewById(R.id.noRecordTv)
@@ -158,14 +159,14 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 //        addValueToModel();
             listAdapter =
                 AccountStatementAdapter(
-                    context,
+                    requireContext(),
                     { view, list, data, position ->
                         when (view.id) {
                             R.id.print_tv -> try {
 //                    Toast.makeText(context, "print", Toast.LENGTH_LONG).show()
 //                    openReceipt(data)
                             } catch (e: Exception) {
-                                Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT)
+                                Toast.makeText(requireContext(), "Enable to print data", Toast.LENGTH_SHORT)
                                     .show()
                             }
 
@@ -173,9 +174,9 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                     },
                     arrayList
                 )
-            layoutManager = LinearLayoutManager(context)
-            mView!!.recyclerView!!.setLayoutManager(layoutManager)
-            mView!!.recyclerView.setAdapter(listAdapter)
+            layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerView.setLayoutManager(layoutManager)
+            binding.recyclerView.setAdapter(listAdapter)
 
             getTxnType()
             getAccountStmt()
@@ -307,7 +308,6 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         accountStmtRequest!!.FromDate=startDateToSend
         accountStmtRequest!!.UptoDate=endDateToSend
         accountStmtRequest!!.UserType=loginModel!!.Data.UserType
-        accountStmtRequest!!.UserType="D"
 //        accountStmtRequest!!.UserType="OOU"
         accountStmtRequest!!.TransactionType=transactionType
         accountStmtRequest!!.AgentID=loginModel!!.Data.UserId

@@ -242,6 +242,7 @@
         android:paddingRight="@dimen/padding_5dp"
         android:paddingTop="@dimen/small_margin"
         android:paddingBottom="@dimen/small_margin"
+        android:visibility="visible"
         />
 
     <TextView
@@ -532,10 +533,49 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin_7dp"
+                    android:layout_marginRight="@dimen/margin_7dp"
+                    android:layout_gravity="right">
+                    <TextView
+                        android:id="@+id/addGstDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_margin"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:text="Add GST Details"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/medium_margin"
+                        android:background="@drawable/app_blue_round_button_background"/>
+                    <TextView
+                        android:id="@+id/getGstDetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="@dimen/small_margin"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:text="Get GST Details"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:background="@drawable/app_blue_round_button_background"/>
+                </LinearLayout>
+
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/margin_7dp"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gstEdt"
@@ -552,7 +592,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gstNameEdt"
@@ -569,7 +611,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gstFlatEdt"
@@ -586,7 +630,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
+                android:visibility="gone"
                 android:background="@null">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gstStreetEdt"
@@ -603,7 +650,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
+                android:visibility="gone"
                 android:background="@null">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/gstAreaEdt"
@@ -620,7 +670,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null">
                 <EditText
                     android:id="@+id/pin_edt2"
@@ -637,7 +689,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null"
                 android:visibility="visible">
                 <EditText
@@ -656,7 +710,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_7dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/margin_7dp"
+                android:layout_marginRight="@dimen/margin_7dp"
                 android:background="@null">
                 <EditText
                     android:id="@+id/cityEdt2"

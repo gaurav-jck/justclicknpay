@@ -34,6 +34,7 @@ import com.justclick.clicknbook.Fragment.train.model.PnrResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelTicketDetailResponse
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainBookingDetailsBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
@@ -41,10 +42,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.DateAndTimeUtils
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_booking_details.view.*
-import kotlinx.android.synthetic.main.fragment_train_response.view.pdfTv
-import kotlinx.android.synthetic.main.train_passanger_seats_show.view.*
-import kotlinx.android.synthetic.main.train_passanger_seats_show.view.statusTv
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,6 +60,7 @@ class TrainBookingDetailsFragment : Fragment() {
     private var bitmap: Bitmap? = null
     private var scrollView:ScrollView?=null
     private var cancelTicket:TextView?=null
+    var binding:FragmentTrainBookingDetailsBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         loginModel = LoginModel()
@@ -74,6 +72,7 @@ class TrainBookingDetailsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view=  inflater.inflate(R.layout.fragment_train_booking_details, container, false)
+        binding=FragmentTrainBookingDetailsBinding.bind(view)
         cancelTicket =view.findViewById(R.id.cancelTicket)
         if(arguments!=null) {
             trainResponse = requireArguments().getSerializable("trainResponse") as PnrResponse
@@ -96,29 +95,29 @@ class TrainBookingDetailsFragment : Fragment() {
             }
         }
 
-        view.fareLabelRel.setOnClickListener {
+        binding!!.fareLabelRel.setOnClickListener {
             showHideFare(view)
         }
-        view.agentLabelRel.setOnClickListener {
-            if(view.agentView.visibility== AdapterView.VISIBLE){
-                view.agentView.visibility= AdapterView.GONE
+        binding!!.agentLabelRel.setOnClickListener {
+            if(binding!!.agentView.visibility== AdapterView.VISIBLE){
+                binding!!.agentView.visibility= AdapterView.GONE
             }else{
-                view.agentView.visibility= AdapterView.VISIBLE
+                binding!!.agentView.visibility= AdapterView.VISIBLE
             }
         }
-        view.instructionLabelRel.setOnClickListener {
-            if(view.instructionTv.visibility== AdapterView.VISIBLE){
-                view.instructionTv.visibility= AdapterView.GONE
+        binding!!.instructionLabelRel.setOnClickListener {
+            if(binding!!.instructionTv.visibility== AdapterView.VISIBLE){
+                binding!!.instructionTv.visibility= AdapterView.GONE
             }else{
-                view.instructionTv.visibility= AdapterView.VISIBLE
+                binding!!.instructionTv.visibility= AdapterView.VISIBLE
             }
         }
 
-        view.back_arrow.setOnClickListener {
+        binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
-        view.okTv.setOnClickListener {
+        binding!!.okTv.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
 
@@ -155,7 +154,7 @@ class TrainBookingDetailsFragment : Fragment() {
             }
 
 
-        view.pdfTv.setOnClickListener {
+        binding!!.pdfTv.setOnClickListener {
 
             when {
                 ContextCompat.checkSelfPermission(
@@ -176,10 +175,10 @@ class TrainBookingDetailsFragment : Fragment() {
             }
         }
 
-        view.changeBoarding.setOnClickListener{
+        binding!!.changeBoarding.setOnClickListener{
 
         }
-        view.cancelTicket.setOnClickListener{
+        binding!!.cancelTicket.setOnClickListener{
             cancelTicket(trainResponse!!.reservationid)
         }
 
@@ -187,86 +186,87 @@ class TrainBookingDetailsFragment : Fragment() {
     }
 
     private fun showHideFare(view: View) {
-        if(view.fareView.visibility== AdapterView.VISIBLE){
-            view.fareView.visibility= AdapterView.GONE
+        if(binding!!.fareView.visibility== AdapterView.VISIBLE){
+            binding!!.fareView.visibility= AdapterView.GONE
         }else{
-            view.fareView.visibility= AdapterView.VISIBLE
+            binding!!.fareView.visibility= AdapterView.VISIBLE
         }
     }
 
     private fun setData(view: View) {
 
-        view.statusTv.text="ResId : "+trainResponse!!.reservationid
-        view.pnrTv.text="Pnr : "+trainResponse!!.pnr
+        binding!!.statusTv.text="ResId : "+trainResponse!!.reservationid
+        binding!!.pnrTv.text="Pnr : "+trainResponse!!.pnr
 
         var journeyDetail=trainResponse!!.transactionDetails.get(0);
-        view.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainnumber+")"
+        binding!!.trainNameTv.text = journeyDetail.trainName+" ("+journeyDetail.trainnumber+")"
         try{
-//            view.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
+//            binding!!.startTimeTv.text = journeyDetail.scheduledDeparture.substring(0, 10)+"\n"+
 //                    journeyDetail.scheduledDeparture.substring(11, journeyDetail.scheduledDeparture.length)
-            view.startTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
+            binding!!.startTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
                 DateAndTimeUtils.DateTrainInput,
                 DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledDeparture)
-//            view.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
+//            binding!!.endTimeTv.text = journeyDetail.scheduledArrival.substring(0, 10)+"\n"+
 //                    journeyDetail.scheduledArrival.substring(11, journeyDetail.scheduledArrival.length)
-            view.endTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
+            binding!!.endTimeTv.text =DateAndTimeUtils.formatDateFromDateString(
                 DateAndTimeUtils.DateTrainInput,
                 DateAndTimeUtils.DateTrainOutput, journeyDetail.scheduledArrival)
         }catch (e:Exception){
 
         }
-        view.fromStnTv.text = journeyDetail.from
-        view.toStnTv.text = journeyDetail.to
-        view.durationTv.text = journeyDetail.duration
-        view.classTv.text = "Adult = "+journeyDetail.adult+" | "+"Child = "+journeyDetail.child +
+        binding!!.fromStnTv.text = journeyDetail.from
+        binding!!.toStnTv.text = journeyDetail.to
+        binding!!.durationTv.text = journeyDetail.duration
+        binding!!.classTv.text = "Adult = "+journeyDetail.adult+" | "+"Child = "+journeyDetail.child +
                 " | "+"Class = "+journeyDetail.journeyClass + " | "+ "Quota = "+journeyDetail.quota
-        view.boardingStn.text="Boarding point - "+journeyDetail.boarding
+        binding!!.boardingStn.text="Boarding point - "+journeyDetail.boarding
 
         var seats=""
-        view.seatsTv.text = seats
+        binding!!.seatsTv.text = seats
 
         if(seats.contains("AVAIL")||
                 seats.contains("AVBL")){
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.green))
         }else{
-            view.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
+            binding!!.seatsTv.setTextColor(requireContext().resources.getColor(R.color.blue))
         }
 
-        view.passengerContainerLin!!.removeAllViews()
+        binding!!.passengerContainerLin!!.removeAllViews()
         for(list in trainResponse!!.passengerDetails.iterator()){
             val child: View = layoutInflater.inflate(R.layout.train_passanger_seats_show, null)
             var count:TextView=child.findViewById(R.id.passengerCountTv)
             var nameTv:TextView=child.findViewById(R.id.nameTv)
+            var genderTv:TextView=child.findViewById(R.id.genderTv)
             nameTv.text= list.name
             var ageTv:TextView=child.findViewById(R.id.ageTv)
             var statusTv:TextView=child.findViewById(R.id.statusTv)
             var currentStatusTv:TextView=child.findViewById(R.id.currentStatusTv)
             ageTv.text= list.age
-            child.genderTv.text= list.sex
-            count.text=(view.passengerContainerLin!!.childCount+1).toString()
+            genderTv.text= list.sex
+            count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
 
             statusTv.text=list.bookingStatus
             currentStatusTv.text=list.currentStatus
 
-            view.passengerContainerLin!!.addView(child)
+            binding!!.passengerContainerLin!!.addView(child)
         }
 
         var fareDetails=trainResponse!!.fareDetails.get(0)
-        view.baseFareTv.setText(fareDetails.ticketFar.toString())
-        view.cateringTv.setText(fareDetails.cateringCharge.toString())
-        view.conFeeTv.setText(fareDetails.convenienceFee.toString())
-        view.pgChargeTv.setText(fareDetails.pgCharges.toString())
-        view.insuranceTv.setText(fareDetails.travelInsurancePremium.toString())
-        view.serviceChargeTv.setText(fareDetails.travelAgentServiceCharge.toString())
-        view.totalFareTv.setText(fareDetails.totalFare.toString())
+        binding!!.baseFareTv.setText(fareDetails.ticketFar.toString())
+        binding!!.cateringTv.setText(fareDetails.cateringCharge.toString())
+        binding!!.conFeeTv.setText(fareDetails.convenienceFee.toString())
+        binding!!.pgChargeTv.setText(fareDetails.pgCharges.toString())
+        binding!!.insuranceTv.setText(fareDetails.travelInsurancePremium.toString())
+        binding!!.serviceChargeTv.setText(fareDetails.travelAgentServiceCharge.toString())
+        binding!!.totalFareTv.setText(fareDetails.totalFare.toString())
 //        Agent details
         var agentDetails=trainResponse!!.agentDetails.get(0)
-        view.principleAgentTv.setText(agentDetails.principleAgent)
-        view.agentEmailTv.setText(agentDetails.emailID)
-        view.agentMobileTv.setText(agentDetails.contactNumber)
-        view.rspNameTv.setText(agentDetails.agentName)
-        view.rspIdTv.setText(agentDetails.corporateName)
-        view.rspAddressTv.setText(agentDetails.address)
+        binding!!.principleAgentTv.setText(agentDetails.principleAgent)
+        binding!!.agentEmailTv.setText(agentDetails.emailID)
+        binding!!.agentMobileTv.setText(agentDetails.contactNumber)
+        binding!!.rspNameTv.setText(agentDetails.agentName)
+        binding!!.rspIdTv.setText(agentDetails.corporateName)
+        binding!!.rspAddressTv.setText(agentDetails.address)
 
     }
 

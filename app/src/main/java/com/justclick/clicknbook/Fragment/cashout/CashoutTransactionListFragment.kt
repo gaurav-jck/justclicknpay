@@ -21,12 +21,11 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
-import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.cashout.model.PayoutListRequestModel
-import com.justclick.clicknbook.Fragment.jctmoney.request.DmtListRequestModel
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.adapter.AutocompleteAdapter
+import com.justclick.clicknbook.databinding.ActivityTxnListBinding
 import com.justclick.clicknbook.model.AgentNameModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.model.RblPrintResponse
@@ -42,7 +41,6 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.activity_txn_list.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -153,8 +151,9 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.activity_txn_list, container, false)
+        var binding=ActivityTxnListBinding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-        view.noRecordTv.setVisibility(View.GONE)
+        binding.noRecordTv.setVisibility(View.GONE)
 
         startDateTv = view.findViewById(R.id.startDateTv)
         noRecordTv = view.findViewById(R.id.noRecordTv)
@@ -205,8 +204,8 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
             }
         }, arrayList)
         layoutManager = LinearLayoutManager(context)
-        view.recyclerView.setLayoutManager(layoutManager)
-        view.recyclerView.setAdapter(listAdapter)
+        binding.recyclerView.setLayoutManager(layoutManager)
+        binding.recyclerView.setAdapter(listAdapter)
         if (arrayList != null && arrayList!!.size == 0) {
             pageStart = 1
             pageEnd = 10
@@ -228,7 +227,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
         } else {
             listAdapter!!.notifyDataSetChanged()
         }
-        view.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
+        binding.recyclerView.addOnScrollListener(recyclerViewOnScrollListener)
         return view
     }
 

@@ -14,6 +14,7 @@ import com.justclick.clicknbook.Fragment.train.adapter.TrainBookingListAdapter
 import com.justclick.clicknbook.Fragment.train.model.PnrResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingListResponseModel
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.FragmentTrainPnrSearchBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
@@ -22,9 +23,6 @@ import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
-import kotlinx.android.synthetic.main.fragment_train_booking_list.view.back_arrow
-import kotlinx.android.synthetic.main.fragment_train_pnr_search.*
-import kotlinx.android.synthetic.main.fragment_train_pnr_search.view.*
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -41,6 +39,7 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
     var loginModel: LoginModel?=null
     var arrayList:ArrayList<TrainBookingListResponseModel.reservationlist>?=null
     var fragView:View?=null
+    var binding:FragmentTrainPnrSearchBinding?=null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,14 +53,15 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
                               savedInstanceState: Bundle?): View? {
         if(fragView==null){
             val view = inflater.inflate(R.layout.fragment_train_pnr_search, container, false)
+            binding=FragmentTrainPnrSearchBinding.bind(view)
             fragView=view
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
             arrayList= ArrayList()
 
-            view.back_arrow.setOnClickListener(this)
-            view.get_tv.setOnClickListener(this)
-            view.res_tv.setOnClickListener(this)
-            view.status_tv.setOnClickListener(this)
+            binding!!.backArrow.setOnClickListener(this)
+            binding!!.getTv.setOnClickListener(this)
+            binding!!.resTv.setOnClickListener(this)
+            binding!!.statusTv.setOnClickListener(this)
 
         }
 
@@ -114,7 +114,7 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
             R.id.back_arrow->
                 parentFragmentManager.popBackStack()
             R.id.get_tv->{
-                var pnr=number_edt.text.toString()
+                var pnr=binding!!.numberEdt.text.toString()
                 if(pnr.isEmpty()){
                     Toast.makeText(context, "Please enter pnr number", Toast.LENGTH_SHORT).show()
                 }else if(pnr.trim().length<10){
@@ -124,7 +124,7 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.res_tv->{
-                var pnr=number_edt.text.toString()
+                var pnr=binding!!.numberEdt.text.toString()
                 if(pnr.isEmpty()){
                     Toast.makeText(context, "Please enter reservation-Id", Toast.LENGTH_SHORT).show()
                 }else if(pnr.trim().length<10){
@@ -134,9 +134,9 @@ class TrainPnrSearchFragment : Fragment(), View.OnClickListener {
                 }
             }
             R.id.statusTv->{
-                if(!number_edt.text.toString().isEmpty()){
+                if(!binding!!.numberEdt.text.toString().isEmpty()){
                     Common.hideSoftKeyboard((context as Activity))
-                    getPnrStatus(number_edt.text.toString())
+                    getPnrStatus(binding!!.numberEdt.text.toString())
                 }else{
                     Toast.makeText(context, "Please enter pnr number", Toast.LENGTH_SHORT).show()
                 }
