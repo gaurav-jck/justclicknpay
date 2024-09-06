@@ -55,11 +55,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
-import com.justclick.clicknbook.Fragment.BankDetailsFragment;
-import com.justclick.clicknbook.Fragment.ContactDetailsFragment;
-import com.justclick.clicknbook.Fragment.SupportQueryFragment;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNeww;
+import com.justclick.clicknbook.BuildConfig;
+import com.justclick.clicknbook.Fragment.profilemenus.BankDetailsFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.CompanyContactFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.ContactDetailsFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.PolicyFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
@@ -89,7 +90,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentSearchFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirCancellationListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirRefundReportFragment;
-import com.justclick.clicknbook.Fragment.BalanceCheckFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.BalanceCheckFragment;
 import com.justclick.clicknbook.Fragment.HomeFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipaySenderDetailFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
@@ -97,23 +98,19 @@ import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
+import com.justclick.clicknbook.Fragment.profilemenus.TermsFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.TrainBookingCheckFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragment;
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
-import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
-import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
-import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
 import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
-import com.justclick.clicknbook.fingoole.view.InsuranceFragment;
-import com.justclick.clicknbook.fingoole.view.InsuranceListFragment;
 import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.jctPayment.Dashboard_Old_Activity;
 import com.justclick.clicknbook.jctPayment.Models.UserInfo;
@@ -163,7 +160,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private FirebaseAuth mFirebaseAuth;
     private Animation animUp, animDown;
     private Context context;
-    private TextView toolbar_title_tv, tv_agency_name, tv_email_id;
+    private TextView toolbar_title_tv, tv_agency_name, tv_email_id, agentCodeTv, mobileTv;
     private ImageView menu_filter;
     private Dialog filterDialog, appUpdateDialog, transAlertDialog;
     private Fragment mobileFragmentNew, agentSearchFragment,
@@ -202,6 +199,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
         menu_filter=  findViewById(R.id.menu_filter);
         tv_agency_name=  findViewById(R.id.tv_agency_name);
         tv_email_id=  findViewById(R.id.tv_email_id);
+        mobileTv=  findViewById(R.id.mobileTv);
+        agentCodeTv=  findViewById(R.id.agentCodeTv);
 //        menu_items_lin_container =  findViewById(R.id.menu_items_lin_container);
 
         menu_filter.setOnClickListener(new View.OnClickListener() {
@@ -215,8 +214,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
         });
         try {
             loginModel= MyPreferences.getLoginData(loginModel,context);
-            tv_agency_name.setText(loginModel.Data.AgencyName);
-            tv_email_id.setText(loginModel.Data.Email+"\n"+"( "+loginModel.Data.DoneCardUser.toUpperCase()+" )");
+            tv_agency_name.setText(loginModel.Data.AgencyName.toUpperCase());
+            tv_email_id.setText(loginModel.Data.Email);
+            agentCodeTv.setText("( "+loginModel.Data.DoneCardUser.toUpperCase()+" )");
+            mobileTv.setText(loginModel.Data.Mobile);
         }catch (NullPointerException e){
 
         }
@@ -321,11 +322,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.home_lin).setOnClickListener(this);
         findViewById(R.id.bank_details_lin).setOnClickListener(this);
         findViewById(R.id.contact_details_lin).setOnClickListener(this);
+        findViewById(R.id.terms_lin).setOnClickListener(this);
+        findViewById(R.id.policy_lin).setOnClickListener(this);
+        findViewById(R.id.company_contact_lin).setOnClickListener(this);
         findViewById(R.id.query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.changePassLin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
+        ((TextView)findViewById(R.id.appVersionTv)).setText("App Version-" + BuildConfig.VERSION_NAME);
 
         try {
             list = getHomeScreenProductMenus();
@@ -693,6 +698,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case R.id.contact_details_lin:
                 replaceFragmentWithBackStack(new ContactDetailsFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.terms_lin:
+                replaceFragmentWithBackStack(new TermsFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.policy_lin:
+                replaceFragmentWithBackStack(new PolicyFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.company_contact_lin:
+                replaceFragmentWithBackStack(new CompanyContactFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.query_lin:

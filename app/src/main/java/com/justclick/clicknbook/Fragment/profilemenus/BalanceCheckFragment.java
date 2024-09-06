@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment;
+package com.justclick.clicknbook.Fragment.profilemenus;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.AgentDetails;
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.utils.Common;
 
@@ -26,6 +27,7 @@ public class BalanceCheckFragment extends Fragment {
     TextView AvlCrd,AvlBal,Add_crd,agent;
     String agentDoneCard;
     private AgentDetails agentDetails;
+    private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -45,6 +47,7 @@ public class BalanceCheckFragment extends Fragment {
         super.onAttach(context);
         try {
             titleChangeListener= (ToolBarTitleChangeListener) context;
+            toolBarHideFromFragmentListener= (ToolBarHideFromFragmentListener) context;
         }catch (ClassCastException e){
 
         }
@@ -57,6 +60,15 @@ public class BalanceCheckFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_balance_check, container, false);
         titleChangeListener.onToolBarTitleChange(getString(R.string.agentBalanceCheckFragmentTitle));
         initializeViews(view);
+
+        toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
+
+        view.findViewById(R.id.back_arrow).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getParentFragmentManager().popBackStack();
+            }
+        });
 
         return view;
     }

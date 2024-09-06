@@ -285,12 +285,12 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                             }
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
-                                otpDialog(LOGIN_SERVICE)
+                                otpDialog()
                             } else {
                                 if (otpDialog!!.isShowing) {
                                     otpDialog!!.dismiss()
                                 }
-                                otpDialog(LOGIN_SERVICE)
+                                otpDialog()
                             }
                         } else {
                             errorPopup(loginModel.Status)
@@ -380,7 +380,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         return true
     }
 
-    private fun otpDialog(TYPE: Int) {
+    private fun otpDialog() {
         otpDialog = Dialog(context!!)
         otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         otpDialog!!.setContentView(R.layout.send_otp_layout)

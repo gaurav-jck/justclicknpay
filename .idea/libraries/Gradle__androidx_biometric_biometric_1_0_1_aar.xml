@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.biometric:biometric:1.0.1@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/1996a61c749f77258f71608d8182cdbc/transformed/biometric-1.0.1/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/85dc8a77778b0014e0d0e2d68efa5ad3/transformed/biometric-1.0.1/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/1996a61c749f77258f71608d8182cdbc/transformed/biometric-1.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/1996a61c749f77258f71608d8182cdbc/transformed/biometric-1.0.1/res" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/1996a61c749f77258f71608d8182cdbc/transformed/biometric-1.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/85dc8a77778b0014e0d0e2d68efa5ad3/transformed/biometric-1.0.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/85dc8a77778b0014e0d0e2d68efa5ad3/transformed/biometric-1.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/85dc8a77778b0014e0d0e2d68efa5ad3/transformed/biometric-1.0.1/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment;
+package com.justclick.clicknbook.Fragment.profilemenus;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,20 +14,20 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ContactDetailsFragment#newInstance} factory method to
+ * Use the {@link PolicyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ContactDetailsFragment extends Fragment {
+public class PolicyFragment extends Fragment {
     private Context context;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
 
-    public ContactDetailsFragment() {
+    public PolicyFragment() {
         // Required empty public constructor
     }
 
     // TODO: Rename and change types and number of parameters
-    public static ContactDetailsFragment newInstance(String param1, String param2) {
-        ContactDetailsFragment fragment = new ContactDetailsFragment();
+    public static PolicyFragment newInstance(String param1, String param2) {
+        PolicyFragment fragment = new PolicyFragment();
         return fragment;
     }
 
@@ -47,7 +47,7 @@ public class ContactDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_contact_details, container, false);
+        View view= inflater.inflate(R.layout.fragment_policy, container, false);
         toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
 
         view.findViewById(R.id.back_arrow).setOnClickListener(new View.OnClickListener() {

@@ -1,0 +1,137 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/terms_light_background"
+    tools:context=".Fragment.profilemenus.BankDetailsFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Company Contact"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/logoImg"
+        android:layout_width="@dimen/logoSizeWidthHome"
+        android:layout_height="55dp"
+        android:src="@drawable/app_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/rel_top"
+        android:layout_marginTop="@dimen/small_margin"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/reachUsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/margin_5dp"
+        app:cardElevation="@dimen/margin_3dp"
+        app:cardBackgroundColor="@color/cardMobileBackground"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        android:layout_below="@+id/logoImg"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:padding="@dimen/medium_margin"
+            android:layout_margin="2dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="REACH US AT"
+                android:fontFamily="@font/raleway_semi_bold"
+                android:textSize="@dimen/textSize_20sp_activity_login"
+                />
+            <ImageView
+                android:id="@+id/imageView_sub_item"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/location_ic_red"
+                android:padding="@dimen/margin_5dp"
+                android:layout_marginTop="@dimen/medium_margin"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Just Click Karo Services Pvt. Ltd.\nDelhi Head Office"
+                android:textColor="@color/app_red_color"
+                android:fontFamily="@font/raleway_semi_bold"
+                android:textSize="@dimen/text_size_14sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/company_address1"
+                android:textColor="@color/grey_dark"
+                android:fontFamily="@font/museo_regular"
+                android:layout_marginTop="@dimen/margin_3dp"
+                android:textSize="@dimen/small_text_size"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="011-43436363 (100 lines), 011-43439393 (100 lines)"
+                android:textColor="@color/app_red_color"
+                android:fontFamily="@font/museo_regular"
+                android:layout_marginTop="@dimen/margin_3dp"
+                android:textSize="@dimen/small_text_size"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/company_address2"
+                android:textColor="@color/app_red_color"
+                android:fontFamily="@font/museo_regular"
+                android:layout_marginTop="@dimen/margin_3dp"
+                android:textSize="@dimen/text_size_15sp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/reachUsView"
+        android:layout_marginRight="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/margin_5dp"
+        app:cardElevation="@dimen/margin_3dp"
+        app:cardBackgroundColor="@color/cardMobileBackground"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        >
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.camera:camera-extensions:1.2.2@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/b96e38c4e00b037c81bf93f35fa70f21/transformed/jetified-camera-extensions-1.2.2/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/8212ce66182671a5777d380aa8d2f47d/transformed/jetified-camera-extensions-1.2.2/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/b96e38c4e00b037c81bf93f35fa70f21/transformed/jetified-camera-extensions-1.2.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/b96e38c4e00b037c81bf93f35fa70f21/transformed/jetified-camera-extensions-1.2.2/res" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/b96e38c4e00b037c81bf93f35fa70f21/transformed/jetified-camera-extensions-1.2.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/8212ce66182671a5777d380aa8d2f47d/transformed/jetified-camera-extensions-1.2.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/8212ce66182671a5777d380aa8d2f47d/transformed/jetified-camera-extensions-1.2.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/8212ce66182671a5777d380aa8d2f47d/transformed/jetified-camera-extensions-1.2.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

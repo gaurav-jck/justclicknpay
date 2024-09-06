@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <corners android:radius="0dp" />
+
+    <solid android:color="@color/drawer_very_light_color" />
+<padding android:left="@dimen/margin_7dp"
+    android:right="@dimen/margin_7dp"
+    android:top="@dimen/margin_7dp"
+    android:bottom="@dimen/margin_7dp"
+    />
+    <size
+        android:width="20dp"
+        android:height="20dp"/>
+</shape>

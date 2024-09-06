@@ -67,6 +67,9 @@
     <color name="contactUsLightBackground">#44284567</color>
     <color name="contactUsYellow">#FEEA3B</color>
 
+<!--    Terms conditions , privacy policy-->
+    <color name="terms_light_background">#22eeeeee</color>
+
     <!--Mobile Fragment-->
     <color name="mobile_cardview_background">#90000000</color>
     <color name="mobile_background_image_color">#aa000000</color>
@@ -236,7 +239,7 @@
     <color name="red_light_color">#EF4040</color>
     <color name="green_color">#65B741</color>
     <color name="green_very_light_color">#C1F2B0</color>
-    <color name="drawer_very_light_color">#f8f8f8</color>
+    <color name="drawer_very_light_color">#E9EEF3</color>
     <color name="home_item_very_light_color">#E2E6EB</color>
     <color name="home_background_color">#DFE6E8</color>
 

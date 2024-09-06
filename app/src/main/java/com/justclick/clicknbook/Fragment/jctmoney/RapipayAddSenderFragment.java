@@ -159,6 +159,7 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
             }
         });
 
+        otpDetailTv.setText("One Time Password ( OTP ) has been send to your mobile "+number_edt.getText().toString()+".\\nPlease enter the same here.");
         if(commonParams.getApiService().equals("1")){
             number_edt.setEnabled(false);
             otpLin.setVisibility(View.VISIBLE);         // new change

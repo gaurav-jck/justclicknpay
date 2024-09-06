@@ -1,7 +1,6 @@
-package com.justclick.clicknbook.Fragment;
+package com.justclick.clicknbook.Fragment.profilemenus;
 
 import android.content.Context;
-import android.media.tv.CommandResponse;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,21 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
-import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
-import com.justclick.clicknbook.Fragment.creditcard.CheckCredentialResponse;
-import com.justclick.clicknbook.Fragment.creditcard.CreditCardRequest;
-import com.justclick.clicknbook.Fragment.creditcard.CreditCardTxnFragment;
-import com.justclick.clicknbook.Fragment.creditcard.GenerateOtpResponse;
-import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.SupportQueryRequest;
 import com.justclick.clicknbook.utils.Common;
-import com.justclick.clicknbook.utils.MyPreferences;
 
 import okhttp3.ResponseBody;
 

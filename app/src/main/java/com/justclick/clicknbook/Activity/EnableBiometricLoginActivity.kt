@@ -22,7 +22,10 @@ import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.Window
@@ -51,6 +54,8 @@ import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
+import com.justclick.clicknbook.utils.GenericKeyEvent
+import com.justclick.clicknbook.utils.GenericTextWatcher
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import okhttp3.ResponseBody
@@ -160,13 +165,13 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                 if (otp != null) {
                     loginRequestModel.OTP = EncryptionDecryptionClass.Encryption(otp, context)
                 }
-                showCustomDialog()
-                NetworkCall().callMobileService(loginRequestModel, ApiConstants.LOGIN, context
+                NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
+                    context, true,
                 ) { response, responseCode ->
                     if (response != null) {
                         responseHandler(response, LOGIN_SERVICE)
                     } else {
-                        hideCustomDialog()
+//                        hideCustomDialog()
                         Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -195,13 +200,13 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
             loginRequestModel.Password = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginPassword(context), context)
             loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
             loginRequestModel.VersionCode = Common.getVersionCode(context)
-            showCustomDialog()
-            NetworkCall().callMobileService(loginRequestModel, ApiConstants.LOGIN, context
+            NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
+                context, true,
             ) { response, responseCode ->
                 if (response != null) {
                     responseHandler(response, LOGIN_SERVICE)
                 } else {
-                    hideCustomDialog()
+//                        hideCustomDialog()
                     Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -219,7 +224,7 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                         response.string(),
                         LoginModel::class.java
                     )
-                    hideCustomDialog()
+                    //                  hideCustomDialog()
                     if (loginModel != null) {
                         if (loginModel.Data != null && loginModel.StatusCode.equals("0", ignoreCase = true)) {
                             //store values to shared preferences
@@ -301,28 +306,89 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         otpDialog!!.setContentView(R.layout.send_otp_layout)
         otpDialog!!.setCancelable(false)
-        val otp_edt = otpDialog!!.findViewById<View>(R.id.otp_edt) as EditText
+        val otpEdt1 = otpDialog!!.findViewById<EditText>(R.id.otpEdt1)
+        val otpEdt2 = otpDialog!!.findViewById<EditText>(R.id.otpEdt2)
+        val otpEdt3 = otpDialog!!.findViewById<EditText>(R.id.otpEdt3)
+        val otpEdt4 = otpDialog!!.findViewById<EditText>(R.id.otpEdt4)
+        val otpErrorTv = otpDialog!!.findViewById<TextView>(R.id.otpErrorTv)
         val submit = otpDialog!!.findViewById<View>(R.id.submit_btn) as Button
+        val resendOtpTv = otpDialog!!.findViewById<TextView>(R.id.resendOtpTv)
+        val timerTv = otpDialog!!.findViewById<TextView>(R.id.timerTv)
         val dialogCloseButton = otpDialog!!.findViewById<View>(R.id.close_btn) as ImageButton
+        object : CountDownTimer(31000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timerTv.visibility = View.VISIBLE
+                timerTv.text = "Resend otp in :" +(millisUntilFinished/1000) + " seconds"
+                resendOtpTv.visibility = View.GONE
+            }
+
+            override fun onFinish() {
+                timerTv.visibility = View.GONE
+                resendOtpTv.visibility = View.VISIBLE
+            }
+        }.start()
+
+        //GenericTextWatcher here works only for moving to next EditText when a number is entered
+//first parameter is the current EditText and second parameter is next EditText
+        otpEdt1.addTextChangedListener(GenericTextWatcher(otpEdt1, otpEdt2))
+        otpEdt2.addTextChangedListener(GenericTextWatcher(otpEdt2, otpEdt3))
+        otpEdt3.addTextChangedListener(GenericTextWatcher(otpEdt3, otpEdt4))
+        otpEdt4.addTextChangedListener(GenericTextWatcher(otpEdt4, null))
+
+//GenericKeyEvent here works for deleting the element and to switch back to previous EditText
+//first parameter is the current EditText and second parameter is previous EditText
+        otpEdt1.setOnKeyListener(GenericKeyEvent(otpEdt1, null))
+        otpEdt2.setOnKeyListener(GenericKeyEvent(otpEdt2, otpEdt1))
+        otpEdt3.setOnKeyListener(GenericKeyEvent(otpEdt3, otpEdt2))
+        otpEdt4.setOnKeyListener(GenericKeyEvent(otpEdt4, otpEdt3))
+        otpEdt1.requestFocus()
+        //        otpEdt1.setFocusableInTouchMode(true);
+
+//        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm.showSoftInput(otpEdt1, InputMethodManager.SHOW_IMPLICIT);
+        val inputMethodManager =
+            context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        resendOtpTv.setOnClickListener { view: View? ->
+            login(
+                null
+            )
+        }
+        otpEdt4.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {
+                var otp = ""
+                otp = otp + otpEdt1.text.toString()
+                otp = otp + otpEdt2.text.toString()
+                otp = otp + otpEdt3.text.toString()
+                otp = otp + otpEdt4.text.toString()
+                if (otp.length == 4) {
+                    otpErrorTv.visibility = View.INVISIBLE
+                    login(otp)
+                }
+            }
+
+            override fun afterTextChanged(editable: Editable) {}
+        })
         submit.setOnClickListener {
             Common.preventFrequentClick(submit)
-            try {
-                val inputMethodManager =
-                    context!!.getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(
-                    otpDialog!!.getWindow()!!.currentFocus!!.windowToken, 0
-                )
-            } catch (e: NullPointerException) {
-            }
+            Common.hideSoftKeyboard(context as MyLoginActivityNew)
+            var otp = ""
+            otp += otpEdt1.text.toString()
+            otp += otpEdt2.text.toString()
+            otp += otpEdt3.text.toString()
+            otp += otpEdt4.text.toString()
             if (Common.checkInternetConnection(context)) {
-                if (otp_edt.text.toString().trim { it <= ' ' }.length > 3) {
-                    login(otp_edt.text.toString().trim { it <= ' ' })
+                if (otp.length > 3) {
+                    otpErrorTv.visibility = View.INVISIBLE
+                    login(otp)
                 } else {
-                    Toast.makeText(context, getString(R.string.empty_and_invalid_otp), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, R.string.empty_and_invalid_otp, Toast.LENGTH_LONG).show()
+                    otpErrorTv.visibility = View.VISIBLE
                 }
                 //                    forgetDialog.dismiss();
             } else {
-                Toast.makeText(context, getString(R.string.no_internet_message), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_LONG).show()
             }
         }
         dialogCloseButton.setOnClickListener { // TODO Auto-generated method stub

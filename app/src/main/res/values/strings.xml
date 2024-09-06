@@ -132,7 +132,7 @@
     <string name="nav_chatting">Chatting</string>
     <string name="nav_logout">Logout</string>
     <string name="About_us">About Us</string>
-    <string name="terms_and_condition">Terms and Conditions</string>
+    <string name="terms_and_condition">Terms &amp; Conditions</string>
     <string name="accept_terms_and_condition">I accept</string>
     <string name="terms_condition"><b><i><u>Terms and Conditions</u></i></b></string>
     <string name="nav_product_balance_check">Product Balance Check</string>
@@ -420,7 +420,7 @@
 
     <!--<string name="action_settings">Settings</string>-->
 
-<!--    Contact us details-->
+    <!--    Contact us details-->
     <string name="rail_email">rail@justclicknpay.in\nkamal.k@justclicknpay.in</string>
     <string name="hotel_email">hotels@justclicknpay.in</string>
     <string name="bus_email">rail@justclicknpay.in\nkamal.k@justclicknpay.in</string>
@@ -801,41 +801,102 @@ Rs.40/-\n
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="lorem_ipsum">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
-        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
-        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
-        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
-        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
-        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
-        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
-        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
-        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
-        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
-        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
-        bibendum, vel congue leo egestas.\n\n
-        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
-        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
-        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
-        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
-        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
-        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
-        est.\n\n
-        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
-        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
-        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
-        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
-        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
-        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
-        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
-        convallis.\n\n
-        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
-        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
-        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
-        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
-        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
-        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
-        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
-    </string>
+    <!--    terms policy-->
+    <string name="terms1"><b>JustClicknPay</b> will not disclose personal information to third parties without the user’s permission, except as provided in this policy, and will take appropriate measures to safeguard the personal information shared with us. When JustClicknPay requests sensitive information, commercially reasonable steps will be taken to establish a secure connection with the user’s web browser to assure privacy.\n
+        <b>JustClicknPay</b> respects your privacy and understands the trust you have reposed in us to protect information that may jeopardize your personal privacy by the disclosure of personal information. Therefore, we assure you that we take all possible measures to make sure we protect your right to privacy by taking utmost precautionary measures. We follow the most appropriate standards to make sure to protect this information.\n
+
+As an informed and discerning user, you can visit our portal and browse through our offerings without letting us know who you are personally. Only in some cases we do keep a track of the I.P. address of your machine, the time spent from the computer on the session, information you browsed etc. to collect data for analysis. But, this at no time means that we know who you are in person.\n
+
+While you purchase certain services from us and/ or if you do register with us for any reason, your personal information like name, address, phone no. , email etc. we may use this information for the purpose of analysis, communication or any other purpose as deemed necessary.\n
+
+This information may also be shared by us with travel suppliers once you purchase services from us to make sure we are able to provide you the desired services appropriately. But, at no stage would we disclose, share or sell any information pertaining to you to any third party. This information may only be shared by us in the event of a legal proceeding and on the provision of necessary legal documents or in case we perceive any harm being caused to the community by a user.\n
+
+In some cases it is possible that we or one of our affiliate companies/ deployed agencies may contact you for the purpose of updating you with offers or information that we may deem beneficial to you.\n
+
+It is our goal to make you feel confident and comfortable while browsing or purchasing from our portal. And, it is for this reason, we update our systems with the latest safety and security features at all times to enhance your confidence in us.</string>
+    <string name="terms2_heading">DISCLAIMER OF WARRANTIES/LIMITATION OF LIABILITY</string>
+    <string name="terms2"><b>JustClicknPay</b> has endeavored to ensure that all the information provided by it is correct. But <b>JustClicknPay</b> neither warrants nor makes any representations regarding the quality, accuracy or completeness of any data or information. <b>JustClicknPay</b> makes not warrant, express or implied concerning the webApp/Site and/or its contents and disclaim all warranties of fitness for a particular purpose and warranties of merchantability in respect of services, including any liability, responsibility or any other claim, whatsoever, in respect of any loss, whether direct or consequential, to any user or any other person, arising out of or from the use of any such information.\n
+
+<b>JustClicknPay</b> does not endorse any advertiser on its webApp/Site in any manner. The users are requested to verify the accuracy of all information on their own before undertaking any reliance on such information.</string>
+    <string name="terms3_heading">OTHERS’ RIGHTS</string>
+    <string name="terms3">If this App/Site contains access to mailing lists or other massage or communication facilities, you agree to use the same only to send and receive massages and material that are proper and related thereto by way of example you agree that when using the Site or any facility here from, you shall not do any of the following.\n
+
+1. Defame, abuse, harass, stalk or otherwise violate the legal rights (such as right of privacy and publicity) of others.
+\n2. Publish, post, distribute or disseminate any defamatory, infringing, obscene, indecent or unlawful material or information.
+\n3. Upload or attach files that contain software or other material protected by intellectual property law (or by right of privacy and publicity) unless the User owns or controls the rights thereto or has received all consents there for as may be required by law.
+\n4. Upload or attach files that contains viruses, corrupted file or any other similar software or programs that may damage the operation of another’s computer.
+\n5. Delete any author attributions, legal notice or proprietary designations or labels in any file that is uploaded.
+\n6. Falsify the origin or source of software or other material contain in a file that is uploaded.
+\n7. Advertise or offer to sell any goods or services, or conduct or forward surveys, contents or chain letters or download any file posted by another user of a Forum that the user know or reasonably should know cannot be legally distributed in such manner.</string>
+    <string name="terms4_heading">CONTESTS AND INTERACTIONS</string>
+    <string name="terms4">This App/Site may contain contests that require you to send an material or information about yourself or offer prizes. Each contests has it own rules which you must read and agree to before you participate.</string>
+    <string name="terms5_heading">DISCLAIMER</string>
+    <string name="terms5">The material in this App/Site could include technical accuracies or typographical errors. <b>JustClicknPay</b> may make changes or improvements at any time.
+
+\nThe material on this App/Site are provided on “As is” basis without warranties of any kind either expressed or implied information, software, products and services contained on this webApp/Site, and the inclusion or offering of any products or services on this webApp/Site does not constitute any endorsement or recommendation of such products or services by <b>JustClicknPay</b> and their respective suppliers. To the fullest extent permissible pursuant to applicable. <b>JustClicknPay</b> disclaims all warranties on merchantability, relating to the information and description of the air or any other travel products displayed on this webApp/Site (including without limitation, the pricing, photograph, general product description etc.) much of which information is provided by respective customers. <b>JustClicknPay</b> affiliates and their respective customers make no guarantees about the availability of specific products and services.
+
+\n<b>JustClicknPay</b> may make improvements and/or changes on this webApp/Site at any time.
+
+\n<b>JustClicknPay</b> does not warrant that the functions contained in this App/Site will be uninterrupted or error free, that defects will be corrected, or that this site or the servers that make it available are free of viruses or other harmful components, but shall endeavor to ensure your fullest satisfaction. <b>JustClicknPay</b> does not warrant or make any representation regarding the use of or the result of the use of the material on the App/Site in terms of their correctness, accuracy, reliability, or otherwise in so far as such material is derived from the service providers such as airlines and tour operators.
+
+\nYou acknowledge that this webApp/Site will provide only on the basis set out in these terms and conditions. Your uninterrupted access or use of this webApp/Site on this basis may be prevented by certain factors outside our reasonable control including, without limitation, the unavailability, inoperability or interruption of the internet or other telecommunication services or as a result of any maintenance or other service work carried out on this webApp/Site. <b>JustClicknPay</b> does not accept any responsibility and will not be liable for any loss or damage whatsoever arising out of or in connection with any ability/inability to access or to use the site. You also acknowledge that through this site. <b>JustClicknPay</b> merely provides intermediary service orders in order to facilitate highest quality service to you. <b>JustClicknPay</b> is not the last mile service provider to you and therefore <b>JustClicknPay</b> shall not to be responsible for any lack of deficiency of services provided by any person (airline, travel and tour operator, similar agency) you shall engage or hire or appoint pursuant to or resulting from, the material available in this site.
+
+\n<b>JustClicknPay</b> will not be liable to you or to any other person for any direct, incident, punitive or consequential loss, damage, cost or expenses of any kind whatsoever and howsoever caused from out of usage of this site.
+
+\n<b>JustClicknPay</b> may add to change or remove any part of these Terms &amp; Conditions of use at any time, without notice. Any changes to these Terms and condition of use or any Terms posted on this site apply as soon as they are posted. By continuing to use this site after any changes are posted. You are indicating your acceptance of these changes.
+
+\n<b>JustClicknPay</b> may add change, discontinue, remove or suspend any other content posted on this site, including features and specific terms described or depicted on this site, temporarily or permanently, at any time without notice and without liability.
+
+\n<b>JustClicknPay</b> reserve the right to undertake all necessary steps to ensure that the security, safety, and integrity of <b>JustClicknPay</b> systems as well as its client interest are an remain well-protected.
+
+\nTowards this end, <b>JustClicknPay</b> may take various steps to verify and confirm the authenticity, enforceability and validity of order placed by you.
+
+\nFinally, We as a merchant shall be under no liability whatsoever in respect of any loss or damage arising directly or indirectly out of the decline of authorization for any Transaction, on Account of the cardholder having exceeded the preset limit mutually agreed by us with our acquiring bank from time to time.</string>
+    <string name="terms6_heading">TERMS AND CONDITIONS</string>
+    <string name="terms6">This App is published and maintained by <b>JustClicknPay</b>, a company incorporated and existing in accordance with the laws of the Republic of India. When you access browse or use this site you accept, without limitation or qualification the terms and conditions set forth below.
+        \nThis user agreement constitutes a binding contract between you the user and <b>JustClicknPay</b> with regards to the use of various services that are provided by <b>JustClicknPay</b>.</string>
+    <string name="terms7_heading">PAYMENT UPLOAD</string>
+    <string name="terms7">Despite Your organization’s contact number(s) are on Do Not Call Registry, You consent to be contacted by <b>JustClicknPay</b> through phone calls, SMS notifications or any other means of communication, in respect to the services provided by <b>JustClicknPay</b>.</string>
+    <string name="terms8_heading">MODIFICATION OF TERMS</string>
+    <string name="terms8"><b>JustClicknPay</b> reserves the right to change the terms, conditions and notices under which the services are offered through the webApp/Site including but not limited the charge for the services provided through the webApp/Site. The user shall be responsible for regularly reviewing the terms and conditions.</string>
+    <string name="terms9_heading">PRIVACY POLICY</string>
+    <string name="terms9">The user hereby consent, expresses and agrees that he has read and fully understand the privacy policy of <b>JustClicknPay</b>. The user further consents that the terms and contents of such privacy policy are acceptable to him.</string>
+    <string name="terms10_heading">APP AND ITS CONTENTS</string>
+    <string name="terms10">This app is only for your personal use. You shall not distribute exchange, modify, sell or transmit anything you copy from this App/Site, including but not limited to any tax, images, audio and video for any business, commercial or public purpose.
+
+\nAs long as you comply with the terms of these Terms and Conditions of Use, <b>JustClicknPay</b> grant you a non-exclusive, non transferable, limited right to enter, view and use this App/Site. You agree not to interrupt or attempt to interrupt the operation of this App/Site in any way.</string>
+    <string name="terms11_heading">OWNERSHIP</string>
+    <string name="terms11">All Material on this App/Site, including but not limited to audio, images, software, text, icons and such like (the “content”), are protected by copyright under international conventions and copyright loss.
+
+\nThere are a number of proprietary logos, service marks and trademarks found on this App/Site whether owned/used by <b>JustClicknPay</b> otherwise. By displaying them on this App/Site.\n<b>JustClicknPay</b> is not granting you any license to utilize those proprietary logos, service marks or trademarks. Any unauthorized use of the Contents may violate copyright laws, trademark laws, the laws of privacy and publicity, and civil and criminal statutes.</string>
+    <string name="terms12_heading">USER’S MATERIAL</string>
+    <string name="terms12">Are prohibited from posting or transmitting any defamatory, libelous, obscene, pornographic, profane, threatening or unlawful material or any material that could constituted or encourage conduct that would be considered a criminal offence or give rise to civil liability, or otherwise violate any law.
+
+\n<b>JustClicknPay</b> assumes no liability or responsibility arising from the contents of any communication containing any defamatory, erroneous, inaccurate, libelous, obscene or profane material. <b>JustClicknPay</b> may change, edit, or remove any user material or conversations that are illegal, indecent, obscene or offensive, or that violates Just Click Karo policies in any way. <b>JustClicknPay</b> will fully cooperate with any law enforcement authorities or court order requesting or directing <b>JustClicknPay</b> to disclose the Identity of any one posting such material.</string>
+    <string name="terms13_heading">JustClicknPay RIGHTS</string>
+    <string name="terms13">If you send any communication or material to the App/Site by electronic mail or otherwise, including any comments, data, question, suggestion or the like or such communication are and will be treated by <b>JustClicknPay</b> and non confidential. You hereby give up any and all claim that any use of such material violates any of your rights including moral rights, privacy rights, proprietary or other property rights, rights to credit for material or ideas or any other right, including the right to approve the way <b>JustClicknPay</b> uses such material. Any material submitted to this App/Site may be adapted, broadcast, changed, disclose, copied, licensed, performed, posted, published, soled, transmitted all use by <b>JustClicknPay</b> anywhere in the world, in any medium, forever.</string>
+    <string name="terms14_heading">TRANSMITTED MATERIAL</string>
+    <string name="terms14">Internet transmissions are never completely private or secure. You understand that any massage or information you send to this App/Site may be read or intercepted by others unless th ere is a special notice that a particular massage (for example, credit card information) is encrypted (send in code). Sending a message to <b>JustClicknPay</b> does not cause Just Click Karo to have any special responsibility to you.
+
+\nThe copyright of the contents of this webApp/Site belong to <b>JustClicknPay</b>. Accordingly <b>JustClicknPay</b> reserve or rights. Copying of part or all the contents of this webApp/Site without permission of <b>JustClicknPay</b> is prohibited except to the extent that such copying/printing is necessary for the purpose of availing of the paid services provided.</string>
+    <string name="terms15_heading">CANCELLATION AND REFUNDS</string>
+    <string name="terms15">If you have cancelled the booking directly with the airline, you would need to inform <b>JustClicknPay</b> of the same. Please mail us at <b>support@justclicknpay.in</b> to inform us the cancellation, under Special Claims. You can also submit request for Special Claims against (NO SHOW) unutilized ticket, and flight not operational cases. On receiving your confirmation, <b>JustClicknPay</b> will validate the refund amount with the airline and then process the refund to your account in the form of credit note. Please note that <b>JustClicknPay</b> shall charge Rs. 500 per sector per passenger as a cancellation service fee over and above the individual airline cancellation fee. The credit note generated will not have any validity which will be adjusted in new bookings.\n</string>
+
+
+    <string name="policy"><b>What personal information does <b>JustClicknPay</b> gather from me and how is this information used?</b>
+\nWhen browsing our site, you are not required to provide any personal information unless and until you choose to make a purchase or sign up for one of our e-mail newsletters or other services as described above. A valid credit card is required to make a purchase on our site.
+      \n\n<b>With whom (if anyone) will my personal information be shared?</b>
+\nWhen you reserve or purchase travel services through <b>JustClicknPay</b>, we provide to the travel agency or other involved third party only that portion of your personal information that is needed for the successful fulfillment of your travel arrangements.
+       \n\n<b>What safeguards are in place to protect the loss, misuse or alteration of your information?</b>
+\nAll personal information you provide to <b>JustClicknPay</b> is transmitted using SSL (Secure Socket Layer) encryption. SSL is a proven coding system that lets your browser automatically encrypt, or scramble, data before you send it to us. In addition, when you make travel purchases on <b>JustClicknPay</b>, you are protected.
+       \n\n<b>Making a Booking?</b>
+\nIn order to purchase travel and related services through our site, you must provide us with certain personal information such as your name, your credit card number and expiration date, your telephone number, your e-mail address and the name or names of the person(s) traveling (if not you). We require this information so that we can process, fulfill and confirm your reservations and transactions and keep you informed of each transaction’s status.
+       \n\n<b>What other information should I know about my privacy?</b>
+\n<b>JustClicknPay</b> contains links to other web sites. Please note that when you click on one of these links, you are entering another web site for which <b>JustClicknPay</b> has no responsibility. We encourage you to read the privacy statements of all such sites as their policies may be materially different from this Privacy Policy. Of course, you are solely responsible for maintaining the secrecy of your passwords and credit card numbers. In addition to the circumstances described above, <b>JustClicknPay</b> may disclose member information if required to do so by law, court order, as requested by other government or law enforcement authority.
+
+\n\nThank you for Choosing Us.\n</string>
+
+    <string name="company_address1">UNIT NO.884-885,8th FLOOR\nAGGARWAL MILLENNIUM TOWER-II,\nNETAJI SUBHASH PLACE, PITAM PURA, DELHI-110034</string>
+    <string name="company_address2">For Packages:- 011-43436455 ,011-43436457,011-43436466,011-43436475</string>
 
 </resources>

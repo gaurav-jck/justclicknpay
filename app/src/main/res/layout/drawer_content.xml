@@ -4,32 +4,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/color_white"
+    android:background="@color/drawer_very_light_color"
     android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@drawable/icon_drawer"
         >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#606BA7F6"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_vertical"
+        android:gravity="center"
+        android:visibility="visible"
+        android:layout_marginRight="@dimen/small_text_size"
         >
 <!--#302c67b5-->
 <!--#902c67b5-->
         <ImageView
         android:id="@+id/messengerImageView"
-        android:layout_marginLeft="@dimen/size_20dp"
         android:layout_marginTop="@dimen/medium_margin"
             android:layout_width="@dimen/drawer_logo_height"
         android:layout_height="@dimen/drawer_logo_height"
@@ -46,25 +41,43 @@
 
         <TextView
             android:id="@+id/tv_agency_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/iv_agent_icon"
-            android:text="@string/drawer_title_name"
-            android:layout_marginLeft="@dimen/drawer_content_left_margin"
+            android:text="JustClicknay"
             android:layout_marginTop="@dimen/small_margin"
-            android:textColor="@color/color_white"
-            android:textSize="@dimen/drawer_content_text_size"/>
+            android:textColor="@color/black_text_color"
+            android:fontFamily="@font/raleway_semi_bold"
+            android:textSize="@dimen/text_size_18sp"/>
 
         <TextView
             android:id="@+id/tv_email_id"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/drawer_title_email"
-            android:textColor="@color/color_white"
+            android:textColor="@color/black_text_color"
             android:layout_marginTop="@dimen/very_small_margin"
-            android:layout_marginBottom="@dimen/large_margin"
-            android:textSize="@dimen/drawer_content_text_size"
-            android:layout_marginLeft="@dimen/drawer_content_left_margin"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_15sp"
+            />
+        <TextView
+            android:id="@+id/agentCodeTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_title_email"
+            android:textColor="@color/black_text_color"
+            android:layout_marginTop="@dimen/margin_2dp"
+            android:textSize="@dimen/small_text_size"
+            />
+        <TextView
+            android:id="@+id/mobileTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_title_email"
+            android:textColor="@color/black_text_color"
+            android:layout_marginTop="@dimen/very_small_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
+            android:textSize="@dimen/text_size_15sp"
             />
     </LinearLayout>
     </RelativeLayout>
@@ -77,6 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginLeft="@dimen/margin_7dp"
+            android:layout_marginRight="@dimen/margin_7dp"
             android:paddingBottom="@dimen/medium_margin">
 
             <LinearLayout
@@ -85,27 +100,39 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/large_margin"
                 android:paddingLeft="@dimen/large_margin"
-                android:paddingTop="@dimen/small_margin"
-                android:paddingBottom="@dimen/small_margin"
+                android:paddingTop="@dimen/margin_7dp"
+                android:paddingBottom="@dimen/margin_7dp"
                 android:visibility="visible"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
 
                 <ImageView
                     android:id="@+id/home_img"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_home_black" />
+                    app:srcCompat="@drawable/ic_home_black"
+                    android:background="@drawable/solid_circle_drawer_background"/>
 
                 <TextView
                     android:id="@+id/home_tv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/nav_home"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
 
             </LinearLayout>
 
@@ -118,25 +145,35 @@
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:visibility="visible"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
 
                 <ImageView
                     android:id="@+id/account_img"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_rupee" />
+                    app:srcCompat="@drawable/ic_icon_rupee"
+                    android:background="@drawable/solid_circle_drawer_background"/>
 
                 <TextView
                     android:id="@+id/account_tv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/nav_balance"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -148,25 +185,36 @@
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:visibility="gone"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
 
                 <ImageView
                     android:id="@+id/credit_request_img"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    android:src="@drawable/ic_wallet_border" />
+                    android:src="@drawable/ic_wallet_border"
+                    android:background="@drawable/solid_circle_drawer_background"/>
 
                 <TextView
                     android:id="@+id/credit_request_tv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/nav_agent_credit_request"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
 
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -178,25 +226,36 @@
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:visibility="gone"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
 
                 <ImageView
                     android:id="@+id/deposit_request_img"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_cash_black" />
+                    app:srcCompat="@drawable/ic_icon_cash_black"
+                    android:background="@drawable/solid_circle_drawer_background"/>
 
                 <TextView
                     android:id="@+id/deposit_request_tv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/nav_agent_deposit_request"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
 
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <!--Menu item container-->
@@ -215,23 +274,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:visibility="gone"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:id="@+id/iv_chatting"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    android:src="@drawable/chat_icon" />
+                    android:src="@drawable/chat_icon"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/tv_chatting"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/nav_chatting"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -242,22 +314,33 @@
                 android:paddingLeft="@dimen/large_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/bank_account_icon" />
+                    app:srcCompat="@drawable/bank_account_icon"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/bankDetailsTv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Bank Details"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
 
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -268,22 +351,141 @@
                 android:paddingLeft="@dimen/large_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/contact_us_vector" />
+                    app:srcCompat="@drawable/contact_us_vector"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/contactDetailsTv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Contact Us"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/terms_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
+                >
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/terms_ic"
+                    android:background="@drawable/solid_circle_drawer_background"/>
+                <TextView
+                    android:id="@+id/termsTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/terms_and_condition"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/policy_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
+                >
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/policy_ic"
+                    android:background="@drawable/solid_circle_drawer_background"/>
+                <TextView
+                    android:id="@+id/policyTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/privacy_policy"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/company_contact_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
+                >
+                <ImageView
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    app:srcCompat="@drawable/location_ic"
+                    android:background="@drawable/solid_circle_drawer_background"/>
+                <TextView
+                    android:id="@+id/reachUsTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Company Contact"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -294,23 +496,33 @@
                 android:paddingLeft="@dimen/large_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:id="@+id/iv_query"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/query_support" />
+                    app:srcCompat="@drawable/query_support"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/tv_query"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Query!"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
@@ -321,39 +533,51 @@
                 android:paddingLeft="@dimen/large_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/drawer_very_light_color"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/change_password_iv" />
+                    app:srcCompat="@drawable/change_password_iv"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/changePassTv"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Change Password"
                     android:textSize="@dimen/drawer_content_text_size"
                     android:textColor="@color/main_text_color"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
-
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/logout_lin"
+                android:id="@+id/logout_linold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/medium_margin"
                 android:paddingLeft="@dimen/large_margin"
                 android:paddingTop="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
-                android:background="@color/drawer_very_light_color"
+                android:visibility="gone"
+                android:background="@drawable/white_round_button_background"
                 >
                 <ImageView
                     android:id="@+id/iv_logout"
                     android:layout_width="@dimen/drawer_image_size"
                     android:layout_height="@dimen/drawer_image_size"
-                    app:srcCompat="@drawable/ic_icon_logout" />
+                    app:srcCompat="@drawable/ic_icon_logout"
+                    android:background="@drawable/solid_circle_drawer_background"/>
                 <TextView
                     android:id="@+id/tv_logout"
                     android:layout_width="match_parent"
@@ -365,6 +589,50 @@
                     android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/appVersionTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1.2.3"
+                android:padding="@dimen/small_margin"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:textColor="@color/black_text_color"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_13sp"
+                />
+<!--            android:textColor="@color/app_red_color_light"-->
+
+            <LinearLayout
+                android:id="@+id/logout_lin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:background="@drawable/white_round_button_background"
+                android:padding="@dimen/small_margin"
+                >
+                <TextView
+                    android:id="@+id/logoutTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Logout"
+                    android:padding="@dimen/small_margin"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/app_red_color_light"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/text_size_14sp"
+                    />
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    app:srcCompat="@drawable/ic_logout_red"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin" />
+            </LinearLayout>
+
 
         </LinearLayout>
 
