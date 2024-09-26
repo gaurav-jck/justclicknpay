@@ -178,7 +178,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
                 R.id.statusTv->{
-                    if(data.txnStatus.equals("0")){
+                    if(data.txnStatus.equals("0") || data.txnAmount==1.0f){
                         Toast.makeText(context, "Status check is not valid", Toast.LENGTH_SHORT).show()
                     }else{
                         statusPosition=position
@@ -489,7 +489,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
     fun callAgent(transactionListRequestModel: DmtListRequestModel?, progress: Boolean) {
 
 //        transactionListRequestModel!!.setAgentCode("JC0A39395") // hardcode
-//        transactionListRequestModel!!.setAgentCode("jc0o188") // hardcode
+//        transactionListRequestModel!!.setAgentCode("jc0o187") // hardcode
         transactionListRequestModel!!.setUserType(loginModel!!.Data.UserType)
 //        transactionListRequestModel!!.setUserType("OOU")
 //        transactionListRequestModel!!.TxnStatus="Refund Pending"

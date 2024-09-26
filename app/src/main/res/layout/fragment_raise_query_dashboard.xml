@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.train.TrainDashboardFragment"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
+        android:paddingTop="@dimen/very_small_margin"
+        android:paddingBottom="@dimen/very_small_margin"
+        >
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/size_1dp"
+            app:srcCompat="@drawable/arrow_left_back" />
+
+        <TextView
+            android:id="@+id/fromStationTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/large_margin"
+            android:layout_toRightOf="@+id/back_arrow"
+            android:padding="@dimen/medium_margin"
+            android:text="Query Dashboard"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/simple_content_text_size" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/train_dashboard1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin_40dp"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:gravity="center_vertical">
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:cardCornerRadius="@dimen/margin_5dp"
+                    app:cardElevation="@dimen/margin_3dp"
+                    app:cardBackgroundColor="@color/cardMobileBackground"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    >
+                    <LinearLayout
+                        android:id="@+id/raiseQuery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        >
+                        <ImageView
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/query_support2"
+                            android:padding="@dimen/margin_10dp"
+                            android:layout_marginTop="@dimen/margin_5dp"
+                            android:background="@drawable/train_circle_background1"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Raise a Query"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="@dimen/small_margin"
+                            android:textColor="@color/train_dashboard222"
+                            android:minLines="2"
+                            />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:cardCornerRadius="@dimen/margin_5dp"
+                    app:cardElevation="@dimen/margin_3dp"
+                    app:cardBackgroundColor="@color/cardMobileBackground"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:layout_marginTop="@dimen/small_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    >
+                <LinearLayout
+                    android:id="@+id/getTicket"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="3dp"
+                    >
+                    <ImageView
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/train_vector_dashboard4"
+                        android:padding="@dimen/margin_10dp"
+                        android:layout_marginTop="@dimen/margin_5dp"
+                        android:background="@drawable/train_circle_background4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Get Ticket"
+                        android:gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/small_margin"
+                        android:textColor="@color/train_dashboard333"
+                        android:minLines="2"
+                        />
+                </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

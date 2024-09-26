@@ -60,6 +60,7 @@ import com.justclick.clicknbook.Fragment.profilemenus.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.CompanyContactFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.ContactDetailsFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.PolicyFragment;
+import com.justclick.clicknbook.Fragment.profilemenus.raisequery.RaiseQueryDashboardFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.SupportQueryFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
@@ -326,6 +327,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.policy_lin).setOnClickListener(this);
         findViewById(R.id.company_contact_lin).setOnClickListener(this);
         findViewById(R.id.query_lin).setOnClickListener(this);
+        findViewById(R.id.raise_query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.changePassLin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
@@ -714,6 +716,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case R.id.query_lin:
                 replaceFragmentWithBackStack(new SupportQueryFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case R.id.raise_query_lin:
+                replaceFragmentWithBackStack(new RaiseQueryDashboardFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.changePassLin:

@@ -215,6 +215,7 @@
     <string name="action_download_aeps_txn_excel">Download Txn Register</string>
     <string name="action_mark_all_read">Mark All as Read</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="viewImage"><u>View Ticket</u></string>
 
     <!--agentName dashboard screen-->
     <string name="agent_dashboard_title">Welcome To JustClicknPay</string>

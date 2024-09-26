@@ -80,14 +80,30 @@
                 android:id="@+id/search_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/blue_round_button_background"
-                android:layout_marginTop="@dimen/small_margin"
-                android:textColor="@color/color_white"
                 android:gravity="center"
+                android:textColor="@color/color_white"
                 android:layout_below="@+id/agent_search_edt"
-                android:textSize="@dimen/simple_content_text_size"
-                android:padding="@dimen/small_margin"
-                android:text="@string/search" />
+                android:textSize="@dimen/text_size_18sp"
+                android:padding="@dimen/margin_8dp"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                android:layout_marginRight="@dimen/margin_2dp"
+                android:background="@drawable/ripple_red_button_background"
+                android:layout_marginTop="@dimen/large_margin"
+                android:text="@string/search"/>
+            <TextView
+                android:id="@+id/infoTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/color_white"
+                android:layout_below="@+id/search_tv"
+                android:textSize="@dimen/text_size_18sp"
+                android:padding="@dimen/margin_8dp"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                android:layout_marginRight="@dimen/margin_2dp"
+                android:background="@drawable/ripple_red_button_background"
+                android:layout_marginTop="@dimen/large_margin"
+                android:text="Agent Info"/>
 
             <ListView
                 android:id="@+id/list_agent"

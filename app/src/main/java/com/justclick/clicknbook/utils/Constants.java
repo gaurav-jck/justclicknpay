@@ -13,4 +13,7 @@ public class Constants {
   public static class ModuleType{
     public static final int FLIGHT=1, HOTEL=2, PACKAGE=3, RECHARGE=4;
   }
+  public static class QueryStatus{
+    public static final int ALL=-1, OPEN=1, CLOSE=2, REOPEN=3;
+  }
 }

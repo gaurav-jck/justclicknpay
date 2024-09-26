@@ -1430,17 +1430,17 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity implements Goo
     @Override
     protected void onResume() {
         super.onResume();
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
-                            mCurrentLocation=location;
-                        }
-                    }
-                });
+//        fusedLocationClient.getLastLocation()
+//                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+//                    @Override
+//                    public void onSuccess(Location location) {
+//                        // Got last known location. In some rare situations this can be null.
+//                        if (location != null) {
+//                            // Logic to handle location object
+//                            mCurrentLocation=location;
+//                        }
+//                    }
+//                });
     }
 
 

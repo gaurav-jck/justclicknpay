@@ -30,6 +30,7 @@ public class ApiConstants
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
+//    public static final String BASE_URL_AEPS_N="https://b2baepsapi.justclicknpay.com/";   // AEPS URL N test
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
     //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
     public static final String BASE_URL_CREDIT="https://payout.justclicknpay.com/";
@@ -84,6 +85,10 @@ public class ApiConstants
     public static final String AirRefundReport ="AirRefundReport";
     public static final String AirSalesReport ="AirSalesReport";
     public static final String TRAVELSESSION ="TRAVELSESSION";
+    public static final String raiseticket ="raiseticket";
+    public static final String gettickets ="gettickets";
+    public static final String saveticketslogs ="saveticketslogs";
+    public static final String getticketlogs ="getticketlogs";
 
     public static final String newregistration ="newregistration";
     public static final String getcityandstate ="getcityandstate";

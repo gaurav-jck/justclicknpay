@@ -716,6 +716,27 @@ public interface ApiInterface {
                                       @Part("RequestData") RequestBody RequestData,
                                       @Part MultipartBody.Part Image);
 
+    @Multipart
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> raiseQuery(@Path("methodName") String method,
+                                      @Part("Data") RequestBody RequestData,
+                                      @Part MultipartBody.Part Image);
+
+    @Multipart
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> getRaiseTicketList(@Path("methodName") String method,
+                                         @Part("donecarduser") RequestBody email,
+                                         @Part("fromdate") RequestBody salutation ,
+                                         @Part("uptodate") RequestBody firstname,
+                                         @Part("statusid") RequestBody lastname);
+
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> queryStatus(@Path("methodName") String method,
+                                    @Body Object data);
+    @POST("v2/android/api/Auth/{methodName}")
+    Call<ResponseBody> queryLogs(@Path("methodName") String method,
+                                   @Query("ticketid") int id);
+
     @POST("v2/android/api/Auth/{methodName}")
     Call<ResponseBody> loginRequest(@Path("methodName") String method,
                                     @Body Object data);

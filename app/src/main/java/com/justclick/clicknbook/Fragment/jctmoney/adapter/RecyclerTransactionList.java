@@ -83,11 +83,10 @@ public class RecyclerTransactionList extends RecyclerView.Adapter<RecyclerView.V
                 }else {
                     myViewHolder.bankName.setVisibility(View.VISIBLE);
                 }
-              /*  if(info.getMobile()==null || info.getMobile().length()==0){
-                    myViewHolder.mobile.setVisibility(View.GONE);
-                }else {
-                    myViewHolder.mobile.setVisibility(View.VISIBLE);
-                }*/
+                if(info.getTxnAmount()==1){
+                    info.setTxnStatusDesc("Success");
+                    myViewHolder.status.setText("Success");
+                }
                 if(info.getMobile()==null || info.getMobile().length()==0){
                     myViewHolder.account.setVisibility(View.GONE);
                 }else {

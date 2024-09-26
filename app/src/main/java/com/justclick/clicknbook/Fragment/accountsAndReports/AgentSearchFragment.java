@@ -1,5 +1,6 @@
 package com.justclick.clicknbook.Fragment.accountsAndReports;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -9,8 +10,12 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +29,7 @@ import com.justclick.clicknbook.adapter.AutocompleteAdapter;
 import com.justclick.clicknbook.model.AgentNameModel;
 import com.justclick.clicknbook.model.AgentDetails;
 import com.justclick.clicknbook.model.LoginModel;
+import com.justclick.clicknbook.model.SalesAgentInfoModel;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
@@ -117,6 +123,15 @@ public class AgentSearchFragment extends Fragment
                 search(v);
             }
         });
+        view.findViewById(R.id.infoTv).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(validatee(agentName)){
+                    Common.hideSoftKeyboard((NavigationDrawerActivity)context);
+                    getAgentInfo();
+                }
+            }
+        });
         //when autocomplete is clicked
         list_agent.setOnItemClickListener(
                 new AdapterView.OnItemClickListener()
@@ -183,6 +198,84 @@ public class AgentSearchFragment extends Fragment
         });
         return view;
     }
+
+    public class AgentInfoRequest{
+        public String AgentDoneCardUser, DeviceId, DoneCardUser, LoginSessionId;
+    }
+    private void getAgentInfo() {
+        agentDoneCardFromName = agentName.substring(agentName.indexOf("(") + 1,
+                agentName.indexOf(")"));
+        AgentInfoRequest agentInfoRequest=new AgentInfoRequest();
+        agentInfoRequest.DoneCardUser=loginModel.Data.DoneCardUser;
+        agentInfoRequest.AgentDoneCardUser=agentDoneCardFromName;
+        agentInfoRequest.DeviceId=Common.getDeviceId(context);
+        agentInfoRequest.LoginSessionId= EncryptionDecryptionClass.EncryptSessionId(
+                EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
+        showCustomDialog();
+        new NetworkCall().callMobileService(agentInfoRequest, ApiConstants.AgentDetail, context,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerInfo(response);
+                    }else {
+                        hideCustomDialog();
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerInfo(ResponseBody response) {
+        try {
+            hideCustomDialog();
+            SalesAgentInfoModel agentInfoModel = new Gson().fromJson(response.string(), SalesAgentInfoModel.class);
+            if(agentInfoModel!=null){
+                agentInfoDialog(agentInfoModel);
+            }else {
+                Toast.makeText(context,"Error in getting agent info", Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            hideCustomDialog();
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void agentInfoDialog(SalesAgentInfoModel agentInfoModel) {
+        final Dialog infoDialog = new Dialog(context, R.style.Theme_Design_Light);
+        infoDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        final Window window= infoDialog.getWindow();
+        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT);
+        infoDialog.setContentView(R.layout.agent_info_dialog);
+        WindowManager.LayoutParams params = infoDialog.getWindow().getAttributes();
+
+        infoDialog.getWindow().setAttributes(params);
+        final TextView nameTv= (TextView) infoDialog.findViewById(R.id.nameTv);
+        final TextView agentCodeTv= (TextView) infoDialog.findViewById(R.id.agentCodeTv);
+        final TextView validTv= (TextView) infoDialog.findViewById(R.id.validTv);
+        final TextView agentNameTv= (TextView) infoDialog.findViewById(R.id.agentNameTv);
+        final TextView addressTv= (TextView) infoDialog.findViewById(R.id.addressTv);
+        final TextView mobileTv= (TextView) infoDialog.findViewById(R.id.mobileTv);
+        final TextView emailTv= (TextView) infoDialog.findViewById(R.id.emailTv);
+        final TextView panTv= (TextView) infoDialog.findViewById(R.id.panTv);
+        nameTv.setText(agentInfoModel.AgencyName);
+        agentCodeTv.setText(agentDoneCardFromName);
+        validTv.setText(agentInfoModel.Validity);
+        agentNameTv.setText(agentInfoModel.ContactPerson);
+        addressTv.setText(agentInfoModel.Address);
+        mobileTv.setText(agentInfoModel.Mobile);
+        emailTv.setText(agentInfoModel.Email);
+        panTv.setText(agentInfoModel.PANNo);
+        TextView okTv = (TextView) infoDialog.findViewById(R.id.okTv);
+
+        okTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                infoDialog.dismiss();
+            }
+        });
+        infoDialog.show();
+    }
+
 
     public AgentNameModel call_agent(AgentNameRequestModel model) {
 //        agent.DATA.clear()
