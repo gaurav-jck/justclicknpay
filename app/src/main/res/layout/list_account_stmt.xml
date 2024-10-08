@@ -69,26 +69,27 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_2dp"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/margin_2dp">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="Confirmation Id"
-                android:textSize="@dimen/text_size_14sp"
                 android:textColor="@color/dark_blue_color"
-                android:layout_weight="1"/>
+                android:textSize="@dimen/text_size_14sp" />
 
             <TextView
                 android:id="@+id/confirmIdTv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Id"
+                android:layout_weight="1.4"
                 android:gravity="right"
-                android:textSize="@dimen/text_size_14sp"
+                android:text="Id"
                 android:textColor="@color/dark_blue_color"
-                android:layout_weight="1.4"/>
+                android:fontFamily="@font/roboto_medium"
+                android:background="@drawable/money_receiver_border_rect_corner"
+                android:textSize="@dimen/text_size_14sp" />
 
         </LinearLayout>
 

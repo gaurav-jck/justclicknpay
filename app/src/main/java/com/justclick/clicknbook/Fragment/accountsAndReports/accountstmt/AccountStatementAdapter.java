@@ -22,7 +22,7 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int TYPE_FOOTER = 2;
     Context context;
     int count;
-    List<AccountStmtResponse.accountStatementList> infoList;
+    ArrayList<AccountStmtResponse.accountStatementList> infoList;
     OnRecyclerItemClickListener listener;
 
     public interface OnRecyclerItemClickListener{
@@ -30,7 +30,7 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
                                         AccountStmtResponse.accountStatementList data, int position);
     }
 
-    public AccountStatementAdapter(Context activity, OnRecyclerItemClickListener listener, List<AccountStmtResponse.accountStatementList> infoList) {
+    public AccountStatementAdapter(Context activity, OnRecyclerItemClickListener listener, ArrayList<AccountStmtResponse.accountStatementList> infoList) {
 
         this.context = activity;
         this.infoList = infoList;
@@ -70,6 +70,30 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
             myViewHolder.typeTv.setText(info.transactionType);
             myViewHolder.remarksTv.setText(info.remarks);
             myViewHolder.updatedByTv.setText(info.updatedBy);
+
+            myViewHolder.confirmIdTv.setOnClickListener(view -> {
+                listener.onRecyclerItemClick(view, infoList,info, position);
+            });
+
+            if(info.transactionType.equals(TxnType.Companion.getDMTBooking()) || info.transactionType.equals(TxnType.Companion.getDMTRefund()) ||
+                    info.transactionType.equals(TxnType.Companion.getDMTValidation()) || info.transactionType.equals(TxnType.Companion.getDMTValidationRefund())||
+                    info.transactionType.equals(TxnType.Companion.getMATMBooking()) || info.transactionType.equals(TxnType.Companion.getMATMQRTXN()) ||
+                    info.transactionType.equals(TxnType.Companion.getMATMOneTime()) || info.transactionType.equals(TxnType.Companion.getMATMQRActivate()) ||
+                    info.transactionType.equals(TxnType.Companion.getAepsPayout()) || info.transactionType.equals(TxnType.Companion.getAepsACWBooking())||
+                    (info.transactionType.equals(TxnType.Companion.getAepsACPBooking())  || info.transactionType.equals(TxnType.Companion.getAepsAMSBooking()) ||
+                     info.transactionType.equals(TxnType.Companion.getAepsMiniStatement()) || info.transactionType.equals(TxnType.Companion.getAepsPayoutReversal()) ||
+                    info.transactionType.equals(TxnType.Companion.getAepsOneTime()) || info.transactionType.equals(TxnType.Companion.getRecharge()) ||
+                            info.transactionType.equals(TxnType.Companion.getRechargeInsurance()) ||
+                    info.transactionType.equals(TxnType.Companion.getRechargeFastagPayment()) || info.transactionType.equals(TxnType.Companion.getRechargeFastagRefund()) ||
+                    info.transactionType.equals(TxnType.Companion.getRechargePolicy()) || info.transactionType.equals(TxnType.Companion.getRechargePolicyRejected()) ||
+                    info.transactionType.equals(TxnType.Companion.getRechargeLICPayment()) || info.transactionType.equals(TxnType.Companion.getRechargeLICRefund()) ||
+                    info.transactionType.equals(TxnType.Companion.getRechargePancardRefund()) || info.transactionType.equals(TxnType.Companion.getRechargeUtilityPayment()) ||
+                    info.transactionType.equals(TxnType.Companion.getRechargePancardPayment()) || info.transactionType.equals(TxnType.Companion.getRechargeUtilityRefund()))){
+                myViewHolder.confirmIdTv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner);
+            }else {
+                myViewHolder.confirmIdTv.setBackground(null);
+            }
+            
         }catch (Exception e){}
 
     }

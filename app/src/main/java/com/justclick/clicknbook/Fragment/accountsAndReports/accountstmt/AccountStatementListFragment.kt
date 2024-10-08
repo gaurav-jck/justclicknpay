@@ -26,6 +26,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
+import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentAccountStatementBinding
@@ -162,9 +163,9 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                     requireContext(),
                     { view, list, data, position ->
                         when (view.id) {
-                            R.id.print_tv -> try {
-//                    Toast.makeText(context, "print", Toast.LENGTH_LONG).show()
-//                    openReceipt(data)
+                            R.id.confirmIdTv -> try {
+//                                Toast.makeText(context, "print", Toast.LENGTH_LONG).show()
+                                getReceiptData(data)
                             } catch (e: Exception) {
                                 Toast.makeText(requireContext(), "Enable to print data", Toast.LENGTH_SHORT)
                                     .show()
@@ -183,6 +184,177 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         }
 
         return mView
+    }
+
+    private fun getReceiptData(data: AccountStmtResponse.accountStatementList?) {
+        if(data!!.transactionType.equals(TxnType.DMTBooking) || data!!.transactionType.equals(TxnType.DMTRefund) ||
+            data!!.transactionType.equals(TxnType.DMTValidation) || data!!.transactionType.equals(TxnType.DMTValidationRefund)){
+            getDMTTxnDetail(data.referenceid)
+        }else if(data!!.transactionType.equals(TxnType.MATMBooking) || data!!.transactionType.equals(TxnType.MATMQRTXN) ||
+            data!!.transactionType.equals(TxnType.MATMOneTime) || data!!.transactionType.equals(TxnType.MATMQRActivate) ||
+            data!!.transactionType.equals(TxnType.AepsAMSBooking)||
+            data!!.transactionType.equals(TxnType.AepsPayout) || data!!.transactionType.equals(TxnType.AepsACWBooking)){
+            getMATMTxnDetail(data.referenceid)
+        }else if(data!!.transactionType.equals(TxnType.AepsACPBooking)  || data!!.transactionType.equals(TxnType.AepsMiniStatement) ||
+             data!!.transactionType.equals(TxnType.AepsPayoutReversal) ||
+            data!!.transactionType.equals(TxnType.AepsOneTime)){
+            getAEPSTxnDetail(data.referenceid)
+        }else if(data!!.transactionType.equals(TxnType.Recharge) || data!!.transactionType.equals(TxnType.RechargeInsurance) ||
+            data!!.transactionType.equals(TxnType.RechargeFastagPayment) || data!!.transactionType.equals(TxnType.RechargeFastagRefund) ||
+            data!!.transactionType.equals(TxnType.RechargePolicy) || data!!.transactionType.equals(TxnType.RechargePolicyRejected) ||
+            data!!.transactionType.equals(TxnType.RechargeLICPayment) || data!!.transactionType.equals(TxnType.RechargeLICRefund) ||
+            data!!.transactionType.equals(TxnType.RechargePancardRefund) || data!!.transactionType.equals(TxnType.RechargeUtilityPayment) ||
+            data!!.transactionType.equals(TxnType.RechargePancardPayment) || data!!.transactionType.equals(TxnType.RechargeUtilityRefund)){
+            getRechargeTxnDetail(data.referenceid)
+        }
+    }
+
+    private fun getDMTTxnDetail(referenceid: String?) {
+        var detailReceiptRequest = DetailReceiptRequest()
+        detailReceiptRequest.jcktransactionid=referenceid
+        val json = Gson().toJson(detailReceiptRequest)
+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_DETAIL).create(ApiInterface::class.java)
+        val call = apiService.accountStmtPost(ApiConstants.getDMTTransactionbyID, detailReceiptRequest)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerDmt(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun responseHandlerDmt(response: ResponseBody) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), DmtDetailReceiptResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                    if(commonResponse.data!=null){
+                        (context as NavigationDrawerActivity).replaceFragmentWithBackStack(DMTTxnDetailFragment.newInstance(commonResponse.data.get(0)));
+                    }
+                }else {
+                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                noRecordTv!!.visibility = View.VISIBLE
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            noRecordTv!!.visibility = View.VISIBLE
+            e.printStackTrace()
+        }
+    }
+
+    private fun getMATMTxnDetail(referenceid: String?) {
+        var detailReceiptRequest = DetailReceiptRequest()
+        detailReceiptRequest.jcktransactionid=referenceid
+        val json = Gson().toJson(detailReceiptRequest)
+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_DETAIL).create(ApiInterface::class.java)
+        val call = apiService.accountStmtPost(ApiConstants.getMATMTransactionbyID, detailReceiptRequest)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerMatm(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun responseHandlerMatm(response: ResponseBody) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), MatmDetailReceiptResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                    if(commonResponse.data!=null){
+                        (context as NavigationDrawerActivity).replaceFragmentWithBackStack(MATMTxnDetailFragment.newInstance(commonResponse.data.get(0)));
+                    }
+                }else {
+                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                noRecordTv!!.visibility = View.VISIBLE
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            noRecordTv!!.visibility = View.VISIBLE
+            e.printStackTrace()
+        }
+    }
+
+    private fun getAEPSTxnDetail(referenceid: String?) {
+        var detailReceiptRequest = DetailReceiptRequest()
+        detailReceiptRequest.jcktransactionid=referenceid
+        val json = Gson().toJson(detailReceiptRequest)
+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_DETAIL).create(ApiInterface::class.java)
+        val call = apiService.accountStmtPost(ApiConstants.getAEPSTransactionbyid, detailReceiptRequest)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerAeps(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun responseHandlerAeps(response: ResponseBody) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), AepsDetailReceiptResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                    if(commonResponse.data!=null){
+                        (context as NavigationDrawerActivity).replaceFragmentWithBackStack(AEPSTxnDetailFragment.newInstance(commonResponse.data.get(0)));
+                    }
+                }else {
+                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                noRecordTv!!.visibility = View.VISIBLE
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            noRecordTv!!.visibility = View.VISIBLE
+            e.printStackTrace()
+        }
+    }
+
+    private fun getRechargeTxnDetail(referenceid: String?) {
+        var detailReceiptRequest = DetailReceiptRequest()
+        detailReceiptRequest.jcktransactionid=referenceid
+        val json = Gson().toJson(detailReceiptRequest)
+
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_DETAIL).create(ApiInterface::class.java)
+        val call = apiService.accountStmtPost(ApiConstants.getRechargeTransactionbyid, detailReceiptRequest)
+        NetworkCall().callService(call,context,true
+        ) { response, responseCode ->
+            if (response != null) {
+                responseHandlerRecharge(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+    private fun responseHandlerRecharge(response: ResponseBody) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), RechargeDetailReceiptResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                    if(commonResponse.data!=null){
+                        (context as NavigationDrawerActivity).replaceFragmentWithBackStack(RechargeTxnDetailFragment.newInstance(commonResponse.data.get(0)));
+                    }
+                }else {
+                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                noRecordTv!!.visibility = View.VISIBLE
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            noRecordTv!!.visibility = View.VISIBLE
+            e.printStackTrace()
+        }
     }
 
     private fun openFilterDialog() {

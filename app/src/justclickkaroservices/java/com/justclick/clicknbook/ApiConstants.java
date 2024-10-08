@@ -16,7 +16,7 @@ public class ApiConstants
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
     public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
-    //    public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
+//        public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
     //    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
@@ -24,7 +24,7 @@ public class ApiConstants
     public static final String BASE_URL_QR_old="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
     public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
-//    public static final String BASE_URL_ACCOUNT_STMT="https://uatremittance.justclicknpay.com/";
+    public static final String BASE_URL_ACCOUNT_DETAIL="https://uatremittance.justclicknpay.com/";
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
 //    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
@@ -96,6 +96,10 @@ public class ApiConstants
     //    Account Stmt
     public static final String TransactionType ="TransactionType";
     public static final String AccountStatementList ="AccountStatementList";
+    public static final String getDMTTransactionbyID ="getDMTTransactionbyID";
+    public static final String getMATMTransactionbyID ="getMATMTransactionbyID";
+    public static final String getRechargeTransactionbyid ="getRechargeTransactionbyid";
+    public static final String getAEPSTransactionbyid ="getAEPSTransactionbyid";
 
     //Sales Report
     public static final String SalesAgentDetail ="SalesAgentDetails";

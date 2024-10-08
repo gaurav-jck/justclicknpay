@@ -25,7 +25,6 @@
           <stringArguments>
             <stringArg name="classpath">
               <args>
-                <arg>$MODULE_DIR$/../../../app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/justclickkaroservicesDebug/R.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/f73eed599e37e5a854f95950ff326727/transformed/jetified-jxl-2.6.12.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/e25734e1a4ae3b07a1eb062de99bc86f/transformed/jetified-simple-xml-2.7.1.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/61038093bfa75ab94f261007e27436c8/transformed/jetified-onboardinglib_V.1.1.13-api.jar</arg>
@@ -233,6 +232,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/ap_generated_sources/justclickkaroservicesDebug/out" isTestSource="false" generated="true" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/crashlytics/res/justclickkaroservices/debug" type="java-resource" />
@@ -244,6 +244,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/res/resValues/justclickkaroservices/debug" type="java-resource" />
     </content>
     <content url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/../../../app/build/generated/source/buildConfig/justclickkaroservices/debug" isTestSource="false" generated="true" />
