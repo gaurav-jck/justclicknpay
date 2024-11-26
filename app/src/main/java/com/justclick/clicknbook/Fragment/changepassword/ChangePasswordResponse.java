@@ -5,6 +5,6 @@ public class ChangePasswordResponse {
     public errors errors;
 
     public class errors{
-        String[] newpassword;
+        public String[] newpassword;
     }
 }

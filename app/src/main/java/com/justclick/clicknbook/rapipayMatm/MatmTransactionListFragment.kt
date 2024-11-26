@@ -368,7 +368,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
         if(loginModel!!.Data.UserType.equals("A") || loginModel!!.Data.UserType.equals("D")){
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
         }else{
-            transactionListRequestModel!!.setAgentCode("")
+            transactionListRequestModel!!.setAgentCode(agentDoneCard)
         }
         if (progress && !MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
@@ -502,6 +502,8 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
             var agent=agent_search_edt.text.toString()
             if(agent.contains("(") && agent.contains(")")) {
                 agentDoneCard = agent.substring(agent.indexOf("( ") + 1, agent.indexOf(" )")).trim()
+            }else{
+                agentDoneCard=""
             }
             applyFilter()
         }

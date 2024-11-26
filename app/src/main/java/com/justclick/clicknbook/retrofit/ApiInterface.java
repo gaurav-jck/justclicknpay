@@ -495,6 +495,11 @@ public interface ApiInterface {
     Call<ResponseBody> getRapipayWithHeader(@Path("methodName") String method, @Body Object data,
                                             @Header("userData") String userData, @Header("Authorization") String token);
 
+    @POST("api/payments/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> getRapipayFormHeader(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                            @Header("userData") String userData, @Header("Authorization") String token);
+
     @GET()
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> testHeader(@Url String url, @Header("Authorization") String token);

@@ -488,7 +488,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
         accountStmtRequest!!.JUpdatedBy=updatedBy
         accountStmtRequest!!.distributordid=""
         if(accountStmtRequest!!.UserType.equals("O") || accountStmtRequest!!.UserType.equals("OOU")){
-            accountStmtRequest!!.Donecarduser=""
+            accountStmtRequest!!.Donecarduser=filterDoneCardUser
         }else if(accountStmtRequest!!.UserType.equals("D")){
             accountStmtRequest!!.distributordid=loginModel!!.Data.DoneCardUser
             accountStmtRequest!!.Donecarduser=filterDoneCardUser
@@ -781,6 +781,8 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             var agent=agent_auto.text.toString()
             if(agent.contains("(") && agent.contains(")")) {
                 filterDoneCardUser = agent.substring(agent.indexOf("( ") + 1, agent.indexOf(" )")).trim()
+            }else{
+                filterDoneCardUser=""
             }
             applyFilter()
         }

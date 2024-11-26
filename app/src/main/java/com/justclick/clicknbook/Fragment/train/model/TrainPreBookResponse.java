@@ -23,7 +23,7 @@ public class TrainPreBookResponse implements Serializable {
         public String transactionId, merchant, mode, userData, loggedInUserType, loggedInAgentCode;
     }
 
-    class paymentDetails implements Serializable{
+    public class paymentDetails implements Serializable{
         public float availableAmount, payableAmount, remainingWalletAmount;
     }
 

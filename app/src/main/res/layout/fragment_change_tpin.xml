@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.creditcard.CreditCardFragment"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/app_blue_color"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Change TPIN"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="@dimen/margin_10dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+            android:layout_marginTop="@dimen/medium_margin">
+
+            <EditText
+                android:id="@+id/oldPassEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Old TPIN"
+                android:text=""
+                android:maxLength="@integer/passwordMaxLength"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_18sp"
+                android:textColor="@color/black_text_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+            android:layout_marginTop="@dimen/medium_margin">
+
+            <EditText
+                android:id="@+id/newPassEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="New TPIN"
+                android:text=""
+                android:maxLength="@integer/passwordMaxLength"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_18sp"
+                android:textColor="@color/black_text_color" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+            android:layout_marginTop="@dimen/medium_margin">
+
+            <EditText
+                android:id="@+id/confirmPassEdt"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Confirm New TPIN"
+                android:text=""
+                android:maxLength="@integer/passwordMaxLength"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size_18sp"
+                android:textColor="@color/black_text_color" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+            android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:textSize="@dimen/small_text_size"
+            android:textColor="@color/red_light_color"
+            android:text="Your TPIN length should be 4 characters."/>
+
+        <TextView
+            android:id="@+id/submit_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size"
+            android:padding="@dimen/margin_7dp"
+            android:background="@color/orange_color"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/margin_5dp"
+            android:layout_marginRight="@dimen/margin_5dp"
+            android:text="Get OTP"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

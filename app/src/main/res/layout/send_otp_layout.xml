@@ -72,7 +72,7 @@
             android:id="@+id/otpLin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/margin_10dp"
+            android:padding="@dimen/medium_margin"
             android:layout_marginTop="@dimen/size_20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,9 +85,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
-                android:paddingLeft="@dimen/margin_10dp"
+                android:paddingLeft="@dimen/medium_margin"
                 android:paddingRight="@dimen/margin_5dp"
-                android:textSize="@dimen/textSize_20sp_activity_login"
+                android:textSize="20sp"
                 android:maxLength="1"/>
 
             <EditText
@@ -96,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
-                android:textSize="@dimen/textSize_20sp_activity_login"
+                android:textSize="20sp"
                 android:layout_marginLeft="@dimen/margin_5dp"
                 android:maxLength="1"/>
             <EditText
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
-                android:textSize="@dimen/textSize_20sp_activity_login"
+                android:textSize="20sp"
                 android:layout_marginLeft="@dimen/margin_5dp"
                 android:maxLength="1"/>
             <EditText
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:selectAllOnFocus="true"
-                android:textSize="@dimen/textSize_20sp_activity_login"
+                android:textSize="20sp"
                 android:layout_marginLeft="@dimen/margin_5dp"
                 android:maxLength="1"/>
 
@@ -139,12 +139,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_5dp"
-            android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginRight="@dimen/margin_5dp"
             android:background="@drawable/app_blue_round_button_background"
             android:enabled="true"
             android:gravity="center"
-            android:padding="@dimen/margin_10dp"
+            android:padding="@dimen/medium_margin"
             android:text="Verify OTP"
             android:textAllCaps="false"
             android:textColor="@color/white"
@@ -157,7 +157,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/otpBtn"
-            android:layout_marginTop="@dimen/margin_10dp">
+            android:layout_marginTop="@dimen/medium_margin">
             <TextView
                 android:id="@+id/noOtpTv"
                 android:layout_width="wrap_content"

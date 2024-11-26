@@ -282,7 +282,8 @@ private var filterDialog: Dialog? = null
         request.usertype=loginModel!!.Data.UserType
 //        request.usertype="OOU"
         request.bookuserid=loginModel!!.Data.UserId
-//        request.bookuserid="px‚ju}{j\u007Fnu|k}rIpvjru7lxv"
+//        request.bookuserid="px‚ju}{j\u007Fnu|k}rIpvjru7lxv"   //staff
+//        request.bookuserid="{jsrr}{j\u007Fnu|Ipvjru7lxv"   // JC0A30527
         request.fromdate=startDateToSend
         request.todate=endDateToSend
 //        filters

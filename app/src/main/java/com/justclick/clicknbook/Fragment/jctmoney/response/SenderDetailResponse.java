@@ -52,6 +52,25 @@ public class SenderDetailResponse implements Serializable {
 
     public class senderDetailInfo implements Serializable{
         private String dob,gender,mobile,name,pin,state;
+        private String stateResp;
+
+        public String getStateResp() {
+            return stateResp;
+        }
+
+        public void setStateResp(String stateResp) {
+            this.stateResp = stateResp;
+        }
+
+        public String getEkyc_id() {
+            return ekyc_id;
+        }
+
+        public void setEkyc_id(String ekyc_id) {
+            this.ekyc_id = ekyc_id;
+        }
+
+        private String ekyc_id;
 
         public String getDob() {
             return dob;

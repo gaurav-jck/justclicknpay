@@ -12,6 +12,7 @@ public class ApiConstants
     public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
     public static final String BASE_URL=BASE_URL_LIVE;
     public static final String BASE_URL_UAT_LOGIN="https://wlremittance.justclicknpay.com/";
+    public static final String BASE_URL_UAT_LOGIN_NEW="https://uatapitravel.justclicknpay.com/";
     public static final String BASE_URL_UAT_DEPOSIT="https://uatapitravel.justclicknpay.com/";
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
     public static final String BASE_URL_INSURANCE=BASE_URL_JCT_MONEY;  //live insurance url
@@ -24,7 +25,8 @@ public class ApiConstants
     public static final String BASE_URL_QR_old="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
     public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
-    public static final String BASE_URL_ACCOUNT_DETAIL="https://uatremittance.justclicknpay.com/";
+//    public static final String BASE_URL_ACCOUNT_DETAIL="https://uatremittance.justclicknpay.com/";
+    public static final String BASE_URL_ACCOUNT_DETAIL=BASE_URL_RAPIPAY;
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
 //    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
@@ -32,7 +34,7 @@ public class ApiConstants
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
 //    public static final String BASE_URL_AEPS_N="https://b2baepsapi.justclicknpay.com/";   // AEPS URL N test
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
-    //        public static final String BASE_URL_LIC="https://Uatmatm.justclicknpay.com/";
+            public static final String BASE_URL_TPIN="https://uatmatm.justclicknpay.com/";  //test url
     public static final String BASE_URL_CREDIT="https://payout.justclicknpay.com/";
     public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";
     public static final String BASE_URL_PAYTM="https://recharge.justclicknpay.com/";
@@ -92,6 +94,7 @@ public class ApiConstants
 
     public static final String newregistration ="newregistration";
     public static final String getcityandstate ="getcityandstate";
+    public static final String savelogs ="savelogs";
 
     //    Account Stmt
     public static final String TransactionType ="TransactionType";
@@ -193,8 +196,10 @@ public class ApiConstants
     //    Rapipay
     public static final String CheckCredential ="CheckCredential";
     public static final String SenderDetail ="SenderDetail";
+    public static final String senderkyc ="senderkyc";
     public static final String DeleteBenificiary ="DeleteBenificiary";
     public static final String AddBenificiary  ="AddBenificiary";
+    public static final String transactionotp   ="transactionotp";
     public static final String TransactionRapi   ="Transaction";
     public static final String ValidateAccount ="ValidateAccount";
     public static final String AddSender   ="AddSender";
@@ -275,6 +280,11 @@ public class ApiConstants
     public static final String otpChangePassword="otpChangePassword";
     public static final String ChangePassword="ChangePassword";
     public static final String checkdataexists="checkdataexists";
+
+    //    tpin
+    public static final String setnewmpin="setnewmpin";
+    public static final String otpchangempin="otpchangempin";
+    public static final String changempin="changempin";
 
 }
 

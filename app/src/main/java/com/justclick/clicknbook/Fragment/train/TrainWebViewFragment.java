@@ -38,7 +38,6 @@ import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.MyPreferences;
 
-import org.bouncycastle.util.encoders.Base64Encoder;
 
 import java.io.IOException;
 import java.net.URLDecoder;

@@ -88,10 +88,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private val SideUpper="Side Upper"
     private val SideLower="Side Lower"
     private val WindowSeat="Window Seat"
-    private val Veg="Veg"
-    private val NonVeg="Non Veg"
-    private val DoNotSelect="No Food"
-    private val Snacks="Snacks"
     var loginModel:LoginModel?=null
     var passengerContainerLin:LinearLayout?=null
     var preferenceRadioGroup:RadioGroup?=null
@@ -361,19 +357,22 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         passenger.passengerName=name
         passenger.passengerAge=age
         passenger.passengerGender=sex
+        var food=""
         if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
-            if(fareRuleResponse!!.bkgCfg!!.foodDetails!=null && fareRuleResponse!!.bkgCfg!!.foodDetails.isNotEmpty())
-            passenger.passengerFoodChoice=fareRuleResponse!!.bkgCfg!!.foodDetails[0]
+            if(fareRuleResponse!!.bkgCfg!!.foodDetails!=null && fareRuleResponse!!.bkgCfg!!.foodDetails.isNotEmpty()){
+                passenger.passengerFoodChoice=fareRuleResponse!!.bkgCfg!!.foodDetails[0]
+                food=passenger.passengerFoodChoice
+            }
             else{
-                passenger.passengerBerthChoice=""
+                passenger.passengerFoodChoice=""
             }
         }else{
-            passenger.passengerBerthChoice=""
+            passenger.passengerFoodChoice=""
         }
         passenger.childBerthFlag=null
         passenger.type=ADULT
         passengerArray!!.add(passenger)
-        addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender)
+        addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, food)
     }
 
     private fun changeBoardingStn(stationCode: String) {
@@ -1143,6 +1142,11 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private fun makeTrainBookingRequest(response: TrainPreBookResponse, token:String, userData:String) {
         if(response.finalBookingFareAndJourneyDetail!=null){
 
+            if(response.paymentDetails.get(0).availableAmount<response.paymentDetails.get(0).payableAmount){
+                Common.showResponsePopUp(context,"Your available amount is not enough for this booking.")
+                return
+            }
+
             trainBookingRequest!!.journeyDetails.get(0).fromStation=response.bookingDetails.journeyDetails.get(0).fromStation
             trainBookingRequest!!.journeyDetails.get(0).toStation=response.bookingDetails.journeyDetails.get(0).toStation
             trainBookingRequest!!.journeyDetails.get(0).boardingStation=response.bookingDetails.journeyDetails.get(0).boardingStation
@@ -1313,8 +1317,12 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     passenger.passengerGender=getGender(genderRadio!!.text.toString())
 //                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
                     passenger.passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
+                    var food=""
                     if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
                         passenger.passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
+                        food=foodChoice.selectedItem.toString()
+                    }else{
+                        passenger.passengerFoodChoice=""
                     }
                     if(berthCheck!!.isEnabled){
                         if(berthCheck.isChecked){
@@ -1327,7 +1335,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     }
                     passenger.type=type
                     passengerArray!!.add(passenger)
-                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender)
+                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, food)
 
                 }else{
                     passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
@@ -1394,13 +1402,21 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
 
     private fun getFoodName(value: String?): String {
         if(value.equals("V")){
-            return Veg
+            return FoodChoice.Veg
         }else if(value.equals("N")){
-            return NonVeg
+            return FoodChoice.NonVeg
         }else if(value.equals("D")){
-            return DoNotSelect
+            return FoodChoice.DoNotSelect
         }else if(value.equals("E")){
-            return Snacks
+            return FoodChoice.Snacks
+        }else if(value.equals("J")){
+            return FoodChoice.JainMeal
+        }else if(value.equals("F")){
+            return FoodChoice.VegDiabetic
+        }else if(value.equals("G")){
+            return FoodChoice.NonVegDiabetic
+        }else if(value.equals("T")){
+            return FoodChoice.TeaCoffee
         }else{
             return value!!
         }
@@ -1409,10 +1425,14 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     private fun getFoodChoice(value: String): String? {
         var food=""
         when (value) {
-            Veg -> food="V"
-            NonVeg -> food="N"
-            DoNotSelect -> food="D"
-            Snacks -> food="E"
+            FoodChoice.Veg -> food="V"
+            FoodChoice.NonVeg -> food="N"
+            FoodChoice.DoNotSelect -> food="D"
+            FoodChoice.Snacks -> food="E"
+            FoodChoice.JainMeal -> food="J"
+            FoodChoice.VegDiabetic -> food="F"
+            FoodChoice.NonVegDiabetic -> food="G"
+            FoodChoice.TeaCoffee -> food="T"
             else -> { // Note the block
                 food=value
             }
@@ -1474,7 +1494,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     passenger.passengerGender=getGender(genderRadio!!.text.toString())
                     passenger.type=type
                     passengerArray!!.add(passenger)
-                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender)
+                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, "")
 
                 }else{
                     passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
@@ -1494,7 +1514,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.show()
     }
 
-    private fun addPassenger(name:String, age:String, gender:String){
+    private fun addPassenger(name:String, age:String, gender:String, food:String){
         val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
         var count:TextView=child.findViewById(R.id.passengerCountTv)
         var nameTv:TextView=child.findViewById(R.id.nameTv)
@@ -1502,10 +1522,15 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var ageTv:TextView=child.findViewById(R.id.ageTv)
         var delete:TextView=child.findViewById(R.id.delete)
         var genderTv:TextView=child.findViewById(R.id.genderTv)
+        var foodTv:TextView=child.findViewById(R.id.foodTv)
         ageTv.text= age
         genderTv.text= gender
         count.text=(passengerContainerLin!!.childCount+1).toString()
-
+        if(food.isEmpty()){
+            foodTv.text=""
+        }else{
+            foodTv.text= "Food- $food"
+        }
         child.setOnClickListener{
             if(passengerArray!!.get(passengerContainerLin!!.indexOfChild(child)).type==ADULT){
                 addPass(ADULT, passengerContainerLin!!.indexOfChild(child))

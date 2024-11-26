@@ -1,4 +1,4 @@
-package com.justclick.clicknbook.Fragment.changepassword;
+package com.justclick.clicknbook.Fragment.changetpin;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -21,6 +21,9 @@ import androidx.fragment.app.Fragment;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.Activity.MyLoginActivityNew;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordActivity;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordRequest;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordResponse;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
@@ -34,18 +37,18 @@ import java.util.Map;
 
 import okhttp3.ResponseBody;
 
-public class ChangePasswordFragment extends Fragment implements View.OnClickListener {
+public class ChangeTpinFragment extends Fragment implements View.OnClickListener {
     private Context context;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private EditText oldPassEdt, newPassEdt, confirmPassEdt;
     private LoginModel loginModel;
 
-    public ChangePasswordFragment() {
+    public ChangeTpinFragment() {
         // Required empty public constructor
     }
 
-    public static ChangePasswordFragment newInstance() {
-        ChangePasswordFragment fragment = new ChangePasswordFragment();
+    public static ChangeTpinFragment newInstance() {
+        ChangeTpinFragment fragment = new ChangeTpinFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -68,7 +71,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_change_password, container, false);
+        View view= inflater.inflate(R.layout.fragment_change_tpin, container, false);
 
         toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
 
@@ -110,13 +113,13 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         String json = new Gson().toJson(request);
 
         Map<String,String> params = new HashMap<>();
-        params.put("oldpassword", request.oldpassword);
-        params.put("newpassword", request.newpassword);
-        params.put("confirmed", request.confirmed);
+        params.put("oldmpin", request.oldpassword);
+        params.put("newMPIN", request.newpassword);
+        params.put("confirmedMPIn", request.confirmed);
         params.put("BookUserID", request.BookUserID);
         params.put("MerchantId", request.MerchantId);
 
-        new NetworkCall().callServiceWithError(NetworkCall.getPayoutNewApiInterface().changePassword(ApiConstants.otpChangePassword, params),
+        new NetworkCall().callServiceWithError(NetworkCall.getTpinApiInterface().changePassword(ApiConstants.otpchangempin, params),
                 context,true,
                 (response, responseCode) -> {
                     if(response!=null){
@@ -141,6 +144,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
                     otpDialog(senderResponse.description);
                 }else if(senderResponse.status!=null){
 //                    Toast.makeText(context,senderResponse.description,Toast.LENGTH_SHORT).show();
+                    otpDialog(senderResponse.description);
                     Common.showResponsePopUp(context, senderResponse.description);
                 }else {
                     Toast.makeText(context,"Error in change password, please try after some time.",Toast.LENGTH_LONG).show();
@@ -212,16 +216,16 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
         String json = new Gson().toJson(request);
 
         Map<String,String> params = new HashMap<>();
-        params.put("oldpassword", request.oldpassword);
-        params.put("newpassword", request.newpassword);
-        params.put("confirmed", request.confirmed);
+        params.put("oldmpin", request.oldpassword);
+        params.put("newMPIN", request.newpassword);
+        params.put("confirmedMPIn", request.confirmed);
         params.put("BookUserID", request.BookUserID);
         params.put("MerchantId", request.MerchantId);
         params.put("OTP", request.OTP);
 
         new SaveLogs().saveLogs(context.getApplicationContext(), loginModel.Data.DoneCardUser, SaveLogs.Companion.getChangePassword());
 
-        new NetworkCall().callService(NetworkCall.getPayoutNewApiInterface().changePassword(ApiConstants.ChangePassword, params),
+        new NetworkCall().callService(NetworkCall.getTpinApiInterface().changePassword(ApiConstants.changempin, params),
                 context,true,
                 (response, responseCode) -> {
                     if(response!=null){
@@ -264,9 +268,7 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
             @Override
             public void onClick(View view) {
                 responseDialog.dismiss();
-                MyPreferences.logoutUser(context);
-                context.startActivity(new Intent(context, MyLoginActivityNew.class));
-                requireActivity().finish();
+                getParentFragmentManager().popBackStack();
             }
         });
         responseDialog.show();

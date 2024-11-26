@@ -195,11 +195,12 @@ class GetSenderFragment : Fragment(), View.OnClickListener {
         try {
             val senderResponse = Gson().fromJson(response.string(), SenderDetailResponse::class.java)
             if (senderResponse != null) {
-                if (senderResponse.statusCode == "00") {
+                if (senderResponse.statusCode == "00" || senderResponse.statusCode == "02" || senderResponse.statusCode == "03") {
                     val bundle = Bundle()
                     bundle.putSerializable("senderResponse", senderResponse)
                     commonParams!!.sessionKey = senderResponse.sessionKey
                     commonParams!!.sessionRefNo = senderResponse.sessionRefId
+                    commonParams!!.mobile=number_edt!!.text.toString()
                     bundle.putSerializable("commonParams", commonParams)
                     val payoutBeneFragment = PayoutBeneFragment()
                     payoutBeneFragment.arguments = bundle

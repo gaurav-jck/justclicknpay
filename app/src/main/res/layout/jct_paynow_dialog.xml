@@ -178,7 +178,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/very_large_margin"
+        android:layout_marginTop="@dimen/very_large_margin"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/medium_margin"
         >
@@ -190,9 +190,11 @@
             android:text=""
             android:maxLength="4"
             android:visibility="gone"
-            android:inputType="numberDecimal"
+            android:inputType="number"
+            android:digits="@string/mobile_digit"
             android:textColor="@color/black"/>
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -209,11 +211,24 @@
             android:textSize="@dimen/text_size_16sp"
             android:padding="@dimen/small_margin"/>
         <TextView
+            android:id="@+id/otpTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Get OTP"
+            android:background="@color/orange_color"
+            android:textColor="@color/white"
+            android:layout_marginLeft="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/text_size_16sp"
+            android:padding="@dimen/small_margin"/>
+        <TextView
             android:id="@+id/payNowTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Pay Now"
+            android:visibility="gone"
             android:background="@color/orange_color"
             android:textColor="@color/white"
             android:layout_marginLeft="1dp"

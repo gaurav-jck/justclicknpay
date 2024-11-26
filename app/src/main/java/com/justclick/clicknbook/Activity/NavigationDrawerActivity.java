@@ -56,6 +56,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.BuildConfig;
+import com.justclick.clicknbook.Fragment.changetpin.ChangeTpinFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.CompanyContactFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.ContactDetailsFragment;
@@ -136,6 +137,7 @@ import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
+import com.justclick.clicknbook.utils.UserType;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -232,7 +234,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //method to show credit and deposit request
         showOrHideCreditOrDepositRequest();
 
-        if(loginModel.Data.UserType.equals("S")){
+        if(loginModel.Data.UserType.equals(UserType.SalesPerson)){
             findViewById(R.id.balance_lin).setVisibility(View.GONE);
         }
 
@@ -267,7 +269,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
     }
 
     private void showOrHideCreditOrDepositRequest() {
-        if((loginModel.Data.UserType.equals("A")||loginModel.Data.UserType.equals("D"))
+        if((loginModel.Data.UserType.equals(UserType.Agent)||loginModel.Data.UserType.equals(UserType.Distributor))
                 && !(loginModel.Data.ValidationCode.equals("D"))){
             findViewById(R.id.credit_request_lin).setVisibility(View.VISIBLE);
             findViewById(R.id.deposit_request_lin).setVisibility(View.VISIBLE);
@@ -330,6 +332,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.raise_query_lin).setOnClickListener(this);
         findViewById(R.id.logout_lin).setOnClickListener(this);
         findViewById(R.id.changePassLin).setOnClickListener(this);
+        findViewById(R.id.changeTpinLin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
         ((TextView)findViewById(R.id.appVersionTv)).setText("App Version-" + BuildConfig.VERSION_NAME);
@@ -726,6 +729,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 replaceFragmentWithBackStack(new ChangePasswordFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.changeTpinLin:
+                replaceFragmentWithBackStack(new ChangeTpinFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case R.id.logout_lin:
                 MyPreferences.logoutUserRemember(context);
                 startActivity(new Intent(context, MyLoginActivityNew.class));
@@ -804,6 +811,14 @@ public class NavigationDrawerActivity extends AppCompatActivity
             fm.beginTransaction()
                     .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left, R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right)
                     .replace(R.id.container, fragment, tag).addToBackStack(null).commit();
+        }
+    }
+    public void replaceFragmentWithTagNoBackStack(Fragment fragment, String tag){
+        FragmentManager fm= getSupportFragmentManager();
+        if(!fragment.isVisible()) {
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.fragment_enter_from_right, R.anim.fragment_exit_to_left, R.anim.fragment_enter_from_left, R.anim.fragment_exit_to_right)
+                    .replace(R.id.container, fragment, tag).commit();
         }
     }
 
@@ -934,11 +949,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             subMenuHotel.SubMenuCode=MenuCodes.AEPS_OLD;
                             subMenuArrayList.add(subMenuHotel);
                         }*/
-                    if(!((loginModel.Data.UserType.equalsIgnoreCase("D"))||
-                            (loginModel.Data.UserType.equalsIgnoreCase("S")))) {
-                           /* if(!subMenu.SubMenuCode.equals(MenuCodes.AEPS)){
-                                subMenuArrayList.add(subMenu);
-                            }*/
+                    if(!((loginModel.Data.UserType.equalsIgnoreCase(UserType.Distributor))||
+                            (loginModel.Data.UserType.equalsIgnoreCase(UserType.SalesPerson)) ||
+                            (loginModel.Data.UserType.equalsIgnoreCase(UserType.AdminStaff)))) {
                         subMenuArrayList.add(subMenu);
                     }
                 }
@@ -948,7 +961,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 //            hardcoded
 
-            if(isUtilityBill && !loginModel.Data.UserType.equals("D")){
+            if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff))){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
                 fasttag.SubMenu=MenuCodes.FAST_TAG;
                 fasttag.SubMenuCode=MenuCodes.FAST_TAG;
@@ -972,7 +985,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subMenuArrayList.add(subMenuCashOut);
             }
 
-            if(loginModel.Data.UserType.equals("D")){
+            if(loginModel.Data.UserType.equals(UserType.Distributor)){
                 LoginModel.DataList.subMenu qr=loginModel.new DataList().new subMenu();
                 qr.SubMenu=MenuCodes.CASHFREE_QR;
                 qr.SubMenuCode=MenuCodes.CASHFREE_QR;
@@ -1013,13 +1026,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         ccList.SubMenuCode=MenuCodes.CreditCardList;
                         subMenuArrayList.add(ccList);
 
-                        if(loginModel.Data.UserType.equals("D")){
+                        if(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff)
+                                || loginModel.Data.UserType.equals(UserType.Admin)){
                             LoginModel.DataList.subMenu irctcList=loginModel.new DataList().new subMenu();
                             irctcList.SubMenu=MenuCodes.TrainBookingListDisplay;
                             irctcList.SubMenuCode=MenuCodes.TrainBookingList;
                             subMenuArrayList.add(irctcList);
                         }
-                        if(loginModel.Data.UserType.equals("D") || loginModel.Data.UserType.equals("A")){
+                        if(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.Agent)
+                                || loginModel.Data.UserType.equals(UserType.AdminStaff) || loginModel.Data.UserType.equals(UserType.Admin)){
                             LoginModel.DataList.subMenu aepsList=loginModel.new DataList().new subMenu();
                             aepsList.SubMenu=MenuCodes.AepsListDisplay;
                             aepsList.SubMenuCode=MenuCodes.AepsList;
@@ -1419,12 +1434,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private Boolean exit = false;
     @Override
     public void onBackPressed() {
+//        super.onBackPressed();
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        }else {
-            if((getSupportFragmentManager().findFragmentById(R.id.container)
-                    instanceof HomeFragment)){
+        } else {
+            if ((getSupportFragmentManager().findFragmentById(R.id.container)
+                    instanceof HomeFragment)) {
                 if (exit) {
                     finish(); // finish activity
                 } else {
@@ -1439,14 +1455,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     }, 3 * 1000);
 
                 }
-            }else if(((getSupportFragmentManager().findFragmentById(R.id.container)
+            } else if (((getSupportFragmentManager().findFragmentById(R.id.container)
                     instanceof AdminDepositReportFragment ||
                     getSupportFragmentManager().findFragmentById(R.id.container)
                             instanceof AdminCreditReportFragment) &&
-                    (agencyListOfFragment.getVisibility()==View.VISIBLE))){
+                    (agencyListOfFragment.getVisibility() == View.VISIBLE))) {
                 agencyListOfFragment.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 getSupportFragmentManager().popBackStack();
             }
 

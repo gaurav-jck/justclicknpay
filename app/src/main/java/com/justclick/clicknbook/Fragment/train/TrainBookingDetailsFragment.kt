@@ -15,6 +15,7 @@ import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,9 @@ import java.util.*
 
 class TrainBookingDetailsFragment : Fragment() {
 
+    private val WPS_PDF="cn.wps.moffice_eng"
+    private val ADOBE_PDF="com.adobe.reader"
+    private val DRIVE_PDF="com.google.android.apps.docs"
     var trainResponse: PnrResponse?=null
     var loginModel: LoginModel?=null
     private var bitmap: Bitmap? = null
@@ -425,6 +429,13 @@ class TrainBookingDetailsFragment : Fragment() {
         if (pdfFile.exists()) {
             val intent = Intent(Intent.ACTION_VIEW)
             val uri = Uri.fromFile(pdfFile)
+            if(isAppExists(DRIVE_PDF)){
+                intent.setPackage(DRIVE_PDF)   // particular app to open pdf file
+            }else if(isAppExists(ADOBE_PDF)){
+                intent.setPackage(ADOBE_PDF)
+            }else if(isAppExists(WPS_PDF)){
+                intent.setPackage(WPS_PDF)
+            }
             val photoURI = FileProvider.getUriForFile(
                 requireContext(),
                 requireContext().applicationContext.packageName + ".provider", pdfFile
@@ -444,6 +455,22 @@ class TrainBookingDetailsFragment : Fragment() {
         }else{
             Toast.makeText(requireContext(), "No file exist", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun isAppExists(mPackageName: String): Boolean {
+        val packageManager: PackageManager = requireActivity().packageManager
+        val packageList = packageManager
+            .getInstalledPackages(PackageManager.GET_PERMISSIONS)
+        var isPackage = false
+        for (pl in packageList) {
+            if (pl.applicationInfo.packageName == mPackageName) {
+                isPackage = true
+            }
+        }
+        if (!isPackage) {
+            return false
+        }
+        return true
     }
 
     private fun showCustomDialog() {

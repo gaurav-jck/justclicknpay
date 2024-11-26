@@ -54,6 +54,8 @@ import com.justclick.clicknbook.firebase.ForceUpdateChecker
 import com.justclick.clicknbook.model.ForgetPasswordModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
+import com.justclick.clicknbook.network.SaveLogs
+import com.justclick.clicknbook.network.SaveLogs.Companion.ChangePassword
 import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
@@ -63,6 +65,7 @@ import com.justclick.clicknbook.utils.GenericTextWatcher
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import okhttp3.ResponseBody
+
 
 class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdateChecker.OnUpdateNeededListener {
     private val LOGIN_SERVICE = 1
@@ -201,7 +204,9 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                 }
                 var json = Gson().toJson(loginRequestModel);
 //                showCustomDialog()
-                NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
+                NetworkCall().callService(
+                    NetworkCall.getLoginRequestInterface()
+                        .loginRequest(ApiConstants.LOGIN, loginRequestModel),
                     context, true,
                 ) { response, responseCode ->
                     if (response != null) {
@@ -252,6 +257,11 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         }
     }
 
+    private fun saveLogs(doneCard: String) {
+        var ip: String? = null
+        SaveLogs().saveLogs(applicationContext, doneCard, SaveLogs.LOGIN)
+    }
+
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
         try {
             when (TYPE) {
@@ -271,12 +281,14 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                                 showPasswordChangeAlert("Please change your password for security reasons.")
                             }else{
                                 //store values to shared preferences
+//                                loginModel.Data.DoneCardUser="JC0A30527"
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)
                                 } else {
                                     MyPreferences.logoutUserRemember(context)
                                 }
+                                saveLogs(loginModel.Data.DoneCardUser)
                                 MyPreferences.setAppCurrentTime(context)
                                 MyPreferences.saveLoginId(context, email_edt!!.text.toString())
                                 val intent = Intent(context, NavigationDrawerActivity::class.java)
@@ -602,6 +614,8 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         requestModel.MerchantID = ApiConstants.MerchantId
         requestModel.MobileNo = mobile
         var requestString=Gson().toJson(requestModel)
+        SaveLogs().saveLogs(applicationContext, mobile, SaveLogs.ForgotPassword
+        )
         NetworkCall().callService(
             NetworkCall.getForgetPassApiInterface().forgetPass(requestModel),
             context, true

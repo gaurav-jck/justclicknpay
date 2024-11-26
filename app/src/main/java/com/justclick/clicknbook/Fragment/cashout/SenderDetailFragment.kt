@@ -145,7 +145,8 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
 
   private fun getAdapter(benificiaryDetailData: ArrayList<benificiaryDetailData>): RapipayRecipientListAdapter {
     return RapipayRecipientListAdapter(context, RapipayRecipientListAdapter.OnRecyclerItemClickListener { view, list, position ->
-      if (view.id == R.id.payNowTv) {
+//      if (view.id == R.id.payNowTv) {
+      if (view.id == R.id.deleteTv) {
 //                    Toast.makeText(context, "Pay Now", Toast.LENGTH_SHORT).show();
         beneData = list[position]
         if (beneData!!.accountNumber == null || beneData!!.accountNumber.length == 0) {
@@ -248,7 +249,7 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
       LinearLayout.LayoutParams.WRAP_CONTENT)
     amountEdt = paymentDialog!!.findViewById(R.id.amountEdt)
     var amountWordsTv:TextView = paymentDialog!!.findViewById(R.id.amountWordsTv)
-    val otpEdt = paymentDialog!!.findViewById<EditText>(R.id.otpEdt)
+    val otpTv = paymentDialog!!.findViewById<EditText>(R.id.otpTv)
     val cancelTv = paymentDialog!!.findViewById<TextView>(R.id.cancelTv)
     val payNowTv = paymentDialog!!.findViewById<TextView>(R.id.payNowTv)
     val limitTv = paymentDialog!!.findViewById<TextView>(R.id.limitTv)
@@ -256,6 +257,8 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     limitDetailLin.visibility=View.GONE
     val transactionTypeIMPSTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeIMPSTv)
     val transactionTypeNEFTTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeNEFTTv)
+    otpTv.visibility=View.GONE
+    payNowTv.visibility=View.VISIBLE
 
     amountEdt!!.addTextChangedListener(object :TextWatcher{
       override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

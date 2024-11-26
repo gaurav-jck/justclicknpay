@@ -3,6 +3,7 @@ package com.justclick.clicknbook.Fragment.jctmoney.request;
 public class SenderDetailRequest extends CommonRapiRequest{
     private String Mobile,AgentCode,SessionKey,SessionRefId;
     private int isBank2, isBank3;
+    public String lat, longg, Name;
 
     public void setIsBank2(int isBank2) {
         this.isBank2 = isBank2;

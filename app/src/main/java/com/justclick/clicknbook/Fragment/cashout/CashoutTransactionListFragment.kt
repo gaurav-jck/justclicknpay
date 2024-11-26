@@ -380,7 +380,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
             transactionListRequestModel!!.setAgentCode(loginModel!!.Data.DoneCardUser)
             transactionListRequestModel!!.AgentID=agentDoneCard
         }else{
-            transactionListRequestModel!!.setAgentCode("")
+            transactionListRequestModel!!.setAgentCode(agentDoneCard)
             transactionListRequestModel!!.AgentID=agentDoneCard
         }
         if (progress && !MyCustomDialog.isDialogShowing()) {
@@ -517,6 +517,8 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
             var agent=agent_search_edt.text.toString()
             if(agent.contains("(") && agent.contains(")")) {
                 agentDoneCard = agent.substring(agent.indexOf("( ") + 1, agent.indexOf(" )")).trim()
+            }else{
+                agentDoneCard=""
             }
             applyFilter()
         }

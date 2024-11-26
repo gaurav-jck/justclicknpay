@@ -6,6 +6,7 @@ public class TransactionRequest extends CommonRapiRequest{
             Bank1Value, Bank1Type, Bank2Value, Bank2Type, Bank3Value, Bank3Type;
     private String address, pinCode, state, city, statecode, gst_state;
     private int isBank2, isBank3;
+    public String otp, stateresp, Transactionid, JCKTransactionid, lat, longitude;
 
     public void setBank1Value(String bank1Value) {
         Bank1Value = bank1Value;

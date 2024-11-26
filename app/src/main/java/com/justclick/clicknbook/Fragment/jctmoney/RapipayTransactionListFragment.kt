@@ -502,6 +502,9 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
             transactionListRequestModel!!.setAgentCode("")
             transactionListRequestModel!!.AgentId=agentDoneCard
         }
+//        transactionListRequestModel!!.LoggedinAgentCode=""
+//        transactionListRequestModel!!.setAgentCode("")
+//        transactionListRequestModel!!.AgentId=agentDoneCard
         if (progress && !MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
         }

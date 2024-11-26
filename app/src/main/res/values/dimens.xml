@@ -191,5 +191,7 @@
     <dimen name="text_margin">16dp</dimen>
 
     <dimen name="margin_top_normal">10dp</dimen>
+    <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="textSize_20sp_activity_login">20sp</dimen>
 
 </resources>

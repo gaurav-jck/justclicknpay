@@ -51,6 +51,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/6dc85c14178d5790beab567ee648eff9/transformed/jetified-firebase-auth-21.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/c1be0cb0b538b760ecb9e81bf93093cc/transformed/jetified-viewpager2-1.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/da221973e552e6c80444beb4c2a07d85/transformed/jetified-firebase-database-20.0.6-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/0e1208344048a1c2904ac8aadfa1fa8b/transformed/jetified-integrity-1.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/5254566b979acb1fb7c863f017e31532/transformed/jetified-play-services-location-21.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/1207a3ff203f1abbb8d2e25314a7b1fe/transformed/jetified-firebase-messaging-22.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/8803a294622b18bbcdb9e99a3a584e4d/transformed/jetified-play-services-auth-api-phone-18.0.1-api.jar</arg>
@@ -72,7 +73,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/0bc05c992f555f877db8986fcaf1aa58/transformed/jetified-firebase-installations-interop-17.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/e3f1d881152b0b837bf41be0a02b1c0d/transformed/jetified-play-services-cloud-messaging-16.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/8374cafd2fd9b09a055586fc56ef5bf7/transformed/jetified-firebase-iid-interop-17.1.0-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/caches/transforms-3/53ffcd938971fec3bd415e9e56c9bb6d/transformed/jetified-play-services-tasks-18.0.2-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/455237ddaf4c3f3cfa06e7545717822e/transformed/jetified-play-services-tasks-18.2.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/efb51149895e35204d44d50542dcb9cf/transformed/jetified-firebase-measurement-connector-19.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/75403c748abfd7d5c62e0c6318ba3820/transformed/jetified-play-services-measurement-20.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/32e3bd9d2b42c6271ae576dd425549d1/transformed/jetified-play-services-measurement-sdk-20.0.1-api.jar</arg>
@@ -81,7 +82,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/5e30edb93ab89f6e6106238bb74d8563/transformed/jetified-play-services-ads-identifier-18.0.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/24ffcc68efcbc5f49233f7effe1dada4/transformed/jetified-play-services-measurement-sdk-api-20.0.1-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/b78ba591ed0939b306fbb4bf802df6b2/transformed/jetified-play-services-measurement-base-20.0.1-api.jar</arg>
-                <arg>$USER_HOME$/.jdks/caches/transforms-3/2254b94e3929837e301920a043a52769/transformed/jetified-play-services-basement-18.1.0-api.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/df7cb338f1e1da458d2ed5bd56e0af60/transformed/jetified-play-services-basement-18.4.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/62a23efe3afb7e0086dfeade81fca1dd/transformed/fragment-1.3.6-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/dde7579cc27b1cbe7c207ce89ecaf119/transformed/jetified-activity-1.8.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/f7638a8cb33d87f5ff52e5bca318d966/transformed/jetified-camera-camera2-1.2.2-api.jar</arg>
@@ -181,6 +182,7 @@
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/026001120373c5f9ec758e023f667b55/transformed/jetified-jsr305-2.0.1.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout-solver/2.0.4/1f001d7db280a89a6c26b26a66eb064bb6d5efeb/constraintlayout-solver-2.0.4.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/da3e8f6ed9357d27131857657d52442c/transformed/jetified-resourceinspection-annotation-1.0.1.jar</arg>
+                <arg>$USER_HOME$/.jdks/caches/transforms-3/e2080e8c314d7270785a9b3259666c0e/transformed/jetified-core-common-2.0.4-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/ce54cd54d056b7a30263c70df82d1cd6/transformed/jetified-core-3.2.0.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/9a154bb6de01266f5f5fae1edfc1bb83/transformed/jetified-fbcore-1.10.0-api.jar</arg>
                 <arg>$USER_HOME$/.jdks/caches/transforms-3/277c6b230fe44f98dd39d914f0d648b1/transformed/jetified-drawee-1.10.0-api.jar</arg>
@@ -349,8 +351,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-auth:20.3.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-auth-api-phone:18.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-base:18.1.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-basement:18.1.0@aar" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-tasks:18.0.2@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-basement:18.4.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-tasks:18.2.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-auth-base:18.0.4@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-database:20.0.6@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.firebase:firebase-appcheck-interop:16.0.1@aar" level="project" />
@@ -382,6 +384,8 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-measurement-api:20.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-measurement-sdk-api:20.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.gms:play-services-measurement-sdk:20.0.1@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.play:integrity:1.4.0@aar" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: com.google.android.play:core-common:2.0.4@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.biometric:biometric:1.0.1@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: pl.droidsonroids.gif:android-gif-drawable:1.2.22@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidmads.library.qrgenearator:QRGenearator:1.0.3@aar" level="project" />

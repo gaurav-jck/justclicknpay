@@ -1,5 +1,6 @@
 package com.justclick.clicknbook.Fragment.jctmoney;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,13 +11,19 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordRequest;
+import com.justclick.clicknbook.Fragment.changepassword.ChangePasswordResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest;
 import com.justclick.clicknbook.Fragment.jctmoney.request.CommonParams;
 import com.justclick.clicknbook.Fragment.jctmoney.request.SenderDetailRequest;
@@ -29,8 +36,12 @@ import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
+import com.justclick.clicknbook.network.SaveLogs;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.MyPreferences;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.ResponseBody;
 
@@ -76,6 +87,7 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                 checkCredential();
             }
             initializeViews(mView);
+//            tpinDialog();
         }
         return mView;
     }
@@ -166,6 +178,104 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
 //        number_edt.addTextChangedListener(textWatcher);
     }
 
+    private void tpinDialog(){
+        Dialog otpDialog = new Dialog(context);
+        otpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        otpDialog.setContentView(R.layout.set_tpin_layout);
+        otpDialog.setCancelable(false);
+        final EditText tpinEdt= otpDialog.findViewById(R.id.tpinEdt);
+        final TextView confirmTpinEdt= otpDialog.findViewById(R.id.confirmTpinEdt);
+        final TextView backTv= otpDialog.findViewById(R.id.backTv);
+        final TextView submit_tv= otpDialog.findViewById(R.id.submit_tv);
+
+        tpinEdt.requestFocus();
+
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+
+        submit_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Common.preventFrequentClick(submit_tv);
+                Common.hideSoftKeyboard(requireActivity());
+
+                String tpin=tpinEdt.getText().toString().trim();
+                String tpinConfirm=confirmTpinEdt.getText().toString().trim();
+
+                if(Common.checkInternetConnection(context)){
+                    if(tpin.isEmpty()){
+                        Toast.makeText(context, "Please enter TPIN", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(tpinConfirm.isEmpty()){
+                        Toast.makeText(context, "Please confirm your TPIN", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(!tpinConfirm.equals(tpin)){
+                        Toast.makeText(context, "TPIN you entered does not matched with confirm TPIN", Toast.LENGTH_LONG).show();
+                    }else {
+                        setTpin(tpin, otpDialog);
+                    }
+                }else {
+                    Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        backTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                otpDialog.dismiss();
+                getParentFragmentManager().popBackStack();
+            }
+        });
+        otpDialog.show();
+    }
+
+    private void setTpin(String otp, Dialog otpDialog) {
+        ChangePasswordRequest request=new ChangePasswordRequest();
+        request.oldpassword= otp;
+        request.BookUserID= loginModel.Data.UserId;
+        request.MerchantId= ApiConstants.MerchantId;
+        request.OTP= otp;
+
+        String json = new Gson().toJson(request);
+
+        Map<String,String> params = new HashMap<>();
+        params.put("MPIN", otp);
+        params.put("BookUserID", request.BookUserID);
+        params.put("MerchantId", request.MerchantId);
+
+        new NetworkCall().callService(NetworkCall.getTpinApiInterface().changePassword(ApiConstants.setnewmpin, params),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        otpDialog.dismiss();
+                        responseHandlerPassword(response, 1);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerPassword(ResponseBody response, int i) {
+        try {
+            ChangePasswordResponse senderResponse = new Gson().fromJson(response.string(),
+                    ChangePasswordResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.status.equals("00")) {
+                    Common.showResponsePopUp(context, senderResponse.description);
+                }else if(senderResponse.description!=null){
+                    Toast.makeText(context,senderResponse.description,Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(context,"Error in setting tpin, please try after some time.",Toast.LENGTH_LONG).show();
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void getSenderDetail() {
         if(validate())
         {
@@ -177,6 +287,8 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
             jctMoneySenderRequestModel.setApiService(commonParams.getApiService());  //new change
             jctMoneySenderRequestModel.setIsBank2(commonParams.isBank2);  //new change
             jctMoneySenderRequestModel.setIsBank3(commonParams.isBank3);  //new change
+            commonParams.agentCode=loginModel.Data.DoneCardUser;
+            commonParams.mobile=number_edt.getText().toString();
             new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, ApiConstants.SenderDetail, context,
                     new NetworkCall.RetrofitResponseListener() {
                         @Override
@@ -200,11 +312,13 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                     bundle.putSerializable("senderResponse", senderResponse);
                     commonParams.setSessionKey(senderResponse.getSessionKey());
                     commonParams.setSessionRefNo(senderResponse.getSessionRefId());
+                    commonParams.mobile=number_edt.getText().toString();
+                    commonParams.agentCode=loginModel.Data.DoneCardUser;
                     bundle.putSerializable("commonParams", commonParams);
                     RapipaySenderDetailFragment senderDetailFragment=new RapipaySenderDetailFragment();
                     senderDetailFragment.setArguments(bundle);
                     ((NavigationDrawerActivity)context).replaceFragmentWithTag(senderDetailFragment, FragmentTags.jctMoneySenderDetailFragment);
-                }else if(senderResponse.getStatusCode().equals("05")){
+                }else if(senderResponse.getStatusCode().equals("02")){
 //                    add sender
 //                    getsender ka response requestfor me dena h
                     Bundle bundle=new Bundle();
@@ -212,25 +326,27 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
                     bundle.putString("SenderNumber", number_edt.getText().toString());
                     commonParams.setSessionKey(senderResponse.getSessionKey());
                     commonParams.setSessionRefNo(senderResponse.getSessionRefId());
+                    commonParams.mobile=number_edt.getText().toString();
+                    commonParams.agentCode=loginModel.Data.DoneCardUser;
                     bundle.putSerializable("commonParams", commonParams);
-                    RapipayAddSenderFragment senderDetailFragment=new RapipayAddSenderFragment();
-                    senderDetailFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(senderDetailFragment);
+                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(DmtKycFragment.newInstance(senderResponse, commonParams));
                     Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
-                }else if(senderResponse.getStatusCode().equals("06")){
-//                    update sender
+                }else if(senderResponse.getStatusCode().equals("03")){
+//                    add sender
+//                    getsender ka response requestfor me dena h
                     Bundle bundle=new Bundle();
                     bundle.putSerializable("senderResponse", senderResponse);
                     bundle.putString("SenderNumber", number_edt.getText().toString());
                     commonParams.setSessionKey(senderResponse.getSessionKey());
                     commonParams.setSessionRefNo(senderResponse.getSessionRefId());
+                    commonParams.mobile=number_edt.getText().toString();
+                    commonParams.agentCode=loginModel.Data.DoneCardUser;
                     bundle.putSerializable("commonParams", commonParams);
-                    RapipayAddSenderFragment senderDetailFragment=new RapipayAddSenderFragment();
-                    senderDetailFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(senderDetailFragment);
-                    Toast.makeText(context, senderResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(AddRemittanceFragment.newInstance(commonParams,
+                            senderResponse.getSenderDetailInfo().get(0).getStateResp(), senderResponse.getSenderDetailInfo().get(0).getEkyc_id()));
+                    Common.showResponsePopUp(requireContext(), senderResponse.getStatusMessage());
                 }else {
-                    Toast.makeText(context, senderResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                    Common.showResponsePopUp(requireContext(), senderResponse.getStatusMessage());
                 }
             }else {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
@@ -239,43 +355,6 @@ public class JctMoneyGetSenderFragment extends Fragment implements View.OnClickL
 
         }
     }
-
-    private void responseHandlerOld(ResponseBody response, int TYPE) {
-        try {
-            JctMoneySenderDetailResponseModel senderResponse = new Gson().fromJson(response.string(), JctMoneySenderDetailResponseModel.class);
-            if(senderResponse!=null){
-                if(senderResponse.statusCode ==1 && (senderResponse.state.equalsIgnoreCase("2") ||
-                        senderResponse.state.equalsIgnoreCase("4"))) {
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("senderResponse", senderResponse);
-                    JctMoneySenderDetailFragment jctMoneySenderDetailFragment=new JctMoneySenderDetailFragment();
-                    jctMoneySenderDetailFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity)context).replaceFragmentWithTag(jctMoneySenderDetailFragment, FragmentTags.jctMoneySenderDetailFragment);
-//                    Toast.makeText(context,senderResponse.message,Toast.LENGTH_SHORT).show();
-                } else if(senderResponse.statusCode ==1 && senderResponse.state.equalsIgnoreCase("1")){
-                    Bundle bundle=new Bundle();
-                    bundle.putSerializable("senderResponse", senderResponse);
-                    bundle.putString("SenderNumber", number_edt.getText().toString());
-                    JctMoneyCreateSenderFragment jctMoneyCreateSenderFragment=new JctMoneyCreateSenderFragment();
-                    jctMoneyCreateSenderFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(jctMoneyCreateSenderFragment);
-                    Toast.makeText(context,senderResponse.message,Toast.LENGTH_SHORT).show();
-                }else{
-                    Bundle bundle=new Bundle();
-                    bundle.putString("SenderNumber", number_edt.getText().toString());
-                    JctMoneyCreateSenderFragment jctMoneyCreateSenderFragment=new JctMoneyCreateSenderFragment();
-                    jctMoneyCreateSenderFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(jctMoneyCreateSenderFragment);
-                    Toast.makeText(context,senderResponse.message,Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-            }
-        }catch (Exception e){
-
-        }
-    }
-
 
     @Override
     public void onClick(View v) {

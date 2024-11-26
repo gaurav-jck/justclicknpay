@@ -7,6 +7,7 @@ package com.justclick.clicknbook.model;
 public class DepositRequestResponseModel {
 
     public DepositRequestResult DepositRequestResult;
+    public DepositRequestResult depositRequestResult;
     public class DepositRequestResult {
 
     public String Status, StatusCode;

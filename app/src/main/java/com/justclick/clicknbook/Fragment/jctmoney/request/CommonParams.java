@@ -6,6 +6,7 @@ public class CommonParams implements Serializable {
     private String sessionKey,sessionRefNo,token, userData;
     private String kycStatus, address, pinCode, state, city, statecode;
     public int isBank2, isBank3;
+    public String agentCode, mobile;
 
     public String getAddress() {
         return address;

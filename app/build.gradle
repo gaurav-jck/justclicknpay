@@ -33,8 +33,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 123
-            versionName "1.8.8"
+            versionCode 127
+            versionName "1.8.12"
 //            applicationIdSuffix ".qa"
 
         }
@@ -204,6 +204,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging:21.1.0'
     implementation platform('com.google.firebase:firebase-bom:28.3.0')
     implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.android.play:integrity:1.4.0'
 
 //    biometric
     implementation "androidx.biometric:biometric:1.0.1"
@@ -236,8 +237,10 @@ dependencies {
 //    onboard
     implementation files('libs/onboardinglib_V.1.1.13.aar')
 //    matm
-    implementation files('libs/PS_MATM_2.0.2.aar')
-    implementation files('libs/FINO_PS_MATM.aar')
+    implementation files('libs/PS_MATM_2.0.2.aar')   // old sdk file
+    implementation files('libs/FINO_PS_MATM.aar')     // old sdk file
+//    implementation files('libs/fingpaymicroatm-release.aar')
+//    implementation files('libs/microatmlib-release.aar')
     implementation 'de.greenrobot:greendao:2.1.0'
     implementation 'org.greenrobot:eventbus:3.3.1'
     implementation 'com.intuit.sdp:sdp-android:1.0.6'

@@ -2,6 +2,7 @@ package com.justclick.clicknbook.Fragment.cashoutnew
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -55,7 +56,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
     private var isApprove=All
     private var beneData: BankListResponse.data? = null
     private var senderDetailResponse: SenderDetailResponse? = null
-    private var senderInfo: SenderDetailResponse.senderDetailInfo? = null
+//    private var senderInfo: SenderDetailResponse.senderDetailInfo? = null
     private var limitTv:TextView?=null
     private var remainingLimit:Float?=0.0f
     private var recipientRecycleView:RecyclerView?=null
@@ -87,10 +88,12 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         if(mView==null){
             mView = inflater.inflate(R.layout.fragment_payout_bene, container, false)
             toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-            if (requireArguments().getSerializable("senderResponse") != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                senderDetailResponse = requireArguments().getSerializable("senderResponse", SenderDetailResponse::class.java)
+                commonParams = requireArguments().getSerializable("commonParams", CommonParams::class.java)
+            }else{
                 senderDetailResponse = requireArguments().getSerializable("senderResponse") as SenderDetailResponse?
                 commonParams = requireArguments().getSerializable("commonParams") as CommonParams?
-                senderInfo = senderDetailResponse!!.senderDetailInfo[0]
             }
             checkCredential()
             initializeViews(mView!!)
@@ -162,8 +165,8 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         val face = Common.TextViewTypeFace(context)
         recipientRecycleView=view.findViewById(R.id.recipientRecycleView)
         limitTv=view.findViewById(R.id.limitTv)
-        view.findViewById<TextView>(R.id.senderNameTv).setText(senderInfo!!.name)
-        view.findViewById<TextView>(R.id.senderMobileTv).setText(senderInfo!!.mobile)
+        view.findViewById<TextView>(R.id.senderNameTv).setText("")
+        view.findViewById<TextView>(R.id.senderMobileTv).setText(commonParams!!.mobile)
         view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
         view.findViewById<View>(R.id.addBankTv).setOnClickListener(this)
     }
@@ -412,7 +415,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
             LinearLayout.LayoutParams.WRAP_CONTENT)
         val amountEdt = paymentDialog!!.findViewById<EditText>(R.id.amountEdt)
         var amountWordsTv:TextView = paymentDialog!!.findViewById(R.id.amountWordsTv)
-        val otpEdt = paymentDialog!!.findViewById<EditText>(R.id.otpEdt)
+        val otpTv = paymentDialog!!.findViewById<TextView>(R.id.otpTv)
         val cancelTv = paymentDialog!!.findViewById<TextView>(R.id.cancelTv)
         val payNowTv = paymentDialog!!.findViewById<TextView>(R.id.payNowTv)
         val limitTv = paymentDialog!!.findViewById<TextView>(R.id.limitTv)
@@ -420,6 +423,9 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         limitDetailLin.visibility=View.GONE
         val transactionTypeIMPSTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeIMPSTv)
         val transactionTypeNEFTTv = paymentDialog!!.findViewById<TextView>(R.id.transactionTypeNEFTTv)
+
+        otpTv.visibility=View.GONE
+        payNowTv.visibility=View.VISIBLE
 
         amountEdt!!.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

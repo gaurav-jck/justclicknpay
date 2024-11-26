@@ -83,7 +83,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:src="@drawable/train_vector_dashboard1"
-                            android:padding="@dimen/margin_10dp"
+                            android:padding="@dimen/medium_margin"
                             android:layout_marginTop="@dimen/margin_5dp"
                             android:background="@drawable/train_circle_background1"
                             />
@@ -127,7 +127,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/train_vector_dashboard2"
-                        android:padding="@dimen/margin_10dp"
+                        android:padding="@dimen/medium_margin"
                         android:layout_marginTop="@dimen/margin_5dp"
                         android:background="@drawable/train_circle_background2"
                         />
@@ -181,7 +181,7 @@
                         android:layout_width="70dp"
                         android:layout_height="70dp"
                         android:src="@drawable/train_vector_dashboard3"
-                        android:padding="@dimen/margin_10dp"
+                        android:padding="@dimen/medium_margin"
                         android:layout_marginTop="@dimen/margin_5dp"
                         android:background="@drawable/train_circle_background3"
                         />

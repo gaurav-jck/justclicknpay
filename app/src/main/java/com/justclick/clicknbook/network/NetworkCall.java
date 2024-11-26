@@ -155,139 +155,6 @@ public class NetworkCall {
         });
     }
 
-    public String getFormDataFromServer(Context context, String page, String method, Object object,
-                                        ByteArrayOutputStream networkOutputStream, File fileToSend, Uri fileUri, String encodedImage){
-        try {
-//            new Gson().toJson(model)
-            String lineEnd = "\r\n";
-            String twoHyphens = "--";
-            String boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW";
-            String url = ApiConstants.BASE_URL + page + method;
-            URL obj = new URL(url);
-            OkHttpClient client = new OkHttpClient();
-            MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
-//            MediaType mediaType = MediaType.parse("multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW");
-            MediaType mediaType = MediaType.parse("multipart/form-data; boundary="+boundary);
-          /*  RequestBody body = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: " +
-                    "form-data; name=\"RequestData\"\r\n\r\n"+new Gson().toJson(object)+"\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"+
-                    "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: " +
-                    "form-data; name=\"Image\"\r\n\r\n"+networkOutputStream+"\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
-            RequestBody body2 = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: " +
-                    "form-data; name=\"RequestData\"\r\n\r\n"+new Gson().toJson(object)+"\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--"+
-                    "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: " +
-                    "form-data; name=\"Image\"\r\n\r\n"+encodedImage+"\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");*/
-//            RequestBody body3 = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"RequestData\"\r\n\r\n" +
-//                    new Gson().toJson(object)+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n" +
-//                    "Content-Disposition: form-data; name=\"Image\""+encodedImage+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
-            Bitmap bm = BitmapFactory.decodeFile(encodedImage);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            bm.compress(Bitmap.CompressFormat.JPEG, 25, baos); // bm is the bitmap object
-            byte[] b = baos.toByteArray();
-
-            String encodedImage2 = Base64.encodeToString(b, Base64.DEFAULT);
-
-
-            String str = twoHyphens + boundary + lineEnd;
-            String str2 = "Content-Disposition: form-data; name=\"RequestData\"";
-            String str3 = "Content-Type: application/json";
-            String str4 = "Content-Disposition: form-data; name=\"Image\"";
-            String str5 = "Content-Type: image/jpeg";
-            String str6 = twoHyphens + boundary + twoHyphens;
-
-
-
-            String StrTotal = str + str2 + "\r\n" + /*str3 + "\r\n" +"\r\n" +*/ new Gson().toJson(object) + "\r\n" + str
-                    + str4 + "\r\n" + str5 + "\r\n"+"\r\n"+ encodedImage2 + "\r\n" + str6;
-
-            RequestBody body4 = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"RequestData\"\r\n\r\n" +
-                    new Gson().toJson(object)+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n");
-            RequestBody body5 = RequestBody.create(mediaType, StrTotal);
-            RequestBody body3 = RequestBody.create(mediaType, "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name=\"RequestData\"\r\n\r\n" +
-                    new Gson().toJson(object)+"\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; " +
-                    "name=\"Image\"; filename="+encodedImage+"\r\nContent-Type: image/jpeg\r\n\r\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
-//RequestBody body5 = RequestBody.create(mediaType, "\"------WebKitFormBoundary7MA4YWxkTrZu0gW\\r\\nContent-Disposition: form-data; name=\\\"RequestData\\\"\\r\\n\\r\\n" +
-//        new Gson().toJson(object)+"\\r\\n------WebKitFormBoundary7MA4YWxkTrZu0gW\\r\\nContent-Disposition: form-data; name=\\\"Image\"\\r\\n\\r\\n\"+new Gson().toJson(object)+\"\\n\\r\\n------WebKitFormBoundary7MA4YWxkTrZu0gW--");
-//Content-Disposition: form-data; name=\"Image\"; filename=\"D:\\JCT Designs\\color images\\icon2.png\"\r\nContent-Type: image/png\r\n\r\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--
-            File file = new File(encodedImage);
-
-            // create RequestBody instance from file
-            RequestBody requestFile =
-                    RequestBody.create(
-                            MediaType.parse(context.getContentResolver().getType(fileUri)),
-                            file
-                    );
-            // MultipartBody.Part is used to send also the actual file name
-            MultipartBody.Part body2 =
-                    MultipartBody.Part.createFormData("Image", file.getName(), requestFile);
-
-            RequestBody requestBody = new MultipartBody.Builder()
-//                    .setType(MultipartBody.FORM)
-                    .setType(mediaType)
-//                    .addFormDataPart("RequestData", new Gson().toJson(object))
-                    .addFormDataPart("RequestData", "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition:" +
-                            "form-data; name=RequestData\r\n\r\n"+new Gson().toJson(object)+"\n\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--")
-                    .addFormDataPart("Image", fileToSend.getName() ,
-                            requestFile)
-//                    .addPart(body4)
-//                    .addPart(body2)
-                    .build();
-
-
-         /*   val file = File(image)
-            val MEDIA_TYPE_JPEG : MediaType? = MediaType.parse("image/jpeg")
-            val requestBody : RequestBody = MultipartBody.Builder()
-                    .setType(MultipartBody.FORM)
-                    .addFormDataPart("uri", image, RequestBody.create(MEDIA_TYPE_JPEG, file))
-                    .addFormDataPart("name", image)
-                    .build()*/
-
-            /*  "------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data;" +
-
-                            " name=\"Image\"\r\n\r\n"+
-                            " filename=\"" +
-                    object+"\r\nContent-Type: image/jpeg"+*/
-
-            /*{
-"BankName" : "AXIS BANK",
-"EmpName" : "ankur sharma",
-"MobileNumber" : "9599171731",
-"ReceiptNo" : "1234",
-"Remarks" : "test",
-"TotalAmount" : "10",
-"TransactionDate" : "20180910",
-"TypeOfAmount" : "Cash",
-"DeviceId" : "7dbf315e44bc1d42",
-"DoneCardUser" : "JC0A13387",
-"LoginSessionId" : "NHBG8Fc1xtZ2f2/gNXJ5fPh0SYp1R/gjhh0DTgmVMNo="
-}*/
-            Request request = new Request.Builder()
-                    .url("http://uatms.justclickkaro.com/MobileServices.svc/AgentDepositRequest")
-                    .post(body3)
-//                    .post(requestBody)
-                    .addHeader("content-type", "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW")
-                    .addHeader("cache-control", "no-cache")
-                    .addHeader("postman-token", "5fdcfa09-a63a-d836-9ab8-8dc961db4fb9")
-                    .build();
-
-            okhttp3.Response response = client.newCall(request).execute();
-
-            //print result
-//            System.out.println(response.body().string());
-
-//            String response="";
-////process the stream and store it in StringBuilder
-//            while(inStream.hasNextLine())
-//                response+=(inStream.nextLine());
-//            hideCustomDialog();
-            return response.body().string();
-
-        }catch (Exception e){
-            hideCustomDialog();
-            e.printStackTrace();
-        }
-        return null;
-    }
-
 
     public void callRblLongTimeService(Object model, String methodName, final Context context, RetrofitResponseListener listener, boolean isDialog) {
         this.context=context;
@@ -1690,6 +1557,9 @@ public class NetworkCall {
     public static ApiInterface getPayoutNewApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT_NEW).create(ApiInterface.class);  // new changes
     }
+    public static ApiInterface getTpinApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_TPIN).create(ApiInterface.class);  // new changes
+    }
     public static ApiInterface getRegisterApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT_NEW).create(ApiInterface.class);  // new changes
     }
@@ -1718,7 +1588,7 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_UAT_DEPOSIT).create(ApiInterface.class);
     }
     public static ApiInterface getLoginRequestInterface(){
-        return APIClient.getClient(ApiConstants.BASE_URL_UAT_DEPOSIT).create(ApiInterface.class);
+        return APIClient.getClient(ApiConstants.BASE_URL_UAT_LOGIN_NEW).create(ApiInterface.class);
     }
     public static ApiInterface getAepsInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);

@@ -4,22 +4,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.core.view.GravityCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewFlipper;
 
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNew;
-import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNeww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
@@ -62,6 +58,7 @@ import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
+import com.justclick.clicknbook.databinding.FragmentHomeBinding;
 import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
@@ -74,14 +71,16 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
-    private RecyclerView recyclerView;
+//    private RecyclerView recyclerView;
     private ToolBarTitleChangeListener titleChangeListener;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private MenuItemsAdapter menuItemsAdapter;
     private Context context;
     private LinearLayoutManager layoutManager;
-    private ViewFlipper viewFlipper;
-    private ImageView image1, image2, image3, image4, image5;
+//    private ViewFlipper viewFlipper;
+//    private ImageView image1, image2, image3, image4, image5;
+    private FragmentHomeBinding binding;
+    private View mView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -118,55 +117,54 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_home, container, false);
+        if(mView==null){
+            mView= inflater.inflate(R.layout.fragment_home, container, false);
+            binding=FragmentHomeBinding.bind(mView);
+            //        viewFlipper=  view.findViewById(R.id.viewFlipper);
+//        image1=  view.findViewById(R.id.image1);
+//        image2=  view.findViewById(R.id.image2);
+//        image3=  view.findViewById(R.id.image3);
+//        image4=  view.findViewById(R.id.image4);
+//        image5=  view.findViewById(R.id.image5);
 
-        viewFlipper=  view.findViewById(R.id.viewFlipper);
-        image1=  view.findViewById(R.id.image1);
-        image2=  view.findViewById(R.id.image2);
-        image3=  view.findViewById(R.id.image3);
-        image4=  view.findViewById(R.id.image4);
-        image5=  view.findViewById(R.id.image5);
+//        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider1.jpg").placeholder(R.drawable.hotel_demo_image).into(binding.image1);
+//        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider2.jpg").placeholder(R.drawable.hotel_demo_image).into(binding.image2);
+//        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider3.jpg").placeholder(R.drawable.hotel_demo_image).into(binding.image3);
+//        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider4.jpg").placeholder(R.drawable.hotel_demo_image).into(binding.image4);
+//        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider5.jpg").placeholder(R.drawable.hotel_demo_image).into(binding.image5);
 
-        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider1.jpg").placeholder(R.drawable.hotel_demo_image).into(image1);
-        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider2.jpg").placeholder(R.drawable.hotel_demo_image).into(image2);
-        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider3.jpg").placeholder(R.drawable.hotel_demo_image).into(image3);
-        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider4.jpg").placeholder(R.drawable.hotel_demo_image).into(image4);
-        Picasso.with(context).load("https://aclient.justclicknpay.com/jct/Image/appslider5.jpg").placeholder(R.drawable.hotel_demo_image).into(image5);
-
-        viewFlipper.setAutoStart(true);
-        viewFlipper.setInAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_in));
-        viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_out));
-        viewFlipper.setFlipInterval(5000);
-        viewFlipper.startFlipping();
+//        binding.viewFlipper.setAutoStart(true);
+//        binding.viewFlipper.setInAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_in));
+//        binding.viewFlipper.setOutAnimation(AnimationUtils.loadAnimation(context,R.anim.fade_out));
+//        binding.viewFlipper.setFlipInterval(5000);
+//        binding.viewFlipper.startFlipping();
 
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 //        Toast.makeText(context, "Fragment OnCreateView", Toast.LENGTH_LONG).show();
-        titleChangeListener.onToolBarTitleChange(getString(R.string.nav_home));
-        toolBarHideFromFragmentListener.onToolBarHideFromFragment(false);
 
-        ArrayList<LoginModel.DataList> list= null;
-        try {
-            list = ((NavigationDrawerActivity)context).getHomeScreenProductMenus();
-        } catch (Exception e) {
-            e.printStackTrace();
-            list=new ArrayList<>();
-        }
-
-        menuItemsAdapter=new MenuItemsAdapter(context, new MenuItemsAdapter.OnRecyclerItemClickListener() {
-            @Override
-            public void onRecyclerItemClick(View view, ArrayList<LoginModel.DataList> list, int position) {
-
+            ArrayList<LoginModel.DataList> list= null;
+            try {
+                list = ((NavigationDrawerActivity)context).getHomeScreenProductMenus();
+            } catch (Exception e) {
+                e.printStackTrace();
+                list=new ArrayList<>();
             }
 
-        },list,this);
-        layoutManager=new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(menuItemsAdapter);
+            menuItemsAdapter=new MenuItemsAdapter(context, new MenuItemsAdapter.OnRecyclerItemClickListener() {
+                @Override
+                public void onRecyclerItemClick(View view, ArrayList<LoginModel.DataList> list, int position) {
+
+                }
+
+            },list,this);
+            layoutManager=new LinearLayoutManager(context);
+            binding.recyclerView.setLayoutManager(layoutManager);
+            binding.recyclerView.setAdapter(menuItemsAdapter);
 
 //        String t=FirebaseInstanceId.getInstance().getToken();
-
-        return view;
+        }
+        return mView;
     }
 
     public void sendMenuCode(String subMenuCode) {
@@ -345,6 +343,13 @@ public class HomeFragment extends Fragment {
 //                ((NavigationDrawerActivity)context).
 //                        replaceFragmentWithBackStack(new HomeFragment());
         }
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        titleChangeListener.onToolBarTitleChange(getString(R.string.nav_home));
+        toolBarHideFromFragmentListener.onToolBarHideFromFragment(false);
     }
 
     @Override

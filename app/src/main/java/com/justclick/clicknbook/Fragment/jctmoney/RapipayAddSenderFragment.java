@@ -291,19 +291,19 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
 
     private void addSender(String methodName, String otp, final int responseType) {
         AddSenderRequest jctMoneySenderRequestModel=new AddSenderRequest();
-        jctMoneySenderRequestModel.setName(name_edt.getText().toString().trim());
-        jctMoneySenderRequestModel.setLastName(last_name_edt.getText().toString().trim());
-        jctMoneySenderRequestModel.setMobile(number_edt.getText().toString());
-        jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
-        jctMoneySenderRequestModel.setPin(pin_edt.getText().toString());
-        jctMoneySenderRequestModel.setAddress(city);
-        jctMoneySenderRequestModel.setState(state);
-        jctMoneySenderRequestModel.setDob(dob_edt.getText().toString());
-        jctMoneySenderRequestModel.setGender(gender);
-        jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
-        jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
-        jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
-        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
+//        jctMoneySenderRequestModel.setName(name_edt.getText().toString().trim());
+//        jctMoneySenderRequestModel.setLastName(last_name_edt.getText().toString().trim());
+//        jctMoneySenderRequestModel.setMobile(number_edt.getText().toString());
+//        jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
+//        jctMoneySenderRequestModel.setPin(pin_edt.getText().toString());
+//        jctMoneySenderRequestModel.setAddress(city);
+//        jctMoneySenderRequestModel.setState(state);
+//        jctMoneySenderRequestModel.setDob(dob_edt.getText().toString());
+//        jctMoneySenderRequestModel.setGender(gender);
+//        jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
+//        jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
+//        jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+//        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
         jctMoneySenderRequestModel.otp=otp;
         jctMoneySenderRequestModel.gst_state=getGstState(state);
 
@@ -426,17 +426,17 @@ public class RapipayAddSenderFragment extends Fragment implements View.OnClickLi
 
     private void validateSender(String verifySender, String otp,final int responseType) {
         AddSenderRequest jctMoneySenderRequestModel=new AddSenderRequest();
-        jctMoneySenderRequestModel.setMobile(number_edt.getText().toString());
-        jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
-        jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
-        jctMoneySenderRequestModel.setOtp(otp);
-        jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
-        jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
-        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
-        if(addSenderResponse!=null){
-            jctMoneySenderRequestModel.setOtpRefId(addSenderResponse.getOtpRefId());
-            jctMoneySenderRequestModel.setFundTransferId(addSenderResponse.getFundTransferId());
-        }
+//        jctMoneySenderRequestModel.setMobile(number_edt.getText().toString());
+//        jctMoneySenderRequestModel.setAgentCode(loginModel.Data.DoneCardUser);
+//        jctMoneySenderRequestModel.setRequestFor(senderDetailResponse.getRequestFor());
+//        jctMoneySenderRequestModel.setOtp(otp);
+//        jctMoneySenderRequestModel.setSessionKey(commonParams.getSessionKey());
+//        jctMoneySenderRequestModel.setSessionRefId(commonParams.getSessionRefNo());
+//        jctMoneySenderRequestModel.setApiService(commonParams.getApiService());
+//        if(addSenderResponse!=null){
+//            jctMoneySenderRequestModel.setOtpRefId(addSenderResponse.getOtpRefId());
+//            jctMoneySenderRequestModel.setFundTransferId(addSenderResponse.getFundTransferId());
+//        }
 
         new NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, verifySender, context,
                 new NetworkCall.RetrofitResponseListener() {

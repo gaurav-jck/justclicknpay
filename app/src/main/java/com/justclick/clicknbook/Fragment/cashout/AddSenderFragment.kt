@@ -253,18 +253,18 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
 
     private fun addSender(methodName: String, otp: String, responseType: Int) {
         val jctMoneySenderRequestModel = AddSenderRequest()
-        jctMoneySenderRequestModel.name = name_edt!!.text.toString().trim { it <= ' ' }
-        jctMoneySenderRequestModel.mobile = number_edt!!.text.toString()
-        jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
-        jctMoneySenderRequestModel.pin = pin_edt!!.text.toString()
-        jctMoneySenderRequestModel.address = city
-        jctMoneySenderRequestModel.state = state
-        jctMoneySenderRequestModel.dob = dob_edt!!.text.toString()
-        jctMoneySenderRequestModel.gender = gender
-        jctMoneySenderRequestModel.requestFor = senderDetailResponse!!.requestFor
-        jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
-        jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
-        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
+//        jctMoneySenderRequestModel.name = name_edt!!.text.toString().trim { it <= ' ' }
+//        jctMoneySenderRequestModel.mobile = number_edt!!.text.toString()
+//        jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
+//        jctMoneySenderRequestModel.pin = pin_edt!!.text.toString()
+//        jctMoneySenderRequestModel.address = city
+//        jctMoneySenderRequestModel.state = state
+//        jctMoneySenderRequestModel.dob = dob_edt!!.text.toString()
+//        jctMoneySenderRequestModel.gender = gender
+//        jctMoneySenderRequestModel.requestFor = senderDetailResponse!!.requestFor
+//        jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
+//        jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+//        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
         NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, methodName, context,
                 { response, responseCode ->
                     if (response != null) {
@@ -369,15 +369,15 @@ class AddSenderFragment : Fragment(), View.OnClickListener {
 
     private fun validateSender(verifySender: String, otp: String, responseType: Int) {
         val jctMoneySenderRequestModel = AddSenderRequest()
-        jctMoneySenderRequestModel.mobile = number_edt!!.text.toString()
-        jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
-        jctMoneySenderRequestModel.requestFor = senderDetailResponse!!.requestFor
-        jctMoneySenderRequestModel.otp = otp
-        jctMoneySenderRequestModel.otpRefId = addSenderResponse!!.otpRefId
-        jctMoneySenderRequestModel.fundTransferId = addSenderResponse!!.fundTransferId
-        jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
-        jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
-        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
+//        jctMoneySenderRequestModel.mobile = number_edt!!.text.toString()
+//        jctMoneySenderRequestModel.agentCode = loginModel!!.Data.DoneCardUser
+//        jctMoneySenderRequestModel.requestFor = senderDetailResponse!!.requestFor
+//        jctMoneySenderRequestModel.otp = otp
+//        jctMoneySenderRequestModel.otpRefId = addSenderResponse!!.otpRefId
+//        jctMoneySenderRequestModel.fundTransferId = addSenderResponse!!.fundTransferId
+//        jctMoneySenderRequestModel.sessionKey = commonParams!!.sessionKey
+//        jctMoneySenderRequestModel.sessionRefId = commonParams!!.sessionRefNo
+//        jctMoneySenderRequestModel.apiService = commonParams!!.apiService
         NetworkCall().callRapipayServiceHeader(jctMoneySenderRequestModel, verifySender, context,
                 { response, responseCode ->
                     if (response != null) {

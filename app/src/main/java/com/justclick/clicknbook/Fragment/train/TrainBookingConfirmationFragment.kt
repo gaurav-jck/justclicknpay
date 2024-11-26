@@ -100,18 +100,22 @@ class TrainBookingConfirmationFragment : Fragment() {
 
         binding!!.passengerContainerLin!!.removeAllViews()
         for(list in trainBookingRequest!!.adultRequest.iterator()){
-            val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
+            val child: View = layoutInflater.inflate(R.layout.train_passanger_show_confirm, null)
             var count:TextView=child.findViewById(R.id.passengerCountTv)
             var nameTv:TextView=child.findViewById(R.id.nameTv)
             nameTv.text= list.passengerName
             var ageTv:TextView=child.findViewById(R.id.ageTv)
-            var delete:TextView=child.findViewById(R.id.delete)
             var genderTv:TextView=child.findViewById(R.id.genderTv)
+            var foodTv:TextView=child.findViewById(R.id.foodTv)
             ageTv.text= list.passengerAge
             genderTv.text= list.passengerGender
             count.text=(binding!!.passengerContainerLin!!.childCount+1).toString()
-
-            delete.visibility=View.GONE
+            val foodChoice=getFoodType(list.passengerFoodChoice)
+            if(foodChoice!=null && foodChoice.isEmpty()){
+                foodTv.text=""
+            }else{
+                foodTv.text= "Food- $foodChoice"
+            }
             binding!!.passengerContainerLin!!.addView(child)
         }
         for(list in trainBookingRequest!!.childRequest.iterator()){
@@ -139,6 +143,28 @@ class TrainBookingConfirmationFragment : Fragment() {
         binding!!.concessionTv.setText(fareDetails.concession.toString())
         binding!!.totalFareTv.setText(fareDetails.totalFare.toString())
 
+    }
+
+    private fun getFoodType(value: String?): CharSequence? {
+        if(value.equals("V")){
+            return FoodChoice.Veg
+        }else if(value.equals("N")){
+            return FoodChoice.NonVeg
+        }else if(value.equals("D")){
+            return FoodChoice.DoNotSelect
+        }else if(value.equals("E")){
+            return FoodChoice.Snacks
+        }else if(value.equals("J")){
+            return FoodChoice.JainMeal
+        }else if(value.equals("F")){
+            return FoodChoice.VegDiabetic
+        }else if(value.equals("G")){
+            return FoodChoice.NonVegDiabetic
+        }else if(value.equals("T")){
+            return FoodChoice.TeaCoffee
+        }else{
+            return value!!
+        }
     }
 
     private fun getArrivalDate(departTime: String, duration: String): String {
