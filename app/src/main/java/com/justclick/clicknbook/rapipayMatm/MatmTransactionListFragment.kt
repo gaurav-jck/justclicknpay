@@ -309,30 +309,6 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
         filterDialog!!.show()
     }
 
-    fun call_agent(model: AgentNameRequestModel?): AgentNameModel? {
-//        agent.DATA.clear()
-        val apiService = APIClient.getClient().create(ApiInterface::class.java)
-        val call = apiService.agentNamePost(ApiConstants.GetAgentName, model)
-        call.enqueue(object : Callback<AgentNameModel?> {
-            override fun onResponse(call: Call<AgentNameModel?>, response: Response<AgentNameModel?>) {
-                try {
-                    agentNameModel = response.body()
-                    if (agentNameModel!!.StatusCode.equals("0", ignoreCase = true)) {
-                        autocompleteAdapter = AutocompleteAdapter(context, agentNameModel)
-                        list_agent!!.adapter = autocompleteAdapter
-                        list_agent!!.visibility = View.VISIBLE
-                    }
-                } catch (e: Exception) {
-                }
-            }
-
-            override fun onFailure(call: Call<AgentNameModel?>, t: Throwable) {
-                val a = 0
-                //                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-            }
-        })
-        return agentNameModel
-    }
 
     private val recyclerViewOnScrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener() {
         override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
@@ -454,9 +430,6 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
             agent_search_edt.visibility = View.GONE
             listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
-//        comment these lines
-//        agent_search_edt.visibility = View.VISIBLE
-//        listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.VISIBLE
 
         var status= arrayOf("All Status", "Failed","Initiated", "Refund Pending", "Refunded", "Rejected", "Success", "Manually Rejected")
 //        resources.getStringArray(R.array.jct_list_array)
@@ -478,7 +451,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             statusSpinner.setSelection(0)
             txnEdt.setText("")
@@ -564,7 +537,7 @@ class MatmTransactionListFragment : Fragment(), View.OnClickListener {
                             replace(")"," )")
                         }
 
-                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr,requireContext()))
                         agent_auto.showDropDown()
                     }else{
 //                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()

@@ -675,7 +675,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
 
-                params.put("AgentCode", MyPreferences.getLoginData(new LoginModel(), context).Data.DoneCardUser);
+                params.put("AgentCode", MyPreferences. getLoginData(new LoginModel(), context).Data.DoneCardUser);
                 params.put("Mobile", mobileNo);
                 params.put("Merchant", ApiConstants.MerchantId);
                 params.put("Mode", "APP");

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="DMT KYC"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/aadhar_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:hint="@string/aadharNoHint"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/aadharEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:digits="@string/mobile_digit"
+                android:maxLines="1"
+                android:maxLength="12"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/aeps_input_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:layout_marginTop="@dimen/margin_30dp"
+            >
+
+            <RadioButton
+                android:id="@+id/rb_mantra"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Mantra"
+                android:checked="true"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"/>
+
+            <RadioButton
+                android:id="@+id/rb_morpho"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Morpho"
+                android:buttonTint="@color/darkBlueColor"
+                android:layout_marginLeft="20dp"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="visible"/>
+
+            <RadioButton
+                android:id="@+id/rb_startek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Startek"
+                android:layout_marginLeft="20dp"
+                android:buttonTint="@color/darkBlueColor"
+                android:textColor="@color/darkBlueColor"
+                android:visibility="visible"/>
+
+        </RadioGroup>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/very_large_margin"
+            android:hint="@string/otp_hint"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/otpEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="6"
+                android:digits="@string/mobile_digit"
+                android:maxLines="1"
+                android:maxLength="6"
+                android:inputType="number"
+                android:singleLine="true"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/aeps_input_text_size" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/validateLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_40dp"
+            android:visibility="visible"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/validateAdhar"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Validate Aadhar"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@drawable/button_shep"
+                android:layout_marginRight="5dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/captureLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_40dp"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/btnCapture"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Capture"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@drawable/button_shep"
+                android:layout_marginRight="5dp"/>
+
+            <Button
+                android:id="@+id/btnSubmit"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Submit KYC"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@drawable/button_shep"
+                android:layout_marginRight="5dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

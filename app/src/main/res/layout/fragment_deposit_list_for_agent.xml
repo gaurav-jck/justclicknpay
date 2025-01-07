@@ -14,13 +14,26 @@
 
 
     <RelativeLayout
-        android:id="@+id/title_rel"
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
 
         <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Deposit List"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
 
     </RelativeLayout>
 
@@ -29,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/color_white"
+        android:layout_below="@id/rel_top"
         android:visibility="gone">
     <LinearLayout
         android:id="@+id/searchAgentLin"
@@ -71,10 +85,11 @@
         android:id="@+id/date_lin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/very_small_margin"
         android:background="@color/color_white"
         android:layout_below="@+id/searchAgent"
         android:paddingTop="@dimen/very_small_margin"
+        android:paddingLeft="@dimen/margin_3dp"
+        android:paddingRight="@dimen/margin_3dp"
         >
 
         <LinearLayout

@@ -114,6 +114,7 @@ public class MenuCodes {
 
   public static final String  MobileFragment="Mobile";
   public static final String  DMT ="Dmt";
+  public static final String  DMT2 ="DMT-2";
   public static final String  FlightSearch="Flight";
   public static final String  HotelSearch="Hotel";
   public static final String  BusSearch="Bus";
@@ -124,6 +125,7 @@ public class MenuCodes {
   public static final String  CREDOPAY="CREDOPAY";
   public static final String  FAST_TAG="FastTag";
   public static final String  TRAIN="Rail";
+  public static final String  TRAIN_TENT="Tent";
   public static final String  BILL_PAY="UITILITY";
   public static final String  CASH_OUT="PayOut";
   public static final String  LIC="LIC";

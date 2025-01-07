@@ -170,7 +170,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
         setDates()
 
 //        addValueToModel();
-        listAdapter = RecyclerTransactionList(context, RecyclerTransactionList.OnRecyclerItemClickListener { view, list, data, position ->
+        listAdapter = RecyclerTransactionList(context, { view, list, data, position ->
             when (view.id) {
                 R.id.print_tv -> try {
                     openReceipt(data)
@@ -178,7 +178,9 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
                 R.id.statusTv->{
-                    if(data.txnStatus.equals("0") || data.txnAmount==1.0f){
+                    if(data.txnStatus.equals("0")){
+//                        Toast.makeText(context, "Status check is not valid", Toast.LENGTH_SHORT).show()
+                    }else if(data.txnAmount==1.0f){
                         Toast.makeText(context, "Status check is not valid", Toast.LENGTH_SHORT).show()
                     }else{
                         statusPosition=position
@@ -591,8 +593,8 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
             listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
 //        comment these lines
-        agent_search_edt.visibility = View.VISIBLE
-        listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.VISIBLE
+//        agent_search_edt.visibility = View.VISIBLE
+//        listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.VISIBLE
 
         var status= arrayOf("All Status", "Failed","Initiated", "Refund Pending", "Refunded", "Rejected", "Success", "Manually Rejected")
 //        resources.getStringArray(R.array.jct_list_array)
@@ -614,7 +616,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             statusSpinner.setSelection(0)
             txnEdt.setText("")
@@ -698,7 +700,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                             replace(")"," )")
                         }
 
-                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr,requireContext()))
                         agent_auto.showDropDown()
                     }else{
 //                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()

@@ -2,6 +2,7 @@ package com.justclick.clicknbook.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -43,6 +44,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
@@ -65,6 +67,7 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
+import com.justclick.clicknbook.utils.Constants;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.squareup.picasso.Picasso;
 
@@ -207,6 +210,12 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new JctMoneyGetSenderFragment());
                 break;
+            case MenuCodes.DMT2://9
+//                ((NavigationDrawerActivity)context).checkMapping();
+//                startActivity(new Intent(context, MoneyTransferActivity.class));
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new Dmt2GetSenderFragment());
+                break;
             case MenuCodes.TrainBookingcheck://10
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new TrainBookingCheckFragment());
@@ -305,6 +314,9 @@ public class HomeFragment extends Fragment {
             case MenuCodes.TRAIN://25
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
                 break;
+            case MenuCodes.TRAIN_TENT://25
+                openTrainTent();
+                break;
             case MenuCodes.CASH_OUT://26
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new GetSenderFragment());
 //                ((NavigationDrawerActivity) context).replaceFragmentWithTag(new PayoutBeneFragment(), FragmentTags.payoutSenderDetailFragment);
@@ -343,6 +355,14 @@ public class HomeFragment extends Fragment {
 //                ((NavigationDrawerActivity)context).
 //                        replaceFragmentWithBackStack(new HomeFragment());
         }
+    }
+
+    private void openTrainTent() {
+//        Toast.makeText(context, "Open url", Toast.LENGTH_SHORT).show();
+        String url = Constants.trainTentUrl;
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
     }
 
     @Override

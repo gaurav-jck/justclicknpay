@@ -493,7 +493,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             statusSpinner.setSelection(0)
             txnEdt.setText("")
@@ -579,7 +579,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                             replace(")"," )")
                         }
 
-                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr,requireContext()))
                         agent_auto.showDropDown()
                     }else{
 //                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()

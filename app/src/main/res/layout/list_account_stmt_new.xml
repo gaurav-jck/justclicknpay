@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="@color/cardBackground"
+    app:cardCornerRadius="@dimen/margin_7dp"
+    app:cardElevation="5dp"
+    android:layout_margin="3dp">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small_margin"
+        android:layout_margin="@dimen/margin_2dp"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_2dp">
+
+            <TextView
+                android:id="@+id/confirmIdTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.4"
+                android:gravity="left"
+                android:text="Id"
+                android:textColor="@color/dark_blue_color"
+                android:fontFamily="@font/roboto_medium"
+                android:background="@drawable/money_receiver_border_rect_corner"
+                android:textSize="@dimen/text_size_14sp" />
+
+
+            <TextView
+                android:id="@+id/typeTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Txn Type"
+                android:gravity="right"
+                android:textColor="@color/dark_blue_color"
+                android:textSize="@dimen/text_size_14sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_3dp">
+
+            <TextView
+                android:id="@+id/agencyTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/black_text_color"
+                android:layout_toLeftOf="@id/agentIdTv"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/agentIdTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Id"
+                android:layout_alignParentRight="true"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/black_text_color"
+                android:layout_weight="1"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/updatedByTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:gravity="left"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/grey_dark"
+                android:layout_weight="1.3"/>
+
+            <TextView
+                android:id="@+id/dateTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/grey_dark"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_3dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/debitTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/app_red_color"
+                android:visibility="gone"
+                android:layout_weight="1"/>
+            <TextView
+                android:id="@+id/remarksTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="remarks"
+                android:gravity="left"
+                android:textSize="@dimen/text_size_14sp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textColor="@color/black_text_color"
+                android:layout_weight="1.3"/>
+
+            <TextView
+                android:id="@+id/creditTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/green"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_3dp"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/balanceTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="2344"
+                android:gravity="right"
+                android:textSize="@dimen/text_size_14sp"
+                android:textColor="@color/dark_blue_color"
+                android:textStyle="bold"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

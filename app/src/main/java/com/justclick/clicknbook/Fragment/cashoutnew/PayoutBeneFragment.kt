@@ -205,7 +205,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
                              context, """
       You can't do any transaction to this beneficiary.
       Please add new beneficiary.
-      """.trimIndent(), Toast.LENGTH_SHORT
+      """.trimIndent(), Toast.LENGTH_LONG
                          ).show()
                     } else {
                         validateCredential()
@@ -528,6 +528,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         requestModel.AgentCode = loginModel!!.Data.DoneCardUser
         requestModel.MobileNumber = beneData!!.mobileNo
         requestModel.Amount = amount
+//        requestModel.Amount = 0
         requestModel.AccountNumber = beneData!!.accountNo
         requestModel.Name = beneData!!.agencyName
         requestModel.BankName = beneData!!.bankName
@@ -536,6 +537,7 @@ class PayoutBeneFragment : Fragment(), View.OnClickListener {
         requestModel.TransferType = TType
         requestModel.Email= loginModel!!.Data.Email
         requestModel.ApiService= commonParams!!.apiService
+        var json=Gson().toJson(requestModel)
 
         NetworkCall().callService(NetworkCall.getPayoutNewApiInterface().getPayoutTxnWithHeader(ApiConstants.TransactionPayout, requestModel,
             userData, "Bearer "+token), requireContext(), true

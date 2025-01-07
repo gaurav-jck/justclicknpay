@@ -72,7 +72,7 @@ public class RecyclerTransactionList extends RecyclerView.Adapter<RecyclerView.V
                 if(info.getAccountNo()!=null){
                     myViewHolder.account.setText("Ac no. "+info.getAccountNo());
                 }else {
-                    myViewHolder.account.setText("Ac no. ");
+                    myViewHolder.account.setText("Ac no.  *****");
                 }
                 myViewHolder.date.setText( info.getCreatedDate());
                 myViewHolder.txnType.setText(info.getTxnType());

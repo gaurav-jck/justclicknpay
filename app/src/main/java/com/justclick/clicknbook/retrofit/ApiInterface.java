@@ -504,6 +504,17 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> testHeader(@Url String url, @Header("Authorization") String token);
 
+//    DMT2
+    @POST("api/Payments/bank2/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getDmt2Header(@Path("methodName") String method, @Body Object data,
+                                            @Header("userData") String userData, @Header("Authorization") String token);
+
+    @POST("api/Payments/bank2/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> getDmt2HeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                            @Header("userData") String userData, @Header("Authorization") String token);
+
 
     //    Payout
     @POST("api/Payment/{methodName}")

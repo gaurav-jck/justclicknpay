@@ -7,5 +7,6 @@ package com.justclick.clicknbook;
 public class FragmentTags
 {
     public static final String jctMoneySenderDetailFragment ="jctMoneySenderDetailFragment";
+    public static final String dmt2SenderDetailFragment ="dmt2SenderDetailFragment";
     public static final String payoutSenderDetailFragment ="payoutSenderDetailFragment";
     }

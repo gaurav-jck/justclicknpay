@@ -46,7 +46,7 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
         // infalte the item Layout
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_account_stmt, parent, false);
+                .inflate(R.layout.list_account_stmt_new, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -70,6 +70,14 @@ public class AccountStatementAdapter extends RecyclerView.Adapter<RecyclerView.V
             myViewHolder.typeTv.setText(info.transactionType);
             myViewHolder.remarksTv.setText(info.remarks);
             myViewHolder.updatedByTv.setText(info.updatedBy);
+
+            if(Float.parseFloat(info.txnAMTC)>0){
+                myViewHolder.creditTv.setTextColor(context.getResources().getColor(R.color.green, null));
+                myViewHolder.creditTv.setText("+"+info.txnAMTC);
+            }else {
+                myViewHolder.creditTv.setTextColor(context.getResources().getColor(R.color.app_red_color, null));
+                myViewHolder.creditTv.setText("-"+info.txnAMTD);
+            }
 
             myViewHolder.confirmIdTv.setOnClickListener(view -> {
                 listener.onRecyclerItemClick(view, infoList,info, position);

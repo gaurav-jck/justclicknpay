@@ -25,7 +25,7 @@ public class ApiConstants
     public static final String BASE_URL_QR_old="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
     public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
-//    public static final String BASE_URL_ACCOUNT_DETAIL="https://uatremittance.justclicknpay.com/";
+    public static final String BASE_URL_UAT_REMMIT="https://uatremittance.justclicknpay.com/";
     public static final String BASE_URL_ACCOUNT_DETAIL=BASE_URL_RAPIPAY;
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
 //    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
@@ -209,6 +209,10 @@ public class ApiConstants
     public static final String Reject   ="Reject";
     public static final String PendingRefund   ="PendingRefund";
     public static final String ClaimRefund   ="ClaimRefund";
+
+//    DMT2
+    public static final String aadharverify   ="aadharverify";
+    public static final String registerRemitter   ="registerRemitter";
 
     //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";

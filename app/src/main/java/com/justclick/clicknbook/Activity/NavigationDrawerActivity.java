@@ -57,6 +57,8 @@ import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.BuildConfig;
 import com.justclick.clicknbook.Fragment.changetpin.ChangeTpinFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2SenderDetailFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.CompanyContactFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.ContactDetailsFragment;
@@ -435,6 +437,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(jctMoneyGetSenderFragment);
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case MenuCodes.DMT2:
+//                checkMapping();
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new Dmt2GetSenderFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case MenuCodes.TrainBookingcheck:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(trainPnrCheckFragment);
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -505,6 +512,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 break;
             case MenuCodes.TRAIN:
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
+            case MenuCodes.TRAIN_TENT:
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
+                Toast.makeText(context, "Book irctc tent in mahakumbh", Toast.LENGTH_SHORT).show();
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case MenuCodes.CASH_OUT:
@@ -612,6 +624,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 return R.drawable.ic_credit_card;
             case MenuCodes.TRAIN:
                 return R.drawable.train_booking_check_icon;
+            case MenuCodes.TRAIN_TENT:
+                return R.drawable.train_booking_check_icon;
             case MenuCodes.HotelSearch:
                 return R.drawable.hotel_menu_icon;
             case MenuCodes.AgentCreditRequestFragment:
@@ -621,6 +635,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
             case MenuCodes.TrainBookingcheck:
                 return R.drawable.train_booking_check_icon;
             case MenuCodes.DMT:
+            case MenuCodes.DMT2:
                 return R.drawable.money_transfer_menu_icon;
             case MenuCodes.CASH_OUT:
                 return R.drawable.money_transfer_menu_icon;
@@ -893,6 +908,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         ArrayList<LoginModel.DataList> list=new ArrayList<>();
         boolean isUtilityBill=false;
         boolean isPayout=false;
+        boolean isDmt2=false;
         boolean isQR=false;
 
         if(loginModel.ProductList!=null && loginModel.ProductList.size()>0){
@@ -925,7 +941,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                     subMenu.SubMenuCode=modules[i].substring(0,modules[i].indexOf("-"));
                     if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.DMT)){
                         subMenu.SubMenu="DMT";
-                        isPayout=true;
+                        isDmt2=true;
                         findViewById(R.id.credit_request_lin).setVisibility(View.GONE);
                     }else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.MobileFragment)){
                         subMenu.SubMenu="Recharge";
@@ -943,16 +959,24 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         subMenu.SubMenu="Utility Bill";
                         isUtilityBill=true;
                     }
-                        /*else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
-                            LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
-                            subMenuHotel.SubMenu=MenuCodes.AEPS_OLD;
-                            subMenuHotel.SubMenuCode=MenuCodes.AEPS_OLD;
-                            subMenuArrayList.add(subMenuHotel);
-                        }*/
+
+//                    else if(subMenu.SubMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){    //hardcoded
+//                        LoginModel.DataList.subMenu subMenuHotel=dataList.new subMenu();
+//                        subMenuHotel.SubMenu=MenuCodes.AEPS_OLD;
+//                        subMenuHotel.SubMenuCode=MenuCodes.AEPS_OLD;
+//                        subMenuArrayList.add(subMenuHotel);
+//                    }
                     if(!((loginModel.Data.UserType.equalsIgnoreCase(UserType.Distributor))||
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.SalesPerson)) ||
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.AdminStaff)))) {
                         subMenuArrayList.add(subMenu);
+                        if(isDmt2){
+                            LoginModel.DataList.subMenu dmt2 = dataList.new subMenu();
+                            dmt2.SubMenu = MenuCodes.DMT2;
+                            dmt2.SubMenuCode = MenuCodes.DMT2;
+                            subMenuArrayList.add(dmt2);
+                            isDmt2=false;
+                        }
                     }
                 }
             }
@@ -960,6 +984,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 
 //            hardcoded
+
+            LoginModel.DataList.subMenu tent=dataList.new subMenu();
+            tent.SubMenu=MenuCodes.TRAIN_TENT;
+            tent.SubMenuCode=MenuCodes.TRAIN_TENT;
+            subMenuArrayList.add(tent);
 
             if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff))){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
@@ -1499,6 +1528,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
             }else if(classType.equals(CodeEnum.PayoutNew)){
                 ((PayoutBeneFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.payoutSenderDetailFragment)).
                         getBankDetails(false);
+            }else if(classType.equals(CodeEnum.DMT2)){
+                ((Dmt2SenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.dmt2SenderDetailFragment)).
+                        getSenderDetail(0);
             }else {
                 ((SenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.jctMoneySenderDetailFragment)).
                         getSenderDetail(0);

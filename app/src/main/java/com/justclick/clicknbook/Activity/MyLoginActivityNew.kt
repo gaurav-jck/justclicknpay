@@ -282,6 +282,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                             }else{
                                 //store values to shared preferences
 //                                loginModel.Data.DoneCardUser="JC0A30527"
+//                                loginModel.Data.DoneCardUser="JC0A39739"
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)

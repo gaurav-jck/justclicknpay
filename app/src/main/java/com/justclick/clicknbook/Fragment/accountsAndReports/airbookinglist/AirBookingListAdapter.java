@@ -46,7 +46,7 @@ public class AirBookingListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         // infalte the item Layout
 
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_air_booking, parent, false);
+                .inflate(R.layout.list_air_booking_new, parent, false);
 
         if(viewType == TYPE_FOOTER) {
             View itemView2 = LayoutInflater.from(parent.getContext())
@@ -65,16 +65,21 @@ public class AirBookingListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                 final AirBookingListResponse.travelsListDetail info = infoList.get(position);
 
                 myViewHolder.agentIdTv.setText(info.doneCardUser);
-                myViewHolder.agencyTv.setText(info.doneCardUser);
+//                myViewHolder.agencyTv.setText(info.doneCardUser);
                 myViewHolder.orderNoTv.setText(info.orderno);
                 myViewHolder.orderIdTv.setText(info.reforderid);
                 myViewHolder.dateTv.setText(info.createdDate);
-                myViewHolder.updateDateTv.setText(info.statusDate);
+//                myViewHolder.updateDateTv.setText(info.statusDate);
                 myViewHolder.typeTv.setText(info.tripType+" ["+info.travelType+"]");
-                myViewHolder.mobileTv.setText(info.paxMobileNumber);
+                myViewHolder.mobileTv.setText("M. "+info.paxMobileNumber);
                 myViewHolder.nameTv.setText(info.paxName);
                 myViewHolder.grossTv.setText(info.amount);
-                myViewHolder.refundTv.setText(info.refundAmt);
+
+                if(Float.parseFloat(info.refundAmt)>0){
+                    myViewHolder.refundTv.setText("Ref "+info.refundAmt);
+                }else {
+                    myViewHolder.refundTv.setText("");
+                }
 
 
 //                myViewHolder.refundLin.setOnClickListener(v -> listener.onRecyclerItemClick(myViewHolder.refundLin,

@@ -23,6 +23,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -416,6 +417,15 @@ public final class Common {
     return new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss", Locale.US).format(date);
   }
 
+  public static ArrayAdapter<String> getAutocompleteAdapter(String[] arr, Context context){
+    ArrayAdapter<String> adapter= new ArrayAdapter<String>(
+            context,
+            R.layout.autocomplete_item, R.id.operator_tv, arr);
+    adapter.setDropDownViewResource(R.layout.autocomplete_item_dropdown);
+
+    return adapter;
+  }
+
 
   public static void preventFrequentClick(final View view){
     view.setClickable(false);
@@ -450,6 +460,7 @@ public final class Common {
       }
     });
   }
+
 
   public static String loadJSONFromAsset(Context context, String fileName) {
     String json = null;

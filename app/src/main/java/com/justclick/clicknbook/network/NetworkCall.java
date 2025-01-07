@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -1142,7 +1143,12 @@ public class NetworkCall {
 //                        JsonObject object = new JsonObject(response.body().toString());
 //                        String body=object.getString("msgDesc");
 //                    }
-                    responseBody=response.body();
+                    if(response.code()==200){
+                        responseBody=response.body();
+                    }else {
+                        responseBody=response.errorBody();
+                        Log.d("Response------", responseBody.string());
+                    }
                     retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
                 }catch (Exception e){
                     responseBody=null;
@@ -1582,6 +1588,9 @@ public class NetworkCall {
 
     public static ApiInterface getAccountStmtApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_ACCOUNT_STMT).create(ApiInterface.class);
+    }
+    public static ApiInterface getDmt2ApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface.class);
     }
 
     public static ApiInterface getDepositRequestInterface(){

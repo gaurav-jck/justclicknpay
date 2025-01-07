@@ -35,6 +35,7 @@ import com.justclick.clicknbook.adapter.DepositListForAgentAdapter;
 import com.justclick.clicknbook.model.AgentNameModel;
 import com.justclick.clicknbook.model.DepositListForAgentModel;
 import com.justclick.clicknbook.model.LoginModel;
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailForAgentModel;
@@ -63,6 +64,7 @@ public class AgentDepositListFragment extends Fragment implements View.OnClickLi
     private final int START_DATE=1, END_DATE=2;
     private final int CALL_AGENT=1;
     private ToolBarTitleChangeListener titleChangeListener;
+    private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private final boolean SHOW_PROGRESS=true, NO_PROGRESS=false;
     private Context context;
     private RecyclerView recyclerView;
@@ -94,6 +96,7 @@ public class AgentDepositListFragment extends Fragment implements View.OnClickLi
         super.onAttach(context);
         try {
             titleChangeListener= (ToolBarTitleChangeListener) context;
+            toolBarHideFromFragmentListener= (ToolBarHideFromFragmentListener) context;
         }catch (ClassCastException e){
 
         }
@@ -156,6 +159,7 @@ public class AgentDepositListFragment extends Fragment implements View.OnClickLi
         agent_search_edt = (EditText) view.findViewById(R.id.agent_search_edt);
         agencyList = (ListView) view.findViewById(R.id.agencyList);
         titleChangeListener.onToolBarTitleChange(getString(R.string.agentDepositListFragmentTitle));
+        toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
 
         //initialize date values
         setDates();
@@ -192,6 +196,10 @@ public class AgentDepositListFragment extends Fragment implements View.OnClickLi
         }
 
         recyclerView.addOnScrollListener(recyclerViewOnScrollListener);
+
+        view.findViewById(R.id.back_arrow).setOnClickListener(it->{
+            getParentFragmentManager().popBackStack();
+        });
 
         view.findViewById(R.id.lin_dateFilter).setOnClickListener(new View.OnClickListener() {
             @Override

@@ -32,6 +32,7 @@ import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.CreditListForAgentAdapter;
 import com.justclick.clicknbook.model.CreditListForAgentModel;
 import com.justclick.clicknbook.model.LoginModel;
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailForAgentModel;
@@ -54,6 +55,7 @@ public class AgentCreditListFragment extends Fragment implements View.OnClickLis
     private final int START_DATE=1, END_DATE=2;
     private final int CALL_AGENT=1;
     private ToolBarTitleChangeListener titleChangeListener;
+    private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private final boolean SHOW_PROGRESS=true, NO_PROGRESS=false;
     private Context context;
     private RecyclerView recyclerView;
@@ -81,6 +83,7 @@ public class AgentCreditListFragment extends Fragment implements View.OnClickLis
         super.onAttach(context);
         try {
             titleChangeListener= (ToolBarTitleChangeListener) context;
+            toolBarHideFromFragmentListener= (ToolBarHideFromFragmentListener) context;
         }catch (ClassCastException e){
 
         }
@@ -147,6 +150,7 @@ public class AgentCreditListFragment extends Fragment implements View.OnClickLis
         totalRejectedAmount =  view.findViewById(R.id.totalRejectedAmount);
 
         titleChangeListener.onToolBarTitleChange(getString(R.string.agentCreditListFragmentTitle));
+        toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
 
         //initialize date values
         setDates();
@@ -188,6 +192,10 @@ public class AgentCreditListFragment extends Fragment implements View.OnClickLis
             public void onClick(View v) {
                 openFilterDialog();
             }
+        });
+
+        view.findViewById(R.id.back_arrow).setOnClickListener(it->{
+                getParentFragmentManager().popBackStack();
         });
 
         lin= (LinearLayout) view.findViewById(R.id.lin);

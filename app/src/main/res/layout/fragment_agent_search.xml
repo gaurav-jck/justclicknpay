@@ -109,7 +109,8 @@
                 android:id="@+id/list_agent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/agent_search_edt"/>
+                android:layout_below="@+id/agent_search_edt"
+                android:background="@color/white"/>
         </RelativeLayout>
 
 

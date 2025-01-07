@@ -16,6 +16,7 @@
          android:background="@color/colorPrimary"
          android:padding="@dimen/small_margin"
          android:gravity="center"
+         android:fontFamily="@font/roboto_medium"
          android:text="Confirm"/>
 
 
@@ -25,6 +26,8 @@
          android:layout_height="wrap_content"
          android:text="Please confirm your request"
          android:textColor="@color/dark_blue_color"
+         android:textSize="@dimen/text_size_15sp"
+         android:fontFamily="@font/museo_regular"
          android:layout_marginLeft="@dimen/medium_margin"
          android:layout_marginRight="@dimen/medium_margin"
          android:layout_marginTop="@dimen/margin_30dp" />
@@ -63,11 +66,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/red_fill_round_background"
             android:gravity="center"
             android:layout_margin="@dimen/very_small_margin"
             android:padding="@dimen/small_margin"
             android:text="Cancel"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/color_white" />
 
         <TextView
@@ -75,11 +80,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/red_fill_round_background"
             android:gravity="center"
             android:layout_margin="@dimen/very_small_margin"
             android:padding="@dimen/small_margin"
-            android:text="Ok"
+            android:text="Submit"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/open_sans_semibold"
             android:textColor="@color/color_white" />
 
     </LinearLayout>

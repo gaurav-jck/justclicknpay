@@ -19,7 +19,7 @@
         android:textColor="@color/app_blue_color"
         android:id="@+id/countryName"
         android:layout_alignParentTop="true"
-        android:background="@color/cardBackground"
+        android:background="#efefef"
         android:paddingLeft="@dimen/small_margin"
         android:paddingRight="@dimen/medium_margin"
         android:paddingTop="@dimen/medium_margin"

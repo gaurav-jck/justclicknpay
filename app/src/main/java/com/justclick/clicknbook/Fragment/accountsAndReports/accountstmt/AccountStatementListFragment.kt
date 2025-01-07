@@ -429,7 +429,8 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
                             replace(")"," )")
                         }
 
-                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+//                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr,requireContext()))
                         agent_auto.showDropDown()
                     }else{
 //                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
@@ -444,16 +445,6 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
             e.printStackTrace()
             Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
         }
-    }
-
-    private fun getSpinnerAdapter(arr: Array<String?>): ArrayAdapter<String>? {
-        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
-            requireContext(),
-            R.layout.mobile_operator_spinner_item, R.id.operator_tv, arr
-        )
-        adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown)
-
-        return adapter
     }
 
     fun getTxnType() {
@@ -741,8 +732,8 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openListFilterDialog() {
-//        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
-        listFilterDialog = Dialog(requireContext())
+        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+//        listFilterDialog = Dialog(requireContext())
         listFilterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         listFilterDialog!!.setContentView(R.layout.account_stmt_filter)
         val typeSpinner = listFilterDialog!!.findViewById<Spinner>(R.id.typeSpinner)
@@ -767,7 +758,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             typeSpinner.setSelection(0)
             confirmIdEdt.setText("")
@@ -809,7 +800,7 @@ class AccountStatementListFragment : Fragment(), View.OnClickListener {
 
         val window = listFilterDialog!!.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
+            LinearLayout.LayoutParams.MATCH_PARENT)
         listFilterDialog!!.show()
     }
 

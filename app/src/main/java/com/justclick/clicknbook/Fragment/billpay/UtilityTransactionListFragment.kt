@@ -468,6 +468,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
             agent_search_edt.visibility = View.GONE
             listFilterDialog!!.findViewById<View>(R.id.agentLabelTv).visibility = View.GONE
         }
+
         val adapter = ArrayAdapter(requireContext(),
                 R.layout.agent_details_spinner_item_dropdown, R.id.operator_tv, resources.getStringArray(R.array.jct_list_array))
         adapter.setDropDownViewResource(R.layout.salutation_spinner_item_dropdown)
@@ -486,7 +487,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             statusSpinner.setSelection(0)
             txnEdt.setText("")
@@ -582,7 +583,7 @@ class UtilityTransactionListFragment : Fragment(), View.OnClickListener {
                             replace(")"," )")
                         }
 
-                        agent_auto.setAdapter<ArrayAdapter<String>>(getSpinnerAdapter(arr))
+                        agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr, requireContext()))
                         agent_auto.showDropDown()
                     }else{
 //                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()

@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2.3"
             android:text="11/12/2018"
-            android:textColor="@color/transactionListLabelColor"
+            android:textColor="@color/grey_dark"
             android:textSize="@dimen/text_size_14sp" />
 
         <TextView

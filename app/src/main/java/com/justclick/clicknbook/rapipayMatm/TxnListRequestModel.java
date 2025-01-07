@@ -3,7 +3,16 @@ package com.justclick.clicknbook.rapipayMatm;
 import com.justclick.clicknbook.ApiConstants;
 
 public class TxnListRequestModel {
-    private String AgentCode,UserType,Merchant= ApiConstants.MerchantId, Fromdate, Todate, RowStart, RowEnd, RRn, JckTransactionId;
+    private String AgentCode,UserType,Merchant= ApiConstants.MerchantId, Fromdate, Todate, RowStart, RowEnd,
+            RRn, JckTransactionId, mobile, txnDescription;
+
+    public void setTxnDescription(String txnDescription) {
+        this.txnDescription = txnDescription;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
 
     public void setUserType(String userType) {
         UserType = userType;

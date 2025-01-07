@@ -36,8 +36,10 @@ import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
+import jxl.CellView
 import jxl.Workbook
 import jxl.WorkbookSettings
+import jxl.format.CellFormat
 import jxl.write.Label
 import jxl.write.WritableSheet
 import jxl.write.WritableWorkbook
@@ -152,7 +154,7 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
             mView!!.findViewById<View>(R.id.linFilter).setOnClickListener(this)
             mView!!.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
             mView!!.findViewById<View>(R.id.exportExcelTv).setOnClickListener(this)
-            mView!!.findViewById<View>(R.id.exportExcelTv).visibility=View.GONE
+            mView!!.findViewById<View>(R.id.exportExcelTv).visibility=View.VISIBLE
 
 
             //initialize date values
@@ -402,7 +404,7 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun createExcelSheet() {
-        val fileName = "jck_accountStmt" + System.currentTimeMillis() + ".xls"
+        val fileName = "jck_airBookingList" + System.currentTimeMillis() + ".xls"
         var myFile= File(requireContext().getExternalFilesDir(null)!!.path, fileName)
         val wbSettings = WorkbookSettings()
         wbSettings.setLocale(Locale("en", "EN"))
@@ -411,34 +413,58 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
             val a = 1
             workbook = Workbook.createWorkbook(myFile, wbSettings)
             //workbook.createSheet("Report", 0);
-            val sheet: WritableSheet = workbook.createSheet("Account Statement", 0)
+            val sheet: WritableSheet = workbook.createSheet("Air Booking List", 0)
 
             var labelList:ArrayList<Label> = ArrayList()
             labelList.add(Label(0, 0, "SNo."))
             labelList.add(Label(1, 0, "Confirmation Id"))
             labelList.add(Label(2, 0, "Booking Ref No."))
             labelList.add(Label(3, 0, "Transaction Date"))
-            labelList.add(Label(4, 0, "Debit"))
-            labelList.add(Label(5, 0, "Credit"))
-            labelList.add(Label(6, 0, "Balance"))
-            labelList.add(Label(7, 0, "Transaction Type"))
-            labelList.add(Label(8, 0, "Current Credit Amount"))
-            labelList.add(Label(9, 0, "Remarks"))
-            labelList.add(Label(10, 0, "Updated by"))
+            labelList.add(Label(4, 0, "Pax Name"))
+            labelList.add(Label(5, 0, "Pax Mobile"))
+            labelList.add(Label(6, 0, "Debit"))
+            labelList.add(Label(7, 0, "Credit"))
+            labelList.add(Label(8, 0, "Transaction Type"))
+            labelList.add(Label(9, 0, "Travel Type"))
+
+            var cv: CellView = sheet.getColumnView(1);
+            cv.size = 25 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(1, cv)
+            var cv2: CellView = sheet.getColumnView(2);
+            cv2.size = 18 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(2, cv2)
+            var cv3: CellView = sheet.getColumnView(3);
+            cv3.size = 18 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(3, cv3)
+            var cv4: CellView = sheet.getColumnView(4);
+            cv4.size = 18 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(4, cv4)
+            var cv5: CellView = sheet.getColumnView(5);
+            cv5.size = 12 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(5, cv5)
+            var cv6: CellView = sheet.getColumnView(6);
+            cv6.size = 12 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(6, cv6)
+            var cv7: CellView = sheet.getColumnView(7);
+            cv7.size = 10 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(7, cv7)
+            var cv8: CellView = sheet.getColumnView(8);
+            cv8.size = 12 * 256 + 100; /* Every character is 256 units wide, so scale it. */
+            sheet.setColumnView(8, cv8)
 
             for(i in 0 until arrayList!!.size){
                 var r=i+1
                 labelList.add(Label(0, r, r.toString()))
-//                labelList.add(Label(1, r, arrayList!!.get(i).referenceid))
-//                labelList.add(Label(2, r, ""))
-//                labelList.add(Label(3, r, arrayList!!.get(i).txndate))
-//                labelList.add(Label(4, r, arrayList!!.get(i).txnAMTD))
-//                labelList.add(Label(5, r, arrayList!!.get(i).txnAMTC))
-//                labelList.add(Label(6, r, arrayList!!.get(i).balance))
-//                labelList.add(Label(7, r, arrayList!!.get(i).transactionType))
-//                labelList.add(Label(8, r, arrayList!!.get(i).currentCreditAmount))
-//                labelList.add(Label(9, r, arrayList!!.get(i).remarks))
-//                labelList.add(Label(10, r, arrayList!!.get(i).updatedBy))
+                labelList.add(Label(1, r, arrayList!!.get(i).orderno))
+                labelList.add(Label(2, r, arrayList!!.get(i).reforderid))
+                labelList.add(Label(3, r, arrayList!!.get(i).createdDate))
+                labelList.add(Label(4, r, arrayList!!.get(i).paxName))
+                labelList.add(Label(5, r, arrayList!!.get(i).paxMobileNumber))
+                labelList.add(Label(6, r, arrayList!!.get(i).amount))
+                labelList.add(Label(7, r, arrayList!!.get(i).refundAmt))
+                labelList.add(Label(8, r, arrayList!!.get(i).bookingType))
+                labelList.add(Label(9, r, arrayList!!.get(i).travelType+" "+arrayList!!.get(i).tripType))
+
             }
 
             try {
@@ -498,8 +524,8 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openListFilterDialog() {
-//        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
-        listFilterDialog = Dialog(requireContext())
+        listFilterDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+//        listFilterDialog = Dialog(requireContext())
         listFilterDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         listFilterDialog!!.setContentView(R.layout.air_booking_filter)
 
@@ -508,7 +534,7 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
         val nameEdt = listFilterDialog!!.findViewById<EditText>(R.id.nameEdt)
         val mobileEdt = listFilterDialog!!.findViewById<EditText>(R.id.mobileEdt)
 
-        listFilterDialog!!.findViewById<View>(R.id.cancelTv).setOnClickListener { listFilterDialog!!.dismiss() }
+        listFilterDialog!!.findViewById<View>(R.id.back_arrow).setOnClickListener { listFilterDialog!!.dismiss() }
         listFilterDialog!!.findViewById<View>(R.id.resetTv).setOnClickListener {
             orderNoEdt.setText("")
             refIdEdt.setText("")
@@ -526,7 +552,7 @@ class AirBookingListFragment : Fragment(), View.OnClickListener {
 
         val window = listFilterDialog!!.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-            LinearLayout.LayoutParams.WRAP_CONTENT)
+            LinearLayout.LayoutParams.MATCH_PARENT)
         listFilterDialog!!.show()
     }
 

@@ -2,6 +2,7 @@ package com.justclick.clicknbook.Fragment.cashout
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -106,9 +107,15 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     // Inflate the layout for this fragment
     val myView = inflater.inflate(R.layout.fragment_jct_money_sender_detail, container, false)
     if (requireArguments().getSerializable("senderResponse") != null) {
-      senderDetailResponse = requireArguments().getSerializable("senderResponse") as SenderDetailResponse?
-      commonParams = requireArguments().getSerializable("commonParams") as CommonParams?
-      senderInfo = senderDetailResponse!!.senderDetailInfo[0]
+      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        senderDetailResponse = requireArguments().getSerializable("senderResponse", SenderDetailResponse::class.java)
+        commonParams = requireArguments().getSerializable("commonParams", CommonParams::class.java)
+        senderInfo = senderDetailResponse!!.senderDetailInfo[0]
+      }else{
+        senderDetailResponse = requireArguments().getSerializable("senderResponse") as SenderDetailResponse?
+        commonParams = requireArguments().getSerializable("commonParams") as CommonParams?
+        senderInfo = senderDetailResponse!!.senderDetailInfo[0]
+      }
     }
     try {
       initializeViews(myView)
@@ -120,17 +127,17 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
 
   }
 
-  private fun initializeViews(view: View?) {
-    senderNameTv = view!!.findViewById(R.id.senderNameTv)
-    senderMobileTv = view.findViewById(R.id.senderMobileTv)
-    senderKycTv = view.findViewById(R.id.senderKycTv)
-    addRecTv = view.findViewById(R.id.addRecTv)
-    limitTv = view.findViewById(R.id.limitTv)
-    recipientRecycleView = view.findViewById(R.id.recipientRecycleView)
+  private fun initializeViews(mView: View?) {
+    senderNameTv = mView!!.findViewById(R.id.senderNameTv)
+    senderMobileTv = mView.findViewById(R.id.senderMobileTv)
+    senderKycTv = mView.findViewById(R.id.senderKycTv)
+    addRecTv = mView.findViewById(R.id.addRecTv)
+    limitTv = mView.findViewById(R.id.limitTv)
+    recipientRecycleView = mView.findViewById(R.id.recipientRecycleView)
     loginModel = LoginModel()
     loginModel = MyPreferences.getLoginData(loginModel, context)
     val face = Common.TextViewTypeFace(context)
-    view.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
+    mView.findViewById<View>(R.id.back_arrow).setOnClickListener(this)
     senderNameTv!!.setText(senderInfo!!.name)
     senderMobileTv!!.setText(senderInfo!!.mobile)
     limitTv!!.setText("Rs. " + senderDetailResponse!!.remainingLimit + "")
@@ -138,16 +145,14 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
     recipientRecycleView!!.setAdapter(getAdapter(senderDetailResponse!!.benificiaryDetailData))
     recipientRecycleView!!.setLayoutManager(LinearLayoutManager(context))
     addRecTv!!.setOnClickListener(this)
-    view.findViewById<View>(R.id.limitLin).visibility= View.GONE
+    mView.findViewById<View>(R.id.limitLin).visibility= View.GONE
 //    view.findViewById<View>(R.id.limitLin).visibility= View.VISIBLE
-    view.findViewById<View>(R.id.limitDetailLin).visibility= View.GONE
+    mView.findViewById<View>(R.id.limitDetailLin).visibility= View.GONE
   }
 
   private fun getAdapter(benificiaryDetailData: ArrayList<benificiaryDetailData>): RapipayRecipientListAdapter {
     return RapipayRecipientListAdapter(context, RapipayRecipientListAdapter.OnRecyclerItemClickListener { view, list, position ->
-//      if (view.id == R.id.payNowTv) {
-      if (view.id == R.id.deleteTv) {
-//                    Toast.makeText(context, "Pay Now", Toast.LENGTH_SHORT).show();
+      if (view.id == R.id.payNowTv) {
         beneData = list[position]
         if (beneData!!.accountNumber == null || beneData!!.accountNumber.length == 0) {
           Toast.makeText(context, """
@@ -167,8 +172,15 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
           currentListItemPosition = position
         }
       } else {
-        openDeleteConfirmationDialog("Confirm Delete Request", "Please confirm," +
-                " you want to delete this beneficiary.", "Cancel", "Delete", list[position])
+//        openDeleteConfirmationDialog("Confirm Delete Request", "Please confirm," +
+//                " you want to delete this beneficiary.", "Cancel", "Delete", list[position])
+        openTxnConfirmationDialog("Confirm this transaction", """
+     Please confirm, you want to make this transaction.
+     Amount=$amount
+     Account no=${beneData!!.accountNumber}
+     Name=${beneData!!.accountHolderName}
+     """.trimIndent(),
+          "Cancel", "Submit","","")
       }
     }, benificiaryDetailData, senderInfo!!.mobile)
   }
@@ -371,7 +383,6 @@ class SenderDetailFragment : Fragment(), View.OnClickListener {
 //                    if(MyCustomDialog.isDialogShowing()){
 //                    MyCustomDialog.setDialogMessage("Please wait transaction running...")}
           openDialog(senderResponse.credentialData[0], senderResponse.credentialData[0].payoutlimit)
-//                    makeTransaction(senderResponse.credentialData[0].token, senderResponse.credentialData[0].userData)
         } else {
           Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
 //                    hideCustomDialog()

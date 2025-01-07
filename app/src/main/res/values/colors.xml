@@ -97,6 +97,7 @@
     <color name="listItemTextColorBlue">@color/app_blue_color</color>
     <color name="listItemDateColorLight">#90000000</color>
     <color name="listItemAmountColor">#ddD40A0A</color>
+    <color name="listDropdownColor">#f9f9f9</color>
 
     <!--Rbl colors-->
     <color name="printDialogLableColor">#aa000000</color>
