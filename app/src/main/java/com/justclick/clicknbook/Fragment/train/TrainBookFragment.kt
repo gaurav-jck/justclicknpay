@@ -92,6 +92,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
     var passengerContainerLin:LinearLayout?=null
     var preferenceRadioGroup:RadioGroup?=null
     var reservationChoice:String=NoChoice
+    var autoUpgradeFlag=true
     var doj:String?=null
     private val gender = ""
     private  var post:String? = ""
@@ -1058,6 +1059,12 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             journey.travelInsuranceOpted="True"
         }else{
             journey.travelInsuranceOpted="False"
+        }
+        var upgrade=binding!!.otherPrefRadioGroup.findViewById<RadioButton>(R.id.autoUpgradeRadio)
+        if(upgrade.isChecked){
+            journey.autoUpgradationSelected="True"
+        }else{
+            journey.autoUpgradationSelected="False"
         }
 
         journeyList.add(journey)

@@ -34,11 +34,53 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/fromLin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rel_top"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/margin_8dp"
+        android:paddingRight="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:layout_marginBottom="@dimen/small_margin"
+        >
+        <TextView
+            android:id="@+id/fromTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DELHI"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/open_sans_semibold"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To"
+            android:paddingLeft="@dimen/small_margin"
+            android:paddingRight="@dimen/small_margin"
+            android:textColor="@color/app_blue_color"
+            android:rotation="180"
+            android:src="@drawable/forward_arrow"
+            app:tint="@color/app_blue_color" />
+        <TextView
+            android:id="@+id/toTv"
+            android:layout_width="@dimen/size_0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="DELHI"
+            android:gravity="right"
+            android:textColor="@color/black_text_color"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/open_sans_semibold"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/labelLin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@id/rel_top"
+        android:layout_below="@id/fromLin"
         android:padding="@dimen/small_margin"
         >
         <TextView

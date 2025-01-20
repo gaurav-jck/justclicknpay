@@ -33,7 +33,7 @@
         android:gravity="left"
         android:text="Name"
         android:textAllCaps="true"
-        android:textColor="@color/app_blue_color"
+        android:textColor="@color/darkBlueColor"
         android:textSize="@dimen/small_text_size"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/small_margin"/>
@@ -47,6 +47,7 @@
         android:gravity="left"
         android:text="22"
         android:textSize="@dimen/small_text_size"
+        android:textColor="@color/color_light_black2"
         android:layout_marginLeft="@dimen/medium_margin"
         android:layout_marginRight="@dimen/small_margin"/>
 
@@ -56,6 +57,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@+id/ageTv"
         app:layout_constraintTop_toBottomOf="@+id/nameTv"
+        android:textColor="@color/color_light_black2"
         android:gravity="left"
         android:text="M"
         android:textSize="@dimen/small_text_size"
@@ -77,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Booking Status"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/color_light_black2"
                 android:textSize="@dimen/small_text_size"
                 android:visibility="visible"
                 />
@@ -87,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="WL"
                 android:layout_marginLeft="@dimen/medium_margin"
-                android:textColor="@color/app_blue_color"
+                android:textColor="@color/darkBlueColor"
                 android:visibility="visible"
                 android:textSize="@dimen/small_text_size"
                 />
@@ -101,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Current Status"
-                android:textColor="@color/grey_dark"
+                android:textColor="@color/color_light_black2"
                 android:textSize="@dimen/small_text_size"
                 android:visibility="visible"
                 />
@@ -110,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="WL"
-                android:textColor="@color/app_blue_color"
+                android:textColor="@color/darkBlueColor"
                 android:visibility="visible"
                 android:textSize="@dimen/small_text_size"
                 android:layout_marginLeft="@dimen/medium_margin"

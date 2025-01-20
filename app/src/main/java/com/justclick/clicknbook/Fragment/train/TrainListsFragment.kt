@@ -97,6 +97,8 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
         if(trainResponse!=null){
             if(trainResponse.stationList!=null && trainResponse.stationList!!.size>0){
                 openTrainRouteDialog(trainResponse)
+            }else{
+                Toast.makeText(requireContext(), "No route found for this train", Toast.LENGTH_SHORT).show()
             }
         }else{
 
@@ -293,10 +295,14 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
         val window = dialog.window
         window!!.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT)
+        var fromTv=dialog.findViewById<TextView>(R.id.fromTv)
+        var toTv=dialog.findViewById<TextView>(R.id.toTv)
         var titleTv=dialog.findViewById<TextView>(R.id.titleTv)
         var back_arrow=dialog.findViewById<ImageView>(R.id.back_arrow)
         var routeRecycler=dialog.findViewById<RecyclerView>(R.id.routeRecycler)
         titleTv.text= "Train Route-"+trainNumber+"\n"+trainName
+        fromTv.text=trainResponse.stationList?.get(0)?.stationName
+        toTv.text=trainResponse.stationList?.get(trainResponse.stationList!!.size-1)?.stationName
         routeRecycler.layoutManager=LinearLayoutManager(context)
         routeRecycler.adapter= TrainRouteAdapter(trainResponse.stationList,object : OnRouteListListener{
             override fun onListFragmentInteraction(item: ArrayList<TrainRouteModel.StationList>?, id: Int, listPosition: Int, type: CodeEnum) {

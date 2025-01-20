@@ -315,7 +315,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/margin_8dp"
-            android:text="Other Preferences"
+            android:text="Preferences"
             android:textColor="@color/text_dark_gray"
             android:textSize="@dimen/simple_content_text_size" />
         <ImageView
@@ -939,6 +939,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/travel_insurance_no"
+                    android:paddingLeft="@dimen/small_margin"
+                    android:textColor="@color/listItemLightBlack" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Other Preferences"
+                android:textColor="@color/text_dark_gray"
+                android:textSize="@dimen/simple_content_text_size"
+                android:padding="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:background="@color/train_background2"
+                />
+
+            <RadioGroup
+                android:id="@+id/otherPrefRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/small_margin"
+                android:paddingLeft="@dimen/medium_margin">
+                <RadioButton
+                    android:id="@+id/autoUpgradeRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auto_upgrade_yes"
+                    android:textColor="@color/listItemLightBlack"
+                    android:checked="true"
+                    android:paddingLeft="@dimen/small_margin"/>
+                <RadioButton
+                    android:id="@+id/noAutoRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auto_upgrade_no"
                     android:paddingLeft="@dimen/small_margin"
                     android:textColor="@color/listItemLightBlack" />
             </RadioGroup>

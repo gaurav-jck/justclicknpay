@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/background_home_screen"
-        android:alpha=".4"/>
-
     <LinearLayout
         android:id="@+id/date_lin"
         android:layout_width="match_parent"

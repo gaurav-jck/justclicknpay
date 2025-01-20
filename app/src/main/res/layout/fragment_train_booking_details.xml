@@ -81,6 +81,7 @@
         android:layout_above="@+id/pdfLin"
         >
         <LinearLayout
+            android:id="@+id/pdfView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
@@ -173,6 +174,7 @@
                     android:text="Success"
                     android:textAllCaps="true"
                     android:textColor="@color/dark_blue_color"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="@dimen/small_text_size"
                     android:gravity="right"
                     android:layout_gravity="center_vertical"/>
@@ -184,7 +186,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Train Details"
-                android:textColor="@color/text_dark_gray"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textSize="@dimen/small_text_size"
                 android:paddingTop="@dimen/margin_2dp"
                 android:paddingBottom="@dimen/margin_2dp"
@@ -345,7 +348,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/very_small_margin"
                         android:text="Saharanpur"
-                        android:textColor="@color/text_dark_gray"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:textSize="@dimen/small_text_size"
                         app:layout_constraintRight_toLeftOf="@+id/viewLeft"
                         app:layout_constraintStart_toStartOf="parent"
@@ -358,7 +362,8 @@
                         android:layout_marginTop="@dimen/very_small_margin"
                         android:text="Delhi"
                         android:gravity="right"
-                        android:textColor="@color/text_dark_gray"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:textSize="@dimen/small_text_size"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/viewRight"
@@ -477,7 +482,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Passenger Details"
-                android:textColor="@color/text_dark_gray"
+                android:textColor="@color/black"
+                android:fontFamily="@font/open_sans_semibold"
                 android:textSize="@dimen/small_text_size"
                 android:paddingTop="@dimen/margin_2dp"
                 android:paddingBottom="@dimen/margin_2dp"
@@ -507,7 +513,8 @@
                     android:paddingTop="@dimen/margin_2dp"
                     android:paddingBottom="@dimen/margin_2dp"
                     android:text="Fare Details"
-                    android:textColor="@color/text_dark_gray"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="@dimen/small_text_size" />
 
                 <ImageView
@@ -541,7 +548,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Ticket Fare"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/baseFareTv"
@@ -549,7 +558,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -567,6 +577,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Catering Charge"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"
                         android:textSize="@dimen/small_text_size"/>
 
                     <TextView
@@ -575,7 +587,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -593,6 +606,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="Convenience Fee (inc. GST)"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"
                         android:maxLines="1"
                         android:textSize="@dimen/small_text_size"/>
 
@@ -602,7 +617,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -620,6 +636,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Travel Insurance (inc. GST)"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"
                         android:textSize="@dimen/small_text_size"/>
 
                     <TextView
@@ -628,7 +646,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -646,6 +665,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Agent Service Charge"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"
                         android:textSize="@dimen/small_text_size"/>
 
                     <TextView
@@ -654,7 +675,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -672,6 +694,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="PG Charge"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"
                         android:textSize="@dimen/small_text_size"/>
 
                     <TextView
@@ -680,7 +704,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -730,7 +755,8 @@
                     android:paddingTop="@dimen/margin_2dp"
                     android:paddingBottom="@dimen/margin_2dp"
                     android:text="Agent Details"
-                    android:textColor="@color/text_dark_gray"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="@dimen/small_text_size" />
 
                 <ImageView
@@ -764,7 +790,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Principle Agent Name"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/principleAgentTv"
@@ -772,7 +800,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.3"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size11sp"/>
                 </LinearLayout>
@@ -791,7 +820,9 @@
                         android:layout_weight="1"
                         android:text="Customer Care Email"
                         android:maxLines="1"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/agentEmailTv"
@@ -799,7 +830,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -817,7 +849,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Customer Care Contact"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/agentMobileTv"
@@ -825,7 +859,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -843,7 +878,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RSP Name"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/rspNameTv"
@@ -851,7 +888,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -869,7 +907,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RSP Id"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/rspIdTv"
@@ -877,7 +917,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -895,7 +936,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="RSP Address"
-                        android:textSize="@dimen/small_text_size"/>
+                        android:textSize="@dimen/small_text_size"
+                        android:textColor="@color/text_dark_gray"
+                        android:fontFamily="@font/roboto_regular"/>
 
                     <TextView
                         android:id="@+id/rspAddressTv"
@@ -903,7 +946,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1.2"
                         android:text="1234"
-                        android:textColor="@color/color_grey"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/open_sans_semibold"
                         android:gravity="right"
                         android:textSize="@dimen/small_text_size"/>
                 </LinearLayout>
@@ -924,7 +968,8 @@
                     android:paddingTop="@dimen/margin_2dp"
                     android:paddingBottom="@dimen/margin_2dp"
                     android:text="Instruction"
-                    android:textColor="@color/text_dark_gray"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:textSize="@dimen/small_text_size" />
 
                 <ImageView
@@ -947,7 +992,7 @@
                 android:layout_marginRight="@dimen/medium_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:textSize="@dimen/small_text_size10sp"
-                android:textColor="@color/grey_dark"/>
+                android:textColor="@color/black_text_color"/>
 
             <ImageView
                 android:id="@+id/electionLogo"

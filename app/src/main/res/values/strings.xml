@@ -454,6 +454,8 @@ We have observed that travel agents are using only one mobile number for multipl
     <string name="travel_insurance">Do you want to take travel insurance?</string>
     <string name="travel_insurance_yes">Yes, I want travel insurance ( \u20B9 0.35 )</string>
     <string name="travel_insurance_no">No, I don not want travel insurance</string>
+    <string name="auto_upgrade_yes">Consider for Auto Upgradation</string>
+    <string name="auto_upgrade_no">Book only if confirm birth are allotted.</string>
     <string name="change"><u>Change</u></string>
     <string name="irctc_instruction">1. Prescribed Original ID proofs are:- Voter Identity Card / Passport / PAN Card / Driving License / Photo ID card issued by Central / State Govt. / Public Sector
 Undertakings of State / Central Government ,District Administrations , Municipal bodies and Panchayat Administrations which are having serial number / Student

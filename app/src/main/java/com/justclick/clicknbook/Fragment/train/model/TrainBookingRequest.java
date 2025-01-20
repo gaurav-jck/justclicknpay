@@ -17,7 +17,8 @@ public class TrainBookingRequest implements Serializable {
     public class journeyDetails implements Serializable{
         public String trainName, trainNo, fromStation, toStation, fromStationCode, toStationCode, boardingStation, boardingStationCode,
                 reservationUpTo, reservationUpToCode, journeyClass,JourneyClass, quota, bookingFlag, departTime, arrivalTime, journeyDate, moreThanOneDay,
-                enquiryType, reservationChoice, ticketType, reservationMode="MOBILE_ANDROID", travelInsuranceOpted, duration;
+                enquiryType, reservationChoice, ticketType, reservationMode="MOBILE_ANDROID", travelInsuranceOpted, duration,
+                autoUpgradationSelected;
     }
     public class destinationDetail implements Serializable{
         public String address, pinCode, stateName, city, postOffice;

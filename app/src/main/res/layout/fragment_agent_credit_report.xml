@@ -9,7 +9,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background_home_screen"
         android:alpha=".4"/>
 
     <RelativeLayout
@@ -128,7 +127,15 @@
         </LinearLayout>
 
     </RelativeLayout>
-
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/app_blue_color"
+        android:layout_below="@id/date_lin"
+        android:layout_marginTop="@dimen/margin_2dp"
+        android:layout_marginBottom="@dimen/margin_2dp"
+        />
     <TextView
         android:id="@+id/self_deposit2"
         android:layout_width="wrap_content"
@@ -146,7 +153,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/date_lin"/>
+        android:layout_below="@+id/line"/>
 
     <ListView
         android:id="@+id/agencyList"
