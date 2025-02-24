@@ -29,6 +29,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.CheckBox
@@ -78,6 +79,11 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_biometric)
         context = this
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
 
         initializeFirebase()
         initializeViews()
@@ -238,12 +244,12 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                                 password_edt!!.text.toString().trim { it <= ' ' })
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
-                                otpDialog()
+                                otpDialog(loginModel.Status)
                             } else {
                                 if (otpDialog!!.isShowing) {
                                     otpDialog!!.dismiss()
                                 }
-                                otpDialog()
+                                otpDialog(loginModel.Status)
                             }
                         } else {
                             errorPopup(loginModel.Status)
@@ -301,7 +307,7 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         return true
     }
 
-    private fun otpDialog() {
+    private fun otpDialog(statusMsg:String) {
         otpDialog = Dialog(context!!)
         otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         otpDialog!!.setContentView(R.layout.send_otp_layout)
@@ -315,6 +321,8 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         val resendOtpTv = otpDialog!!.findViewById<TextView>(R.id.resendOtpTv)
         val timerTv = otpDialog!!.findViewById<TextView>(R.id.timerTv)
         val dialogCloseButton = otpDialog!!.findViewById<View>(R.id.close_btn) as ImageButton
+        val otpTextTv = otpDialog!!.findViewById<TextView>(R.id.otpTextTv)
+        otpTextTv.text=statusMsg
         object : CountDownTimer(31000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timerTv.visibility = View.VISIBLE

@@ -1,6 +1,7 @@
 package com.justclick.clicknbook.jctPayment.newaeps;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -11,9 +12,13 @@ import android.content.IntentSender;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
@@ -22,6 +27,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.os.Looper;
+import android.provider.Settings;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
@@ -31,10 +38,12 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,13 +59,17 @@ import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.gson.Gson;
@@ -103,28 +116,25 @@ import javax.xml.transform.stream.StreamResult;
 
 import okhttp3.ResponseBody;
 
-public class AepsRegistrationActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
-        LocationListener,
-        ResultCallback<LocationSettingsResult> {
+public class AepsRegistrationActivity extends AppCompatActivity{
     //https://developers.google.com/identity/sign-in/android/sign-in
-    private final String MANTRA = "MANTRA", STARTEK = "STARTEK", MORPHO = "MORPHO", ADHAR_UID = "uid", VIRTUAL_ID = "vid";
-    private final String MANTRA_PACKAGE = "com.mantra.rdservice", STARTEK_PACKAGE = "com.acpl.registersdk",
-            MORPHO_PACKAGE = "com.scl.rdservice";
     private final int BAL_ENQ = 1;
     private final int CAPTURE_REQUEST_CODE = 123, FINO_AEPS_CODE = 12;
-    private FusedLocationProviderClient fusedLocationClient;
     private Context context;
     private FirebaseAnalytics mFirebaseAnalytics;
     private Button btn_capture, btn_submit;
     EditText et_aadhar, txt_mobileno;
+    private Spinner spinnerDeviceType;
     private TextInputLayout aadhar_no;
     String str_aadhar, mobileNo;
     String pidDataXML = "";
-    String d_type = MANTRA, adharType = ADHAR_UID;
+    String d_type = AepsConstants.MANTRA_L1, adharType = AepsConstants.ADHAR_UID;
     int TYPE = BAL_ENQ;
     String URL;
     private boolean isGetAgain;
+    int PERMISSION_ID = 44;
+    FusedLocationProviderClient mFusedLocationClient;
+    String mLatitude="29.9319558", mLongitude="77.5334789";
 
 
     @Override
@@ -132,7 +142,6 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aeps_registration);
         context = this;
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -174,20 +183,31 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         filter16[0] = new InputFilter.LengthFilter(16);
         et_aadhar.setFilters(filter12);
 
-        ((RadioGroup) findViewById(R.id.radio_group)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        spinnerDeviceType = findViewById(R.id.spinnerDeviceType);
+        spinnerDeviceType.setAdapter(Common.getSpinnerAdapter(AepsConstants.deviceArray, context));
+
+        spinnerDeviceType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId) {
-                    case R.id.rb_mantra:
-                        d_type = MANTRA;
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i) {
+                    case 0:
+                        d_type = AepsConstants.MANTRA_L1;
                         break;
-                    case R.id.rb_startek:
-                        d_type = STARTEK;
+                    case 1:
+                        d_type = AepsConstants.MANTRA;
                         break;
-                    case R.id.rb_morpho:
-                        d_type = MORPHO;
+                    case 2:
+                        d_type = AepsConstants.MORPHO;
+                        break;
+                    case 3:
+                        d_type = AepsConstants.STARTEK;
                         break;
                 }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
         ((RadioGroup) findViewById(R.id.radio_group_adhar)).setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -195,7 +215,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.rb_adhar:
-                        adharType = ADHAR_UID;
+                        adharType = AepsConstants.ADHAR_UID;
                         aadhar_no.setHint(getResources().getString(R.string.aadharNoHint));
                         et_aadhar.setFilters(filter12);
 //                        showCapture();
@@ -206,7 +226,7 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                         }
                         break;
                     case R.id.rb_virtual_id:
-                        adharType = VIRTUAL_ID;
+                        adharType = AepsConstants.VIRTUAL_ID;
                         aadhar_no.setHint(getResources().getString(R.string.virtualIdHint));
                         et_aadhar.setFilters(filter16);
                         if (validation()) {
@@ -255,11 +275,11 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         et_aadhar.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if (!hasFocus && adharType.equals(ADHAR_UID)) {
+                if (!hasFocus && adharType.equals(AepsConstants.ADHAR_UID)) {
                     if (et_aadhar.getText().toString().length() < 12) {
                         et_aadhar.setError(getResources().getString(R.string.aadharNoError));
                     }
-                } else if (!hasFocus && adharType.equals(VIRTUAL_ID)) {
+                } else if (!hasFocus && adharType.equals(AepsConstants.VIRTUAL_ID)) {
                     if (et_aadhar.getText().toString().length() < 16) {
                         et_aadhar.setError(getResources().getString(R.string.virtualIdError));
                     }
@@ -275,9 +295,9 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (adharType.equals(ADHAR_UID) && et_aadhar.getText().toString().length() < 12) {
+                if (adharType.equals(AepsConstants.ADHAR_UID) && et_aadhar.getText().toString().length() < 12) {
                     hideCapture();
-                } else if (adharType.equals(VIRTUAL_ID) && et_aadhar.getText().toString().length() < 16) {
+                } else if (adharType.equals(AepsConstants.VIRTUAL_ID) && et_aadhar.getText().toString().length() < 16) {
                     hideCapture();
                 } else {
                     if (validation()) {
@@ -295,6 +315,12 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         });
 
         getAdharNumber();
+
+        //        location find
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+        // method to get the location
+        getLastLocation();
 
     }
 
@@ -337,26 +363,28 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
     public void captureData() {
         isGetAgain = true;
         try {
-            if (d_type.equals(STARTEK) && validation()) {
-                if (searchPackageName(STARTEK_PACKAGE)) {
+            if (d_type.equals(AepsConstants.STARTEK) && validation()) {
+                if (searchPackageName(AepsConstants.STARTEK_PACKAGE)) {
 //                    String pidOptXML = createPidOptXMLStartek();
-                    String pidOptXML = createPidOptXML();
-                    capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    String pidOptXML = XMLGenerator.createPidOptXML();
+                    capture(AepsConstants.STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            } else if (d_type.equals(MANTRA) && validation()) {
-                if (searchPackageName(MANTRA_PACKAGE)) {
+            } else if (d_type.equals(AepsConstants.MANTRA) && validation()) {
+                if (searchPackageName(AepsConstants.MANTRA_PACKAGE)) {
 //                    String pidOptXML = getPIDOptions();
 //                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                     String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
-                    capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    capture(AepsConstants.MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            } else if (d_type.equals(MORPHO) && validation()) {
-                if (searchPackageName(MORPHO_PACKAGE)) {
-//                    String pidOptXML = createPidOptXML();  //old
-                    String pidOptXML = getPIDOptionsPay();  //paysprint
-//                    String pidOptXML = getPIDOptionsPay2();  //paysprint2
+            }  else if (d_type.equals(AepsConstants.MANTRA_L1) && validation()) {
+                String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+            } else if (d_type.equals(AepsConstants.MORPHO) && validation()) {
+                if (searchPackageName(AepsConstants.MORPHO_PACKAGE)) {
+                    String pidOptXML = XMLGenerator.createPidOptXML();  //old
+//                    String pidOptXML = getPIDOptions();   // change
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
-                    capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    capture(AepsConstants.MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
             }
         } catch (Exception e) {
@@ -389,143 +417,6 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 
         et_aadhar.setError(null);
     }
-
-    protected static final int REQUEST_CHECK_SETTINGS = 0x1, REQUEST_ID_MULTIPLE_PERMISSIONS = 0x2;
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
-    /**
-     * The fastest rate for active location updates. Exact. Updates will never be more frequent
-     * than this value.
-     */
-    public static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS =
-            UPDATE_INTERVAL_IN_MILLISECONDS / 2;
-
-    private void checkPermissions() {
-        int permissionLocation = ContextCompat.checkSelfPermission(context,
-                android.Manifest.permission.ACCESS_FINE_LOCATION);
-        List<String> listPermissionsNeeded = new ArrayList<>();
-        if (permissionLocation != PackageManager.PERMISSION_GRANTED) {
-            listPermissionsNeeded.add(android.Manifest.permission.ACCESS_FINE_LOCATION);
-            if (!listPermissionsNeeded.isEmpty()) {
-                ActivityCompat.requestPermissions(this,
-                        listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), REQUEST_ID_MULTIPLE_PERMISSIONS);
-            }
-        } else {
-            displayLocationSettingsRequest();
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        int permissionLocation = ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-        if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
-            displayLocationSettingsRequest();
-        }
-    }
-
-    private void displayLocationSettingsRequest() {
-        mGoogleApiClient = new GoogleApiClient.Builder(context)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
-        mGoogleApiClient.connect();
-
-        mLocationRequest = new LocationRequest();
-
-        // Sets the desired interval for active location updates. This interval is
-        // inexact. You may not receive updates at all if no location sources are available, or
-        // you may receive them slower than requested. You may also receive updates faster than
-        // requested if other applications are requesting location at a faster interval.
-        mLocationRequest.setInterval(UPDATE_INTERVAL_IN_MILLISECONDS);
-
-        // Sets the fastest rate for active location updates. This interval is exact, and your
-        // application will never receive updates faster than this value.
-        mLocationRequest.setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
-
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-        builder.addLocationRequest(mLocationRequest);
-        builder.setAlwaysShow(true);
-        mLocationSettingsRequest = builder.build();
-
-//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
-//        builder.setAlwaysShow(true);
-
-        PendingResult<LocationSettingsResult> result = LocationServices.SettingsApi.checkLocationSettings(mGoogleApiClient, builder.build());
-        result.setResultCallback(new ResultCallback<LocationSettingsResult>() {
-            @Override
-            public void onResult(LocationSettingsResult result) {
-                final Status status = result.getStatus();
-                switch (status.getStatusCode()) {
-                    case LocationSettingsStatusCodes.SUCCESS:
-                        // All location settings are satisfied.
-                        // You can initialize location requests here.
-                        int permissionLocation = ContextCompat
-                                .checkSelfPermission(context,
-                                        Manifest.permission.ACCESS_FINE_LOCATION);
-                        if (permissionLocation == PackageManager.PERMISSION_GRANTED) {
-                            mCurrentLocation = LocationServices.FusedLocationApi
-                                    .getLastLocation(mGoogleApiClient);
-
-//                            Toast.makeText(context, mCurrentLocation.getLatitude()+"",
-//                                    Toast.LENGTH_SHORT).show();
-//                            sessionCheckMethod(true);
-//                            sendMobileTransaction();
-                            if (mCurrentLocation != null) {
-//                                mobileTxn();
-                                sendMobileTransaction();
-                            } else {
-//                                Toast.makeText(context, "Please fetch your current location from google map.",Toast.LENGTH_LONG).show();
-                                sendMobileTransaction();
-                            }
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
-                        // Location settings are not satisfied.
-                        // But could be fixed by showing the user a dialog.
-                        try {
-                            // Show the dialog by calling startResolutionForResult(),
-                            // and check the result in onActivityResult().
-                            // Ask to turn on GPS automatically
-                            status.startResolutionForResult(AepsRegistrationActivity.this,
-                                    REQUEST_CHECK_SETTINGS);
-                        } catch (IntentSender.SendIntentException e) {
-                            // Ignore the error.
-                        }
-                        break;
-                    case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        // Location settings are not satisfied.
-                        // However, we have no way
-                        // to fix the
-                        // settings so we won't show the dialog.
-                        // finish();
-                        break;
-                }
-            }
-        });
-    }
-
-  /*  ActivityResultLauncher<Intent> startActivityForScanDevice = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-            result -> {
-                if (result.getResultCode() == RESULT_OK) {
-                    Intent intent = result.getData();
-                    PID_DATA = intent.getStringExtra("PID_DATA");
-                    Log.d("PID_DATA", PID_DATA);
-                    if (PID_DATA.contains("Device not ready") || PID_DATA.contains("Please connect") || PID_DATA.contains("Not connected")) {
-                        ErrorDialog.createErrorDialog(activity, "Device Not Connected");
-                    } else if (PID_DATA.contains("Bluetooth Connection Failed") || PID_DATA.contains("Bluetooth connection failed")) {
-                        ErrorDialog.createErrorDialog(activity, "Please pair your device");
-                    } else {
-                        checkAePSService();
-                    }
-
-                }
-
-            });*/
 
     private void capture(String packageName, String pidOptXML, int requestCode) {
 //        sessionCheckMethod(false);
@@ -579,50 +470,6 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
             public String date, txnType, amount, narration;
         }
 //        { "statusCode": "00", "statusMessage": "Success", "msDetails": [{ "date": "06/07/2021", "txnType": "Dr", "amount": "350.00", "narration": " UPI/11873111709" }
-    }
-
-    public void mobileTxn() {
-        AepsTxnRequest request = new AepsTxnRequest();
-        LoginModel loginModel = new LoginModel();
-        request.AgentCode = MyPreferences.getLoginData(loginModel, context).Data.DoneCardUser;
-        request.SessionKey = MyPreferences.getSessionKey(context);
-        request.SessionRefNo = MyPreferences.getSessionRefNo(context);
-        request.Lattitude = mCurrentLocation.getLatitude() + "";
-        request.Longitude = mCurrentLocation.getLongitude() + "";
-        request.DeviceId = Common.getDeviceId(context);
-        request.AadharNumber = str_aadhar;
-        if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
-            request.PId = Base64.encodeToString(pidDataXML.
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
-        } else {
-            request.PId = Base64.encodeToString(("<?xml version=\"1.0\"?>" + pidDataXML).
-                    getBytes(StandardCharsets.UTF_8), Base64.DEFAULT).replace("\n", "");
-        }
-        isGetAgain = false;
-        new NetworkCall().callAepsServiceHeaderNew(request, URL, context,
-                new NetworkCall.RetrofitResponseListener() {
-                    @Override
-                    public void onRetrofitResponse(ResponseBody response, int responseCode) {
-                        MyCustomDialog.hideCustomDialog();
-                        if (response != null) {
-                            try {
-//                                Toast.makeText(context, "response", Toast.LENGTH_SHORT).show();
-                                AepsResponse commonResponseModel = new Gson().fromJson(response.string(), AepsResponse.class);
-//                                Toast.makeText(context, response.string(), Toast.LENGTH_LONG).show();
-                                if (commonResponseModel != null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                    openReceipt(commonResponseModel);
-                                } else {
-                                    Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();
-                                }
-                            } catch (Exception e) {
-
-                            }
-                        } else {
-                            Toast.makeText(context, "no response", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }, MyPreferences.getUserData(context), MyPreferences.getAepsToken(context));
     }
 
     private void sendMobileTransaction() {
@@ -682,10 +529,11 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
                 params.put("AadharNumber", str_aadhar);
 //                params.put("Latitude", mCurrentLocation.getLatitude() + "");
 //                params.put("Longitude", mCurrentLocation.getLongitude() + "");
-                params.put("Lattitude", 28.70111 + "");
-                params.put("Longitude", 77.10112 + "");
+                params.put("Lattitude", mLatitude);
+//                params.put("Latitude", mLatitude);
+                params.put("Longitude", mLongitude);
                 params.put("PId", pidDataXML);
-                if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+                if (d_type.equals(AepsConstants.MORPHO) || d_type.equals(AepsConstants.STARTEK)) {
                     params.put("PId", pidDataXML.replace("\n", ""));  //.replace("\n","")
                 } else {
                     params.put("PId", ("<?xml version=\"1.0\"?>" + pidDataXML).replace("\n", ""));
@@ -709,73 +557,22 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
-    private void openReceipt(AepsResponse responseModel) {
-        final Dialog dialog = new Dialog(context, R.style.Theme_Design_Light);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.rapipay_matm_receipt_dialog);
-        Window window = dialog.getWindow();
-        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        TextView cardHolderTv, agentCodeTv;
-        ((TextView) dialog.findViewById(R.id.title)).setText("AEPS Receipt");
-        cardHolderTv = dialog.findViewById(R.id.cardHolderTv);
-        agentCodeTv = dialog.findViewById(R.id.agentCodeTv);
-        TextView bankNameTv = dialog.findViewById(R.id.bankNameTv);
-        TextView accountNoTv = dialog.findViewById(R.id.accountNoTv);
-        TextView benIdTv = dialog.findViewById(R.id.benIdTv);
-        TextView apiTxnIdTv = dialog.findViewById(R.id.apiTxnIdTv);
-        TextView jckTxnIdTv = dialog.findViewById(R.id.jckTxnIdTv);
-        TextView bankRefNoTv = dialog.findViewById(R.id.bankRefNoTv);
-        TextView remitAmountTv = dialog.findViewById(R.id.remitAmountTv);
-        TextView availBalTv = dialog.findViewById(R.id.availBalTv);
-        TextView txnTypeTv = dialog.findViewById(R.id.txnTypeTv);
-        TextView txnStatusTv = dialog.findViewById(R.id.txnStatusTv);
-        TextView txnDateTv = dialog.findViewById(R.id.txnDateTv);
-        LinearLayout cardNameLin = dialog.findViewById(R.id.cardNameLin);
-        cardNameLin.setVisibility(View.GONE);
-//        cardHolderTv.setText("xxxxxxxx"+str_aadhar.substring(str_aadhar.length()-4));
-        AepsResponse.balEnQDetails detail = responseModel.balEnqDetails.get(0);
-        agentCodeTv.setText(detail.agentCode);
-        bankNameTv.setText(detail.bankName);
-        if (detail.accountNumber != null && detail.accountNumber.length() > 6) {
-            accountNoTv.setText("XXXXXXXX" + detail.accountNumber.substring(detail.accountNumber.length() - 4));
-        } else {
-            accountNoTv.setText(detail.accountNumber);
-        }
-//        benIdTv.setText(detail.transactionId);
-        apiTxnIdTv.setText(detail.apiTxnId);
-        jckTxnIdTv.setText(detail.jckTransactionId);
-        bankRefNoTv.setText(detail.rrn);
-        txnTypeTv.setText(detail.txnType);
-        txnStatusTv.setText(detail.status);
-        remitAmountTv.setText(detail.txnAmount + "");
-        availBalTv.setText(detail.availableBalance);
-        txnDateTv.setText(detail.timeStamp);
-        dialog.findViewById(R.id.back_tv).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-            }
-        });
-        dialog.show();
-    }
-
     // validation for submit
     private boolean validation() {
         str_aadhar = et_aadhar.getText().toString().trim();
-        if (adharType.equals(ADHAR_UID) && TextUtils.isEmpty(str_aadhar)) {
+        if (adharType.equals(AepsConstants.ADHAR_UID) && TextUtils.isEmpty(str_aadhar)) {
             et_aadhar.setError("Please enter Aadhar Number");
 //            et_aadhar.requestFocus();
             return false;
-        } else if (adharType.equals(ADHAR_UID) && str_aadhar.length() != 12) {
+        } else if (adharType.equals(AepsConstants.ADHAR_UID) && str_aadhar.length() != 12) {
             et_aadhar.setError("Please enter 12 digit Aadhar Number");
 //            et_aadhar.requestFocus();
             return false;
-        } else if (adharType.equals(VIRTUAL_ID) && TextUtils.isEmpty(str_aadhar)) {
+        } else if (adharType.equals(AepsConstants.VIRTUAL_ID) && TextUtils.isEmpty(str_aadhar)) {
             et_aadhar.setError("Please enter Virtual Id");
 //            et_aadhar.requestFocus();
             return false;
-        } else if (adharType.equals(VIRTUAL_ID) && str_aadhar.length() != 16) {
+        } else if (adharType.equals(AepsConstants.VIRTUAL_ID) && str_aadhar.length() != 16) {
             et_aadhar.setError("Please enter 16 digit Virtual Id");
 //            et_aadhar.requestFocus();
             return false;
@@ -794,314 +591,12 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 
     }
 
-    private String getPIDOptionsPay2() {
-        try {
-            String posh = "UNKNOWN";
-
-            Opts opts = new Opts();
-            opts.fCount = "1";
-            opts.fType = "2";
-            opts.iCount = "0";
-            opts.iType = "0";
-            opts.pCount = "0";
-            opts.pType = "0";
-            opts.format = "0";
-            opts.pidVer = "2.0";
-            opts.timeout = "20000";
-//            opts.otp = "123456";
-//            opts.wadh = "Hello";
-            opts.posh = posh;
-            opts.env = "P";
-
-            PidOptions pidOptions = new PidOptions();
-            pidOptions.ver = "1.0";
-            pidOptions.Opts = opts;
-
-            Serializer serializer = new Persister();
-            StringWriter writer = new StringWriter();
-            serializer.write(pidOptions, writer);
-            return writer.toString();
-        } catch (Exception e) {
-            Log.e("Error", e.toString());
-        }
-        return null;
-    }
-
-    // pid data xml for startek
-    private String createPidOptXML() {
-        String tmpOptXml = "";
-        try {
-            String fCount = "1";
-            String fType = "2";
-            String iCount = "0";
-            String iType = "0";
-            String pCount = "0";
-            String pType = "0";
-            String format = "0";
-            String pidVer = "2.0";
-            String timeout = "20000";
-            String otp = "";
-//            String env = "PP";   //uat
-            String env = "P";   //live
-            String wath = "";
-            String posh = "UNKNOWN";
-
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            docFactory.setNamespaceAware(true);
-            DocumentBuilder docBuilder = null;
-
-            docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-            doc.setXmlStandalone(true);
-
-            Element rootElement = doc.createElement("PidOptions");
-            doc.appendChild(rootElement);
-
-            Element opts = doc.createElement("Opts");
-            rootElement.appendChild(opts);
-
-            Attr attr = doc.createAttribute("fCount");
-            //attr.setValue(String.valueOf(fCountSel.getSelectedItem().toString()));
-            attr.setValue(fCount);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("fType");
-            attr.setValue(fType);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("iCount");
-            attr.setValue(iCount);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("iType");
-            attr.setValue(iType); //change
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pCount");
-            attr.setValue(pCount);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pType");
-            attr.setValue(pType); //change
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("format");
-            attr.setValue(format);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pidVer");
-            attr.setValue(pidVer);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("timeout");
-            attr.setValue(timeout);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("otp");
-            attr.setValue(otp);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("env");
-            attr.setValue(env);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("wadh");
-            //attr.setValue("ONLY USE FOR E-KYC.");
-            attr.setValue(wath);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("posh");
-            attr.setValue(posh);
-            opts.setAttributeNode(attr);
-
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-            DOMSource source = new DOMSource(doc);
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            transformer.transform(source, result);
-
-            tmpOptXml = writer.getBuffer().toString().replaceAll("\n|\r", "");
-            tmpOptXml = tmpOptXml.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-
-            return tmpOptXml;
-        } catch (Exception ex) {
-            showMessageDialogue("EXCEPTION- " + ex.getMessage(), "EXCEPTION");
-            return "";
-        }
-    }
-
-    // pid data xml
-    private String createPidOptXMLStartek() {
-        String tmpOptXml = "";
-        try {
-            String fTypeStr = "0";
-            String timeOutStr = "20000";
-            //            uat
-            String formatStr = "1";
-//            String envStr = "PP";
-//            live
-            String envStr = "P";
-
-
-            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-            docFactory.setNamespaceAware(true);
-            DocumentBuilder docBuilder = null;
-
-            docBuilder = docFactory.newDocumentBuilder();
-            Document doc = docBuilder.newDocument();
-            doc.setXmlStandalone(true);
-
-            Element rootElement = doc.createElement("PidOptions");
-            doc.appendChild(rootElement);
-
-            Element opts = doc.createElement("Opts");
-            rootElement.appendChild(opts);
-
-            Attr attr = doc.createAttribute("fCount");
-            //attr.setValue(String.valueOf(fCountSel.getSelectedItem().toString()));
-            attr.setValue("1");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("fType");
-            attr.setValue(fTypeStr);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("iCount");
-            attr.setValue("0");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("iType");
-//            attr.setValue("");    // before
-            attr.setValue("0");     // after
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pCount");
-            attr.setValue("0");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pType");
-//            attr.setValue("");    // before
-            attr.setValue("0");    // after
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("format");
-            attr.setValue(formatStr);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("pidVer");
-            attr.setValue("2.0");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("timeout");
-            attr.setValue(timeOutStr);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("otp");
-            attr.setValue("");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("env");
-            attr.setValue(envStr);
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("wadh");
-            attr.setValue("");
-            opts.setAttributeNode(attr);
-
-            attr = doc.createAttribute("posh");
-            attr.setValue("UNKNOWN");
-            opts.setAttributeNode(attr);
-
-            Element demo = doc.createElement("Demo");
-            demo.setTextContent("");
-            rootElement.appendChild(demo);
-
-            Element custotp = doc.createElement("CustOpts");
-            rootElement.appendChild(custotp);
-
-            Element param = doc.createElement("Param");
-            custotp.appendChild(param);
-
-
-            attr = doc.createAttribute("name");
-            attr.setValue("ValidationKey");
-            param.setAttributeNode(attr);
-
-            attr = doc.createAttribute("value");
-            attr.setValue("ONLY USE FOR LOCKED DEVICES.");
-            param.setAttributeNode(attr);
-
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
-            DOMSource source = new DOMSource(doc);
-            StringWriter writer = new StringWriter();
-            StreamResult result = new StreamResult(writer);
-            transformer.transform(source, result);
-
-            tmpOptXml = writer.getBuffer().toString().replaceAll("\n|\r", "");
-            tmpOptXml = tmpOptXml.replaceAll("&lt;", "<").replaceAll("&gt;", ">");
-
-            return tmpOptXml;
-        } catch (Exception ex) {
-            showMessageDialogue("EXCEPTION- " + ex.getMessage(), "EXCEPTION");
-            return "";
-        }
-    }
-
-    // pid data xml for mantra
-    private String getPIDOptions() {
-        try {
-
-            Opts opts = new Opts();
-            opts.fCount = "1";
-            opts.fType = "0";
-            opts.iCount = "0";
-            opts.iType = "0";
-            opts.pCount = "0";
-            opts.pType = "0";
-            opts.format = "1";
-            opts.pidVer = "2.0";
-            opts.timeout = "10000";
-            opts.otp = "";
-            opts.wadh = "";
-            opts.posh = "UNKNOWN";
-            opts.env = "P";     // live
-//            opts.env = "PP";      // uat
-
-            PidOptions pidOptions = new PidOptions();
-            pidOptions.ver = "1.0";
-            pidOptions.Opts = opts;
-
-            Serializer serializer = new Persister();
-            StringWriter writer = new StringWriter();
-            serializer.write(pidOptions, writer);
-            return writer.toString();
-        } catch (Exception e) {
-            Log.e("Error", e.toString());
-        }
-        return null;
-    }
 
     // get result of pid data
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             // Check for the integer request code originally supplied to startResolutionForResult().
-            case REQUEST_CHECK_SETTINGS:
-                switch (resultCode) {
-                    case Activity.RESULT_OK:
-//                        Log.i(TAG, "User agreed to make required location settings changes.");
-                        startLocationUpdates();
-                        break;
-                    case Activity.RESULT_CANCELED:
-//                        Log.i(TAG, "User chose not to make required location settings changes.");
-                        break;
-                }
-                break;
             case CAPTURE_REQUEST_CODE:
                 try {
 //                    isDataCaptured=false;
@@ -1138,46 +633,6 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
 
     }
 
-    /**
-     * Provides the entry point to Google Play services.
-     */
-    protected GoogleApiClient mGoogleApiClient;
-
-    /**
-     * Stores parameters for requests to the FusedLocationProviderApi.
-     */
-    protected LocationRequest mLocationRequest;
-    protected LocationSettingsRequest mLocationSettingsRequest;
-
-    /**
-     * Represents a geographical location.
-     */
-    protected Location mCurrentLocation;
-    protected Boolean mRequestingLocationUpdates;
-
-    private void startLocationUpdates() {
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient,
-                mLocationRequest,
-                this
-        ).setResultCallback(new ResultCallback<Status>() {
-            @Override
-            public void onResult(Status status) {
-                mRequestingLocationUpdates = true;
-//                setButtonsEnabledState();
-            }
-        });
-    }
 
     private void readXMLData(String pidDataXML) {
         try {
@@ -1289,78 +744,159 @@ public class AepsRegistrationActivity extends AppCompatActivity implements Googl
         return true;
     }
 
+    @SuppressLint("MissingPermission")
+    private void getLastLocation() {
+        // check if permissions are given
+        if (checkPermissions()) {
+
+            // check if location is enabled
+            if (isLocationEnabled()) {
+
+                // getting last
+                // location from
+                // FusedLocationClient
+                // object
+                mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Location> task) {
+                        Location location = task.getResult();
+                        if (location == null) {
+                            requestNewLocationData();
+                        } else {
+                            mLatitude=location.getLatitude()+"";
+                            mLongitude=location.getLongitude()+"";
+//                            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                startActivity(intent);
+            }
+        } else {
+            // if permissions aren't available,
+            // request for permissions
+            requestPermissions();
+//            requestPermissions2();
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private void requestNewLocationData() {
+
+        // Initializing LocationRequest
+        // object with appropriate methods
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(5);
+        mLocationRequest.setFastestInterval(0);
+        mLocationRequest.setNumUpdates(1);
+
+        // setting LocationRequest
+        // on FusedLocationClient
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
+    }
+
+    private LocationCallback mLocationCallback = new LocationCallback() {
+
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+            Location mLastLocation = locationResult.getLastLocation();
+            mLatitude=mLastLocation.getLatitude()+"";
+            mLongitude=mLastLocation.getLongitude()+"";
+//            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
+//            latitudeTextView.setText("Latitude: " + mLastLocation.getLatitude() + "");
+//            longitTextView.setText("Longitude: " + mLastLocation.getLongitude() + "");
+        }
+    };
+
+    // method to check for permissions
+    private boolean checkPermissions() {
+        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
+
+        // If we want background location
+        // on Android 10.0 and higher,
+        // use:
+        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
+    }
+
+    // method to request for permissions
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[]{
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
+    }
+
+    // method to check
+    // if location is enabled
+    private boolean isLocationEnabled() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+    }
+
+    // If everything is alright then
+    @Override
+    public void
+    onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == PERMISSION_ID) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLastLocation();
+            }
+        }
+    }
+
+    private void requestPermissions2() {
+
+        ActivityResultLauncher<String[]> locationPermissionRequest =
+                registerForActivityResult(new ActivityResultContracts
+                                .RequestMultiplePermissions(), result -> {
+
+//                            Boolean fineLocationGranted = null;
+                            Boolean coarseLocationGranted = null;
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                                fineLocationGranted = result.getOrDefault(
+//                                        Manifest.permission.ACCESS_FINE_LOCATION, false);
+                                coarseLocationGranted = result.getOrDefault(
+                                        Manifest.permission.ACCESS_COARSE_LOCATION,false);
+                            }
+
+                           /* if (fineLocationGranted != null && fineLocationGranted) {
+                                // Precise location access granted.
+                            } else */if (coarseLocationGranted != null && coarseLocationGranted) {
+                                // Only approximate location access granted.
+                        Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show();
+                            } else {
+                                // No location access granted.
+                                Toast.makeText(context, "Cancelled", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+
+        // ...
+
+        // Before you perform the actual permission request, check whether your app
+        // already has the permissions, and whether your app needs to show a permission
+        // rationale dialog. For more details, see Request permissions.
+        locationPermissionRequest.launch(new String[] {
+                /*Manifest.permission.ACCESS_FINE_LOCATION,*/
+                Manifest.permission.ACCESS_COARSE_LOCATION
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        if (mCurrentLocation == null) {
-            if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (mCurrentLocation != null) {
-//            Toast.makeText(context, mCurrentLocation.getLatitude()+"",
-//                    Toast.LENGTH_SHORT).show();
-            }
-//            updateLocationUI();
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onResult(@NonNull LocationSettingsResult locationSettingsResult) {
-
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        mCurrentLocation = location;
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        // Got last known location. In some rare situations this can be null.
-                        if (location != null) {
-                            // Logic to handle location object
-                            mCurrentLocation = location;
-                        }
-                    }
-                });
     }
 
 

@@ -721,6 +721,7 @@ Rs.40/-\n
 
     <string name="bank_name_digit">qwertyuioplkjhgfdsazxcvbnm QWERTYUIOPLKJHGFDSAZXCVBNM</string>
     <string name="mobile_digit">0123456789</string>
+    <string name="faceCaptureRdService">Please download Face RD service from here.</string>
 
     <!--cash payout-->
     <string name="aepsAmount">AEPS Amount (in Rs) 5000</string>

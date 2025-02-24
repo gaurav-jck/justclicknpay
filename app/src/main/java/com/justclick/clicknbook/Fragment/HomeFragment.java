@@ -56,6 +56,7 @@ import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
+import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
 import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
@@ -312,7 +313,8 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new FasttagFragment());
                 break;
             case MenuCodes.TRAIN://25
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());  // old
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainSearchFragment());    //new change
                 break;
             case MenuCodes.TRAIN_TENT://25
                 openTrainTent();

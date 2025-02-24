@@ -1,279 +1,467 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    tools:context="com.justclick.clicknbook.Fragment.train.TrainSearchFragment">
-
-    <RelativeLayout
-        android:id="@+id/rel_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="@dimen/medium_margin">
-
-        <ImageView
-            android:id="@+id/back_arrow"
-            android:layout_width="@dimen/back_arrow_size"
-            android:layout_height="@dimen/back_arrow_size"
-            app:srcCompat="@drawable/arrow_left_back"
-            android:padding="@dimen/size_1dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bookTrain"
-            android:textSize="@dimen/title_text_size"
-            android:textColor="@color/color_white"
-            android:layout_centerInParent="true"/>
-
-    </RelativeLayout>
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/rel_top"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:layout_marginTop="@dimen/large_margin">
-
-        <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tabStation"/>
-
-       <!-- <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabTrain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tabTrain"
-            android:visibility="gone"/>-->
-
-    </com.google.android.material.tabs.TabLayout>
-
-    <TextView
-        android:id="@+id/fromStnCodeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="70dp"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:hint="STN"
-        android:text="stn"
-        android:textAllCaps="true"
-        android:textSize="@dimen/simple_content_text_size"
-        android:textColor="@color/text_dark_gray"
-        android:background="@drawable/edittext_border_hotel"
-        android:paddingLeft="@dimen/medium_margin"
-        android:paddingRight="@dimen/medium_margin"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
-        />
-
-    <TextView
-        android:id="@+id/fromStnNameTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintStart_toEndOf="@id/fromStnCodeTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:hint="From Station"
-        android:maxLines="1"
-        android:textSize="@dimen/simple_content_text_size"
-        android:textColor="@color/black_text_color"
-        android:textStyle="bold"
-        android:paddingStart="@dimen/medium_margin"
-        android:paddingEnd="@dimen/medium_margin"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
-        />
-
-
-    <RelativeLayout
-        android:id="@+id/lineLin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/fromStnNameTv"
-        android:layout_margin="@dimen/medium_margin"
-        >
-        <View
-            android:id="@+id/view"
+    android:layout_marginBottom="@dimen/small_margin"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <RelativeLayout
+            android:id="@+id/rel_top"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/size_1dp"
-            android:background="@color/gray_color_light"
-            android:layout_toLeftOf="@+id/arrowImg"
-            android:layout_centerVertical="true"/>
-        <ImageView
-            android:id="@+id/arrowImg"
-            android:layout_width="@dimen/size_25dp"
-            android:layout_height="@dimen/size_25dp"
-            android:src="@drawable/both_side_arrow"
-            android:layout_marginRight="@dimen/medium_margin"
-            android:background="@drawable/edittext_border_hotel"
-            android:layout_alignParentRight="true"
-            android:rotation="90"
-            />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/medium_margin">
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="@dimen/back_arrow_size"
+                android:layout_height="@dimen/back_arrow_size"
+                app:srcCompat="@drawable/arrow_left_back"
+                android:padding="@dimen/size_1dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bookTrain"
+                android:textSize="@dimen/title_text_size"
+                android:textColor="@color/color_white"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+        <ScrollView android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:paddingBottom="@dimen/small_margin"
+            android:layout_below="@id/rel_top">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/medium_margin"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_below="@+id/rel_top"
+            android:background="@color/white"
+            tools:context="com.justclick.clicknbook.Fragment.train.TrainSearchFragment">
+
+            <RelativeLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                >
+
+                <TextView
+                    android:id="@+id/stationTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/tabStation"
+                    android:textAllCaps="true"
+                    android:textColor="@color/black_text_color"
+                    android:fontFamily="@font/open_sans_semibold"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_2dp"
+                    android:background="@color/darkBlueColor"
+                    android:layout_below="@id/stationTv"
+                    android:layout_alignRight="@id/stationTv"
+                    android:layout_marginTop="@dimen/small_margin"
+                    />
+
+                <!-- <com.google.android.material.tabs.TabItem
+                     android:id="@+id/tabTrain"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/tabTrain"
+                     android:visibility="gone"/>-->
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/fromStnCodeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="70dp"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:hint="STN"
+                android:text="stn"
+                android:textAllCaps="true"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/text_dark_gray"
+                android:background="@drawable/edittext_border_hotel"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingRight="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                />
+
+            <TextView
+                android:id="@+id/fromStnNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tabLayout"
+                app:layout_constraintStart_toEndOf="@id/fromStnCodeTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:hint="From Station"
+                android:maxLines="1"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/black_text_color"
+                android:textStyle="bold"
+                android:paddingStart="@dimen/medium_margin"
+                android:paddingEnd="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                />
+
+
+            <RelativeLayout
+                android:id="@+id/lineLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/fromStnNameTv"
+                android:layout_margin="@dimen/medium_margin"
+                >
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_1dp"
+                    android:background="@color/gray_color_light"
+                    android:layout_toLeftOf="@+id/arrowImg"
+                    android:layout_centerVertical="true"/>
+                <ImageView
+                    android:id="@+id/arrowImg"
+                    android:layout_width="@dimen/size_25dp"
+                    android:layout_height="@dimen/size_25dp"
+                    android:src="@drawable/both_side_arrow"
+                    android:layout_marginRight="@dimen/medium_margin"
+                    android:background="@drawable/edittext_border_hotel"
+                    android:layout_alignParentRight="true"
+                    android:rotation="90"
+                    />
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/toStnCodeTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/lineLin"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:minWidth="70dp"
+                android:gravity="center"
+                android:hint="STN"
+                android:text="stn"
+                android:textAllCaps="true"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/text_dark_gray"
+                android:background="@drawable/edittext_border_hotel"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingRight="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                />
+
+            <TextView
+                android:id="@+id/toStnNameTv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@id/toStnCodeTv"
+                app:layout_constraintStart_toEndOf="@id/toStnCodeTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="@dimen/large_margin"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:hint="To Station"
+                android:maxLines="1"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/black_text_color"
+                android:textStyle="bold"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingRight="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                />
+
+            <TextView
+                android:id="@+id/departLabelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/toStnCodeTv"
+                app:layout_constraintLeft_toLeftOf="@+id/toStnCodeTv"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:text="@string/departHint"
+                android:textSize="@dimen/small_text_size"/>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dateConst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/departLabelTv"
+                app:layout_constraintLeft_toLeftOf="@+id/departLabelTv"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/medium_margin"
+                android:paddingRight="@dimen/medium_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:background="@color/edittext_light_background_color"
+                >
+
+                <TextView
+                    android:id="@+id/departDayTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@+id/departMonthTv"
+                    app:layout_constraintBottom_toBottomOf="@+id/departDayNameTv"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="01"
+                    android:textColor="@color/text_dark_gray"
+                    android:textSize="@dimen/large_text_size"/>
+
+                <TextView
+                    android:id="@+id/departMonthTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toRightOf="@+id/departDayTv"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:text="JAN"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/text_dark_gray"/>
+
+                <TextView
+                    android:id="@+id/departDayNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/departMonthTv"
+                    app:layout_constraintLeft_toRightOf="@+id/departDayTv"
+                    android:layout_marginTop="@dimen/margin_2dp"
+                    android:layout_marginLeft="@dimen/medium_margin"
+                    android:layout_marginBottom="@dimen/small_margin"
+                    android:text="Monday"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/text_dark_gray"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/quotaLabelTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quota"
+                android:layout_marginTop="@dimen/large_margin"
+                app:layout_constraintStart_toStartOf="@id/dateConst"
+                app:layout_constraintTop_toBottomOf="@+id/dateConst"
+                android:padding="@dimen/margin_2dp"
+                android:visibility="gone"
+                />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/quotaSpinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintStart_toStartOf="@+id/quotaLabelTv"
+                app:layout_constraintTop_toBottomOf="@+id/quotaLabelTv"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginRight="@dimen/large_margin"
+                android:visibility="gone"
+                />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/grey"
+                android:layout_marginTop="@dimen/small_margin"
+                app:layout_constraintTop_toBottomOf="@+id/quotaSpinner"
+                app:layout_constraintStart_toStartOf="@+id/quotaSpinner"
+                app:layout_constraintEnd_toEndOf="@+id/quotaSpinner"/>
+
+            <TextView
+                android:id="@+id/searchTrainsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bookTrain"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@color/app_blue_color"
+                android:padding="@dimen/medium_margin"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin"
+                app:layout_constraintTop_toBottomOf="@+id/quotaSpinner"
+                android:fontFamily="@font/open_sans_semibold"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/bookingListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin_5dp"
+                app:cardElevation="@dimen/margin_3dp"
+                app:cardBackgroundColor="@color/cardMobileBackground"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_marginTop="@dimen/margin_30dp"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/searchTrainsTv"
+                >
+                <LinearLayout
+                    android:id="@+id/bookingList"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_margin="3dp"
+                    android:paddingTop="@dimen/margin_7dp"
+                    android:paddingBottom="@dimen/margin_7dp"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:background="@color/train_dashboard0"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/train_vector_dashboard4"
+                        android:padding="@dimen/margin_10dp"
+                        android:background="@drawable/train_circle_background4"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Booking List"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/train_dashboard555"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/searchPnrView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin_5dp"
+                app:cardElevation="@dimen/margin_3dp"
+                app:cardBackgroundColor="@color/cardMobileBackground"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:visibility="visible"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:layout_marginTop="@dimen/margin_12dp"
+                app:layout_constraintTop_toBottomOf="@+id/bookingListView"
+                >
+                <LinearLayout
+                    android:id="@+id/searchPNR"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_margin="3dp"
+                    android:paddingTop="@dimen/margin_7dp"
+                    android:paddingBottom="@dimen/margin_7dp"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:background="@color/train_dashboard0"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/train_vector_dashboard2"
+                        android:padding="@dimen/medium_margin"
+                        android:background="@drawable/train_circle_background2"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Search PNR"
+                        android:gravity="center_horizontal"
+                        android:textColor="@color/train_dashboard333"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:fontFamily="@font/open_sans_semibold"
+                        />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pnrStatusView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin_5dp"
+                app:cardElevation="@dimen/margin_3dp"
+                app:cardBackgroundColor="@color/cardMobileBackground"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                android:visibility="visible"
+                app:layout_constraintTop_toBottomOf="@+id/searchPnrView"
+                >
+                <LinearLayout
+                    android:id="@+id/pnrStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_margin="3dp"
+                    android:paddingTop="@dimen/margin_7dp"
+                    android:paddingBottom="@dimen/margin_7dp"
+                    android:paddingLeft="@dimen/medium_margin"
+                    android:background="@color/train_dashboard0"
+                    >
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/train_vector_dashboard3"
+                        android:padding="@dimen/medium_margin"
+                        android:background="@drawable/train_circle_background3"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Check Current PNR Status"
+                        android:gravity="center"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:textColor="@color/train_dashboard444"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/open_sans_semibold"
+                        />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pnrStatusView"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
     </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/toStnCodeTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/lineLin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:minWidth="70dp"
-        android:gravity="center"
-        android:hint="STN"
-        android:text="stn"
-        android:textAllCaps="true"
-        android:textSize="@dimen/simple_content_text_size"
-        android:textColor="@color/text_dark_gray"
-        android:background="@drawable/edittext_border_hotel"
-        android:paddingLeft="@dimen/medium_margin"
-        android:paddingRight="@dimen/medium_margin"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
-        />
 
-    <TextView
-        android:id="@+id/toStnNameTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/toStnCodeTv"
-        app:layout_constraintStart_toEndOf="@id/toStnCodeTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="@dimen/large_margin"
-        android:layout_marginEnd="@dimen/small_margin"
-        android:hint="To Station"
-        android:maxLines="1"
-        android:textSize="@dimen/simple_content_text_size"
-        android:textColor="@color/black_text_color"
-        android:textStyle="bold"
-        android:paddingLeft="@dimen/medium_margin"
-        android:paddingRight="@dimen/medium_margin"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
-        />
-
-    <TextView
-        android:id="@+id/departLabelTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/toStnCodeTv"
-        app:layout_constraintLeft_toLeftOf="@+id/toStnCodeTv"
-        android:layout_marginTop="@dimen/margin_30dp"
-        android:text="@string/departHint"
-        android:textSize="@dimen/small_text_size"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dateConst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/departLabelTv"
-        app:layout_constraintLeft_toLeftOf="@+id/departLabelTv"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:paddingLeft="@dimen/medium_margin"
-        android:paddingRight="@dimen/medium_margin"
-        android:paddingTop="@dimen/small_margin"
-        android:paddingBottom="@dimen/small_margin"
-        android:background="@color/edittext_light_background_color"
-        >
-
-    <TextView
-        android:id="@+id/departDayTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/departMonthTv"
-        app:layout_constraintBottom_toBottomOf="@+id/departDayNameTv"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="01"
-        android:textColor="@color/text_dark_gray"
-        android:textSize="@dimen/large_text_size"/>
-
-    <TextView
-        android:id="@+id/departMonthTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintLeft_toRightOf="@+id/departDayTv"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:text="JAN"
-        android:textSize="@dimen/small_text_size"
-        android:textColor="@color/text_dark_gray"/>
-
-    <TextView
-        android:id="@+id/departDayNameTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/departMonthTv"
-        app:layout_constraintLeft_toRightOf="@+id/departDayTv"
-        android:layout_marginTop="@dimen/margin_2dp"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:layout_marginBottom="@dimen/small_margin"
-        android:text="Monday"
-        android:textSize="@dimen/small_text_size"
-        android:textColor="@color/text_dark_gray"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/quotaLabelTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quota"
-        android:layout_marginTop="@dimen/large_margin"
-        app:layout_constraintStart_toStartOf="@id/dateConst"
-        app:layout_constraintTop_toBottomOf="@+id/dateConst"
-        android:padding="@dimen/margin_2dp"
-        android:visibility="gone"
-        />
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/quotaSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_margin"
-        app:layout_constraintStart_toStartOf="@+id/quotaLabelTv"
-        app:layout_constraintTop_toBottomOf="@+id/quotaLabelTv"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="@dimen/large_margin"
-        android:visibility="gone"
-        />
-    <View
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/grey"
-        android:layout_marginTop="@dimen/small_margin"
-        app:layout_constraintTop_toBottomOf="@+id/quotaSpinner"
-        app:layout_constraintStart_toStartOf="@+id/quotaSpinner"
-        app:layout_constraintEnd_toEndOf="@+id/quotaSpinner"/>
-
-    <TextView
-        android:id="@+id/searchTrainsTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/bookTrain"
-        android:textSize="@dimen/simple_content_text_size"
-        android:textColor="@color/color_white"
-        android:background="@color/app_blue_color"
-        android:padding="@dimen/medium_margin"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/margin_40dp"
-        android:layout_marginLeft="@dimen/large_margin"
-        android:layout_marginRight="@dimen/large_margin"
-        app:layout_constraintTop_toBottomOf="@+id/quotaSpinner"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>

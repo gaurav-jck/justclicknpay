@@ -245,6 +245,14 @@ public final class Common {
     }
   }
 
+  public static ArrayAdapter getSpinnerAdapter(String[] arr, Context context) {
+    ArrayAdapter<String> adapter = new ArrayAdapter(context,
+            R.layout.mobile_operator_spinner_item, R.id.operator_tv, arr);
+    adapter.setDropDownViewResource(R.layout.mobile_operator_spinner_item_dropdown);
+    return adapter;
+  }
+
+
   public static void showResponsePopUp(Context context, String message){
     final Dialog responseDialog = new Dialog(context);
     responseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

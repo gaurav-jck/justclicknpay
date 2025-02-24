@@ -191,6 +191,7 @@
     <color name="train_background5">#f5e8ab</color>
     <color name="train_background6">#b8e8bf</color>
 
+    <color name="train_dashboard0">#f6f6fa</color>
     <color name="train_dashboard1">#f3f5f9</color>
     <color name="train_dashboard2">#e4eefa</color>
     <color name="train_dashboard22">#6882a0</color>

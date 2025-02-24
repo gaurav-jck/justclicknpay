@@ -118,43 +118,92 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Device Type"
+            android:textColor="@color/app_blue_color"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <Spinner
+            android:id="@+id/spinnerDeviceType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@color/text_dark_gray"/>
+
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="@dimen/margin_30dp"
+            android:visibility="gone"
             >
 
-            <RadioButton
-                android:id="@+id/rb_mantra"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="Mantra"
-                android:checked="true"
-                android:buttonTint="@color/darkBlueColor"
-                android:textColor="@color/darkBlueColor"/>
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <RadioButton
+                        android:id="@+id/rb_mantra"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mantra L0"
+                        android:checked="true"
+                        android:buttonTint="@color/darkBlueColor"
+                        android:textColor="@color/darkBlueColor"/>
+                    <RadioButton
+                        android:id="@+id/rb_mantraL1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:text="Mantra L1"
+                        android:buttonTint="@color/darkBlueColor"
+                        android:textColor="@color/darkBlueColor"/>
+                </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/rb_morpho"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Morpho"
-                android:buttonTint="@color/darkBlueColor"
-                android:layout_marginLeft="20dp"
-                android:textColor="@color/darkBlueColor"
-                android:visibility="visible"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <RadioButton
+                        android:id="@+id/rb_morpho"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Morpho"
+                        android:buttonTint="@color/darkBlueColor"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:textColor="@color/darkBlueColor"
+                        android:visibility="visible"/>
 
-            <RadioButton
-                android:id="@+id/rb_startek"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Startek"
-                android:layout_marginLeft="20dp"
-                android:buttonTint="@color/darkBlueColor"
-                android:textColor="@color/darkBlueColor"
-                android:visibility="visible"/>
+                    <RadioButton
+                        android:id="@+id/rb_startek"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Startek"
+                        android:layout_marginLeft="@dimen/medium_margin"
+                        android:buttonTint="@color/darkBlueColor"
+                        android:textColor="@color/darkBlueColor"
+                        android:visibility="visible"/>
+
+                </LinearLayout>
+            </LinearLayout>
 
         </RadioGroup>
 

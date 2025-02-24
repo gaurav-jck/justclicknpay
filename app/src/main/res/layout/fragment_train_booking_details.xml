@@ -444,7 +444,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="Booking Date - "
-                            android:textColor="@color/grey_dark"
+                            android:textColor="@color/color_light_black2"
                             android:textSize="@dimen/text_size_13sp"
                             android:visibility="visible" />
 

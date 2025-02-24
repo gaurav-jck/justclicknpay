@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -45,20 +46,27 @@ import javax.xml.transform.OutputKeys
 import javax.xml.transform.TransformerFactory
 import javax.xml.transform.dom.DOMSource
 import javax.xml.transform.stream.StreamResult
+import kotlin.random.Random
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class Dmt2KycFragment : Fragment() {
     private final val CAPTURE_REQUEST_CODE = 123
+    private val FINGER_CAPTURE = 1
+    private val FACE_CAPTURE = 2
     private val MANTRA = "MANTRA"
+    private val MANTRA_L1 = "MANTRA_L1"
     private val STARTEK = "STARTEK"
     private val MORPHO = "MORPHO"
     private val MANTRA_PACKAGE = "com.mantra.rdservice"
+    private val MANTRA_L1_PACKAGE = "com.mantra.mfs110.rdservice"
     private val STARTEK_PACKAGE = "com.acpl.registersdk"
     private val MORPHO_PACKAGE = "com.scl.rdservice"
-    var d_type = MANTRA
+    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho", "Startek")
+    var d_type = MANTRA_L1
     var pidDataXML = "";
+    private var captureType=FINGER_CAPTURE
     private var senderDetailResponse: SenderDetailResponse? = null
     private var commonParams: CommonParams? = null
     private var binding: FragmentDmt2KycBinding?=null
@@ -103,10 +111,22 @@ class Dmt2KycFragment : Fragment() {
         })
 
         hideCaptureView()
-
+//        showCaptureView()
         binding!!.btnCapture.setOnClickListener {
             captureData()
 
+        }
+        binding!!.btnFaceCapture.setOnClickListener {
+//            if (searchPackageName("in.gov.uidai.facerd")) {
+//                captureFaceData()
+//            }
+            captureFaceData()
+        }
+        binding!!.downloadImg.setOnClickListener {
+            val intentPlay = Intent(Intent.ACTION_VIEW)
+            intentPlay.data = Uri.parse("market://details?id=in.gov.uidai.facerd");
+//            intentPlay.data = Uri.parse("market://details?id=$mPackageName")
+            startActivity(intentPlay)
         }
         binding!!.validateAdhar.setOnClickListener {
             validateAdhar()
@@ -123,13 +143,32 @@ class Dmt2KycFragment : Fragment() {
             }
         }
 
-        (binding!!.radioGroup).setOnCheckedChangeListener { group, checkedId ->
+       /* (binding!!.radioGroup).setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rb_mantra -> d_type = MANTRA
                 R.id.rb_startek -> d_type = STARTEK
                 R.id.rb_morpho -> d_type = MORPHO
             }
-        }
+        }*/
+        binding!!.spinnerDeviceType.adapter=Common.getSpinnerAdapter(deviceArray, requireContext())
+        binding!!.spinnerDeviceType.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                adapterView: AdapterView<*>?,
+                view: View?,
+                i: Int,
+                l: Long
+            ) {
+                when (i) {
+                    0 -> d_type = MANTRA_L1
+                    1 -> d_type = MANTRA
+                    2 -> d_type = MORPHO
+                    3 -> d_type = STARTEK
+                }
+            }
+
+            override fun onNothingSelected(adapterView: AdapterView<*>?) {}
+        })
+
 
         binding!!.backArrow.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -186,11 +225,13 @@ class Dmt2KycFragment : Fragment() {
         binding!!.captureLin.visibility=View.GONE
         binding!!.radioGroup.visibility=View.GONE
         binding!!.otpEdt.visibility=View.GONE
+        binding!!.rdDownloadLin.visibility=View.GONE
     }
     private fun showCaptureView() {
         binding!!.captureLin.visibility=View.VISIBLE
         binding!!.radioGroup.visibility=View.VISIBLE
         binding!!.otpEdt.visibility=View.VISIBLE
+        binding!!.rdDownloadLin.visibility=View.VISIBLE
         binding!!.validateLin.visibility=View.GONE
         binding!!.aadharEdt.isEnabled=false
     }
@@ -211,7 +252,11 @@ class Dmt2KycFragment : Fragment() {
                         "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
                     capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
-            } else if (d_type == MORPHO) {
+            }else if (d_type == MANTRA_L1) {
+                val pidOptXML =
+                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                capture(MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+            }  else if (d_type == MORPHO) {
                 if (searchPackageName(MORPHO_PACKAGE)) {
 //                    String pidOptXML = createPidOptXML();  //old
                     val pidOptXML: String = getPIDOptionsPay() //paysprint
@@ -237,7 +282,8 @@ class Dmt2KycFragment : Fragment() {
                     pidDataXML = data.getStringExtra("PID_DATA")!!
                     if (pidDataXML != null) {
                         // xml parsing
-                        readXMLData(pidDataXML)
+                        captureType=FINGER_CAPTURE
+                        readXMLData(pidDataXML, FINGER_CAPTURE)
                     } else {
                         showMessageDialogue(
                             "NULL STRING RETURNED",
@@ -252,7 +298,78 @@ class Dmt2KycFragment : Fragment() {
         }
     }
 
-    private fun readXMLData(pidDataXML: String) {
+    private val startForFaceResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data = result.data
+            try {
+                if (data != null) {
+                    val bundle = data.extras
+                    if (bundle != null) {
+                        pidDataXML = bundle.getString("response").toString()
+                        if (pidDataXML != null) {
+                            captureType=FACE_CAPTURE
+                            readXMLData(pidDataXML, FACE_CAPTURE)
+//                            Common.showResponsePopUp(requireContext(), response)
+                        }else{
+//                    handleFailure()
+                            Toast.makeText(requireContext(), "capture failed", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+//                handleFailure()
+                        Toast.makeText(requireContext(), "capture failed", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+//            handleFailure()
+                    Toast.makeText(requireContext(), "capture failed", Toast.LENGTH_SHORT).show()
+                }
+            } catch (ex: java.lang.Exception) {
+                showMessageDialogue("Error:-" + ex.message, "EXCEPTION")
+                ex.printStackTrace()
+            }
+        }
+    }
+
+    fun captureFaceData() {
+        try {
+            val intent = Intent("in.gov.uidai.rdservice.face.CAPTURE")
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+            intent.putExtra(
+                "request",
+                createPidOptionForKUA(getRandomNumber(), "P")
+            )
+
+            startForFaceResult.launch(intent)
+        } catch (e: Exception) {
+            showMessageDialogue("EXCEPTION- " + e.message, "EXCEPTION")
+        }
+    }
+    fun getRandomNumber(): String {
+        val start = 10000000
+        val end = 99999999
+        val number = Random(System.nanoTime()).nextInt(end - start + 1) + start
+        return number.toString()
+    }
+    fun getWADH2(): String {
+        return "sgydIC09zzy6f8Lb3xaAqzKquKe9lFcNR9uTvYxFp+A="
+    }
+    val LANGUAGE=""
+    fun createPidOptionForKUA(txnId: String, buildType:String): String {
+        return createPidOptionsKUA(txnId, "auth", getWADH2(), buildType)
+    }
+    private fun createPidOptionsKUA(txnId: String, purpose: String, wadh:String, buildType:String): String {
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
+                "<PidOptions ver=\"1.0\" env=\"${buildType}\">\n" +
+                "   <Opts fCount=\"1\" fType=\"1\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"\" wadh=\"${wadh}\" posh=\"\" />\n" +
+                "   <CustOpts>\n" +
+                "      <Param name=\"txnId\" value=\"${txnId}\"/>\n" +
+                "      <Param name=\"purpose\" value=\"$purpose\"/>\n" +
+                "      <Param name=\"language\" value=\"${LANGUAGE}\"/>\n" +
+                "   </CustOpts>\n" +
+                "</PidOptions>"
+    }
+
+    private fun readXMLData(pidDataXML: String, type: Int) {
         try {
             val inputStream: InputStream =
                 ByteArrayInputStream(pidDataXML.toByteArray(charset("UTF-8")))
@@ -274,7 +391,12 @@ class Dmt2KycFragment : Fragment() {
                 } else {
                     val s_message = element2.getElementsByTagName("Resp")
                         .item(0).attributes.getNamedItem("errInfo").nodeValue
-                    showMessageDialogue(s_message, "Fingerprint data status")
+                    if(type==FINGER_CAPTURE)
+                    {
+                        showMessageDialogue(s_message, "Fingerprint data status")
+                    }else{
+                        showMessageDialogue(s_message, "Face capture data status")
+                    }
                 }
             }
         } catch (e: java.lang.Exception) {
@@ -428,8 +550,13 @@ class Dmt2KycFragment : Fragment() {
         params["long"] = "78.96288"
         params["OTP"] = binding!!.otpEdt.text.toString()
         params["StateResp"] = senderDetailResponse?.senderDetailInfo?.get(0)!!.stateResp
+        if(captureType==FINGER_CAPTURE){
+            params["isiris"] = "false"
+        }else{
+            params["isiris"] = "true"
+        }
 //        pidDataXML="test"
-        if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+        if (d_type.equals(MORPHO) || d_type.equals(STARTEK) || d_type.equals(MANTRA_L1)) {
 //            params.put("Pid", pidDataXML.replace("\n", ""));  //.replace("\n","")
             pidDataXML=pidDataXML.replace("\n", "")
             params["Pid"]=pidDataXML
@@ -475,6 +602,7 @@ class Dmt2KycFragment : Fragment() {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            Toast.makeText(requireContext(), "Oops! Something went wrong in response.\n"+e.message, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -95,6 +95,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden|adjustPan" />
+<!--        android:permission="android.permission.ACCESS_WIFI_STATE"-->
+<!--        for security purpose use permissions in activity tag like this-->
         <activity
             android:name=".Activity.MyLoginActivity"
             android:screenOrientation="portrait"

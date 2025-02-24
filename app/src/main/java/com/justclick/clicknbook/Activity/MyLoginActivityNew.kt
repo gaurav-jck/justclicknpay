@@ -28,6 +28,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.CheckBox
@@ -55,7 +56,6 @@ import com.justclick.clicknbook.model.ForgetPasswordModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.network.SaveLogs
-import com.justclick.clicknbook.network.SaveLogs.Companion.ChangePassword
 import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
@@ -91,6 +91,10 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         setContentView(R.layout.activity_login_new)
         context = this
 
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         initializeFirebase()
         ForceUpdateChecker.with(context!!).onUpdateNeeded(this).check()
         initializeViews()
@@ -298,12 +302,12 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                             }
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
-                                otpDialog()
+                                otpDialog(loginModel.Status)
                             } else {
                                 if (otpDialog!!.isShowing) {
                                     otpDialog!!.dismiss()
                                 }
-                                otpDialog()
+                                otpDialog(loginModel.Status)
                             }
                         } else {
                             errorPopup(loginModel.Status)
@@ -393,7 +397,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         return true
     }
 
-    private fun otpDialog() {
+    private fun otpDialog(statusMsg: String) {
         otpDialog = Dialog(context!!)
         otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         otpDialog!!.setContentView(R.layout.send_otp_layout)
@@ -407,6 +411,8 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         val resendOtpTv = otpDialog!!.findViewById<TextView>(R.id.resendOtpTv)
         val timerTv = otpDialog!!.findViewById<TextView>(R.id.timerTv)
         val dialogCloseButton = otpDialog!!.findViewById<View>(R.id.close_btn) as ImageButton
+        val otpTextTv = otpDialog!!.findViewById<TextView>(R.id.otpTextTv)
+        otpTextTv.text=statusMsg
         object : CountDownTimer(31000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timerTv.visibility = View.VISIBLE

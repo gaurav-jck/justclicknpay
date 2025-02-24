@@ -63,12 +63,36 @@
                 android:textSize="@dimen/aeps_input_text_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Device Type"
+            android:textColor="@color/app_blue_color"
+            android:layout_marginTop="@dimen/size_25dp"
+            android:layout_marginLeft="@dimen/margin_2dp"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <Spinner
+            android:id="@+id/spinnerDeviceType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginLeft="@dimen/small_margin"
+            android:layout_marginRight="@dimen/small_margin"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_1dp"
+            android:layout_margin="@dimen/small_margin"
+            android:background="@color/text_dark_gray"/>
+
         <RadioGroup
             android:id="@+id/radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:visibility="visible"
+            android:visibility="gone"
             android:layout_marginTop="@dimen/margin_30dp"
             >
 
@@ -144,7 +168,7 @@
                 android:textSize="@dimen/simple_content_text_size"
                 android:textColor="@color/color_white"
                 android:background="@drawable/button_shep"
-                android:layout_marginRight="5dp"/>
+                />
 
         </LinearLayout>
         <LinearLayout
@@ -152,30 +176,67 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_40dp"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btnCapture"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Capture"
+                android:text="finger Capture"
                 android:textSize="@dimen/simple_content_text_size"
                 android:textColor="@color/color_white"
                 android:background="@drawable/button_shep"
-                android:layout_marginRight="5dp"/>
+                />
+            <Button
+                android:id="@+id/btnFaceCapture"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Face Capture"
+                android:textSize="@dimen/simple_content_text_size"
+                android:textColor="@color/color_white"
+                android:background="@drawable/button_shep"
+                android:layout_marginTop="@dimen/medium_margin"/>
 
             <Button
                 android:id="@+id/btnSubmit"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Submit KYC"
                 android:textSize="@dimen/simple_content_text_size"
                 android:textColor="@color/color_white"
                 android:background="@drawable/button_shep"
-                android:layout_marginRight="5dp"/>
+                android:layout_marginTop="@dimen/medium_margin"
+                />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rdDownloadLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_margin"
+            android:gravity="right|center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/faceCaptureRdService"
+                android:textColor="@color/black_text_color"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/museo_regular"
+                />
+            <ImageView
+                android:id="@+id/downloadImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download_icon"
+                android:padding="@dimen/margin_2dp"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                />
         </LinearLayout>
 
     </LinearLayout>

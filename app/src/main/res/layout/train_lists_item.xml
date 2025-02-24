@@ -11,7 +11,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/medium_margin"
+        android:paddingTop="@dimen/margin_7dp"
+        android:paddingBottom="@dimen/margin_7dp"
+        android:paddingLeft="@dimen/medium_margin"
+        android:paddingRight="@dimen/medium_margin"
         android:orientation="horizontal">
 
         <TextView
@@ -21,7 +24,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:text="012345"
-            android:padding="@dimen/small_margin"
+            android:paddingTop="@dimen/margin_3dp"
+            android:paddingBottom="@dimen/margin_3dp"
+            android:paddingLeft="@dimen/margin_7dp"
+            android:paddingRight="@dimen/margin_7dp"
             android:textColor="@color/text_dark_gray"
             android:textSize="@dimen/text_size_14sp"
             android:fontFamily="sans-serif-medium"
@@ -137,7 +143,7 @@
             android:textSize="@dimen/simple_content_text_size"
             android:textColor="@color/text_dark_gray"
             android:text="20:00"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/margin_8dp"
             />
 
         <TextView
@@ -188,7 +194,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/viewRight"
             android:orientation="horizontal"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/margin_8dp"
             >
 
             <TextView
@@ -228,7 +234,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/fareTv"
-            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/small_margin"
             android:orientation="vertical"
             android:visibility="visible">
 

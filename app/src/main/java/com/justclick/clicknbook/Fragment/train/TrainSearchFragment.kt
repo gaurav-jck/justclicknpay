@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -94,7 +95,7 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         binding= FragmentTrainSearch2Binding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
-        binding!!.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+        /*binding!!.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
 
@@ -109,7 +110,7 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
                 }
             }
 
-        })
+        })*/
 
         setDates(view)
         setStation(view)
@@ -122,6 +123,9 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         binding!!.dateConst.setOnClickListener(this)
         binding!!.arrowImg.setOnClickListener(this)
 
+        binding!!.searchPNR.setOnClickListener(this)
+        binding!!.pnrStatus.setOnClickListener(this)
+        binding!!.bookingList.setOnClickListener(this)
         setQuota(view)
 
         return view
@@ -184,6 +188,15 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
                 swapStn()
             R.id.dateConst->
                 selectDate()
+            R.id.searchPNR->{
+                (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainPnrSearchFragment())
+            }
+            R.id.pnrStatus->{
+                (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainPnrStatusFragment())
+            }
+            R.id.bookingList->{
+                (context as NavigationDrawerActivity).replaceFragmentWithBackStack(TrainBookingListNewFragment())
+            }
         }
     }
 

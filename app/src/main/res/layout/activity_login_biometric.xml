@@ -367,12 +367,12 @@
                                     android:gravity="center"
                                     android:layout_marginLeft="@dimen/login_content_margin"
                                     android:layout_marginTop="@dimen/large_margin"
-                                    android:paddingRight="@dimen/large_margin"
+                                    android:layout_marginRight="@dimen/login_content_margin"
                                     android:paddingTop="@dimen/very_small_margin"
                                     android:paddingBottom="@dimen/very_small_margin"
                                     android:textColor="@color/black_text_color"
                                     android:textSize="@dimen/text_size_15sp"
-                                    android:text="Please login to authorize biometric login for future."
+                                    android:text="Please login to authorize biometric login for future use."
                                     android:layout_gravity="center_vertical"
                                     />
 

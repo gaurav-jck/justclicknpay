@@ -231,6 +231,7 @@ public class Dmt2GetSenderFragment extends Fragment implements View.OnClickListe
                     commonParams.agentCode=loginModel.Data.DoneCardUser;
                     bundle.putSerializable("commonParams", commonParams);
                     ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(Dmt2KycFragment.newInstance(senderResponse, commonParams));
+//                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(Dmt2FaceKycFragment.newInstance(senderResponse, commonParams));
                     Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
                 }else if(senderResponse.getStatusCode().equals("03")){
 //                    add sender
