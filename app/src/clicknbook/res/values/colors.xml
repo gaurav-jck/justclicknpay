@@ -13,7 +13,8 @@
     <color name="orange_color">#ea7419</color>
     <color name="app_green_color">#78AD17</color>
 
-
+<color name="app_blue_color_light2">#ee285AB4</color>
+<color name="app_blue_color_light3">#EE5486E1</color>
     <color name="app_icon_color">@color/orange_color</color>
     <color name="app_icon_color2">@color/app_blue_color_light</color>
     <color name="app_icon_color_black">@color/black_text_color</color>

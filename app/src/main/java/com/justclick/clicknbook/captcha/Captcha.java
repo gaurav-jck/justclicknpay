@@ -1,7 +1,7 @@
 package com.justclick.clicknbook.captcha;
 
+import java.security.SecureRandom;
 import java.util.List;
-import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -18,7 +18,7 @@ public abstract class Captcha {
     protected abstract Bitmap image();
 
     public static int color(){
-        Random r = new Random();
+        SecureRandom r = new SecureRandom();
         int number;
         do{
             number = r.nextInt(9);
@@ -50,9 +50,10 @@ public abstract class Captcha {
     }
 
     public static int gradientColor(){
-        Random r = new Random();
+        SecureRandom r = new SecureRandom();
         int number;
         do{
+//            number = r.nextInt(9);
             number = r.nextInt(9);
         }while(usedColors.contains(number));
         usedColors.add(number);

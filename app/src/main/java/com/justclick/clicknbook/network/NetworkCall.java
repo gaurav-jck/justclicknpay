@@ -1147,7 +1147,7 @@ public class NetworkCall {
                         responseBody=response.body();
                     }else {
                         responseBody=response.errorBody();
-                        Log.d("Response------", responseBody.string());
+//                        Log.d("Response------", responseBody.string());
                     }
                     retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
                 }catch (Exception e){

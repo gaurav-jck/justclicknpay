@@ -163,20 +163,19 @@
                     android:orientation="vertical"
                     android:visibility="visible">
 
-                    <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                   <!-- <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
                         android:id="@+id/rangeSeekbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:bar_highlight_color="@color/app_blue_color"
-                        app:bar_color="@color/gray_color_hotel_review"
-                        app:left_thumb_color="@color/app_blue_color"
-                        app:right_thumb_color="@color/app_blue_color"
-                        app:left_thumb_color_pressed="@color/app_red_color_light"
-                        app:right_thumb_color_pressed="@color/app_red_color_light"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
-                        />
+                        android:layout_marginRight="10dp"
+                        app:bar_color="@color/gray_color_hotel_review"
+                        app:bar_highlight_color="@color/app_blue_color"
+                        app:left_thumb_color="@color/app_blue_color"
+                        app:left_thumb_color_pressed="@color/app_red_color_light"
+                        app:right_thumb_color="@color/app_blue_color"
+                        app:right_thumb_color_pressed="@color/app_red_color_light" />-->
 
                     <RelativeLayout
                         android:layout_width="match_parent"

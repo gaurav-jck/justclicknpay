@@ -163,10 +163,10 @@ public class MyLoginActivity extends AppCompatActivity implements View.OnClickLi
         captchaEdt = findViewById(R.id.captchaEdt);
         captchaImg =  findViewById(R.id.captchaImg);
 
-        textCaptcha = new TextCaptcha(500, 130, 6, TextCaptcha.TextOptions.NUMBERS_AND_LETTERS);
+//        textCaptcha = new TextCaptcha(500, 130, 6, TextCaptcha.TextOptions.NUMBERS_AND_LETTERS);
 //        MathCaptcha mathCaptcha = new MathCaptcha(600, 150, MathCaptcha.MathOptions.PLUS_MINUS);
 
-        captchaImg.setImageBitmap(textCaptcha.getImage());
+//        captchaImg.setImageBitmap(textCaptcha.getImage());
 
         findViewById(R.id.refreshCaptchaImg).setOnClickListener(new View.OnClickListener() {
             @Override

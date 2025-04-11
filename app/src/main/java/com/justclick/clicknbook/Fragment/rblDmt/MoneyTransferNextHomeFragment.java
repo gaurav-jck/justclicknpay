@@ -1801,7 +1801,7 @@ public class MoneyTransferNextHomeFragment extends Fragment implements View.OnCl
                                     }
                                 }
 
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
 

@@ -57,6 +57,7 @@ public class ApiConstants
     public static final String AGENTLOGIN="AGENTLOGIN";
     //    public static final String LOGIN="LOGIN";
     public static final String LOGIN="INDIALOGIN";
+    public static final String Validatesession="Validatesession";
     public static final String REGISTRATION="REGISTRATION";
     public static final String UploadFile="UploadFile";
     public static final String FORGETPASSWORD="FORGETPASS";

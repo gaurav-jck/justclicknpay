@@ -10,8 +10,8 @@ import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.retrofit.APIClient;
 import com.justclick.clicknbook.retrofit.ApiInterface;
-
 import okhttp3.ResponseBody;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

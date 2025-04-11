@@ -186,18 +186,20 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                     }else if(data.txnStatusDesc.equals("Processed")){
                         Toast.makeText(context, "Processed", Toast.LENGTH_SHORT).show()
                     }else{
-                        statusPosition=position
-                        val statusCheck=StatusCheck()
-                        statusCheck.setTransactionId(data.jckTransactionId)
-                        statusCheck.setAgentCode(loginModel!!.Data.DoneCardUser)
-                        statusCheck.setLoggedInUserType(loginModel!!.Data.UserType)
+                        Toast.makeText(context, data.txnStatusDesc, Toast.LENGTH_SHORT).show()
+//                        statusPosition=position
+//                        val statusCheck=StatusCheck()
+//                        statusCheck.setTransactionId(data.jckTransactionId)
+//                        statusCheck.setAgentCode(loginModel!!.Data.DoneCardUser)
+//                        statusCheck.setLoggedInUserType(loginModel!!.Data.UserType)
 //                        statusCheck.setAgentCode("JC0O188")
 //                        statusCheck.setLoggedInUserType("OOU")
-                        if(data.serviceType.equals("PayoutPaytm")){
+                        /*if(data.serviceType.equals("PayoutPaytm")){
                             getStatus(statusCheck)
                         }else{
                             Toast.makeText(requireContext(), "Status can't be check for this transaction", Toast.LENGTH_SHORT).show()
-                        }
+                        }*/
+//                        getStatus(statusCheck)
                     }
                 }
 
@@ -232,7 +234,16 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
     }
 
     private fun getStatus(statusCheck: StatusCheck) {
-        NetworkCall().callPayoutTxnServiceHeader(statusCheck, ApiConstants.CheckStatus, context,
+        NetworkCall().callService(NetworkCall.getDmt2ApiInterface().getDmt2Header(
+            ApiConstants.CheckStatus, statusCheck,"",""), requireContext(), true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandler(response, STATUS_CHECK)
+            } else {
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }
+       /* NetworkCall().callPayoutTxnServiceHeader(statusCheck, ApiConstants.CheckStatus, context,
             { response, responseCode ->
                 if (response != null) {
                     responseHandler(response, STATUS_CHECK)
@@ -240,7 +251,7 @@ class CashoutTransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
                 }
                 hideCustomDialog()
-            },"","", true)
+            },"","", true)*/
     }
 
     private fun responseHandler(response: ResponseBody, TYPE: Int) {

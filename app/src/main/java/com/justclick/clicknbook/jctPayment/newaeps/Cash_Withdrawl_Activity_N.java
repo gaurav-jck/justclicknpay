@@ -211,9 +211,12 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
                         d_type = AepsConstants.MANTRA;
                         break;
                     case 2:
-                        d_type = AepsConstants.MORPHO;
+                        d_type = AepsConstants.MORPHO_L1;
                         break;
                     case 3:
+                        d_type = AepsConstants.MORPHO;
+                        break;
+                    case 4:
                         d_type = AepsConstants.STARTEK;
                         break;
                 }
@@ -436,6 +439,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
                     capture(AepsConstants.MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
+            }else if (d_type.equals(AepsConstants.MORPHO_L1) && validation()) {
+                String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
             }
         } catch (Exception e) {
             showMessageDialogue(getString(R.string.captureError), "Capture Error");

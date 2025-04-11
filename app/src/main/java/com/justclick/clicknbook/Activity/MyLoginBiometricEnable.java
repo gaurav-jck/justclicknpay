@@ -91,6 +91,7 @@ public class MyLoginBiometricEnable extends AppCompatActivity implements View.On
         }
 
         setFont();
+        Common.preventCopyPaste(password_edt);
 
     }
 

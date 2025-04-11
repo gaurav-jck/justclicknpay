@@ -216,7 +216,7 @@ public class TrainBookingCheckFragment extends Fragment implements View.OnClickL
         CheckTrainPnrResponseModel model = null /*(CheckTrainPnrResponseModel) response*/;
         try {
             model = new Gson().fromJson(response.string(), CheckTrainPnrResponseModel.class);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         if (model != null) {

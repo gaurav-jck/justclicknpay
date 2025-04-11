@@ -1,12 +1,12 @@
 <component name="libraryTable">
-  <library name="Gradle: androidx.camera:camera-video:1.2.2@aar">
+  <library name="Gradle: androidx.camera:camera-video:1.2.2@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/b4398796fde4419fde4ef833d1386f7e/transformed/jetified-camera-video-1.2.2/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/e9ec3025b693d8984d3925786a6b6df1/transformed/jetified-camera-video-1.2.2/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/b4398796fde4419fde4ef833d1386f7e/transformed/jetified-camera-video-1.2.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/b4398796fde4419fde4ef833d1386f7e/transformed/jetified-camera-video-1.2.2/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/b4398796fde4419fde4ef833d1386f7e/transformed/jetified-camera-video-1.2.2/res" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/e9ec3025b693d8984d3925786a6b6df1/transformed/jetified-camera-video-1.2.2/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/e9ec3025b693d8984d3925786a6b6df1/transformed/jetified-camera-video-1.2.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/e9ec3025b693d8984d3925786a6b6df1/transformed/jetified-camera-video-1.2.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

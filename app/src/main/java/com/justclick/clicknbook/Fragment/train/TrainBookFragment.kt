@@ -1,5 +1,6 @@
 package com.justclick.clicknbook.Fragment.train
 
+import android.R.attr.text
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,11 +64,9 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Locale
-import kotlin.collections.ArrayList
-import kotlin.collections.indices
-import kotlin.collections.iterator
 
 
 /**
@@ -1106,6 +1106,9 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         additionalDetail.childCount=getCount(INFANT)
         additionalDetail.coach=""
         additionalDetail.email=binding!!.emailEdt.text.toString()
+//        val data: ByteArray = additionalDetail.email.toByteArray(StandardCharsets.UTF_8)
+//        val base64email: String = Base64.encodeToString(data, Base64.DEFAULT)
+//        additionalDetail.email=base64email
         additionalDetail.mobile=binding!!.mobileEdt.text.toString()
         additionalDetail.totalPaxCount=additionalDetail.adultCount+additionalDetail.childCount
         additionalDetail.preference="LB"

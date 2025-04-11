@@ -27,6 +27,7 @@ import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.network.SaveLogs;
 import com.justclick.clicknbook.utils.Common;
+import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.MyPreferences;
 
 import java.util.HashMap;
@@ -102,9 +103,12 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
     private void submitQuery() {
         ChangePasswordRequest request=new ChangePasswordRequest();
-        request.oldpassword= oldPassEdt.getText().toString();
-        request.newpassword= newPassEdt.getText().toString();
-        request.confirmed= confirmPassEdt.getText().toString();
+//        request.oldpassword= oldPassEdt.getText().toString();
+//        request.newpassword= newPassEdt.getText().toString();
+//        request.confirmed= confirmPassEdt.getText().toString();
+        request.oldpassword= EncryptionDecryptionClass.Encryption(oldPassEdt.getText().toString(), context);
+        request.newpassword= EncryptionDecryptionClass.Encryption(newPassEdt.getText().toString(), context);
+        request.confirmed= EncryptionDecryptionClass.Encryption(confirmPassEdt.getText().toString(), context);
         request.BookUserID= loginModel.Data.UserId;
 
         String json = new Gson().toJson(request);
@@ -203,9 +207,12 @@ public class ChangePasswordFragment extends Fragment implements View.OnClickList
 
     private void changePassword(String otp, Dialog otpDialog) {
         ChangePasswordRequest request=new ChangePasswordRequest();
-        request.oldpassword= oldPassEdt.getText().toString();
-        request.newpassword= newPassEdt.getText().toString();
-        request.confirmed= confirmPassEdt.getText().toString();
+//        request.oldpassword= oldPassEdt.getText().toString();
+//        request.newpassword= newPassEdt.getText().toString();
+//        request.confirmed= confirmPassEdt.getText().toString();
+        request.oldpassword= EncryptionDecryptionClass.Encryption(oldPassEdt.getText().toString(), context);
+        request.newpassword= EncryptionDecryptionClass.Encryption(newPassEdt.getText().toString(), context);
+        request.confirmed= EncryptionDecryptionClass.Encryption(confirmPassEdt.getText().toString(), context);
         request.BookUserID= loginModel.Data.UserId;
         request.OTP= otp;
 

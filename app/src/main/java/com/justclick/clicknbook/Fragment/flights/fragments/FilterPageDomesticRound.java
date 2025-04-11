@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+//import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+//import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.justclick.clicknbook.Fragment.flights.adapters.RecyclerAirlineAdapter;
 import com.justclick.clicknbook.Fragment.flights.responseModel.FlightSearchResponseModel;
 import com.justclick.clicknbook.R;
@@ -37,7 +37,7 @@ public class FilterPageDomesticRound extends Fragment implements View.OnClickLis
     TextView tv_price_stop, tv_time, tv_airline, tv_p_min, tv_p_max, tv_nonStop, tv_oneStop, tv_moreStop;
     TextView tv_morning, tv_afternoon, tv_evening, tv_night, tv_apply, tv_reset;
     LinearLayout ll_price_stop, ll_time, ll_airline;
-    private CrystalRangeSeekbar rangeSeekbar;
+//    private CrystalRangeSeekbar rangeSeekbar;
     String s_time = "";
     int s_Stop = 0, t_min = 0, t_max = 0, LIST_FILTER_TYPE=OUTBOUND_LIST;
     float minPrice = 0, maxPrice = 0, minPriceInbound ,maxPriceInbound;
@@ -170,21 +170,21 @@ public class FilterPageDomesticRound extends Fragment implements View.OnClickLis
 
     private void setValues() {
 
-        rangeSeekbar = view.findViewById(R.id.rangeSeekbar);
-        rangeSeekbar.setMinValue(minPrice);
-        rangeSeekbar.setMaxValue(maxPrice);
+//        rangeSeekbar = view.findViewById(R.id.rangeSeekbar);
+//        rangeSeekbar.setMinValue(minPrice);
+//        rangeSeekbar.setMaxValue(maxPrice);
         tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context) + minPrice+"");
         tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxPrice+"");
 
-        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context)  + minValue);
-                tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxValue);
-                selectedMinPrice = minValue.doubleValue();
-                selectedMaxPrice = maxValue.doubleValue();
-            }
-        });
+//        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//            @Override
+//            public void valueChanged(Number minValue, Number maxValue) {
+//                tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context)  + minValue);
+//                tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxValue);
+//                selectedMinPrice = minValue.doubleValue();
+//                selectedMaxPrice = maxValue.doubleValue();
+//            }
+//        });
 
         recyclerAirlineAdapter = new RecyclerAirlineAdapter(context, arrayListID, arrayListID, new RecyclerAirlineAdapter.AirlineCheckChangeListener() {
             @Override
@@ -202,8 +202,8 @@ public class FilterPageDomesticRound extends Fragment implements View.OnClickLis
 
     private void setValuesInbound() {
 
-        rangeSeekbar.setMinValue(minPriceInbound);
-        rangeSeekbar.setMaxValue(maxPriceInbound);
+//        rangeSeekbar.setMinValue(minPriceInbound);
+//        rangeSeekbar.setMaxValue(maxPriceInbound);
         tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context) + minPriceInbound+"");
         tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxPriceInbound+"");
 

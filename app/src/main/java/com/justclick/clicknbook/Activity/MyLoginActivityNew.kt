@@ -52,6 +52,7 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.biometric.BiometricPromptUtils
 import com.justclick.clicknbook.biometric.CryptographyManager
 import com.justclick.clicknbook.firebase.ForceUpdateChecker
+import com.justclick.clicknbook.model.DepositRequestResponseModel
 import com.justclick.clicknbook.model.ForgetPasswordModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
@@ -171,6 +172,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         if(!MyPreferences.getForceLoginData(context).isForceLogin && MyPreferences.isBiometric(context)){
             showBiometricPromptForEncryption()
         }
+        Common.preventCopyPaste(password_edt)
     }
 
     private fun setFont() {
@@ -188,14 +190,15 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         val uName = email_edt!!.text.toString()
         val uPass = password_edt!!.text.toString()
 
-        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        /*val check1 = "hamdaantravelsqaimoh@gmail.com"
         val check2 = "9797141435"
 
         val DID: String = if (uName == check1 || uName == check2 ) {
             "JustClicknPayOtp"
         } else {
             Common.getDeviceId(context)
-        }
+        }*/
+        val DID=Common.getDeviceId(context)
         if (validate(uName, uPass)) {
             try {
                 val loginRequestModel = LoginRequestModel()
@@ -232,13 +235,13 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         val check1 = "hamdaantravelsqaimoh@gmail.com"
         val check2 = "9797141435"
 
-        val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
+      /*  val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
             MyPreferences.getLoginId(context).equals(check2)) {
             "JustClicknPayOtp"
         } else {
             Common.getDeviceId(context)
-        }
-//        val DID = Common.getDeviceId(context)
+        }*/
+        val DID = Common.getDeviceId(context)
         try {
             val loginRequestModel = LoginRequestModel()
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)
@@ -296,9 +299,11 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                                 saveLogs(loginModel.Data.DoneCardUser)
                                 MyPreferences.setAppCurrentTime(context)
                                 MyPreferences.saveLoginId(context, email_edt!!.text.toString())
-                                val intent = Intent(context, NavigationDrawerActivity::class.java)
+                                validateSession()
+                                /*val intent = Intent(context, NavigationDrawerActivity::class.java).
+                                putExtra("SessionValidate",true)
                                 startActivity(intent)
-                                finish()
+                                finish()*/
                             }
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
@@ -336,6 +341,61 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
             Toast.makeText(context, getString(R.string.exception_message), Toast.LENGTH_SHORT).show()
         }
     }
+    class SessionRequest {
+        var UserCode: String? = null
+        var LoginSessionId: String? = null
+    }
+    private fun validateSession() {
+        var loginModel=LoginModel()
+        var sessionRequest= SessionRequest()
+        sessionRequest.UserCode = MyPreferences.getLoginData(loginModel, context).Data.UserId
+        sessionRequest.LoginSessionId =
+            MyPreferences.getLoginData(loginModel, context).LoginSessionId
+
+        NetworkCall().callService(
+            NetworkCall.getLoginRequestInterface().loginRequest
+                (ApiConstants.Validatesession, sessionRequest), context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerSession(response)
+            } else {
+                hideCustomDialog()
+                //                        Toast./makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private fun responseHandlerSession(response: ResponseBody) {
+        try {
+            val responseModel = Gson().fromJson(
+                response.string(),
+                DepositRequestResponseModel::class.java
+            )
+            hideCustomDialog()
+            if (responseModel != null) {
+                if (responseModel.DepositRequestResult.StatusCode == "0") {
+//                    Toast.makeText(context, responseModel.DepositRequestResult.Data.Message, Toast.LENGTH_SHORT).show();
+//                    MyPreferences.setUserValidated(context)
+                    //                    Common.showResponsePopUp(context, responseModel.DepositRequestResult.Data.Message);
+                    val intent = Intent(context, NavigationDrawerActivity::class.java)/*.
+                    putExtra("SessionValidate",true)*/
+                    startActivity(intent)
+                    finish()
+                } else {
+                    /*Toast.makeText(context, responseModel.DepositRequestResult.Status, Toast.LENGTH_LONG).show();
+                    MyPreferences.logoutUser(context)
+                    val intent = Intent(applicationContext, MyLoginActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)*/
+                    Toast.makeText(context, getString(R.string.appSession), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+//                Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+        } catch (e: java.lang.Exception) {
+        }
+    }
+
     private fun showPasswordChangeAlert(message: String) {
         val responseDialog = Dialog(context!!)
         responseDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

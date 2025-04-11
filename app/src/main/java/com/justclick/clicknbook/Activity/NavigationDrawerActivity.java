@@ -137,6 +137,7 @@ import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
 import com.justclick.clicknbook.model.AgentDetails;
 import com.justclick.clicknbook.model.CommonResponseModel;
+import com.justclick.clicknbook.model.DepositRequestResponseModel;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.model.RblCommonResponse;
 import com.justclick.clicknbook.myinterface.FragmentBackPressListener;
@@ -147,6 +148,7 @@ import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
 import com.justclick.clicknbook.requestmodels.AgentCreditDetailModel;
 import com.justclick.clicknbook.requestmodels.CommonRequestModel;
+import com.justclick.clicknbook.requestmodels.LoginRequestModel;
 import com.justclick.clicknbook.utils.CodeEnum;
 import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
@@ -283,14 +285,62 @@ public class NavigationDrawerActivity extends AppCompatActivity
         toggle.syncState();
         navigationDrawerInitialize();
 
+        /*if (getIntent().getBooleanExtra("SessionValidate", false)) {
+//            Toast.makeText(this, "Validating session", Toast.LENGTH_SHORT).show();
+            validateSession();
+        }else {
+//            Toast.makeText(this, "No validation", Toast.LENGTH_SHORT).show();
+        }*/
+        /*if(!MyPreferences.isUserLogin(context) || !MyPreferences.isUserValidated(context)) {
 
-////        location find
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-//
-//        // method to get the location
-//        getLastLocation();
+        }*/
 
     }
+
+    /*public class SessionRequest{
+        public String  UserCode,LoginSessionId;
+    }
+    private void validateSession() {
+        SessionRequest sessionRequest=new SessionRequest();
+        sessionRequest.UserCode=MyPreferences.getLoginData(loginModel,context).Data.UserId;
+        sessionRequest.LoginSessionId=MyPreferences.getLoginData(loginModel,context).LoginSessionId;
+
+        new NetworkCall().callService(NetworkCall.getLoginRequestInterface().
+                        loginRequest(ApiConstants.Validatesession, sessionRequest), context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerSession(response);
+                    }else {
+                        hideCustomDialog();
+//                        Toast./makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerSession(ResponseBody response) {
+        try {
+            DepositRequestResponseModel responseModel = new Gson().fromJson(response.string(), DepositRequestResponseModel.class);
+            hideCustomDialog();
+            if(responseModel!=null){
+                if(responseModel.DepositRequestResult.StatusCode.equals("0")) {
+//                    Toast.makeText(context, responseModel.DepositRequestResult.Data.Message, Toast.LENGTH_SHORT).show();
+                    MyPreferences.setUserValidated(context);
+//                    Common.showResponsePopUp(context, responseModel.DepositRequestResult.Data.Message);
+                }else {
+//                    Toast.makeText(context, responseModel.DepositRequestResult.Status, Toast.LENGTH_LONG).show();
+                    MyPreferences.logoutUser(context);
+                    Intent intent = new Intent(getApplicationContext(), MyLoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    Toast.makeText(context, R.string.appSession, Toast.LENGTH_SHORT).show();
+                }
+            }else {
+//                Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e){
+
+        }
+    }*/
 
     private void showOrHideCreditOrDepositRequest() {
         if((loginModel.Data.UserType.equals(UserType.Agent)||loginModel.Data.UserType.equals(UserType.Distributor))
@@ -990,10 +1040,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
 //            hardcoded
 
-            LoginModel.DataList.subMenu tent=dataList.new subMenu();
-            tent.SubMenu=MenuCodes.TRAIN_TENT;
-            tent.SubMenuCode=MenuCodes.TRAIN_TENT;
-            subMenuArrayList.add(tent);
+//            LoginModel.DataList.subMenu tent=dataList.new subMenu();
+//            tent.SubMenu=MenuCodes.TRAIN_TENT;
+//            tent.SubMenuCode=MenuCodes.TRAIN_TENT;
+//            subMenuArrayList.add(tent);
 
             if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff))){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
@@ -1465,107 +1515,6 @@ public class NavigationDrawerActivity extends AppCompatActivity
         }
     }
 
-    @SuppressLint("MissingPermission")
-    private void getLastLocation() {
-        // check if permissions are given
-        if (checkPermissions()) {
-
-            // check if location is enabled
-            if (isLocationEnabled()) {
-
-                // getting last
-                // location from
-                // FusedLocationClient
-                // object
-                mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        Location location = task.getResult();
-                        if (location == null) {
-                            requestNewLocationData();
-                        } else {
-//                            Toast.makeText(context,"Latitude: " + location.getLatitude()+"\nLongitude: " + location.getLongitude(), Toast.LENGTH_LONG ).show();
-                        }
-                    }
-                });
-            } else {
-                Toast.makeText(this, "Please turn on" + " your location...", Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                startActivity(intent);
-            }
-        } else {
-            // if permissions aren't available,
-            // request for permissions
-            requestPermissions();
-        }
-    }
-
-    @SuppressLint("MissingPermission")
-    private void requestNewLocationData() {
-
-        // Initializing LocationRequest
-        // object with appropriate methods
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(5);
-        mLocationRequest.setFastestInterval(0);
-        mLocationRequest.setNumUpdates(1);
-
-        // setting LocationRequest
-        // on FusedLocationClient
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, Looper.myLooper());
-    }
-
-    private LocationCallback mLocationCallback = new LocationCallback() {
-
-        @Override
-        public void onLocationResult(LocationResult locationResult) {
-            Location mLastLocation = locationResult.getLastLocation();
-//            Toast.makeText(context,"Latitude: " + mLastLocation.getLatitude()+"\nLongitude: " + mLastLocation.getLongitude(), Toast.LENGTH_LONG ).show();
-//            latitudeTextView.setText("Latitude: " + mLastLocation.getLatitude() + "");
-//            longitTextView.setText("Longitude: " + mLastLocation.getLongitude() + "");
-        }
-    };
-
-    // method to check for permissions
-    private boolean checkPermissions() {
-        return ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED;
-
-        // If we want background location
-        // on Android 10.0 and higher,
-        // use:
-        // ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED
-    }
-
-    // method to request for permissions
-    private void requestPermissions() {
-        ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION}, PERMISSION_ID);
-    }
-
-    // method to check
-    // if location is enabled
-    private boolean isLocationEnabled() {
-        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
-    // If everything is alright then
-    @Override
-    public void
-    onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == PERMISSION_ID) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                getLastLocation();
-            }
-        }
-    }
-
-
 
     private Boolean exit = false;
     @Override
@@ -1676,8 +1625,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
-        if(Common.checkInternetConnection(context))
-            appSession();
+//        if(Common.checkInternetConnection(context))
+//            appSession();
         if (MyPreferences.getAppCurrentTime(context) > System.currentTimeMillis()) {
 //                    logged in
         } else {

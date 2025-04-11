@@ -1,9 +1,9 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.play:core-common:2.0.4@aar">
+  <library name="Gradle: com.google.android.play:core-common:2.0.4@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/9860817f3f46749f6aecd69e2c38663b/transformed/jetified-core-common-2.0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/9860817f3f46749f6aecd69e2c38663b/transformed/jetified-core-common-2.0.4/res" />
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/9860817f3f46749f6aecd69e2c38663b/transformed/jetified-core-common-2.0.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/454911c6bc895c71cf820f78a4b5fd67/transformed/jetified-core-common-2.0.4/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/454911c6bc895c71cf820f78a4b5fd67/transformed/jetified-core-common-2.0.4/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/454911c6bc895c71cf820f78a4b5fd67/transformed/jetified-core-common-2.0.4/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

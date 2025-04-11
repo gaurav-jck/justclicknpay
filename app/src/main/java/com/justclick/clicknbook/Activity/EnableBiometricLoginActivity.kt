@@ -50,6 +50,7 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.biometric.BiometricPromptUtils
 import com.justclick.clicknbook.biometric.CryptographyManager
 import com.justclick.clicknbook.firebase.ForceUpdateChecker
+import com.justclick.clicknbook.model.DepositRequestResponseModel
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
@@ -136,6 +137,7 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         if(!MyPreferences.getForceLoginData(context).isForceLogin && MyPreferences.isBiometric(context)){
             showBiometricPromptForEncryption()
         }
+        Common.preventCopyPaste(password_edt)
     }
 
     private fun setFont() {
@@ -154,13 +156,13 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         val check1 = "hamdaantravelsqaimoh@gmail.com"
         val check2 = "9797141435"
 
-        val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
+        /*val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
             MyPreferences.getLoginId(context).equals(check2)) {
             "JustClicknPayOtp"
         } else {
             Common.getDeviceId(context)
-        }
-//        val DID = Common.getDeviceId(context)
+        }*/
+        val DID = Common.getDeviceId(context)
         if (validate(uName, uPass)) {
             try {
                 val loginRequestModel = LoginRequestModel()
@@ -190,7 +192,7 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
 
     private fun loginCall() {
         Common.hideSoftKeyboard(context as EnableBiometricLoginActivity?)
-        val check1 = "hamdaantravelsqaimoh@gmail.com"
+        /*val check1 = "hamdaantravelsqaimoh@gmail.com"
         val check2 = "9797141435"
 
         val DID: String = if (MyPreferences.getLoginId(context).equals(check1) ||
@@ -198,8 +200,8 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
             "JustClicknPayOtp"
         } else {
             Common.getDeviceId(context)
-        }
-//        val DID = Common.getDeviceId(context)
+        }*/
+        val DID = Common.getDeviceId(context)
         try {
             val loginRequestModel = LoginRequestModel()
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)
@@ -222,6 +224,62 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
         }
     }
 
+    class SessionRequest {
+        var UserCode: String? = null
+        var LoginSessionId: String? = null
+    }
+    private fun validateSession() {
+        var loginModel=LoginModel()
+        var sessionRequest= SessionRequest()
+        sessionRequest.UserCode = MyPreferences.getLoginData(loginModel, context).Data.UserId
+        sessionRequest.LoginSessionId =
+            MyPreferences.getLoginData(loginModel, context).LoginSessionId
+
+        NetworkCall().callService(
+            NetworkCall.getLoginRequestInterface().loginRequest
+                (ApiConstants.Validatesession, sessionRequest), context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerSession(response)
+            } else {
+                hideCustomDialog()
+                //                        Toast./makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private fun responseHandlerSession(response: ResponseBody) {
+        try {
+            val responseModel = Gson().fromJson(
+                response.string(),
+                DepositRequestResponseModel::class.java
+            )
+            hideCustomDialog()
+            if (responseModel != null) {
+                if (responseModel.DepositRequestResult.StatusCode == "0") {
+//                    Toast.makeText(context, responseModel.DepositRequestResult.Data.Message, Toast.LENGTH_SHORT).show();
+//                    MyPreferences.setUserValidated(context)
+                    //                    Common.showResponsePopUp(context, responseModel.DepositRequestResult.Data.Message);
+                   /* val intent = Intent(context, NavigationDrawerActivity::class.java)*//*.
+                    putExtra("SessionValidate",true)*//*
+                    startActivity(intent)
+                    finish()*/
+                    showBiometricPromptForEncryption()
+                } else {
+                    /*Toast.makeText(context, responseModel.DepositRequestResult.Status, Toast.LENGTH_LONG).show();
+                    MyPreferences.logoutUser(context)
+                    val intent = Intent(applicationContext, MyLoginActivity::class.java)
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                    startActivity(intent)*/
+                    Toast.makeText(context, getString(R.string.appSession), Toast.LENGTH_SHORT).show()
+                }
+            } else {
+//                Toast.makeText(context,R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+        } catch (e: java.lang.Exception) {
+        }
+    }
+
     private fun responseHandler(response: ResponseBody, TYPE: Int) {
         try {
             when (TYPE) {
@@ -236,12 +294,15 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                             //store values to shared preferences
 //                            dataBaseHelper.insertLoginIds(email_edt.getText().toString());
                             MyPreferences.saveLoginData(loginModel, context)
-                            showBiometricPromptForEncryption()
+                            if (otpDialog!=null && otpDialog!!.isShowing) {
+                                otpDialog!!.dismiss()
+                            }
                             MyPreferences.setAppCurrentTime(context)
                             MyPreferences.saveEmailPassword(
                                 context,
                                 email_edt!!.text.toString(),
                                 password_edt!!.text.toString().trim { it <= ' ' })
+                            validateSession()
                         } else if (loginModel.StatusCode.equals("2", ignoreCase = true)) {
                             if (otpDialog == null) {
                                 otpDialog(loginModel.Status)
@@ -416,6 +477,8 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                 BiometricPromptUtils.createBiometricPrompt(this, ::encryptAndStoreServerToken)
             val promptInfo = BiometricPromptUtils.createPromptInfo(this)
             biometricPrompt.authenticate(promptInfo, BiometricPrompt.CryptoObject(cipher))
+        }else{
+            Common.showCommonAlertDialog(context, "Your biometric login is not enable currently, please unable from settings and then retry.", "Alert!")
         }
     }
 
@@ -445,7 +508,8 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
 
     private fun authorizedBiometricLogin() {
         MyPreferences.enableBiometric(context)
-        val intent = Intent(context, NavigationDrawerActivity::class.java)
+        val intent = Intent(context, NavigationDrawerActivity::class.java)/*.
+        putExtra("SessionValidate",true)*/
         startActivity(intent)
         finish()
     }

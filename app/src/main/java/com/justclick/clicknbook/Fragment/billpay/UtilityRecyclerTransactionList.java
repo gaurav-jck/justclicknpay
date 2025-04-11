@@ -71,6 +71,12 @@ public class UtilityRecyclerTransactionList extends RecyclerView.Adapter<Recycle
                 myViewHolder.txnType.setText(info.getRechargeType());
                 myViewHolder.status.setText( info.getTxnStatusDesc());
 
+                if(info.getTxnStatusDesc().equalsIgnoreCase("Success")){
+                    myViewHolder.status.setTextColor(context.getResources().getColor(R.color.green));
+                }else {
+                    myViewHolder.status.setTextColor(context.getResources().getColor(R.color.text_dark_gray));
+                }
+
                 myViewHolder.print_tv.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

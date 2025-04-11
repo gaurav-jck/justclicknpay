@@ -4,10 +4,10 @@
             <domain includeSubdomains="true">api.rapipay.com</domain>
             <domain includeSubdomains="true">contents.irctc.co.in</domain>
 
-            <trust-anchors>
+           <!-- <trust-anchors>
 
                 <certificates src="@raw/star_rapipay_com"/>
-            </trust-anchors>
+            </trust-anchors>-->   // remove for vapt testing
 
     </domain-config>
 

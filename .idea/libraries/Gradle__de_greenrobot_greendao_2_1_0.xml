@@ -1,5 +1,6 @@
 <component name="libraryTable">
-  <library name="Gradle: de.greenrobot:greendao:2.1.0">
+  <library name="Gradle: de.greenrobot:greendao:2.1.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="de.greenrobot" artifactId="greendao" version="2.1.0" />
     <CLASSES>
       <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/de.greenrobot/greendao/2.1.0/9414c1d4578673dac83a23119009624fd695726d/greendao-2.1.0.jar!/" />
     </CLASSES>

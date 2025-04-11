@@ -109,6 +109,7 @@ public class MenuCodes {
   public static final String MenuCodesDistributor="UpdateCredit,DepositList,CreditList";
   public static final String ImplementedMenuCodes="JCTMoneyList"+","+MenuCodesDistributor+","+MenuCodesSales+","+AccountStatement
           +","+AirBookingList;    //,Top-UpDetails,BusBookingList
+//  public static final String ImplementedMenuCodes=AccountStatement;    //codes for testing only, use above
 
 //    public static final String ImplementedMenuCodes="";
 

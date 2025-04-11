@@ -178,7 +178,7 @@ class RapipayTransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
                 R.id.statusTv->{
-                    if(data.txnStatus.equals("0")){
+                    if(data.txnStatus.equals("0") || data.txnStatusDesc.equals("Success")){
 //                        Toast.makeText(context, "Status check is not valid", Toast.LENGTH_SHORT).show()
                     }else if(data.txnAmount==1.0f){
                         Toast.makeText(context, "Status check is not valid", Toast.LENGTH_SHORT).show()

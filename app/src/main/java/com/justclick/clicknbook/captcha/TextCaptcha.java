@@ -1,8 +1,8 @@
 package com.justclick.clicknbook.captcha;
 
 import java.io.CharArrayWriter;
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -51,7 +51,7 @@ public class TextCaptcha extends Captcha {
         tp.setDither(true);
         tp.setTextSize(getWidth() / getHeight() * 25);
 
-        Random r = new Random(System.currentTimeMillis());
+        SecureRandom r = new SecureRandom();
         CharArrayWriter cab = new CharArrayWriter();
         this.answer = "";
         for (int i = 0; i < this.wordLength; i++) {
@@ -59,21 +59,27 @@ public class TextCaptcha extends Captcha {
             switch (options) {
                 case UPPERCASE_ONLY:
                     ch = (char) (r.nextInt(91 - 65) + (65));
+//                    ch = 't';
                     break;
                 case LOWERCASE_ONLY:
                     ch = (char) (r.nextInt(123 - 97) + (97));
+//                    ch = 's';
                     break;
                 case NUMBERS_ONLY:
                     ch = (char) (r.nextInt(58 - 49) + (49));
+//                    ch = 'm';
                     break;
                 case LETTERS_ONLY:
                     ch = getLetters(r);
+//                    ch = 't';
                     break;
                 case NUMBERS_AND_LETTERS:
                     ch = getLettersNumbers(r);
+//                    ch = 't';
                     break;
                 default:
                     ch = getLettersNumbers(r);
+//                    ch = 't';
                     break;
             }
             cab.append(ch);
@@ -82,11 +88,10 @@ public class TextCaptcha extends Captcha {
 
         char[] data = cab.toCharArray();
         for (int i = 0; i < data.length; i++) {
-//            this.x += (30 - (3 * this.wordLength)) + (Math.abs(r.nextInt()) % (65 - (1.2 * this.wordLength))); //original
-            this.x += (30 - (3 * this.wordLength)) + (50/*(Math.abs(r.nextInt()) % (65 - (1.2 * this.wordLength))*/);
-            this.y = 50 + /*Math.abs(r.nextInt()) %*/ 40;
+            this.x += (30 - (3 * this.wordLength)) + (Math.abs(r.nextInt()) % (65 - (1.2 * this.wordLength)));
+            this.y = 50 + Math.abs(r.nextInt()) % 40;
             Canvas cc = new Canvas(bitmap);
-//            tp.setTextSkewX(r.nextFloat() - r.nextFloat());
+            tp.setTextSkewX(r.nextFloat() - r.nextFloat());
             tp.setColor(color());
             cc.drawText(data, i, 1, this.x, this.y, tp);//original
 //            cc.drawText(data, i, 3, this.x, this.y, tp);
@@ -95,7 +100,7 @@ public class TextCaptcha extends Captcha {
         return bitmap;
     }
 
-    private char getLetters(Random r) {
+    private char getLetters(SecureRandom r) {
         int rint = (r.nextInt(123 - 65) + (65));
         if (((rint > 90) && (rint < 97)))
             getLetters(r);
@@ -104,7 +109,7 @@ public class TextCaptcha extends Captcha {
         return mCh;
     }
 
-    private char getLettersNumbers(Random r) {
+    private char getLettersNumbers(SecureRandom r) {
         int rint = (r.nextInt(123 - 49) + (49));
 
         if(rint==48 || rint==79 || rint==111){  // for removing zero and O

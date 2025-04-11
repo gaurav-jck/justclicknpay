@@ -1,7 +1,7 @@
 package com.justclick.clicknbook.captcha;
 
+import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.Config;
@@ -46,7 +46,7 @@ public class MathCaptcha extends Captcha {
         tp.setDither(true);
         tp.setShader(fontGrad);
         tp.setTextSize(getWidth() / this.height * 20);
-        Random r = new Random(System.currentTimeMillis());
+        SecureRandom r = new SecureRandom();
         one = r.nextInt(9) + 1;
         two = r.nextInt(9) + 1;
         math = r.nextInt((options == MathOptions.PLUS_MINUS_MULTIPLY)?3:2);
@@ -73,7 +73,7 @@ public class MathCaptcha extends Captcha {
             y = 50 + Math.abs(r.nextInt()) % 50;
             Canvas cc = new Canvas(bitmap);
             if(i != 1)
-                tp.setTextSkewX(r.nextFloat() - r.nextFloat());
+                tp.setTextSkewX(44f);
             cc.drawText(data, i, 1, x, y, tp);
             tp.setTextSkewX(0);
         }

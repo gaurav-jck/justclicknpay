@@ -264,7 +264,7 @@ public class MyTrainStationDialog {
                             autocompleteAdapter = new AutocompleteAdapter(context, trainSearchDataModel);
 //                            list_agent.setAdapter(autocompleteAdapter);
                         }
-                    } catch (IOException e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 } else {

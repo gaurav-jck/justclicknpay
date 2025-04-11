@@ -13,12 +13,14 @@ buildscript {
             name 'Google'
         }*/
         google()
-        jcenter()
+        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
+//        jcenter()
     }
 
     dependencies {
 //        classpath 'com.android.tools.build:gradle:3.4.0'
-        classpath 'com.android.tools.build:gradle:8.0.0'
+        classpath 'com.android.tools.build:gradle:8.0.2'
 //        classpath 'com.android.tools.build:gradle:7.4.2'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -28,6 +30,7 @@ buildscript {
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
 //        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.21'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0'
+//        classpath 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.0'
         classpath 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:2.0.1'
     }
 }
@@ -36,18 +39,22 @@ allprojects
         {
             repositories {
                 google()
-                jcenter()
-                maven {
-                    credentials {
-                        username 'myMavenRepo'
-                        password 'CredoPaySDK'
-                    }
-                    url "https://mymavenrepo.com/repo/nkkgWioPTZZyJhyjF9hy/"
-                }
+                mavenCentral()
+                maven { url 'https://jitpack.io' }
+                maven { url 'https://maven.fabric.io/public' }
+                maven { url 'https://maven.google.com/' }
+//                jcenter()
+//                maven {
+//                    credentials {
+//                        username 'myMavenRepo'
+//                        password 'CredoPaySDK'
+//                    }
+//                    url "https://mymavenrepo.com/repo/nkkgWioPTZZyJhyjF9hy/"
+//                }
 
             }
         }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}

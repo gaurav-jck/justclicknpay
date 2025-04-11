@@ -57,11 +57,13 @@ class DmtKycFragment : Fragment() {
     private val MANTRA_L1 = "MANTRA_L1"
     private val STARTEK = "STARTEK"
     private val MORPHO = "MORPHO"
+    private val MORPHO_L1 = "MORPHO_L1"
     private val MANTRA_PACKAGE = "com.mantra.rdservice"
     private val MANTRA_L1_PACKAGE = "com.mantra.mfs110.rdservice"
     private val STARTEK_PACKAGE = "com.acpl.registersdk"
     private val MORPHO_PACKAGE = "com.scl.rdservice"
-    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho", "Startek")
+    private val MORPHO_PACKAGE_L1 = "com.idemia.l1rdservice"
+    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho L1", "Morpho", "Startek")
     var d_type = MANTRA_L1
     var pidDataXML = "";
     private var captureType=FINGER_CAPTURE
@@ -141,8 +143,9 @@ class DmtKycFragment : Fragment() {
                 when (i) {
                     0 -> d_type = MANTRA_L1
                     1 -> d_type = MANTRA
-                    2 -> d_type = MORPHO
-                    3 -> d_type = STARTEK
+                    2 -> d_type = MORPHO_L1
+                    3 -> d_type = MORPHO
+                    4 -> d_type = STARTEK
                 }
             }
 
@@ -184,6 +187,10 @@ class DmtKycFragment : Fragment() {
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
                     capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
+            }else if (d_type == MORPHO_L1) {
+                val pidOptXML =
+                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                capture(MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }
         } catch (e: Exception) {
             showMessageDialogue("EXCEPTION- " + e.message, "EXCEPTION")
@@ -472,13 +479,20 @@ class DmtKycFragment : Fragment() {
             params["isiris"] = "Face"
         }
 //        pidDataXML="test"
-        if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
+        /*if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
 //            params.put("Pid", pidDataXML.replace("\n", ""));  //.replace("\n","")
             pidDataXML=pidDataXML.replace("\n", "")
             params["Pid"]=pidDataXML
         } else {
 //            params.put("Pid", ("<?xml version=\"1.0\"?>" + pidDataXML).replace("\n", ""));
             pidDataXML=("<?xml version=\"1.0\"?>$pidDataXML").replace("\n", "")
+            params["Pid"]=pidDataXML
+        }*/
+        if (d_type.equals(MANTRA)){
+            pidDataXML=("<?xml version=\"1.0\"?>$pidDataXML").replace("\n", "")
+            params["Pid"]=pidDataXML
+        }else{
+            pidDataXML=pidDataXML.replace("\n", "")
             params["Pid"]=pidDataXML
         }
 

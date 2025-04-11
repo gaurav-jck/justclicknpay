@@ -230,6 +230,8 @@
                                         android:maxLength="50"
                                         android:inputType="textPassword"
                                         android:maxLines="1"
+                                        android:longClickable="false"
+                                        tools:ignore="Autofill"
                                         android:textColorHint="@color/login_hint_color_new"
 
                                         />

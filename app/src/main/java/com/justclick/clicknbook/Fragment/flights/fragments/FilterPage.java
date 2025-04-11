@@ -16,8 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
-import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+//import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
+//import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.justclick.clicknbook.Fragment.flights.adapters.RecyclerAirlineAdapter;
 import com.justclick.clicknbook.Fragment.flights.responseModel.FlightSearchResponseModel;
 import com.justclick.clicknbook.R;
@@ -35,7 +35,7 @@ public class FilterPage extends Fragment implements View.OnClickListener {
     TextView tv_price_stop, tv_time, tv_airline, tv_p_min, tv_p_max, tv_nonStop, tv_oneStop, tv_moreStop;
     TextView tv_morning, tv_afternoon, tv_evening, tv_night, tv_apply, tv_reset;
     LinearLayout ll_price_stop, ll_time, ll_airline;
-    private CrystalRangeSeekbar rangeSeekbar;
+//    private CrystalRangeSeekbar rangeSeekbar;
     String s_time = "", str_min, str_max;
     int s_Stop = 0, t_min = 0, t_max = 0;
     float minPrice = 0, maxPrice = 0;
@@ -79,21 +79,21 @@ public class FilterPage extends Fragment implements View.OnClickListener {
         initAllViews();
         resetAllValues();
 
-        rangeSeekbar = view.findViewById(R.id.rangeSeekbar);
-        rangeSeekbar.setMinValue(minPrice);
-        rangeSeekbar.setMaxValue(maxPrice);
+//        rangeSeekbar = view.findViewById(R.id.rangeSeekbar);
+//        rangeSeekbar.setMinValue(minPrice);
+//        rangeSeekbar.setMaxValue(maxPrice);
         tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context) + minPrice+"");
         tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxPrice+"");
 
-        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
-            @Override
-            public void valueChanged(Number minValue, Number maxValue) {
-                tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context)  + minValue);
-                tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxValue);
-                selectedMinPrice = minValue.doubleValue();
-                selectedMaxPrice = maxValue.doubleValue();
-            }
-        });
+//        rangeSeekbar.setOnRangeSeekbarChangeListener(new OnRangeSeekbarChangeListener() {
+//            @Override
+//            public void valueChanged(Number minValue, Number maxValue) {
+//                tv_p_min.setText(CurrencyCode.getCurrencySymbol("INR", context)  + minValue);
+//                tv_p_max.setText(CurrencyCode.getCurrencySymbol("INR", context) + maxValue);
+//                selectedMinPrice = minValue.doubleValue();
+//                selectedMaxPrice = maxValue.doubleValue();
+//            }
+//        });
 
         Iterator itr = hashFlightObject.iterator();
         while(itr.hasNext())

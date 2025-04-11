@@ -1,8 +1,8 @@
 <component name="libraryTable">
-  <library name="Gradle: net.gotev:uploadservice:3.0.3@aar">
+  <library name="Gradle: net.gotev:uploadservice:3.0.3@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.jdks/caches/transforms-3/413658c09ff8936e1f98950f3806e254/transformed/jetified-uploadservice-3.0.3/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.jdks/caches/transforms-3/413658c09ff8936e1f98950f3806e254/transformed/jetified-uploadservice-3.0.3/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/84cbf01ea8d326f413235bc1c89efc58/transformed/jetified-uploadservice-3.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/84cbf01ea8d326f413235bc1c89efc58/transformed/jetified-uploadservice-3.0.3/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/net.gotev/uploadservice/3.0.3/969429d0026076f5c5f8f369d501db7dd23af663/uploadservice-3.0.3-javadoc.jar!/" />

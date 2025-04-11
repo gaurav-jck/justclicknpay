@@ -223,7 +223,7 @@ class TrainBookingDetailsFragment : Fragment() {
         binding!!.durationTv.text = journeyDetail.duration
         binding!!.classTv.text = "Adult = "+journeyDetail.adult+" | "+"Child = "+journeyDetail.child +
                 " | "+"Class = "+journeyDetail.journeyClass + " | "+ "Quota = "+journeyDetail.quota
-        binding!!.boardingStn.text="Boarding point - "+journeyDetail.boarding
+        binding!!.boardingStn.text="Boarding at - "+journeyDetail.boarding+"  "+journeyDetail.dateOfBoarding
         binding!!.bookingDateTv.text="Booking Date - "+journeyDetail.dateTimeOfBooking
 
         var seats=""

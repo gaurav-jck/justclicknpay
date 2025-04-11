@@ -183,12 +183,17 @@ class TransactionListFragment : Fragment(), View.OnClickListener {
                     Toast.makeText(context, "Enable to print data", Toast.LENGTH_SHORT).show()
                 }
                 R.id.statusTv->{
-                    statusPosition=position
-                    val statusCheck=StatusCheck()
-                    statusCheck.setTransactionId(data.jckTransactionId)
-                    statusCheck.setLoggedinAgentCode(loginModel!!.Data.DoneCardUser)
-                    statusCheck.setAgentCode(data.agentCode)
-                    getStatus(statusCheck)
+                    if(data.txnStatusDesc.equals("Success",true) ||
+                        data.txnStatusDesc.equals("Failed",true)){
+                        Toast.makeText(context, data.txnStatusDesc+ " transaction", Toast.LENGTH_SHORT).show()
+                    }else{
+                        statusPosition=position
+                        val statusCheck=StatusCheck()
+                        statusCheck.setTransactionId(data.jckTransactionId)
+                        statusCheck.setLoggedinAgentCode(loginModel!!.Data.DoneCardUser)
+                        statusCheck.setAgentCode(data.agentCode)
+                        getStatus(statusCheck)
+                    }
                 }
 
             }

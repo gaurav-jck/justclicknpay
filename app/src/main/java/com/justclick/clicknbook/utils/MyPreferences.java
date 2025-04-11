@@ -15,6 +15,7 @@ public class MyPreferences {
 
   private static final String MyPrefName="MyPref";
   private static final String IsLogin="IsLogin";
+  private static final String IsValidate="IsValidate";
   private static final String IsBiometric="IsBiometric";
   private static final String MyLoginDataClass="MyLoginDataClass";
   private static final String Password="Password";
@@ -106,6 +107,14 @@ public class MyPreferences {
   public static Boolean isUserLogin(Context context){
     return getPreferences(context).getBoolean(IsLogin, false);
   }
+  public static Boolean isUserValidated(Context context){
+    return getPreferences(context).getBoolean(IsValidate, false);
+  }
+  public static void setUserValidated(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(IsValidate, true);
+    prefsEditor.commit();
+  }
 
   public static String getLoginId(Context context){
     return getPreferences(context).getString(EmailId, "");
@@ -147,7 +156,7 @@ public class MyPreferences {
 
   public static void setAppCurrentTime(Context context){
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
-    prefsEditor.putLong(ExpiredDate, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60)); // change to 60
+    prefsEditor.putLong(ExpiredDate, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60)); // change to 60  , 10 during test
     prefsEditor.commit();
   }
 

@@ -40,7 +40,8 @@ public class SplashScreen extends Activity {
             public void run() {
 //                startActivity(new Intent(context, MyLoginActivityAeps.class));
                 if(MyPreferences.isUserLogin(context)){
-                    startActivity(new Intent(context, NavigationDrawerActivity.class));
+                    startActivity(new Intent(context, NavigationDrawerActivity.class).
+                            putExtra("SessionValidate",false));
                 }else {
                     startActivity(new Intent(context, MyLoginActivityNew.class));
                 }

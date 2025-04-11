@@ -104,6 +104,41 @@
                         android:layout_weight="1"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
                         android:text="Email Id"
                         android:fontFamily="@font/klinic_slab_medium"/>
                     <TextView
@@ -262,6 +297,40 @@
                         android:layout_weight="1"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
                         android:text="Email Id"
                         android:fontFamily="@font/klinic_slab_medium"/>
                     <TextView
@@ -320,7 +389,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="9599182274 / 9719762243"
+                        android:text=""
                         android:gravity="left"
                         android:textSize="@dimen/text_size_14sp"
                         android:textColor="@color/white"
@@ -409,6 +478,41 @@
                 android:padding="@dimen/small_margin"
                 android:visibility="visible"
                 android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -570,6 +674,41 @@
                 android:padding="@dimen/small_margin"
                 android:visibility="visible"
                 android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -768,6 +907,41 @@
                         android:layout_weight="1"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
                         android:text="Email Id"
                         android:fontFamily="@font/klinic_slab_medium"/>
                     <TextView
@@ -825,7 +999,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="9310892153,7428094444,9560404215"
+                        android:text="9310892153,7428094444"
                         android:gravity="left"
                         android:textSize="@dimen/text_size_14sp"
                         android:textColor="@color/white"
@@ -913,6 +1087,41 @@
                 android:padding="@dimen/small_margin"
                 android:visibility="visible"
                 android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1073,6 +1282,41 @@
                 android:padding="@dimen/small_margin"
                 android:visibility="visible"
                 android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1269,6 +1513,41 @@
                         android:layout_weight="1"
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
                         android:text="Email Id"
                         android:fontFamily="@font/klinic_slab_medium"/>
                     <TextView
@@ -1414,6 +1693,41 @@
                 android:padding="@dimen/small_margin"
                 android:visibility="visible"
                 android:background="@color/contactUsLightGrayBackground">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/very_small_margin"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Delhi Office"
+                        android:gravity="center"
+                        android:padding="@dimen/margin_2dp"
+                        android:background="@drawable/contact_border_background"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/museo_regular" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".8"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_14sp"
+                        android:text=""
+                        android:fontFamily="@font/klinic_slab_medium"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

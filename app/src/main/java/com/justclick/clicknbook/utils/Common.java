@@ -13,6 +13,8 @@ import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.provider.Settings;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
 import android.text.method.ScrollingMovementMethod;
@@ -273,6 +275,25 @@ public final class Common {
 //        forgetDialog.setCancelable(false);
     responseDialog.show();
   }
+
+  public static void showCommonAlertDialog(Context context, String message, String title) {
+    // Create an alert builder
+    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+    builder.setTitle(title);
+    builder.setMessage(message);
+    builder.setCancelable(false);
+
+    // add a button
+    builder.setPositiveButton("OK", (dialog, which) -> {
+      // send data from the AlertDialog to the Activity
+      dialog.dismiss();
+    });
+    // create and show the alert dialog
+    AlertDialog dialog = builder.create();
+    dialog.show();
+  }
+
+
   public static int getAgeFromDOB(Date date){
     int age= Calendar.getInstance().getTime().getYear()-date.getYear();
     return age;
