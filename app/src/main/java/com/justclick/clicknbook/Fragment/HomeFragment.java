@@ -62,6 +62,7 @@ import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
 import com.justclick.clicknbook.databinding.FragmentHomeBinding;
+import com.justclick.clicknbook.graphhome.GraphFragment;
 import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
@@ -166,6 +167,13 @@ public class HomeFragment extends Fragment {
             binding.recyclerView.setLayoutManager(layoutManager);
             binding.recyclerView.setAdapter(menuItemsAdapter);
 
+            binding.graphLin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((NavigationDrawerActivity)context).
+                            replaceFragmentWithBackStack(new GraphFragment());
+                }
+            });
 //        String t=FirebaseInstanceId.getInstance().getToken();
         }
         return mView;

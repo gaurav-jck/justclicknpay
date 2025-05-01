@@ -237,5 +237,28 @@
                 android:layout_marginLeft="5dp"/>
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_50dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/margin_3dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Click here for update location "
+                />
+            <TextView
+                android:id="@+id/updateLocationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/update_location"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/text_size_15sp"
+                android:padding="3dp"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

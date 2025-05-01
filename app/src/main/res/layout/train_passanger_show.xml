@@ -68,6 +68,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/genderTv"
         app:layout_constraintStart_toEndOf="@id/genderTv"
         app:layout_constraintRight_toLeftOf="@id/delete"
+        app:layout_constraintTop_toTopOf="@id/genderTv"
         android:gravity="right"
         android:text="Food-"
         android:textSize="@dimen/text_size_13sp"

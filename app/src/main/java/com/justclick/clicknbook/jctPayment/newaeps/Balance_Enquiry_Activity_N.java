@@ -79,6 +79,7 @@ import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.Adapters.MiniStatementAdapter;
 import com.justclick.clicknbook.jctPayment.Models.Opts;
 import com.justclick.clicknbook.jctPayment.Models.PidOptions;
+import com.justclick.clicknbook.jctPayment.Models.UpdateLocationRequest;
 import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
@@ -141,6 +142,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
     private boolean isGetAgain;
     int PERMISSION_ID = 44;
     FusedLocationProviderClient mFusedLocationClient;
+    private boolean mLocation=false;
     String mLatitude="29.9319558", mLongitude="77.5334789";
 
 
@@ -404,6 +406,26 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
         // method to get the location
         getLastLocation();
 
+        findViewById(R.id.updateLocationTv).setOnClickListener(view -> {
+            if(mLocation){
+                updateLocation();
+            }else {
+                getLastLocation();
+            }
+        });
+    }
+
+
+    private void updateLocation() {
+        LoginModel loginModel=new LoginModel();
+        loginModel=MyPreferences.getLoginData(loginModel,context);
+        UpdateLocationRequest request=new UpdateLocationRequest();
+        request.lat=mLatitude;
+        request.longitude=mLongitude;
+        request.merchantcode=loginModel.Data.DoneCardUser;
+        request.mobile=loginModel.Data.Mobile;
+//        request.mobile="9012836576";
+        GetAepsCredential.updateLocation(context, request);
     }
 
     public void captureData() {
@@ -427,9 +449,10 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
                 capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
             } else if (d_type.equals(AepsConstants.MORPHO) && validation()) {
                 if (searchPackageName(AepsConstants.MORPHO_PACKAGE)) {
-                    String pidOptXML = XMLGenerator.createPidOptXML();  //old
+//                    String pidOptXML = XMLGenerator.createPidOptXML();  //old
 //                    String pidOptXML = getPIDOptions();   // change
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
+                    String pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"2\" iCount=\"0\" iType=\"\" pCount=\"0\" pType=\"\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
                     capture(AepsConstants.MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
             }else if (d_type.equals(AepsConstants.MORPHO_L1) && validation()) {
@@ -576,6 +599,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
 //                params.put("Longitude", mCurrentLocation.getLongitude() + "");
                 params.put("Latitude", mLatitude);
                 params.put("Longitude", mLongitude);
+//                params.put("Latitude", "28.101122");
+//                params.put("Longitude", "77.022111");
 
                 /*if(d_type.equals(AepsConstants.MORPHO) || d_type.equals(AepsConstants.STARTEK)){
                     params.put("PId", pidDataXML.replace("\n",""));  //.replace("\n","")
@@ -966,6 +991,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
                         } else {
                             mLatitude=location.getLatitude()+"";
                             mLongitude=location.getLongitude()+"";
+                            mLocation=true;
 //                            Toast.makeText(context,"Latitude: " + location.getLatitude()+"\nLongitude: " + location.getLongitude(), Toast.LENGTH_LONG ).show();
                         }
                     }
@@ -1006,6 +1032,7 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
             Location mLastLocation = locationResult.getLastLocation();
             mLatitude=mLastLocation.getLatitude()+"";
             mLongitude=mLastLocation.getLongitude()+"";
+            mLocation=true;
 //            Toast.makeText(context,"Latitude: " + mLastLocation.getLatitude()+"\nLongitude: " + mLastLocation.getLongitude(), Toast.LENGTH_LONG ).show();
 //            latitudeTextView.setText("Latitude: " + mLastLocation.getLatitude() + "");
 //            longitTextView.setText("Longitude: " + mLastLocation.getLongitude() + "");

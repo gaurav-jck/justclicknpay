@@ -1160,9 +1160,9 @@ public class NetworkCall {
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideCustomDialog();
                 responseBody=null;
                 retrofitResponseListener.onRetrofitResponse(null,0);
-                hideCustomDialog();
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
             }
 
@@ -1591,6 +1591,12 @@ public class NetworkCall {
     }
     public static ApiInterface getDmt2ApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface.class);
+    }
+    public static ApiInterface getLocationUpdateInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
+    }
+    public static ApiInterface getUatRemmitInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_UAT_REMMIT).create(ApiInterface.class);
     }
 
     public static ApiInterface getDepositRequestInterface(){

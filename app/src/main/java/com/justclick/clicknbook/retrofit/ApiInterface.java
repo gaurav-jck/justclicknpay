@@ -190,6 +190,9 @@ public interface ApiInterface {
     @POST("apiAccounts/Accounts/{methodName}")
     Call<ResponseBody> accountStmtPost(@Path("methodName") String method, @Body Object data);
 
+    @POST("apiAccounts/Accounts/{methodName}")
+    Call<ResponseBody> dashboardChartData(@Path("methodName") String method, @Body Object data);
+
 
     //Rbl Services
 
@@ -489,6 +492,9 @@ public interface ApiInterface {
 
     @POST("api/payments/{methodName}")
     Call<ResponseBody> getRapipayCommonPost(@Path("methodName") String method, @Body Object data);
+
+    @POST("B2B/AdharPayment/{methodName}")
+    Call<ResponseBody> updateLocation(@Path("methodName") String method, @Body Object data);
 
     @POST("api/payments/{methodName}")
     @Headers({"Content-Type: application/json"})

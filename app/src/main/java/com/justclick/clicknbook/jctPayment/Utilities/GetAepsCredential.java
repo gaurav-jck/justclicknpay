@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity;
 import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity;
 import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity;
@@ -77,5 +78,30 @@ public class GetAepsCredential {
                     }
                 });
         return isGet;
+    }
+
+    public static void updateLocation(final Context context, Object request){
+        new NetworkCall().callService(NetworkCall.getLocationUpdateInterface().updateLocation(ApiConstants.paysprintlocationupdate, request),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerLocation(response, context);
+                    }else {
+                        Toast.makeText(context, "Location update failed, please retry after sometime", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private static void responseHandlerLocation(ResponseBody response, Context context) {
+        try{
+            PaytmWalletFragment.CommonResponse commonResponse=new Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse.class);
+            if(commonResponse!=null){
+                Toast.makeText(context, commonResponse.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(context, "Location update failed, please retry after sometime", Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, "Location update failed, please retry after sometime", Toast.LENGTH_SHORT).show();
+        }
     }
 }

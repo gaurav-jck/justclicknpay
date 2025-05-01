@@ -66,6 +66,24 @@
             android:textSize="@dimen/text_size_16sp"/>
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!--<com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:background="@null">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/passMobileEdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Passenger mobile number"
+            android:inputType="number"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:digits="@string/mobile_digit"
+            android:maxLength="@integer/mobileMaxLength"
+            android:textSize="@dimen/text_size_16sp"/>
+    </com.google.android.material.textfield.TextInputLayout>-->
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

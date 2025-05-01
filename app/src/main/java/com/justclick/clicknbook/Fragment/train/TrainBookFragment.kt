@@ -1,6 +1,5 @@
 package com.justclick.clicknbook.Fragment.train
 
-import android.R.attr.text
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
@@ -10,7 +9,6 @@ import android.text.SpannableStringBuilder
 import android.text.Spanned
 import android.text.TextWatcher
 import android.text.method.LinkMovementMethod
-import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,7 +62,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.nio.charset.StandardCharsets
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -373,7 +370,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         passenger.childBerthFlag=null
         passenger.type=ADULT
         passengerArray!!.add(passenger)
-        addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, food)
+        addPassenger(passenger.passengerName,"", passenger.passengerAge, passenger.passengerGender, food)
     }
 
     private fun changeBoardingStn(stationCode: String) {
@@ -961,8 +958,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             Toast.makeText(requireContext(), "Please add passenger", Toast.LENGTH_SHORT).show()
         }else if(!isGstValid()){
             Toast.makeText(requireContext(), "Please add all GST details", Toast.LENGTH_SHORT).show()
-        }else if(!Common.isMobileValid(mobile)){
-            Toast.makeText(requireContext(), R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show()
+        }else if(!isMobileValid(mobile)){
+            Toast.makeText(requireContext(), "Wrong format! Mobile number should be 10 digits, starting with 6-9.", Toast.LENGTH_SHORT).show()
+        }else if(isMobileNoDuplicated(mobile)){
+            Toast.makeText(requireContext(), "Wrong format! Mobile number cannot have same digits.", Toast.LENGTH_SHORT).show()
         } else if(!Common.isEmailValid(email)){
             Toast.makeText(requireContext(), R.string.empty_and_invalid_email, Toast.LENGTH_SHORT).show()
         }/*else if(addressEdt.text.toString().isEmpty()){
@@ -976,6 +975,22 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         }
     }
 
+    fun isMobileValid(mobile: String): Boolean {
+        val pattern = "[6-9]\\d{9}$"
+        return if (mobile.isNotEmpty() && mobile.matches(pattern.toRegex())) {
+            true
+        } else {
+            false
+        }
+    }
+    fun isMobileNoDuplicated(mobile: String): Boolean {
+        val pattern = "(\\d)\\1{9}$"
+        return if (mobile.isNotEmpty() && mobile.matches(pattern.toRegex())) {
+            true
+        } else {
+            false
+        }
+    }
     private fun isGstValid(): Boolean {
         return true
     }
@@ -1238,6 +1253,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.setContentView(layoutInflater.inflate(R.layout.train_passanger_view, null))
         var radioGroup:RadioGroup?=dialog.findViewById(R.id.genderRadioGroup)
         var nameEdt: EditText? =dialog.findViewById(R.id.nameEdt)
+//        var passMobileEdt: EditText? =dialog.findViewById(R.id.passMobileEdt)
         var ageEdt: EditText? =dialog.findViewById(R.id.ageEdt)
         var berthCheck: CheckBox? =dialog.findViewById(R.id.berthCheck)
         var textView: TextView? =dialog.findViewById(R.id.passengerCountTv)
@@ -1280,6 +1296,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         var isAdd:Boolean
         if(position<passengerArray!!.size){
             nameEdt!!.setText(passengerArray!!.get(position).passengerName)
+//            passMobileEdt!!.setText(passengerArray!!.get(position).passengerMobile)
             ageEdt!!.setText(passengerArray!!.get(position).passengerAge)
             if(Integer.parseInt(passengerArray!!.get(position).passengerAge)<12){
                 berthCheck!!.isEnabled=true;
@@ -1316,13 +1333,16 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.findViewById<TextView>(R.id.addPassTv)!!.setOnClickListener {
             if(!Common.isNameValid(nameEdt!!.text.toString())){
                 nameEdt!!.setError("Please enter valid name")
-            }else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
+            }/*else if(!Common.isMobileValid(passMobileEdt!!.text.toString())){
+                passMobileEdt!!.setError("Please enter valid mobile number")
+            }*/else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
                 ageEdt.setError("Please enter valid age")
             }else{
                 var genderRadio:RadioButton?=dialog.findViewById(radioGroup!!.checkedRadioButtonId)
                 if(isAdd){
                     var passenger:TrainBookingRequest.adultRequest=TrainBookingRequest().adultRequest()
                     passenger.passengerName=nameEdt!!.text.toString()
+//                    passenger.passengerMobile=passMobileEdt!!.text.toString()
                     passenger.passengerAge=ageEdt!!.text.toString()
                     passenger.passengerGender=getGender(genderRadio!!.text.toString())
 //                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
@@ -1345,17 +1365,21 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     }
                     passenger.type=type
                     passengerArray!!.add(passenger)
-                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, food)
+                    addPassenger(passenger.passengerName, "",passenger.passengerAge, passenger.passengerGender, food)
 
                 }else{
                     passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
+//                    passengerArray!!.get(position).passengerMobile=passMobileEdt!!.text.toString()
                     passengerArray!!.get(position).passengerAge=ageEdt!!.text.toString()
                     passengerArray!!.get(position).passengerGender=getGender(genderRadio!!.text.toString())
 //                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
                     passengerArray!!.get(position).passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
                     if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
                         passengerArray!!.get(position).passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
+                    }else{
+                        passengerArray!!.get(position).passengerFoodChoice=""
                     }
+
                     if(berthCheck!!.isEnabled){
                         if(berthCheck.isChecked){
                             passengerArray!!.get(position).childBerthFlag="True"
@@ -1504,7 +1528,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                     passenger.passengerGender=getGender(genderRadio!!.text.toString())
                     passenger.type=type
                     passengerArray!!.add(passenger)
-                    addPassenger(passenger.passengerName, passenger.passengerAge, passenger.passengerGender, "")
+                    addPassenger(passenger.passengerName, "",passenger.passengerAge, passenger.passengerGender, "")
 
                 }else{
                     passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
@@ -1524,11 +1548,10 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         dialog.show()
     }
 
-    private fun addPassenger(name:String, age:String, gender:String, food:String){
+    private fun addPassenger(name:String, mobile:String, age:String, gender:String, food:String){
         val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
         var count:TextView=child.findViewById(R.id.passengerCountTv)
         var nameTv:TextView=child.findViewById(R.id.nameTv)
-        nameTv.text= name
         var ageTv:TextView=child.findViewById(R.id.ageTv)
         var delete:TextView=child.findViewById(R.id.delete)
         var genderTv:TextView=child.findViewById(R.id.genderTv)
@@ -1536,6 +1559,11 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         ageTv.text= age
         genderTv.text= gender
         count.text=(passengerContainerLin!!.childCount+1).toString()
+        if(!mobile.isEmpty()){
+            nameTv.text= "$name [$mobile]"
+        }else{
+            nameTv.text= name
+        }
         if(food.isEmpty()){
             foodTv.text=""
         }else{
@@ -1562,13 +1590,20 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             val child: View = layoutInflater.inflate(R.layout.train_passanger_show, null)
             var count:TextView=child.findViewById(R.id.passengerCountTv)
             var nameTv:TextView=child.findViewById(R.id.nameTv)
-            nameTv.text= list.passengerName
+            nameTv.text= list.passengerName/*+" [${list.passengerMobile}]*//*"*/
             var ageTv:TextView=child.findViewById(R.id.ageTv)
+            var foodTv:TextView=child.findViewById(R.id.foodTv)
             var delete:TextView=child.findViewById(R.id.delete)
             var genderTv:TextView=child.findViewById(R.id.genderTv)
             ageTv.text= list.passengerAge
             count.text=(passengerContainerLin!!.childCount+1).toString()
             genderTv.text=list.passengerGender
+
+            if(list.passengerFoodChoice.isEmpty()){
+                foodTv.text=""
+            }else{
+                foodTv.text= "Food- ${list.passengerFoodChoice}"
+            }
 
             child.setOnClickListener{
                 if(passengerArray!!.get(passengerContainerLin!!.indexOfChild(child)).type==ADULT){

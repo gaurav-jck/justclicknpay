@@ -217,6 +217,7 @@
     <orderEntry type="library" name="Gradle: io.reactivex.rxjava2:rxjava:2.0.1" level="project" />
     <orderEntry type="library" name="Gradle: javax.xml.stream:stax-api:1.0-2" level="project" />
     <orderEntry type="library" name="Gradle: com.google.guava:listenablefuture:1.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.github.PhilJay:MPAndroidChart:v3.0.3" level="project" />
     <orderEntry type="library" name="Gradle: C (3)" level="project" />
     <orderEntry type="library" name="Gradle: C (4)" level="project" />
   </component>

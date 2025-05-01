@@ -77,6 +77,7 @@ import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.Models.Opts;
 import com.justclick.clicknbook.jctPayment.Models.PidOptions;
+import com.justclick.clicknbook.jctPayment.Models.UpdateLocationRequest;
 import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
@@ -143,6 +144,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
 //    private boolean isTxnAuthenticated;
     int PERMISSION_ID = 44;
     FusedLocationProviderClient mFusedLocationClient;
+    private boolean mLocation=false;
     String mLatitude="29.9319558", mLongitude="77.5334789";
 
 
@@ -411,6 +413,26 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
 
         // method to get the location
         getLastLocation();
+
+        findViewById(R.id.updateLocationTv).setOnClickListener(view -> {
+            if(mLocation){
+                updateLocation();
+            }else {
+                getLastLocation();
+            }
+        });
+    }
+
+    private void updateLocation() {
+        LoginModel loginModel=new LoginModel();
+        loginModel=MyPreferences.getLoginData(loginModel,context);
+        UpdateLocationRequest request=new UpdateLocationRequest();
+        request.lat=mLatitude;
+        request.longitude=mLongitude;
+        request.merchantcode=loginModel.Data.DoneCardUser;
+        request.mobile=loginModel.Data.Mobile;
+//        request.mobile="9012836576";
+        GetAepsCredential.updateLocation(context, request);
     }
 
     public void captureData() {
@@ -974,6 +996,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
                         } else {
                             mLatitude=location.getLatitude()+"";
                             mLongitude=location.getLongitude()+"";
+                            mLocation=true;
 //                            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
                         }
                     }
@@ -1014,6 +1037,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
             Location mLastLocation = locationResult.getLastLocation();
             mLatitude=mLastLocation.getLatitude()+"";
             mLongitude=mLastLocation.getLongitude()+"";
+            mLocation=true;
 //            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
 //            latitudeTextView.setText("Latitude: " + mLastLocation.getLatitude() + "");
 //            longitTextView.setText("Longitude: " + mLastLocation.getLongitude() + "");

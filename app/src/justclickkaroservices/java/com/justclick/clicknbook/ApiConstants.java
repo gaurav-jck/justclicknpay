@@ -293,6 +293,9 @@ public class ApiConstants
     public static final String otpchangempin="otpchangempin";
     public static final String changempin="changempin";
 
+    public static final String paysprintlocationupdate="paysprintlocationupdate";
+    public static final String getDashboard="getDashboard";
+
 }
 
 //urls

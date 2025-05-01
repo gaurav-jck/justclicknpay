@@ -168,7 +168,7 @@
     <dimen name="minDayCellHeight">40dp</dimen>
     <dimen name="topLogoHeight">150dp</dimen>
 
-<!--    terms policy sizes-->
+    <!--    terms policy sizes-->
 
     <!--Jct Payment-->
     <dimen name="layout_login_padding_top">30dp</dimen>

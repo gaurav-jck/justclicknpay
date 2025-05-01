@@ -34,7 +34,7 @@ public class TrainBookingRequest implements Serializable {
         public float baseFare, serviceCharge, agentServiceCharge, concession, pgCharge, totalFare;
     }
     public class adultRequest implements Serializable{
-        public String passengerName, passengerAge, passengerGender, currentBerthChoice, passengerCardNumber, passengerBerthChoice,
+        public String passengerName, /*passengerMobile,*/ passengerAge, passengerGender, currentBerthChoice, passengerCardNumber, passengerBerthChoice,
                 passengerNationality="IN", passengerCardType, passengerConcession, forgoConcession, passengerIcardFlag,
                 passengerBedrollChoice="false", passengerFoodChoice="", passengerSerialNumber="1", concessionOpted="True",
                 childBerthFlag;

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".graphhome.GraphFragment"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+<!--    <com.github.mikephil.charting.charts.BarChart-->
+<!--        android:id="@+id/chart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent" />-->
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Transaction Chart"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/date_lin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/very_small_margin"
+        android:background="@color/color_white"
+        android:paddingTop="@dimen/very_small_margin"
+        >
+        <LinearLayout
+            android:id="@+id/linFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/filter_image"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/very_small_margin"
+                android:text="List Filter"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/startDateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StartDate"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/app_blue_color"
+            android:textSize="@dimen/small_text_size"
+            android:gravity="center"/>
+
+
+        <LinearLayout
+            android:id="@+id/lin_dateFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:id="@+id/filter_image_rel"
+                android:layout_width="@dimen/list_filter_icon_size"
+                android:layout_height="@dimen/list_filter_icon_size"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/filter_icon"/>
+            <TextView
+                android:id="@+id/filter_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingRight="@dimen/very_small_margin"
+                android:text="Date filter"
+                android:paddingTop="@dimen/very_small_margin"
+                android:textColor="@color/app_blue_color"
+                android:textSize="@dimen/small_text_size10sp"
+                android:gravity="right"/>
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/noChartTv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textColor="@color/app_blue_color"
+        android:text="No transaction made on given dates"
+        android:gravity="center"
+        android:visibility="gone"
+        />
+    <com.github.mikephil.charting.charts.PieChart
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/piechart"/>
+
+
+</LinearLayout>
