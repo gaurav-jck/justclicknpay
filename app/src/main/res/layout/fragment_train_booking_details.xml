@@ -121,7 +121,8 @@
                     android:layout_gravity="center"
                     android:layout_weight="1.1"
                     android:src="@drawable/app_logo"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_toRightOf="@id/logo2"
+                    android:layout_marginLeft="@dimen/margin_10dp"/>
 
                 <ImageView
                     android:id="@+id/logo3"
@@ -129,10 +130,11 @@
                     android:layout_height="45dp"
                     android:layout_gravity="center"
                     android:layout_weight="1.1"
-                    android:src="@drawable/irctc_g20_logo"
+                    android:src="@drawable/iyc_logo"
                     android:layout_toLeftOf="@+id/logo4"
                     android:layout_centerVertical="true"
-                    android:visibility="gone"/>
+                    android:layout_marginRight="@dimen/margin_10dp"
+                    android:visibility="visible"/>
 
                 <ImageView
                     android:id="@+id/logo4"

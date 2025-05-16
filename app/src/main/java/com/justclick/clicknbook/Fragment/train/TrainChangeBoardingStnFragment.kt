@@ -94,7 +94,7 @@ class TrainChangeBoardingStnFragment : Fragment() {
         showCustomDialog()
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
         val call = apiService.changeBoardingStn(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/PostBoardingStationChange?StationCode="
-                +getStnCode()+"&Pnr="+listData!!.pnRno)
+                +getStnCode()+"&Pnr="+listData!!.pnRno+"&ReservationId="+listData!!.reservationID)
         call.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 try {
