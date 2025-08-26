@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: org.greenrobot:eventbus:3.3.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/2a50f7f8c6aa2d2a80fed2983ef1c61b/transformed/jetified-eventbus-3.3.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/2a50f7f8c6aa2d2a80fed2983ef1c61b/transformed/jetified-eventbus-3.3.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/8eb67777aaaa0749e2212e2f5cfec4a6/transformed/jetified-eventbus-3.3.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/8eb67777aaaa0749e2212e2f5cfec4a6/transformed/jetified-eventbus-3.3.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

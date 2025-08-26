@@ -30,7 +30,7 @@ public class ApiConstants
     public static final String BASE_URL_UAT_REMMIT="https://uatremittance.justclicknpay.com/";
     public static final String BASE_URL_ACCOUNT_DETAIL=BASE_URL_RAPIPAY;
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
-//    public static final String BASE_URL_TRAIN="https:///b2baepsapi.justclicknpay.com/";  //live train url till 14 mar 24
+    public static final String BASE_URL_TRAIN_UAT="https://justrail.justclicknpay.com/";  //test
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
     public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
@@ -217,6 +217,13 @@ public class ApiConstants
     public static final String aadharverify   ="aadharverify";
     public static final String registerRemitter   ="registerRemitter";
 
+    //    DMT3
+    public static final String checkmerchant   ="checkmerchant";
+    public static final String merchantkyc   ="merchantkyc";
+    public static final String queryremitter   ="queryremitter";
+    public static final String addremitter   ="addremitter";
+    public static final String addbenificiary   ="addbenificiary";
+
     //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";
     public static final String PaysprintCashWithDraw   ="PaysprintCashWithDraw";
@@ -241,6 +248,7 @@ public class ApiConstants
     public static final String getrailbookinglist="getrailbookinglist";
     public static final String getPassenger="getPassenger";
     public static final String addagentgstdetails="addagentgstdetails";
+    public static final String generateAuthentication="generateAuthentication";
 
     //    Payout
     public static final String ValidateCredential="ValidateCredential";

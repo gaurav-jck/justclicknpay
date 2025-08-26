@@ -3,6 +3,7 @@ package com.justclick.clicknbook.Fragment.train
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.text.Editable
 import android.text.Html
 import android.text.SpannableStringBuilder
@@ -32,6 +33,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
@@ -44,6 +46,8 @@ import com.justclick.clicknbook.Fragment.train.model.CustomerDetailResponse
 import com.justclick.clicknbook.Fragment.train.model.FareRuleResponse
 import com.justclick.clicknbook.Fragment.train.model.GSTDetailRequest
 import com.justclick.clicknbook.Fragment.train.model.GSTDetailResponse
+import com.justclick.clicknbook.Fragment.train.model.GenerateOtpRequest
+import com.justclick.clicknbook.Fragment.train.model.GenerateOtpResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainBookingRequest
 import com.justclick.clicknbook.Fragment.train.model.TrainPreBookResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
@@ -371,6 +375,108 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         passenger.type=ADULT
         passengerArray!!.add(passenger)
         addPassenger(passenger.passengerName,"", passenger.passengerAge, passenger.passengerGender, food)
+    }
+
+    var otpDialog: Dialog?=null
+    var validateTv:TextView?=null
+    var generateOtpTv:TextView?=null
+    var resendOtpLin:LinearLayout?=null
+    var timerTv:TextView?=null
+    var otpView: TextInputLayout?=null
+    private fun aadharOtpDialog() {
+        otpDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        otpDialog!!.setContentView(R.layout.aadhar_otp_dialog)
+        otpDialog!!.setCancelable(false)
+
+        var back_arrow=otpDialog!!.findViewById<ImageView>(R.id.back_arrow)
+        var cancelTv=otpDialog!!.findViewById<ImageView>(R.id.cancelTv)
+        var otpEdt=otpDialog!!.findViewById<EditText>(R.id.otpEdt)
+        generateOtpTv=otpDialog!!.findViewById(R.id.generateOtpTv)
+        otpView=otpDialog!!.findViewById(R.id.otpView)
+        validateTv=otpDialog!!.findViewById(R.id.validateTv)
+        resendOtpLin=otpDialog!!.findViewById(R.id.resendOtpLin)
+        timerTv=otpDialog!!.findViewById(R.id.timerTv)
+
+        back_arrow.setOnClickListener {
+            otpDialog!!.dismiss()
+        }
+        cancelTv.setOnClickListener {
+            otpDialog!!.dismiss()
+        }
+        validateTv!!.visibility=View.GONE
+        resendOtpLin!!.visibility=View.GONE
+        otpView!!.visibility=View.GONE
+
+        generateOtpTv!!.setOnClickListener {
+            generateOtp()
+        }
+
+        otpDialog!!.show()
+    }
+
+    private fun generateOtp() {
+        var loginModel = LoginModel()
+        loginModel = MyPreferences.getLoginData(loginModel, context)
+        Toast.makeText(requireContext(), "Generate OTP", Toast.LENGTH_SHORT).show()
+        val request = GenerateOtpRequest()
+        request.reservationid = "R02085WZQZJC0A13387"
+        request.aadhaarConsent = "true"
+        request.wsUserLogin = ""
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterfaceTest()
+            .getAdharOtp(ApiConstants.generateAuthentication, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                ApiConstants.MerchantId, loginModel!!.Data.UserId,"App", trainBookingRequest!!.userDate),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerGenerateOtp(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerGenerateOtp(response: ResponseBody, responseCode: Int) {
+        try {
+            val generateOtpResponse = Gson().fromJson(response.string(), GenerateOtpResponse::class.java)
+            if (generateOtpResponse != null) {
+                if (generateOtpResponse.statusCode == "00") {
+                    Toast.makeText(context,generateOtpResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    showOtp(generateOtpResponse)
+                } else if (generateOtpResponse.statusCode != null) {
+                    Common.showResponsePopUp(context, generateOtpResponse.statusMessage)
+                } else {
+                    Toast.makeText(
+                        context, "Unable to generate OTP", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showOtp(generateOtpResponse: GenerateOtpResponse) {
+        object : CountDownTimer((generateOtpResponse.resendOTPTime*1000).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                resendOtpLin!!.visibility = View.VISIBLE
+                timerTv!!.text = "Regenerate otp in :" +(millisUntilFinished/1000) + " seconds"
+                generateOtpTv!!.isEnabled=false
+            }
+
+            override fun onFinish() {
+                resendOtpLin!!.visibility = View.GONE
+                generateOtpTv!!.isEnabled=true
+            }
+        }.start()
+        validateTv!!.visibility=View.VISIBLE
+        otpView!!.visibility=View.VISIBLE
+        resendOtpLin!!.visibility = View.VISIBLE
     }
 
     private fun changeBoardingStn(stationCode: String) {
@@ -1067,7 +1173,13 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         journey.journeyDate=journeyDate()
         journey.moreThanOneDay="True"
         journey.enquiryType="3"
+        journey.chochid=binding!!.coachEdt.text.toString()
         journey.reservationChoice=reservationChoice
+        journey.ssQuotaSplitCoach = "Y";
+        if (journey.reservationChoice.trim() != "99")
+        {
+            journey.ssQuotaSplitCoach = "N";
+        }
         journey.ticketType="F"
         var checkbox=binding!!.insuranceRadioGroup.findViewById<RadioButton>(R.id.travelRadioYes)
         if(checkbox.isChecked){

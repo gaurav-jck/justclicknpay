@@ -519,7 +519,18 @@ public interface ApiInterface {
     @POST("api/Payments/bank2/{methodName}")
     @FormUrlEncoded
     Call<ResponseBody> getDmt2HeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
-                                            @Header("userData") String userData, @Header("Authorization") String token);
+                                        @Header("userData") String userData, @Header("Authorization") String token);
+
+    //    DMT3
+    @POST("api/Payments/bank6/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getDmt3Header(@Path("methodName") String method, @Body Object data,
+                                     @Header("userData") String userData, @Header("Authorization") String token);
+
+    @POST("api/Payments/bank6/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> getDmt3HeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                            @Header("UserData") String userData, @Header("Authorization") String token);
 
 
     //    Payout
@@ -726,6 +737,16 @@ public interface ApiInterface {
                                           @Header("Identifier") String doneCard,
                                           @Header("LoggedInUserType") String type,
                                           @Header("Merchant") String merchant, @Header("Mode") String mode);
+
+    @Headers({"Content-Type: application/json"})
+    @POST("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> getAdharOtp(@Path("methodName") String method,@Body Object data,
+                                          @Header("Identifier") String doneCard,
+                                          @Header("LoggedInUserType") String type,
+                                          @Header("Merchant") String merchant,
+                                          @Header("Uid") String Uid,
+                                   @Header("Mode") String mode,
+                                   @Header("userData") String userData);
 
 //    @Multipart
 //    @POST("MobileServices.svc/{methodName}")

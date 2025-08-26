@@ -1036,6 +1036,11 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 }
             }
 
+//            hardcode dmt3
+//            LoginModel.DataList.subMenu dmt3=dataList.new subMenu();
+//            dmt3.SubMenu=MenuCodes.DMT3;
+//            dmt3.SubMenuCode=MenuCodes.DMT3;
+//            subMenuArrayList.add(dmt3);
 
 
 //            hardcoded

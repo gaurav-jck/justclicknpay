@@ -1,10 +1,11 @@
 package com.justclick.clicknbook.Fragment.jctmoney.response;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CheckCredentialResponse {
+public class CheckCredentialResponse implements Serializable {
     private String statusCode, statusMessage;
-    private List<credentialData> credentialData;
+    public List<credentialData> credentialData;
     public String apiServices;
 
     public String getStatusCode() {
@@ -31,7 +32,7 @@ public class CheckCredentialResponse {
         this.credentialData = credentialData;
     }
 
-    public class credentialData{
+    public class credentialData implements Serializable{
         private String kycStatus,sessionKey,sessionRefNo,token,userData,txnRefId;
         private float payoutlimit;
         public String address, pinCode, state, city, statecode;

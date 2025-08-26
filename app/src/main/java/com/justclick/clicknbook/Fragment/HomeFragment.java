@@ -15,8 +15,10 @@ import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
+import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.Fragment.accountsAndReports.AgentDepositRequestFragmentNewww;
 import com.justclick.clicknbook.Fragment.accountsAndReports.airbookinglist.AirBookingListFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.accountstmt.AccountStatementListFragment;
@@ -45,6 +47,10 @@ import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2SenderDetailFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.dmt3.Dmt3GetSenderFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest;
+import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
@@ -67,13 +73,17 @@ import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
+import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
 import com.justclick.clicknbook.utils.Constants;
 import com.justclick.clicknbook.utils.MenuCodes;
+import com.justclick.clicknbook.utils.MyPreferences;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import okhttp3.ResponseBody;
 
 public class HomeFragment extends Fragment {
 //    private RecyclerView recyclerView;
@@ -219,151 +229,194 @@ public class HomeFragment extends Fragment {
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new JctMoneyGetSenderFragment());
                 break;
-            case MenuCodes.DMT2://9
+            case MenuCodes.DMT2://10
 //                ((NavigationDrawerActivity)context).checkMapping();
 //                startActivity(new Intent(context, MoneyTransferActivity.class));
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new Dmt2GetSenderFragment());
                 break;
-            case MenuCodes.TrainBookingcheck://10
+            case MenuCodes.DMT3://11
+                getDMT3Credentials();
+                break;
+            case MenuCodes.TrainBookingcheck://12
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new TrainBookingCheckFragment());
                 break;
-            case MenuCodes.TrainFailedList://11
+            case MenuCodes.TrainFailedList://13
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new TrainFailedListFragment());
                 break;
-            case MenuCodes.FlightSearch://12
+            case MenuCodes.FlightSearch://14
 //                ((NavigationDrawerActivity) context).replaceFragmentWithTag(FlightSearch.newInstance(), FlightSearch.FlightSearchTag);
                 AirWebviewActivity.airSession(context);
 //                startActivity(new Intent(context, AirWebviewActivity.class));
                 break;
-            case MenuCodes.BusSearch://13
+            case MenuCodes.BusSearch://15
 //                ((NavigationDrawerActivity)context).
 //                        replaceFragmentWithBackStack(new BusSearchFragment());
                 AirWebviewActivity.airSession(context);
                 break;
-            case MenuCodes.HotelSearch://14
+            case MenuCodes.HotelSearch://16
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new HotelSearchFragment());
                 break;
-            case MenuCodes.AirSalesReport://15
+            case MenuCodes.AirSalesReport://17
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new AirSalesReportFragment());
                 break;
-            case MenuCodes.AirRefundReport://16
+            case MenuCodes.AirRefundReport://18
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new AirRefundReportFragment());
                 break;
-            case MenuCodes.AirCancellationReport://17
+            case MenuCodes.AirCancellationReport://19
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new AirCancellationListFragment());
                 break;
-            case MenuCodes.AEPS://18
+            case MenuCodes.AEPS://20
                 startActivity(new Intent(context, Dashboard_New_Activity.class));
 //                ((NavigationDrawerActivity)context).userLogin(true);
 //                ((NavigationDrawerActivity)context).checkAepsCredential();
                 break;
-            case MenuCodes.AEPS_OLD://18
+            case MenuCodes.AEPS_OLD://21
 //                startActivity(new Intent(context, Dashboard_New_Activity.class));
                 ((NavigationDrawerActivity)context).userLogin(true);
 //                ((NavigationDrawerActivity)context).checkAepsCredential();
                 break;
-            case MenuCodes.BusBookingList://19
+            case MenuCodes.BusBookingList://22
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new BusTransactionListFragment());
                 break;
-            case MenuCodes.JCTMoneyList://20
+            case MenuCodes.JCTMoneyList://23
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new RapipayTransactionListFragment());
                 break;
-            case MenuCodes.PayoutList://20
+            case MenuCodes.PayoutList://24
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new CashoutTransactionListFragment());
                 break;
-            case MenuCodes.UtilityList://20
+            case MenuCodes.UtilityList://25
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new UtilityTransactionListFragment());
                 break;
-            case MenuCodes.CreditCardList://20
+            case MenuCodes.CreditCardList://26
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new TransactionListFragment());
                 break;
-            case MenuCodes.AirBookingList:
+            case MenuCodes.AirBookingList:  //27
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new AirBookingListFragment());
                 break;
-            case MenuCodes.TopUpDetails://21
+            case MenuCodes.TopUpDetails://28
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new RechargeListFragment());
                 break;
-            case MenuCodes.NetSalesReport://22
+            case MenuCodes.NetSalesReport://29
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragment());
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new NetSalesReportFragmentNew());
                 break;
-            case MenuCodes.SalesAccountStatement://23
+            case MenuCodes.SalesAccountStatement://30
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new SalesAccountListFragment());
                 break;
-            case MenuCodes.AccountStatement://23
+            case MenuCodes.AccountStatement://31
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new AccountStatementListFragment());
                 break;
-            case MenuCodes.ApproveAgent://24
+            case MenuCodes.ApproveAgent://32
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(AgentVerificationFragment.newInstance());
                 break;
-            case MenuCodes.MATM://24
+            case MenuCodes.MATM://33
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MainMatmFragment());
 //                startActivity(new Intent(context, CredoPayActivityJava.class));
                 break;
-            case MenuCodes.CREDOPAY://24
+            case MenuCodes.CREDOPAY://34
                 startActivity(new Intent(context, CredoPayActivityJava.class));
                 break;
-            case MenuCodes.FAST_TAG://24
+            case MenuCodes.FAST_TAG://35
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new FasttagFragment());
                 break;
-            case MenuCodes.TRAIN://25
+            case MenuCodes.TRAIN://36
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainDashboardFragment());  // old
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainSearchFragment());    //new change
                 break;
-            case MenuCodes.TRAIN_TENT://25
+            case MenuCodes.TRAIN_TENT://37
                 openTrainTent();
                 break;
-            case MenuCodes.CASH_OUT://26
+            case MenuCodes.CASH_OUT://38
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new GetSenderFragment());
 //                ((NavigationDrawerActivity) context).replaceFragmentWithTag(new PayoutBeneFragment(), FragmentTags.payoutSenderDetailFragment);
                 break;
-            case MenuCodes.LIC://27
+            case MenuCodes.LIC://39
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new LicFragment());
                 break;
-            case MenuCodes.BILL_PAY://28
+            case MenuCodes.BILL_PAY://40
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new BillPayMainPagerFragment());
                 break;
-            case MenuCodes.PAYTM://29
+            case MenuCodes.PAYTM://41
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
                 break;
-            case MenuCodes.CASHFREE_QR://30
+            case MenuCodes.CASHFREE_QR://42
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
                 break;
-            case MenuCodes.DYNAMIC_QR://31
+            case MenuCodes.DYNAMIC_QR://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
                 break;
-            case MenuCodes.TrainBookingList://32
+            case MenuCodes.TrainBookingList://44
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListNewFragment());
                 break;
-            case MenuCodes.AepsList:
+            case MenuCodes.AepsList: //45
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new com.justclick.clicknbook.jctPayment.Fragments.TransactionListFragment());
                 break;
-            case MenuCodes.MatmList:
+            case MenuCodes.MatmList:  //46
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new MatmTransactionListFragment());
                 break;
-            case MenuCodes.CREDIT://33
+            case MenuCodes.CREDIT://47
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CreditCardFragment());
                 break;
             default:
                 Toast.makeText(context,"Not working", Toast.LENGTH_SHORT).show();
 //                ((NavigationDrawerActivity)context).
 //                        replaceFragmentWithBackStack(new HomeFragment());
+        }
+    }
+
+    private void getDMT3Credentials() {
+        LoginModel loginModel=new LoginModel();
+        loginModel= MyPreferences.getLoginData(loginModel,context);
+        CheckCredentialRequest request=new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+
+        new NetworkCall().callService(NetworkCall.getDmt3ApiInterface().getRapipayCommonPost(ApiConstants.CheckCredential, request),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerCredential(response);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerCredential(ResponseBody response) {
+        try {
+            CheckCredentialResponse senderResponse = new Gson().fromJson(response.string(), CheckCredentialResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.getStatusCode().equals("00")) {
+//                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    Bundle bundle=new Bundle();
+                    bundle.putSerializable("credentialResponse", senderResponse.credentialData.get(0));
+                    Dmt3GetSenderFragment dmt3Fragment=new Dmt3GetSenderFragment();
+                    dmt3Fragment.setArguments(bundle);
+                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(dmt3Fragment);
+                }else {
+                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_LONG).show();
+                    getParentFragmentManager().popBackStack();
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
         }
     }
 

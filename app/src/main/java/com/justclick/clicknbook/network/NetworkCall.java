@@ -1550,6 +1550,9 @@ public class NetworkCall {
     public static ApiInterface getTrainApiInterface(){
         return APIClient.getClientTrain().create(ApiInterface.class);
     }
+    public static ApiInterface getTrainApiInterfaceTest(){
+        return APIClient.getClient(ApiConstants.BASE_URL_TRAIN_UAT).create(ApiInterface.class);
+    }
 
     public static ApiInterface getCashFreeQRApiInterfaceOld(){
         return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
@@ -1591,6 +1594,9 @@ public class NetworkCall {
     }
     public static ApiInterface getDmt2ApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface.class);
+    }
+    public static ApiInterface getDmt3ApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_UAT_REMMIT).create(ApiInterface.class);
     }
     public static ApiInterface getLocationUpdateInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);

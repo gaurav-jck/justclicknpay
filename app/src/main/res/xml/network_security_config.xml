@@ -3,6 +3,8 @@
     <domain-config cleartextTrafficPermitted="true">
             <domain includeSubdomains="true">api.rapipay.com</domain>
             <domain includeSubdomains="true">contents.irctc.co.in</domain>
+            <domain includeSubdomains="true">www.irctc.co.in</domain>
+            <domain includeSubdomains="true">irctc.co.in</domain>
 
            <!-- <trust-anchors>
 

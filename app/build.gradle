@@ -4,12 +4,12 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdk 34
+    compileSdk 35
     defaultConfig {
         applicationId "com.justclick.clicknbook"
 //        applicationId "com.justclicknpay.justclickkaroservices"
         minSdkVersion 23
-        targetSdkVersion 34
+        targetSdkVersion 35
         versionCode 137
         versionName "1.8.22"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,8 +35,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 142
-            versionName "1.9.3"
+            versionCode 144
+            versionName "1.9.5"
 //            applicationIdSuffix ".qa"
 
         }

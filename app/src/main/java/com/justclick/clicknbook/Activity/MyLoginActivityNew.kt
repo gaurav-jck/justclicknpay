@@ -249,12 +249,13 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
             loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
             loginRequestModel.VersionCode = Common.getVersionCode(context)
             showCustomDialog()
-            NetworkCall().callMobileService(loginRequestModel, ApiConstants.LOGIN, context
+            NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
+                context, true,
             ) { response, responseCode ->
                 if (response != null) {
                     responseHandler(response, LOGIN_SERVICE)
                 } else {
-                    hideCustomDialog()
+//                        hideCustomDialog()
                     Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -290,6 +291,8 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                                 //store values to shared preferences
 //                                loginModel.Data.DoneCardUser="JC0A30527"
 //                                loginModel.Data.DoneCardUser="JC0A39739"
+//                                loginModel.Data.DoneCardUser="JC0A13387"
+//                                loginModel.Data.DoneCardUser="JC0A47068"   // rahul.dave89
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)

@@ -3,13 +3,13 @@ package com.justclick.clicknbook.Fragment.train
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
 import androidx.core.view.children
+import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.train.model.TrainCancelResponse
@@ -374,6 +374,7 @@ class TrainCancelDetailsFragment : Fragment() {
     }
 
     private fun cancelSelected(cancelRequest: CancelRequest) {
+        val json = Gson().toJson(cancelRequest)
         NetworkCall().callService(NetworkCall.getTrainApiInterface().trainCancelTicket(ApiConstants.CancelTicket, cancelRequest,
                 loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType, ApiConstants.MerchantId, "App"),
                 context,true)

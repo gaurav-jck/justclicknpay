@@ -9,6 +9,13 @@ public class TrainListRequest {
     public String pnr, reservationid, trainnumber, trainsource, traindestination, status, agentcode;
 
 
+    /*{"bookuserid":"j}~uIs~|}lurlttj{x7lxv","fromdate":"20250711","merchantid":"JUSTCLICKTRAVELS","todate":"20250711","usertype":"OOU", "pnr":"2719048931"}
+
+
+{"bookuserid":"mjn7{jq~uABIpvjru7lxv","fromdate":"20250714","merchantid":"JUSTCLICKTRAVELS","todate":"20250714","usertype":"A"}
+
+     **/
+
     /*{
         public int pageIndex { get; set; } = 0;
         [Required(ErrorMessage = "From Date Required")]

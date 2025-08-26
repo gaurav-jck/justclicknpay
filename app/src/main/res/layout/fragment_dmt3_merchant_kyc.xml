@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/backArrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Merchant KYC"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/aadhar_no"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:hint="@string/aadharNoHint"
+                android:textColorHint="@color/colorHint">
+
+                <EditText
+                    android:id="@+id/aadharEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="6"
+                    android:digits="@string/mobile_digit"
+                    android:maxLines="1"
+                    android:maxLength="12"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/colorText"
+                    android:textSize="@dimen/aeps_input_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/number_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile No"
+                    android:text=""
+                    android:maxLength="10"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/email_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email Id"
+                    android:text=""
+                    android:maxLength="@integer/emailMaxLength"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true"
+                    android:maxLines="1"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/name_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/user_pancardName"
+                    android:text=""
+                    android:maxLength="50"
+                    android:digits="@string/personName_editText_digits"
+                    android:singleLine="true"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/pan_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/user_pancard"
+                    android:text=""
+                    android:maxLength="@integer/panMaxLength"
+                    android:digits="@string/alphaNumeric_editText_digits"
+                    android:inputType="textCapCharacters"
+                    android:textAllCaps="true"
+                    android:singleLine="true"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/dob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/dob_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:hint="@string/selectDob"
+                    android:maxLength="10"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/app_blue_color"
+                    android:textSize="@dimen/simple_content_text_size" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/address_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/user_address"
+                    android:text=""
+                    android:maxLength="100"
+                    android:singleLine="true"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+<!--android:enabled="false"
+                    android:focusable="false"-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/city_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp"
+                >
+                <EditText
+                    android:id="@+id/city_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/city"
+                    android:text=""
+                    android:maxLength="100"
+                    android:digits="@string/personName_editText_digits"
+                    android:singleLine="true"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/pin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_7dp">
+
+                <EditText
+                    android:id="@+id/pin_edt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pinCode"
+                    android:text=""
+                    android:maxLength="6"
+                    android:inputType="number"
+                    android:digits="@string/mobile_digit"
+                    android:singleLine="true"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/app_blue_color" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Device Type"
+                android:textColor="@color/app_blue_color"
+                android:layout_marginTop="@dimen/margin_7dp"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                android:textSize="@dimen/text_size_14sp" />
+
+            <Spinner
+                android:id="@+id/spinnerDeviceType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size_1dp"
+                android:layout_margin="@dimen/small_margin"
+                android:background="@color/text_dark_gray"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/medium_margin"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnCapture"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Capture fingerprint"
+                    android:textSize="@dimen/simple_content_text_size"
+                    android:textColor="@color/color_white"
+                    android:background="@drawable/button_shep"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

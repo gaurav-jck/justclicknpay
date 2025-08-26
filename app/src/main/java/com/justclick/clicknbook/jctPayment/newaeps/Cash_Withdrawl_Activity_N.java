@@ -221,6 +221,9 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
                     case 4:
                         d_type = AepsConstants.STARTEK;
                         break;
+                    case 5:
+                        d_type = AepsConstants.STARTEK_L1;
+                        break;
                 }
             }
 
@@ -444,7 +447,10 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
                     String pidOptXML = XMLGenerator.createPidOptXML();
                     capture(AepsConstants.STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            } else if (d_type.equals(AepsConstants.MANTRA) && validation()) {
+            } else if (d_type.equals(AepsConstants.STARTEK_L1) && validation()) {
+                String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
+                capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
+            }else if (d_type.equals(AepsConstants.MANTRA) && validation()) {
                 if (searchPackageName(AepsConstants.MANTRA_PACKAGE)) {
 //                    String pidOptXML = getPIDOptions();
 //                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";

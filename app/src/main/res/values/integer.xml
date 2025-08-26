@@ -13,12 +13,14 @@
     <integer name="firstNameMaxLength">50</integer>
     <integer name="trainPassNameMaxLength">30</integer>
     <integer name="mobileMaxLength">10</integer>
+    <integer name="panMaxLength">10</integer>
     <integer name="amountMaxLength">12</integer>
     <integer name="amountMaxLengthSmall">7</integer>
     <integer name="dmtMaxLength">6</integer>
     <integer name="nameLargeMaxLength">150</integer>
     <integer name="emailMaxLength">100</integer>
     <integer name="passwordMaxLength">20</integer>
+    <integer name="aadharMaxLength">12</integer>
     <integer name="ifscMaxLength">11</integer>
     <integer name="billNumberMaxLength">20</integer>
     <integer name="bankAccountMaxLength">20</integer>

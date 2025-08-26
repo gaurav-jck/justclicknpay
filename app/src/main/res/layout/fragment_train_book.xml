@@ -897,6 +897,49 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/coachRel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/very_large_margin"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/train_background3"
+                    android:padding="@dimen/margin_8dp"
+                    android:text="Coach Number"
+                    android:textColor="@color/text_dark_gray"
+                    android:textSize="@dimen/simple_content_text_size" />
+
+                <EditText
+                    android:id="@+id/coachEdt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/medium_margin"
+                    android:layout_marginLeft="@dimen/small_margin"
+                    android:layout_marginRight="@dimen/small_margin"
+                    android:hint="Please enter coach (Ex. S4)"
+                    android:background="@color/transparent"
+                    android:inputType="text|textCapCharacters"
+                    android:textAllCaps="true"
+                    android:maxLines="1"
+                    android:digits="@string/alphaNumeric_editText_digits"
+                    android:singleLine="true"
+                    android:maxLength="3"
+                    android:textSize="@dimen/text_size_16sp"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/size_1dp"
+                    android:layout_margin="@dimen/small_margin"
+                    android:background="@color/gray_color"/>
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -905,7 +948,7 @@
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/margin_8dp"
                 android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/train_background3"
+                android:background="@color/train_background2"
                 />
 
             <TextView
@@ -951,7 +994,7 @@
                 android:textSize="@dimen/simple_content_text_size"
                 android:padding="@dimen/margin_8dp"
                 android:layout_marginTop="@dimen/very_large_margin"
-                android:background="@color/train_background2"
+                android:background="@color/train_background3"
                 />
 
             <RadioGroup

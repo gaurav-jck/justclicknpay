@@ -464,7 +464,7 @@ class TrainBookingDetailsFragment : Fragment() {
             .getInstalledPackages(PackageManager.GET_PERMISSIONS)
         var isPackage = false
         for (pl in packageList) {
-            if (pl.applicationInfo.packageName == mPackageName) {
+            if (pl.applicationInfo?.packageName == mPackageName) {
                 isPackage = true
             }
         }

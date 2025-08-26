@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.lifecycle:lifecycle-service:2.6.2@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/ca9595f532c26abf76363f4752650e45/transformed/jetified-lifecycle-service-2.6.2/res" />
-      <root url="jar://$USER_HOME$/.jdks/caches/8.10.2/transforms/ca9595f532c26abf76363f4752650e45/transformed/jetified-lifecycle-service-2.6.2/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.jdks/caches/8.10.2/transforms/ca9595f532c26abf76363f4752650e45/transformed/jetified-lifecycle-service-2.6.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/8baa5b21b98c83a450569dd74b74acb3/transformed/jetified-lifecycle-service-2.6.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/8baa5b21b98c83a450569dd74b74acb3/transformed/jetified-lifecycle-service-2.6.2/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/8baa5b21b98c83a450569dd74b74acb3/transformed/jetified-lifecycle-service-2.6.2/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

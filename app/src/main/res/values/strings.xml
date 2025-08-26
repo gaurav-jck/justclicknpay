@@ -458,6 +458,7 @@ We have observed that travel agents are using only one mobile number for multipl
     <string name="auto_upgrade_yes">Consider for Auto Upgradation</string>
     <string name="auto_upgrade_no">Book only if confirm birth are allotted.</string>
     <string name="change"><u>Change</u></string>
+    <string name="irctc_adhar_validate">Please validate your aadhar as per IRCTC rule.</string>
     <string name="irctc_instruction">1. Prescribed Original ID proofs are:- Voter Identity Card / Passport / PAN Card / Driving License / Photo ID card issued by Central / State Govt. / Public Sector
 Undertakings of State / Central Government ,District Administrations , Municipal bodies and Panchayat Administrations which are having serial number / Student
 Identity Card with photograph issued by recognized School or College for their students / Nationalized Bank Passbook with photograph /Credit Cards issued by

@@ -56,14 +56,16 @@ class DmtKycFragment : Fragment() {
     private val MANTRA = "MANTRA"
     private val MANTRA_L1 = "MANTRA_L1"
     private val STARTEK = "STARTEK"
+    private val STARTEK_L1 = "STARTEK_L1"
     private val MORPHO = "MORPHO"
     private val MORPHO_L1 = "MORPHO_L1"
     private val MANTRA_PACKAGE = "com.mantra.rdservice"
     private val MANTRA_L1_PACKAGE = "com.mantra.mfs110.rdservice"
     private val STARTEK_PACKAGE = "com.acpl.registersdk"
+    private val STARTEK_PACKAGE_L1 = "com.acpl.registersdk_l1"
     private val MORPHO_PACKAGE = "com.scl.rdservice"
     private val MORPHO_PACKAGE_L1 = "com.idemia.l1rdservice"
-    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho L1", "Morpho", "Startek")
+    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho L1", "Morpho", "Startek", "Startek L1 (Access)")
     var d_type = MANTRA_L1
     var pidDataXML = "";
     private var captureType=FINGER_CAPTURE
@@ -146,6 +148,7 @@ class DmtKycFragment : Fragment() {
                     2 -> d_type = MORPHO_L1
                     3 -> d_type = MORPHO
                     4 -> d_type = STARTEK
+                    5 -> d_type = STARTEK_L1
                 }
             }
 
@@ -167,7 +170,11 @@ class DmtKycFragment : Fragment() {
                     val pidOptXML: String = createPidOptXML()
                     capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
-            } else if (d_type == MANTRA) {
+            } else if (d_type == STARTEK_L1) {
+                val pidOptXML =
+                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                capture(STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            }else if (d_type == MANTRA) {
                 if (searchPackageName(MANTRA_PACKAGE)) {
 //                    String pidOptXML = getPIDOptions();
 //                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
@@ -545,7 +552,7 @@ class DmtKycFragment : Fragment() {
             .getInstalledPackages(PackageManager.GET_PERMISSIONS)
         var isPackage = false
         for (pl in packageList) {
-            if (pl.applicationInfo.packageName == mPackageName) {
+            if (pl.applicationInfo?.packageName == mPackageName) {
                 isPackage = true
             }
         }

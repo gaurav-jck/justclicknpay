@@ -116,6 +116,7 @@ public class MenuCodes {
   public static final String  MobileFragment="Mobile";
   public static final String  DMT ="Dmt";
   public static final String  DMT2 ="DMT-2";
+  public static final String  DMT3 ="DMT-3";
   public static final String  FlightSearch="Flight";
   public static final String  HotelSearch="Hotel";
   public static final String  BusSearch="Bus";
