@@ -160,7 +160,7 @@
                     android:layout_height="wrap_content"
                     android:text="KYC with Face data"
                     android:textSize="@dimen/simple_content_text_size"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textColor="@color/color_white"
                     android:background="@drawable/button_shep"
                     android:layout_marginTop="@dimen/medium_margin"
@@ -172,7 +172,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_50dp"
                     android:gravity="right|center"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     >
                     <TextView
                         android:layout_width="wrap_content"

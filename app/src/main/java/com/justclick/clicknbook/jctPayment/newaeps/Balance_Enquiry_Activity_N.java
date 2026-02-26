@@ -654,13 +654,8 @@ public class Balance_Enquiry_Activity_N extends AppCompatActivity {
         RecyclerView recyclerView=dialog.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
 
-        recyclerView.setAdapter(new MiniStatementAdapter(context, responseModel.msDetails));
+//        recyclerView.setAdapter(new MiniStatementAdapter(context, responseModel.msDetails));
 
-        /*if(responseModel.msDetails!=null && responseModel.msDetails.size()>0){
-            Toast.makeText(context, responseModel.msDetails.size()+"\n"+responseModel.msDetails.get(0).amount, Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(context, "No mini statement found for given data.", Toast.LENGTH_SHORT).show();
-        }*/
         dialog.show();
     }
 

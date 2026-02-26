@@ -715,6 +715,8 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 return R.drawable.ic_qr_code;
             case MenuCodes.DYNAMIC_QR:
                 return R.drawable.ic_qr_code;
+            case MenuCodes.QR_CODE2:
+                return R.drawable.ic_qr_code;
             case MenuCodes.BILL_PAY:
                 return R.drawable.ic_icon_mobile_payment_black;
             case MenuCodes.AirSalesReport:
@@ -980,7 +982,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.BusSearch) ||
                             loginModel.ProductList.get(i).ProductCode.equalsIgnoreCase(MenuCodes.AEPS) ))){*/
             for(int i=0; i<modules.length;i++){
-                if(modules[i].contains(MenuCodes.DMT+"-1")|| modules[i].contains(MenuCodes.AEPS+"-1")||
+                if(modules[i].contains(MenuCodes.DMT+"-1")||
+                        modules[i].contains(MenuCodes.AEPS+"-1")||
+                        modules[i].contains(MenuCodes.PAYOUT+"-1")||
                         modules[i].contains(MenuCodes.BusSearch+"-1")   ||
                         modules[i].contains(MenuCodes.MobileFragment+"-1" ) ||
                         modules[i].contains(MenuCodes.MATM+"-1") ||
@@ -1050,6 +1054,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //            tent.SubMenuCode=MenuCodes.TRAIN_TENT;
 //            subMenuArrayList.add(tent);
 
+//            LoginModel.DataList.subMenu irctc=dataList.new subMenu();
+//            irctc.SubMenu=MenuCodes.TRAIN;
+//            irctc.SubMenuCode=MenuCodes.TRAIN;
+//            subMenuArrayList.add(irctc);
+
+            if(isQR){
+                LoginModel.DataList.subMenu qrcode2=dataList.new subMenu();
+                qrcode2.SubMenu=MenuCodes.QR_CODE2;
+                qrcode2.SubMenuCode=MenuCodes.QR_CODE2;
+                subMenuArrayList.add(qrcode2);
+            }
+
             if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff))){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
                 fasttag.SubMenu=MenuCodes.FAST_TAG;
@@ -1067,12 +1083,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subPaytm.SubMenuCode=MenuCodes.CREDIT;
                 subMenuArrayList.add(subPaytm);*/
             }
-            if(isPayout) {
+            /*if(isPayout) {
                 LoginModel.DataList.subMenu subMenuCashOut = dataList.new subMenu();
                 subMenuCashOut.SubMenu = MenuCodes.CASH_OUT;
                 subMenuCashOut.SubMenuCode = MenuCodes.CASH_OUT;
                 subMenuArrayList.add(subMenuCashOut);
-            }
+            }*/
 
             if(loginModel.Data.UserType.equals(UserType.Distributor)){
                 LoginModel.DataList.subMenu qr=loginModel.new DataList().new subMenu();

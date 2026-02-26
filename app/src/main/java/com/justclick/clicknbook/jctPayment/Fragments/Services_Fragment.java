@@ -17,7 +17,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity;
 import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity;
 import com.justclick.clicknbook.jctPayment.BankDetailsActivity;
 import com.justclick.clicknbook.jctPayment.CashPayoutHistoryActivity;
@@ -25,6 +24,7 @@ import com.justclick.clicknbook.jctPayment.CashPayoutRequestActivity;
 import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
+import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationFragment;
 import com.justclick.clicknbook.utils.MyPreferences;
 
 import org.json.JSONException;
@@ -85,7 +85,7 @@ public class Services_Fragment extends Fragment implements View.OnClickListener 
                 startActivity(new Intent(getContext(), CashPayoutHistoryActivity.class));
                 break;
             case R.id.img_register:
-                startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
+                startActivity(new Intent(getContext(), AepsRegistrationFragment.class));
                 break;
             case R.id.img_bank_details:
                 getBankDetailAndAmount(BANK_DETAILS);

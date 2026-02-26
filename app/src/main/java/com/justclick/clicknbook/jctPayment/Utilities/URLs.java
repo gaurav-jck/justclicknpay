@@ -10,7 +10,7 @@ public class URLs {
 //    public static final String BASE_URL = ApiConstants.BASE_URL_AEPS_OLD;
     public static final String BASE_URL = ApiConstants.BASE_URL_AEPS_N;
     public static final String BASE_URL_N = ApiConstants.BASE_URL_AEPS_N;
-//    public static final String BASE_URL_N_Test = ApiConstants.BASE_URL_AEPS_N_test;
+    public static final String BASE_URL_N_Test = ApiConstants.BASE_URL_AEPS_NTest;
 //    public static final String BASE_URL = "http://uataeps-api-yes.justclicknpay.com/";
 //        public static final String BASE_URL = "https://aeps.justclicknpay.com/";
         public static final String AEPS_EXCEL_DOWNLOAD_URL = ApiConstants.AEPS_EXCEL_DOWNLOAD_URL;
@@ -47,6 +47,7 @@ public class URLs {
     public static final String TransactionListAeps ="TransactionList";
     public static final String AepsRegistration ="AepsRegistration";
     public static final String getagentadhar ="getagentadhar";
+    public static final String GetBankList ="GetBankList";
 
 
     public static final String CheckKyc ="CheckKyc";
@@ -56,7 +57,17 @@ public class URLs {
     public static final String BalanceCheck =BASE_URL_N+"B2B/AdharPayment/"+"BalanceCheck";
     public static final String BankStatment =BASE_URL_N+"B2B/AdharPayment/"+"BankStatment";
     public static final String AadharPay =   BASE_URL_N+"B2B/AdharPayment/"+"AadharPay";
-    public static final String AepsRegister =   BASE_URL_N+"B2B/AdharPayment/"+"Registration";
-    public static final String AepsAuthenticate =   BASE_URL_N+"B2B/AdharPayment/"+"Authentication";
+//    public static final String AepsRegister =   BASE_URL_N_Test+"B2B/AdharPayment/"+"Registration";
+//    public static final String AepsAuthenticate =   BASE_URL_N_Test+"B2B/AdharPayment/"+"Authentication";
+    public static final String AepsRegister =   "Registration";
+    public static final String AepsAuthenticate =   "Authentication";
+    public static final String AepsBalanceCheck =   "BalanceCheck";
+    public static final String AepsBankStatment =   "BankStatment";
+    public static final String WithdrawCashAuthentication =   "WithdrawCashAuthentication";
+    public static final String AadharPayAeps =   "AadharPay";
+    public static final String bank2ekyc =   "bank2ekyc";
+    public static final String Bank3SendOTP =   "Bank3SendOTP";
+    public static final String bank3verifyOTP =   "bank3verifyOTP";
+    public static final String bank3ekyc =   "bank3ekyc";
     public static final String StatusEnquiry ="StatusEnquiry";
 }

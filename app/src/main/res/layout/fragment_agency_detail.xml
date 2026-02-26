@@ -110,7 +110,7 @@
                     android:background="@android:color/transparent"
                     android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:hint="@string/company_name"
-                    android:inputType="text"
+                    android:inputType="text|textCapWords"
                     android:maxLength="50"
                     android:maxLines="1"
                     android:singleLine="true"

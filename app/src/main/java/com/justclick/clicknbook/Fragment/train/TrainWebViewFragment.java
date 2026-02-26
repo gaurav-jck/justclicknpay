@@ -103,7 +103,7 @@ public class TrainWebViewFragment extends Fragment {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
 //https://justclicknpay.com/Rail/RailBookingConfirmation.aspx?Bookdetail=UjA2MTIxTVU5SEpDMEExMzM4N34yNTYwMzU0NDA0
-//            Toast.makeText(context, "Url= "+url, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context, "Url= "+url, Toast.LENGTH_LONG).show();
 //            https://justclicknpay.com/Rail/RailReturnPageNew.aspx?CancelButton=Y
             String responseUrl="https://justclicknpay.com/Rail/RailBookingConfirmation.aspx";
             if(url.contains("CancelButton=Y")){

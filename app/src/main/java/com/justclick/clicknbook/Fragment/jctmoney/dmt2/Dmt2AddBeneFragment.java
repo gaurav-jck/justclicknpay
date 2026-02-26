@@ -292,11 +292,12 @@ public class Dmt2AddBeneFragment extends Fragment implements View.OnClickListene
                 Common.preventFrequentClick(verifyAccountTv);
                 if(Common.checkInternetConnection(context)){
                     if(validate()) {
-                        if(commonParams.getApiService().equals("1")){
+                        addBeneficiary(ApiConstants.AddBenificiary, AddRecipient, true);
+                        /*if(commonParams.getApiService().equals("1")){
                             addBeneficiary(ApiConstants.AddBenificiary, AddRecipient, true);
                         }else {
                             validateBeneficiary(ApiConstants.ValidateAccount, VerifyAccount, false);
-                        }
+                        }*/
                     }
                 }else {
                     Toast.makeText(context, R.string.no_internet_message, Toast.LENGTH_SHORT).show();
@@ -326,6 +327,7 @@ public class Dmt2AddBeneFragment extends Fragment implements View.OnClickListene
         requestModel.setGst_state(commonParams.getStatecode());  // new change
         requestModel.setUserdata(commonParams.getUserData());  // new change
         requestModel.verified="1";
+        requestModel.setVerifyRequired(isVerify);
 
         new NetworkCall().callService(NetworkCall.getDmt2ApiInterface().getDmt2Header(method, requestModel,
                         commonParams.getUserData(), "Bearer "+commonParams.getToken()),
@@ -372,8 +374,9 @@ public class Dmt2AddBeneFragment extends Fragment implements View.OnClickListene
         requestModel.setGst_state(commonParams.getStatecode());  // new change
         requestModel.setUserdata(commonParams.getUserData());  // new change
         requestModel.verified="1";
+        requestModel.setVerifyRequired(isVerify);
 
-        new NetworkCall().callRapipayServiceHeader(requestModel, method, context,
+        /*new NetworkCall().callRapipayServiceHeader(requestModel, method, context,
                 new NetworkCall.RetrofitResponseListener() {
                     @Override
                     public void onRetrofitResponse(ResponseBody response, int responseCode) {
@@ -383,7 +386,19 @@ public class Dmt2AddBeneFragment extends Fragment implements View.OnClickListene
                             Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
                         }
                     }
-                }, commonParams.getUserData(), commonParams.getToken());
+                }, commonParams.getUserData(), commonParams.getToken());*/
+
+        new NetworkCall().callService(NetworkCall.getDmt2ApiInterface().getDmt2Header(method, requestModel,
+                        commonParams.getUserData(), "Bearer "+commonParams.getToken()),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response, TYPE);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 
     public class ValidateBeneResponse extends CommonRapiResponse{

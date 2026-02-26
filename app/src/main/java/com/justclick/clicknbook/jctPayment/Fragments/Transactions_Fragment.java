@@ -23,7 +23,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.justclick.clicknbook.jctPayment.Activities.ViewAllTransaction;
 import com.justclick.clicknbook.jctPayment.Adapters.RecyclerRecentTransaction;
 import com.justclick.clicknbook.jctPayment.Models.TransactionInfo;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
@@ -88,15 +87,6 @@ public class Transactions_Fragment extends Fragment {
 
         // get transaction data
 //        getTransactionList();
-
-
-        tv_all_transaction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(context, ViewAllTransaction.class));
-            }
-        });
-
 
         return rootView;
 

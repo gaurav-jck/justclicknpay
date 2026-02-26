@@ -366,7 +366,7 @@
                     android:id="@+id/bt_submit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/blue_round_button_background"
+                    android:background="@drawable/app_red_round_button_background"
                     android:onClick="submit"
                     android:gravity="center"
                     android:textSize="@dimen/title_text_size"

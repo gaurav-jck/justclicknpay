@@ -18,13 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity;
-import com.justclick.clicknbook.jctPayment.Balance_Enquiry_Activity_old;
 import com.justclick.clicknbook.jctPayment.BankDetailsActivity;
 import com.justclick.clicknbook.jctPayment.CashPayoutHistoryActivity;
 import com.justclick.clicknbook.jctPayment.CashPayoutRequestActivity;
-import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity;
-import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity_old;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
 import com.justclick.clicknbook.utils.MyPreferences;
@@ -66,13 +62,6 @@ public class Services_Fragment_old extends Fragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.img_cash_withdrawl:
-                startActivity(new Intent(getContext(), Cash_Withdrawl_Activity_old.class));
-                break;
-            case R.id.img_balance_enquiry:
-                Intent be=new Intent(getContext(), Balance_Enquiry_Activity_old.class);
-                startActivity(be);
-                break;
             case R.id.img_cash_payout:
                 getBankDetailAndAmount(CASH_OUT);
                 break;
@@ -92,27 +81,6 @@ public class Services_Fragment_old extends Fragment implements View.OnClickListe
         if (data != null & resultCode == RESULT_OK && requestCode == 1)
         {
 
-            /*if (data.hasExtra("ClientResponse")) {//This is for encrypted client response from finosdk in case of SUCCESS
-                response = data.getStringExtra("ClientResponse");
-                String strDecryptResponse = AES_BC.getInstance().decryptDecode(Utils.replaceNewLine(response), FinoConstants.CLIENT_REQUEST_ENCRYPTION_KEY);
-                Utils.showOneBtnDialog(context, getString(com.finopaytech.finosdk.R.string.STR_INFO), strDecryptResponse, false);
-            } else if (data.hasExtra("ErrorDtls"))
-            {//This is plain text error in case of FAILED
-                response = data.getStringExtra("ErrorDtls");
-                String errorMsg = "", errorDtlsMsg = "";
-                if (!response.equalsIgnoreCase("")) {
-                    try {
-                        String[] error_dtls = response.split("\\|");
-                        if (error_dtls.length > 0) {
-                            errorMsg = error_dtls[0];
-                            Utils.showOneBtnDialog(context, getString(com.finopaytech.finosdk.R.string.STR_INFO), "Error Message : " + errorMsg, false);
-                        }
-                    } catch (ArrayIndexOutOfBoundsException exp) {
-                    }
-                }
-            }
-
-            ErrorSingletone.getFreshInstance();*/
         }
         else if (data != null & resultCode == RESULT_OK && requestCode == 2)
         {

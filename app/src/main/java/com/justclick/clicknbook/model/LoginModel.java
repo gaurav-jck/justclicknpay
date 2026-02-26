@@ -10,7 +10,7 @@ public class LoginModel
     public class Data{
         public String UserData,Email,UserType,Mobile,Name, MerchantID,MerchantUrl,
                 RefAgency,ValidationCode,AgencyName, DoneCardUser, BankNames, ModuleAccess,
-                CreditFlag, UserId, remainpassdays;
+                CreditFlag, UserId, remainpassdays, Agentid;
     }
 
     public ArrayList<DataList> DataList;

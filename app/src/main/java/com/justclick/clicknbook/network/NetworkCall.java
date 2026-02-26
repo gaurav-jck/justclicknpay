@@ -1561,6 +1561,11 @@ public class NetworkCall {
     public static ApiInterface getCashFreeQRApiInterface(){
 //        return APIClient.getClient(ApiConstants.BASE_URL_PAYOUT).create(ApiInterface.class);   //old qr code
         return APIClient.getClient(ApiConstants.BASE_URL_QR).create(ApiInterface.class);  // new changes
+//        return APIClient.getClient(ApiConstants.BASE_URL_UAT_REMMIT).create(ApiInterface.class);  // testing url
+    }
+
+    public static ApiInterface getEaseQRApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_QR).create(ApiInterface.class);  // ease qr
     }
 
     public static ApiInterface getPayoutNewApiInterface(){

@@ -74,7 +74,7 @@ public class TrainPreBookResponse implements Serializable {
     public class finalBookingFareAndJourneyDetail implements Serializable{
         public float totalFare, wpServiceTax, wpServiceCharge, travelInsuranceCharge, travelInsuranceServiceTax,
                 cateringCharge;
-        public String journeyClass;
+        public String journeyClass, aadhaarOTPBasedBooking;
     }
     /*{
     "bookingDetails": {

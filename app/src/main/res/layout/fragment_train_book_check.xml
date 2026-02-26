@@ -64,7 +64,7 @@
                     android:layout_marginTop="@dimen/large_margin"
                     android:padding="@dimen/small_margin"
                     android:gravity="center"
-                    android:background="@drawable/blue_round_button_background"
+                    android:background="@drawable/app_red_round_button_background"
                     android:text="@string/getResponse"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/title_text_size" />
@@ -111,7 +111,7 @@
                     android:layout_marginTop="@dimen/large_margin"
                     android:padding="@dimen/small_margin"
                     android:gravity="center"
-                    android:background="@drawable/blue_round_button_background"
+                    android:background="@drawable/app_red_round_button_background"
                     android:text="@string/getResponse"
                     android:textColor="@color/color_white"
                     android:textSize="@dimen/title_text_size" />

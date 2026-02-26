@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class FareRuleResponse implements Serializable {
     public String baseFare, distance, dynamicFare, enqClass, from, to, quota, reqEnqParam,
             reservationCharge, serverId, serviceTax, superfastCharge, tatkalFare, timeStamp,
-            totalFare, trainName, trainNo, errorMessage, availablityDate, availablityStatus;
+            totalFare, trainName, trainNo, errorMessage, availablityDate, availablityStatus,
+            otpAuthenticationFlag;
     public ArrayList<avlDayList> avlDayList;
     public bkgCfg bkgCfg;
 

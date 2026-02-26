@@ -7,4 +7,5 @@ public class AepsConstants {
             MORPHO_PACKAGE = "com.scl.rdservice",MORPHO_PACKAGE_L1 = "com.idemia.l1rdservice",
             MANTRA_L1_PACKAGE = "com.mantra.mfs110.rdservice",STARTEK_PACKAGE_L1 = "com.acpl.registersdk_l1";
     public static final String deviceArray[]={"Mantra L1","Mantra L0","Morpho L1", "Morpho", "Startek", "Startek L1 (Access)"};
+    public static final String deviceArrayNew[]={"Mantra L1","Morpho L1","Startek L1 (Access)"};
 }

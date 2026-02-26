@@ -10,5 +10,8 @@ class FoodChoice {
          val VegDiabetic="Veg(Diabetic)"
          val NonVegDiabetic="Non-Veg(Diabetic)"
          val TeaCoffee="Tea/Coffee"
+
+        val VegFoodValue="V"
+        val NoFoodValue="D"
     }
 }

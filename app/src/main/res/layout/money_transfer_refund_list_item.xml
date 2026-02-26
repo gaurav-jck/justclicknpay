@@ -360,7 +360,7 @@
             android:textColor="@color/color_white"
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_marginRight="@dimen/small_margin"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:paddingTop="@dimen/very_small_margin"
             android:paddingBottom="@dimen/very_small_margin"
             android:paddingLeft="@dimen/large_margin"

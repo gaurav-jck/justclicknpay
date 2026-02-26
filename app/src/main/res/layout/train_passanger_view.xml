@@ -181,6 +181,22 @@
         android:layout_height="1dp"
         android:background="@color/grey"
         android:layout_marginTop="@dimen/small_margin"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Other Preference"
+        android:layout_marginTop="@dimen/medium_margin"
+        android:padding="@dimen/margin_2dp"/>
+
+    <CheckBox
+        android:id="@+id/noFoodCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/age"
+        android:text="No, I don't want food"/>
+
 </LinearLayout>
 
     <TextView
@@ -191,7 +207,7 @@
         android:layout_marginTop="@dimen/large_margin"
         android:layout_marginBottom="@dimen/medium_margin"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/blue_round_button_background"
+        android:background="@drawable/app_red_round_button_background"
         android:backgroundTint="@color/app_blue_color"
         android:textColor="@color/white"
         android:paddingLeft="@dimen/medium_margin"

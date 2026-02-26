@@ -2,6 +2,7 @@ package com.justclick.clicknbook.Fragment.train
 
 import android.app.Activity
 import android.app.Dialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.text.Editable
@@ -29,6 +30,7 @@ import android.widget.RadioGroup
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -866,45 +868,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
         /*{"cityList":"Saharanpur","serverId":"DM04AP18MS3","state":"UTTAR PRADESH","timeStamp":"2021-12-03T19:01:39.884"}*/
     }
 
-    private fun getCity(pin: String) {
-        if (!MyCustomDialog.isDialogShowing()) {
-            showCustomDialog()
-        }
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_TRAIN).create(ApiInterface::class.java)
-        val call = apiService.getServiceCityPinResponse(ApiConstants.BASE_URL_TRAIN+"apiV1/RailEngine/PostOffice?pincode="+pin)
-        call.enqueue(object : Callback<ResponseBody?> {
-            override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
-                try {
-                    if(response!=null && response.body()!=null){
-                        var responseString= response.body()!!.string()
-                        responseString=responseString.replace("cityList\":\"", "cityList\":[\"")
-                        responseString=responseString.replace("\",\"serverId", "\"],\"serverId")
-
-                        val pinCity = Gson().fromJson(responseString, CityPinResponse::class.java)
-                        if(pinCity!=null && pinCity!!.cityList!=null){
-                            getCityPin(pin,pinCity!!.cityList!!.get(0))
-                        }else{
-                            hideCustomDialog()
-                            Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
-                        }
-
-                    } else {
-                        hideCustomDialog()
-                        Toast.makeText(requireContext(), "No data found for this pin code", Toast.LENGTH_LONG).show()
-                    }
-                } catch (e: Exception) {
-                    hideCustomDialog()
-                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                hideCustomDialog()
-                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
     private fun getCityPin(pin: String, cityName: String?) {
         if (!MyCustomDialog.isDialogShowing()) {
             showCustomDialog()
@@ -1001,42 +964,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                hideCustomDialog()
-                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
-            }
-        })
-    }
-
-    private fun getCityState2(pin: String) {
-        if (!MyCustomDialog.isDialogShowing()) {
-            showCustomDialog()
-        }
-        val apiService = APIClient.getClientRapipay().create(ApiInterface::class.java)
-        val call = apiService.getServicePin("https://api.postalpincode.in/pincode/$pin")
-        call.enqueue(object : Callback<ArrayList<PinCityResponse>?> {
-            override fun onResponse(call: Call<ArrayList<PinCityResponse>?>, response: Response<ArrayList<PinCityResponse>?>) {
-                try {
-                    if (response != null && response.body() != null && response.body()!!.size > 0) {
-                        hideCustomDialog()
-                        if (response.body()!![0].postOffice != null) {
-                            Common.hideSoftKeyboard(context as Activity?)
-                            binding!!.cityEdt2.setText(response.body()!![0].postOffice.get(0).district)
-                            binding!!.stateEdt2.setText(response.body()!![0].postOffice.get(0).state)
-                        } else {
-                            Toast.makeText(requireContext(), response.body()!![0].message, Toast.LENGTH_LONG).show()
-                            clearCityState2()
-                        }
-                    } else {
-                        hideCustomDialog()
-                        Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
-                    }
-                } catch (e: Exception) {
-                    hideCustomDialog()
-                    Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_LONG).show()
-                }
-            }
-
-            override fun onFailure(call: Call<ArrayList<PinCityResponse>?>, t: Throwable) {
                 hideCustomDialog()
                 Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
             }
@@ -1319,6 +1246,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             val bundle = Bundle()
             bundle.putSerializable("trainRequest", trainBookingRequest)
             bundle.putSerializable("trainPreBookResponse", response)
+            bundle.putString("otpAuthenticationFlag", fareRuleResponse!!.otpAuthenticationFlag)
             bundle.putString("DOJ", doj)
             trainBookFragment.arguments=bundle
             (context as NavigationDrawerActivity?)!!.replaceFragmentWithBackStack(trainBookFragment)
@@ -1357,242 +1285,6 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             }
         } catch (e: Exception) {
             Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun addPass(type:Int, position:Int){
-        val dialog = BottomSheetDialog(requireContext())
-        dialog.setContentView(layoutInflater.inflate(R.layout.train_passanger_view, null))
-        var radioGroup:RadioGroup?=dialog.findViewById(R.id.genderRadioGroup)
-        var nameEdt: EditText? =dialog.findViewById(R.id.nameEdt)
-//        var passMobileEdt: EditText? =dialog.findViewById(R.id.passMobileEdt)
-        var ageEdt: EditText? =dialog.findViewById(R.id.ageEdt)
-        var berthCheck: CheckBox? =dialog.findViewById(R.id.berthCheck)
-        var textView: TextView? =dialog.findViewById(R.id.passengerCountTv)
-        var nationality:Spinner?= dialog.findViewById(R.id.nationality)
-        var birthPref:Spinner?= dialog.findViewById(R.id.birthPref)
-        var foodChoice:Spinner?= dialog.findViewById(R.id.foodChoice)
-        var foodLin:LinearLayout?= dialog.findViewById(R.id.foodLin)
-        textView!!.text="Passenger "+(position+1)
-        var nation = ArrayList<String>()
-        nation.add("Indian")
-        var list = ArrayList<String>()
-        list.add(NoPreference)
-        if(fareRuleResponse!!.bkgCfg!!.applicableBerthTypes!=null){
-            for(i in fareRuleResponse!!.bkgCfg!!.applicableBerthTypes.indices){
-                list.add(getBerthName(fareRuleResponse!!.bkgCfg!!.applicableBerthTypes[i]))
-            }
-        }/*else{
-            list.add(WindowSeat)
-        }*/
-
-        var adapter=ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, list)
-        birthPref!!.adapter=adapter
-
-        var adapterNation=ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, nation)
-        nationality!!.adapter=adapterNation
-
-        var foodList = ArrayList<String>()
-        if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
-            foodLin!!.visibility=View.VISIBLE
-            for(i in fareRuleResponse!!.bkgCfg!!.foodDetails.indices){
-//                foodList.add(fareRuleResponse!!.bkgCfg!!.foodDetails[i])
-                foodList.add(getFoodName(fareRuleResponse!!.bkgCfg!!.foodDetails[i]))
-            }
-            val aa = ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, foodList)
-            foodChoice!!.adapter=aa
-        }else{
-            foodLin!!.visibility=View.GONE
-        }
-
-        var isAdd:Boolean
-        if(position<passengerArray!!.size){
-            nameEdt!!.setText(passengerArray!!.get(position).passengerName)
-//            passMobileEdt!!.setText(passengerArray!!.get(position).passengerMobile)
-            ageEdt!!.setText(passengerArray!!.get(position).passengerAge)
-            if(Integer.parseInt(passengerArray!!.get(position).passengerAge)<12){
-                berthCheck!!.isEnabled=true;
-            }
-            berthCheck!!.isChecked = passengerArray!!.get(position).childBerthFlag!=null &&
-                    passengerArray!!.get(position).childBerthFlag.equals("True")
-            isAdd=false
-        }else{
-            isAdd=true
-        }
-
-        ageEdt!!.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                if(s!!.isNotEmpty()) {
-                    var a: Int = Integer.parseInt(s.toString())
-                    if(a in 5..11){
-                        berthCheck!!.isEnabled=true
-                        berthCheck!!.isChecked=true
-                    }else if(a>120){
-                        ageEdt!!.error = "Age must be smaller than 120"
-                    }else{
-                        berthCheck!!.isEnabled=false
-                    }
-                }
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            }
-        })
-
-        dialog.findViewById<TextView>(R.id.addPassTv)!!.setOnClickListener {
-            if(!Common.isNameValid(nameEdt!!.text.toString())){
-                nameEdt!!.setError("Please enter valid name")
-            }/*else if(!Common.isMobileValid(passMobileEdt!!.text.toString())){
-                passMobileEdt!!.setError("Please enter valid mobile number")
-            }*/else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
-                ageEdt.setError("Please enter valid age")
-            }else{
-                var genderRadio:RadioButton?=dialog.findViewById(radioGroup!!.checkedRadioButtonId)
-                if(isAdd){
-                    var passenger:TrainBookingRequest.adultRequest=TrainBookingRequest().adultRequest()
-                    passenger.passengerName=nameEdt!!.text.toString()
-//                    passenger.passengerMobile=passMobileEdt!!.text.toString()
-                    passenger.passengerAge=ageEdt!!.text.toString()
-                    passenger.passengerGender=getGender(genderRadio!!.text.toString())
-//                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
-                    passenger.passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
-                    var food=""
-                    if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
-                        passenger.passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
-                        food=foodChoice.selectedItem.toString()
-                    }else{
-                        passenger.passengerFoodChoice=""
-                    }
-                    if(berthCheck!!.isEnabled){
-                        if(berthCheck.isChecked){
-                            passenger.childBerthFlag="True"
-                        }else{
-                            passenger.childBerthFlag="False"
-                        }
-                    }else{
-                        passenger.childBerthFlag=null
-                    }
-                    passenger.type=type
-                    passengerArray!!.add(passenger)
-                    addPassenger(passenger.passengerName, "",passenger.passengerAge, passenger.passengerGender, food)
-
-                }else{
-                    passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
-//                    passengerArray!!.get(position).passengerMobile=passMobileEdt!!.text.toString()
-                    passengerArray!!.get(position).passengerAge=ageEdt!!.text.toString()
-                    passengerArray!!.get(position).passengerGender=getGender(genderRadio!!.text.toString())
-//                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
-                    passengerArray!!.get(position).passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
-                    if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
-                        passengerArray!!.get(position).passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
-                    }else{
-                        passengerArray!!.get(position).passengerFoodChoice=""
-                    }
-
-                    if(berthCheck!!.isEnabled){
-                        if(berthCheck.isChecked){
-                            passengerArray!!.get(position).childBerthFlag="True"
-                        }else{
-                            passengerArray!!.get(position).childBerthFlag="False"
-                        }
-                    }else{
-                        passengerArray!!.get(position).childBerthFlag=null
-                    }
-                    passengerArray!!.get(position).type=type
-                    refreshPassengerList()
-                }
-
-                dialog.dismiss()
-            }
-        }
-        dialog.show()
-    }
-
-    private fun getBerthName(value: String?): String {
-        if(value.equals("LB")){
-            return LowerBerth
-        }else if(value.equals("UB")){
-            return UpperBerth
-        }else if(value.equals("MB")){
-            return MiddleBerth
-        }else if(value.equals("SU")){
-            return SideUpper
-        }else if(value.equals("SL")){
-            return SideLower
-        }else if(value.equals("WS")){
-            return WindowSeat
-        }else{
-            return ""
-        }
-    }
-
-    private fun getBerthChoice(berthValue: String): String? {
-        var berth=""
-        when (berthValue) {
-            NoPreference -> berth=""
-            LowerBerth -> berth="LB"
-            UpperBerth -> berth="UB"
-            MiddleBerth -> berth="MB"
-            SideLower -> berth="SL"
-            SideUpper -> berth="SU"
-            WindowSeat -> berth="WS"
-            else -> { // Note the block
-                berth=""
-            }
-        }
-        return berth
-    }
-
-    private fun getFoodName(value: String?): String {
-        if(value.equals("V")){
-            return FoodChoice.Veg
-        }else if(value.equals("N")){
-            return FoodChoice.NonVeg
-        }else if(value.equals("D")){
-            return FoodChoice.DoNotSelect
-        }else if(value.equals("E")){
-            return FoodChoice.Snacks
-        }else if(value.equals("J")){
-            return FoodChoice.JainMeal
-        }else if(value.equals("F")){
-            return FoodChoice.VegDiabetic
-        }else if(value.equals("G")){
-            return FoodChoice.NonVegDiabetic
-        }else if(value.equals("T")){
-            return FoodChoice.TeaCoffee
-        }else{
-            return value!!
-        }
-    }
-
-    private fun getFoodChoice(value: String): String? {
-        var food=""
-        when (value) {
-            FoodChoice.Veg -> food="V"
-            FoodChoice.NonVeg -> food="N"
-            FoodChoice.DoNotSelect -> food="D"
-            FoodChoice.Snacks -> food="E"
-            FoodChoice.JainMeal -> food="J"
-            FoodChoice.VegDiabetic -> food="F"
-            FoodChoice.NonVegDiabetic -> food="G"
-            FoodChoice.TeaCoffee -> food="T"
-            else -> { // Note the block
-                food=value
-            }
-        }
-        return food
-    }
-
-    private fun getGender(gender: String): String? {
-        if(gender.equals("Male")){
-            return "M"
-        }else if(gender.equals("Female")){
-            return "F"
-        }else{
-            return "T"
         }
     }
 
@@ -1714,7 +1406,7 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             if(list.passengerFoodChoice.isEmpty()){
                 foodTv.text=""
             }else{
-                foodTv.text= "Food- ${list.passengerFoodChoice}"
+                foodTv.text= "Food- ${getFoodName(list.passengerFoodChoice)}"
             }
 
             child.setOnClickListener{
@@ -1730,6 +1422,330 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
                 refreshPassengerList()
             }
             passengerContainerLin!!.addView(child)
+        }
+    }
+
+    var vegIndex=0
+    var noFoodIndex=0
+    private fun addPass(type:Int, position:Int){
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(layoutInflater.inflate(R.layout.train_passanger_view, null))
+        var radioGroup:RadioGroup?=dialog.findViewById(R.id.genderRadioGroup)
+        var nameEdt: EditText? =dialog.findViewById(R.id.nameEdt)
+//        var passMobileEdt: EditText? =dialog.findViewById(R.id.passMobileEdt)
+        var ageEdt: EditText? =dialog.findViewById(R.id.ageEdt)
+        var berthCheck: CheckBox? =dialog.findViewById(R.id.berthCheck)
+        var textView: TextView? =dialog.findViewById(R.id.passengerCountTv)
+        var nationality:Spinner?= dialog.findViewById(R.id.nationality)
+        var birthPref:Spinner?= dialog.findViewById(R.id.birthPref)
+        var foodChoice:Spinner?= dialog.findViewById(R.id.foodChoice)
+        var foodLin:LinearLayout?= dialog.findViewById(R.id.foodLin)
+        var noFoodCheck: CheckBox? =dialog.findViewById(R.id.noFoodCheck)
+        textView!!.text="Passenger "+(position+1)
+        var nation = ArrayList<String>()
+        nation.add("Indian")
+        var list = ArrayList<String>()
+        list.add(NoPreference)
+        if(fareRuleResponse!!.bkgCfg!!.applicableBerthTypes!=null){
+            for(i in fareRuleResponse!!.bkgCfg!!.applicableBerthTypes.indices){
+                list.add(getBerthName(fareRuleResponse!!.bkgCfg!!.applicableBerthTypes[i]))
+            }
+        }/*else{
+            list.add(WindowSeat)
+        }*/
+
+        var adapter=ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, list)
+        birthPref!!.adapter=adapter
+
+        var adapterNation=ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, nation)
+        nationality!!.adapter=adapterNation
+
+        if(isNoFoodSelected){
+            noFoodCheck!!.isChecked=true
+        }else{
+            noFoodCheck!!.isChecked=false
+        }
+
+        noFoodCheck!!.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                // CheckBox is checked
+//                Toast.makeText(context, "Checkbox is checked!", Toast.LENGTH_SHORT).show()
+                showFoodAlertDialog(noFoodCheck, foodChoice)
+            } else {
+                // CheckBox is unchecked
+//                Toast.makeText(context, "Checkbox is unchecked!", Toast.LENGTH_SHORT).show()
+                isNoFoodSelected=false
+            }
+        }
+
+        var foodList = ArrayList<String>()
+        if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
+            foodLin!!.visibility=View.VISIBLE
+            for(i in fareRuleResponse!!.bkgCfg!!.foodDetails.indices){
+//                foodList.add(fareRuleResponse!!.bkgCfg!!.foodDetails[i])
+                foodList.add(getFoodName(fareRuleResponse!!.bkgCfg!!.foodDetails[i]))
+                if(fareRuleResponse!!.bkgCfg!!.foodDetails[i].equals(FoodChoice.VegFoodValue)){
+                    vegIndex=i
+                }
+                if(fareRuleResponse!!.bkgCfg!!.foodDetails[i].equals(FoodChoice.NoFoodValue)){
+                    noFoodIndex=i
+                }
+            }
+            val aa = ArrayAdapter<String>(requireContext(), R.layout.spinner_item, R.id.name_tv, foodList)
+            foodChoice!!.adapter=aa
+            if(isNoFoodSelected){
+                foodChoice!!.setSelection(noFoodIndex)
+            }else{
+                foodChoice!!.setSelection(vegIndex)      // by default veg selection
+            }
+        }else{
+            foodLin!!.visibility=View.GONE
+        }
+        var isAdd:Boolean
+        if(position<passengerArray!!.size){
+            nameEdt!!.setText(passengerArray!!.get(position).passengerName)
+//            passMobileEdt!!.setText(passengerArray!!.get(position).passengerMobile)
+            ageEdt!!.setText(passengerArray!!.get(position).passengerAge)
+            if(Integer.parseInt(passengerArray!!.get(position).passengerAge)<12){
+                berthCheck!!.isEnabled=true;
+            }
+            berthCheck!!.isChecked = passengerArray!!.get(position).childBerthFlag!=null &&
+                    passengerArray!!.get(position).childBerthFlag.equals("True")
+            isAdd=false
+        }else{
+            isAdd=true
+        }
+
+        ageEdt!!.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                if(s!!.isNotEmpty()) {
+                    var a: Int = Integer.parseInt(s.toString())
+                    if(a in 5..11){
+                        berthCheck!!.isEnabled=true
+                        berthCheck!!.isChecked=true
+                    }else if(a>120){
+                        ageEdt!!.error = "Age must be smaller than 120"
+                    }else{
+                        berthCheck!!.isEnabled=false
+                    }
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            }
+        })
+
+        dialog.findViewById<TextView>(R.id.addPassTv)!!.setOnClickListener {
+            if(!Common.isNameValid(nameEdt!!.text.toString())){
+                nameEdt!!.setError("Please enter valid name")
+            }/*else if(!Common.isMobileValid(passMobileEdt!!.text.toString())){
+                passMobileEdt!!.setError("Please enter valid mobile number")
+            }*/else if(ageEdt!!.text.toString().isEmpty() || Integer.parseInt(ageEdt!!.text.toString())<5 || Integer.parseInt(ageEdt!!.text.toString())>120){
+                ageEdt.setError("Please enter valid age")
+            }else{
+                var genderRadio:RadioButton?=dialog.findViewById(radioGroup!!.checkedRadioButtonId)
+                if(isAdd){
+                    var passenger:TrainBookingRequest.adultRequest=TrainBookingRequest().adultRequest()
+                    passenger.passengerName=nameEdt!!.text.toString()
+//                    passenger.passengerMobile=passMobileEdt!!.text.toString()
+                    passenger.passengerAge=ageEdt!!.text.toString()
+                    passenger.passengerGender=getGender(genderRadio!!.text.toString())
+//                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
+                    passenger.passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
+                    var food=""
+                    if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
+
+                        if(isNoFoodSelected){
+                            passenger.passengerFoodChoice=FoodChoice.NoFoodValue
+                            food=FoodChoice.DoNotSelect
+                        }else{
+                            passenger.passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
+                            food=foodChoice.selectedItem.toString()
+                        }
+                    }else{
+                        passenger.passengerFoodChoice=""
+                    }
+                    if(berthCheck!!.isEnabled){
+                        if(berthCheck.isChecked){
+                            passenger.childBerthFlag="True"
+                        }else{
+                            passenger.childBerthFlag="False"
+                        }
+                    }else{
+                        passenger.childBerthFlag=null
+                    }
+                    passenger.type=type
+                    passengerArray!!.add(passenger)
+                    if(isNoFoodSelected){
+                        for(i in 0 until passengerArray!!.size){
+                            passengerArray!!.get(i).passengerFoodChoice=FoodChoice.NoFoodValue
+                        }
+                        refreshPassengerList()
+                    }else{
+                        addPassenger(passenger.passengerName, "",passenger.passengerAge, passenger.passengerGender, food)
+                    }
+
+                }else{
+                    passengerArray!!.get(position).passengerName=nameEdt!!.text.toString()
+//                    passengerArray!!.get(position).passengerMobile=passMobileEdt!!.text.toString()
+                    passengerArray!!.get(position).passengerAge=ageEdt!!.text.toString()
+                    passengerArray!!.get(position).passengerGender=getGender(genderRadio!!.text.toString())
+//                    passenger.passengerBerthChoice=birthPref.selectedItem.toString()
+                    passengerArray!!.get(position).passengerBerthChoice=getBerthChoice(birthPref.selectedItem.toString())
+                    if(fareRuleResponse!!.bkgCfg.foodChoiceEnabled.equals("true")){
+                        if(isNoFoodSelected){
+                            foodChoice!!.setSelection(noFoodIndex)
+                            passengerArray!!.get(position).passengerFoodChoice=FoodChoice.NoFoodValue
+                        }else{
+                            passengerArray!!.get(position).passengerFoodChoice=getFoodChoice(foodChoice!!.selectedItem.toString())
+                        }
+                    }else{
+                        passengerArray!!.get(position).passengerFoodChoice=""
+                    }
+
+                    if(berthCheck!!.isEnabled){
+                        if(berthCheck.isChecked){
+                            passengerArray!!.get(position).childBerthFlag="True"
+                        }else{
+                            passengerArray!!.get(position).childBerthFlag="False"
+                        }
+                    }else{
+                        passengerArray!!.get(position).childBerthFlag=null
+                    }
+                    passengerArray!!.get(position).type=type
+                    if(isNoFoodSelected){
+                        for(i in 0 until passengerArray!!.size){
+                            passengerArray!!.get(i).passengerFoodChoice=FoodChoice.NoFoodValue
+                        }
+                    }
+                    refreshPassengerList()
+                }
+
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
+    }
+
+    private var isNoFoodSelected=false
+    private fun showFoodAlertDialog(noFoodCheck: CheckBox, foodChoice: Spinner?) {
+        // Create an alert builder
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirmation Alert")
+        builder.setMessage("Food will not be provided for any of the passengers.\nDo you want to Proceed?")
+        builder.setCancelable(false)
+
+        // add a button
+        builder.setPositiveButton(
+            "Proceed"
+        ) { dialog: DialogInterface, which: Int ->
+            // send data from the AlertDialog to the Activity
+            noFoodSelected(noFoodCheck, foodChoice)
+            dialog.dismiss()
+        }
+        builder.setNegativeButton(
+            "Cancel"
+        ) { dialog: DialogInterface, which: Int ->
+            // send data from the AlertDialog to the Activity
+            noFoodCheck.isChecked=false
+            isNoFoodSelected=false
+            dialog.dismiss()
+        }
+        // create and show the alert dialog
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+    private fun noFoodSelected(noFoodCheck: CheckBox, foodChoice: Spinner?) {
+        isNoFoodSelected=true
+        foodChoice!!.setSelection(noFoodIndex)
+    }
+
+    private fun getBerthName(value: String?): String {
+        if(value.equals("LB")){
+            return LowerBerth
+        }else if(value.equals("UB")){
+            return UpperBerth
+        }else if(value.equals("MB")){
+            return MiddleBerth
+        }else if(value.equals("SU")){
+            return SideUpper
+        }else if(value.equals("SL")){
+            return SideLower
+        }else if(value.equals("WS")){
+            return WindowSeat
+        }else{
+            return ""
+        }
+    }
+
+    private fun getBerthChoice(berthValue: String): String? {
+        var berth=""
+        when (berthValue) {
+            NoPreference -> berth=""
+            LowerBerth -> berth="LB"
+            UpperBerth -> berth="UB"
+            MiddleBerth -> berth="MB"
+            SideLower -> berth="SL"
+            SideUpper -> berth="SU"
+            WindowSeat -> berth="WS"
+            else -> { // Note the block
+                berth=""
+            }
+        }
+        return berth
+    }
+
+    private fun getFoodName(value: String?): String {
+        if(value.equals("V")){
+            return FoodChoice.Veg
+        }else if(value.equals("N")){
+            return FoodChoice.NonVeg
+        }else if(value.equals("D")){
+            return FoodChoice.DoNotSelect
+        }else if(value.equals("E")){
+            return FoodChoice.Snacks
+        }else if(value.equals("J")){
+            return FoodChoice.JainMeal
+        }else if(value.equals("F")){
+            return FoodChoice.VegDiabetic
+        }else if(value.equals("G")){
+            return FoodChoice.NonVegDiabetic
+        }else if(value.equals("T")){
+            return FoodChoice.TeaCoffee
+        }else{
+            return value!!
+        }
+    }
+
+    private fun getFoodChoice(value: String): String? {
+        var food=""
+        when (value) {
+            FoodChoice.Veg -> food="V"
+            FoodChoice.NonVeg -> food="N"
+            FoodChoice.DoNotSelect -> food="D"
+            FoodChoice.Snacks -> food="E"
+            FoodChoice.JainMeal -> food="J"
+            FoodChoice.VegDiabetic -> food="F"
+            FoodChoice.NonVegDiabetic -> food="G"
+            FoodChoice.TeaCoffee -> food="T"
+            else -> { // Note the block
+                food=value
+            }
+        }
+        return food
+    }
+
+    private fun getGender(gender: String): String? {
+        if(gender.equals("Male")){
+            return "M"
+        }else if(gender.equals("Female")){
+            return "F"
+        }else{
+            return "T"
         }
     }
 
@@ -1952,4 +1968,153 @@ class TrainBookFragment : Fragment(), View.OnClickListener {
             "  ]\n" +
             "}"
 
+    var prebookResponse="{\n" +
+            "  \"bookingDetails\" : {\n" +
+            "    \"journeyDetails\" : [ {\n" +
+            "      \"trainName\" : \"DDN SHTBDI EXP\",\n" +
+            "      \"trainNo\" : \"12017\",\n" +
+            "      \"fromStation\" : \"NEW DELHI\",\n" +
+            "      \"toStation\" : \"DEHRADUN\",\n" +
+            "      \"fromStationCode\" : \"NDLS\",\n" +
+            "      \"toStationCode\" : \"DDN\",\n" +
+            "      \"boardingStation\" : \"NEW DELHI\",\n" +
+            "      \"boardingStationCode\" : \"NDLS\",\n" +
+            "      \"reservationUpTo\" : \"DEHRADUN\",\n" +
+            "      \"reservationUpToCode\" : \"DDN\",\n" +
+            "      \"journeyClass\" : \"CC\",\n" +
+            "      \"quota\" : \"GN\",\n" +
+            "      \"bookingFlag\" : \"Y\",\n" +
+            "      \"departTime\" : \"06:45\",\n" +
+            "      \"arrivalTime\" : \"12:55\",\n" +
+            "      \"journeyDate\" : \"20251231\",\n" +
+            "      \"moreThanOneDay\" : \"True\",\n" +
+            "      \"enquiryType\" : \"3\",\n" +
+            "      \"reservationChoice\" : \"99\",\n" +
+            "      \"ticketType\" : \"F\",\n" +
+            "      \"reservationMode\" : \"MOBILE_ANDROID\",\n" +
+            "      \"travelInsuranceOpted\" : \"True\",\n" +
+            "      \"autoUpgradationSelected\" : \"True\",\n" +
+            "      \"seniorCitizenApplicablecheck\" : false,\n" +
+            "      \"chochid\" : null,\n" +
+            "      \"ssQuotaSplitCoach\" : null\n" +
+            "    } ],\n" +
+            "    \"passengerAdditionalDetail\" : [ {\n" +
+            "      \"mobile\" : \"9389173616\",\n" +
+            "      \"coach\" : \"\",\n" +
+            "      \"preference\" : \"LB\",\n" +
+            "      \"email\" : \"gaurav.s@justclicknpay.in\",\n" +
+            "      \"remarks\" : \"JustClick\",\n" +
+            "      \"adultCount\" : 1,\n" +
+            "      \"childCount\" : 0,\n" +
+            "      \"totalPaxCount\" : 1\n" +
+            "    } ],\n" +
+            "    \"gstDetails\" : [ {\n" +
+            "      \"gst\" : \"\",\n" +
+            "      \"flat\" : \"\",\n" +
+            "      \"gstName\" : \"\",\n" +
+            "      \"pinCode\" : \"\",\n" +
+            "      \"stateCity\" : \"\",\n" +
+            "      \"city\" : \"\"\n" +
+            "    } ],\n" +
+            "    \"fareDetail\" : [ {\n" +
+            "      \"baseFare\" : 474.0,\n" +
+            "      \"serviceCharge\" : 31.0,\n" +
+            "      \"agentServiceCharge\" : 0.0,\n" +
+            "      \"concession\" : 0.0,\n" +
+            "      \"pgCharge\" : 0.0,\n" +
+            "      \"totalFare\" : 765.0\n" +
+            "    } ],\n" +
+            "    \"destinationDetails\" : [ {\n" +
+            "      \"address\" : \"Saharanpur\",\n" +
+            "      \"pinCode\" : \"247001\",\n" +
+            "      \"stateName\" : \"UTTAR PRADESH\",\n" +
+            "      \"city\" : \"Saharanpur\",\n" +
+            "      \"postOffice\" : \"Hakikat Nagar S.O\"\n" +
+            "    } ],\n" +
+            "    \"adultDetails\" : [ {\n" +
+            "      \"passengerName\" : \"Testing \",\n" +
+            "      \"passengerAge\" : \"32\",\n" +
+            "      \"passengerGender\" : \"M\",\n" +
+            "      \"currentBerthChoice\" : null,\n" +
+            "      \"passengerCardNumber\" : null,\n" +
+            "      \"passengerBerthChoice\" : \"\",\n" +
+            "      \"passengerNationality\" : \"IN\",\n" +
+            "      \"passengerCardType\" : null,\n" +
+            "      \"passengerConcession\" : null,\n" +
+            "      \"forgoConcession\" : null,\n" +
+            "      \"passengerIcardFlag\" : null,\n" +
+            "      \"passengerBedrollChoice\" : \"false\",\n" +
+            "      \"passengerFoodChoice\" : \"V\",\n" +
+            "      \"passengerSerialNumber\" : \"1\",\n" +
+            "      \"concessionOpted\" : \"True\",\n" +
+            "      \"childBerthFlag\" : null\n" +
+            "    } ],\n" +
+            "    \"childDetails\" : [ ],\n" +
+            "    \"transactionId\" : \"R01125D5YOJC0A13387\",\n" +
+            "    \"finalBookingFareAndJourneyDetailsDto\" : null,\n" +
+            "    \"merchant\" : \"JUSTCLICKTRAVELS\",\n" +
+            "    \"mode\" : \"App\",\n" +
+            "    \"uid\" : null,\n" +
+            "    \"userData\" : \"M2fJVT3KbFL0Ri8WSjIOa2V6Dv4Ti+8D1ysKVFjcW966020Gjrd/lCTQTJxc3HQ9by82an4Q9IyPmOKmYfNL5PzjjPmjrLyQLgHn6hdUcLVhF8QO9whE5p+PE8Ewqn8dle5S8HjphXpJSn+ULwGeIaKZPJtijtN444w7wValnmwJqcnYo5oMnqYVLRS+GXqK2ilzQ5AJtUtT3Nw0VKv5b2E7O96vALKsxZYcgSR9UvzAleVdChHjmG+4v3O+ccSGOp2wpoLadBR+24xOG82S3S4FWj4liWYyIDIy92RcL/pUIVKgHAB/r7x8OpvjY16FS+Dfav9AS/HvNT0A2ocRBzU+60PL+sXSU8skYGYxUZezF+aZD39aekGGeNkUPIBYGyL9AD/URd7bpDliwrcGYHylhUx1eTZt5DgSfok6jHQ+/ijAcSst5hxdC8SlCBgCnvdIJlalkvMP80+R49KRWh+NQ2QdHLw7+x4SEN4/LAXtYUJseDvDj7ZPwGWOGd/RCcXkD3iwsoBEsnKFNR1CMaFqI2SDL84A4qi5VYTVpD8bYVrfC5mID6oJ5N9soeISaAwFM9OGauGZjF9Pm+eFwjk1nf19/Kr1PQ5oQ3XKxmdV1hE4GuVxoKOuDNPVuRCueTY9+03U2WQmwaudaI9a9A==\",\n" +
+            "    \"loggedInUserType\" : \"A\",\n" +
+            "    \"loggedInAgentCode\" : \"JC0A13387\"\n" +
+            "  },\n" +
+            "  \"confirmJourneyDetail\" : [ {\n" +
+            "    \"trainNameNo\" : \"12017/DDN SHTBDI EXP\",\n" +
+            "    \"doj\" : \"31-12-2025\",\n" +
+            "    \"class\" : \"CHAIR CAR\",\n" +
+            "    \"fromStation\" : \"NEW DELHI-NDLS\",\n" +
+            "    \"toStation\" : \"DEHRADUN-DDN\",\n" +
+            "    \"quota\" : \"General\",\n" +
+            "    \"boardingStation\" : \"NEW DELHI-NDLS\",\n" +
+            "    \"reservationUpTo\" : \"DEHRADUN-DDN\",\n" +
+            "    \"insurence\" : \"True\",\n" +
+            "    \"prefrence\" : \"LB\",\n" +
+            "    \"aotoUpgradeChoice\" : \"Yes\",\n" +
+            "    \"distance\" : \"315KM\",\n" +
+            "    \"departTime\" : \"NDLS -06:45\",\n" +
+            "    \"arrivalTime\" : \"DDN/12:55\",\n" +
+            "    \"duration\" : \"\"\n" +
+            "  } ],\n" +
+            "  \"paymentDetails\" : [ {\n" +
+            "    \"availableAmount\" : 8695.94,\n" +
+            "    \"payableAmount\" : 846.85,\n" +
+            "    \"remainingWalletAmount\" : 7849.09\n" +
+            "  } ],\n" +
+            "  \"availableblityDetail\" : [ {\n" +
+            "    \"avaialbleSeats\" : \"AVAILABLE-0659\",\n" +
+            "    \"avaialbleDate\" : \"31-12-2025\"\n" +
+            "  } ],\n" +
+            "  \"confirmPaxDetail\" : [ {\n" +
+            "    \"name\" : \"Testing \",\n" +
+            "    \"age\" : \"32\",\n" +
+            "    \"gender\" : \"Male\",\n" +
+            "    \"birthPrefrence\" : null,\n" +
+            "    \"seniorCitizen\" : \"No\",\n" +
+            "    \"senoirCitezenConsesion\" : null,\n" +
+            "    \"optBirth\" : null,\n" +
+            "    \"nationality\" : \"IN\",\n" +
+            "    \"idTypeNumber\" : \" /\"\n" +
+            "  } ],\n" +
+            "  \"confirmFareDetail\" : [ {\n" +
+            "    \"ticketFare\" : 765,\n" +
+            "    \"serviceCharge\" : 35.4,\n" +
+            "    \"agentServiceCharge\" : 40,\n" +
+            "    \"concession\" : 0,\n" +
+            "    \"pgCharge\" : 6.0,\n" +
+            "    \"totalFare\" : 846.85,\n" +
+            "    \"insurance\" : 0.45\n" +
+            "  } ],\n" +
+            "  \"finalBookingFareAndJourneyDetail\" : [ {\n" +
+            "    \"totalFare\" : 800.85,\n" +
+            "    \"wpServiceTax\" : 5.4,\n" +
+            "    \"wpServiceCharge\" : 30.0,\n" +
+            "    \"travelInsuranceCharge\" : 0.38,\n" +
+            "    \"travelInsuranceServiceTax\" : 0.07,\n" +
+            "    \"cateringCharge\" : 125,\n" +
+            "    \"journeyClass\" : \"CC\"\n" +
+            "  } ],\n" +
+            "  \"statusCode\" : \"00\",\n" +
+            "  \"statusMessage\" : \"Success\"\n" +
+            "}"
 }

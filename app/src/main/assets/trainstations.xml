@@ -33127,4 +33127,20 @@
         <stncode>YLG</stncode>
         <stnname>YALVIGI</stnname>
     </stationname>
+    <stationname>
+        <stncode>CPSN</stncode>
+        <stnname>CHHATRAPATI SAMBHAJINAGAR</stnname>
+    </stationname>
+    <stationname>
+        <stncode>NGRH</stncode>
+        <stnname>NEW GIRIDIH</stnname>
+    </stationname>
+    <stationname>
+        <stncode>GUGD</stncode>
+        <stnname>G GORKHNATH DHM</stnname>
+    </stationname>
+    <stationname>
+        <stncode>DRSV</stncode>
+        <stnname>DHARASHIV</stnname>
+    </stationname>
 </StationName>

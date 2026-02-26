@@ -39,6 +39,7 @@ class TrainBookingConfirmationFragment : Fragment() {
 
     var trainBookingRequest: TrainBookingRequest?=null
     var trainPreBookResponse: TrainPreBookResponse?=null
+    var otpAuthenticationFlag:String?=null
     var binding:FragmentTrainBookingConfirmationBinding?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,13 +54,20 @@ class TrainBookingConfirmationFragment : Fragment() {
         if(arguments!=null) {
             trainBookingRequest = requireArguments().getSerializable("trainRequest") as TrainBookingRequest
             trainPreBookResponse = requireArguments().getSerializable("trainPreBookResponse") as TrainPreBookResponse
+            otpAuthenticationFlag = requireArguments().getString("otpAuthenticationFlag")
             var fromStationTv: TextView =view.findViewById(R.id.fromStationTv)
             var toStationTv: TextView =view.findViewById(R.id.toStationTv)
             var dateTv: TextView =view.findViewById(R.id.dateTv)
             fromStationTv.text=trainBookingRequest!!.journeyDetails.get(0).fromStation
             toStationTv.text=trainBookingRequest!!.journeyDetails.get(0).toStation
             dateTv.text=trainBookingRequest!!.dateToSet
-//            aadharOtpDialog()
+            if(trainPreBookResponse!!.finalBookingFareAndJourneyDetail.get(0).aadhaarOTPBasedBooking.equals("true")){
+                aadharOtpDialog()
+            }else{
+                binding!!.otpLinear!!.visibility=View.GONE
+                binding!!.confirmBookingTv!!.visibility=View.VISIBLE
+//                aadharOtpDialog()
+            }
             setData(view)
         }
 
@@ -163,7 +171,7 @@ class TrainBookingConfirmationFragment : Fragment() {
     var resendOtpLin:LinearLayout?=null
     var timerTv:TextView?=null
     var otpView: TextInputLayout?=null
-    private fun aadharOtpDialog() {
+    private fun aadharOtpDialog1() {
         otpDialog = Dialog(requireContext(), R.style.Theme_Design_Light)
         otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
         otpDialog!!.setContentView(R.layout.aadhar_otp_dialog)
@@ -189,22 +197,43 @@ class TrainBookingConfirmationFragment : Fragment() {
         otpView!!.visibility=View.GONE
 
         generateOtpTv!!.setOnClickListener {
-            generateOtp()
+            generateOtp("")
         }
 
         otpDialog!!.show()
     }
+    private fun aadharOtpDialog() {
+        binding!!.generateOtpTv!!.visibility=View.VISIBLE
+        binding!!.otpLinear!!.visibility=View.VISIBLE
+        binding!!.irctcIdLin!!.visibility=View.VISIBLE
+        binding!!.passwordInput!!.visibility=View.VISIBLE
+        binding!!.resendOtpLin!!.visibility=View.GONE
+        binding!!.verifyOtpTv!!.visibility=View.GONE
+        binding!!.otpEdt!!.visibility=View.GONE
+        binding!!.confirmBookingTv!!.visibility=View.GONE
 
-    private fun generateOtp() {
+        binding!!.generateOtpTv!!.setOnClickListener {
+            var password=binding!!.passwordEdt.text.toString()
+            if(password.length<5){
+                Toast.makeText(requireContext(), "Please enter valid irctc password", Toast.LENGTH_SHORT).show()
+            }else{
+                generateOtp(password)
+            }
+        }
+        binding!!.agentIrctcId.text=MyPreferences.getLoginData(LoginModel(), context).Data.Agentid
+    }
+
+    private fun generateOtp(password:String) {
         var loginModel = LoginModel()
         loginModel = MyPreferences.getLoginData(loginModel, context)
-        Toast.makeText(requireContext(), "Generate OTP", Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), "Generate OTP", Toast.LENGTH_SHORT).show()
         val request = GenerateOtpRequest()
         request.reservationid = trainBookingRequest!!.TransactionId
         request.aadhaarConsent = "true"
         request.wsUserLogin = ""
+        request.irctcpassword = password
         val json = Gson().toJson(request)
-        NetworkCall().callService(NetworkCall.getTrainApiInterfaceTest()
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
             .getAdharOtp(ApiConstants.generateAuthentication, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
                 ApiConstants.MerchantId, /*loginModel!!.Data.UserId*/"","App", trainBookingRequest!!.userDate),
             context, true
@@ -226,7 +255,8 @@ class TrainBookingConfirmationFragment : Fragment() {
                     Toast.makeText(context,generateOtpResponse.statusMessage,Toast.LENGTH_SHORT).show();
                     showOtp(generateOtpResponse)
                 } else if (generateOtpResponse.statusCode != null) {
-                    Common.showResponsePopUp(context, generateOtpResponse.statusMessage)
+                    Common.showCommonAlertDialog(context, generateOtpResponse.statusMessage, "Api Response")
+//                    showOtp(generateOtpResponse)
                 } else {
                     Toast.makeText(
                         context, "Unable to generate OTP", Toast.LENGTH_SHORT
@@ -241,7 +271,7 @@ class TrainBookingConfirmationFragment : Fragment() {
         }
     }
 
-    private fun showOtp(generateOtpResponse: GenerateOtpResponse) {
+    private fun showOtp1(generateOtpResponse: GenerateOtpResponse) {
         object : CountDownTimer((generateOtpResponse.resendOTPTime*1000).toLong(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 resendOtpLin!!.visibility = View.VISIBLE
@@ -257,6 +287,87 @@ class TrainBookingConfirmationFragment : Fragment() {
         validateTv!!.visibility=View.VISIBLE
         otpView!!.visibility=View.VISIBLE
         resendOtpLin!!.visibility = View.VISIBLE
+    }
+    private fun showOtp(generateOtpResponse: GenerateOtpResponse) {
+        object : CountDownTimer((generateOtpResponse.resendOTPTime*1000).toLong(), 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                binding!!.resendOtpLin!!.visibility = View.VISIBLE
+                binding!!.timerTv!!.text = "Regenerate otp in :" +(millisUntilFinished/1000) + " seconds"
+                binding!!.generateOtpTv!!.isEnabled=false
+            }
+
+            override fun onFinish() {
+                binding!!.resendOtpLin!!.visibility = View.GONE
+                binding!!.generateOtpTv!!.isEnabled=true
+                binding!!.generateOtpTv!!.text="Re-Generate OTP"
+            }
+        }.start()
+        binding!!.verifyOtpTv.visibility=View.VISIBLE
+        binding!!.otpEdt.visibility=View.VISIBLE
+        binding!!.resendOtpLin!!.visibility = View.VISIBLE
+        binding!!.irctcIdLin!!.visibility = View.GONE
+        binding!!.passwordInput!!.visibility = View.GONE
+
+        binding!!.verifyOtpTv.setOnClickListener({
+            var otp=binding!!.otpEdt.text.toString()
+            if(otp.isEmpty()){
+                Toast.makeText(requireContext(), "Please enter OTP", Toast.LENGTH_SHORT).show()
+            }else if(otp.length<6){
+                Toast.makeText(requireContext(), "Please enter valid OTP", Toast.LENGTH_SHORT).show()
+            }else{
+                verifyOtp(otp)
+            }
+        })
+    }
+
+    private fun verifyOtp(otp:String) {
+        var loginModel = LoginModel()
+        loginModel = MyPreferences.getLoginData(loginModel, context)
+//        Toast.makeText(requireContext(), "Verify OTP $otp", Toast.LENGTH_SHORT).show()
+        val request = GenerateOtpRequest()
+        request.reservationid = trainBookingRequest!!.TransactionId
+        request.aadhaarConsent = "true"
+        request.wsUserLogin = ""
+        request.irctcpassword = binding!!.passwordEdt.text.toString()
+        request.otp = otp
+        request.captchaAns = otp
+        val json = Gson().toJson(request)
+        NetworkCall().callService(NetworkCall.getTrainApiInterface()
+            .getAdharOtp(ApiConstants.verifyAuthentication, request, loginModel!!.Data.DoneCardUser, loginModel!!.Data.UserType,
+                ApiConstants.MerchantId, /*loginModel!!.Data.UserId*/"","App", trainBookingRequest!!.userDate),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerVerifyOtp(response, responseCode)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerVerifyOtp(response: ResponseBody, responseCode: Int) {
+        try {
+            val generateOtpResponse = Gson().fromJson(response.string(), GenerateOtpResponse::class.java)
+            if (generateOtpResponse != null) {
+                if (generateOtpResponse.statusCode == "00") {
+                    Toast.makeText(context,generateOtpResponse.statusMessage,Toast.LENGTH_SHORT).show();
+                    binding!!.confirmBookingTv.visibility=View.VISIBLE
+                    binding!!.otpLinear.visibility=View.GONE
+                } else if (generateOtpResponse.statusCode != null) {
+                    Common.showCommonAlertDialog(context, generateOtpResponse.statusMessage, "Api Response")
+                } else {
+                    Toast.makeText(
+                        context, "Unable to verify OTP", Toast.LENGTH_SHORT
+                    ).show()
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: java.lang.Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
     }
 
 

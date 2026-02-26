@@ -557,7 +557,7 @@ public class JctMoneySenderDetailFragment extends Fragment implements View.OnCli
         final TextView tab4= dialog.findViewById(R.id.tab4);
         final TextView tab5= dialog.findViewById(R.id.tab5);
 
-        tab1.setBackgroundResource(R.drawable.blue_round_button_background);
+        tab1.setBackgroundResource(R.drawable.app_red_round_button_background);
         tab2.setBackgroundResource(R.drawable.blue_round_corner_button_background);
         tab3.setBackgroundResource(R.drawable.blue_round_corner_button_background);
         tab4.setBackgroundResource(R.drawable.blue_round_corner_button_background);
@@ -836,7 +836,7 @@ public class JctMoneySenderDetailFragment extends Fragment implements View.OnCli
     }
 
     private void tabClick(TextView tab1, TextView tab2, TextView tab3, TextView tab4, TextView tab5) {
-        tab1.setBackgroundResource(R.drawable.blue_round_button_background);
+        tab1.setBackgroundResource(R.drawable.app_red_round_button_background);
         tab2.setBackgroundResource(R.drawable.blue_round_corner_button_background);
         tab3.setBackgroundResource(R.drawable.blue_round_corner_button_background);
         tab4.setBackgroundResource(R.drawable.blue_round_corner_button_background);

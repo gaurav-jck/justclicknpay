@@ -197,6 +197,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
                             list.add(getQuota(trainResponse!!.quotaList!!.get(i)))
                         }
                     }
+//                    list.add(Tatkal)
                 } else {
                     list.add(General)
                 }

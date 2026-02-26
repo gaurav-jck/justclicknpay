@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.newaeps.Balance_Enquiry_Activity_N.AepsMiniResponse;
+import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity;
 
 import org.w3c.dom.Text;
 
@@ -20,9 +20,9 @@ public class MiniStatementAdapter extends RecyclerView.Adapter<MiniStatementAdap
 
     Context context;
     int count;
-    List<AepsMiniResponse.msDetails> detailsList;
+    List<AepsRegistrationActivity.AepsMiniResponse.msDetails> detailsList;
 
-    public MiniStatementAdapter(Context activity,  List<AepsMiniResponse.msDetails> infoList) {
+    public MiniStatementAdapter(Context activity,  List<AepsRegistrationActivity.AepsMiniResponse.msDetails> infoList) {
 
         this.context = activity;
         this.detailsList = infoList;

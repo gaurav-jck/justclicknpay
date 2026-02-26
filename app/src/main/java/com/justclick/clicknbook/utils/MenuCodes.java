@@ -122,6 +122,7 @@ public class MenuCodes {
   public static final String  BusSearch="Bus";
   //    public static final String  AEPS="Aeps";
   public static final String  AEPS="AAEPS";
+  public static final String  PAYOUT="PAYOUT";
   public static final String  AEPS_OLD ="AepsYes";
   public static final String  MATM="MATM";
   public static final String  CREDOPAY="CREDOPAY";
@@ -134,6 +135,7 @@ public class MenuCodes {
   public static final String  PAYTM="Wallet";
   public static final String  CREDIT="Credit Card";
   public static final String  CASHFREE_QR="QRCODE";
+  public static final String  QR_CODE2="QRCODE 2";
   public static final String  DYNAMIC_QR="Dynamic QRCode";
   public static final String  AgentChattingFragment="S0";
   public static final String  AgentDepositRequestFragment="DepositRequest";

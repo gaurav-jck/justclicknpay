@@ -3,6 +3,7 @@ package com.justclick.clicknbook;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.multidex.BuildConfig;
+import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.finopaytech.finosdk.helpers.FinoApplication;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -35,7 +37,7 @@ public class MyJckApplication extends MultiDexApplication {
         super.onCreate();
         instance = this;
 //        Fresco.initialize(this);
-       // FinoApplication.init(this);
+        FinoApplication.init(this);    //added 25/12/25
         FirebaseApp.initializeApp(MyJckApplication.this);
         firebaseRemoteConfig = FirebaseRemoteConfig.getInstance();
         firebaseRemoteConfig.setDefaultsAsync(R.xml.remote_config_defaults);
@@ -58,25 +60,12 @@ public class MyJckApplication extends MultiDexApplication {
                     }
                 });
 
-        /*firebaseRemoteConfig.fetch(60)
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(MyApplication.this, "Fetch Succeeded",
-                                    Toast.LENGTH_SHORT).show();
+    }
 
-                            // After config data is successfully fetched, it must be activated before newly fetched
-                            // values are returned.
-                            firebaseRemoteConfig.activateFetched();
-                        } else {
-                            Toast.makeText(MyApplication.this, "Fetch Failed",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                        displayWelcomeMessage();
-                    }
-                });
-*/
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(base);
     }
 
     @Override

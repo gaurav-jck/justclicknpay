@@ -35,7 +35,7 @@
         android:visibility="gone"
         android:textSize="@dimen/title_text_size"
         android:padding="@dimen/small_margin"
-        android:background="@drawable/blue_round_button_background"
+        android:background="@drawable/app_red_round_button_background"
         android:textColor="@color/color_white"
         android:layout_alignParentBottom="true"
         android:textStyle="bold"

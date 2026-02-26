@@ -359,7 +359,7 @@
                     android:textSize="@dimen/simple_content_text_size"
                     android:paddingTop="@dimen/medium_margin"
                     android:paddingBottom="@dimen/medium_margin"
-                    android:background="@drawable/blue_round_button_background"
+                    android:background="@drawable/app_red_round_button_background"
                     android:layout_marginRight="@dimen/small_margin"
                     />
 
@@ -368,7 +368,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/blue_round_button_background"
+                    android:background="@drawable/app_red_round_button_background"
                     android:text="@string/proceed"
                     android:textAllCaps="true"
                     android:textStyle="bold"

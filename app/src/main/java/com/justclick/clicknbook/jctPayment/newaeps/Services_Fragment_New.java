@@ -4,20 +4,19 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.android.volley.AuthFailureError;
@@ -26,8 +25,8 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
+import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.BankDetailsActivity;
@@ -36,6 +35,7 @@ import com.justclick.clicknbook.jctPayment.CashPayoutRequestActivity;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
 import com.justclick.clicknbook.model.LoginModel;
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
@@ -50,27 +50,39 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Services_Fragment_New extends Fragment implements View.OnClickListener {
+    ToolBarHideFromFragmentListener toolBarHideFromFragmentListener=null;
     private final int CASH_OUT=0, BANK_DETAILS=1;
     private final int BAL_ENQ=0, WITHDRAW=1, MINISTMT=2, AadharPay=3, REGISTER=4;
     private Context context;
     ProgressDialog progressDialog;
+    private String aepsPipe;
     private String partnerKey = "UFMwMDY4YTEyODZiZmExZWVmYzVhNTQ1MDJjYTBhN2YxNjYwNjk=";  //live
 //    private String partnerKey = "UFMwMDE2NDdiMWVhYzI1MzRiODUyNDBhYWY2NDk2Mzc4ODcxOTY0";
     private String partnerId = "PS0068";   //live
 //    private String partnerId = "PS00164";
+
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        toolBarHideFromFragmentListener= (ToolBarHideFromFragmentListener) context;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getActivity();
         progressDialog = new ProgressDialog(context);
+        aepsPipe=requireArguments().getString("aepsPipe");
+//        aepsPipe=requireArguments().getString("aepsPipe");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_services_, container, false);
-
+//        var binding= FragmentServicesBinding.inflate(inflater);
+        toolBarHideFromFragmentListener.onToolBarHideFromFragment(true);
         rootView.findViewById(R.id.img_cash_withdrawl).setOnClickListener(this);
         rootView.findViewById(R.id.img_balance_enquiry).setOnClickListener(this);
         rootView.findViewById(R.id.img_mini_stmt).setOnClickListener(this);
@@ -80,7 +92,26 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
         rootView.findViewById(R.id.img_bank_details).setOnClickListener(this);
         rootView.findViewById(R.id.img_onboard).setOnClickListener(this);
         rootView.findViewById(R.id.img_register).setOnClickListener(this);
+        rootView.findViewById(R.id.bankKyc1).setOnClickListener(this);
+        rootView.findViewById(R.id.bankKyc2).setOnClickListener(this);
+        rootView.findViewById(R.id.back_arrow).setOnClickListener(this);
 
+        if(aepsPipe.equals("bank2")){
+            ((TextView)rootView.findViewById(R.id.titleTv)).setText("Aeps1 Dashboard");
+            rootView.findViewById(R.id.bankKyc1).setVisibility(View.VISIBLE);
+            rootView.findViewById(R.id.bankKyc2).setVisibility(View.GONE);
+            ((TextView)rootView.findViewById(R.id.ekyc1Name)).setText("EKYC\nAeps1");
+        }else if(aepsPipe.equals("bank3")){
+            ((TextView)rootView.findViewById(R.id.titleTv)).setText("Aeps2 Dashboard");
+            rootView.findViewById(R.id.bankKyc1).setVisibility(View.GONE);
+            rootView.findViewById(R.id.bankKyc2).setVisibility(View.VISIBLE);
+            ((TextView)rootView.findViewById(R.id.ekyc2Name)).setText("EKYC\nAeps2");
+        }else if(aepsPipe.equals("bank6")){
+            ((TextView)rootView.findViewById(R.id.titleTv)).setText("Aeps3 Dashboard");
+            rootView.findViewById(R.id.bankKyc1).setVisibility(View.VISIBLE);
+            rootView.findViewById(R.id.bankKyc2).setVisibility(View.GONE);
+            ((TextView)rootView.findViewById(R.id.ekyc1Name)).setText("EKYC\nAeps3");
+        }
         return rootView;
     }
 
@@ -119,10 +150,23 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                 break;
             case R.id.img_register:
 //                checkKYC(REGISTER, URLs.CheckKyc);
-                startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new AepsRegistrationFragment(aepsPipe));
+//                startActivity(new Intent(getContext(), AepsRegistrationActivityNew.class));
                 break;
             case R.id.img_onboard:
                 onboardSdk();
+                break;
+            case R.id.bankKyc1:
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new AepsKyc1Bank2Fragment(aepsPipe));
+                break;
+            case R.id.bankKyc2:
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new AepsKyc2OTPFragment(aepsPipe));
+                break;
+            case R.id.back_arrow:
+                getParentFragmentManager().popBackStack();
                 break;
         }
     }
@@ -155,23 +199,34 @@ public class Services_Fragment_New extends Fragment implements View.OnClickListe
                             if(method.equals(URLs.CheckKyc)){
                                 if(commonResponseModel!=null && commonResponseModel.statusCode.equalsIgnoreCase("00")) {
                                     if(TYPE==BAL_ENQ){
-                                        Intent intent=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
-                                        intent.putExtra("TYPE","BE");
-                                        startActivity(intent);
+//                                        Intent intent=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
+//                                        intent.putExtra("TYPE","BE");
+//                                        startActivity(intent);
+                                        ((NavigationDrawerActivity)context).
+                                                replaceFragmentWithBackStack(new AepsBalanceMiniFragment("BE", aepsPipe));
                                     }else if(TYPE==WITHDRAW){
-                                        Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
+                                       /* Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
                                         intent.putExtra("TYPE","CW");
-                                        startActivity(intent);
+                                        intent.putExtra("aepsPipe",aepsPipe);
+                                        startActivity(intent);*/
+                                        ((NavigationDrawerActivity)context).
+                                                replaceFragmentWithBackStack(new AepsWithdrawAdharFragment("CW", aepsPipe));
                                     }else if(TYPE==AadharPay){
-                                        Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
+                                      /*  Intent intent=new Intent(getContext(),Cash_Withdrawl_Activity_N.class);
                                         intent.putExtra("TYPE","AP");
-                                        startActivity(intent);
+                                        intent.putExtra("aepsPipe",aepsPipe);
+                                        startActivity(intent);*/
+                                        ((NavigationDrawerActivity)context).
+                                                replaceFragmentWithBackStack(new AepsWithdrawAdharFragment("AP", aepsPipe));
                                     }else if(TYPE==REGISTER){
-                                        startActivity(new Intent(getContext(), AepsRegistrationActivity.class));
+                                        ((NavigationDrawerActivity)context).
+                                                replaceFragmentWithBackStack(new AepsRegistrationFragment(aepsPipe));
                                     }else {
-                                        Intent intent=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
-                                        intent.putExtra("TYPE","MS");
-                                        startActivity(intent);
+//                                        Intent intent=new Intent(getContext(),Balance_Enquiry_Activity_N.class);
+//                                        intent.putExtra("TYPE","MS");
+//                                        startActivity(intent);
+                                        ((NavigationDrawerActivity)context).
+                                                replaceFragmentWithBackStack(new AepsBalanceMiniFragment("MS", aepsPipe));
                                     }
                                 }else {
                                     Toast.makeText(context, commonResponseModel.statusMessage, Toast.LENGTH_SHORT).show();

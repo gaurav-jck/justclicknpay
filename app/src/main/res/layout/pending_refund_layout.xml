@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/margin_5dp"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Cancel"
             android:textColor="@color/color_white" />
 
@@ -83,7 +83,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_toRightOf="@+id/cancel_btn"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Submit"
             android:textColor="@color/color_white" />
 

@@ -280,7 +280,7 @@
             android:id="@+id/payBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Pay Bill"
             android:gravity="center"
             android:paddingLeft="@dimen/large_margin"

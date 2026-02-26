@@ -22,7 +22,7 @@ import okhttp3.ResponseBody;
 
 public class GetAepsCredential {
     private static boolean isGet;
-    private static void saveData(CheckResponseClass responseModel, Context context) {
+    public static void saveData(CheckResponseClass responseModel, Context context) {
         MyPreferences.saveAepsToken(responseModel.credentialData.get(0).token,context);
         MyPreferences.saveUserData(responseModel.credentialData.get(0).userData,context);
         MyPreferences.saveSessionKey(responseModel.credentialData.get(0).sessionKey,context);
@@ -62,7 +62,7 @@ public class GetAepsCredential {
                                 }else if(context instanceof Cash_Withdrawl_Activity_N){
                                     ((Cash_Withdrawl_Activity_N)context).captureData();
                                 }else if(context instanceof AepsRegistrationActivity){
-                                    ((AepsRegistrationActivity)context).captureData();
+                                    ((AepsRegistrationActivity)context).captureFaceData();
                                 }else {
                                     ((Cash_Withdrawl_Activity)context).captureData();
                                 }

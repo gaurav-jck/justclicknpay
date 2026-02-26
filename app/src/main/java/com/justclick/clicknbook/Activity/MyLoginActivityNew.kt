@@ -293,6 +293,8 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
 //                                loginModel.Data.DoneCardUser="JC0A39739"
 //                                loginModel.Data.DoneCardUser="JC0A13387"
 //                                loginModel.Data.DoneCardUser="JC0A47068"   // rahul.dave89
+//                                loginModel.Data.DoneCardUser="JC0A6943"   // agent
+//                                loginModel.Data.DoneCardUser="JC0A49239"   // agent
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)

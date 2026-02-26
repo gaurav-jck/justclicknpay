@@ -1,12 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.browser:browser:1.0.0@aar" external-system-id="GRADLE">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/4b81e12ce5c515f6a468048a4788afd3/transformed/browser-1.0.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/d780ef223f0475c750bd18f0f3175fc8/transformed/browser-1.0.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/4b81e12ce5c515f6a468048a4788afd3/transformed/browser-1.0.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/4b81e12ce5c515f6a468048a4788afd3/transformed/browser-1.0.0/res" />
-      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/4b81e12ce5c515f6a468048a4788afd3/transformed/browser-1.0.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/d780ef223f0475c750bd18f0f3175fc8/transformed/browser-1.0.0/res" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/d780ef223f0475c750bd18f0f3175fc8/transformed/browser-1.0.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/d780ef223f0475c750bd18f0f3175fc8/transformed/browser-1.0.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

@@ -126,7 +126,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Cancel"
             android:layout_marginRight="@dimen/small_margin"
             android:textColor="@color/color_white" />
@@ -136,7 +136,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Confirm"
             android:textColor="@color/color_white" />
 

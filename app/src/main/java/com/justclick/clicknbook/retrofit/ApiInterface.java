@@ -331,9 +331,8 @@ public interface ApiInterface {
     @POST("B2B/AdharPayment/{methodName}")
     Call<ResponseBody> aepsPostServiceN(@Path("methodName") String method, @Body Object data);
 
-    //    AEPS services new
-    @POST("b2b/AdharPayment/{methodName}")
-    Call<ResponseBody> aepsPostServiceNew(@Path("methodName") String method, @Body Object data);
+    @GET("B2B/AdharPayment/{methodName}")
+    Call<ResponseBody> getAepsBankList(@Path("methodName") String method);
 
     @POST("b2b/AdharPayment/{methodName}")
     @Headers({"Content-Type: application/json"})
@@ -346,6 +345,11 @@ public interface ApiInterface {
 
                                          @Part("RequestData") RequestBody partMap,
                                          @Part MultipartBody.Part file);
+
+    @POST("B2B/AdharPayment/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> getAepsHeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                        @Header("UserData") String userData, @Header("token") String token);
 
     //    train
     @GET("apiV1/RailEngine/{methodName}")
@@ -570,6 +574,12 @@ public interface ApiInterface {
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getQROTP(@Path("methodName") String method, @Body Object data,
                                 @Header("userData") String userData, @Header("Authorization") String token);
+
+//    Ease QR
+    @POST("api/v1/EaseBuzz/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getQR2(@Path("methodName") String method, @Body Object data,
+                                @Header("UserData") String userData, @Header("Authorization") String token);
 
     //MATM
     @POST("api_V1/PaymentEngine/{methodName}")

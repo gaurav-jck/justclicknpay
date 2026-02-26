@@ -33,8 +33,9 @@ public class ApiConstants
     public static final String BASE_URL_TRAIN_UAT="https://justrail.justclicknpay.com/";  //test
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
-    public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
-//    public static final String BASE_URL_AEPS_N="https://b2baepsapi.justclicknpay.com/";   // AEPS URL N test
+    public static final String BASE_URL_AEPS_N="https://b2baepsapi.justclicknpay.com/";   // AEPS URL N Live
+//    public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N Live
+    public static final String BASE_URL_AEPS_NTest="https://b2baepsapi.justclicknpay.com/";   // AEPS URL N test
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";
             public static final String BASE_URL_TPIN="https://uatmatm.justclicknpay.com/";  //test url
     public static final String BASE_URL_CREDIT="https://payout.justclicknpay.com/";
@@ -249,6 +250,7 @@ public class ApiConstants
     public static final String getPassenger="getPassenger";
     public static final String addagentgstdetails="addagentgstdetails";
     public static final String generateAuthentication="generateAuthentication";
+    public static final String verifyAuthentication="verifyAuthentication";
 
     //    Payout
     public static final String ValidateCredential="ValidateCredential";
@@ -265,6 +267,11 @@ public class ApiConstants
     public static final String Authentication="Authentication";
     public static final String VPACheck="VPACheck";
     public static final String cashfreedynamicQR="cashfreedynamicQR";
+
+    //    qr ease
+    public static final String AuthenticationQr2="AuthenticationQr2";
+    public static final String checkvpaease="checkvpaease";
+    public static final String createvpaease="createvpaease";
 
     //    LIC
     public static final String GenerateToken   ="GenerateToken";

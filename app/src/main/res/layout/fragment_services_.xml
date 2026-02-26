@@ -1,22 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".jctPayment.Fragments.Services_Fragment">
+    tools:context=".jctPayment.Fragments.Services_Fragment"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/large_margin"
-        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/rel_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/medium_margin">
+
+            <ImageView
+                android:id="@+id/back_arrow"
+                android:layout_width="@dimen/back_arrow_size"
+                android:layout_height="@dimen/back_arrow_size"
+                app:srcCompat="@drawable/arrow_left_back"
+                android:padding="@dimen/size_1dp"/>
+
+            <TextView
+                android:id="@+id/titleTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="Aeps Dashboard"
+                android:textColor="@color/color_white"
+                android:textSize="@dimen/title_text_size" />
+
+        </RelativeLayout>
+
 
         <TextView
-            android:layout_width="315dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
             android:text="@string/dash_board_services"
             android:background="@color/colorAEPSDashboardBlue"
             android:padding="@dimen/small_margin"
@@ -27,13 +52,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/img_cash_withdrawl"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -44,7 +72,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_cash_withdraw"
+                    android:text="Cash\nWithdraw"
                     android:textColor="@color/app_blue_color_light"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
@@ -54,8 +82,9 @@
 
             <LinearLayout
                 android:id="@+id/img_balance_enquiry"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -67,7 +96,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_balance_enquiry"
+                    android:text="Balance\nEnquiry"
                     android:textColor="@color/app_blue_color_light"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
@@ -77,8 +106,9 @@
 
             <LinearLayout
                 android:id="@+id/img_mini_stmt"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:gravity="center"
                 android:orientation="vertical"
@@ -91,7 +121,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_mini_stmt"
+                    android:text="Mini\nStatement"
                     android:textColor="@color/app_blue_color_light"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
@@ -103,11 +133,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp">
             <LinearLayout
                 android:id="@+id/img_adhar_pay"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:layout_marginTop="@dimen/large_margin"
                 android:gravity="center"
@@ -119,7 +152,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_aadhar_pay"
+                    android:text="Aadhar\nPay"
                     android:textColor="@color/app_blue_color_light"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
@@ -129,8 +162,9 @@
 
             <LinearLayout
                 android:id="@+id/img_register"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:layout_marginTop="@dimen/large_margin"
                 android:layout_marginLeft="@dimen/large_margin"
@@ -144,7 +178,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/title_activity_registration"
+                    android:text="AEPS Authentication"
                     android:textColor="@color/app_blue_color_light"
                     android:textSize="14sp"
                     android:textStyle="bold"
@@ -154,8 +188,9 @@
 
             <LinearLayout
                 android:id="@+id/img_onboard"
-                android:layout_width="@dimen/dashboard_icon_w"
+                android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
                 android:background="@drawable/aeps_border"
                 android:layout_marginLeft="@dimen/large_margin"
                 android:layout_marginTop="@dimen/large_margin"
@@ -174,6 +209,89 @@
                     android:textStyle="bold"
                     android:minLines="2"
                     android:gravity="center_horizontal"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:weightSum="3">
+            <LinearLayout
+                android:id="@+id/bankKyc1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/aeps_border"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/account_box_aeps"/>
+                <TextView
+                    android:id="@+id/ekyc1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EKYC\nBank1"
+                    android:textColor="@color/app_blue_color_light"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:minLines="2"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bankKyc2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/aeps_border"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/account_box_aeps"/>
+                <TextView
+                    android:id="@+id/ekyc2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EKYC\nBank2"
+                    android:textColor="@color/app_blue_color_light"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:minLines="2"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/aeps_border"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:orientation="vertical">
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/aeps_border"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:gravity="center"
+                android:visibility="invisible"
+                android:orientation="vertical">
+
             </LinearLayout>
         </LinearLayout>
 
@@ -311,5 +429,3 @@
         </LinearLayout>
 
     </LinearLayout>
-
-</ScrollView>

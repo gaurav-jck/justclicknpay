@@ -7,21 +7,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
+    <RelativeLayout
+        android:id="@+id/rel_top"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
         app:layout_constraintTop_toTopOf="parent"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:padding="@dimen/medium_margin">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/size_1dp"/>
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="AEPS Authentication"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/title_text_size" />
+
+    </RelativeLayout>
 
 <ScrollView
     android:layout_width="match_parent"
@@ -84,7 +93,7 @@
                 android:layout_weight="6"
                 android:digits="@string/mobile_digit"
                 android:maxLines="1"
-                android:maxLength="16"
+                android:maxLength="12"
                 android:inputType="number"
                 android:singleLine="true"
                 android:textColor="@color/colorText"
@@ -121,7 +130,8 @@
             android:textColor="@color/app_blue_color"
             android:layout_marginTop="@dimen/size_25dp"
             android:layout_marginLeft="@dimen/margin_2dp"
-            android:textSize="@dimen/text_size_14sp" />
+            android:textSize="@dimen/text_size_14sp"
+            android:visibility="gone"/>
 
         <Spinner
             android:id="@+id/spinnerDeviceType"
@@ -130,13 +140,15 @@
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginLeft="@dimen/small_margin"
             android:layout_marginRight="@dimen/small_margin"
+            android:visibility="gone"
             />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/size_1dp"
             android:layout_margin="@dimen/small_margin"
-            android:background="@color/text_dark_gray"/>
+            android:background="@color/text_dark_gray"
+            android:visibility="gone"/>
 
 
         <RadioGroup
@@ -180,10 +192,37 @@
 
         </RadioGroup>
 
+        <EditText
+            android:id="@+id/pid"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/colorText"
+            android:minLines="4"
+            android:textSize="10sp"
+            android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:scrollbars="vertical"
+            android:overScrollMode="always"
+            android:scrollbarStyle="insideInset"
+            android:visibility="gone"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aepsAuthenticationNote"
+            android:textColor="@color/grey_dark"
+            android:textSize="@dimen/text_size_13sp"
+            android:fontFamily="@font/museo_regular"
+            android:layout_marginTop="@dimen/margin_30dp"
+            />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_40dp"
+            android:layout_marginTop="@dimen/margin_10dp"
             android:gravity="center_horizontal">
 
             <Button
@@ -208,6 +247,32 @@
                 android:visibility="visible"
                 android:background="@drawable/button_shep"
                 android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rdDownloadLin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_30dp"
+            android:gravity="right|center"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/faceCaptureRdService"
+                android:textColor="@color/black_text_color"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/museo_regular"
+                />
+            <ImageView
+                android:id="@+id/downloadImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download_icon"
+                android:padding="@dimen/margin_2dp"
+                android:layout_marginLeft="@dimen/margin_2dp"
+                />
         </LinearLayout>
 
     </LinearLayout>

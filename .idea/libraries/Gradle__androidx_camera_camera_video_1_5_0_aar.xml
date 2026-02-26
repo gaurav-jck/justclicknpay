@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Gradle: androidx.camera:camera-video:1.5.0@aar" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/b1c253362e6b26fe030898fe52d6d4b0/transformed/jetified-camera-video-1.5.0/annotations.zip!/" />
+    </ANNOTATIONS>
+    <CLASSES>
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/b1c253362e6b26fe030898fe52d6d4b0/transformed/jetified-camera-video-1.5.0/res" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/b1c253362e6b26fe030898fe52d6d4b0/transformed/jetified-camera-video-1.5.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/b1c253362e6b26fe030898fe52d6d4b0/transformed/jetified-camera-video-1.5.0/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/androidx.camera/camera-video/1.5.0/a5f9a7fe548b3c8ba76084de8ae07370cb997f5a/camera-video-1.5.0-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.jdks/caches/modules-2/files-2.1/androidx.camera/camera-video/1.5.0/324d2672177f17b16105097624dce2f4764bcb8f/camera-video-1.5.0-samples-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

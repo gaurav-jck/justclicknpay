@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginRight="@dimen/margin_5dp"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:text="Submit"
             android:textColor="@color/color_white" />
 

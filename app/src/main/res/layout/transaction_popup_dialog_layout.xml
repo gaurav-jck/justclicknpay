@@ -115,7 +115,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:maxLength="@integer/pincode_maxLength"
+            android:maxLength="@integer/tpin_maxLength6"
             android:digits="@string/remarks_editText_digits"
             android:textColor="@color/app_blue_color"
             android:textColorHint="@color/login_hint_color_new"
@@ -138,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:gravity="center"
             android:layout_margin="@dimen/very_small_margin"
             android:padding="@dimen/small_margin"
@@ -150,11 +150,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/blue_round_button_background"
+            android:background="@drawable/app_red_round_button_background"
             android:gravity="center"
             android:layout_margin="@dimen/very_small_margin"
             android:padding="@dimen/small_margin"
-            android:text="Ok"
+            android:text="Submit"
             android:textColor="@color/color_white" />
 
     </LinearLayout>

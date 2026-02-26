@@ -81,7 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/rel_top"
-        android:layout_above="@+id/confirmBookingTv">
+        android:layout_above="@+id/bottomLinear">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -586,8 +586,8 @@
 
     </ScrollView>
 
-    <TextView
-        android:id="@+id/confirmBookingTv"
+    <LinearLayout
+        android:id="@+id/bottomLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -595,13 +595,163 @@
         android:layout_marginTop="@dimen/small_margin"
         android:layout_marginEnd="@dimen/small_margin"
         android:layout_marginBottom="@dimen/small_margin"
-        android:background="@drawable/blue_round_button_background"
-        android:backgroundTint="@color/app_blue_color"
-        android:gravity="center"
-        android:padding="@dimen/margin_7dp"
-        android:text="Confirm Booking"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/text_size_16sp" />
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/otpLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:background="#aaefefef"
+            >
+            <EditText
+                android:id="@+id/otpEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/verifyOtpTv"
+                android:textSize="@dimen/text_size_15sp"
+                android:background="@drawable/edittext_border_hotel"
+                android:layout_alignBottom="@id/verifyOtpTv"
+                android:layout_alignTop="@id/verifyOtpTv"
+                android:gravity="center"
+                android:maxLength="@integer/otp_maxLength6"
+                android:textColor="@color/black_text_color"
+                android:hint="Enter OTP"
+                android:visibility="visible"
+                />
+            <TextView
+                android:id="@+id/verifyOtpTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/app_red_round_button_background"
+                android:backgroundTint="@color/app_blue_color"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:paddingTop="@dimen/margin_5dp"
+                android:paddingBottom="@dimen/margin_5dp"
+                android:paddingLeft="@dimen/margin_7dp"
+                android:paddingRight="@dimen/margin_7dp"
+                android:text="Verify OTP"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:visibility="visible"
+                android:textSize="@dimen/text_size_16sp" />
+
+            <LinearLayout
+                android:id="@+id/irctcIdLin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/verifyOtpTv"
+                android:padding="@dimen/margin_2dp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IRCTC ID - "
+                    android:textColor="@color/black_text_color"
+                    android:visibility="visible"/>
+                <TextView
+                    android:id="@+id/agentIrctcId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="WS 1292292"
+                    android:textColor="@color/app_blue_color"
+                    android:textSize="@dimen/text_size_14sp"
+                    android:visibility="visible"/>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                app:passwordToggleEnabled="true"
+                android:layout_below="@+id/irctcIdLin"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:background="@drawable/edittext_border_hotel"
+                android:layout_marginTop="@dimen/margin_2dp">
+                <EditText
+                    android:id="@+id/password_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="8"
+                    android:layout_gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:padding="@dimen/padding_5dp"
+                    android:layout_margin="@dimen/very_small_margin"
+                    android:textColor="@color/login_text_color"
+                    android:textSize="@dimen/text_size_18sp"
+                    android:hint="Enter IRCTC password"
+                    android:text=""
+                    android:maxLength="15"
+                    android:inputType="textPassword"
+                    android:maxLines="1"
+                    android:longClickable="false"
+                    tools:ignore="Autofill"
+                    android:textColorHint="@color/login_hint_color_new"
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/generateOtpTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/app_red_round_button_background"
+                android:backgroundTint="@color/app_blue_color"
+                android:layout_below="@id/passwordInput"
+                android:layout_marginTop="@dimen/margin_7dp"
+                android:gravity="center"
+                android:padding="@dimen/margin_7dp"
+                android:text="Generate OTP"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_16sp" />
+            <LinearLayout
+                android:id="@+id/resendOtpLin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/generateOtpTv"
+                android:layout_gravity="right"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_centerHorizontal="true">
+                <TextView
+                    android:id="@+id/noOtpTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Did not receive OTP?"
+                    android:textColor="@color/app_blue_color"
+                    android:padding="@dimen/margin_2dp"
+                    android:visibility="visible"/>
+
+                <TextView
+                    android:id="@+id/timerTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Resend otp in 60 sec"
+                    android:textColor="@color/orange_color"
+                    app:layout_constraintLeft_toRightOf="@+id/noOtpTv"
+                    app:layout_constraintTop_toTopOf="@+id/noOtpTv"
+                    android:padding="@dimen/margin_2dp"
+                    android:layout_marginLeft="@dimen/margin_2dp"
+                    android:visibility="visible"/>
+
+            </LinearLayout>
+        </RelativeLayout>
+        <TextView
+            android:id="@+id/confirmBookingTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/app_red_round_button_background"
+            android:backgroundTint="@color/app_blue_color"
+            android:gravity="center"
+            android:padding="@dimen/margin_7dp"
+            android:text="Confirm Booking"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:textSize="@dimen/text_size_16sp" />
+    </LinearLayout>
 
 </RelativeLayout>

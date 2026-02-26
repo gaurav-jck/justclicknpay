@@ -324,7 +324,8 @@ class OtherDetailFragment : Fragment(), View.OnClickListener {
                 if (senderResponse.statusCode == "00") {
                     showResponsePopUp(senderResponse.statusMessage)
                 } else {
-                    Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(context, senderResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    Common.showCommonAlertDialog(context, senderResponse.statusMessage, "Api Response")
 //                    hideCustomDialog()
                 }
             } else {

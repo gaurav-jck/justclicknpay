@@ -285,6 +285,7 @@ private var filterDialog: Dialog? = null
 //        request.bookuserid="px‚ju}{j\u007Fnu|k}rIpvjru7lxv"   //staff
 //        request.bookuserid="{jsrr}{j\u007Fnu|Ipvjru7lxv"   // JC0A30527
 //        request.bookuserid="jwt~{7|qj{vjIs~|}lurlttj{x7lxv"   // JC0A13387
+//        request.bookuserid="}{j\u007Fnu|xu~}rxw|k‚vxmrIpvjru7lxv"   // jc0a49239
         request.fromdate=startDateToSend
         request.todate=endDateToSend
 //        filters

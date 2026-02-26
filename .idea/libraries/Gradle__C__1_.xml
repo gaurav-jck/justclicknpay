@@ -1,9 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: C (1)" external-system-id="GRADLE">
+    <ANNOTATIONS>
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/f0a207d7766f92aeb1d2e126538021bd/transformed/jetified-finosdk-release19Nov/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/a8f1b01d20a56e71df4a9e6ce56eae95/transformed/jetified-PS_MATM_2.0.2/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/a8f1b01d20a56e71df4a9e6ce56eae95/transformed/jetified-PS_MATM_2.0.2/res" />
-      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/a8f1b01d20a56e71df4a9e6ce56eae95/transformed/jetified-PS_MATM_2.0.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/f0a207d7766f92aeb1d2e126538021bd/transformed/jetified-finosdk-release19Nov/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.jdks/caches/8.13/transforms/f0a207d7766f92aeb1d2e126538021bd/transformed/jetified-finosdk-release19Nov/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.jdks/caches/8.13/transforms/f0a207d7766f92aeb1d2e126538021bd/transformed/jetified-finosdk-release19Nov/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

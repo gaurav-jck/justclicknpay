@@ -220,12 +220,14 @@ class TrainListAdapter(
                     responseString=responseString.replace("},\"bkgCfg", "}],\"bkgCfg")
                 }*/
 
-                val fareRuleResponse = parseDataManually(responseString)
-//                val fareRuleResponse = Gson().fromJson(responseString, FareRuleResponse::class.java)
-                mValues!!.get(position).fareRuleResponse=fareRuleResponse
-//                notifyDataSetChanged()
-                notifyItemChanged(position)
-//                fareRuleResponse(fareRuleResponse, holder, position)
+                var jsonObject= JSONObject(responseString)
+                if(jsonObject.has("errorMessage")){
+                    Toast.makeText(context, jsonObject.getString("errorMessage"), Toast.LENGTH_LONG).show()
+                }else{
+                    val fareRuleResponse = parseDataManually(responseString)
+                    mValues!!.get(position).fareRuleResponse=fareRuleResponse
+                    notifyItemChanged(position)
+                }
             } else {
                 Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
@@ -256,6 +258,11 @@ class TrainListAdapter(
             fareRuleResponse.serverId=jsonObject.getString("serverId")
         }else{
             fareRuleResponse.serverId=""
+        }
+        if(jsonObject.has("otpAuthenticationFlag")){
+            fareRuleResponse.otpAuthenticationFlag=jsonObject.getString("otpAuthenticationFlag")
+        }else{
+            fareRuleResponse.otpAuthenticationFlag="0"
         }
         fareRuleResponse.timeStamp=jsonObject.getString("timeStamp")
 

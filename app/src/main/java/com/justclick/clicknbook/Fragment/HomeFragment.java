@@ -53,6 +53,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
+import com.justclick.clicknbook.Fragment.qrcodeNew.QRCode2Fragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
@@ -70,6 +71,8 @@ import com.justclick.clicknbook.credopay.CredoPayActivityJava;
 import com.justclick.clicknbook.databinding.FragmentHomeBinding;
 import com.justclick.clicknbook.graphhome.GraphFragment;
 import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
+import com.justclick.clicknbook.jctPayment.newaeps.AepsSelectionDashboardFragment;
+import com.justclick.clicknbook.jctPayment.newaeps.Services_Fragment_New;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
@@ -273,7 +276,9 @@ public class HomeFragment extends Fragment {
                         replaceFragmentWithBackStack(new AirCancellationListFragment());
                 break;
             case MenuCodes.AEPS://20
-                startActivity(new Intent(context, Dashboard_New_Activity.class));
+                ((NavigationDrawerActivity)context).
+                        replaceFragmentWithBackStack(new AepsSelectionDashboardFragment());
+//                startActivity(new Intent(context, Dashboard_New_Activity.class));
 //                ((NavigationDrawerActivity)context).userLogin(true);
 //                ((NavigationDrawerActivity)context).checkAepsCredential();
                 break;
@@ -360,6 +365,10 @@ public class HomeFragment extends Fragment {
             case MenuCodes.DYNAMIC_QR://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                break;
+            case MenuCodes.QR_CODE2://43
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCode2Fragment());
                 break;
             case MenuCodes.TrainBookingList://44
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListNewFragment());

@@ -205,7 +205,7 @@
                     android:digits="@string/personName_editText_digits"
                     android:singleLine="true"
                     android:maxLines="1"
-                    android:inputType="text"
+                    android:inputType="text|textCapWords"
                     android:textColorHint="@color/registration_hint_color"
                     />
 

@@ -27,6 +27,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.response.DmtKycResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.SenderDetailResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentDmtKycBinding
+import com.justclick.clicknbook.jctPayment.newaeps.AepsConstants
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
@@ -53,20 +54,7 @@ class DmtKycFragment : Fragment() {
     private val FINGER_CAPTURE = 1
     private val FACE_CAPTURE = 2
     private final val CAPTURE_REQUEST_CODE = 123
-    private val MANTRA = "MANTRA"
-    private val MANTRA_L1 = "MANTRA_L1"
-    private val STARTEK = "STARTEK"
-    private val STARTEK_L1 = "STARTEK_L1"
-    private val MORPHO = "MORPHO"
-    private val MORPHO_L1 = "MORPHO_L1"
-    private val MANTRA_PACKAGE = "com.mantra.rdservice"
-    private val MANTRA_L1_PACKAGE = "com.mantra.mfs110.rdservice"
-    private val STARTEK_PACKAGE = "com.acpl.registersdk"
-    private val STARTEK_PACKAGE_L1 = "com.acpl.registersdk_l1"
-    private val MORPHO_PACKAGE = "com.scl.rdservice"
-    private val MORPHO_PACKAGE_L1 = "com.idemia.l1rdservice"
-    private val deviceArray = arrayOf("Mantra L1", "Mantra L0", "Morpho L1", "Morpho", "Startek", "Startek L1 (Access)")
-    var d_type = MANTRA_L1
+    var d_type = AepsConstants.MANTRA_L1
     var pidDataXML = "";
     private var captureType=FINGER_CAPTURE
     private var senderDetailResponse: SenderDetailResponse? = null
@@ -134,7 +122,7 @@ class DmtKycFragment : Fragment() {
             }
         }*/
 
-        binding!!.spinnerDeviceType.adapter=Common.getSpinnerAdapter(deviceArray, requireContext())
+        binding!!.spinnerDeviceType.adapter=Common.getSpinnerAdapter(AepsConstants.deviceArrayNew, requireContext())
         binding!!.spinnerDeviceType.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 adapterView: AdapterView<*>?,
@@ -143,12 +131,9 @@ class DmtKycFragment : Fragment() {
                 l: Long
             ) {
                 when (i) {
-                    0 -> d_type = MANTRA_L1
-                    1 -> d_type = MANTRA
-                    2 -> d_type = MORPHO_L1
-                    3 -> d_type = MORPHO
-                    4 -> d_type = STARTEK
-                    5 -> d_type = STARTEK_L1
+                    0 -> d_type = AepsConstants.MANTRA_L1
+                    1 -> d_type = AepsConstants.MORPHO_L1
+                    2 -> d_type = AepsConstants.STARTEK_L1
                 }
             }
 
@@ -164,40 +149,15 @@ class DmtKycFragment : Fragment() {
 
     fun captureData() {
         try {
-            if (d_type == STARTEK) {
-                if (searchPackageName(STARTEK_PACKAGE)) {
-//                    String pidOptXML = createPidOptXMLStartek();
-                    val pidOptXML: String = createPidOptXML()
-                    capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-                }
-            } else if (d_type == STARTEK_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                capture(STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
-            }else if (d_type == MANTRA) {
-                if (searchPackageName(MANTRA_PACKAGE)) {
-//                    String pidOptXML = getPIDOptions();
-//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
-                    val pidOptXML =
-                        "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                    capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-                }
-            } else if (d_type == MANTRA_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                capture(MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-            } else if (d_type == MORPHO) {
-                if (searchPackageName(MORPHO_PACKAGE)) {
-//                    String pidOptXML = createPidOptXML();  //old
-                    val pidOptXML: String = getPIDOptionsPay() //paysprint
-                    //                    String pidOptXML = getPIDOptionsPay2();  //paysprint2
-//                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
-                    capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-                }
-            }else if (d_type == MORPHO_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                capture(MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            if (d_type == AepsConstants.STARTEK_L1 ) {
+                val pidOptXML =getPidOptXml()
+                capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            }else if (d_type == AepsConstants.MANTRA_L1) {
+                val pidOptXML =getPidOptXml()
+                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+            } else if (d_type == AepsConstants.MORPHO_L1) {
+                val pidOptXML =getPidOptXml()
+                capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }
         } catch (e: Exception) {
             showMessageDialogue("EXCEPTION- " + e.message, "EXCEPTION")
@@ -338,104 +298,14 @@ class DmtKycFragment : Fragment() {
         }
     }
     private fun capture(packageName: String, pidOptXML: String, requestCode: Int) {
-//        sessionCheckMethod(false);
         val intent1 = Intent("in.gov.uidai.rdservice.fp.CAPTURE", null)
-        //String pidOptXML = getPIDOptions(); //working
         intent1.putExtra("PID_OPTIONS", pidOptXML)
         intent1.setPackage(packageName)
         startForResult.launch(intent1)
-//        startActivityForResult(intent1, requestCode)
     }
 
-    private fun getPIDOptionsPay(): String {
-
-        return "<?xml version=\"1.0\"?><PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" posh=\"UNKNOWN\" env=\"P\" /><CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts></PidOptions>"
-    }
-
-    // pid data xml for startek
-    private fun createPidOptXML(): String {
-        var tmpOptXml = ""
-        return try {
-            val fCount = "1"
-            val fType = "2"
-            val iCount = "0"
-            val iType = "0"
-            val pCount = "0"
-            val pType = "0"
-            val format = "0"
-            val pidVer = "2.0"
-            val timeout = "20000"
-            val otp = ""
-            //            String env = "PP";   //uat
-            val env = "P" //live
-            val wath = ""
-            val wadh = "18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw="
-            val posh = "UNKNOWN"
-            val docFactory = DocumentBuilderFactory.newInstance()
-            docFactory.isNamespaceAware = true
-            var docBuilder: DocumentBuilder? = null
-            docBuilder = docFactory.newDocumentBuilder()
-            val doc = docBuilder.newDocument()
-            doc.xmlStandalone = true
-            val rootElement = doc.createElement("PidOptions")
-            doc.appendChild(rootElement)
-            val opts = doc.createElement("Opts")
-            rootElement.appendChild(opts)
-            var attr = doc.createAttribute("fCount")
-            //attr.setValue(String.valueOf(fCountSel.getSelectedItem().toString()));
-            attr.value = fCount
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("fType")
-            attr.value = fType
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("iCount")
-            attr.value = iCount
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("iType")
-            attr.value = iType //change
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("pCount")
-            attr.value = pCount
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("pType")
-            attr.value = pType //change
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("format")
-            attr.value = format
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("pidVer")
-            attr.value = pidVer
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("timeout")
-            attr.value = timeout
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("otp")
-            attr.value = otp
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("env")
-            attr.value = env
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("wadh")
-            //attr.setValue("ONLY USE FOR E-KYC.");
-            attr.value = wadh
-            opts.setAttributeNode(attr)
-            attr = doc.createAttribute("posh")
-            attr.value = posh
-            opts.setAttributeNode(attr)
-            val transformerFactory = TransformerFactory.newInstance()
-            val transformer = transformerFactory.newTransformer()
-            transformer.setOutputProperty(OutputKeys.STANDALONE, "yes")
-            val source = DOMSource(doc)
-            val writer = StringWriter()
-            val result = StreamResult(writer)
-            transformer.transform(source, result)
-            tmpOptXml = writer.buffer.toString().replace("\n|\r".toRegex(), "")
-            tmpOptXml = tmpOptXml.replace("&lt;".toRegex(), "<").replace("&gt;".toRegex(), ">")
-            tmpOptXml
-        } catch (ex: java.lang.Exception) {
-            showMessageDialogue("EXCEPTION- " + ex.message, "EXCEPTION")
-            ""
-        }
+    private fun getPidOptXml(): String {
+        return "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" posh=\"UNKNOWN\" env=\"P\" /><CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
     }
 
     // show message
@@ -485,23 +355,9 @@ class DmtKycFragment : Fragment() {
         }else{
             params["isiris"] = "Face"
         }
-//        pidDataXML="test"
-        /*if (d_type.equals(MORPHO) || d_type.equals(STARTEK)) {
-//            params.put("Pid", pidDataXML.replace("\n", ""));  //.replace("\n","")
-            pidDataXML=pidDataXML.replace("\n", "")
-            params["Pid"]=pidDataXML
-        } else {
-//            params.put("Pid", ("<?xml version=\"1.0\"?>" + pidDataXML).replace("\n", ""));
-            pidDataXML=("<?xml version=\"1.0\"?>$pidDataXML").replace("\n", "")
-            params["Pid"]=pidDataXML
-        }*/
-        if (d_type.equals(MANTRA)){
-            pidDataXML=("<?xml version=\"1.0\"?>$pidDataXML").replace("\n", "")
-            params["Pid"]=pidDataXML
-        }else{
-            pidDataXML=pidDataXML.replace("\n", "")
-            params["Pid"]=pidDataXML
-        }
+
+        pidDataXML=pidDataXML.replace("\n", "")
+        params["Pid"]=pidDataXML
 
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_RAPIPAY).create(ApiInterface::class.java)
         val call = apiService.getRapipayFormHeader(ApiConstants.senderkyc, params, commonParams!!.userData, "Bearer "+commonParams!!.token)
@@ -531,47 +387,12 @@ class DmtKycFragment : Fragment() {
                         )
                     )
                 } else {
-                    Common.showResponsePopUp(requireContext(),commonResponse.statusMessage)
-                    /*val bundle = Bundle()
-                    bundle.putSerializable("commonParams", commonParams)
-                    (context as NavigationDrawerActivity).replaceFragmentWithBackStack(
-                        AddRemittanceFragment.newInstance(
-                            commonParams!!, "", ""
-                        )
-                    )*/
+                    Common.showCommonAlertDialog(requireContext(), commonResponse.statusMessage, "Api Response")
                 }
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
-    }
-
-    private fun searchPackageName(mPackageName: String): Boolean {
-        val packageManager: PackageManager = requireActivity().packageManager
-        val packageList = packageManager
-            .getInstalledPackages(PackageManager.GET_PERMISSIONS)
-        var isPackage = false
-        for (pl in packageList) {
-            if (pl.applicationInfo?.packageName == mPackageName) {
-                isPackage = true
-            }
-        }
-
-        if (!isPackage) {
-            val toast = Toast.makeText(
-                context,
-                "Please install ` Registered Device` Service.",
-                Toast.LENGTH_LONG
-            )
-            toast.setGravity(Gravity.TOP, 0, 0)
-            toast.show()
-            val intentPlay = Intent(Intent.ACTION_VIEW)
-            //intentPlay.setData(Uri.parse("market://details?id=com.acpl.registersdk"));
-            intentPlay.data = Uri.parse("market://details?id=$mPackageName")
-            startActivity(intentPlay)
-            return false
-        }
-        return true
     }
 
     private fun showCapture() {

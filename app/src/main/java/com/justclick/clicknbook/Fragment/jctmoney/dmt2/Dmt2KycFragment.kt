@@ -229,15 +229,9 @@ class Dmt2KycFragment : Fragment() {
 
     private fun hideCaptureView() {
         binding!!.captureLin.visibility=View.GONE
-        binding!!.radioGroup.visibility=View.GONE
-        binding!!.otpEdt.visibility=View.GONE
-        binding!!.rdDownloadLin.visibility=View.GONE
     }
     private fun showCaptureView() {
         binding!!.captureLin.visibility=View.VISIBLE
-        binding!!.radioGroup.visibility=View.VISIBLE
-        binding!!.otpEdt.visibility=View.VISIBLE
-        binding!!.rdDownloadLin.visibility=View.VISIBLE
         binding!!.validateLin.visibility=View.GONE
         binding!!.aadharEdt.isEnabled=false
     }
@@ -246,37 +240,28 @@ class Dmt2KycFragment : Fragment() {
         try {
             if (d_type == STARTEK) {
                 if (searchPackageName(STARTEK_PACKAGE)) {
-//                    String pidOptXML = createPidOptXMLStartek();
-                    val pidOptXML: String = createPidOptXML()
+//                    val pidOptXML: String = createPidOptXML()
+                    val pidOptXML: String = getPIDOptionsPay()
                     capture(STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
             } else if (d_type == STARTEK_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                val pidOptXML = getPIDOptionsPay();
                 capture(STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }else if (d_type == MANTRA) {
                 if (searchPackageName(MANTRA_PACKAGE)) {
-//                    String pidOptXML = getPIDOptions();
-//                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
-                    val pidOptXML =
-                        "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                    val pidOptXML = getPIDOptionsPay()
                     capture(MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
             }else if (d_type == MANTRA_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                val pidOptXML = getPIDOptionsPay();
                 capture(MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
             }  else if (d_type == MORPHO) {
                 if (searchPackageName(MORPHO_PACKAGE)) {
-//                    String pidOptXML = createPidOptXML();  //old
                     val pidOptXML: String = getPIDOptionsPay() //paysprint
-                    //                    String pidOptXML = getPIDOptionsPay2();  //paysprint2
-//                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
                     capture(MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
             }else if (d_type == MORPHO_L1) {
-                val pidOptXML =
-                    "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw=\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+                val pidOptXML: String = getPIDOptionsPay() //paysprint
                 capture(MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }
         } catch (e: Exception) {
@@ -674,7 +659,6 @@ class Dmt2KycFragment : Fragment() {
         binding!!.btnSubmit.setTextColor(resources.getColor(R.color.color_white,null))
         binding!!.btnSubmit.setBackgroundResource(R.drawable.button_shep)
         binding!!.btnSubmit.setAlpha(1f)
-        binding!!.otp.visibility=View.VISIBLE
     }
 
     private fun hideSubmit() {
@@ -682,7 +666,6 @@ class Dmt2KycFragment : Fragment() {
         binding!!.btnSubmit.setTextColor(getResources().getColor(R.color.black_text_color));
         binding!!.btnSubmit.setBackgroundResource(R.color.gray_color);
         binding!!.btnSubmit.setAlpha(0.4f);
-        binding!!.otp.visibility=View.INVISIBLE
     }
 
     companion object {

@@ -378,7 +378,9 @@ class AgentDepositRequestFragmentNewww : Fragment(), View.OnClickListener{
         var cameraImg=dialog.findViewById<ImageView>(R.id.cameraImg)
 
         galleryImg.setOnClickListener {
-            askSelfPermission2()
+//            askSelfPermission2()
+            // Launching the photo picker (photos & video included)
+            pickMedia.launch(PickVisualMediaRequest(ImageOnly))
             dialog.dismiss()
         }
         cameraImg.setOnClickListener {
@@ -690,6 +692,7 @@ class AgentDepositRequestFragmentNewww : Fragment(), View.OnClickListener{
                 Log.d("PhotoPicker", "No media selected")
             }
         }
+
 
     private fun selectFile() {
 //        Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);

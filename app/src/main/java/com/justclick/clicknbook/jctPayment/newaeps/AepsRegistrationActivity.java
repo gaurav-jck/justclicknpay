@@ -114,6 +114,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import kotlin.random.RandomKt;
 import okhttp3.ResponseBody;
 
 public class AepsRegistrationActivity extends AppCompatActivity{
@@ -254,7 +255,8 @@ public class AepsRegistrationActivity extends AppCompatActivity{
                 if (!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
                 } else {
-                    captureData();
+//                    captureData();
+                    captureFaceData();
                 }
             } else {
                 Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
@@ -270,7 +272,8 @@ public class AepsRegistrationActivity extends AppCompatActivity{
                 if (!isGetAgain) {
                     GetAepsCredential.checkAepsCredential(context);
                 } else {
-                    captureData();
+//                    captureData();
+                    captureFaceData();
                 }
             } else {
                 Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
@@ -318,6 +321,12 @@ public class AepsRegistrationActivity extends AppCompatActivity{
             public void afterTextChanged(Editable editable) {
 
             }
+        });
+
+        findViewById(R.id.rdDownloadLin).setOnClickListener(view -> {
+            Intent intentPlay = new Intent(Intent.ACTION_VIEW);
+            intentPlay.setData(Uri.parse("market://details?id=in.gov.uidai.facerd"));
+            startActivity(intentPlay);
         });
 
         getAdharNumber();
@@ -402,6 +411,77 @@ public class AepsRegistrationActivity extends AppCompatActivity{
         } catch (Exception e) {
             showMessageDialogue("EXCEPTION- " + e.getMessage(), "EXCEPTION");
         }
+    }
+
+    private ActivityResultLauncher<Intent> startForFaceResult = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+    result -> {
+        if (result.getResultCode() == Activity.RESULT_OK) {
+            // Handle the returned Intent here
+            Intent data = result.getData();
+            try {
+                if (data != null) {
+                    Bundle bundle = data.getExtras();
+                    if (bundle != null) {
+                        pidDataXML = bundle.getString("response").toString();
+                        if (pidDataXML != null) {
+//                            captureType=FACE_CAPTURE
+                            Toast.makeText(context, "Reading data", Toast.LENGTH_SHORT).show();
+                            readXMLData(pidDataXML);
+//                            Common.showResponsePopUp(requireContext(), response)
+                        }else{
+//                    handleFailure()
+                            Toast.makeText(context, "capture failed", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+//                handleFailure()
+                        Toast.makeText(context, "capture failed", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+//            handleFailure()
+                    Toast.makeText(context, "capture failed", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception ex) {
+                showMessageDialogue("Error:-" + ex.getMessage(), "EXCEPTION");
+                ex.printStackTrace();
+            }
+        } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+            showMessageDialogue("Cancelled", "Result");
+        }
+    });
+
+    public void captureFaceData() {
+        try {
+            Intent intent =new Intent("in.gov.uidai.rdservice.face.CAPTURE");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+//            Common.showCommonAlertDialog(requireContext(), createPidOptionForKUA(getRandomNumber(), "P"),"Face XML")
+            intent.putExtra(
+                    "request",
+                    createPidOptionForKUA(getRandomNumber(), "P")
+            );
+
+            startForFaceResult.launch(intent);
+        } catch (Exception e) {
+            showMessageDialogue("EXCEPTION- " + e.getMessage(), "EXCEPTION");
+        }
+    }
+    public String getRandomNumber() {
+        int start = 10000000;
+        int end = 99999999;
+        int number = RandomKt.Random(System.nanoTime()).nextInt(end - start + 1) + start;
+        return String.valueOf(number);
+    }
+    public String getWADH2() {
+//        return "sgydIC09zzy6f8Lb3xaAqzKquKe9lFcNR9uTvYxFp+A="
+        return "";
+    }
+    String LANGUAGE="";
+    public String createPidOptionForKUA(String txnId, String buildType) {
+        return createPidOptionsKUA(txnId, "auth", getWADH2(), buildType);
+    }
+    private final String createPidOptionsKUA(String txnId, String purpose, String wadh, String buildType) {
+        return "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PidOptions ver=\"1.0\" env=\"" + buildType + "\"><Opts fCount=\"1\" fType=\"2\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"\" wadh=\"" + wadh + "\" posh=\"\" /><CustOpts><Param name=\"txnId\" value=\"" + txnId + "\"/><Param name=\"purpose\" value=\"" + purpose + "\"/><Param name=\"language\" value=\"" + LANGUAGE + "\"/></CustOpts></PidOptions>";
     }
 
     private void hideCapture() {
@@ -677,12 +757,14 @@ public class AepsRegistrationActivity extends AppCompatActivity{
 //                    showMessageDialogue("Data captured", "Fingerprint data status");
                 } else {
                     String s_message = element2.getElementsByTagName("Resp").item(0).getAttributes().getNamedItem("errInfo").getNodeValue();
-                    showMessageDialogue(s_message, "Fingerprint data status");
+//                    showMessageDialogue(s_message, "Fingerprint data status");
+                    showMessageDialogue(s_message, "Face capture data status");
                 }
             }
 
         } catch (Exception e) {
             Log.e("Jobs", "Exception parse xml :" + e);
+            showMessageDialogue("Error:-" + e.getMessage(), "EXCEPTION");
 //            Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }

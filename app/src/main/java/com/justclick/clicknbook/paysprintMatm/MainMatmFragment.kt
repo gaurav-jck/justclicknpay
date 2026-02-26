@@ -1,12 +1,14 @@
 package com.justclick.clicknbook.paysprintMatm
 
 import android.Manifest
-import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothManager
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
 import android.util.Log
@@ -15,15 +17,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.example.matm.MatmHostActivity
 import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.R
+import com.justclick.clicknbook.databinding.ActivityMainRapipayBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
+import com.justclick.clicknbook.rapipayMatm.*
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
 import okhttp3.ResponseBody
@@ -31,15 +38,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
-import android.app.Activity.RESULT_OK
-import android.bluetooth.BluetoothManager
-import android.os.Build
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat.getSystemService
-import com.justclick.clicknbook.databinding.ActivityMainRapipayBinding
-import com.justclick.clicknbook.rapipayMatm.*
-import com.service.finopayment.Hostnew
-import java.lang.StringBuilder
 
 
 public class MainMatmFragment : Fragment() {
@@ -331,27 +329,20 @@ public class MainMatmFragment : Fragment() {
 
     private fun makeTxn() {
         try {
-            if (/*accessBluetoothDetails()!! &&*/ transactionType != null && !binding!!.inputAmount.text.toString().isEmpty()) {
-                val intent = Intent(requireContext(), Hostnew::class.java)
-                intent.putExtra("partnerId", partnerId)
-                intent.putExtra("apiKey", key)
-                intent.putExtra("transactionType", tType)
-                intent.putExtra("amount", binding!!.inputAmount.text.toString().trim())
-                intent.putExtra("merchantCode", agentCode)
-//                intent.putExtra("merchantCode", "JC0A36575")
-//                intent.putExtra("merchantCode", "JC0A45929")
-                intent.putExtra("remarks", "JCK Transaction")
-                intent.putExtra("mobileNumber", mobile)
-//                intent.putExtra("referenceNumber", getRandomString(5, chars))
-                intent.putExtra("referenceNumber", clientRefId)
-                intent.putExtra("latitude", "22.572646")
-                intent.putExtra("longitude", "88.363895")
-                intent.putExtra("subMerchantId", agentCode)
-//                intent.putExtra("subMerchantId", "JC0A36575")
-//                intent.putExtra("subMerchantId", "JC0A45929")
-                intent.putExtra("deviceManufacturerId", "3")
-                startActivityForResult(intent, 999)
-
+            if (transactionType != null && !binding!!.inputAmount.text.toString().isEmpty()) {
+                val intent = Intent(requireContext(), MatmHostActivity::class.java)
+                intent.putExtra("partnerid", partnerId);
+                intent.putExtra("partnerapikey", key);
+                intent.putExtra("submerchantid", agentCode);
+                intent.putExtra("mobile", mobile);
+                intent.putExtra("amount", binding!!.inputAmount.text.toString().trim());
+                intent.putExtra("remarks", "JCK Transaction");
+                intent.putExtra("latitude", "28.701201");
+                intent.putExtra("longitude", "77.102501");
+                intent.putExtra("txnid", clientRefId); // unique
+                intent.putExtra("ttype", tType);// ATMBE for balance enquiry & ATMCW for cash withdrawal
+                startForResult.launch(intent)
+//                startActivityForResult(intent, 999)
             } else {
                 Toast.makeText(activity, "First pair bluetooth and select type", Toast.LENGTH_LONG).show()
             }
@@ -400,58 +391,57 @@ public class MainMatmFragment : Fragment() {
 
     private val NEW_MATM_AEPS_Resposne = 150
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (data != null) {
-            when (requestCode) {
-                999 -> {
-                    val status = data.getBooleanExtra("status", false)
-                    val response1 = data.getIntExtra("response", 0)
-                    val message = data.getStringExtra("message")
-                    if (status) {
-                        try {
-                            val jsonObject =
-                                JSONObject(data.getStringExtra("JSONDATA").toString())
-                            var response=MATMResponse()
+    private val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+    { result: ActivityResult ->
+        if (result.resultCode == RESULT_OK) {
+            val data = result.data
+            try {
+                val status = data!!.getBooleanExtra("status", false)
+                val response1 = data!!.getIntExtra("response", 0)
+                val message = data!!.getStringExtra("message")
+                if (status) {
+                    try {
+                        val jsonObject =
+                            JSONObject(data.getStringExtra("data").toString())
+                        var response=MATMResponse()
 //                            succes.setVisibility(View.VISIBLE)
 //                            fail.setVisibility(View.GONE)
-                            response.status=status
-                            response.response=message
-                            response.message=message
-                            response.transType=jsonObject.getString("transType")
-                            response.type=jsonObject.getString("type")
-                            response.bankrrn=jsonObject.getString("bankRrn")
-                            response.balAmount=jsonObject.getString("balAmount")
-                            response.transAmount=jsonObject.getString("transAmount")
-                            response.txnid=jsonObject.getString("txnid")
-                            response.cardNumber=jsonObject.getString("cardNumber")
-                            response.cardType=jsonObject.getString("cardType")
-                            response.bankName=jsonObject.getString("bankName")
-                            response.terminalId=jsonObject.getString("terminalId")
-                            updateResponse(response)
-                            openReceipt(response)
-                            Toast.makeText(
-                                requireContext(),
-                                "" + message,
-                                Toast.LENGTH_LONG
-                            ).show()
-                            Log.d(" RESULTS", jsonObject.toString())
-                        } catch (jsonException: JSONException) {
-                            Log.d(" RESULTS", jsonException.toString())
-                            jsonException.printStackTrace()
-                        }
-                    }else{
-                        var response=MATMResponse()
                         response.status=status
                         response.response=message
-                        response.txnid=clientRefId
+                        response.message=message
+                        response.transType=jsonObject.getString("transType")
+                        response.type=jsonObject.getString("type")
+                        response.bankrrn=jsonObject.getString("bankRrn")
+                        response.balAmount=jsonObject.getString("balAmount")
+                        response.transAmount=jsonObject.getString("transAmount")
+                        response.txnid=jsonObject.getString("txnid")
+                        response.cardNumber=jsonObject.getString("cardNumber")
+                        response.cardType=jsonObject.getString("cardType")
+                        response.bankName=jsonObject.getString("bankName")
+                        response.terminalId=jsonObject.getString("terminalId")
                         updateResponse(response)
+                        openReceipt(response)
+                        Toast.makeText(
+                            requireContext(),
+                            "" + message,
+                            Toast.LENGTH_LONG
+                        ).show()
+                        Log.d(" RESULTS", jsonObject.toString())
+                    } catch (jsonException: JSONException) {
+                        Log.d(" RESULTS", jsonException.toString())
+                        jsonException.printStackTrace()
                     }
+                }else{
+                    var response=MATMResponse()
+                    response.status=status
+                    response.response=message
+                    response.txnid=clientRefId
+                    updateResponse(response)
                 }
+            } catch (ex: java.lang.Exception) {
+                Toast.makeText(context,  "EXCEPTION"+ex.message, Toast.LENGTH_LONG).show()
+                ex.printStackTrace()
             }
-        }
-        else{
-            Toast.makeText(context, "SYNC failed", Toast.LENGTH_SHORT).show()
         }
     }
 
