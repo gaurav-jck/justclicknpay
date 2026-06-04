@@ -76,7 +76,7 @@ public class AepsBalanceMiniFragment(Type: String, aepsPipe: String) : Fragment(
     var str_aadhar: String? = null
     var mobileNo: String? = null
     var pidDataXML = ""
-    var d_type = AepsConstants.MANTRA_L1
+    var d_type = AepsConstants.MANTRA
     var adharType:String? = AepsConstants.ADHAR_UID
     var captureType = Finger
     var TYPE = Type
@@ -200,9 +200,9 @@ public class AepsBalanceMiniFragment(Type: String, aepsPipe: String) : Fragment(
                 l: Long
             ) {
                 when (i) {
-                    0 -> d_type = AepsConstants.MANTRA_L1
-                    1 -> d_type = AepsConstants.MORPHO_L1
-                    2 -> d_type = AepsConstants.STARTEK_L1
+                    0 -> d_type = AepsConstants.MANTRA
+                    1 -> d_type = AepsConstants.MORPHO
+                    2 -> d_type = AepsConstants.STARTEK
                 }
             }
 
@@ -293,13 +293,13 @@ public class AepsBalanceMiniFragment(Type: String, aepsPipe: String) : Fragment(
     fun captureData() {
         isGetAgain = true
         try {
-            if (d_type == AepsConstants.STARTEK_L1 && validation()) {
+            if (d_type == AepsConstants.STARTEK && validation()) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
-            }else if (d_type == AepsConstants.MANTRA_L1 && validation()) {
+            }else if (d_type == AepsConstants.MANTRA && validation()) {
                 val pidOptXML =getPidOptXml()
-                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-            } else if (d_type == AepsConstants.MORPHO_L1 && validation()) {
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            } else if (d_type == AepsConstants.MORPHO && validation()) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }

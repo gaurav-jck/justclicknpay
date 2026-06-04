@@ -1,0 +1,187 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rel_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:padding="@dimen/small_margin">
+
+        <ImageView
+            android:id="@+id/back_arrow"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            app:srcCompat="@drawable/arrow_left_back"
+            android:padding="@dimen/very_small_margin"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verify Aadhar"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/color_white"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/small_margin"
+            android:layout_gravity="center_vertical"
+            card_view:cardBackgroundColor="@color/cardMobileBackground"
+            card_view:cardCornerRadius="4dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/very_small_margin"
+                android:layout_marginLeft="@dimen/small_margin"
+                android:layout_marginRight="@dimen/small_margin"
+                android:layout_marginTop="@dimen/small_margin"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                    <EditText
+                        android:id="@+id/mobileEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="6"
+                        android:hint="Mobile number"
+                        android:inputType="number"
+                        android:maxLength="@integer/aadharMaxLength"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:enabled="false"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/registration_hint_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/account_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginTop="@dimen/margin_10dp">
+
+                    <EditText
+                        android:id="@+id/aadharEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="6"
+                        android:hint="Aadhar number"
+                        android:inputType="number"
+                        android:maxLength="@integer/aadharMaxLength"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/registration_hint_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/otpView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                    android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/margin_10dp">
+
+                    <EditText
+                        android:id="@+id/otpEdt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="6"
+                        android:hint="Enter OTP"
+                        android:inputType="number"
+                        android:maxLength="6"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@color/app_blue_color"
+                        android:textColorHint="@color/registration_hint_color"
+                        android:textSize="@dimen/money_transfer_input_text_size" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/size_20dp">
+
+                    <TextView
+                        android:id="@+id/getOtpTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:background="@drawable/app_blue_round_button_background"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:paddingRight="@dimen/small_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:text="Get Aadhar OTP"
+                        android:maxLines="1"
+                        android:visibility="visible"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/color_white" />
+
+                    <TextView
+                        android:id="@+id/verifyOtpTv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                        android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                        android:background="@drawable/app_red_round5_button_background"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/small_margin"
+                        android:paddingRight="@dimen/small_margin"
+                        android:paddingTop="@dimen/medium_margin"
+                        android:paddingBottom="@dimen/medium_margin"
+                        android:text="Verify OTP"
+                        android:maxLines="1"
+                        android:textSize="@dimen/text_size_16sp"
+                        android:textColor="@color/color_white" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
+</LinearLayout>

@@ -715,6 +715,11 @@ Rs.40/-\n
     <string name="virtualIdError">Please enter 16 digits Virtual Id </string>
     <string name="withdraw_auth_note"><b>Note:</b> Agent is required to authenticate before completing a cash withdraw transaction as per the Vendor Rule</string>
 
+    <string name="download_face_rd"><u>Download Face RD Service</u></string>
+    <string name="download_mantra_rd"><u>Download Mantra RD Service</u></string>
+    <string name="download_morpho_rd"><u>Download Morpho RD Service</u></string>
+    <string name="download_startek_rd"><u>Download Startek RD Service</u></string>
+
     <!--Cash Transfer -->
     <string name="cash_transfer_enter_ifsc_code">ENTER IFSC CODE</string>
     <string name="select_type">SELECT TYPE NEFT/RTGS</string>

@@ -201,7 +201,7 @@ class TrainListsFragment : Fragment(), View.OnClickListener, ModifySearchDialog.
                 } else {
                     list.add(General)
                 }
-                if (list.indexOf(General) != 0) {
+                if (list.indexOf(General) != 0 && list.indexOf(General) != -1) {
                     var temp = list.get(0)
                     list[list.indexOf(General)] = temp
                     list[0] = General

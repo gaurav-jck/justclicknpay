@@ -8,5 +8,6 @@ public class FragmentTags
 {
     public static final String jctMoneySenderDetailFragment ="jctMoneySenderDetailFragment";
     public static final String dmt2SenderDetailFragment ="dmt2SenderDetailFragment";
+    public static final String InstaSenderDetailFragment ="InstaSenderDetailFragment";
     public static final String payoutSenderDetailFragment ="payoutSenderDetailFragment";
     }

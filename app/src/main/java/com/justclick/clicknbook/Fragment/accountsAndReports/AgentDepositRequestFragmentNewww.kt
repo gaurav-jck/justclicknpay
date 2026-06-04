@@ -778,6 +778,7 @@ class AgentDepositRequestFragmentNewww : Fragment(), View.OnClickListener{
     }
 
     private fun addAccount(model: AgentDepositRequestRequestModel) {
+        val json = Gson().toJson(model)
         NetworkCall().callService(
             NetworkCall.getDepositRequestInterface().depositRequest(
                 ApiConstants.AgentDepositRequest,
@@ -867,6 +868,29 @@ class AgentDepositRequestFragmentNewww : Fragment(), View.OnClickListener{
         )
 
         // MultipartBody.Part is used to send also the actual file name
+        return MultipartBody.Part.createFormData(paramName, imageFile.name, requestFile)
+    }
+
+    private fun sendFileNew(paramName: String, imageFile: File?): MultipartBody.Part? {
+        if (imageFile == null || !imageFile.exists()) return null
+
+        // Use BuildConfig.APPLICATION_ID to ensure it matches the Manifest authority
+        val authority = "${requireContext().packageName}.provider"
+
+        val uri = FileProvider.getUriForFile(
+            requireContext(),
+            authority,
+            imageFile
+        )
+
+        // Get the MIME type safely
+        val mimeType = requireContext().contentResolver.getType(uri) ?: "image/jpeg"
+
+        val requestFile = RequestBody.create(
+            mimeType.toMediaTypeOrNull(),
+            imageFile
+        )
+
         return MultipartBody.Part.createFormData(paramName, imageFile.name, requestFile)
     }
 

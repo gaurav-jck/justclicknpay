@@ -60,6 +60,7 @@ import com.justclick.clicknbook.network.SaveLogs
 import com.justclick.clicknbook.requestmodels.ForgetPasswordRequestModel
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.EncryptDecrypt
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.GenericKeyEvent
 import com.justclick.clicknbook.utils.GenericTextWatcher
@@ -202,12 +203,21 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
         if (validate(uName, uPass)) {
             try {
                 val loginRequestModel = LoginRequestModel()
-                loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(uName, context)
-                loginRequestModel.Password = EncryptionDecryptionClass.Encryption(uPass, context)
-                loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
+                loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(uName, context).replace("\n","")
+                loginRequestModel.Password = EncryptionDecryptionClass.Encryption(uPass, context).replace("\n","")
+                loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context).replace("\n","")
+//                loginRequestModel.UserId = EncryptDecrypt.encryption2(uName, context!!)
+//                loginRequestModel.Password = EncryptDecrypt.encryption2(uPass, context!!)
+//                loginRequestModel.DeviceId = EncryptDecrypt.encryption2(DID, context!!)
                 loginRequestModel.VersionCode = Common.getVersionCode(context)
+               /* val dec=EncryptDecrypt.decryption2(loginRequestModel.UserId.replace("\n",""), context!!)+"\n"+
+                        EncryptDecrypt.decryption2(loginRequestModel.Password.replace("\n",""), context!!)+"\n"+
+                        "Device Id-"+DID+"  dec-"+EncryptDecrypt.decryption2(loginRequestModel.DeviceId.replace("\n",""), context!!)
+//                Toast.makeText(context, dec, Toast.LENGTH_LONG).show()
+                Common.showCommonAlertDialog(context, dec, "Enc Dec")*/
                 if (otp != null) {
                     loginRequestModel.OTP = EncryptionDecryptionClass.Encryption(otp, context)
+//                    loginRequestModel.OTP = EncryptDecrypt.encryption2(otp, context!!)
                 }
                 var json = Gson().toJson(loginRequestModel);
 //                showCustomDialog()
@@ -220,8 +230,7 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
                         responseHandler(response, LOGIN_SERVICE)
                     } else {
 //                        hideCustomDialog()
-                        Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
                     }
                 }
             } catch (e: Exception) {
@@ -247,6 +256,9 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)
             loginRequestModel.Password = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginPassword(context), context)
             loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
+//            loginRequestModel.UserId = EncryptDecrypt.encryption2(MyPreferences.getLoginId(context), context!!)
+//            loginRequestModel.Password = EncryptDecrypt.encryption2(MyPreferences.getLoginPassword(context), context!!)
+//            loginRequestModel.DeviceId = EncryptDecrypt.encryption2(DID, context!!)
             loginRequestModel.VersionCode = Common.getVersionCode(context)
             showCustomDialog()
             NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
@@ -295,6 +307,9 @@ class MyLoginActivityNew : AppCompatActivity(), View.OnClickListener, ForceUpdat
 //                                loginModel.Data.DoneCardUser="JC0A47068"   // rahul.dave89
 //                                loginModel.Data.DoneCardUser="JC0A6943"   // agent
 //                                loginModel.Data.DoneCardUser="JC0A49239"   // agent
+//                                loginModel.Data.DoneCardUser="JC0A48087"   // agent
+//                                loginModel.Data.DoneCardUser="JC0A49530"   // agent
+//                                loginModel.Data.DoneCardUser="JC0A38369"   // agent
                                 MyPreferences.saveLoginData(loginModel, context)
                                 if (remember_me_checkbox!!.isChecked) {
                                     MyPreferences.rememberLogin(context)

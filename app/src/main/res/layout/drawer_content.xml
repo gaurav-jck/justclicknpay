@@ -258,6 +258,47 @@
                     app:tint="@color/grey_dark" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/salesCreditRequestLin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:paddingLeft="@dimen/large_margin"
+                android:paddingTop="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
+                android:visibility="visible"
+                android:orientation="horizontal"
+                android:background="@drawable/white_round_button_background"
+                >
+
+                <ImageView
+                    android:id="@+id/salesCreditImg"
+                    android:layout_width="@dimen/drawer_image_size"
+                    android:layout_height="@dimen/drawer_image_size"
+                    android:src="@drawable/ic_wallet_border"
+                    android:background="@drawable/solid_circle_drawer_background"/>
+
+                <TextView
+                    android:id="@+id/salesCreditRequestTv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Sales Credit Request"
+                    android:textSize="@dimen/drawer_content_text_size"
+                    android:textColor="@color/main_text_color"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/drawer_text_left_margin"/>
+
+                <ImageView
+                    android:layout_width="@dimen/drawer_arrow_size"
+                    android:layout_height="@dimen/drawer_arrow_size"
+                    app:srcCompat="@drawable/arrow_left_back"
+                    android:rotation="180"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/small_margin"
+                    app:tint="@color/grey_dark" />
+            </LinearLayout>
+
             <!--Menu item container-->
             <LinearLayout
                 android:id="@+id/menu_items_lin_container"

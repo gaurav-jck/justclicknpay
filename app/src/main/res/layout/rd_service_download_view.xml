@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_5dp"
+    android:layout_margin="@dimen/margin_2dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Please download RD service from below links"
+        android:textSize="@dimen/text_size_14sp"
+        android:textColor="@color/black_text_color"
+        />
+
+    <TextView
+        android:id="@+id/faceTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download_face_rd"
+        android:drawableRight="@drawable/download_icon"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/blue_color"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_2dp"
+        />
+
+    <TextView
+        android:id="@+id/mantraTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download_mantra_rd"
+        android:drawableRight="@drawable/download_icon"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/blue_color"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_2dp"
+        />
+
+    <TextView
+        android:id="@+id/morphoTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download_morpho_rd"
+        android:drawableRight="@drawable/download_icon"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/blue_color"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_2dp"
+        />
+    <TextView
+        android:id="@+id/startekTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/download_startek_rd"
+        android:drawableRight="@drawable/download_icon"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/blue_color"
+        android:layout_marginTop="@dimen/margin_5dp"
+        android:padding="@dimen/margin_2dp"
+        />
+
+</LinearLayout>

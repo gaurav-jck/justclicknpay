@@ -42,8 +42,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 158
-            versionName "1.10.6"
+            versionCode 161
+            versionName "1.10.9"
 //            applicationIdSuffix ".qa"
 
         }
@@ -237,6 +237,7 @@ dependencies {
 
 //    image compress
 //    implementation 'id.zelory:compressor:3.0.1'
+    implementation("com.journeyapps:zxing-android-embedded:4.3.0")
 
     //    implementation 'com.google.firebase:firebase-config:11.8.0'
     implementation 'com.google.firebase:firebase-config:19.0.3'

@@ -77,7 +77,7 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
     var str_amount: String? = null
     var mobileNo: String? = null
     var pidDataXML = ""
-    var d_type = AepsConstants.MANTRA_L1
+    var d_type = AepsConstants.MANTRA
     var adharType:String? = AepsConstants.ADHAR_UID
     var captureType = Finger
     var TYPE = Type
@@ -170,7 +170,7 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
             }else{
                 Common.hideSoftKeyboard(requireActivity())
                 if (!isGetAgain) {
-                    captureType=Finger
+                    captureType=Face
                     checkAepsCredential()
                 } else {
                     captureFaceData()
@@ -230,9 +230,9 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
                 l: Long
             ) {
                 when (i) {
-                    0 -> d_type = AepsConstants.MANTRA_L1
-                    1 -> d_type = AepsConstants.MORPHO_L1
-                    2 -> d_type = AepsConstants.STARTEK_L1
+                    0 -> d_type = AepsConstants.MANTRA
+                    1 -> d_type = AepsConstants.MORPHO
+                    2 -> d_type = AepsConstants.STARTEK
                 }
             }
 
@@ -323,13 +323,13 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
     fun captureData() {
         isGetAgain = true
         try {
-            if (d_type == AepsConstants.STARTEK_L1 && validation()) {
+            if (d_type == AepsConstants.STARTEK && validation()) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
-            }else if (d_type == AepsConstants.MANTRA_L1 && validation()) {
+            }else if (d_type == AepsConstants.MANTRA && validation()) {
                 val pidOptXML =getPidOptXml()
-                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-            } else if (d_type == AepsConstants.MORPHO_L1 && validation()) {
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            } else if (d_type == AepsConstants.MORPHO && validation()) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }
@@ -524,7 +524,7 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
         pidDataXML=pidDataXML.replace("\n", "")
         params["PId"] = pidDataXML
 
-//        binding.pid.setText(pidDataXML)
+//        binding.faceEdt.setText(pidDataXML)
 
         val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface::class.java)
         val call = apiService.getAepsHeaderMap(URL, params, MyPreferences.getUserData(context),
@@ -704,9 +704,11 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
                 } else {
                     val s_message = element2.getElementsByTagName("Resp")
                         .item(0).attributes.getNamedItem("errInfo").nodeValue
-                    showMessageDialogue(s_message, "Fingerprint data status");
-//                    showMessageDialogue(s_message, "Face capture data status")
-//                    showTransactionAlert()
+                    if(captureType.equals(Finger)) {
+                        showMessageDialogue(s_message, "Fingerprint data status")
+                    }else{
+                        showMessageDialogue(s_message, "Face capture data status")
+                    }
                 }
             }
         } catch (e: Exception) {

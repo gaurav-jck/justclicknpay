@@ -305,7 +305,7 @@ private var filterDialog: Dialog? = null
             if (response != null) {
                 responseHandlerList(response, request) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, resources.getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
             }
         }
     }

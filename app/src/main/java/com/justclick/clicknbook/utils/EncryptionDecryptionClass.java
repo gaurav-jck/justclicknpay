@@ -7,8 +7,11 @@ import com.justclick.clicknbook.R;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
+import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -20,13 +23,17 @@ public class EncryptionDecryptionClass {
 
   private static String shak="fnsddfnasfnadfnkdmfnd";
 
-  private static String getEncryptionKey(Context context) {
+  private static String getEncryptionKey() {
     String key="c9XAzmFaC4l5lmdsipTaJqMKjYu2lW0";
+    return key;
+  }
+  private static String getEncryptionKeyNew() {
+    String key="c9XAzmFaC4l5lmdsipTaJqMKjYu2lW00";
     return key;
   }
 
   private static String getSessionEncryptionKey(Context context) {
-//        return context.getResources().getString(R.String.google_api_key).subString(8);
+//        return context.getResources().getString(R.string.google_api_key).substring(2,34);
     return "nwA9gVUzpa0wFostuUWuPZmdiWci63o";
   }
 
@@ -34,7 +41,7 @@ public class EncryptionDecryptionClass {
     try {
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       byte[] keyBytes = new byte[16];
-      byte[] b = getEncryptionKey(context).getBytes("UTF-8");
+      byte[] b = getEncryptionKey().getBytes("UTF-8");
       int len = b.length;
       if (len > keyBytes.length)
         len = keyBytes.length;
@@ -51,6 +58,33 @@ public class EncryptionDecryptionClass {
     }
 
   }
+
+  public static String EncryptionNew(String text, Context context){
+    try {
+      byte[] plaintextBytes = text.replace("\n","").getBytes("UTF-8");
+      byte[] iv = new byte[12]; // GCM recommended IV size is 12 bytes
+      new SecureRandom().nextBytes(iv);
+
+      Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+      GCMParameterSpec spec = new GCMParameterSpec(128, iv); // 128-bit authentication tag
+      SecretKeySpec key = new SecretKeySpec(getEncryptionKey().getBytes("UTF-8"), "AES");
+      cipher.init(Cipher.ENCRYPT_MODE,key, spec);
+
+      byte[] ciphertext = cipher.doFinal(plaintextBytes);
+
+      // Combine IV and ciphertext/tag and encode to Base64 for storage/transmission
+      // The tag is automatically appended to the ciphertext in Java's GCM implementation
+      byte[] combined = new byte[iv.length + ciphertext.length];
+      System.arraycopy(iv, 0, combined, 0, iv.length);
+      System.arraycopy(ciphertext, 0, combined, iv.length, ciphertext.length);
+
+      return Base64.encodeToString(combined, Base64.DEFAULT);
+    }catch (Exception e){
+      return null;
+    }
+
+  }
+
 
   public static String EncryptSessionId(String text, Context context){
     try {
@@ -74,12 +108,16 @@ public class EncryptionDecryptionClass {
 
   }
 
+  public static String EncryptSessionIdNew(String text, Context context){
+    return Encryption(text, context);
+  }
+
   public static String Decryption(String text, Context context){
     try {
       Cipher cipher = Cipher.getInstance
               ("AES/CBC/PKCS5Padding"); //this parameters should not be changed
       byte[] keyBytes = new byte[16];
-      byte[] b = getEncryptionKey(context).getBytes("UTF-8");
+      byte[] b = getEncryptionKey().getBytes("UTF-8");
       int len = b.length;
       if (len > keyBytes.length)
         len = keyBytes.length;
@@ -98,24 +136,29 @@ public class EncryptionDecryptionClass {
     }
   }
 
-  public static final String deskey = "5b787793958d4f50d12c7da4";
-  public static String opensslEncrypt(String data) {
+  public static String DecryptionNew(String text, Context context){
     try {
-      String iv = "01234567";
-      byte[] key = deskey.getBytes();
+      byte[] decodedData = Base64.decode(text.replace("\n",""), Base64.DEFAULT);
 
-      Cipher cipher = Cipher.getInstance("DESede/CBC/PKCS5Padding");
-      IvParameterSpec aaa = new IvParameterSpec(iv.getBytes());
-      cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "DESede"), aaa);
+      // Extract IV (first 12 bytes)
+      byte[] iv = new byte[12];
+      System.arraycopy(decodedData, 0, iv, 0, iv.length);
 
-      byte[] results = cipher.doFinal(data.getBytes("UTF-8"));
+      // Extract the actual ciphertext and tag
+      int ciphertextLength = decodedData.length - 12;
+      byte[] ciphertext = new byte[ciphertextLength];
+      System.arraycopy(decodedData, 12, ciphertext, 0, ciphertextLength);
 
-      return Base64.encodeToString(results,0).replace("\n",""); // it returns the result as a String
-//        return  java.util.Base64.getEncoder().encodeToString(cipher.doFinal(data.getBytes()));
+      Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+      GCMParameterSpec spec = new GCMParameterSpec(128, iv);
+      SecretKeySpec key = new SecretKeySpec(getEncryptionKey().getBytes("UTF-8"), "AES");
+      cipher.init(Cipher.DECRYPT_MODE, key, spec);
+
+      byte[] decryptedBytes = cipher.doFinal(ciphertext);
+      return new String(decryptedBytes, "UTF-8");
     }catch (Exception e){
-      return "";
+      return null;
     }
-
   }
 
   static public String computeHash(String message) throws Exception {

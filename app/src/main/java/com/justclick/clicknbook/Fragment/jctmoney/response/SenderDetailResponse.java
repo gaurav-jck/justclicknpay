@@ -54,6 +54,12 @@ public class SenderDetailResponse implements Serializable {
         private String dob,gender,mobile,name,pin,state;
         private String stateResp;
 
+        public String getPidOptionWadh() {
+            return pidOptionWadh;
+        }
+
+        private String pidOptionWadh;
+
         public String getStateResp() {
             return stateResp;
         }

@@ -28,12 +28,14 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.ActivityAepsKycOtpBinding
 import com.justclick.clicknbook.jctPayment.Models.AepsKyc2GetOtpRequest
 import com.justclick.clicknbook.jctPayment.Models.AepsKyc2GetOtpResponse
+import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential
 import com.justclick.clicknbook.jctPayment.Utilities.URLs
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
 import com.justclick.clicknbook.retrofit.ApiInterface
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.MyCustomDialog
 import com.justclick.clicknbook.utils.MyPreferences
 import okhttp3.ResponseBody
 
@@ -45,6 +47,7 @@ class AepsKyc2OTPFragment(aepsPipe: String) : Fragment(), View.OnClickListener {
     var mLongitude= "77.5334789"
     var transactionId:String?=null
     var otpreqid:String?=null
+    private var isGetAgain = false
     var aepsPipe = aepsPipe
     var wadh="18f4CEiXeXcfGXvgWA/blxD+w2pw7hfQPY45JMytkPw="
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
@@ -77,7 +80,11 @@ class AepsKyc2OTPFragment(aepsPipe: String) : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when(v!!.id){
             R.id.getOtp->{
-                getOtp()
+                if (!isGetAgain) {
+                    checkAepsCredential()
+                } else {
+                    getOtp()
+                }
             }
             R.id.verifyOtp->{
                 val otp=binding!!.otpEdt.text.toString()
@@ -94,6 +101,49 @@ class AepsKyc2OTPFragment(aepsPipe: String) : Fragment(), View.OnClickListener {
             }
         }
     }
+
+    fun checkAepsCredential() {
+        val request = GetAepsCredential.CheckCredentialRequest()
+        val loginModel = LoginModel()
+        request.AgentCode = MyPreferences.getLoginData(loginModel, context).Data.DoneCardUser
+        MyCustomDialog.showCustomDialog(context, "Please wait...")
+        NetworkCall().callAepsServiceNew(
+            request, URLs.GenerateToken, context
+        ) { response: ResponseBody?, responseCode: Int ->
+            isGetAgain=false
+            if (response != null) {
+                try {
+                    val commonResponseModel =
+                        Gson().fromJson(
+                            response.string(),
+                            GetAepsCredential.CheckResponseClass::class.java
+                        )
+                    if (commonResponseModel != null && commonResponseModel.statusCode.equals(
+                            "00",
+                            ignoreCase = true
+                        )
+                    ) {
+                        GetAepsCredential.saveData(commonResponseModel, context)
+                        MyCustomDialog.hideCustomDialog()
+                        getOtp()
+                        isGetAgain = true
+                    } else {
+                        Toast.makeText(
+                            context,
+                            commonResponseModel!!.statusMessage,
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                } catch (e: java.lang.Exception) {
+                    MyCustomDialog.hideCustomDialog()
+                }
+            } else {
+                MyCustomDialog.hideCustomDialog()
+            }
+        }
+    }
+
 
     private fun getOtp() {
         var requestModel= AepsKyc2GetOtpRequest()

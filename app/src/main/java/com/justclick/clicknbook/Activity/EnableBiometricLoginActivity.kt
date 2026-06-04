@@ -55,6 +55,7 @@ import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.requestmodels.LoginRequestModel
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.EncryptDecrypt
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass
 import com.justclick.clicknbook.utils.GenericKeyEvent
 import com.justclick.clicknbook.utils.GenericTextWatcher
@@ -169,6 +170,9 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                 loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(uName, context)
                 loginRequestModel.Password = EncryptionDecryptionClass.Encryption(uPass, context)
                 loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
+//                loginRequestModel.UserId = EncryptDecrypt.encryption2(uName, context!!)
+//                loginRequestModel.Password = EncryptDecrypt.encryption2(uPass, context!!)
+//                loginRequestModel.DeviceId = EncryptDecrypt.encryption2(DID, context!!)
                 loginRequestModel.VersionCode = Common.getVersionCode(context)
                 if (otp != null) {
                     loginRequestModel.OTP = EncryptionDecryptionClass.Encryption(otp, context)
@@ -207,6 +211,9 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
             loginRequestModel.UserId = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginId(context), context)
             loginRequestModel.Password = EncryptionDecryptionClass.Encryption(MyPreferences.getLoginPassword(context), context)
             loginRequestModel.DeviceId = EncryptionDecryptionClass.Encryption(DID, context)
+//            loginRequestModel.UserId = EncryptDecrypt.encryption2(MyPreferences.getLoginId(context), context!!)
+//            loginRequestModel.Password = EncryptDecrypt.encryption2(MyPreferences.getLoginPassword(context), context!!)
+//            loginRequestModel.DeviceId = EncryptDecrypt.encryption2(DID, context!!)
             loginRequestModel.VersionCode = Common.getVersionCode(context)
             NetworkCall().callService(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.LOGIN,loginRequestModel),
                 context, true,
@@ -243,7 +250,7 @@ class EnableBiometricLoginActivity : AppCompatActivity(), View.OnClickListener, 
                 responseHandlerSession(response)
             } else {
                 hideCustomDialog()
-                //                        Toast./makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                //                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
             }
         }
     }

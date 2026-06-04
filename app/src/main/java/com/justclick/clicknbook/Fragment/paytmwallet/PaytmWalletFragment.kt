@@ -214,6 +214,7 @@ class PaytmWalletFragment : Fragment() {
     internal class CommonResponse{
         var statusCode: String? = null
         var statusMessage: String? = null
+        var status: Boolean? = null
     }
 
     internal class VerifyOtpResponse {

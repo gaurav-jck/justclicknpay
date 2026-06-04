@@ -7,15 +7,16 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.jck.myjckapp.ui.fragments.aeps.AepsDashboardFragment;
 import com.justclick.clicknbook.Activity.AirWebviewActivity;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
@@ -33,56 +34,51 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.AirRefundReportFragm
 import com.justclick.clicknbook.Fragment.accountsAndReports.AirSalesReportFragment;
 import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragment;
 import com.justclick.clicknbook.Fragment.billpay.BillPayMainPagerFragment;
+import com.justclick.clicknbook.Fragment.billpayinsta.InstaBillpayDashboardFragment;
 import com.justclick.clicknbook.Fragment.bus.BusTransactionListFragment;
-import com.justclick.clicknbook.Fragment.cashfreeQR.CashFreeQRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashfreeQR.QRCodeFragment;
 import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
-import com.justclick.clicknbook.Fragment.cashoutnew.PayoutBeneFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment;
-import com.justclick.clicknbook.Fragment.jctmoney.JctMoneyGetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
-import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2SenderDetailFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt3.Dmt3GetSenderFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaDmtDashboardFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaMerchantOnboardFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest;
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.qrcodeNew.QRCode2Fragment;
+import com.justclick.clicknbook.Fragment.qrupicash.QRUpiCashFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragment;
-import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
-import com.justclick.clicknbook.Fragment.train.TrainBookingListFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
-import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
 import com.justclick.clicknbook.Fragment.train.TrainSearchFragment;
-import com.justclick.clicknbook.FragmentTags;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.MenuItemsAdapter;
 import com.justclick.clicknbook.credopay.CredoPayActivityJava;
 import com.justclick.clicknbook.databinding.FragmentHomeBinding;
 import com.justclick.clicknbook.graphhome.GraphFragment;
-import com.justclick.clicknbook.jctPayment.Dashboard_New_Activity;
 import com.justclick.clicknbook.jctPayment.newaeps.AepsSelectionDashboardFragment;
-import com.justclick.clicknbook.jctPayment.newaeps.Services_Fragment_New;
 import com.justclick.clicknbook.model.LoginModel;
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener;
 import com.justclick.clicknbook.myinterface.ToolBarTitleChangeListener;
 import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.paysprintMatm.MainMatmFragment;
 import com.justclick.clicknbook.rapipayMatm.MatmTransactionListFragment;
+import com.justclick.clicknbook.utils.Common;
 import com.justclick.clicknbook.utils.Constants;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.justclick.clicknbook.utils.MyPreferences;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -90,6 +86,7 @@ import okhttp3.ResponseBody;
 
 public class HomeFragment extends Fragment {
 //    private RecyclerView recyclerView;
+    private final int DMT_INSTA=1, BILLPAY_INSTA=2, AEPS_INSTA=3;
     private ToolBarTitleChangeListener titleChangeListener;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private MenuItemsAdapter menuItemsAdapter;
@@ -192,6 +189,7 @@ public class HomeFragment extends Fragment {
         return mView;
     }
 
+    int productType=DMT_INSTA;
     public void sendMenuCode(String subMenuCode) {
         switch (subMenuCode) {
             case MenuCodes.UpdateCredit:      //1
@@ -227,10 +225,10 @@ public class HomeFragment extends Fragment {
                         replaceFragmentWithBackStack(new RechargeMainPagerFragment());
                 break;
             case MenuCodes.DMT://9
-//                ((NavigationDrawerActivity)context).checkMapping();
-//                startActivity(new Intent(context, MoneyTransferActivity.class));
-                ((NavigationDrawerActivity)context).
-                        replaceFragmentWithBackStack(new JctMoneyGetSenderFragment());
+                productType=DMT_INSTA;
+                getDMTCredentials();  // new for instapay
+//                ((NavigationDrawerActivity)context).
+//                        replaceFragmentWithBackStack(new JctMoneyGetSenderFragment());
                 break;
             case MenuCodes.DMT2://10
 //                ((NavigationDrawerActivity)context).checkMapping();
@@ -278,9 +276,10 @@ public class HomeFragment extends Fragment {
             case MenuCodes.AEPS://20
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new AepsSelectionDashboardFragment());
-//                startActivity(new Intent(context, Dashboard_New_Activity.class));
-//                ((NavigationDrawerActivity)context).userLogin(true);
-//                ((NavigationDrawerActivity)context).checkAepsCredential();
+                break;
+            case MenuCodes.AEPS2://20
+                productType=AEPS_INSTA;
+                getAepsCredentials();      // new change in aeps
                 break;
             case MenuCodes.AEPS_OLD://21
 //                startActivity(new Intent(context, Dashboard_New_Activity.class));
@@ -294,6 +293,8 @@ public class HomeFragment extends Fragment {
             case MenuCodes.JCTMoneyList://23
                 ((NavigationDrawerActivity)context).
                         replaceFragmentWithBackStack(new RapipayTransactionListFragment());
+//                ((NavigationDrawerActivity)context).
+//                        replaceFragmentWithBackStack(new InstaDmtTransactionListFragment());
                 break;
             case MenuCodes.PayoutList://24
                 ((NavigationDrawerActivity)context).
@@ -355,6 +356,10 @@ public class HomeFragment extends Fragment {
             case MenuCodes.BILL_PAY://40
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new BillPayMainPagerFragment());
                 break;
+            case MenuCodes.BILL_PAY2://40
+                productType=BILLPAY_INSTA;
+                getDMTCredentials();
+                break;
             case MenuCodes.PAYTM://41
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
                 break;
@@ -369,6 +374,10 @@ public class HomeFragment extends Fragment {
             case MenuCodes.QR_CODE2://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCode2Fragment());
+                break;
+            case MenuCodes.UPI_Cash://43
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
+                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRUpiCashFragment());
                 break;
             case MenuCodes.TrainBookingList://44
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new TrainBookingListNewFragment());
@@ -386,6 +395,192 @@ public class HomeFragment extends Fragment {
                 Toast.makeText(context,"Not working", Toast.LENGTH_SHORT).show();
 //                ((NavigationDrawerActivity)context).
 //                        replaceFragmentWithBackStack(new HomeFragment());
+        }
+    }
+
+    private void getDMTCredentials() {
+        LoginModel loginModel=new LoginModel();
+        loginModel= MyPreferences.getLoginData(loginModel,context);
+        CheckCredentialRequest request=new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+
+        new NetworkCall().callService(NetworkCall.getDmtInstaApiInterface().getInstaCredPost(ApiConstants.CheckCredential,
+                        request), context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerDmtCredential(response);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerDmtCredential(ResponseBody response) {
+        try {
+            CheckCredentialResponse senderResponse = new Gson().fromJson(response.string(), CheckCredentialResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.getStatusCode().equals("00")) {
+//                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    checkAgentOnboard(senderResponse.credentialData.get(0));
+                }else {
+                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_LONG).show();
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkAgentOnboard(CheckCredentialResponse.credentialData credentialData) {
+        LoginModel loginModel=new LoginModel();
+        loginModel= MyPreferences.getLoginData(loginModel,context);
+        CheckCredentialRequest request=new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+
+        new NetworkCall().callService(NetworkCall.getDmtInstaApiInterface().getDmtInstaHeader(ApiConstants.checkagentonboard,
+                        request, credentialData.getUserData(),"Bearer "+credentialData.getToken()), context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerOnboard(response, credentialData);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private String onboardString="{\n" +
+            "    \"statusCode\": \"00\",\n" +
+            "    \"statusMessage\": \"Agent Onboarded\",\n" +
+            "    \"status\": true\n" +
+            "}";
+    private void responseHandlerOnboard(ResponseBody response, CheckCredentialResponse.credentialData credentialData) {
+        try {
+            PaytmWalletFragment.CommonResponse senderResponse = new Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.getStatusCode().equals("00")) {
+//                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    if(productType==DMT_INSTA){
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("credentialResponse", credentialData);
+                        InstaDmtDashboardFragment instaFragment=new InstaDmtDashboardFragment();
+                        instaFragment.setArguments(bundle);
+                        ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(instaFragment);
+                    }else {
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("credentialResponse", credentialData);
+                        InstaBillpayDashboardFragment instaFragment=new InstaBillpayDashboardFragment();
+                        instaFragment.setArguments(bundle);
+                        ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(instaFragment);
+                    }
+                }else if(senderResponse.getStatusCode().equals("02")){
+                    merchantOnboardAlert(senderResponse.getStatusMessage(), credentialData);
+                }else {
+                    Common.showCommonAlertDialog(requireContext(), senderResponse.getStatusMessage(),"Api Response");
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+    private void merchantOnboardAlert(String statusMessage, CheckCredentialResponse.credentialData credentialData) {
+        // Create an alert builder
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Api response");
+        builder.setMessage(statusMessage);
+        builder.setCancelable(false);
+
+        // add a button
+        builder.setPositiveButton("Onboard now", (dialog, which) -> {
+            // send data from the AlertDialog to the Activity
+            ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(InstaMerchantOnboardFragment.newInstance(credentialData, productType));
+            dialog.dismiss();
+        });
+        // add a button
+        builder.setNegativeButton("Cancel", (dialog, which) -> {
+            // send data from the AlertDialog to the Activity
+            dialog.dismiss();
+//            getParentFragmentManager().popBackStack();
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void getAepsCredentials() {
+        LoginModel loginModel=new LoginModel();
+        loginModel= MyPreferences.getLoginData(loginModel,context);
+        CheckCredentialRequest request=new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+
+        new NetworkCall().callService(NetworkCall.getAepsInterface().aepsPostServiceN(ApiConstants.GenerateToken,
+                        request), context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerAepsCredential(response);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerAepsCredential(ResponseBody response) {
+        try {
+            CheckCredentialResponse senderResponse = new Gson().fromJson(response.string(), CheckCredentialResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.getStatusCode().equals("00")) {
+//                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    checkAepsAgentOnboard(senderResponse.credentialData.get(0));
+//                    checkAgentOnboard(senderResponse.credentialData.get(0));
+                }else {
+                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_LONG).show();
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void checkAepsAgentOnboard(CheckCredentialResponse.credentialData credentialData) {
+        LoginModel loginModel=new LoginModel();
+        loginModel= MyPreferences.getLoginData(loginModel,context);
+        CheckCredentialRequest request=new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+
+        new NetworkCall().callService(NetworkCall.getDmtInstaApiInterface().getDmtInstaHeader(ApiConstants.checkagentonboard,
+                        request, credentialData.getUserData(),"Bearer "+credentialData.getToken()), context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerAepsOnboard(response, credentialData);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void responseHandlerAepsOnboard(ResponseBody response, CheckCredentialResponse.credentialData credentialData) {
+        try {
+            PaytmWalletFragment.CommonResponse senderResponse = new Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse.class);
+            if(senderResponse!=null){
+                if(senderResponse.getStatusCode().equals("00")) {
+//                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(
+                            AepsDashboardFragment.Companion.newInstance(credentialData));
+                }else if(senderResponse.getStatusCode().equals("02")){
+                    merchantOnboardAlert(senderResponse.getStatusMessage(), credentialData);
+                }else {
+                    Common.showCommonAlertDialog(requireContext(), senderResponse.getStatusMessage(),"Api Response");
+                }
+            }else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+            }
+        }catch (Exception e){
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
         }
     }
 

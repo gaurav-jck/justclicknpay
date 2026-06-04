@@ -2,14 +2,12 @@ package com.justclick.clicknbook.Fragment.jctmoney
 
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,13 +35,7 @@ import org.w3c.dom.Element
 import org.w3c.dom.Node
 import java.io.ByteArrayInputStream
 import java.io.InputStream
-import java.io.StringWriter
-import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
-import javax.xml.transform.OutputKeys
-import javax.xml.transform.TransformerFactory
-import javax.xml.transform.dom.DOMSource
-import javax.xml.transform.stream.StreamResult
 import kotlin.random.Random
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,7 +46,7 @@ class DmtKycFragment : Fragment() {
     private val FINGER_CAPTURE = 1
     private val FACE_CAPTURE = 2
     private final val CAPTURE_REQUEST_CODE = 123
-    var d_type = AepsConstants.MANTRA_L1
+    var d_type = AepsConstants.MANTRA
     var pidDataXML = "";
     private var captureType=FINGER_CAPTURE
     private var senderDetailResponse: SenderDetailResponse? = null
@@ -131,9 +123,9 @@ class DmtKycFragment : Fragment() {
                 l: Long
             ) {
                 when (i) {
-                    0 -> d_type = AepsConstants.MANTRA_L1
-                    1 -> d_type = AepsConstants.MORPHO_L1
-                    2 -> d_type = AepsConstants.STARTEK_L1
+                    0 -> d_type = AepsConstants.MANTRA
+                    1 -> d_type = AepsConstants.MORPHO
+                    2 -> d_type = AepsConstants.STARTEK
                 }
             }
 
@@ -149,13 +141,13 @@ class DmtKycFragment : Fragment() {
 
     fun captureData() {
         try {
-            if (d_type == AepsConstants.STARTEK_L1 ) {
+            if (d_type == AepsConstants.STARTEK ) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
-            }else if (d_type == AepsConstants.MANTRA_L1) {
+            }else if (d_type == AepsConstants.MANTRA) {
                 val pidOptXML =getPidOptXml()
-                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
-            } else if (d_type == AepsConstants.MORPHO_L1) {
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            } else if (d_type == AepsConstants.MORPHO) {
                 val pidOptXML =getPidOptXml()
                 capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             }

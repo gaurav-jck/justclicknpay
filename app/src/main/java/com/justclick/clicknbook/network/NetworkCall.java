@@ -1163,7 +1163,47 @@ public class NetworkCall {
                 hideCustomDialog();
                 responseBody=null;
                 retrofitResponseListener.onRetrofitResponse(null,0);
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
+            }
+
+        });
+    }
+
+    public void callServiceNoMessage(Call<ResponseBody> responseBodyCall,
+                            final Context context, boolean isDialog, RetrofitResponseListener listener) {
+        this.context=context;
+        retrofitResponseListener= listener;
+        if(isDialog){
+            showCustomDialog();}
+        responseBodyCall.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try{
+                    hideCustomDialog();
+//                    if(response.code()==401) {
+//                        JsonObject object = new JsonObject(response.body().toString());
+//                        String body=object.getString("msgDesc");
+//                    }
+                    if(response.code()==200){
+                        responseBody=response.body();
+                    }else {
+                        responseBody=response.errorBody();
+//                        Log.d("Response------", responseBody.string());
+                    }
+                    retrofitResponseListener.onRetrofitResponse(responseBody,response.code());
+                }catch (Exception e){
+                    responseBody=null;
+                    hideCustomDialog();
+                    retrofitResponseListener.onRetrofitResponse(responseBody,0);
+//                    Toast.makeText(context, R.string.exception_message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideCustomDialog();
+                responseBody=null;
+                retrofitResponseListener.onRetrofitResponse(null,0);
+//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_LONG).show();
             }
 
         });
@@ -1602,6 +1642,12 @@ public class NetworkCall {
     }
     public static ApiInterface getDmt3ApiInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_UAT_REMMIT).create(ApiInterface.class);
+    }
+    public static ApiInterface getDmtInstaApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_INSTAPAY).create(ApiInterface.class);
+    }
+    public static ApiInterface getSalesApiInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_SALES).create(ApiInterface.class);
     }
     public static ApiInterface getLocationUpdateInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);

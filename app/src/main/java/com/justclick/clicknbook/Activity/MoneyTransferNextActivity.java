@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
-import com.justclick.clicknbook.Fragment.rblDmt.MoneyTransferNextHomeFragment;
 import com.justclick.clicknbook.Fragment.rblDmt.MoneyTransferRefundFragment;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.LoginModel;
@@ -64,7 +63,6 @@ public class MoneyTransferNextActivity extends AppCompatActivity implements View
         }
     }
     private void initializeViews() {
-        moneyTransferNextHomeFragment=new MoneyTransferNextHomeFragment();
         moneyTransferRefundFragment = new MoneyTransferRefundFragment();
         lin_home= findViewById(R.id.lin_home);
         lin_refund=  findViewById(R.id.lin_refund);
@@ -249,7 +247,7 @@ public class MoneyTransferNextActivity extends AppCompatActivity implements View
                     RblCommonResponse rblCommonResponse = new Gson().fromJson(response.string(), RblCommonResponse.class);
                     if(rblCommonResponse!=null && rblCommonResponse.status == 0) {
                         MyPreferences.logoutUser(context);
-                        Intent intent = new Intent(getApplicationContext(), MyLoginActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MyLoginActivityNew.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         Toast.makeText(context, R.string.appSession, Toast.LENGTH_SHORT).show();

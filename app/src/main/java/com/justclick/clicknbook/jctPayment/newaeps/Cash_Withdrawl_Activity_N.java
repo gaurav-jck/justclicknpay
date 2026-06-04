@@ -8,7 +8,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -21,7 +20,6 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -32,21 +30,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.window.OnBackInvokedDispatcher;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.os.BuildCompat;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -54,45 +47,28 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.LocationSettingsRequest;
-import com.google.android.gms.location.LocationSettingsResult;
-import com.google.android.gms.location.LocationSettingsStates;
-import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.gson.Gson;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.Models.Opts;
-import com.justclick.clicknbook.jctPayment.Models.PidOptions;
 import com.justclick.clicknbook.jctPayment.Models.UpdateLocationRequest;
 import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton;
 import com.justclick.clicknbook.model.LoginModel;
-import com.justclick.clicknbook.network.NetworkCall;
 import com.justclick.clicknbook.utils.Common;
-import com.justclick.clicknbook.utils.MyCustomDialog;
 import com.justclick.clicknbook.utils.MyPreferences;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -100,8 +76,6 @@ import org.w3c.dom.NodeList;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,13 +83,6 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import okhttp3.ResponseBody;
 
 public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
     private FusedLocationProviderClient fusedLocationClient;
@@ -134,7 +101,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
     private Spinner spinnerDeviceType;
     String pidDataXML;
     ProgressDialog progressDialog;
-    String d_type = AepsConstants.MANTRA_L1, adharType = AepsConstants.ADHAR_UID;
+    String d_type = AepsConstants.MANTRA, adharType = AepsConstants.ADHAR_UID;
     private ArrayList<String> positions;
     int TYPE = CASH_WITH;
     String URL, AuthUrl=URLs.WithdrawAuth;
@@ -207,13 +174,13 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i) {
                     case 0:
-                        d_type = AepsConstants.MANTRA_L1;
+                        d_type = AepsConstants.MANTRA;
                         break;
                     case 1:
                         d_type = AepsConstants.MANTRA;
                         break;
                     case 2:
-                        d_type = AepsConstants.MORPHO_L1;
+                        d_type = AepsConstants.MORPHO;
                         break;
                     case 3:
                         d_type = AepsConstants.MORPHO;
@@ -222,7 +189,7 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
                         d_type = AepsConstants.STARTEK;
                         break;
                     case 5:
-                        d_type = AepsConstants.STARTEK_L1;
+                        d_type = AepsConstants.STARTEK;
                         break;
                 }
             }
@@ -442,32 +409,32 @@ public class Cash_Withdrawl_Activity_N extends AppCompatActivity  {
         isGetAgain = true;
         try {
             if (d_type.equals(AepsConstants.STARTEK) && validation()) {
-                if (searchPackageName(AepsConstants.STARTEK_PACKAGE)) {
+                if (searchPackageName(AepsConstants.STARTEK_PACKAGE_L1)) {
 //                    String pidOptXML = createPidOptXMLStartek();
                     String pidOptXML = XMLGenerator.createPidOptXML();
-                    capture(AepsConstants.STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            } else if (d_type.equals(AepsConstants.STARTEK_L1) && validation()) {
+            } else if (d_type.equals(AepsConstants.STARTEK) && validation()) {
                 String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                 capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
             }else if (d_type.equals(AepsConstants.MANTRA) && validation()) {
-                if (searchPackageName(AepsConstants.MANTRA_PACKAGE)) {
+                if (searchPackageName(AepsConstants.MANTRA_PACKAGE_L1)) {
 //                    String pidOptXML = getPIDOptions();
 //                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                     String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
-                    capture(AepsConstants.MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            }  else if (d_type.equals(AepsConstants.MANTRA_L1) && validation()) {
+            }  else if (d_type.equals(AepsConstants.MANTRA) && validation()) {
                 String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
-                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
             } else if (d_type.equals(AepsConstants.MORPHO) && validation()) {
-                if (searchPackageName(AepsConstants.MORPHO_PACKAGE)) {
+                if (searchPackageName(AepsConstants.MORPHO_PACKAGE_L1)) {
                     String pidOptXML = XMLGenerator.createPidOptXML();  //old
 //                    String pidOptXML = getPIDOptions();   // change
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
-                    capture(AepsConstants.MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE);
+                    capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
                 }
-            }else if (d_type.equals(AepsConstants.MORPHO_L1) && validation()) {
+            }else if (d_type.equals(AepsConstants.MORPHO) && validation()) {
                 String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                 capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE);
             }

@@ -10,10 +10,12 @@ public class ApiConstants
     //    public static final String BASE_URL_LIVE_OLD ="https://ms.justclickkaro.com/";
     public static final String BASE_URL_TEST="http://uatms.justclicknpay.com/";
     public static final String BASE_URL_LIVE="https://ams.justclicknpay.com/";  // live app url
+//    public static final String BASE_URL_LIVE="https://justrail.justclicknpay.com/";  // vapt testing  url
     public static final String BASE_URL=BASE_URL_LIVE;
     public static final String BASE_URL_UAT_LOGIN="https://wlremittance.justclicknpay.com/";
 //    public static final String BASE_URL_UAT_LOGIN_NEW="https://uatapitravel.justclicknpay.com/";  //live
     public static final String BASE_URL_UAT_LOGIN_NEW="https://androidservice.justclicknpay.com";
+//    public static final String BASE_URL_UAT_LOGIN_NEW="https://justrail.justclicknpay.com/";  //vapt testing
 //    public static final String BASE_URL_UAT_DEPOSIT="https://uatapitravel.justclicknpay.com/";  // live
     public static final String BASE_URL_UAT_DEPOSIT="https://androidservice.justclicknpay.com";
     public static final String BASE_URL_JCT_MONEY="https://mb.justclicknpay.com/";  //new live jct url (please uncomment this for live)
@@ -21,13 +23,16 @@ public class ApiConstants
     public static final String BASE_URL_RAPIPAY="https://remittance.justclicknpay.com/";  //live rapipay url
 //        public static final String BASE_URL_RAPIPAY="https://uatremittance.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_RAPIPAY_MATM="https://matm.justclicknpay.com/";  //live rapipay url
-    //    public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
+//        public static final String BASE_URL_RAPIPAY_MATM="https://uatmatm.justclicknpay.com/";  //test rapipay url
     public static final String BASE_URL_PAYOUT="https://payout.justclicknpay.com/";  //live payout url
     public static final String BASE_URL_QR="https://payout.justclicknpay.com/";  //qr old url
     public static final String BASE_URL_QR_old="https://Fantasy.justclicknpay.com/";  //qr testing
     public static final String PATH_URL_PAYOUT="api/Payment/";  //path payout url
     public static final String BASE_URL_ACCOUNT_STMT=BASE_URL_RAPIPAY;
     public static final String BASE_URL_UAT_REMMIT="https://uatremittance.justclicknpay.com/";
+//    public static final String BASE_URL_INSTAPAY="https://uatremittance.justclicknpay.com/";   //uat
+    public static final String BASE_URL_INSTAPAY="https://remittance.justclicknpay.com/";     //live
+    public static final String BASE_URL_SALES="https://uatmatm.justclicknpay.com/";  //test sales url
     public static final String BASE_URL_ACCOUNT_DETAIL=BASE_URL_RAPIPAY;
         public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //change on 14 mar 24
     public static final String BASE_URL_TRAIN_UAT="https://justrail.justclicknpay.com/";  //test
@@ -55,10 +60,12 @@ public class ApiConstants
 //    public static final String MobilePage="MobileServices.svc/";
     public static final String MobilePage="v2/android/api/Auth/";
     public static final String MerchantId="JUSTCLICKTRAVELS";
+    public static final String ModeApp="App";
     public static final String AGENTLOGIN="AGENTLOGIN";
     //    public static final String LOGIN="LOGIN";
     public static final String LOGIN="INDIALOGIN";
     public static final String Validatesession="Validatesession";
+    public static final String Logoutsession="Logoutsession";
     public static final String REGISTRATION="REGISTRATION";
     public static final String UploadFile="UploadFile";
     public static final String FORGETPASSWORD="FORGETPASS";
@@ -116,6 +123,9 @@ public class ApiConstants
     public static final String SalesDispproves ="SalesDispprove";
     public static final String NetSalesReport ="NetSalesReport";
     public static final String SalesReport ="SalesReport";
+    public static final String getAgenntList ="getAgenntList";
+    public static final String getSaleAgentDetails ="getSaleAgentDetails";
+    public static final String saleUpdateBalance ="saleUpdateBalance";
 //    https://uatremittance.justclicknpay.com/apiAccounts/Accounts/SalesReport
 
     //    money transfer services
@@ -225,6 +235,26 @@ public class ApiConstants
     public static final String addremitter   ="addremitter";
     public static final String addbenificiary   ="addbenificiary";
 
+//    instapay
+    public static final String checkagentonboard   ="checkagentonboard";
+    public static final String agentonboarding   ="agentonboarding";
+    public static final String checkagentekycstatus   ="checkagentekycstatus";
+    public static final String agentekyc   ="agentekyc";
+    public static final String AddBenificiaryOTP   ="AddBenificiaryOTP";
+    public static final String AddBenificiaryVerifyOTP   ="AddBenificiaryVerifyOTP";
+    public static final String DeleteBenificiaryVerifyOTP   ="DeleteBenificiaryVerifyOTP";
+    public static final String registerRemitterverify   ="registerRemitterverify";
+    public static final String registerRemitterekyc   ="registerRemitterekyc";
+
+//    Aeps insta
+    public static final String check2fastatus   ="check2fastatus";
+    public static final String Authenticity   ="Authenticity";
+    public static final String getbankname   ="getbankname";
+    public static final String BalanceEnquiry   ="BalanceEnquiry";
+    public static final String MiniStatment   ="MiniStatment";
+    public static final String CashWithdrawal   ="CashWithdrawal";
+    public static final String AadharPay   ="AadharPay";
+
     //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";
     public static final String PaysprintCashWithDraw   ="PaysprintCashWithDraw";
@@ -272,6 +302,9 @@ public class ApiConstants
     public static final String AuthenticationQr2="AuthenticationQr2";
     public static final String checkvpaease="checkvpaease";
     public static final String createvpaease="createvpaease";
+
+//    qr upi cash
+    public static final String upiwithdrawal="upiwithdrawal";
 
     //    LIC
     public static final String GenerateToken   ="GenerateToken";

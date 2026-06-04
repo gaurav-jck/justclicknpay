@@ -536,6 +536,34 @@ public interface ApiInterface {
     Call<ResponseBody> getDmt3HeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
                                             @Header("UserData") String userData, @Header("Authorization") String token);
 
+    //    DMT Insta
+
+    @POST("api/v2/DMT/{methodName}")
+    Call<ResponseBody> getInstaCredPost(@Path("methodName") String method, @Body Object data);
+
+    @POST("api/v2/DMT/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getDmtInstaHeader(@Path("methodName") String method, @Body Object data,
+                                     @Header("userData") String userData, @Header("Authorization") String token);
+
+    @POST("api/v2/DMT/{methodName}")
+    @FormUrlEncoded
+    Call<ResponseBody> getInstaHeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                        @Header("UserData") String userData, @Header("Authorization") String token);
+
+//    aeps insta
+@POST("B2B/V2/InstantAEPS/{methodName}")
+@FormUrlEncoded
+Call<ResponseBody> getInstaAepsHeaderMap(@Path("methodName") String method, @FieldMap Map<String,String> params,
+                                     @Header("UserData") String userData, @Header("Authorization") String token);
+
+    @GET("B2B/V2/InstantAEPS/{methodName}")
+    Call<ResponseBody> getAepsInstaBankList(@Path("methodName") String method);
+
+    @POST("B2B/V2/InstantAEPS/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getAepsInstaHeader(@Path("methodName") String method, @Body Object data,
+                                         @Header("userData") String userData, @Header("Authorization") String token);
 
     //    Payout
     @POST("api/Payment/{methodName}")
@@ -575,6 +603,12 @@ public interface ApiInterface {
     Call<ResponseBody> getQROTP(@Path("methodName") String method, @Body Object data,
                                 @Header("userData") String userData, @Header("Authorization") String token);
 
+    //QR upi cash
+    @POST("api/UPIAtm/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getQrUpiCash(@Path("methodName") String method, @Body Object data,
+                                    @Header("userData") String userData, @Header("Authorization") String token);
+
 //    Ease QR
     @POST("api/v1/EaseBuzz/{methodName}")
     @Headers({"Content-Type: application/json"})
@@ -587,6 +621,13 @@ public interface ApiInterface {
 
     @POST("api_V1/PaymentEngine/{methodName}")
     Call<ResponseBody> getRapipayMatmCommonPost2(@Path("methodName") String method,@Query("transactionid") String id, @Body Object data);
+
+//    sales
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> getSalesQuery(@Path("methodName") String method,@Query("SaleCode") String uid);
+
+    @POST("V2/Cashfree/{methodName}")
+    Call<ResponseBody> getSalesPost(@Path("methodName") String method, @Body Object data);
 
     //    LIC
     @POST("Utility/BillPayment/{methodName}")

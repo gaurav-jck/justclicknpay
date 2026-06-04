@@ -156,7 +156,7 @@ public class MyPreferences {
 
   public static void setAppCurrentTime(Context context){
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
-    prefsEditor.putLong(ExpiredDate, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(60)); // change to 60  , 10 during test
+    prefsEditor.putLong(ExpiredDate, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(20)); // change to 60  , 10 during test
     prefsEditor.commit();
   }
 

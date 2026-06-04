@@ -174,6 +174,11 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    homeIcon.setColorFilter(appColor);
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_qr_code_home);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.UPI_Cash)){
+//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
+//                    homeIcon.setColorFilter(appColor);
+//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_qr_code_home);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.DYNAMIC_QR)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
 //                    homeIcon.setColorFilter(appColor);
@@ -200,14 +205,10 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_clipboards);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.AEPS)){
-//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
-//                    homeIcon.setColorFilter(appColor);
-//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_cash_payout_border);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.AEPS2)){
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_cash_payout_border);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.AEPS_OLD)){
-//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
-//                    homeIcon.setColorFilter(appColor);
-//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_cash_payout_border);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.MATM)){
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_cash_payout_border);
@@ -222,9 +223,6 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TRAIN_TENT)){
                     vh.imageView_sub_item.setImageResource(R.drawable.tent_icon);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TrainBookingList)){
-//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
-//                    homeIcon.setColorFilter(appColor);
-//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_clipboards);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TopUpDetails)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );

@@ -17,17 +17,12 @@ import android.view.MenuItem;
 
 
 import com.google.android.material.tabs.TabLayout;
-import com.justclick.clicknbook.Activity.MyLoginActivity;
 import com.justclick.clicknbook.Activity.MyLoginActivityNew;
 import com.justclick.clicknbook.R;
-import com.justclick.clicknbook.jctPayment.Fragments.Services_Fragment;
-import com.justclick.clicknbook.jctPayment.Fragments.TransactionListFragment;
-import com.justclick.clicknbook.jctPayment.Fragments.Transactions_Fragment;
 import com.justclick.clicknbook.jctPayment.Utilities.SessionManager;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
 import com.justclick.clicknbook.jctPayment.newaeps.Services_Fragment_New;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 

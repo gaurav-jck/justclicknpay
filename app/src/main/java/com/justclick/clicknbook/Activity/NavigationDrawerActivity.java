@@ -73,6 +73,8 @@ import com.justclick.clicknbook.BuildConfig;
 import com.justclick.clicknbook.Fragment.changetpin.ChangeTpinFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2SenderDetailFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaSenderDetailFragment;
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.BankDetailsFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.CompanyContactFragment;
 import com.justclick.clicknbook.Fragment.profilemenus.ContactDetailsFragment;
@@ -124,6 +126,7 @@ import com.justclick.clicknbook.Fragment.accountsAndReports.TrainFailedListFragm
 import com.justclick.clicknbook.Fragment.salesReport.AgentVerificationFragment;
 import com.justclick.clicknbook.Fragment.salesReport.NetSalesReportFragmentNew;
 import com.justclick.clicknbook.Fragment.salesReport.SalesAccountListFragment;
+import com.justclick.clicknbook.Fragment.salesReport.salescredit.SalesCreditRequestFragment;
 import com.justclick.clicknbook.Fragment.train.TrainBookingListNewFragment;
 import com.justclick.clicknbook.Fragment.train.TrainDashboardFragment;
 import com.justclick.clicknbook.FragmentTags;
@@ -151,6 +154,7 @@ import com.justclick.clicknbook.requestmodels.CommonRequestModel;
 import com.justclick.clicknbook.requestmodels.LoginRequestModel;
 import com.justclick.clicknbook.utils.CodeEnum;
 import com.justclick.clicknbook.utils.Common;
+import com.justclick.clicknbook.utils.EncryptDecrypt;
 import com.justclick.clicknbook.utils.EncryptionDecryptionClass;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.justclick.clicknbook.utils.MyCustomDialog;
@@ -175,7 +179,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
     private static final String SHARED_PREF_NAME = "jctsharedpref";
     private static final String KEY_AUTH_TOKEN = "authkey";
     private static final String TAG = "SignInActivity";
-    private static final int APP_SESSION = 1, RBL_MAPPING = 2, CHECK_BALANCE = 3, CHECK_SESSION_AEPS=4;
+    private static final int APP_SESSION = 1, RBL_MAPPING = 2, CHECK_BALANCE = 3,
+            CHECK_SESSION_AEPS=4, LOGOUT_SESSION=5;
+
     private static final int RC_SIGN_IN = 9001;
     FusedLocationProviderClient mFusedLocationClient;
     int PERMISSION_ID = 44;
@@ -255,6 +261,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
 
         if(loginModel.Data.UserType.equals(UserType.SalesPerson)){
             findViewById(R.id.balance_lin).setVisibility(View.GONE);
+            findViewById(R.id.salesCreditRequestLin).setVisibility(View.VISIBLE);
+        }else {
+            findViewById(R.id.balance_lin).setVisibility(View.VISIBLE);
+            findViewById(R.id.salesCreditRequestLin).setVisibility(View.GONE);
         }
 
         initializeFragments();
@@ -405,6 +415,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.changeTpinLin).setOnClickListener(this);
         findViewById(R.id.deposit_request_lin).setOnClickListener(this);
         findViewById(R.id.credit_request_lin).setOnClickListener(this);
+        findViewById(R.id.salesCreditRequestLin).setOnClickListener(this);
         ((TextView)findViewById(R.id.appVersionTv)).setText("App Version-" + BuildConfig.VERSION_NAME);
 
         try {
@@ -782,6 +793,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 replaceFragmentWithBackStack(agentCreditRequestFragment);
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
+            case R.id.salesCreditRequestLin:
+                replaceFragmentWithBackStack(new SalesCreditRequestFragment());
+                drawer_layout.closeDrawer(GravityCompat.START);
+                break;
             case R.id.bank_details_lin:
                 replaceFragmentWithBackStack(new BankDetailsFragment());
                 drawer_layout.closeDrawer(GravityCompat.START);
@@ -819,6 +834,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 drawer_layout.closeDrawer(GravityCompat.START);
                 break;
             case R.id.logout_lin:
+                logoutAppSession();
                 MyPreferences.logoutUserRemember(context);
                 startActivity(new Intent(context, MyLoginActivityNew.class));
                 finish();
@@ -1029,22 +1045,16 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.SalesPerson)) ||
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.AdminStaff)))) {
                         subMenuArrayList.add(subMenu);
-                        if(isDmt2){
+                        /*if(isPayout){
                             LoginModel.DataList.subMenu dmt2 = dataList.new subMenu();
-                            dmt2.SubMenu = MenuCodes.DMT2;
-                            dmt2.SubMenuCode = MenuCodes.DMT2;
+                            dmt2.SubMenu = MenuCodes.AEPS2;
+                            dmt2.SubMenuCode = MenuCodes.AEPS2;
                             subMenuArrayList.add(dmt2);
-                            isDmt2=false;
-                        }
+                            isPayout=false;
+                        }*/
                     }
                 }
             }
-
-//            hardcode dmt3
-//            LoginModel.DataList.subMenu dmt3=dataList.new subMenu();
-//            dmt3.SubMenu=MenuCodes.DMT3;
-//            dmt3.SubMenuCode=MenuCodes.DMT3;
-//            subMenuArrayList.add(dmt3);
 
 
 //            hardcoded
@@ -1066,7 +1076,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subMenuArrayList.add(qrcode2);
             }
 
-            if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) || loginModel.Data.UserType.equals(UserType.AdminStaff))){
+            if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) ||
+                    loginModel.Data.UserType.equals(UserType.AdminStaff) ||
+                    loginModel.Data.UserType.equals(UserType.SalesPerson))){
                 LoginModel.DataList.subMenu fasttag=dataList.new subMenu();
                 fasttag.SubMenu=MenuCodes.FAST_TAG;
                 fasttag.SubMenuCode=MenuCodes.FAST_TAG;
@@ -1077,11 +1089,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 subLic.SubMenuCode=MenuCodes.LIC;
                 subMenuArrayList.add(subLic);
 
-                //Credit card hide
-                /*LoginModel.DataList.subMenu subPaytm=dataList.new subMenu();
-                subPaytm.SubMenu=MenuCodes.CREDIT;
-                subPaytm.SubMenuCode=MenuCodes.CREDIT;
-                subMenuArrayList.add(subPaytm);*/
+                LoginModel.DataList.subMenu billpay2=dataList.new subMenu();
+                billpay2.SubMenu=MenuCodes.BILL_PAY2;
+                billpay2.SubMenuCode=MenuCodes.BILL_PAY2;
+                subMenuArrayList.add(billpay2);
             }
             /*if(isPayout) {
                 LoginModel.DataList.subMenu subMenuCashOut = dataList.new subMenu();
@@ -1096,6 +1107,10 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 qr.SubMenuCode=MenuCodes.CASHFREE_QR;
                 subMenuArrayList.add(qr);
             }
+            /*LoginModel.DataList.subMenu upiCash=dataList.new subMenu();
+            upiCash.SubMenu=MenuCodes.UPI_Cash;
+            upiCash.SubMenuCode=MenuCodes.UPI_Cash;
+            subMenuArrayList.add(upiCash);*/
 
 
             /*if(subMenuArrayList.size()>3){
@@ -1230,14 +1245,52 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 },false);
     }
 
+    public class LogoutRequest{
+        public String UserCode, LoginSessionId, IPAddress;
+    }
+    private void logoutAppSession() {
+        LogoutRequest requestModel=new LogoutRequest();
+        requestModel.UserCode=MyPreferences.getLoginData(new LoginModel(), context).Data.UserId;
+//        EncryptDecrypt.encryption2(uName, context!!)
+        requestModel.LoginSessionId= MyPreferences.getLoginData(new LoginModel(), context).LoginSessionId;
+//        requestModel.LoginSessionId= EncryptDecrypt.INSTANCE.encryption2(
+//                MyPreferences.getLoginData(new LoginModel(), context).LoginSessionId, context);
+
+        String json = new Gson().toJson(requestModel);
+
+        new NetworkCall().callServiceNoMessage(NetworkCall.getLoginRequestInterface().loginRequest(ApiConstants.Logoutsession, requestModel),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandler(response, LOGOUT_SESSION);
+                    }else {
+//                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void responseHandler(ResponseBody response, int TYPE) {
         try {
             switch (TYPE){
+                case LOGOUT_SESSION:
+                    DepositRequestResponseModel commonResponse =
+                            new Gson().fromJson(response.string(), DepositRequestResponseModel.class);
+                    if(commonResponse!=null && commonResponse.DepositRequestResult.StatusCode.equals("0")) {
+//                        MyPreferences.logoutUser(context);
+//                        Intent intent = new Intent(getApplicationContext(), MyLoginActivityNew.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                        Toast.makeText(context, "Logout Success", Toast.LENGTH_SHORT).show();
+                    }else {
+//                        Toast.makeText(context, "Logout Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
                 case APP_SESSION:
                     RblCommonResponse rblCommonResponse = new Gson().fromJson(response.string(), RblCommonResponse.class);
                     if(rblCommonResponse!=null && rblCommonResponse.status == 0) {
                         MyPreferences.logoutUser(context);
-                        Intent intent = new Intent(getApplicationContext(), MyLoginActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), MyLoginActivityNew.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         Toast.makeText(context, R.string.appSession, Toast.LENGTH_SHORT).show();
@@ -1607,6 +1660,9 @@ public class NavigationDrawerActivity extends AppCompatActivity
                         getBankDetails(false);
             }else if(classType.equals(CodeEnum.DMT2)){
                 ((Dmt2SenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.dmt2SenderDetailFragment)).
+                        getSenderDetail(0);
+            }else if(classType.equals(CodeEnum.DMTInsta)){
+                ((InstaSenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.InstaSenderDetailFragment)).
                         getSenderDetail(0);
             }else {
                 ((SenderDetailFragment)getSupportFragmentManager().findFragmentByTag(FragmentTags.jctMoneySenderDetailFragment)).

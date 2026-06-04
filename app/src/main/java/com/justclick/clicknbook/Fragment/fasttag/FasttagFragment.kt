@@ -121,7 +121,7 @@ class FasttagFragment : Fragment(), AdapterView.OnItemSelectedListener {
 }*/
     }
     private fun bindOperatorList(operatorList: BillPayFragment.OperatorResponseModel?) {
-        if(operatorList!=null && operatorList.operatorlistDetails!!.size>0){
+        if(operatorList!=null && operatorList.operatorlistDetails!=null && operatorList.operatorlistDetails!!.size>0){
             operatorListData!!.clear();
             operatorListData!!.addAll(operatorList.operatorlistDetails!!)
             spinner_operator!!.setAdapter(setSpinnerAdapter(operatorList.operatorlistDetails!!))

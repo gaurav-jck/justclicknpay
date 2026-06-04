@@ -132,7 +132,7 @@ class AepsSelectionDashboardFragment : Fragment(), View.OnClickListener {
                     } else {
                         mLatitude = location.latitude.toString() + ""
                         mLongitude = location.longitude.toString() + ""
-                        //                            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
+//                                                    Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
                     }
                 }
             } else {
@@ -175,7 +175,7 @@ class AepsSelectionDashboardFragment : Fragment(), View.OnClickListener {
             val mLastLocation = locationResult.lastLocation
             mLatitude = mLastLocation!!.latitude.toString() + ""
             mLongitude = mLastLocation.longitude.toString() + ""
-            //            Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
+//                        Toast.makeText(context,"Latitude: " + mLatitude+"\nLongitude: " + mLongitude, Toast.LENGTH_LONG ).show();
 //            latitudeTextView.setText("Latitude: " + mLastLocation.getLatitude() + "");
 //            longitTextView.setText("Longitude: " + mLastLocation.getLongitude() + "");
         }

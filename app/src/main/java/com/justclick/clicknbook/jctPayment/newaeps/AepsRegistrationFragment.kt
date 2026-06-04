@@ -3,7 +3,6 @@ package com.justclick.clicknbook.jctPayment.newaeps
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -27,10 +26,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
-import com.android.volley.AuthFailureError
-import com.android.volley.DefaultRetryPolicy
-import com.android.volley.Response
-import com.android.volley.toolbox.StringRequest
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -45,7 +40,6 @@ import com.justclick.clicknbook.jctPayment.Models.GetAadharRequest
 import com.justclick.clicknbook.jctPayment.Models.GetAadharResponse
 import com.justclick.clicknbook.jctPayment.Utilities.GetAepsCredential
 import com.justclick.clicknbook.jctPayment.Utilities.URLs
-import com.justclick.clicknbook.jctPayment.Utilities.VolleySingleton
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.retrofit.APIClient
@@ -72,7 +66,7 @@ class AepsRegistrationFragment(aepsPipe: String) : Fragment() {
     var str_aadhar: String? = null
     var mobileNo: kotlin.String? = null
     var pidDataXML = ""
-    var d_type = AepsConstants.MANTRA_L1
+    var d_type = AepsConstants.MANTRA
     var adharType: kotlin.String? = AepsConstants.ADHAR_UID
     var TYPE = BAL_ENQ
     var aepsPipe = aepsPipe
@@ -243,35 +237,35 @@ class AepsRegistrationFragment(aepsPipe: String) : Fragment() {
         isGetAgain = true
         try {
             if (d_type == AepsConstants.STARTEK && validation()) {
-                if (searchPackageName(AepsConstants.STARTEK_PACKAGE)) {
+                if (searchPackageName(AepsConstants.STARTEK_PACKAGE_L1)) {
 //                    String pidOptXML = createPidOptXMLStartek();
                     val pidOptXML = XMLGenerator.createPidOptXML()
-                    capture(AepsConstants.STARTEK_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+                    capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
-            } else if (d_type == AepsConstants.STARTEK_L1 && validation()) {
+            } else if (d_type == AepsConstants.STARTEK && validation()) {
                 val pidOptXML =
                     "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
                 capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             } else if (d_type == AepsConstants.MANTRA && validation()) {
-                if (searchPackageName(AepsConstants.MANTRA_PACKAGE)) {
+                if (searchPackageName(AepsConstants.MANTRA_PACKAGE_L1)) {
 //                    String pidOptXML = getPIDOptions();
 //                    String pidOptXML = "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"0\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>";
                     val pidOptXML =
                         "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                    capture(AepsConstants.MANTRA_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+                    capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
-            } else if (d_type == AepsConstants.MANTRA_L1 && validation()) {
+            } else if (d_type == AepsConstants.MANTRA && validation()) {
                 val pidOptXML =
                     "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
-                capture(AepsConstants.MANTRA_L1_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
             } else if (d_type == AepsConstants.MORPHO && validation()) {
-                if (searchPackageName(AepsConstants.MORPHO_PACKAGE)) {
+                if (searchPackageName(AepsConstants.MORPHO_PACKAGE_L1)) {
                     val pidOptXML = XMLGenerator.createPidOptXML() //old
                     //                    String pidOptXML = getPIDOptions();   // change
 //                    pidOptXML="<PidOptions ver=\"1.0\"><Opts fCount=\"1\" fType=\"0\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" otp=\"\" env=\"P\" wadh=\"\" posh=\"UNKNOWN\"/></PidOptions>";
-                    capture(AepsConstants.MORPHO_PACKAGE, pidOptXML, CAPTURE_REQUEST_CODE)
+                    capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
                 }
-            } else if (d_type == AepsConstants.MORPHO_L1 && validation()) {
+            } else if (d_type == AepsConstants.MORPHO && validation()) {
                 val pidOptXML =
                     "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
                 capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)

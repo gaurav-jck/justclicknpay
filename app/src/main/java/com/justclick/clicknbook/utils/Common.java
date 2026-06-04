@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -11,12 +12,16 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
+import android.net.StaticIpConfiguration;
+import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.provider.Settings;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import android.telephony.TelephonyManager;
+import android.text.format.Formatter;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Base64;
 import android.view.ActionMode;
@@ -33,10 +38,15 @@ import com.justclick.clicknbook.R;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.Date;
@@ -45,6 +55,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by gaurav on 4/14/2017.
@@ -99,6 +111,46 @@ public final class Common {
   public static String getDeviceId(Context context) {
     return Settings.Secure.getString(context.getContentResolver(),
             Settings.Secure.ANDROID_ID);
+  }
+
+  public static String getIpAddress(){
+      try {
+          for (NetworkInterface intf : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+            for (InetAddress addr : Collections.list(intf.getInetAddresses())) {
+              if (!addr.isLoopbackAddress() && addr instanceof Inet4Address) {
+                return addr.getHostAddress();
+              }
+            }
+          }
+      } catch (SocketException e) {
+          return "103.139.75.200";
+      }
+      return "103.139.75.200";
+  }
+
+  public static String getIp(){
+    try (java.util.Scanner s = new java.util.Scanner(new java.net.URL("https://api.ipify.org").openStream(), "UTF-8").useDelimiter("\\A")) {
+      System.out.println("My current IP address is " + s.next());
+      return s.next();
+    } catch (java.io.IOException e) {
+      e.printStackTrace();
+      return "10.220.165.195";
+    }
+  }
+
+  public static String getIp2(){
+      try {
+          for (NetworkInterface intf : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+            for (InetAddress addr : Collections.list(intf.getInetAddresses())) {
+              if (!addr.isLoopbackAddress() && addr instanceof Inet4Address) {
+                return addr.getHostAddress();
+              }
+            }
+          }
+      } catch (SocketException e) {
+        return "10.220.165.195";
+      }
+    return "10.220.165.195";
   }
 
   public static void hideSoftKeyboard(Activity activity) {
@@ -293,6 +345,26 @@ public final class Common {
     dialog.show();
   }
 
+  public static void showSuccessDialog(Context context, String message){
+    Dialog dialog = new Dialog(context);
+    dialog.setContentView(R.layout.success_common_view);
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+    dialog.setCancelable(false);
+//        dialog.getWindow().getAttributes().windowAnimations = R.style.animation;
+
+    TextView messageTv = dialog.findViewById(R.id.messageTv);
+    TextView okTv = dialog.findViewById(R.id.okTv);
+
+    messageTv.setText(message);
+
+    okTv.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        dialog.dismiss();
+      }
+    });
+    dialog.show();
+  }
 
   public static int getAgeFromDOB(Date date){
     int age= Calendar.getInstance().getTime().getYear()-date.getYear();
@@ -490,6 +562,12 @@ public final class Common {
     });
   }
 
+  public static void openDownloadLink(@NotNull Context context, @NotNull String packageName) {
+    Intent intentPlay = new Intent(Intent.ACTION_VIEW);
+    intentPlay.setData(Uri.parse("market://details?id="+packageName));
+    context.startActivity(intentPlay);
+  }
+
 
   public static String loadJSONFromAsset(Context context, String fileName) {
     String json = null;
@@ -507,7 +585,7 @@ public final class Common {
     return json;
   }
 
-  static class Utils {
+    static class Utils {
     public static SortedMap<Currency, Locale> currencyLocaleMap;
 
     static {

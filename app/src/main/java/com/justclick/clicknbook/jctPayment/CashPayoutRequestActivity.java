@@ -20,7 +20,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.justclick.clicknbook.Activity.MyLoginActivity;
+import com.justclick.clicknbook.Activity.MyLoginActivityNew;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.jctPayment.Utilities.SessionManager;
 import com.justclick.clicknbook.jctPayment.Utilities.URLs;
@@ -282,7 +282,7 @@ public class CashPayoutRequestActivity extends AppCompatActivity implements View
                             } else {
                                 Toast.makeText(getApplicationContext(), "AEPS session expire", Toast.LENGTH_LONG).show();
                                 SessionManager.getInstance(context).logout();
-                                Intent intent = new Intent(getApplicationContext(), MyLoginActivity.class);
+                                Intent intent = new Intent(getApplicationContext(), MyLoginActivityNew.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
 //                                finish();
