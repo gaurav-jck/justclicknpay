@@ -44,7 +44,7 @@
 
             </LinearLayout>
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/hotelImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hotelImageSize"

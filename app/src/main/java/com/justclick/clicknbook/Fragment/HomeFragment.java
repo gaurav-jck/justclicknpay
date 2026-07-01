@@ -41,6 +41,7 @@ import com.justclick.clicknbook.Fragment.cashout.GetSenderFragment;
 import com.justclick.clicknbook.Fragment.creditcard.CreditCardFragment;
 import com.justclick.clicknbook.Fragment.fasttag.FasttagFragment;
 import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragment;
+import com.justclick.clicknbook.Fragment.hotel.HotelSearchFragmentKotlin;
 import com.justclick.clicknbook.Fragment.jctmoney.CashoutTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.RapipayTransactionListFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.TransactionListFragment;
@@ -48,7 +49,9 @@ import com.justclick.clicknbook.Fragment.jctmoney.UtilityTransactionListFragment
 import com.justclick.clicknbook.Fragment.jctmoney.dmt2.Dmt2GetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.dmt3.Dmt3GetSenderFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaDmtDashboardFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaMerchantKycFragment;
 import com.justclick.clicknbook.Fragment.jctmoney.instapay.InstaMerchantOnboardFragment;
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.model.MerchantKycCheckResponse;
 import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest;
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse;
 import com.justclick.clicknbook.Fragment.lic.LicFragment;
@@ -80,13 +83,17 @@ import com.justclick.clicknbook.utils.Constants;
 import com.justclick.clicknbook.utils.MenuCodes;
 import com.justclick.clicknbook.utils.MyPreferences;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import okhttp3.ResponseBody;
 
 public class HomeFragment extends Fragment {
 //    private RecyclerView recyclerView;
-    private final int DMT_INSTA=1, BILLPAY_INSTA=2, AEPS_INSTA=3;
+    private final int DMT_INSTA=1, BILLPAY_INSTA=2, AEPS_INSTA=3, INSTA_KYC=4;
     private ToolBarTitleChangeListener titleChangeListener;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
     private MenuItemsAdapter menuItemsAdapter;
@@ -157,6 +164,8 @@ public class HomeFragment extends Fragment {
 
 //        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 //        Toast.makeText(context, "Fragment OnCreateView", Toast.LENGTH_LONG).show();
+
+            getIpAddress();
 
             ArrayList<LoginModel.DataList> list= null;
             try {
@@ -258,8 +267,8 @@ public class HomeFragment extends Fragment {
                 AirWebviewActivity.airSession(context);
                 break;
             case MenuCodes.HotelSearch://16
-                ((NavigationDrawerActivity)context).
-                        replaceFragmentWithBackStack(new HotelSearchFragment());
+//                ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(new HotelSearchFragment());
+                ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(new HotelSearchFragmentKotlin());
                 break;
             case MenuCodes.AirSalesReport://17
                 ((NavigationDrawerActivity)context).
@@ -358,7 +367,13 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.BILL_PAY2://40
                 productType=BILLPAY_INSTA;
-                getDMTCredentials();
+//                getDMTCredentials();
+                getAepsCredentials();
+                break;
+            case MenuCodes.INSTA_KYC://40
+                productType=INSTA_KYC;
+//                getDMTCredentials();
+                getAepsCredentials();
                 break;
             case MenuCodes.PAYTM://41
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new PaytmWalletFragmentNew());
@@ -569,8 +584,19 @@ public class HomeFragment extends Fragment {
             if(senderResponse!=null){
                 if(senderResponse.getStatusCode().equals("00")) {
 //                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
-                    ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(
-                            AepsDashboardFragment.Companion.newInstance(credentialData));
+                    if(productType==AEPS_INSTA){
+                        ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(
+                                AepsDashboardFragment.Companion.newInstance(credentialData));
+                    }else if(productType==INSTA_KYC){
+                        checkMerchantKyc(credentialData);
+                    }else {
+                        Bundle bundle=new Bundle();
+                        bundle.putSerializable("credentialResponse", credentialData);
+                        InstaBillpayDashboardFragment instaFragment=new InstaBillpayDashboardFragment();
+                        instaFragment.setArguments(bundle);
+                        ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(instaFragment);
+                    }
+
                 }else if(senderResponse.getStatusCode().equals("02")){
                     merchantOnboardAlert(senderResponse.getStatusMessage(), credentialData);
                 }else {
@@ -632,11 +658,117 @@ public class HomeFragment extends Fragment {
         startActivity(i);
     }
 
+    private boolean isKycChecked = false;
+    private void checkMerchantKyc(CheckCredentialResponse.credentialData credentialData) {
+        var loginModel = new LoginModel();
+        loginModel = MyPreferences.getLoginData(loginModel, context);
+        CheckCredentialRequest request = new CheckCredentialRequest();
+        request.setAgentCode(loginModel.Data.DoneCardUser);
+        //        request.setAgentCode("jc0a13387");
+//        request.setIPAddress(Common.getIpAddress());
+        request.setIPAddress(ip);
+
+        new NetworkCall().callService(NetworkCall.getDmtInstaApiInterface().getDmtInstaHeader(ApiConstants.checkagentekycstatus, request,
+                        credentialData.getUserData(), "Bearer " + credentialData.getToken()),
+                context,true,
+                (response, responseCode) -> {
+                    if(response!=null){
+                        responseHandlerMerchantKyc(response, credentialData);
+                    }else {
+                        Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private String NO_ACTION_REQUIRED = "NO-ACTION-REQUIRED";
+    private String Pending = "PENDING";
+    private void responseHandlerMerchantKyc(ResponseBody response, CheckCredentialResponse.credentialData credentialData) {
+        try {
+            MerchantKycCheckResponse senderResponse = new Gson().fromJson(
+                    response.string(),
+                    MerchantKycCheckResponse.class);
+            if (senderResponse != null) {
+                if (senderResponse.getStatusCode().equals("00")) {
+                    if (senderResponse.getData().getAction() .equals(NO_ACTION_REQUIRED)) {
+                        isKycChecked = true;
+                        Common.showCommonAlertDialog(
+                                requireContext(),
+                                "Your KYC has been completed, please proceed with transaction.",
+                                "KYC status"
+                        );
+                    } else if (senderResponse.getData().getStatus().equals(Pending)) {
+                        merchantKycAlert(senderResponse, credentialData);
+                    } else {
+                        Common.showCommonAlertDialog(
+                                requireContext(),
+                                senderResponse.getStatusMessage(),
+                                "KYC status"
+                        );
+                    }
+                    //                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Common.showCommonAlertDialog(
+                            requireContext(),
+                            senderResponse.getStatusMessage(),
+                            "Api Response"
+                    );
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                        .show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void merchantKycAlert(MerchantKycCheckResponse kycResponse, CheckCredentialResponse.credentialData credentialData) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Api response");
+        builder.setMessage("Your KYC is pending, please do merchant KYC.");
+        builder.setCancelable(false);
+
+        // add a button
+        builder.setPositiveButton("Do KYC", (dialog, which) -> {
+            // send data from the AlertDialog to the Activity
+            ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(
+                    InstaMerchantKycFragment.newInstance(credentialData, kycResponse.getData()));
+            dialog.dismiss();
+        });
+        builder.setNegativeButton("Cancel", (dialogInterface, i) ->
+        {
+            dialogInterface.dismiss();
+        });
+        // create and show the alert dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         titleChangeListener.onToolBarTitleChange(getString(R.string.nav_home));
         toolBarHideFromFragmentListener.onToolBarHideFromFragment(false);
+    }
+
+    String ip;
+    void getIpAddress(){
+        requireActivity().runOnUiThread(() -> {
+            try {
+                URL url = new URL("https://api.ipify.org");
+                URLConnection connection = url.openConnection();
+                connection.setRequestProperty("User-Agent", "Mozilla/5.0/Chrome"); // Set a User-Agent to avoid HTTP 403 Forbidden error
+                InputStream inputStream = connection.getInputStream();
+                Scanner s = new Scanner(inputStream, "UTF-8").useDelimiter("\\A");
+                ip = s.next();
+                inputStream.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                ip = "103.139.75.200";
+            }
+            // Update UI elements here
+        });
     }
 
     @Override

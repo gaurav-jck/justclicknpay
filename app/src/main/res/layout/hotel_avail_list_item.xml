@@ -1,33 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="1dp"
-    android:background="@color/listItemBackground">
+    android:background="@color/listItemBackground"
+    app:ignore="NamespaceTypo">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/small_margin"
+        app:cardCornerRadius="@dimen/margin_5dp"
+        app:cardElevation="@dimen/margin_3dp"
+        app:cardBackgroundColor="cardBackgroundColor"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_marginTop="@dimen/margin_3dp"
+        android:layout_marginBottom="@dimen/small_margin"
+        android:layout_marginLeft="@dimen/small_margin"
+        >
 
     <LinearLayout
         android:id="@+id/itemLin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_margin="@dimen/margin_2dp">
 
-        <com.facebook.drawee.view.SimpleDraweeView
+       <!-- <com.facebook.drawee.view.SimpleDraweeView
             android:id="@+id/hotelImage"
             android:layout_width="0dp"
             android:layout_height="100dp"
             android:layout_weight="1"
             android:layout_gravity="center"
             android:background="@drawable/hotel_demo_image"
-            />
-        <!-- <ImageView
+            />-->
+         <ImageView
              android:id="@+id/hotelImage"
              android:layout_width="0dp"
-             android:layout_height="wrap_content"
+             android:layout_height="100dp"
              android:layout_weight="1"
              android:layout_gravity="center"
-             android:padding="@dimen/small_margin"/>-->
+             android:padding="@dimen/small_margin"
+             android:background="@drawable/hotel_demo_image"/>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -82,13 +100,14 @@
                     android:numStars="5"
                     android:stepSize="1"
                     android:isIndicator="true"
+                    style="?android:attr/ratingBarStyleSmall"
                     />
 
                 <TextView
                     android:id="@+id/amount_tv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="INR 0000.00"
+                    android:text="\u20B9 2000"
                     android:gravity="right"
                     android:textSize="@dimen/simple_content_text_size"
                     android:textColor="@color/listItemAmountColor"
@@ -152,9 +171,12 @@
 
     </LinearLayout>
 
+    </com.google.android.material.card.MaterialCardView>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@color/color_light_black"/>
+        android:background="@color/color_light_black"
+        android:visibility="gone"/>
 
 </LinearLayout>

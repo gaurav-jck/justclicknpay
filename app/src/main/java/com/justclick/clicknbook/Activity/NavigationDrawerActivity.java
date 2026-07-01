@@ -1,24 +1,19 @@
 package com.justclick.clicknbook.Activity;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.WindowCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -26,8 +21,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.os.Looper;
-import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,13 +44,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -1045,13 +1032,13 @@ public class NavigationDrawerActivity extends AppCompatActivity
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.SalesPerson)) ||
                             (loginModel.Data.UserType.equalsIgnoreCase(UserType.AdminStaff)))) {
                         subMenuArrayList.add(subMenu);
-                        /*if(isPayout){
+                        if(isPayout){
                             LoginModel.DataList.subMenu dmt2 = dataList.new subMenu();
                             dmt2.SubMenu = MenuCodes.AEPS2;
                             dmt2.SubMenuCode = MenuCodes.AEPS2;
                             subMenuArrayList.add(dmt2);
                             isPayout=false;
-                        }*/
+                        }
                     }
                 }
             }
@@ -1112,6 +1099,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
             upiCash.SubMenuCode=MenuCodes.UPI_Cash;
             subMenuArrayList.add(upiCash);*/
 
+            LoginModel.DataList.subMenu hotel=loginModel.new DataList().new subMenu();
+            hotel.SubMenu=MenuCodes.HotelSearch;
+            hotel.SubMenuCode=MenuCodes.HotelSearch;
+            subMenuArrayList.add(hotel);
+
+            LoginModel.DataList.subMenu kyc=loginModel.new DataList().new subMenu();
+            kyc.SubMenu=MenuCodes.INSTA_KYC;
+            kyc.SubMenuCode=MenuCodes.INSTA_KYC;
+            subMenuArrayList.add(kyc);
 
             /*if(subMenuArrayList.size()>3){
                 Collections.swap(subMenuArrayList, 1,3);

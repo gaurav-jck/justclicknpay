@@ -179,12 +179,6 @@ class InstaDmtDashboardFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private val checkKycString = """{
-    "statusCode": "02",
-    "statusMessage": "Agent kyc not done",
-    "status": true
-}"""
-
     private fun responseHandlerMerchantKyc(response: ResponseBody, bankType: String) {
         try {
             val senderResponse = Gson().fromJson(

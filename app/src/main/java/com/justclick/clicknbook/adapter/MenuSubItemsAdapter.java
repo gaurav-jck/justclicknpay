@@ -142,7 +142,7 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.hotel_home_icon );
 //                    homeIcon.setColorFilter(appColor);
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
-                    vh.imageView_sub_item.setImageResource(R.drawable.hotel_home_icon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.hotel_bed_icon);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.DMT)
                         || subMenuCode.equalsIgnoreCase(MenuCodes.DMT2) || subMenuCode.equalsIgnoreCase(MenuCodes.DMT3)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
@@ -189,6 +189,16 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    homeIcon.setColorFilter(appColor);
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_icon_mobile_payment);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.BILL_PAY2)){
+//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
+//                    homeIcon.setColorFilter(appColor);
+//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_icon_mobile_payment);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.INSTA_KYC)){
+//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
+//                    homeIcon.setColorFilter(appColor);
+//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.id_verification_kyc);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.AirSalesReport)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
 //                    homeIcon.setColorFilter(appColor);
@@ -221,7 +231,8 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TRAIN)){
                     vh.imageView_sub_item.setImageResource(R.drawable.train_home_vector);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TRAIN_TENT)){
-                    vh.imageView_sub_item.setImageResource(R.drawable.tent_icon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.train_home_vector);
+//                    vh.imageView_sub_item.setImageResource(R.drawable.tent_icon);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TrainBookingList)){
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_clipboards);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.TopUpDetails)){

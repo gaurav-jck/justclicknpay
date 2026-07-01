@@ -31,6 +31,8 @@ import android.widget.Toast;
 
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
+import com.justclick.clicknbook.Fragment.train.MyTrainStationDialog;
+import com.justclick.clicknbook.Fragment.train.model.TrainStationModel;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.HotelCitySearchAdapter;
 import com.justclick.clicknbook.model.HotelAvailabilityResponseModel;
@@ -57,15 +59,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * Created by Lenovo on 03/25/2017.
- */
 
-public class HotelSearchFragment extends Fragment implements View.OnClickListener ,AdapterView.OnItemSelectedListener {
+public class HotelSearchFragment extends Fragment implements View.OnClickListener
+        ,AdapterView.OnItemSelectedListener,MyTrainStationDialog.OnCityDialogResult {
     final int CHECK_IN=1, CHECK_OUT=2;
     private ToolBarTitleChangeListener titleChangeListener;
     private ToolBarHideFromFragmentListener toolBarHideFromFragmentListener;
-    private TextView totalRoomsTv, paxInfoTv, search_Tv, roomCountTv;
+    private TextView /*totalRoomsTv, paxInfoTv,*/ search_Tv, roomCountTv;
     private ListView cityListView;
     private LinearLayout roomInfoRel;
     private String checkInDate="", checkOutDate="", hotelCode="";
@@ -136,8 +136,8 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
         titleChangeListener.onToolBarTitleChange(getString(R.string.hotelSearchFragmentTitle));
         toolBarHideFromFragmentListener.onToolBarHideFromFragment(false);
         search_Tv = (TextView) view.findViewById(R.id.search_Tv);
-        totalRoomsTv = (TextView) view.findViewById(R.id.totalRoomsTv);
-        paxInfoTv = (TextView) view.findViewById(R.id.paxInfoTv);
+//        totalRoomsTv = (TextView) view.findViewById(R.id.totalRoomsTv);
+//        paxInfoTv = (TextView) view.findViewById(R.id.paxInfoTv);
 
         fromNameTv= (TextView) view.findViewById(R.id.fromNameTv);
         returnYearTv= (TextView) view.findViewById(R.id.returnYearTv);
@@ -180,53 +180,6 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
         view.findViewById(R.id.hotelCitySearchRel).setOnClickListener(this);
         view.findViewById(R.id.searchRel).setOnClickListener(this);
 
-       /* hotelCitySearchAdapter = new HotelCitySearchAdapter(context, hotelCityListModel);
-        cityListView.setAdapter(hotelCitySearchAdapter);
-
-        cityListView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener()
-                {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                    {
-                        citySelectedResponse = hotelCitySearchAdapter.getItem(position);
-//                        agent_name_tv.setText(agentName);
-                        cityListView.setVisibility(View.GONE);
-                        destinationCityEdt.setText(citySelectedResponse.CityName);
-                        destinationCityEdt.setSelection(destinationCityEdt.getText().length());
-                        Common.hideSoftKeyboard((NavigationDrawerActivity)context);
-                    }
-                });*/
-       /* destinationCityEdt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(Common.checkInternetConnection(context)) {
-                    if(s.length()>=2) {
-                        HotelCityRequestModel model=new HotelCityRequestModel();
-                        model.Name=s.toString();
-
-                        if(citySelectedResponse.CityName==null ||
-                                !citySelectedResponse.CityName.equals(s.toString().trim())){
-                            hotelCity(model);
-                        }
-                    }
-                }else {
-                    Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
-                }
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-*/
         return view;
     }
 
@@ -402,9 +355,8 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.hotelCitySearchRel:
-//                Intent i=new Intent(context,BusFromCityActivity.class);
-//                startActivityForResult(i,1);
-                Toast.makeText(context, "city can't search", Toast.LENGTH_SHORT).show();
+//                MyHotelCitySearchDialog.showCustomDialog(context,"Hotel City",1,this);
+//                Toast.makeText(context, "city can't search", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.departDateLin:
                 openCheckInDatePicker();
@@ -433,7 +385,7 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
                 bundle.putSerializable("HotelList",new HotelAvailabilityResponseModel().hotels);
                 bundle.putSerializable("CheckInDateCalander",checkInDateCalendar);
                 bundle.putSerializable("CheckOutDateCalander",checkOutDateCalendar);
-                HotelListWithMapFragment fragment=new HotelListWithMapFragment();
+                HotelSearchListFragment fragment=new HotelSearchListFragment();
                 fragment.setArguments(bundle);
                 ((NavigationDrawerActivity)context).replaceFragmentWithBackStack(fragment);
                 hideCustomDialog();
@@ -464,104 +416,113 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
 
             case R.id.roomPlusTv:
                 roomPlusClick();
-                ObjectAnimator.ofObject(v.findViewById(R.id.roomPlusTv),  "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.roomPlusTv),  "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
             case R.id.roomMinusTv:
                 roomMinusClick();
-                ObjectAnimator.ofObject(v.findViewById(R.id.roomMinusTv), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.roomMinusTv), "backgroundColor",new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
             case R.id.adultMinusImg1:
                 adultMinusClick(1);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultMinusImg1), "backgroundColor", (Object)new ArgbEvaluator(),
-                         /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultMinusImg1), "backgroundColor", new ArgbEvaluator(),
+                         /*Red*/0x88D40A0A, /*Blue*/0x00ffffff).setDuration(500).start();
+
+              /*  ObjectAnimator.ofObject(
+                        (ImageView)v.findViewById(R.id.adultMinusImg1),           // 1. Target view
+                        "backgroundColor",     // 2. Target property
+                                new ArgbEvaluator(),   // 3. The TypeEvaluator (Fixes the crash!)
+                                0x88D40A0A,            // 4. Start value
+                                0x00ffffff               // 5. End value
+                ).start();*/
+
                 break;
             case R.id.adultPlusImg1:
                 adultPlusClick(1, true);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultPlusImg1), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultPlusImg1), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
             case R.id.childMinusImg1:
                 childImageMinusClick(1);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childMinusImg1), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childMinusImg1), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
             case R.id.childPlusImg1:
                 childImagePlusClick(1);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childPlusImg1), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childPlusImg1), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultMinusImg2:
                 adultMinusClick(2);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultMinusImg2), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultMinusImg2), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultPlusImg2:
                 adultPlusClick(2, true);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultPlusImg2), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultPlusImg2), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childMinusImg2:
                 childImageMinusClick(2);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childMinusImg2), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childMinusImg2), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childPlusImg2:
                 childImagePlusClick(2);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childPlusImg2), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childPlusImg2), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultMinusImg3:
                 adultMinusClick(3);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultMinusImg3), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultMinusImg3), "backgroundColor",new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultPlusImg3:
                 adultPlusClick(3, true);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultPlusImg3), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultPlusImg3), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childMinusImg3:
                 childImageMinusClick(3);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childMinusImg3), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childMinusImg3), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childPlusImg3:
                 childImagePlusClick(3);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childPlusImg3), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childPlusImg3), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultMinusImg4:
                 adultMinusClick(4);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultMinusImg4), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultMinusImg4), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.adultPlusImg4:
                 adultPlusClick(4, true);
-                ObjectAnimator.ofObject(v.findViewById(R.id.adultPlusImg4), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.adultPlusImg4), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childMinusImg4:
                 childImageMinusClick(4);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childMinusImg4), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childMinusImg4), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
             case R.id.childPlusImg4:
                 childImagePlusClick(4);
-                ObjectAnimator.ofObject(v.findViewById(R.id.childPlusImg4), "backgroundColor", (Object)new ArgbEvaluator(),
+                ObjectAnimator.ofObject((ImageView)v.findViewById(R.id.childPlusImg4), "backgroundColor", new ArgbEvaluator(),
                          /*Red*/0x88D40A0A, /*Blue*/0x00ffffff)  .setDuration(500).start();
                 break;
 
@@ -569,6 +530,7 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
 
 
     }
+
     public String getDays()
     {
         return String.valueOf((int)( (checkOutDateCalendar.getTimeInMillis() - checkInDateCalendar.getTimeInMillis()) / (1000 * 60 * 60 * 24)));
@@ -1153,26 +1115,26 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
 
     private void setValues() {
         if(NumberOfRooms==1){
-            paxInfoTv.setText(Adults1+" Adult, "+Children1+ " Child");
+//            paxInfoTv.setText(Adults1+" Adult, "+Children1+ " Child");
             NumberOfAdult=Adults1;
             NumberOfChild=Children1;
         }else if(NumberOfRooms==2){
-            paxInfoTv.setText((Adults1+Adults2)+" Adult, "+(Children1+Children2)+ " Child");
+//            paxInfoTv.setText((Adults1+Adults2)+" Adult, "+(Children1+Children2)+ " Child");
             NumberOfAdult=Adults1+Adults2;
             NumberOfChild=Children1+Children2;
         }else if(NumberOfRooms==3){
-            paxInfoTv.setText((Adults1+Adults2+Adults3)+" Adult, "+(Children1+Children2+Children3)+ " Child");
+//            paxInfoTv.setText((Adults1+Adults2+Adults3)+" Adult, "+(Children1+Children2+Children3)+ " Child");
             NumberOfAdult=Adults1+Adults2+Adults3;
             NumberOfChild=Children1+Children2+Children3;
         }else {
-            paxInfoTv.setText((Adults1+Adults2+Adults3+Adults4)+" Adult, "+(Children1+Children2+Children3+Children4)+ " Child");
+//            paxInfoTv.setText((Adults1+Adults2+Adults3+Adults4)+" Adult, "+(Children1+Children2+Children3+Children4)+ " Child");
             NumberOfAdult=Adults1+Adults2+Adults3+Adults4;
             NumberOfChild=Children1+Children2+Children3+Children4;
         }
         if(NumberOfRooms==1) {
-            totalRoomsTv.setText(NumberOfRooms + " Room");
+//            totalRoomsTv.setText(NumberOfRooms + " Room");
         }else {
-            totalRoomsTv.setText(NumberOfRooms + " Rooms");
+//            totalRoomsTv.setText(NumberOfRooms + " Rooms");
         }
     }
 
@@ -1555,22 +1517,10 @@ public class HotelSearchFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // check if the request code is same as what is passed  here it is 2
-        if(requestCode==1 && data!=null)
-        {
-            String message=data.getStringExtra("MESSAGE");
-            String  message1=message.substring(0,message.indexOf(" "));
-            String  message2=message.substring(message.indexOf("(") + 1,
-                    message.indexOf(")"));
-            fromNameTv.setText(message1+" ("+message2+")");
-            hotelCode=message2;
-            MyPreferences.setFlightFromCity(context,message1+" ("+message2+")");
-//                fromCitytv.setText(message2);
-        }
-
+    public void setResult(int value, TrainStationModel.Items intent) {
+        fromNameTv.setText(intent.getCity_name());
+        hotelCode=intent.getStation_code();
+        MyPreferences.setFlightFromCity(context,intent.getCity_name());
     }
 }
 

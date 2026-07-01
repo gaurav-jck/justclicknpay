@@ -66,7 +66,8 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
     private RecyclerView imageRecycler;
     private RatingBar ratingBar;
     private LinearLayout amenitiesLin,roomDetailsLin;
-    private SimpleDraweeView hotelImage;
+//    private SimpleDraweeView hotelImage;
+    private ImageView hotelImage;
     private ImageView amenitiesImg;
     Spinner[] spinnerSelection;
     TextView[] bookTv;
@@ -121,7 +122,7 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
         hotelDescriptionTv= (TextView) view.findViewById(R.id.hotelDescriptionTv);
         hotelDetailsTv= (TextView) view.findViewById(R.id.hotelDetailsTv);
         ratingBar= (RatingBar) view.findViewById(R.id.ratingBar);
-        hotelImage= (SimpleDraweeView) view.findViewById(R.id.hotelImage);
+        hotelImage=  view.findViewById(R.id.hotelImage);
 //        hotelNameTv.setText(moreInfoResponseModel.HotelName);
 //        hotelAddressTv.setText(moreInfoResponseModel.HotelAddress);
 //        hotelDescriptionTv.setText(moreInfoResponseModel.HotelDescription);

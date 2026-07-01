@@ -2,6 +2,7 @@ package com.justclick.clicknbook.Fragment.jctmoney.instapay
 
 import android.Manifest
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -29,6 +30,7 @@ import com.justclick.clicknbook.Fragment.jctmoney.response.DmtKycResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentInstaMerchantKycBinding
 import com.justclick.clicknbook.model.LoginModel
+import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
@@ -69,7 +71,12 @@ class InstaMerchantKycFragment : Fragment() {
     private var kycData: KycData? = null
     private var binding: FragmentInstaMerchantKycBinding?=null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    var toolBarHideFromFragmentListener: ToolBarHideFromFragmentListener?=null
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        toolBarHideFromFragmentListener=context as ToolBarHideFromFragmentListener
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -90,6 +97,7 @@ class InstaMerchantKycFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding= FragmentInstaMerchantKycBinding.inflate(layoutInflater)
+        toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
         getIpAddress()
         binding!!.btnCapture.setOnClickListener {
             if(validateFields()){

@@ -230,7 +230,7 @@ public final class Common {
   }
 
   public static boolean isRegexValid(String name,String regex){
-    if(name.length()>0 && name.matches(regex)){
+    if(name.length()>0 && (regex==null || regex.isEmpty() || name.matches(regex) )){
       return true;
     }else {
       return false;

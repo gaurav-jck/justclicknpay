@@ -59,7 +59,7 @@ public class HotelBookingInformationFragment extends Fragment implements View.On
     private HotelRoomDataResponseModel roomDataResponseModel;
     private RecyclerView roomRecyclerView;
     private ImageView backArrowImg,roomDetailArrowImg;
-    private SimpleDraweeView hotelImage;
+    private ImageView hotelImage;
     private EditText promoCodeEdt;
     private LinearLayout linearAdd;
     private TextView hotelDetailsTv,roomDayInfoTv,checkInDateTv,checkOutDateTv,checkInTimeeTv,

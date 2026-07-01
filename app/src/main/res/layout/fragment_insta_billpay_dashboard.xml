@@ -43,7 +43,7 @@
             android:layout_marginTop="25dp"
             android:layout_marginLeft="@dimen/margin_10dp"
             android:layout_marginRight="@dimen/margin_10dp"
-            android:text="Select DMT Type"
+            android:text="Select Bill Type"
             android:background="@color/colorAEPSDashboardBlue"
             android:padding="@dimen/small_margin"
             android:textSize="17sp"
@@ -59,69 +59,302 @@
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/dmt1Lin"
+                android:id="@+id/electricityLin"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
                 android:layout_weight="1"
-                android:background="@drawable/aeps_border"
+                android:background="@drawable/billpay_border"
                 android:gravity="center"
                 android:orientation="vertical">
                 <ImageView
                     android:layout_width="@dimen/aeps_icon_w"
                     android:layout_height="@dimen/aeps_icon_h"
-                    app:srcCompat="@drawable/ic_money_transfer"/>
+                    app:srcCompat="@drawable/bill_icon_electricity"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" DMT 1"
-                    android:textColor="@color/app_blue_color_light"
+                    android:text="Electricity"
+                    android:textColor="@color/color_light_black2"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/dmt2Lin"
+                android:id="@+id/dthLin"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
                 android:layout_weight="1"
-                android:background="@drawable/aeps_border"
+                android:background="@drawable/billpay_border"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:layout_marginLeft="@dimen/large_margin">
                 <ImageView
                     android:layout_width="@dimen/aeps_icon_w"
                     android:layout_height="@dimen/aeps_icon_h"
-                    app:srcCompat="@drawable/ic_money_transfer"/>
+                    app:srcCompat="@drawable/bill_icon_dth"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" DMT 2"
-                    android:textColor="@color/app_blue_color_light"
+                    android:text="DTH"
+                    android:textColor="@color/color_light_black2"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/dmt3Lin"
+                android:id="@+id/fastagLin"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dashboard_icon_w"
                 android:layout_weight="1"
-                android:background="@drawable/aeps_border"
+                android:background="@drawable/billpay_border"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:layout_marginLeft="@dimen/large_margin"
-                android:visibility="visible">
+                android:layout_marginLeft="@dimen/large_margin">
                 <ImageView
                     android:layout_width="@dimen/aeps_icon_w"
                     android:layout_height="@dimen/aeps_icon_h"
-                    app:srcCompat="@drawable/ic_money_transfer"/>
+                    app:srcCompat="@drawable/bill_icon_fastag"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" DMT 3"
-                    android:textColor="@color/app_blue_color_light"
+                    android:text="Fastag"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/waterLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_water"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Water"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/gasLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_gas"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gas"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/insuranceLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_insurance"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Insurance"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/prepaidLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_prepaid"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prepaid"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/postpaidLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_postpaid"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Postpaid"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/landlineLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_landline"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Landline"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_20dp"
+            android:layout_marginLeft="@dimen/margin_10dp"
+            android:layout_marginRight="@dimen/margin_10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/emiLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_emi"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="EMI"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/datacardLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_datacard"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Datacard"
+                    android:textColor="@color/color_light_black2"
+                    android:textSize="@dimen/dashboard_icon_name_size"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/billLin"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dashboard_icon_w"
+                android:layout_weight="1"
+                android:background="@drawable/billpay_border"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:visibility="invisible">
+                <ImageView
+                    android:layout_width="@dimen/aeps_icon_w"
+                    android:layout_height="@dimen/aeps_icon_h"
+                    app:srcCompat="@drawable/bill_icon_landline"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Landline"
+                    android:textColor="@color/color_light_black2"
                     android:textSize="@dimen/dashboard_icon_name_size"
                     android:textStyle="bold"
                     android:gravity="center_horizontal"/>

@@ -1665,6 +1665,9 @@ public class NetworkCall {
     public static ApiInterface getAepsInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
     }
+    public static ApiInterface getInstaBillpayInterface(){
+        return APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);
+    }
 
 
     private void showCustomDialog() {

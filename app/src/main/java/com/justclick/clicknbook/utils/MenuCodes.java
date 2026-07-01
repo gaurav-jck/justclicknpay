@@ -132,6 +132,7 @@ public class MenuCodes {
   public static final String  TRAIN_TENT="Tent";
   public static final String  BILL_PAY="UITILITY";
   public static final String  BILL_PAY2="UITILITY2";
+  public static final String  INSTA_KYC="KYC";
   public static final String  CASH_OUT="PayOut";
   public static final String  LIC="LIC";
   public static final String  PAYTM="Wallet";

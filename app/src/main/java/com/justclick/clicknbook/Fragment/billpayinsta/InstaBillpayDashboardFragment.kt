@@ -25,6 +25,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
+import com.jck.myjckapp.ui.fragments.aeps.InstaBillerDetailFragment
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.billpay.BillPayFragment
@@ -34,11 +35,11 @@ import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentInstaBillpayDashboardBinding
-import com.justclick.clicknbook.databinding.FragmentInstaDmtDashboardBinding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
+import com.justclick.clicknbook.utils.Constants.BillPay
 import com.justclick.clicknbook.utils.MyPreferences
 import okhttp3.ResponseBody
 import java.net.URL
@@ -116,9 +117,17 @@ class InstaBillpayDashboardFragment : Fragment(), View.OnClickListener {
     ): View {
         binding= FragmentInstaBillpayDashboardBinding.inflate(layoutInflater)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
-        binding!!.dmt1Lin.setOnClickListener(this)
-        binding!!.dmt2Lin.setOnClickListener(this)
-        binding!!.dmt3Lin.setOnClickListener(this)
+        binding!!.electricityLin.setOnClickListener(this)
+        binding!!.dthLin.setOnClickListener(this)
+        binding!!.fastagLin.setOnClickListener(this)
+        binding!!.waterLin.setOnClickListener(this)
+        binding!!.gasLin.setOnClickListener(this)
+        binding!!.insuranceLin.setOnClickListener(this)
+        binding!!.prepaidLin.setOnClickListener(this)
+        binding!!.postpaidLin.setOnClickListener(this)
+        binding!!.landlineLin.setOnClickListener(this)
+        binding!!.emiLin.setOnClickListener(this)
+        binding!!.datacardLin.setOnClickListener(this)
         binding!!.backArrow.setOnClickListener(this)
         //            Common.showCommonAlertDialog(context, ip, "IP address");
         getIpAddress()
@@ -128,14 +137,38 @@ class InstaBillpayDashboardFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         when(v!!.id){
-            R.id.dmt1Lin->{
-                dmtClicked("bank1")
+            R.id.electricityLin->{
+                billClicked(BillPay.Electricity)
             }
-            R.id.dmt2Lin->{
-                dmtClicked("bank2")
+            R.id.dthLin->{
+                billClicked(BillPay.DTH)
             }
-            R.id.dmt3Lin->{
-                dmtClicked("bank3")
+            R.id.fastagLin->{
+                billClicked(BillPay.FASTag)
+            }
+            R.id.waterLin->{
+                billClicked(BillPay.Water)
+            }
+            R.id.gasLin->{
+                billClicked(BillPay.Gas)
+            }
+            R.id.insuranceLin->{
+                billClicked(BillPay.Insurance)
+            }
+            R.id.prepaidLin->{
+                billClicked(BillPay.Prepaid)
+            }
+            R.id.postpaidLin->{
+                billClicked(BillPay.Postpaid)
+            }
+            R.id.landlineLin->{
+                billClicked(BillPay.Landline)
+            }
+            R.id.emiLin->{
+                billClicked(BillPay.EMI)
+            }
+            R.id.datacardLin->{
+                billClicked(BillPay.Datacard)
             }
             R.id.back_arrow->{
                 parentFragmentManager.popBackStack()
@@ -143,16 +176,11 @@ class InstaBillpayDashboardFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun dmtClicked(bankType: String) {
+    private fun billClicked(billType: String) {
         if (isKycChecked) {
-            var fragment=BillPayFragment()
-            var bundle=Bundle()
-            bundle.putSerializable("credentialResponse", commonParams)
-            bundle.putString("BankName", bankType)
-            fragment.arguments=bundle
-            (context as NavigationDrawerActivity).replaceFragmentWithBackStack(fragment)
+            (context as NavigationDrawerActivity).replaceFragmentWithBackStack(InstaBillerDetailFragment.newInstance(commonParams!!, billType))
         } else {
-            checkMerchantKyc(bankType)
+            checkMerchantKyc(billType)
         }
     }
 
@@ -188,7 +216,7 @@ class InstaBillpayDashboardFragment : Fragment(), View.OnClickListener {
     "status": true
 }"""
 
-    private fun responseHandlerMerchantKyc(response: ResponseBody, bankType: String) {
+    private fun responseHandlerMerchantKyc(response: ResponseBody, billType: String) {
         try {
             val senderResponse = Gson().fromJson(
                 response.string(),
@@ -198,7 +226,7 @@ class InstaBillpayDashboardFragment : Fragment(), View.OnClickListener {
                 if (senderResponse.statusCode == "00") {
                     if (senderResponse.data.action == NO_ACTION_REQUIRED) {
                         isKycChecked = true
-                        dmtClicked(bankType)
+                        billClicked(billType)
                     } else if (senderResponse.data.status == Pending) {
                         merchantKycAlert(senderResponse)
                     } else {

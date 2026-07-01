@@ -17,4 +17,9 @@ public class Constants {
   public static class QueryStatus{
     public static final int ALL=-1, OPEN=1, CLOSE=2, REOPEN=3;
   }
+  public static class BillPay{
+    public static final String Postpaid="Postpaid", Landline="Landline", FASTag="FASTag", Datacard="Datacard",
+            Electricity="Electricity", Insurance="Insurance", Water="Water", DTH="DTH", Prepaid="Prepaid",
+            EMI="EMI", Gas="Gas";
+  }
 }

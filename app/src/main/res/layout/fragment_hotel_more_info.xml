@@ -113,7 +113,14 @@
                 android:layout_height="0.1dp"
                 android:background="@color/cardview_shadow_start_color" />
 
-            <com.facebook.drawee.view.SimpleDraweeView
+           <!-- <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/hotelImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/hotelImageSize"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/hotel_demo_image"
+                android:layout_weight="0.70" />-->
+            <ImageView
                 android:id="@+id/hotelImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/hotelImageSize"

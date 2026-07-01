@@ -63,8 +63,7 @@ import com.justclick.clicknbook.utils.SlidingUpPanelLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HotelListWithMapFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,
-        SlidingUpPanelLayout.PanelSlideListener, LocationListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class HotelListWithMapFragment extends Fragment implements SlidingUpPanelLayout.PanelSlideListener, LocationListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private static final String ARG_LOCATION = "arg.location";
     private Context context;
@@ -88,7 +87,6 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
     private GoogleMap mMap;
     private boolean mIsNeedLocationUpdate = true;
 
-    private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private View rootView;
 
@@ -107,11 +105,6 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context=getActivity();
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
     }
 
     @Override
@@ -210,25 +203,6 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
         return rootView;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        mLocation = getArguments().getParcelable(ARG_LOCATION);
-        if (mLocation == null) {
-            mLocation = getLastKnownLocation(false);
-        }
-
-        mMapFragment = SupportMapFragment.newInstance();
-        FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mapContainer, mMapFragment, "map");
-        fragmentTransaction.commit();
-        mMapFragment.getMapAsync(this);
-
-
-        setUpMapIfNeeded();
-    }
-
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -239,10 +213,7 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
                 mMap.getUiSettings().setCompassEnabled(false);
                 mMap.getUiSettings().setZoomControlsEnabled(false);
                 mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                LatLng update = getLastKnownLocation();
-                if (update != null) {
-                    mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.fromLatLngZoom(update, 11.0f)));
-                }
+
                 mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
                     @Override
                     public void onMapClick(LatLng latLng) {
@@ -260,53 +231,6 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
         // In case Google Play services has since become available.
         setUpMapIfNeeded();
 //        collapseMap();
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Connect the client.
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onStop() {
-        // Disconnecting the client invalidates it.
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    private LatLng getLastKnownLocation() {
-        return getLastKnownLocation(true);
-    }
-
-    private LatLng getLastKnownLocation(boolean isMoveMarker) {
-        LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-        Criteria criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_LOW);
-        String provider = lm.getBestProvider(criteria, true);
-        if (provider == null) {
-            return null;
-        }
-        Activity activity = getActivity();
-        if (activity == null) {
-            return null;
-        }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                    activity.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                return null;
-            }
-        }
-        Location loc = lm.getLastKnownLocation(provider);
-        if (loc != null) {
-            LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
-            if (isMoveMarker) {
-                moveMarker(latLng);
-            }
-            return latLng;
-        }
-        return null;
     }
 
     private void moveMarker(LatLng latLng) {
@@ -394,25 +318,6 @@ public class HotelListWithMapFragment extends Fragment implements GoogleApiClien
         if (mIsNeedLocationUpdate) {
             moveToLocation(location);
         }
-    }
-
-    @Override
-    public void onConnected(Bundle bundle) {
-        mLocationRequest = LocationRequest.create();
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setNumUpdates(1);
-
-//        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
     }
 
     @Override

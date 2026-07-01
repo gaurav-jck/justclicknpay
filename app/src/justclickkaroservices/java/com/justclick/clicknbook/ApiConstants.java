@@ -255,6 +255,9 @@ public class ApiConstants
     public static final String CashWithdrawal   ="CashWithdrawal";
     public static final String AadharPay   ="AadharPay";
 
+//    insta billpay
+//    public static final String Operatorlist   ="Operatorlist";
+
     //    MATM
     public static final String InitiateMatmTxn   ="InitiateTransaction";
     public static final String PaysprintCashWithDraw   ="PaysprintCashWithDraw";
@@ -316,6 +319,10 @@ public class ApiConstants
     public static final String Fetchbilldetails   ="Fetchbilldetails";
     public static final String PayBillpayments   ="PayBillpayments";
     public static final String getcommission   ="getcommission";
+//    billpay insta
+    public static final String BillerDetails   ="BillerDetails";
+    public static final String FetchBill   ="FetchBill";
+    public static final String PayBill   ="PayBill";
 
     //    PaytmWallet
     public static final String SendOtp="SendOtp";

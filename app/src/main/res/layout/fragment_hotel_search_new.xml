@@ -7,14 +7,18 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <include
+        android:id="@+id/topView"
+        layout="@layout/top_view"
+        />
+
     <androidx.cardview.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@color/cardMobileBackground"
-        android:layout_alignParentTop="true"
+        app:cardBackgroundColor="@color/cardMobileBackground"
+        android:layout_below="@+id/topView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <ScrollView
@@ -474,16 +478,17 @@
                                         <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal">
+                                            android:layout_gravity="center_horizontal"
+                                            android:orientation="horizontal">
+
                                             <ImageView
                                                 android:id="@+id/childImg11"
                                                 android:layout_width="@dimen/child_image_size"
                                                 android:layout_height="@dimen/adult_image_width"
                                                 android:layout_gravity="bottom"
                                                 android:alpha=".4"
-
-                                                app:srcCompat="@drawable/infant_new_vector"
-                                                android:visibility="visible" />
+                                                android:visibility="visible"
+                                                app:srcCompat="@drawable/infant_new_vector" />
 <!--android:background="@drawable/men_cut"-->
                                             <ImageView
                                                 android:id="@+id/childImg12"
@@ -561,13 +566,14 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
                                     android:orientation="horizontal"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <LinearLayout
                                         android:id="@+id/childAgeLin11"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:background="@drawable/money_receiver_border_rect_corner">
+                                        android:background="@drawable/money_receiver_border_rect_corner"
+                                        android:visibility="visible">
 
                                         <Spinner
                                             android:id="@+id/childAgeSpinner11"
@@ -585,7 +591,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="@dimen/small_margin"
                                         android:background="@drawable/money_receiver_border_rect_corner"
-                                        android:visibility="visible">
+                                        android:visibility="gone">
 
                                         <Spinner
                                             android:id="@+id/childAgeSpinner12"
@@ -755,7 +761,6 @@
                                                 android:layout_height="@dimen/adult_image_width"
                                                 android:layout_gravity="bottom"
                                                 android:alpha=".4"
-
                                                 app:srcCompat="@drawable/infant_new_vector"
                                                 android:visibility="visible" />
 <!--android:background="@drawable/men_cut"-->
@@ -836,7 +841,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
                                     android:orientation="horizontal"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <LinearLayout
                                         android:id="@+id/childAgeLin21"
@@ -1111,7 +1116,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
                                     android:orientation="horizontal"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <LinearLayout
                                         android:id="@+id/childAgeLin31"
@@ -1387,7 +1392,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="right"
                                     android:orientation="horizontal"
-                                    android:visibility="gone">
+                                    android:visibility="visible">
 
                                     <LinearLayout
                                         android:id="@+id/childAgeLin41"

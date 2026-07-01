@@ -3,6 +3,7 @@ package com.justclick.clicknbook.Fragment.jctmoney.instapay
 import android.Manifest
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -25,6 +27,8 @@ import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.billpay.BillPayFragment
 import com.justclick.clicknbook.Fragment.billpayinsta.InstaBillpayDashboardFragment
+import com.justclick.clicknbook.Fragment.jctmoney.instapay.model.MerchantKycCheckResponse
+import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.Fragment.jctmoney.response.DmtKycResponse
 import com.justclick.clicknbook.R
@@ -224,10 +228,12 @@ class InstaMerchantOnboardFragment : Fragment() {
                         val billPayFragment = InstaBillpayDashboardFragment()
                         billPayFragment.arguments = bundle
                         (context as NavigationDrawerActivity).replaceFragmentWithBackStack(billPayFragment)
-                    }else{
+                    }else if(productType==AEPS_INSTA){
                         val fragment = AepsDashboardFragment()
                         fragment.arguments = bundle
                         (context as NavigationDrawerActivity).replaceFragmentWithBackStack(fragment)
+                    }else{
+                        checkMerchantKyc()
                     }
                 } else {
                     Common.showResponsePopUp(requireContext(), commonResponse.statusMessage)
@@ -334,6 +340,102 @@ class InstaMerchantOnboardFragment : Fragment() {
         }catch (e :Exception){
 
         }
+    }
+
+    private var isKycChecked = false
+    private fun checkMerchantKyc() {
+        var loginModel = LoginModel()
+        loginModel = MyPreferences.getLoginData(loginModel, context)
+        val request = CheckCredentialRequest()
+        request.agentCode = loginModel.Data.DoneCardUser
+        //        request.setAgentCode("jc0a13387");
+//        request.setIPAddress(Common.getIpAddress());
+        request.setIPAddress(ip)
+
+        //        request.setIPAddress(CommonKotlin.Companion.fetchPublicIP());
+        NetworkCall().callService(
+            NetworkCall.getDmtInstaApiInterface().getDmtInstaHeader(
+                ApiConstants.checkagentekycstatus,
+                request, commonParams!!.getUserData(), "Bearer " + commonParams!!.getToken()
+            ), context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerMerchantKyc(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private val NO_ACTION_REQUIRED = "NO-ACTION-REQUIRED"
+    private val Pending = "PENDING"
+    private fun responseHandlerMerchantKyc(response: ResponseBody) {
+        try {
+            val senderResponse = Gson().fromJson(
+                response.string(),
+                MerchantKycCheckResponse::class.java
+            )
+            if (senderResponse != null) {
+                if (senderResponse.statusCode == "00") {
+                    if (senderResponse.data.action == NO_ACTION_REQUIRED) {
+                        isKycChecked = true
+                        Common.showSuccessDialog(requireContext(), senderResponse.data.status)
+                    } else if (senderResponse.data.status == Pending) {
+                        merchantKycAlert(senderResponse)
+                    } else {
+                        Common.showCommonAlertDialog(
+                            requireContext(),
+                            senderResponse.statusMessage,
+                            "KYC status"
+                        )
+                    }
+                    //                    Toast.makeText(context,senderResponse.getStatusMessage(),Toast.LENGTH_SHORT).show();
+                } else {
+                    Common.showCommonAlertDialog(
+                        requireContext(),
+                        senderResponse.statusMessage,
+                        "Api Response"
+                    )
+                }
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } catch (e: Exception) {
+            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun merchantKycAlert(kycResponse: MerchantKycCheckResponse) {
+        // Create an alert builder
+        val builder = AlertDialog.Builder(
+            requireContext()
+        )
+        builder.setTitle("Api response")
+        builder.setMessage("Your KYC is pending, please do merchant KYC.")
+        builder.setCancelable(false)
+
+        // add a button
+        builder.setPositiveButton("DO KYC") { dialog: DialogInterface, which: Int ->
+            // send data from the AlertDialog to the Activity
+            (context as NavigationDrawerActivity).replaceFragment(
+                InstaMerchantKycFragment.newInstance(
+                    commonParams!!,
+                    kycResponse.data
+                )
+            )
+            dialog.dismiss()
+        }
+        // add a button
+        builder.setNegativeButton("Cancel") { dialog: DialogInterface, which: Int ->
+            // send data from the AlertDialog to the Activity
+            dialog.dismiss()
+            parentFragmentManager.popBackStack()
+        }
+        // create and show the alert dialog
+        val dialog = builder.create()
+        dialog.show()
     }
 
     var ip: String? = null

@@ -565,6 +565,11 @@ Call<ResponseBody> getInstaAepsHeaderMap(@Path("methodName") String method, @Fie
     Call<ResponseBody> getAepsInstaHeader(@Path("methodName") String method, @Body Object data,
                                          @Header("userData") String userData, @Header("Authorization") String token);
 
+//    insta billpay
+     @POST("Api_v2/bill/utilitypayment/{methodName}")
+     @Headers({"Content-Type: application/json"})
+     Call<ResponseBody> getInstaBillpayHeader(@Path("methodName") String method, @Body Object data,
+                                              @Header("userData") String userData, @Header("Authorization") String token);
     //    Payout
     @POST("api/Payment/{methodName}")
     Call<ResponseBody> getPayoutPost(@Path("methodName") String method, @Body Object data);

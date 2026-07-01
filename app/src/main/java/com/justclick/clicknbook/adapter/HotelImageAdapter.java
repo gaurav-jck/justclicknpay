@@ -7,9 +7,9 @@ import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.facebook.drawee.view.SimpleDraweeView;
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.model.HotelMoreInfoResponseModel;
@@ -83,10 +83,10 @@ public class HotelImageAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public SimpleDraweeView hotelImage;
+        public ImageView hotelImage;
         public MyViewHolder(View view) {
             super(view);
-            hotelImage = (SimpleDraweeView) view.findViewById(R.id.hotelImage);
+            hotelImage = view.findViewById(R.id.hotelImage);
             DisplayMetrics displaymetrics = new DisplayMetrics();
             ((NavigationDrawerActivity)context).getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
             int screenWidth = displaymetrics.widthPixels;

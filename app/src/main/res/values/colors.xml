@@ -213,6 +213,8 @@
     <color name="colorHint">#777777</color>
 
     <color name="colorAEPSDashboardBlue">#88EAF1FD</color>
+    <color name="colorBillpayDashboardBlue">#88EFF3FA</color>
+    <color name="colorBillpayBorder">#881B1723</color>
 
     <color name="text_dark_gray">#262626</color>
     <color name="text_light_gray">#9f9f9f</color>
