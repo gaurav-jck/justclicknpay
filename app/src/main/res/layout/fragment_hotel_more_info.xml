@@ -6,11 +6,14 @@
     android:layout_height="match_parent"
     android:id="@+id/mainLayout">
 
-
+    <include
+        android:id="@+id/topView"
+        layout="@layout/top_view"
+        />
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
+        android:layout_height="match_parent"
+        >
 
 
         <LinearLayout
@@ -22,59 +25,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/app_blue_color"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/backArrowImg"
-                    android:layout_width="0dp"
-                    android:layout_weight="0.01"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:srcCompat="@drawable/back_arrow" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_gravity="center"
-                    android:padding="@dimen/small_margin">
-
-                    <TextView
-                        android:id="@+id/hotelNameTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The leela palace"
-                        android:textColor="@color/color_white"
-                        android:textSize="@dimen/title_text_size" />
-                    <TextView
-                        android:id="@+id/detailTv"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/color_white"
-                        android:text="13 Nov 2017 - 16 Nov 2017 - 2Adult, 2Child, 2Rooms"
-                        android:textSize="@dimen/small_text_size" />
-
-
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_weight="0.009"
-                    android:layout_height="20dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginBottom="@dimen/small_margin"
-                    android:src="@drawable/hoteledit" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/small_margin"
+                android:layout_marginTop="@dimen/margin_3dp"
                 android:background="@drawable/money_receiver_border_rect_corner"
                 >
 

@@ -305,7 +305,7 @@ private var filterDialog: Dialog? = null
             if (response != null) {
                 responseHandlerList(response, request) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
             } else {
-                Toast.makeText(context, resources.getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), resources.getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -337,10 +337,10 @@ private var filterDialog: Dialog? = null
                     Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_LONG).show()
                 }
             }else{
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }catch (e:Exception){
-            Toast.makeText(context, R.string.exception_message, Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -434,11 +434,11 @@ private var filterDialog: Dialog? = null
                 val hours = minutes / 60
                 val days = hours / 24
                 if (days < 0) {
-                    Toast.makeText(context, "you have selected wrong dates", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "you have selected wrong dates", Toast.LENGTH_SHORT).show()
                     return
                 }
                 if (days >= 15) {
-                    Toast.makeText(context, "please select 15 days data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "please select 15 days data", Toast.LENGTH_SHORT).show()
                     return
                 }
                 filterDialog!!.dismiss()
@@ -562,7 +562,7 @@ private var filterDialog: Dialog? = null
             if (response != null) {
                 responseHandlerAgent(response, agent_auto)
             } else {
-                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -576,7 +576,7 @@ private var filterDialog: Dialog? = null
 //                    listAdapter!!.notifyDataSetChanged()
                     if (commonResponse.Data != null &&
                         commonResponse.Data.size > 0) {
-//                        Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+//                        Toast.makeText(requireContext(), commonResponse.Status, Toast.LENGTH_LONG).show()
                         val arr = arrayOfNulls<String>(commonResponse.Data.size)
                         agentArray.clear()
                         agentArray.addAll(commonResponse.Data)
@@ -588,17 +588,17 @@ private var filterDialog: Dialog? = null
                         agent_auto.setAdapter<ArrayAdapter<String>>(Common.getAutocompleteAdapter(arr,requireContext()))
                         agent_auto.showDropDown()
                     }else{
-//                        Toast.makeText(context, "No agent found.", Toast.LENGTH_LONG).show()
+//                        Toast.makeText(requireContext(), "No agent found.", Toast.LENGTH_LONG).show()
                     }
                 }else {
-//                    Toast.makeText(context, commonResponse.Status, Toast.LENGTH_LONG).show()
+//                    Toast.makeText(requireContext(), commonResponse.Status, Toast.LENGTH_LONG).show()
                 }
             } else {
-                Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), "Agents are enable to fetch", Toast.LENGTH_LONG).show()
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(context, "Agents are enable to fetch", Toast.LENGTH_LONG).show()
+            Toast.makeText(requireContext(), "Agents are enable to fetch", Toast.LENGTH_LONG).show()
         }
     }
 

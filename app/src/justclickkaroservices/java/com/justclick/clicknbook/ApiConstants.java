@@ -254,6 +254,7 @@ public class ApiConstants
     public static final String MiniStatment   ="MiniStatment";
     public static final String CashWithdrawal   ="CashWithdrawal";
     public static final String AadharPay   ="AadharPay";
+    public static final String aepstransactionotp   ="aepstransactionotp";
 
 //    insta billpay
 //    public static final String Operatorlist   ="Operatorlist";
@@ -280,6 +281,7 @@ public class ApiConstants
     public static final String CancelTicket="CancelTicket";
     public static final String VerifyOtpRefund="VerifyOtpRefund";
     public static final String getrailbookinglist="getrailbookinglist";
+    public static final String getagentlastbooking="getagentlastbooking";
     public static final String getPassenger="getPassenger";
     public static final String addagentgstdetails="addagentgstdetails";
     public static final String generateAuthentication="generateAuthentication";

@@ -33,6 +33,7 @@ import com.justclick.clicknbook.Activity.NavigationDrawerActivity;
 import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.HotelImageAdapter;
+import com.justclick.clicknbook.databinding.FragmentHotelMoreInfoBinding;
 import com.justclick.clicknbook.model.HotelCityListModel;
 import com.justclick.clicknbook.model.HotelMoreInfoResponseModel;
 import com.justclick.clicknbook.model.LoginModel;
@@ -61,16 +62,10 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
     Context context;
     private LoginModel loginModel;
     private HotelMoreInfoResponseModel moreInfoResponseModel;
-    private TextView summaryTv,locationTv,detailTv,hotelNameTv, hotelAddressTv,
-            hotelDescriptionTv,hotelDetailsTv,amenitiesTv,moreTv;
-    private RecyclerView imageRecycler;
-    private RatingBar ratingBar;
-    private LinearLayout amenitiesLin,roomDetailsLin;
-//    private SimpleDraweeView hotelImage;
-    private ImageView hotelImage;
-    private ImageView amenitiesImg;
     Spinner[] spinnerSelection;
     TextView[] bookTv;
+    private FragmentHotelMoreInfoBinding binding;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -95,47 +90,32 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_hotel_more_info, container, false);
+//        View view= inflater.inflate(R.layout.fragment_hotel_more_info, container, false);
+        binding=FragmentHotelMoreInfoBinding.inflate(getLayoutInflater());
 
-        titleChangeListener.onToolBarTitleChange(getString(R.string.hotelMoreInfoFragmentTitle));
+        binding.topView.titleTv.setText("Hotel Info");
+        binding.topView.backArrow.setOnClickListener(view -> {
+            getParentFragmentManager().popBackStack();
+        });
 
 //        if(getArguments()!=null && getArguments().getSerializable("HotelInfo")!=null){
 //            moreInfoResponseModel= (HotelMoreInfoResponseModel) getArguments().getSerializable("HotelInfo");
 //        }
 
-        initializeViews(view);
-        setRoomDataDynamically(view);
-        return view;
+        initializeViews();
+        setRoomDataDynamically();
+        return binding.getRoot();
     }
 
-    private void initializeViews(View view) {
-        locationTv= (TextView) view.findViewById(R.id.locationTv);
-        summaryTv= (TextView) view.findViewById(R.id.summaryTv);
-        amenitiesLin= (LinearLayout) view.findViewById(R.id.amenitiesLin);
-        roomDetailsLin= (LinearLayout) view.findViewById(R.id.roomDetailsLin);
-//        amenitiesImg= (ImageView) view.findViewById(R.id.amenitiesImg);
-        hotelNameTv= (TextView) view.findViewById(R.id.hotelNameTv);
-        detailTv= (TextView) view.findViewById(R.id.detailTv);
-        moreTv= (TextView) view.findViewById(R.id.moreTv);
-//        amenitiesTv= (TextView) view.findViewById(R.id.amenitiesTv);
-//        hotelAddressTv= (TextView) view.findViewById(R.id.hotelAddressTv);
-        hotelDescriptionTv= (TextView) view.findViewById(R.id.hotelDescriptionTv);
-        hotelDetailsTv= (TextView) view.findViewById(R.id.hotelDetailsTv);
-        ratingBar= (RatingBar) view.findViewById(R.id.ratingBar);
-        hotelImage=  view.findViewById(R.id.hotelImage);
-//        hotelNameTv.setText(moreInfoResponseModel.HotelName);
-//        hotelAddressTv.setText(moreInfoResponseModel.HotelAddress);
-//        hotelDescriptionTv.setText(moreInfoResponseModel.HotelDescription);
-//        hotelDescriptionTv.setText(Html.fromHtml(moreInfoResponseModel.HotelDescription));
+    private void initializeViews() {
         spinnerSelection=new Spinner[4];
         bookTv=new TextView[4];
-        makeTextViewResizable(hotelDescriptionTv, 2, "View More", true);
+        makeTextViewResizable(binding.hotelDescriptionTv, 2, "View More", true);
 
-        locationTv.setOnClickListener(this);
+        binding.locationTv.setOnClickListener(this);
 
-        imageRecycler= (RecyclerView) view.findViewById(R.id.imageRecycler);
-        imageRecycler.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
-        imageRecycler.setAdapter(new HotelImageAdapter(context,new HotelImageAdapter.OnRecyclerItemClickListener() {
+        binding.imageRecycler.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+        binding.imageRecycler.setAdapter(new HotelImageAdapter(context,new HotelImageAdapter.OnRecyclerItemClickListener() {
             @Override
             public void onRecyclerItemClick(View view, ArrayList<HotelMoreInfoResponseModel.HotelImages> list, int position) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
@@ -145,44 +125,44 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
 
 //        ratingBar.setRating(Float.parseFloat(moreInfoResponseModel.HotelStarRating));
         setAmenitiesDynamically();
-        setFont(view);
+        setFont();
 
     }
-    private void setFont(View view) {
+    private void setFont() {
         Typeface face = Common.EditTextTypeFace(context);
         Typeface face2 = Common.TextViewTypeFace(context);
         Typeface face1 = Common.OpenSansRegularTypeFace(context);
 
 //        titles
-        ((TextView)view.findViewById(R.id.summaryTv)).setTypeface(face2);
-        ((TextView)view.findViewById(R.id.locationTv)).setTypeface(face2);
-        ((TextView)view.findViewById(R.id.amenitiesTitleTv)).setTypeface(face2);
-        ((TextView)view.findViewById(R.id.aboutHotelTitleTv)).setTypeface(face2);
-        ((TextView)view.findViewById(R.id.galleryTv)).setTypeface(face2);
-        ((TextView)view.findViewById(R.id.chooseRoomTv)).setTypeface(face2);
+        binding.summaryTv.setTypeface(face2);
+        binding.locationTv.setTypeface(face2);
+        binding.amenitiesTitleTv.setTypeface(face2);
+        binding.aboutHotelTitleTv.setTypeface(face2);
+        binding.galleryTv.setTypeface(face2);
+        binding.chooseRoomTv.setTypeface(face2);
 
 //        contents
-        ((TextView)view.findViewById(R.id.hotelDetailsTv)).setTypeface(face1);
-        ((TextView)view.findViewById(R.id.cheapestPriceTv)).setTypeface(face1);
+        binding.hotelDetailsTv.setTypeface(face1);
+        binding.cheapestPriceTv.setTypeface(face1);
 
 //        labels
-        ((TextView)view.findViewById(R.id.paxInfoTv)).setTypeface(face1);
+        binding.paxInfoTv.setTypeface(face1);
 
 //        editTexts
-//        ((TextView)view.findViewById(R.id.promoCodeEdt)).setTypeface(face);
+//        binding.promoCodeEdt)).setTypeface(face);
 
 
     }
 
 
-    private void setRoomDataDynamically(View view) {
+    private void setRoomDataDynamically() {
         for(int i = 0; i< 4; i++) {
-            LinearLayout dynamicContent = (LinearLayout) view.findViewById(R.id.roomDetailsLin);
+            LinearLayout dynamicContent = binding.roomDetailsLin;
             final View wizard = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE))
                     .inflate(R.layout.hotel_room_data, dynamicContent, false);
 
-            spinnerSelection[i] =(Spinner) wizard.findViewById(R.id.spinnerSelection);
-            bookTv[i] =(TextView) wizard.findViewById(R.id.bookTv);
+            spinnerSelection[i] =wizard.findViewById(R.id.spinnerSelection);
+            bookTv[i] =wizard.findViewById(R.id.bookTv);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(context,
                     R.layout.salutation_spinner_item, R.id.operator_tv, getResources().
                     getStringArray(R.array.hotel_room_amenities_array));
@@ -241,9 +221,9 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
                 amenitiesTv.setText("Parking");
                 amenitiesTv.setCompoundDrawablesWithIntrinsicBounds(null,getResources().getDrawable(R.drawable.parking_vector),null,null);
             }
-            if(amenitiesLin.getChildCount()<=5)
+            if(binding.amenitiesLin.getChildCount()<=5)
             {
-                amenitiesLin.addView(amenitiesTv);
+                binding.amenitiesLin.addView(amenitiesTv);
             }else {
                 final TextView more=new TextView(context);
                 LinearLayout.LayoutParams params1=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -252,7 +232,7 @@ public class HotelMoreInfoFragment extends Fragment implements View.OnClickListe
                 more.setTextColor(getResources().getColor(R.color.app_red_color));
                 more.setPadding(20,5,10,10);
                 more.setGravity(Gravity.CENTER);
-                amenitiesLin.addView(more);
+                binding.amenitiesLin.addView(more);
                 more.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

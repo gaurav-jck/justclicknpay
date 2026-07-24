@@ -3,22 +3,23 @@ package com.jck.myjckapp.ui.fragments.aeps
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -32,21 +33,18 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentAepsTransactionBinding
-import com.justclick.clicknbook.jctPayment.Cash_Withdrawl_Activity.AepsResponse
 import com.justclick.clicknbook.jctPayment.aepsinsta.AepsBankListResponse
 import com.justclick.clicknbook.jctPayment.aepsinsta.AepsInstaResponse
-import com.justclick.clicknbook.jctPayment.newaeps.AepsBalanceMiniFragment
+import com.justclick.clicknbook.jctPayment.aepsinsta.TxnOtpResponse
 import com.justclick.clicknbook.jctPayment.newaeps.AepsConstants
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
-import com.paysprint.onboardinglib.models.bank
 import okhttp3.ResponseBody
 import org.w3c.dom.Element
 import org.w3c.dom.Node
@@ -76,6 +74,7 @@ class AepsFragment : Fragment() {
     private var bankName:String?=null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var commonParams: CheckCredentialResponse.credentialData? = null
+    private var isAmount=true
 
     companion object {
         fun newInstance(param1: CheckCredentialResponse.credentialData, type:String) =
@@ -115,6 +114,7 @@ class AepsFragment : Fragment() {
             binding!!.amount.visibility=View.VISIBLE
             transactionType="ATMCW"
             transactionMethod=ApiConstants.CashWithdrawal
+            isAmount=true
         }else if(txnType!!.equals(AepsConstants.MS)){
             binding!!.topView.titleTv.text = "Mini Statement"
             binding!!.amountEdt.isEnabled=false
@@ -122,6 +122,7 @@ class AepsFragment : Fragment() {
             binding!!.amount.visibility=View.GONE
             transactionType="ATMMS"
             transactionMethod=ApiConstants.MiniStatment
+            isAmount=false
         }else if(txnType!!.equals(AepsConstants.BE)){
             binding!!.topView.titleTv.text = "Balance Enquiry"
             binding!!.amountEdt.isEnabled=false
@@ -129,6 +130,7 @@ class AepsFragment : Fragment() {
             binding!!.amount.visibility=View.GONE
             transactionType="ATMBE"
             transactionMethod=ApiConstants.BalanceEnquiry
+            isAmount=false
         }else{
             binding!!.topView.titleTv.text = "Aadhar Pay"
             binding!!.amountEdt.isEnabled=true
@@ -136,47 +138,29 @@ class AepsFragment : Fragment() {
             binding!!.amount.visibility=View.VISIBLE
             transactionType="ATMAP"
             transactionMethod=ApiConstants.AadharPay
+            isAmount=true
         }
         binding!!.btnCapture.setOnClickListener {
-            if(binding!!.aadharEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter your Aadhar number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.aadharEdt.text.toString().length<12){
-                Toast.makeText(requireContext(), "Please enter valid Aadhar number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.mobileEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter mobile number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.mobileEdt.text.toString().length<10){
-                Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.amountEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter amount", Toast.LENGTH_SHORT).show()
-            }else if(bankId==null){
-                Toast.makeText(requireContext(), "Please select bank", Toast.LENGTH_SHORT).show()
-            }else if(mLatitude==null){
-                Toast.makeText(requireContext(), "Please enable location services", Toast.LENGTH_SHORT).show()
-                checkLocationPermission()
-            }else{
+            if(validateData()){
+                captureType=FINGER_CAPTURE
                 Common.hideSoftKeyboard(requireActivity())
-                captureData()
+                if(binding!!.amountEdt.text.toString().toFloat()>5000){
+                    callOtpApi()
+                }else{
+                    captureData()
+                }
             }
         }
         binding!!.btnCaptureFace.setOnClickListener {
-            if(binding!!.aadharEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter your Aadhar number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.aadharEdt.text.toString().length<12){
-                Toast.makeText(requireContext(), "Please enter valid Aadhar number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.mobileEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter mobile number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.mobileEdt.text.toString().length<10){
-                Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
-            }else if(binding!!.amountEdt.text.toString().isEmpty()){
-                Toast.makeText(requireContext(), "Please enter amount", Toast.LENGTH_SHORT).show()
-            }else if(bankId==null){
-                Toast.makeText(requireContext(), "Please select bank", Toast.LENGTH_SHORT).show()
-            }else if(mLatitude==null){
-                Toast.makeText(requireContext(), "Please enable location services", Toast.LENGTH_SHORT).show()
-                checkLocationPermission()
-            }else{
+            if(validateData()){
+                captureType=FACE_CAPTURE
                 Common.hideSoftKeyboard(requireActivity())
-                captureFaceData()
+                if(binding!!.amountEdt.text.toString().toFloat()>5000){
+                    callOtpApi()
+                }else{
+                    captureFaceData("")
+                }
+
             }
         }
 
@@ -235,10 +219,144 @@ class AepsFragment : Fragment() {
         }
         return binding!!.root
     }
+
+    private fun callOtpApi() {
+        var loginModel= MyPreferences.getLoginData(LoginModel(), context)
+        val params: MutableMap<String, String> = HashMap()
+        params["AadharNumber"] = binding!!.aadharEdt.text.toString()
+        params["AgentCode"] = loginModel.Data.DoneCardUser
+        params["Latitude"] = mLatitude!!
+        params["Longitude"] = mLongitude!!
+        params["IPAddress"] = ip!!
+        params["Mobile"] = binding!!.mobileEdt.text.toString()
+        params["BankIIN"] = bankIIN!!
+        params["Amount"] = binding!!.amountEdt.text.toString()
+        params["amount"] = binding!!.amountEdt.text.toString()
+
+        NetworkCall().callService(
+            NetworkCall.getAepsInterface().getInstaAepsHeaderMap(
+                ApiConstants.aepstransactionotp, params,
+                commonParams!!.userData, "Bearer " + commonParams!!.token
+            ),
+            context, true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandlerOtp(response)
+            } else {
+                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandlerOtp(response: ResponseBody) {
+        try {
+//            val responseString=
+            val commonResponse = Gson().fromJson(response.string(), TxnOtpResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+                    Toast.makeText(context, "Otp send on your registered mobile number", Toast.LENGTH_LONG).show()
+                    openTxnOtpDialog(commonResponse)
+                } else {
+//                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
+                    Common.showCommonAlertDialog(context, commonResponse.statusMessage, "Api Response")
+                }
+            }else{
+                Toast.makeText(context, "Error in response", Toast.LENGTH_SHORT).show()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Exception in response", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private var otpDialog:Dialog?=null
+    private fun openTxnOtpDialog(responseModel: TxnOtpResponse) {
+        otpDialog = Dialog(requireContext())
+        otpDialog!!.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        otpDialog!!.setContentView(R.layout.aeps_insta_txn_otp_dialog)
+
+//        val inputMethodManager =
+//            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+////        inputMethodManager.showSoftInput(null,0)
+//        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+
+        val otpEdt = otpDialog!!.findViewById<EditText>(R.id.otpEdt1)
+//        val agentCodeTv = dialog.findViewById<TextView>(R.id.agentCodeTv)
+
+//        Toast.makeText(requireContext(), responseModel.data.referenceKey, Toast.LENGTH_SHORT).show()
+
+        otpDialog!!.findViewById<View>(R.id.submit_btn).setOnClickListener {
+            if(otpEdt.text.toString().isEmpty()){
+                Toast.makeText(requireContext(), "Please enter otp", Toast.LENGTH_SHORT).show()
+            }else if(otpEdt.text.toString().length<4){
+                Toast.makeText(requireContext(), "Please enter valid otp", Toast.LENGTH_SHORT).show()
+            }else{
+                Common.hideSoftKeyboard(requireActivity())
+                if(captureType.equals(FINGER_CAPTURE)){
+                    captureOtp(otpEdt.text.toString())
+                }else{
+                    captureFaceData(otpEdt.text.toString())
+                }
+            }
+        }
+        otpDialog!!.findViewById<View>(R.id.close_btn).setOnClickListener { otpDialog!!.dismiss() }
+        otpDialog!!.show()
+    }
+
+    private fun captureOtp(otp: String) {
+        Toast.makeText(requireContext(), otp, Toast.LENGTH_SHORT).show()
+        try {
+            if (d_type == AepsConstants.MANTRA) {
+                val pidOptXML =getPidOptionsOtp(otp)
+                capture(AepsConstants.MANTRA_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            } else if (d_type == AepsConstants.MORPHO) {
+                val pidOptXML =getPidOptionsOtp(otp)
+                capture(AepsConstants.MORPHO_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            }else if (d_type == AepsConstants.STARTEK) {
+                val pidOptXML =getPidOptionsOtp(otp)
+                capture(AepsConstants.STARTEK_PACKAGE_L1, pidOptXML, CAPTURE_REQUEST_CODE)
+            }
+        } catch (e: Exception) {
+            showMessageDialogue("EXCEPTION- " + e.message, "EXCEPTION")
+        }
+    }
+
+
+    private fun validateData(): Boolean {
+        val amount=binding!!.amountEdt.text.toString()
+        if(binding!!.aadharEdt.text.toString().isEmpty()){
+            Toast.makeText(requireContext(), "Please enter your Aadhar number", Toast.LENGTH_SHORT).show()
+        }else if(binding!!.aadharEdt.text.toString().length<12){
+            Toast.makeText(requireContext(), "Please enter valid Aadhar number", Toast.LENGTH_SHORT).show()
+        }else if(binding!!.mobileEdt.text.toString().isEmpty()){
+            Toast.makeText(requireContext(), "Please enter mobile number", Toast.LENGTH_SHORT).show()
+        }else if(binding!!.mobileEdt.text.toString().length<10){
+            Toast.makeText(requireContext(), "Please enter valid mobile number", Toast.LENGTH_SHORT).show()
+        }else if(amount.isEmpty()){
+            Toast.makeText(requireContext(), "Please enter amount", Toast.LENGTH_SHORT).show()
+        }else if(isAmount && !Common.isdecimalvalid(amount)){
+            Toast.makeText(requireContext(), "Please enter valid amount", Toast.LENGTH_SHORT).show()
+        }/*else if(isAmount && (amount.toFloat()<100 || amount.toFloat()>5000)){
+            Toast.makeText(requireContext(), "Amount should be between 100 to 5000", Toast.LENGTH_SHORT).show()
+        }*/else if(isAmount && amount.toFloat()<100){
+            Toast.makeText(requireContext(), "Minimum amount should be 100", Toast.LENGTH_SHORT).show()
+        }else if(bankId==null){
+            Toast.makeText(requireContext(), "Please select bank", Toast.LENGTH_SHORT).show()
+        }else if(mLatitude==null){
+            Toast.makeText(requireContext(), "Please enable location services", Toast.LENGTH_SHORT).show()
+            checkLocationPermission()
+        }else{
+            return true
+        }
+        return false
+    }
+
     private fun getBankList() {
         NetworkCall().callService(
             NetworkCall.getAepsInterface().getAepsInstaBankList(
-                ApiConstants.getbankname,),
+                ApiConstants.getbankname,
+            ),
             context, true
         ) { response: ResponseBody?, responseCode: Int ->
             if (response != null) {
@@ -312,7 +430,7 @@ class AepsFragment : Fragment() {
                     if (pidDataXML != null) {
                         // xml parsing
                         captureType=FINGER_CAPTURE
-                        readXMLData(pidDataXML, FINGER_CAPTURE)
+                        readXMLData(pidDataXML, captureType)
                     } else {
                         showMessageDialogue(
                             "NULL STRING RETURNED",
@@ -337,7 +455,7 @@ class AepsFragment : Fragment() {
                         pidDataXML = bundle.getString("response").toString()
                         if (pidDataXML != null) {
                             captureType=FACE_CAPTURE
-                            readXMLData(pidDataXML, FACE_CAPTURE)
+                            readXMLData(pidDataXML, captureType)
 //                            Common.showResponsePopUp(requireContext(), response)
                         }else{
 //                    handleFailure()
@@ -358,7 +476,7 @@ class AepsFragment : Fragment() {
         }
     }
 
-    fun captureFaceData() {
+    fun captureFaceData(otp:String) {
         try {
             val intent = Intent("in.gov.uidai.rdservice.face.CAPTURE")
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -366,7 +484,7 @@ class AepsFragment : Fragment() {
 //            Common.showCommonAlertDialog(requireContext(), createPidOptionForKUA(getRandomNumber(), "P"),"Face XML")
             intent.putExtra(
                 "request",
-                createPidOptionForKUA(getRandomNumber(), "P")
+                createPidOptionForKUA(getRandomNumber(), "P", otp)
             )
 
             startForFaceResult.launch(intent)
@@ -384,13 +502,13 @@ class AepsFragment : Fragment() {
         return ""
     }
     val LANGUAGE=""
-    fun createPidOptionForKUA(txnId: String, buildType:String): String {
-        return createPidOptionsKUA(txnId, "auth", getWADH2(), buildType)
+    fun createPidOptionForKUA(txnId: String, buildType:String, otp:String): String {
+        return createPidOptionsKUA(txnId, "auth", getWADH2(), buildType, otp)
     }
-    private fun createPidOptionsKUA(txnId: String, purpose: String, wadh:String, buildType:String): String {
+    private fun createPidOptionsKUA(txnId: String, purpose: String, wadh:String, buildType:String, otp:String): String {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<PidOptions ver=\"1.0\" env=\"${buildType}\">\n" +
-                "   <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"\" wadh=\"${wadh}\" posh=\"\" />\n" +
+                "   <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"${otp}\" wadh=\"${wadh}\" posh=\"\" />\n" +
                 "   <CustOpts>\n" +
                 "      <Param name=\"txnId\" value=\"${txnId}\"/>\n" +
                 "      <Param name=\"purpose\" value=\"$purpose\"/>\n" +
@@ -416,6 +534,9 @@ class AepsFragment : Fragment() {
                     .item(0).attributes.getNamedItem("errCode").nodeValue
                 if (s_status == "0") {
 //                    isDataCaptured=true;
+                    if(otpDialog!=null && otpDialog!!.isShowing){
+                        otpDialog!!.dismiss()
+                    }
                     showTransactionAlert()
                     //                    showMessageDialogue("Data captured", "Fingerprint data status");
                 } else {
@@ -446,6 +567,9 @@ class AepsFragment : Fragment() {
 
     private fun getPidOptions():String{
         return "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
+    }
+    private fun getPidOptionsOtp(otp:String):String{
+        return "<?xml version=\"1.0\"?> <PidOptions ver=\"1.0\"> <Opts fCount=\"1\" fType=\"2\" wadh=\"\" otp=\"${otp}\" iCount=\"0\" pCount=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"10000\" posh=\"UNKNOWN\" env=\"P\" />" + "<CustOpts><Param name=\"mantrakey\" value=\"\" /></CustOpts> </PidOptions>"
     }
 
     // show message

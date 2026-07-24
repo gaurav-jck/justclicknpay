@@ -29,6 +29,7 @@ import com.justclick.clicknbook.ApiConstants;
 import com.justclick.clicknbook.R;
 import com.justclick.clicknbook.adapter.AutocompleteAdapter;
 import com.justclick.clicknbook.adapter.HotelAvailabilityAdapter;
+import com.justclick.clicknbook.databinding.FragmentHotelListBinding;
 import com.justclick.clicknbook.model.AgentNameModel;
 import com.justclick.clicknbook.model.HotelAvailabilityResponseModel;
 import com.justclick.clicknbook.model.HotelMoreInfoResponseModel;
@@ -56,42 +57,30 @@ import retrofit2.Response;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 
-/**
- * Created by Lenovo on 03/25/2017.
- */
 
 public class HotelSearchListFragment extends Fragment implements View.OnClickListener{
     private final int START_DATE=1, END_DATE=2;
     private final boolean SHOW_PROGRESS=true, NO_PROGRESS=false;
     private Context context;
-    private ToolBarTitleChangeListener titleChangeListener;
     private FragmentBackPressListener fragmentBackPressListener;
-    private RecyclerView recyclerView;
     private String startDateToSend, endDateToSend,agentDoneCardUser;
     private ArrayList<HotelAvailabilityResponseModel.Hotels> creditReportDataArrayList;
     private HotelAvailabilityAdapter hotelAvailabilityAdapter;
     private LinearLayoutManager layoutManager;
-    private TextView startDateTv;
     private Dialog filterDialog;
     private Calendar startDateCalendar, endDateCalendar;
-    private TextView start_date_value_tv, end_date_value_tv,
-            start_day_value_tv, end_day_value_tv;
     private int startDateDay, startDateMonth, startDateYear,
                 endDateDay, endDateMonth, endDateYear;
     private SimpleDateFormat dateFormat, dayFormat, dateToServerFormat;
     private int pageStart=1, pageEnd=10, totalPageCount=0;
     private HotelAvailabilityRequestModel hotelAvailabilityRequestModel;
     private LoginModel loginModel;
-    private AgentNameModel agentNameModel;
-    AutocompleteAdapter autocompleteAdapter;
-    private EditText agent_search_edt;
-    private ListView agencyList;
+    private FragmentHotelListBinding binding;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            titleChangeListener = (ToolBarTitleChangeListener) context;
             fragmentBackPressListener= (FragmentBackPressListener) context;
         }catch (ClassCastException e){
 
@@ -107,7 +96,6 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
         hotelAvailabilityRequestModel =new HotelAvailabilityRequestModel();
         loginModel=new LoginModel();
         loginModel=MyPreferences.getLoginData(loginModel,context);
-        agentNameModel=new AgentNameModel();
         try {
             initializeDates();
         } catch (Exception e) {
@@ -115,60 +103,21 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    private void initializeDates() throws Exception{
-        startDateCalendar= (Calendar) getArguments().getSerializable("CheckInDateCalander");
-        endDateCalendar= (Calendar) getArguments().getSerializable("CheckOutDateCalander");
-        //Date formats
-        dateToServerFormat = Common.getServerDateFormat();
-        dateFormat = Common.getToFromDateFormat();
-        dayFormat = Common.getShortDayFormat();
-
-        //default start Date
-//        startDateCalendar=Calendar.getInstance();
-        startDateDay=startDateCalendar.get(Calendar.DAY_OF_MONTH);
-        startDateMonth=startDateCalendar.get(Calendar.MONTH);
-        startDateYear=startDateCalendar.get(Calendar.YEAR);
-
-
-        //default end Date
-//        endDateCalendar = Calendar.getInstance();
-        endDateDay=endDateCalendar.get(Calendar.DAY_OF_MONTH);
-        endDateMonth=endDateCalendar.get(Calendar.MONTH);
-        endDateYear=endDateCalendar.get(Calendar.YEAR);
-
-        startDateToSend=dateToServerFormat.format(startDateCalendar.getTime());
-        endDateToSend=dateToServerFormat.format(endDateCalendar.getTime());
-
-    }
-
-    private void setDates() {
-        //set default date
-        startDateTv.setText(dayFormat.format(startDateCalendar.getTime())+" "+
-                dateFormat.format(startDateCalendar.getTime())+ "   -   "+
-                dayFormat.format(endDateCalendar.getTime())+" "+
-                dateFormat.format(endDateCalendar.getTime())
-        );
-
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_hotel_list, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        startDateTv = (TextView) view.findViewById(R.id.startDateTv);
-        agent_search_edt = (EditText) view.findViewById(R.id.agent_search_edt);
-        agencyList = (ListView) view.findViewById(R.id.agencyList);
+        binding=FragmentHotelListBinding.inflate(getLayoutInflater());
 
-        titleChangeListener.onToolBarTitleChange(getString(R.string.hotelSearchListFragmentTitle));
-        fragmentBackPressListener.onFragmentBackPress(agencyList);
-
-        view.findViewById(R.id.lin_selfRequest).setOnClickListener(this);
-        view.findViewById(R.id.lin_dateFilter).setOnClickListener(this);
+        binding.topView.titleTv.setText("Hotel List");
+//        fragmentBackPressListener.onFragmentBackPress(agencyList);
 
         //initialize date values
         setDates();
+
+        binding.topView.backArrow.setOnClickListener(view -> {
+            getParentFragmentManager().popBackStack();
+        });
 
         if(getArguments().getSerializable("HotelList")!=null) {
             creditReportDataArrayList = (ArrayList<HotelAvailabilityResponseModel.Hotels>) getArguments().getSerializable("HotelList");
@@ -203,8 +152,8 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
         },creditReportDataArrayList,totalPageCount);
 
         layoutManager=new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(hotelAvailabilityAdapter);
+        binding.recyclerView.setLayoutManager(layoutManager);
+        binding.recyclerView.setAdapter(hotelAvailabilityAdapter);
 
         if(creditReportDataArrayList!=null && creditReportDataArrayList.size()==0) {
             pageStart=1;
@@ -233,7 +182,7 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
             hotelAvailabilityRequestModel.RoomOccupancy=roomOccupancyArrayList;
 
             if(Common.checkInternetConnection(context)) {
-                hotelSearch(hotelAvailabilityRequestModel);
+//                hotelSearch(hotelAvailabilityRequestModel);
 
             }else {
                 Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
@@ -242,103 +191,45 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
             hotelAvailabilityAdapter.notifyDataSetChanged();
         }
 
-        recyclerView.addOnScrollListener(recyclerViewOnScrollListener);
+        binding.recyclerView.addOnScrollListener(recyclerViewOnScrollListener);
 
-        agent_search_edt.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        return binding.getRoot();
+    }
 
-            }
+    private void initializeDates() throws Exception{
+        startDateCalendar= (Calendar) getArguments().getSerializable("CheckInDateCalander");
+        endDateCalendar= (Calendar) getArguments().getSerializable("CheckOutDateCalander");
+        //Date formats
+        dateToServerFormat = Common.getServerDateFormat();
+        dateFormat = Common.getToFromDateFormat();
+        dayFormat = Common.getShortDayFormat();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(Common.checkInternetConnection(context)) {
-                    if(s.length()>=2) {
-                        String term = s.toString();
+        //default start Date
+//        startDateCalendar=Calendar.getInstance();
+        startDateDay=startDateCalendar.get(Calendar.DAY_OF_MONTH);
+        startDateMonth=startDateCalendar.get(Calendar.MONTH);
+        startDateYear=startDateCalendar.get(Calendar.YEAR);
 
-                        AgentNameRequestModel model=new AgentNameRequestModel();
-                        model.AgencyName=term;
-                        model.MerchantID=loginModel.Data.MerchantID;
-                        model.RefAgency=loginModel.Data.RefAgency;
-                        model.DeviceId=Common.getDeviceId(context);
-                        model.DoneCardUser=loginModel.Data.DoneCardUser;
-                        model.LoginSessionId= EncryptionDecryptionClass.EncryptSessionId(
-                                EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
-                        model.Type=loginModel.Data.UserType;
-                        call_agent(model,agencyList);
-                    }
-                }else {
-                    Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_SHORT).show();
-                }
 
-            }
+        //default end Date
+//        endDateCalendar = Calendar.getInstance();
+        endDateDay=endDateCalendar.get(Calendar.DAY_OF_MONTH);
+        endDateMonth=endDateCalendar.get(Calendar.MONTH);
+        endDateYear=endDateCalendar.get(Calendar.YEAR);
 
-            @Override
-            public void afterTextChanged(Editable s) {
+        startDateToSend=dateToServerFormat.format(startDateCalendar.getTime());
+        endDateToSend=dateToServerFormat.format(endDateCalendar.getTime());
 
-            }
-        });
+    }
 
-        agent_search_edt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                agent_search_edt.setText("");
-                agencyList.setVisibility(View.GONE);
-                agentDoneCardUser="";
-            }
-        });
+    private void setDates() {
+        //set default date
+        binding.startDateTv.setText(dayFormat.format(startDateCalendar.getTime())+" "+
+                dateFormat.format(startDateCalendar.getTime())+ "   -   "+
+                dayFormat.format(endDateCalendar.getTime())+" "+
+                dateFormat.format(endDateCalendar.getTime())
+        );
 
-        agencyList.setOnItemClickListener(
-                new AdapterView.OnItemClickListener()
-                {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-                    {
-                        agencyList.setVisibility(View.GONE);
-//                        agencyListRel.setVisibility(View.GONE);
-                        Common.hideSoftKeyboard((NavigationDrawerActivity)context);
-//                        lin_other_container.setVisibility(View.VISIBLE);
-                        String agencyName=autocompleteAdapter.getItem(position).AgencyName;
-                        agentDoneCardUser=agencyName.substring(agencyName.indexOf("(")+1,agencyName.indexOf(")"));
-                        agent_search_edt.setText(agencyName);
-                        agent_search_edt.setSelection(agent_search_edt.getText().toString().length());
-
-                        pageStart=1;
-                        pageEnd=10;
-                        hotelAvailabilityRequestModel.DoneCardUser=loginModel.Data.DoneCardUser;
-                        hotelAvailabilityRequestModel.DeviceId=Common.getDeviceId(context);
-                        hotelAvailabilityRequestModel.LoginSessionId= EncryptionDecryptionClass.EncryptSessionId(                 EncryptionDecryptionClass.Decryption(loginModel.LoginSessionId, context), context);
-                        hotelAvailabilityRequestModel.CheckInDate=startDateToSend;
-                        hotelAvailabilityRequestModel.CheckOutDate=endDateToSend;
-                        hotelAvailabilityRequestModel.CountryName="Singapore";
-                        hotelAvailabilityRequestModel.DestnationName="Singapore";
-                        hotelAvailabilityRequestModel.DestnationCode="Singapore";
-                        hotelAvailabilityRequestModel.NumberOfAdult="1";
-                        hotelAvailabilityRequestModel.NumberOfChild="0";
-                        hotelAvailabilityRequestModel.NumberOfDays="1";
-                        hotelAvailabilityRequestModel.NumberOfRooms="1";
-                        hotelAvailabilityRequestModel.Supplier="TBO";
-                        hotelAvailabilityRequestModel.StaRating="All";
-                        ArrayList<HotelAvailabilityRequestModel.RoomOccupancy> roomOccupancyArrayList=new ArrayList<>();
-                        HotelAvailabilityRequestModel.RoomOccupancy roomOccupancy=new HotelAvailabilityRequestModel().new RoomOccupancy();
-                        roomOccupancy.Ages="1,1";
-                        roomOccupancy.Adults=1;
-                        roomOccupancy.Children=1;
-                        roomOccupancy.TotalRoom=1;
-                        roomOccupancyArrayList.add(roomOccupancy);
-                        hotelAvailabilityRequestModel.RoomOccupancy=roomOccupancyArrayList;
-
-                        if(Common.checkInternetConnection(context)) {
-                            creditReportDataArrayList.clear();
-                            hotelAvailabilityAdapter.notifyDataSetChanged();
-                            hotelSearch(hotelAvailabilityRequestModel);
-                        }else {
-                            Toast.makeText(context,R.string.no_internet_message,Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                });
-        return view;
     }
 
     private void hotelMoreInfo(HotelRoomInfoRequestModel model) {
@@ -420,21 +311,8 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
         catch (NullPointerException e){}
     }
 
-    private boolean validateUpdateInputs(String amount,String remark) {
-        if(!Common.isdecimalvalid(amount)) {
-            Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show();
-            return false;
-        }else if(Float.parseFloat(amount)>1000000){
-                Toast.makeText(context, R.string.invalid_amount, Toast.LENGTH_SHORT).show();
-                return false;
-        }  else if(remark.length()==0){
-            Toast.makeText(context, R.string.empty_remark, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        return true;
-    }
-
-
+    private TextView start_date_value_tv, end_date_value_tv,
+            start_day_value_tv, end_day_value_tv;
     private void openFilterDialog() {
         filterDialog = new Dialog(context);
         filterDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -580,7 +458,7 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
                 hotelAvailabilityAdapter.notifyDataSetChanged();
 
                 //set date to fragment
-                startDateTv.setText(dayFormat.format(startDateCalendar.getTime())+" "+
+                binding.startDateTv.setText(dayFormat.format(startDateCalendar.getTime())+" "+
                         dateFormat.format(startDateCalendar.getTime())+ "   -   "+
                         dayFormat.format(endDateCalendar.getTime())+" "+
                         dateFormat.format(endDateCalendar.getTime())
@@ -643,59 +521,6 @@ public class HotelSearchListFragment extends Fragment implements View.OnClickLis
 
 
         }
-    }
-
-    public AgentNameModel call_agent(AgentNameRequestModel model, final ListView agencyList) {
-//        agent.DATA.clear();
-        ApiInterface apiService = APIClient.getClient().create(ApiInterface.class);
-
-        Call<AgentNameModel> call = apiService.agentNamePost(ApiConstants.GetAgentName, model);
-        call.enqueue(new Callback<AgentNameModel>() {
-            @Override
-            public void onResponse(Call<AgentNameModel> call, Response<AgentNameModel> response) {
-                try {
-                    agentNameModel = response.body();
-                    if(agentNameModel.StatusCode.equalsIgnoreCase("0")) {
-                        agencyList.setVisibility(View.VISIBLE);
-//                        agencyListRel.setVisibility(View.VISIBLE);
-                        autocompleteAdapter = new AutocompleteAdapter(context, agentNameModel);
-                        agencyList.setAdapter(autocompleteAdapter);
-                    }
-                }catch (Exception e){
-
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<AgentNameModel> call, Throwable t) {
-                int a=0;
-//                Toast.makeText(context, R.string.response_failure_message, Toast.LENGTH_SHORT).show();
-            }
-        });
-        return agentNameModel;
-    }
-
-    private boolean validateSelfCreditInputs(String amount, String agentId, String mobile,String remark) {
-        if(!Common.isdecimalvalid(amount)) {
-            Toast.makeText(context, R.string.empty_and_invalid_amount, Toast.LENGTH_SHORT).show();
-            return false;
-        } if(Float.parseFloat(amount)>1000000){
-            Toast.makeText(context, R.string.invalid_amount, Toast.LENGTH_SHORT).show();
-            return false;
-        }else if(agentId.length()==0){
-            Toast.makeText(context, R.string.empty_and_invalid_agent_id, Toast.LENGTH_SHORT).show();
-            return false;
-        }else if(mobile.length()<10){
-            Toast.makeText(context, R.string.empty_and_invalid_mobile, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(remark.length()==0){
-            Toast.makeText(context, R.string.empty_remark, Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
     }
 
     private void openStartDatePicker() {

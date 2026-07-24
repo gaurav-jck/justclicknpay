@@ -6,9 +6,14 @@
     android:layout_height="match_parent"
     android:id="@+id/mainLayout">
 
+    <include
+        android:id="@+id/topView"
+        layout="@layout/top_view"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="3">
 
         <LinearLayout
@@ -280,7 +285,7 @@
                     android:layout_height="@dimen/airVectorIconSize"
                     android:layout_margin="@dimen/very_small_margin"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/passanger_info_adult"/>
+                    android:src="@drawable/room_group"/>
                 <TextView
                     android:id="@+id/roomDetailsTitle"
                     android:layout_width="0dp"

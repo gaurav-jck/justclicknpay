@@ -1094,15 +1094,15 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 qr.SubMenuCode=MenuCodes.CASHFREE_QR;
                 subMenuArrayList.add(qr);
             }
-            /*LoginModel.DataList.subMenu upiCash=dataList.new subMenu();
+           /* LoginModel.DataList.subMenu upiCash=dataList.new subMenu();
             upiCash.SubMenu=MenuCodes.UPI_Cash;
             upiCash.SubMenuCode=MenuCodes.UPI_Cash;
             subMenuArrayList.add(upiCash);*/
 
-            LoginModel.DataList.subMenu hotel=loginModel.new DataList().new subMenu();
-            hotel.SubMenu=MenuCodes.HotelSearch;
-            hotel.SubMenuCode=MenuCodes.HotelSearch;
-            subMenuArrayList.add(hotel);
+//            LoginModel.DataList.subMenu hotel=loginModel.new DataList().new subMenu();
+//            hotel.SubMenu=MenuCodes.HotelSearch;
+//            hotel.SubMenuCode=MenuCodes.HotelSearch;
+//            subMenuArrayList.add(hotel);
 
             LoginModel.DataList.subMenu kyc=loginModel.new DataList().new subMenu();
             kyc.SubMenu=MenuCodes.INSTA_KYC;

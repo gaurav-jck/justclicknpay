@@ -16,7 +16,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.tabs.TabLayout
+import com.google.gson.Gson
 import com.justclick.clicknbook.Activity.NavigationDrawerActivity
+import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.train.model.TrainLastBookingResponse
+import com.justclick.clicknbook.Fragment.train.model.TrainListRequest
+import com.justclick.clicknbook.Fragment.train.model.TrainListResponse
 import com.justclick.clicknbook.Fragment.train.model.TrainSearchDataModel
 import com.justclick.clicknbook.Fragment.train.model.TrainStationModel
 import com.justclick.clicknbook.Fragment.train.viewmodel.TrainSearchViewModel
@@ -24,9 +29,12 @@ import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentTrainSearch2Binding
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.myinterface.ToolBarHideFromFragmentListener
+import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
 import com.justclick.clicknbook.utils.MyPreferences
 import com.justclick.clicknbook.utils.enums.TrainQuotaEnum
+import okhttp3.ResponseBody
+import java.lang.Exception
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -95,23 +103,6 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         binding= FragmentTrainSearch2Binding.bind(view)
         toolBarHideFromFragmentListener!!.onToolBarHideFromFragment(true)
 
-        /*binding!!.tabLayout!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab!!.position==0){
-                    Toast.makeText(activity,"tab click"+tab!!.position, Toast.LENGTH_SHORT).show()
-                }else{
-                    Toast.makeText(activity,"2nd tab click"+tab!!.position, Toast.LENGTH_SHORT).show()
-                }
-            }
-
-        })*/
-
         setDates(view)
         setStation(view)
         binding!!.searchTrainsTv.setOnClickListener(this)
@@ -128,7 +119,65 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         binding!!.bookingList.setOnClickListener(this)
         setQuota(view)
 
+        getLastTransaction()
+
         return view
+    }
+
+    class AgentCode{
+        var agentCode:String?=null
+    }
+    private fun getLastTransaction() {
+        binding!!.lastBookingView.visibility=View.GONE
+        var request= AgentCode()
+        var loginModel=MyPreferences.getLoginData(LoginModel(),requireContext())
+        request.agentCode=loginModel!!.Data.DoneCardUser
+//        request.agentCode="jc0a13387"
+
+        var json= Gson().toJson(request)
+
+        NetworkCall().callService(
+            NetworkCall.getTrainApiInterface().getTrainList(ApiConstants.getagentlastbooking, request),
+            context,false)
+        { response: ResponseBody?, responseCode: Int ->
+
+            if (response != null) {
+                responseHandlerLastTxn(response) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
+            } else {
+//                Toast.makeText(requireContext(), resources.getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun responseHandlerLastTxn(response: ResponseBody) {
+        try{
+            val response = Gson().fromJson(response.string(), TrainLastBookingResponse::class.java)
+            if(response!=null){
+                if(response.statusCode.equals("00")){
+                    if(response!!.data!=null && response!!.data!!.size>0){
+                        setData(response.data.get(0))
+                    }else{
+//                        Toast.makeText(requireContext(), "No last booking found.", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                else{
+//                    Toast.makeText(requireContext(), response!!.statusMessage, Toast.LENGTH_SHORT).show()
+                }
+            }else{
+//                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT).show()
+            }
+        }catch (e: Exception){
+//            Toast.makeText(requireContext(), R.string.exception_message, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun setData(data: TrainLastBookingResponse.data?) {
+        binding!!.lastBookingView.visibility=View.VISIBLE
+        binding!!.resIdTv.text=data!!.reservationid
+        binding!!.fromStnTv.text=data!!.source
+        binding!!.toStnTv.text=data!!.destination
+        binding!!.deptDataTv.text=data!!.reservationdate
+        binding!!.statusTv.text=data!!.status
     }
 
     private fun setQuota(view: View) {

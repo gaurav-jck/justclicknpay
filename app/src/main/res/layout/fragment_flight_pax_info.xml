@@ -51,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.3"
-                    android:src="@drawable/passanger_info_adult" />
+                    android:src="@drawable/room_group" />
 
                 <LinearLayout
                     android:layout_width="0dp"

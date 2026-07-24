@@ -23,11 +23,10 @@
         android:layout_alignParentStart="true">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/large_margin"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -134,7 +133,7 @@
                                     android:id="@+id/departLabel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="DEPART"
+                                    android:text="FROM"
                                     android:layout_gravity="center_horizontal"
                                     android:textSize="@dimen/small_text_size"
                                     android:gravity="center"
@@ -231,7 +230,7 @@
                                     android:id="@+id/returnLabel"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="RETURN"
+                                    android:text="TO"
                                     android:layout_gravity="center_horizontal"
                                     android:textSize="@dimen/small_text_size"
                                     android:gravity="center"
@@ -573,7 +572,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:background="@drawable/money_receiver_border_rect_corner"
-                                        android:visibility="visible">
+                                        android:visibility="gone">
 
                                         <Spinner
                                             android:id="@+id/childAgeSpinner11"
@@ -847,6 +846,7 @@
                                         android:id="@+id/childAgeLin21"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:visibility="gone"
                                         android:background="@drawable/money_receiver_border_rect_corner">
 
                                         <Spinner
@@ -1122,6 +1122,7 @@
                                         android:id="@+id/childAgeLin31"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:visibility="gone"
                                         android:background="@drawable/money_receiver_border_rect_corner">
 
                                         <Spinner
@@ -1398,6 +1399,7 @@
                                         android:id="@+id/childAgeLin41"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:visibility="gone"
                                         android:background="@drawable/money_receiver_border_rect_corner">
 
                                         <Spinner

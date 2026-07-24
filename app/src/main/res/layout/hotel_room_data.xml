@@ -67,7 +67,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/swimming"/>
+                    android:src="@drawable/swimming_pool_vector"/>
                 <TextView
                     android:id="@+id/roomAmenitiesTv"
                     android:layout_width="wrap_content"
@@ -85,7 +85,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/dumbbell"/>
+                    android:src="@drawable/gym_vector"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -102,7 +102,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/swimming"/>
+                    android:src="@drawable/bar_vector"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

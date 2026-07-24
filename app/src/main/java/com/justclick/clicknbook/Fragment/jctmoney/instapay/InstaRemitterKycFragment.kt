@@ -123,12 +123,18 @@ class InstaRemitterKycFragment : Fragment() {
             }
         }
 
-        binding!!.rdDownloadLin.setOnClickListener({
-            val intentPlay = Intent(Intent.ACTION_VIEW)
-            intentPlay.data = Uri.parse("market://details?id=in.gov.uidai.facerd");
-//            intentPlay.data = Uri.parse("market://details?id=$mPackageName")
-            startActivity(intentPlay)
-        })
+        binding!!.rdLinear.faceTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.FACE_RD_PACKAGE)
+        }
+        binding!!.rdLinear.mantraTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.MANTRA_PACKAGE_L1)
+        }
+        binding!!.rdLinear.morphoTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.MORPHO_PACKAGE_L1)
+        }
+        binding!!.rdLinear.startekTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.STARTEK_PACKAGE_L1)
+        }
 
         binding!!.spinnerDeviceType.adapter=
             Common.getSpinnerAdapter(AepsConstants.deviceArrayNew, requireContext())

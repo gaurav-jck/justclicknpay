@@ -193,7 +193,19 @@ class AepsKyc1Bank2Fragment(aepsPipe: String) : Fragment() {
         })
         binding.backArrow.setOnClickListener( {
             getParentFragmentManager().popBackStack();
-        });
+        })
+
+        binding!!.rdLinear.faceTv.visibility=View.GONE
+        binding!!.rdLinear.mantraTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.MANTRA_PACKAGE_L1)
+        }
+        binding!!.rdLinear.morphoTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.MORPHO_PACKAGE_L1)
+        }
+        binding!!.rdLinear.startekTv.setOnClickListener {
+            Common.openDownloadLink(requireContext(),AepsConstants.STARTEK_PACKAGE_L1)
+        }
+
         return binding.root
     }
 

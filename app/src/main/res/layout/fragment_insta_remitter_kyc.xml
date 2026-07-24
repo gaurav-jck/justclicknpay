@@ -191,33 +191,15 @@
                     android:layout_marginTop="@dimen/medium_margin"
                     />
 
-                <LinearLayout
-                    android:id="@+id/rdDownloadLin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_50dp"
-                    android:gravity="right|center"
-                    android:visibility="visible"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/faceCaptureRdService"
-                        android:textColor="@color/black_text_color"
-                        android:textSize="@dimen/text_size_13sp"
-                        android:fontFamily="@font/museo_regular"
-                        />
-                    <ImageView
-                        android:id="@+id/downloadImg"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/download_icon"
-                        android:padding="@dimen/margin_2dp"
-                        android:layout_marginLeft="@dimen/margin_2dp"
-                        />
-                </LinearLayout>
-
             </LinearLayout>
+
+            <include
+                layout="@layout/rd_service_download_view"
+                android:id="@+id/rdLinear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/size_15dp"
+                />
 
         </LinearLayout>
     </ScrollView>

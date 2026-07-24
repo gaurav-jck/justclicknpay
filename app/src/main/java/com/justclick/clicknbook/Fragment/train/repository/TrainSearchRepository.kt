@@ -118,21 +118,27 @@ class TrainSearchRepository {
 
         }
 
-        var quotaList:Any = jsonObject.get("quotaList")
-        var quotaListArray=JSONArray()
-        if(quotaList is String){
-            val quotaClass = jsonObject.getString("quotaList")
-            quotaListArray.put(quotaClass)
+        if(jsonObject.has("quotaList")){
+            var quotaList:Any = jsonObject.get("quotaList")
+            var quotaListArray=JSONArray()
+            if(quotaList is String){
+                val quotaClass = jsonObject.getString("quotaList")
+                quotaListArray.put(quotaClass)
+            }else{
+                quotaListArray=jsonObject.getJSONArray("quotaList")
+            }
+            var quotaArray= Array(quotaListArray.length()){""}
+            for(i in 0 until quotaArray.size){
+                quotaArray[i]=quotaListArray.optString(i)
+            }
+            trainSearchDataModel.quotaList=quotaArray
         }else{
-            quotaListArray=jsonObject.getJSONArray("quotaList")
-        }
-        var quotaArray= Array(quotaListArray.length()){""}
-        for(i in 0 until quotaArray.size){
-            quotaArray[i]=quotaListArray.optString(i)
+            var quotaArray= Array(1){"GN"}
+            trainSearchDataModel.quotaList=quotaArray
         }
 
+
         trainSearchDataModel.trainBtwnStnsList=trainArray
-        trainSearchDataModel.quotaList=quotaArray
 
         return trainSearchDataModel
     }
