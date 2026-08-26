@@ -3,6 +3,7 @@ package com.justclick.clicknbook.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -58,6 +59,7 @@ import com.justclick.clicknbook.Fragment.lic.LicFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment;
 import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragmentNew;
 import com.justclick.clicknbook.Fragment.qrcodeNew.QRCode2Fragment;
+import com.justclick.clicknbook.Fragment.qrcodeNew.QRCodePayUFragment;
 import com.justclick.clicknbook.Fragment.qrupicash.QRUpiCashFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeListFragment;
 import com.justclick.clicknbook.Fragment.recharge.RechargeMainPagerFragment;
@@ -86,6 +88,7 @@ import com.justclick.clicknbook.utils.MyPreferences;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -198,6 +201,32 @@ public class HomeFragment extends Fragment {
         return mView;
     }
 
+    boolean isWithInQR1Range, isWithInQR3Range;
+    public void setQRCodeTimeRange(){
+        LocalTime currentTime = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            currentTime = LocalTime.now();
+            // Define your time windows (e.g., 05:00 AM to 05:00 PM)
+            LocalTime startQr1Time = LocalTime.of(5, 0);
+            LocalTime endQr1Time = LocalTime.of(17, 0);
+
+            // Define your time windows (e.g., 05:00 PM to 12:00 AM)
+            LocalTime startQr3Time = LocalTime.of(17, 0);
+            LocalTime endQr3Time = LocalTime.of(23, 59);
+
+            /*//            for testing
+            LocalTime startQr1Time = LocalTime.of(18, 45);
+            LocalTime endQr1Time = LocalTime.of(18, 48);
+
+            // Define your time windows (e.g., 05:00 PM to 12:00 AM)
+            LocalTime startQr3Time = LocalTime.of(18, 48);
+            LocalTime endQr3Time = LocalTime.of(18, 58);
+*/
+// Check if currentTime is within the range
+            isWithInQR1Range = !currentTime.isBefore(startQr1Time) && !currentTime.isAfter(endQr1Time);
+            isWithInQR3Range = !currentTime.isBefore(startQr3Time) && !currentTime.isAfter(endQr3Time);
+        }
+    }
     int productType=DMT_INSTA;
     public void sendMenuCode(String subMenuCode) {
         switch (subMenuCode) {
@@ -380,15 +409,34 @@ public class HomeFragment extends Fragment {
                 break;
             case MenuCodes.CASHFREE_QR://42
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                setQRCodeTimeRange();
+                if(!isWithInQR3Range){
+                    ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                }else {
+                    Common.showCommonAlertDialog(requireContext(), "Please try QR Code-3 at this time,\nIf not working, then reopen the app.", "QR Code Alert");
+                }
                 break;
             case MenuCodes.DYNAMIC_QR://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
-                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                setQRCodeTimeRange();
+                if(!isWithInQR3Range){
+                    ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodeFragment());
+                }else {
+                    Common.showCommonAlertDialog(requireContext(), "Please try QR Code-3 at this time,\nIf not working, then reopen the app.", "QR Code Alert");
+                }
                 break;
             case MenuCodes.QR_CODE2://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
                 ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCode2Fragment());
+                break;
+            case MenuCodes.QR_CODE_PayU://43
+//                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodePayUFragment());
+                setQRCodeTimeRange();
+                if(isWithInQR3Range){
+                    ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new QRCodePayUFragment());
+                }else {
+                    Common.showCommonAlertDialog(requireContext(), "Please try QR Code-1 at this time,\nIf not working, then reopen the app.", "QR Code Alert");
+                }
                 break;
             case MenuCodes.UPI_Cash://43
 //                ((NavigationDrawerActivity) context).replaceFragmentWithBackStack(new CashFreeQRCodeFragment());
@@ -775,6 +823,7 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
 //        Toast.makeText(context, "Fragment OnResume", Toast.LENGTH_LONG).show();
+        setQRCodeTimeRange();
     }
 
     @Override

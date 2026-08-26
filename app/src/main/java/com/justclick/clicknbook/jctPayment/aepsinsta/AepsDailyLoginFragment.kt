@@ -51,6 +51,7 @@ import kotlin.random.Random
 
 class AepsDailyLoginFragment : Fragment() {
     private val ARG_PARAM1 = "param1"
+    private val ARG_PARAM2 = "param2"
     private val FINGER_CAPTURE = "Finger"
     private val FACE_CAPTURE = "Face"
     private final val CAPTURE_REQUEST_CODE = 123
@@ -58,16 +59,17 @@ class AepsDailyLoginFragment : Fragment() {
     var pidDataXML = "";
     private var captureType=FINGER_CAPTURE
     private var binding: FragmentAepsDailyLoginBinding?=null
-    private var txnType:Int?=null
+    private var AepsBankType: String?=null
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var commonParams: CheckCredentialResponse.credentialData? = null
     private var toolBarHideFromFragmentListener: ToolBarHideFromFragmentListener? = null
 
     companion object {
-        fun newInstance(param1: CheckCredentialResponse.credentialData) =
+        fun newInstance(param1: CheckCredentialResponse.credentialData, param2:String) =
             AepsDailyLoginFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
                 }
             }
     }
@@ -84,6 +86,7 @@ class AepsDailyLoginFragment : Fragment() {
             }else{
                 commonParams = it.getSerializable(ARG_PARAM1) as CheckCredentialResponse.credentialData?
             }
+            AepsBankType=it.getString(ARG_PARAM2)
         }
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
     }
@@ -132,6 +135,11 @@ class AepsDailyLoginFragment : Fragment() {
                 captureFaceData()
             }
         }
+        defaultBankClick()
+        binding!!.aeps1Tv.setOnClickListener { bank1Click() }
+        binding!!.aeps2Tv.setOnClickListener { bank2Click() }
+        binding!!.aeps3Tv.setOnClickListener { bank3Click() }
+
         binding!!.rdLinear.faceTv.setOnClickListener {
             Common.openDownloadLink(requireContext(),AepsConstants.FACE_RD_PACKAGE)
         }
@@ -172,6 +180,51 @@ class AepsDailyLoginFragment : Fragment() {
         return binding!!.root
     }
 
+    private val Bank1 = "Bank1"
+    private val Bank2 = "Bank2"
+    private val Bank3 = "Bank3"
+    fun defaultBankClick(){
+        if(AepsBankType.equals(Bank2)){
+            bank2Click()
+        }else if(AepsBankType.equals(Bank3)){
+            bank3Click()
+        }else{
+            bank1Click()
+        }
+    }
+    fun bank1Click(){
+        AepsBankType = Bank1
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
+    fun bank2Click(){
+        AepsBankType = Bank2
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
+    fun bank3Click(){
+        AepsBankType = Bank3
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
     fun captureData() {
         try {
              if (d_type == AepsConstants.MANTRA) {
@@ -373,6 +426,7 @@ class AepsDailyLoginFragment : Fragment() {
         params["Mode"] = "App"
         params["Merchant"] = ApiConstants.MerchantId
         params["IPAddress"] = ip!!
+        params["aebankname"] = AepsBankType!!
 
         pidDataXML=pidDataXML.replace("\n", "")
         params["Pid"]=pidDataXML
@@ -399,6 +453,13 @@ class AepsDailyLoginFragment : Fragment() {
             if (commonResponse != null) {
                 if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
                     Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
+                    if(AepsBankType.equals(Bank1)){
+                        MyPreferences.aepsInstaBank1Login(requireContext())
+                    }else if(AepsBankType.equals(Bank2)){
+                        MyPreferences.aepsInstaBank2Login(requireContext())
+                    }else{
+                        MyPreferences.aepsInstaBank3Login(requireContext())
+                    }
                     parentFragmentManager.popBackStack()
                 } else {
                     Common.showCommonAlertDialog(context,commonResponse.statusMessage,"Api Response")

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -152,6 +153,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -405,6 +407,7 @@ public class NavigationDrawerActivity extends AppCompatActivity
         findViewById(R.id.salesCreditRequestLin).setOnClickListener(this);
         ((TextView)findViewById(R.id.appVersionTv)).setText("App Version-" + BuildConfig.VERSION_NAME);
 
+        setQRCodeTimeRange();
         try {
             list = getHomeScreenProductMenus();
         } catch (Exception e) {
@@ -964,6 +967,32 @@ public class NavigationDrawerActivity extends AppCompatActivity
                 });
     }
 
+    boolean isWithInQR1Range, isWithInQR3Range;
+    public void setQRCodeTimeRange(){
+        LocalTime currentTime = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            currentTime = LocalTime.now();
+            // Define your time windows (e.g., 05:00 AM to 05:00 PM)
+            LocalTime startQr1Time = LocalTime.of(5, 0);
+            LocalTime endQr1Time = LocalTime.of(17, 0);
+
+            // Define your time windows (e.g., 05:00 PM to 12:00 AM)
+            LocalTime startQr3Time = LocalTime.of(17, 0);
+            LocalTime endQr3Time = LocalTime.of(23, 59);
+
+/*//            for testing
+            LocalTime startQr1Time = LocalTime.of(18, 45);
+            LocalTime endQr1Time = LocalTime.of(18, 48);
+
+            // Define your time windows (e.g., 05:00 PM to 12:00 AM)
+            LocalTime startQr3Time = LocalTime.of(18, 48);
+            LocalTime endQr3Time = LocalTime.of(18, 58);*/
+
+// Check if currentTime is within the range
+            isWithInQR1Range = !currentTime.isBefore(startQr1Time) && !currentTime.isAfter(endQr1Time);
+            isWithInQR3Range = !currentTime.isBefore(startQr3Time) && !currentTime.isAfter(endQr3Time);
+        }
+    }
     public ArrayList<LoginModel.DataList> getHomeScreenProductMenus() throws NullPointerException {
         ArrayList<LoginModel.DataList> list=new ArrayList<>();
         boolean isUtilityBill=false;
@@ -1057,10 +1086,18 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //            subMenuArrayList.add(irctc);
 
             if(isQR){
+
                 LoginModel.DataList.subMenu qrcode2=dataList.new subMenu();
                 qrcode2.SubMenu=MenuCodes.QR_CODE2;
                 qrcode2.SubMenuCode=MenuCodes.QR_CODE2;
                 subMenuArrayList.add(qrcode2);
+
+                if(isWithInQR3Range){
+                    LoginModel.DataList.subMenu qrcodePayu=dataList.new subMenu();
+                    qrcodePayu.SubMenu=MenuCodes.QR_CODE_PayU;
+                    qrcodePayu.SubMenuCode=MenuCodes.QR_CODE_PayU;
+                    subMenuArrayList.add(qrcodePayu);
+                }
             }
 
             if(isUtilityBill && !(loginModel.Data.UserType.equals(UserType.Distributor) ||
@@ -1104,10 +1141,12 @@ public class NavigationDrawerActivity extends AppCompatActivity
 //            hotel.SubMenuCode=MenuCodes.HotelSearch;
 //            subMenuArrayList.add(hotel);
 
-            LoginModel.DataList.subMenu kyc=loginModel.new DataList().new subMenu();
-            kyc.SubMenu=MenuCodes.INSTA_KYC;
-            kyc.SubMenuCode=MenuCodes.INSTA_KYC;
-            subMenuArrayList.add(kyc);
+            if(loginModel.Data.UserType.equals(UserType.Agent)){
+                LoginModel.DataList.subMenu kyc=loginModel.new DataList().new subMenu();
+                kyc.SubMenu=MenuCodes.INSTA_KYC;
+                kyc.SubMenuCode=MenuCodes.INSTA_KYC;
+                subMenuArrayList.add(kyc);
+            }
 
             /*if(subMenuArrayList.size()>3){
                 Collections.swap(subMenuArrayList, 1,3);

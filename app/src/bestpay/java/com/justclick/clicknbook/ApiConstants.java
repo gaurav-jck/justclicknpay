@@ -42,7 +42,7 @@ public class ApiConstants
     public static final String BASE_URL_TRAIN="https://rail.justclicknpay.com/";  //live rapipay url
     public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL new
     public static final String BASE_URL_AEPS_OLD="https://aeps-api-yes.justclicknpay.com/";   // AEPS URL old
-    public static final String BASE_URL_AEPS_N="https://jckaeps.justclicknpay.com/";   // AEPS URL N
+    public static final String BASE_URL_AEPS="https://jckaeps.justclicknpay.com/";   // AEPS URL N
     public static final String BASE_URL_LIC="https://recharge.justclicknpay.com/";   // AEPS URL N
     public static final String BASE_URL_BILLPAY="https://recharge.justclicknpay.com/";   // AEPS URL N
     public static final String BASE_URL_PAYTM=BASE_URL_LIC;

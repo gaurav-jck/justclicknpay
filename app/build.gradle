@@ -4,12 +4,12 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'com.google.gms.google-services'
 
 android {
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "com.justclick.clicknbook"
 //        applicationId "com.justclicknpay.justclickkaroservices"
         minSdkVersion 24
-        targetSdkVersion 35
+        targetSdkVersion 36
         versionCode 138
         versionName "1.8.23"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,8 +42,8 @@ android {
         justclickkaroservices {
             dimension "version"
             applicationId 'com.justclicknpay.justclickkaroservices'
-            versionCode 164
-            versionName "1.11.3"
+            versionCode 168
+            versionName "1.11.7"
 //            applicationIdSuffix ".qa"
 
         }
@@ -147,7 +147,7 @@ android {
 //            useProguard true
 //            minifyEnabled true
 //            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
         }
         release {
@@ -159,7 +159,7 @@ android {
 //            useProguard true
 //            minifyEnabled true
 //            shrinkResources true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
         }
 
@@ -197,7 +197,7 @@ dependencies {
 
 //    excel jar
     implementation files('libs/jxl-2.6.12.jar')
-
+    implementation "androidx.compose.ui:ui:1.11.4"
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'androidx.appcompat:appcompat:1.7.0'
 //    implementation 'androidx.appcompat:appcompat:1.6.1'

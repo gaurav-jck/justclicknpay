@@ -261,7 +261,7 @@ class InstaMerchantKycFragment : Fragment() {
     private fun createPidOptionsKUA(txnId: String, purpose: String, wadh:String, buildType:String): String {
         return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
                 "<PidOptions ver=\"1.0\" env=\"${buildType}\">\n" +
-                "   <Opts fCount=\"1\" fType=\"1\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"\" wadh=\"${wadh}\" posh=\"\" />\n" +
+                "   <Opts fCount=\"1\" fType=\"2\" iCount=\"0\" iType=\"0\" pCount=\"0\" pType=\"0\" format=\"0\" pidVer=\"2.0\" timeout=\"\" otp=\"\" wadh=\"${wadh}\" posh=\"\" />\n" +
                 "   <CustOpts>\n" +
                 "      <Param name=\"txnId\" value=\"${txnId}\"/>\n" +
                 "      <Param name=\"purpose\" value=\"$purpose\"/>\n" +

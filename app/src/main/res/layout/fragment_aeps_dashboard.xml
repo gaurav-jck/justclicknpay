@@ -141,4 +141,42 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_20dp"
+        android:layout_marginLeft="@dimen/margin_10dp"
+        android:layout_marginRight="@dimen/margin_10dp"
+        android:weightSum="2"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/authenticationLin"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dashboard_icon_w"
+            android:layout_weight="1"
+            android:background="@drawable/aeps_border"
+            android:gravity="center"
+            android:layout_marginRight="@dimen/size_15dp"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="@dimen/aeps_icon_w"
+                android:layout_height="@dimen/aeps_icon_h"
+                app:srcCompat="@drawable/ic_fingerprint"
+                app:tint="@color/app_icon_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" Daily \nAuthentication"
+                android:textColor="@color/app_blue_color_light"
+                android:textSize="@dimen/dashboard_icon_name_size"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/margin_10dp"
+                android:minLines="2"
+                android:gravity="center_horizontal"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

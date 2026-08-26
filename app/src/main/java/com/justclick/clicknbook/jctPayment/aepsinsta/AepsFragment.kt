@@ -3,7 +3,6 @@ package com.jck.myjckapp.ui.fragments.aeps
 import android.Manifest
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
@@ -16,7 +15,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.EditText
@@ -29,18 +27,27 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.justclick.clicknbook.Activity.NavigationDrawerActivity
 import com.justclick.clicknbook.ApiConstants
+import com.justclick.clicknbook.Fragment.jctmoney.request.CheckCredentialRequest
 import com.justclick.clicknbook.Fragment.jctmoney.response.CheckCredentialResponse
+import com.justclick.clicknbook.Fragment.paytmwallet.PaytmWalletFragment
 import com.justclick.clicknbook.R
 import com.justclick.clicknbook.databinding.FragmentAepsTransactionBinding
+import com.justclick.clicknbook.jctPayment.Adapters.MiniStatementAdapter
+import com.justclick.clicknbook.jctPayment.Models.DailyAuthenticationRequest
 import com.justclick.clicknbook.jctPayment.aepsinsta.AepsBankListResponse
 import com.justclick.clicknbook.jctPayment.aepsinsta.AepsInstaResponse
+import com.justclick.clicknbook.jctPayment.aepsinsta.MiniStatementInstaAdapter
 import com.justclick.clicknbook.jctPayment.aepsinsta.TxnOtpResponse
 import com.justclick.clicknbook.jctPayment.newaeps.AepsConstants
+import com.justclick.clicknbook.jctPayment.newaeps.AepsRegistrationActivity
 import com.justclick.clicknbook.model.LoginModel
 import com.justclick.clicknbook.network.NetworkCall
 import com.justclick.clicknbook.utils.Common
@@ -51,15 +58,24 @@ import org.w3c.dom.Node
 import java.io.ByteArrayInputStream
 import java.io.InputStream
 import java.net.URL
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
 import java.util.Scanner
 import javax.xml.parsers.DocumentBuilderFactory
 import kotlin.random.Random
+import kotlin.text.equals
 
 class AepsFragment : Fragment() {
     private val ARG_PARAM1 = "param1"
     private val ARG_PARAM2 = "param2"
     private val FINGER_CAPTURE = "Finger"
     private val FACE_CAPTURE = "Face"
+    private val Bank1 = "Bank1"
+    private val Bank2 = "Bank2"
+    private val Bank3 = "Bank3"
+    private var AepsBankType = Bank1
     private final val CAPTURE_REQUEST_CODE = 123
     var d_type = AepsConstants.MANTRA
     var pidDataXML = "";
@@ -140,27 +156,30 @@ class AepsFragment : Fragment() {
             transactionMethod=ApiConstants.AadharPay
             isAmount=true
         }
+
+        defaultBankClick()
+        binding!!.aeps1Tv.setOnClickListener { bank1Click() }
+        binding!!.aeps2Tv.setOnClickListener { bank2Click() }
+        binding!!.aeps3Tv.setOnClickListener { bank3Click() }
+
         binding!!.btnCapture.setOnClickListener {
             if(validateData()){
                 captureType=FINGER_CAPTURE
-                Common.hideSoftKeyboard(requireActivity())
-                if(binding!!.amountEdt.text.toString().toFloat()>5000){
-                    callOtpApi()
+                if(checkDailyLoginFromPefrences()){
+                    callFingerData()
                 }else{
-                    captureData()
+                    checkDailyAuthentication()
                 }
             }
         }
         binding!!.btnCaptureFace.setOnClickListener {
             if(validateData()){
                 captureType=FACE_CAPTURE
-                Common.hideSoftKeyboard(requireActivity())
-                if(binding!!.amountEdt.text.toString().toFloat()>5000){
-                    callOtpApi()
+                if(checkDailyLoginFromPefrences()){
+                    callFaceData()
                 }else{
-                    captureFaceData("")
+                    checkDailyAuthentication()
                 }
-
             }
         }
 
@@ -212,12 +231,83 @@ class AepsFragment : Fragment() {
                 bankId = bankArray!![pos].BankId
                 bankIIN = bankArray!![pos].IIN
                 bankName = bankArray!![pos].BANK_NAME
-                Toast.makeText(context, bankName, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, bankName, Toast.LENGTH_SHORT).show()
             } catch (e: java.lang.Exception) {
                 bankId=null
             }
         }
         return binding!!.root
+    }
+
+    fun defaultBankClick(){
+        if(AepsBankType.equals(Bank2)){
+            bank2Click()
+        }else if(AepsBankType.equals(Bank3)){
+            bank3Click()
+        }else{
+            bank1Click()
+        }
+    }
+    fun bank1Click(){
+        AepsBankType = Bank1
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
+    fun bank2Click(){
+        AepsBankType = Bank2
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
+    fun bank3Click(){
+        AepsBankType = Bank3
+        binding!!.aeps3Tv.setBackgroundResource(R.drawable.blue_rect_button_background)
+        binding!!.aeps3Tv.setTextColor(getResources().getColor(R.color.color_white, null))
+
+        binding!!.aeps1Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps1Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+
+        binding!!.aeps2Tv.setBackgroundResource(R.drawable.money_receiver_border_rect_corner)
+        binding!!.aeps2Tv.setTextColor(getResources().getColor(R.color.dark_blue_color, null))
+    }
+
+    fun callFaceData() {
+        Common.hideSoftKeyboard(requireActivity())
+        if(binding!!.amountEdt.text.toString().toFloat()>5000){
+            callOtpApi()
+        }else{
+            captureFaceData("")
+        }
+    }
+
+    fun callFingerData() {
+        Common.hideSoftKeyboard(requireActivity())
+        if(binding!!.amountEdt.text.toString().toFloat()>5000){
+            callOtpApi()
+        }else{
+            captureData()
+        }
+    }
+
+    fun checkDailyLoginFromPefrences(): Boolean {
+        if(AepsBankType.equals(Bank1)){
+            return MyPreferences.isAepsInstaBank1LoggedIn(requireContext())
+        }else if(AepsBankType.equals(Bank2)){
+            return MyPreferences.isAepsInstaBank2LoggedIn(requireContext())
+        }else{
+            return MyPreferences.isAepsInstaBank3LoggedIn(requireContext())
+        }
     }
 
     private fun callOtpApi() {
@@ -232,6 +322,7 @@ class AepsFragment : Fragment() {
         params["BankIIN"] = bankIIN!!
         params["Amount"] = binding!!.amountEdt.text.toString()
         params["amount"] = binding!!.amountEdt.text.toString()
+        params["aebankname"] = AepsBankType
 
         NetworkCall().callService(
             NetworkCall.getAepsInterface().getInstaAepsHeaderMap(
@@ -249,6 +340,17 @@ class AepsFragment : Fragment() {
         }
     }
 
+    val otpResponse="{\n" +
+            "    \"statusCode\" : \"02\",\n" +
+            "    \"statusMessage\" : \"Success\",\n" +
+            "    \"status\" : true,\n" +
+            "    \"data\" : {\n" +
+            "        \"validity\" : \"2026-08-10 13:16:51\",\n" +
+            "        \"referenceKey\" : \"hAqK1wRHAHuQSCr123mqdkGdZp0HhpqVgVLRAZ2j/AG2qQoUM6ZKNiVOnx1l0BXs.v2.7ff100721765603838692040908\"\n" +
+            "    }\n" +
+            "}"
+
+    var referenceKey=""
     private fun responseHandlerOtp(response: ResponseBody) {
         try {
 //            val responseString=
@@ -256,7 +358,15 @@ class AepsFragment : Fragment() {
             if (commonResponse != null) {
                 if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
                     Toast.makeText(context, "Otp send on your registered mobile number", Toast.LENGTH_LONG).show()
+                    referenceKey=commonResponse.data.referenceKey
                     openTxnOtpDialog(commonResponse)
+                }else if (commonResponse.statusCode.equals("02", ignoreCase = true)) {
+//                    referenceKey=commonResponse.data.referenceKey
+                    if(captureType.equals(FINGER_CAPTURE)){
+                        captureData()
+                    }else{
+                        captureFaceData("")
+                    }
                 } else {
 //                    Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show()
                     Common.showCommonAlertDialog(context, commonResponse.statusMessage, "Api Response")
@@ -305,7 +415,7 @@ class AepsFragment : Fragment() {
     }
 
     private fun captureOtp(otp: String) {
-        Toast.makeText(requireContext(), otp, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireContext(), otp, Toast.LENGTH_SHORT).show()
         try {
             if (d_type == AepsConstants.MANTRA) {
                 val pidOptXML =getPidOptionsOtp(otp)
@@ -620,6 +730,8 @@ class AepsFragment : Fragment() {
         params["BankName"] = bankName!!
         params["Amount"] = binding!!.amountEdt.text.toString()
         params["TxnType"] = transactionType
+        params["referenceKey"] = referenceKey
+        params["aebankname"] = AepsBankType
 
         pidDataXML=pidDataXML.replace("\n", "")
         params["Pid"]=pidDataXML
@@ -642,14 +754,22 @@ class AepsFragment : Fragment() {
 
     private fun responseHandler(response: ResponseBody) {
         try {
-//            val responseString=
-            val commonResponse = Gson().fromJson(response.string(), AepsInstaResponse::class.java)
+            val responseString=response.string()
+            val commonResponse = Gson().fromJson(responseString, AepsInstaResponse::class.java)
+//            Common.showCommonAlertDialog(requireContext(), responseString, "Api response")
             if (commonResponse != null) {
                 if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
                     Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_LONG).show()
-                    if(txnType!!.equals(AepsConstants.MS) || txnType!!.equals(AepsConstants.BE)){
+                    if(txnType!!.equals(AepsConstants.MS)){
+                        commonResponse.balEnqDetails=commonResponse.miniStateMentDetail
+                        openReceipt(commonResponse)
+                    }else if(txnType!!.equals(AepsConstants.BE)){
+                            openReceipt(commonResponse)
+                    }else if(txnType!!.equals(AepsConstants.CW)){
+                        commonResponse.balEnqDetails=commonResponse.cashWithdrawal
                         openReceipt(commonResponse)
                     }else{
+                        commonResponse.balEnqDetails=commonResponse.aadaharPayDetail
                         openReceipt(commonResponse)
                     }
                 } else {
@@ -675,7 +795,7 @@ class AepsFragment : Fragment() {
             LinearLayout.LayoutParams.MATCH_PARENT,
             LinearLayout.LayoutParams.MATCH_PARENT
         )
-        (dialog.findViewById<View>(R.id.title) as TextView).text = "AEPS Receipt"
+        (dialog.findViewById<View>(R.id.title) as TextView).text = "AEPS-2 Receipt"
         val cardHolderTv = dialog.findViewById<TextView>(R.id.cardHolderTv)
         val agentCodeTv = dialog.findViewById<TextView>(R.id.agentCodeTv)
         val bankNameTv = dialog.findViewById<TextView>(R.id.bankNameTv)
@@ -712,6 +832,85 @@ class AepsFragment : Fragment() {
         txnDateTv.text = detail.timeStamp
         dialog.findViewById<View>(R.id.back_tv).setOnClickListener { dialog.dismiss() }
         dialog.show()
+    }
+
+    private fun openMiniStatement(responseModel: AepsInstaResponse) {
+        val dialog = Dialog(requireContext(), R.style.Theme_Design_Light)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.mini_stmt_receipt_dialog)
+        val window = dialog.window
+        window!!.setLayout(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+
+        dialog.findViewById<View>(R.id.back_tv).setOnClickListener { dialog.dismiss() }
+        val recyclerView = dialog.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        recyclerView.adapter = MiniStatementInstaAdapter(requireContext(), responseModel.msDetails)
+
+        /*if(responseModel.msDetails!=null && responseModel.msDetails.size>0){
+            Toast.makeText(context,responseModel.msDetails.get(0).amount, Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(context, "No mini statement found for given data.", Toast.LENGTH_SHORT).show();
+        }*/
+        dialog.show()
+    }
+
+    private fun checkDailyAuthentication() {
+        var request= DailyAuthenticationRequest()
+        request.AgentCode=MyPreferences.getLoginData(LoginModel(),context).Data.DoneCardUser
+        request.aebankname=AepsBankType
+        request.setIPAddress(ip)
+        NetworkCall().callService(
+            NetworkCall.getAepsInterfaceTest().getAepsInstaHeader(
+                ApiConstants.check2fastatus, request,
+                commonParams!!.userData, "Bearer " + commonParams!!.token
+            ),
+            requireContext(), true
+        ) { response: ResponseBody?, responseCode: Int ->
+            if (response != null) {
+                responseHandler2FA(response)
+            } else {
+                Toast.makeText(requireContext(), R.string.response_failure_message, Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+    }
+
+    private fun responseHandler2FA(response: ResponseBody) {
+        try {
+            val commonResponse = Gson().fromJson(response.string(), PaytmWalletFragment.CommonResponse::class.java)
+            if (commonResponse != null) {
+                if (commonResponse.statusCode.equals("00", ignoreCase = true)) {
+//                    Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_SHORT).show()
+                    if(commonResponse.statusMessage.equals("LOGGEDIN")){
+                        if(AepsBankType.equals(Bank1)){
+                            MyPreferences.aepsInstaBank1Login(requireContext())
+                        }else if(AepsBankType.equals(Bank2)){
+                            MyPreferences.aepsInstaBank2Login(requireContext())
+                        }else{
+                            MyPreferences.aepsInstaBank3Login(requireContext())
+                        }
+                        if(captureType.equals(FINGER_CAPTURE)){
+                            callFingerData()
+                        }else{
+                            callFaceData()
+                        }
+                    }else{
+                        Toast.makeText(context, commonResponse.statusMessage, Toast.LENGTH_SHORT).show()
+                        (context as NavigationDrawerActivity).replaceFragmentWithBackStack(
+                            AepsDailyLoginFragment.newInstance(commonParams!!, AepsBankType)
+                        )
+                    }
+                } else {
+                    Common.showCommonAlertDialog(context,commonResponse.statusMessage,"Api Response")
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private val LOCATION_PERMISSION_REQUEST_CODE = 1001

@@ -27,12 +27,64 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="@dimen/margin_30dp">
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/add_beneficiary_side_margin"
+                android:layout_marginRight="@dimen/add_beneficiary_side_margin"
+                android:layout_marginTop="@dimen/medium_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/aeps1Tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/blue_rect_button_background"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/very_large_margin"
+                    android:paddingRight="@dimen/very_large_margin"
+                    android:paddingTop="@dimen/small_margin"
+                    android:text=" AEPS 1 "
+                    android:textSize="@dimen/money_transfer_button_text_size"
+                    android:textColor="@color/color_white" />
+
+                <TextView
+                    android:id="@+id/aeps2Tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/very_large_margin"
+                    android:paddingRight="@dimen/very_large_margin"
+                    android:paddingTop="@dimen/small_margin"
+                    android:text=" AEPS 2 "
+                    android:textSize="@dimen/money_transfer_button_text_size"
+                    android:textColor="@color/dark_blue_color" />
+
+                <TextView
+                    android:id="@+id/aeps3Tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/money_receiver_border_rect_corner"
+                    android:paddingBottom="@dimen/small_margin"
+                    android:paddingLeft="@dimen/very_large_margin"
+                    android:paddingRight="@dimen/very_large_margin"
+                    android:paddingTop="@dimen/small_margin"
+                    android:text=" AEPS 3 "
+                    android:textSize="@dimen/money_transfer_button_text_size"
+                    android:textColor="@color/dark_blue_color" />
+
+            </LinearLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_20dp"
-                android:hint="Please enter your Mobie number"
+                android:hint="Please enter your Mobile number"
                 android:visibility="visible"
                 android:textColorHint="@color/colorHint">
 

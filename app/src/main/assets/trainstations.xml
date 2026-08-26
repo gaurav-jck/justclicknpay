@@ -8,35 +8,92 @@
         <stnname>MUMBAI CENTRAL</stnname>
     </stationname>
     <stationname>
+        <stncode>SANG</stncode>
+        <stnname>SAIRANG</stnname>
+    </stationname>
+    <stationname>
+        <stncode>BENA</stncode>
+        <stnname>BELONIA</stnname>
+    </stationname>
+    <stationname>
+        <stncode>NGRH</stncode>
+        <stnname>NEW GIRIDIH</stnname>
+    </stationname>
+    <stationname>
+        <stncode>MSKT</stncode>
+        <stnname>MC SUNIL KATHUA</stnname>
+    </stationname>
+    <stationname>
+        <stncode>GUGD</stncode>
+        <stnname>G GORKHNATH DHM</stnname>
+    </stationname>
+    <stationname>
+        <stncode>DNWR</stncode>
+        <stnname>DHANWAR</stnname>
+    </stationname>
+    <stationname>
+        <stncode>JAUA</stncode>
+        <stnname>JAMUA</stnname>
+    </stationname>
+    <stationname>
+        <stncode>DRSV</stncode>
+        <stnname>DHARASHIV</stnname>
+    </stationname>
+    <stationname>
+        <stncode>GGVT</stncode>
+        <stnname>GANGAVATHI</stnname>
+    </stationname>
+    <stationname>
+        <stncode>NMGA</stncode>
+        <stnname>NELAMANGALA</stnname>
+    </stationname>
+    <stationname>
+        <stncode>NNHT</stncode>
+        <stnname>Nonihat Jharkhand</stnname>
+    </stationname>
+    <stationname>
+        <stncode>BNRS</stncode>
+        <stnname>BANARAS</stnname>
+    </stationname>
+    <stationname>
+        <stncode>GVH</stncode>
+        <stnname>GOVINDGARH</stnname>
+    </stationname>
+    <stationname>
+        <stncode>MHUR</stncode>
+        <stnname>MOHANPUR</stnname>
+    </stationname>
+    <stationname>
+        <stncode>SBRM</stncode>
+        <stnname>SABROOM</stnname>
+    </stationname>
+    <stationname>
+        <stncode>UDPU</stncode>
+        <stnname>UDAIPUR</stnname>
+    </stationname>
+    <stationname>
+        <stncode>TVCN</stncode>
+        <stnname>TRIVANDRUMNORTH</stnname>
+    </stationname>
+    <stationname>
         <stncode>CSMT</stncode>
         <stnname>C SHIVAJI MAH T</stnname>
     </stationname>
     <stationname>
         <stncode>HZBN</stncode>
-        <stnname>HAZARIBAGH TOWN </stnname>
-    </stationname>
-
-
-    <stationname>
-        <stncode>MBDP</stncode>
-        <stnname>MA BELHADEVI DP</stnname>
-    </stationname>
-
-    <stationname>
-        <stncode>MCDA</stncode>
-        <stnname>MA CHANDIKA D D</stnname>
+        <stnname>HAZARIBAGH TOWN</stnname>
     </stationname>
     <stationname>
         <stncode>MCTM</stncode>
         <stnname>MTYR C TUSHAR M</stnname>
     </stationname>
     <stationname>
-        <stncode>UDPR</stncode>
-        <stnname>Udaipura</stnname>
-    </stationname>
-    <stationname>
         <stncode>KGBP</stncode>
         <stnname>KHONGSANG</stnname>
+    </stationname>
+    <stationname>
+        <stncode>NITR</stncode>
+        <stnname>NSC BOSE ITWARI</stnname>
     </stationname>
     <stationname>
         <stncode>NBJU</stncode>
@@ -47,14 +104,13 @@
         <stnname>CHOURAI</stnname>
     </stationname>
     <stationname>
+        <stncode>SKHV</stncode>
+        <stnname>SUKHOVI</stnname>
+    </stationname>
+    <stationname>
         <stncode>NDPM</stncode>
         <stnname>NARMADAPURAM</stnname>
     </stationname>
-    <stationname>
-        <stncode>NITR</stncode>
-        <stnname>NSC BOSE ITWARI</stnname>
-    </stationname>
-
     <stationname>
         <stncode>JLWC</stncode>
         <stnname>JHALAWAR CITY</stnname>
@@ -62,10 +118,6 @@
     <stationname>
         <stncode>SGAC</stncode>
         <stnname>SOGARIA</stnname>
-    </stationname>
-    <stationname>
-        <stncode>SKHV</stncode>
-        <stnname>SUKHOVI</stnname>
     </stationname>
     <stationname>
         <stncode>VGLJ</stncode>
@@ -79,7 +131,6 @@
         <stncode>PNKD</stncode>
         <stnname>Pankhi Dham</stnname>
     </stationname>
-
     <stationname>
         <stncode>GODA</stncode>
         <stnname>GODDA</stnname>
@@ -88,23 +139,18 @@
         <stncode>DDCC</stncode>
         <stnname>DAUND CHORD LIN</stnname>
     </stationname>
-
-
     <stationname>
         <stncode>SDDN</stncode>
         <stnname>SIDDHARTH NAGAR</stnname>
     </stationname>
-
     <stationname>
         <stncode>YNRK</stncode>
         <stnname> YOG N RISHIKESH </stnname>
     </stationname>
-
     <stationname>
         <stncode>EKNR</stncode>
         <stnname>Ekta Nagar</stnname>
     </stationname>
-
     <stationname>
         <stncode>PIRO</stncode>
         <stnname> PIRO </stnname>
@@ -113,8 +159,6 @@
         <stncode>HSDA</stncode>
         <stnname> HANSDIHA </stnname>
     </stationname>
-
-
     <stationname>
         <stncode>ACOI</stncode>
         <stnname>ALAHABAD CHEOKI</stnname>
@@ -147,18 +191,14 @@
         <stncode>PRRB</stncode>
         <stnname>PRAYAGRAJRAMBAG</stnname>
     </stationname>
-
     <stationname>
         <stncode>RTMN</stncode>
         <stnname>Ratlam New</stnname>
     </stationname>
-
     <stationname>
         <stncode>SBIB</stncode>
         <stnname>SABARMATI BG</stnname>
     </stationname>
-
-
     <stationname>
         <stncode>GZH</stncode>
         <stnname>GULZARBAGH</stnname>
@@ -879,8 +919,6 @@
         <stncode>HTE</stncode>
         <stnname>HATIA</stnname>
     </stationname>
-
-
     <stationname>
         <stncode>KIGL</stncode>
         <stnname>Kunigal</stnname>
@@ -1782,12 +1820,20 @@
         <stnname>FATEHABAD CH.JN</stnname>
     </stationname>
     <stationname>
-        <stncode>FTG</stncode>
-        <stnname>FURSATGANJ</stnname>
+        <stncode>THWM</stncode>
+        <stnname>TAPESHWARNATH D</stnname>
     </stationname>
     <stationname>
         <stncode>FTH</stncode>
         <stnname>FATUHI</stnname>
+    </stationname>
+    <stationname>
+        <stncode>MABM</stncode>
+        <stnname>M AHORWA B DHAM</stnname>
+    </stationname>
+    <stationname>
+        <stncode>ASBS</stncode>
+        <stnname>A S BHALE SULTN</stnname>
     </stationname>
     <stationname>
         <stncode>FTP</stncode>
@@ -3442,8 +3488,8 @@
         <stnname>JALARGARH</stnname>
     </stationname>
     <stationname>
-        <stncode>JAIS</stncode>
-        <stnname>JAIS</stnname>
+        <stncode>G GORKHNATH DHM</stncode>
+        <stnname>GUGD</stnname>
     </stationname>
     <stationname>
         <stncode>JAJ</stncode>
@@ -5611,7 +5657,7 @@
     </stationname>
     <stationname>
         <stncode>AADR</stncode>
-        <stnname>AMB  ANDAURA</stnname>
+        <stnname>AMB ANDAURA</stnname>
     </stationname>
     <stationname>
         <stncode>SUKU</stncode>
@@ -5831,7 +5877,7 @@
     </stationname>
     <stationname>
         <stncode>SRJN</stncode>
-        <stnname>SIRAJNAGAR  H</stnname>
+        <stnname>SIRAJNAGAR H</stnname>
     </stationname>
     <stationname>
         <stncode>RKAE</stncode>
@@ -6938,8 +6984,8 @@
         <stnname>AVATIHALLI</stnname>
     </stationname>
     <stationname>
-        <stncode>AWB</stncode>
-        <stnname>AURANGABAD</stnname>
+        <stncode>CPSN</stncode>
+        <stnname>Chhatrapati Sambhajinagar</stnname>
     </stationname>
     <stationname>
         <stncode>AWG</stncode>
@@ -7150,8 +7196,8 @@
         <stnname>BASNI</stnname>
     </stationname>
     <stationname>
-        <stncode>BANI</stncode>
-        <stnname>BANI</stnname>
+        <stncode>SWPS</stncode>
+        <stnname>SWAMI PARAMHANS</stnname>
     </stationname>
     <stationname>
         <stncode>BANO</stncode>
@@ -10198,8 +10244,8 @@
         <stnname>ANANDPUR SAHIB</stnname>
     </stationname>
     <stationname>
-        <stncode>ANTU</stncode>
-        <stnname>ANTU</stnname>
+        <stncode>MCDA</stncode>
+        <stnname>MA CHANDIKA D D</stnname>
     </stationname>
     <stationname>
         <stncode>ANU</stncode>
@@ -10535,7 +10581,7 @@
     </stationname>
     <stationname>
         <stncode>BPL</stncode>
-        <stnname>BHOPAL  JN</stnname>
+        <stnname>BHOPAL JN</stnname>
     </stationname>
     <stationname>
         <stncode>BPM</stncode>
@@ -14618,8 +14664,8 @@
         <stnname>KALIKIRI</stnname>
     </stationname>
     <stationname>
-        <stncode>KCJ</stncode>
-        <stnname>KASIMPUR</stnname>
+        <stncode>JAIC</stncode>
+        <stnname>JAIS CITY</stnname>
     </stationname>
     <stationname>
         <stncode>KCKI</stncode>
@@ -15625,7 +15671,6 @@
         <stncode>KJ</stncode>
         <stnname>KAJGAON</stnname>
     </stationname>
-
     <stationname>
         <stncode>KLBG</stncode>
         <stnname>KALABURAGI</stnname>
@@ -21727,10 +21772,6 @@
         <stnname>MAHUAWA KHURD</stnname>
     </stationname>
     <stationname>
-        <stncode>BSBS</stncode>
-        <stnname>BANARAS</stnname>
-    </stationname>
-    <stationname>
         <stncode>MUVL</stncode>
         <stnname>MUVAL TANK</stnname>
     </stationname>
@@ -25415,8 +25456,8 @@
         <stnname>NIHASTA HALT</stnname>
     </stationname>
     <stationname>
-        <stncode>NHH</stncode>
-        <stnname>NIHALGARH</stnname>
+        <stncode>MBLP</stncode>
+        <stnname>MAH BIJLI PASI</stnname>
     </stationname>
     <stationname>
         <stncode>NHK</stncode>
@@ -28554,15 +28595,10 @@
         <stncode>SSDT</stncode>
         <stnname>SHAMSHABAD TOWN</stnname>
     </stationname>
-
-
     <stationname>
         <stncode>SHRN</stncode>
         <stnname>S HIRDARAMNAGAR</stnname>
     </stationname>
-
-
-
     <stationname>
         <stncode>SAW</stncode>
         <stnname>SURIAWAN</stnname>
@@ -29076,8 +29112,8 @@
         <stnname>MUSAFIR KHANA</stnname>
     </stationname>
     <stationname>
-        <stncode>MFL</stncode>
-        <stnname>MISRAULI</stnname>
+        <stncode>MKDM</stncode>
+        <stnname>MA KALIKAN DHAM</stnname>
     </stationname>
     <stationname>
         <stncode>MFM</stncode>
@@ -30244,8 +30280,8 @@
         <stnname>PILIBHIT JN</stnname>
     </stationname>
     <stationname>
-        <stncode>PBH</stncode>
-        <stnname>PARTAPGARH JN</stnname>
+        <stncode>MBDP</stncode>
+        <stnname>MA BELHADEVI DP</stnname>
     </stationname>
     <stationname>
         <stncode>PBJM</stncode>
@@ -33128,19 +33164,7 @@
         <stnname>YALVIGI</stnname>
     </stationname>
     <stationname>
-        <stncode>CPSN</stncode>
-        <stnname>CHHATRAPATI SAMBHAJINAGAR</stnname>
-    </stationname>
-    <stationname>
-        <stncode>NGRH</stncode>
-        <stnname>NEW GIRIDIH</stnname>
-    </stationname>
-    <stationname>
-        <stncode>GUGD</stncode>
-        <stnname>G GORKHNATH DHM</stnname>
-    </stationname>
-    <stationname>
-        <stncode>DRSV</stncode>
-        <stnname>DHARASHIV</stnname>
+        <stncode>SJWB</stncode>
+        <stnname>SUMERPURJAWAIB</stnname>
     </stationname>
 </StationName>

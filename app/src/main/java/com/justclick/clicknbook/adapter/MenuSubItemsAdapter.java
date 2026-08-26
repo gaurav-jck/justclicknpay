@@ -170,9 +170,8 @@ public class MenuSubItemsAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 //                    vh.imageView_sub_item.setImageDrawable(homeIcon);
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_qr_code_home);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.QR_CODE2)){
-//                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );
-//                    homeIcon.setColorFilter(appColor);
-//                    vh.imageView_sub_item.setImageDrawable(homeIcon);
+                    vh.imageView_sub_item.setImageResource(R.drawable.ic_qr_code_home);
+                }else if(subMenuCode.equalsIgnoreCase(MenuCodes.QR_CODE_PayU)){
                     vh.imageView_sub_item.setImageResource(R.drawable.ic_qr_code_home);
                 }else if(subMenuCode.equalsIgnoreCase(MenuCodes.UPI_Cash)){
 //                    Drawable homeIcon = context.getResources().getDrawable( R.drawable.mobile_recharge_icon );

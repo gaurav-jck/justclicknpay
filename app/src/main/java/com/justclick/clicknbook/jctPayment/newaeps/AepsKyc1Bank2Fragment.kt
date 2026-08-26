@@ -440,7 +440,7 @@ class AepsKyc1Bank2Fragment(aepsPipe: String) : Fragment() {
 
 //        binding.pid.setText(pidDataXML)
 
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface::class.java)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface::class.java)
         val call = apiService.getAepsHeaderMap(URLs.bank2ekyc, params, MyPreferences.getUserData(context),
             MyPreferences.getAepsToken(context))
         NetworkCall().callService(call,context,true

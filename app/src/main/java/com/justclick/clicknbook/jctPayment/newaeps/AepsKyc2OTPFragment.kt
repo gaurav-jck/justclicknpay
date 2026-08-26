@@ -150,7 +150,7 @@ class AepsKyc2OTPFragment(aepsPipe: String) : Fragment(), View.OnClickListener {
         requestModel.AgentCode=MyPreferences.getLoginData(LoginModel(), context).Data.DoneCardUser
         requestModel.Latitude=mLatitude
         requestModel.Longitude=mLongitude
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface::class.java)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface::class.java)
         val call = apiService.getAepsWithHeaderNew(URLs.Bank3SendOTP, requestModel, MyPreferences.getUserData(context),
             MyPreferences.getAepsToken(context))
         NetworkCall().callService(call,context,true
@@ -191,7 +191,7 @@ class AepsKyc2OTPFragment(aepsPipe: String) : Fragment(), View.OnClickListener {
         requestModel.Transactionid=transactionId
         requestModel.otpreqid=otpreqid
         requestModel.otp=binding!!.otpEdt.text.toString()
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface::class.java)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface::class.java)
         val call = apiService.getAepsWithHeaderNew(URLs.bank3verifyOTP, requestModel, MyPreferences.getUserData(context),
             MyPreferences.getAepsToken(context))
         NetworkCall().callService(call,context,true

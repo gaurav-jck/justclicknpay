@@ -597,7 +597,7 @@ public class NetworkCall {
         String json = new Gson().toJson(model).toString();
 //        ApiInterface service = APIClient.getAepsClientNew().create(ApiInterface.class);
 //        Call<ResponseBody> call = service.aepsPostServiceNew(methodName,model);
-        ApiInterface service = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
+        ApiInterface service = APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface.class);
         Call<ResponseBody> call = service.aepsPostServiceN(methodName,model);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -1650,7 +1650,7 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_SALES).create(ApiInterface.class);
     }
     public static ApiInterface getLocationUpdateInterface(){
-        return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
+        return APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface.class);
     }
     public static ApiInterface getUatRemmitInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_UAT_REMMIT).create(ApiInterface.class);
@@ -1663,7 +1663,10 @@ public class NetworkCall {
         return APIClient.getClient(ApiConstants.BASE_URL_UAT_LOGIN_NEW).create(ApiInterface.class);
     }
     public static ApiInterface getAepsInterface(){
-        return APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface.class);
+        return APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface.class);
+    }
+    public static ApiInterface getAepsInterfaceTest(){
+        return APIClient.getClient(ApiConstants.BASE_URL_AEPS_Test).create(ApiInterface.class);
     }
     public static ApiInterface getInstaBillpayInterface(){
         return APIClient.getClient(ApiConstants.BASE_URL_BILLPAY).create(ApiInterface.class);

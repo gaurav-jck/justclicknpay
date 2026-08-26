@@ -138,7 +138,8 @@ public class MenuCodes {
   public static final String  PAYTM="Wallet";
   public static final String  CREDIT="Credit Card";
   public static final String  CASHFREE_QR="QRCODE";
-  public static final String  QR_CODE2="QRCODE 2";
+  public static final String  QR_CODE2="QR Code 2";
+  public static final String  QR_CODE_PayU="QR Code 3";
   public static final String  UPI_Cash="UPI Cash";
   public static final String  DYNAMIC_QR="Dynamic QRCode";
   public static final String  AgentChattingFragment="S0";

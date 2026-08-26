@@ -479,6 +479,10 @@ public interface ApiInterface {
     @POST("apiV1/RailEngine/{methodName}")
     Call<ResponseBody> getTrainList(@Path("methodName") String method, @Body Object data);
 
+    @GET("apiV1/RailEngine/{methodName}")
+    Call<ResponseBody> getTrainStatus(@Path("methodName") String method, @Query("AgentTxnId") String agentTxnId);
+
+
     //    fino
     @POST("api/Aeps/{methodName}")
     Call<ResponseBody> getFinoCommonPost(@Path("methodName") String method, @Body Object data);
@@ -606,6 +610,11 @@ Call<ResponseBody> getInstaAepsHeaderMap(@Path("methodName") String method, @Fie
     @POST("V2/Cashfree/{methodName}")
     @Headers({"Content-Type: application/json"})
     Call<ResponseBody> getQROTP(@Path("methodName") String method, @Body Object data,
+                                @Header("userData") String userData, @Header("Authorization") String token);
+
+    @POST("api/v1/PayU/{methodName}")
+    @Headers({"Content-Type: application/json"})
+    Call<ResponseBody> getQRPayU(@Path("methodName") String method, @Body Object data,
                                 @Header("userData") String userData, @Header("Authorization") String token);
 
     //QR upi cash

@@ -13,4 +13,5 @@ public class AepsConstants {
     public static final String BE="BE";
     public static final String MS="MS";
     public static final String AP="AP";
+    public static final String D2FA="2FA";
 }

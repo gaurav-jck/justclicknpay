@@ -9,6 +9,10 @@ import com.justclick.clicknbook.firebase.ForceLoginData;
 import com.justclick.clicknbook.model.LoginModel;
 import com.google.gson.Gson;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class MyPreferences {
@@ -42,6 +46,12 @@ public class MyPreferences {
   private static final String KEY_USER_DATA = "userData";
   private static final String KEY_SESSION_KEY= "sessionKey";
   private static final String KEY_SESSION_REF_NO= "sessionRefNo";
+  private static final String AepsInstaBank1Login= "AepsInstaBank1Login";
+  private static final String AepsInstaBank2Login= "AepsInstaBank2Login";
+  private static final String AepsInstaBank3Login= "AepsInstaBank3Login";
+  private static final String AepsInstaBank1LoginDate= "AepsInstaBank1LoginDate";
+  private static final String AepsInstaBank2LoginDate= "AepsInstaBank2LoginDate";
+  private static final String AepsInstaBank3LoginDate= "AepsInstaBank3LoginDate";
 
   public MyPreferences(){
   }
@@ -306,6 +316,84 @@ public class MyPreferences {
     return EncryptionDecryptionClass.Decryption(getPreferences(context).getString(KEY_AGENT_MOBILE, ""), context);
   }
 
+  public static void aepsInstaBank1Login(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(AepsInstaBank1Login, true).apply();
+    prefsEditor.putLong(AepsInstaBank1LoginDate, System.currentTimeMillis()).apply();
+    prefsEditor.commit();
+  }
+  public static Boolean isAepsInstaBank1LoggedIn(Context context){
+    SharedPreferences sharedPref = getPreferences(context);
+    long savedTimeMillis = sharedPref.getLong(AepsInstaBank1LoginDate, 0);
+    if (savedTimeMillis != 0) {
+      Date savedDate = new Date(savedTimeMillis);
+
+      if (savedDate.before(getTodayDateOnly())) {
+        // The saved date is in the past
+        SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+        prefsEditor.putBoolean(AepsInstaBank1Login, false).apply();
+        prefsEditor.commit();
+      }
+    }
+    return getPreferences(context).getBoolean(AepsInstaBank1Login, false);
+  }
+
+    private static Date getTodayDateOnly() {
+      Calendar calendar = Calendar.getInstance();
+//      calendar.add(Calendar.DAY_OF_YEAR, 1);
+//      calendar.setTime(new Date());
+
+// Strip out the time components
+      calendar.set(Calendar.HOUR_OF_DAY, 0);
+      calendar.set(Calendar.MINUTE, 0);
+      calendar.set(Calendar.SECOND, 0);
+      calendar.set(Calendar.MILLISECOND, 0);
+
+// This Date object now represents midnight today
+      Date dateOnly = calendar.getTime();
+        return dateOnly;
+    }
+
+  public static void aepsInstaBank2Login(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(AepsInstaBank2Login, true).apply();
+    prefsEditor.putLong(AepsInstaBank2LoginDate, System.currentTimeMillis()).apply();
+    prefsEditor.commit();
+  }
+  public static Boolean isAepsInstaBank2LoggedIn(Context context){
+    SharedPreferences sharedPref = getPreferences(context);
+    long savedTimeMillis = sharedPref.getLong(AepsInstaBank2LoginDate, 0);
+    if (savedTimeMillis != 0) {
+      Date savedDate = new Date(savedTimeMillis);
+      if (savedDate.before(getTodayDateOnly())) {
+        // The saved date is in the past
+        SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+        prefsEditor.putBoolean(AepsInstaBank2Login, false).apply();
+        prefsEditor.commit();
+      }
+    }
+    return getPreferences(context).getBoolean(AepsInstaBank2Login, false);
+  }
+  public static void aepsInstaBank3Login(Context context){
+    SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+    prefsEditor.putBoolean(AepsInstaBank3Login, true).apply();
+    prefsEditor.putLong(AepsInstaBank3LoginDate, System.currentTimeMillis()).apply();
+    prefsEditor.commit();
+  }
+  public static Boolean isAepsInstaBank3LoggedIn(Context context){
+    SharedPreferences sharedPref = getPreferences(context);
+    long savedTimeMillis = sharedPref.getLong(AepsInstaBank3LoginDate, 0);
+    if (savedTimeMillis != 0) {
+      Date savedDate = new Date(savedTimeMillis);
+      if (savedDate.before(getTodayDateOnly())) {
+        // The saved date is in the past
+        SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
+        prefsEditor.putBoolean(AepsInstaBank3Login, false).apply();
+        prefsEditor.commit();
+      }
+    }
+    return getPreferences(context).getBoolean(AepsInstaBank3Login, false);
+  }
   public static void saveUserData(String token, Context context){
     SharedPreferences.Editor prefsEditor = getPreferences(context).edit();
     prefsEditor.putString(KEY_USER_DATA, EncryptionDecryptionClass.Encryption(token, context));

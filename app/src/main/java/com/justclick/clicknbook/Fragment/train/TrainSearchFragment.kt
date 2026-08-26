@@ -178,6 +178,24 @@ class TrainSearchFragment : Fragment(), View.OnClickListener, MyTrainStationDial
         binding!!.toStnTv.text=data!!.destination
         binding!!.deptDataTv.text=data!!.reservationdate
         binding!!.statusTv.text=data!!.status
+
+        binding!!.statusTv.setOnClickListener({
+            NetworkCall().callService(
+                NetworkCall.getTrainApiInterface().getTrainStatus(ApiConstants.getagentlastbooking, data!!.reservationid),
+                context,false)
+            { response: ResponseBody?, responseCode: Int ->
+
+                if (response != null) {
+                    responseHandlerTxnStatus(response) //https://recharge.justclicknpay.com/Utility/BillPayment/GenerateToken
+                } else {
+                Toast.makeText(requireContext(), resources.getString(R.string.response_failure_message), Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
+    }
+
+    private fun responseHandlerTxnStatus(response: ResponseBody) {
+
     }
 
     private fun setQuota(view: View) {

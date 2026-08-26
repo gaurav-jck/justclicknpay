@@ -5,12 +5,11 @@ import com.justclick.clicknbook.ApiConstants;
 
 
 public class URLs {
-//    public static final String BASE_URL_NEW = ApiConstants.BASE_URL_AEPS;
-    public static final String BASE_URL_NEW = ApiConstants.BASE_URL_AEPS_N;
+    public static final String BASE_URL_NEW = ApiConstants.BASE_URL_AEPS;
 //    public static final String BASE_URL = ApiConstants.BASE_URL_AEPS_OLD;
-    public static final String BASE_URL = ApiConstants.BASE_URL_AEPS_N;
-    public static final String BASE_URL_N = ApiConstants.BASE_URL_AEPS_N;
-    public static final String BASE_URL_N_Test = ApiConstants.BASE_URL_AEPS_NTest;
+    public static final String BASE_URL = ApiConstants.BASE_URL_AEPS;
+    public static final String BASE_URL_N = ApiConstants.BASE_URL_AEPS;
+    public static final String BASE_URL_N_Test = ApiConstants.BASE_URL_AEPS_Test;
 //    public static final String BASE_URL = "http://uataeps-api-yes.justclicknpay.com/";
 //        public static final String BASE_URL = "https://aeps.justclicknpay.com/";
         public static final String AEPS_EXCEL_DOWNLOAD_URL = ApiConstants.AEPS_EXCEL_DOWNLOAD_URL;

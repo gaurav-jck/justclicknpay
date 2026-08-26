@@ -526,7 +526,7 @@ public class AepsWithdrawAdharFragment(Type: String, aepsPipe: String) : Fragmen
 
 //        binding.faceEdt.setText(pidDataXML)
 
-        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS_N).create(ApiInterface::class.java)
+        val apiService = APIClient.getClient(ApiConstants.BASE_URL_AEPS).create(ApiInterface::class.java)
         val call = apiService.getAepsHeaderMap(URL, params, MyPreferences.getUserData(context),
             MyPreferences.getAepsToken(context))
         NetworkCall().callService(call,context,true
